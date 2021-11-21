@@ -1,0 +1,30 @@
+{
+  "id": 1,
+  "name": "Hampton by Hilton",
+  "rooms": [
+    {
+      "id": 1,
+      "roomNumber": "101",
+      "petType": "cat",
+      "seats": [
+        {
+          "id": 1
+        },
+        {
+          "id": 2,
+          "description": "Extra-large seat"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "roomNumber": "102",
+      "petType": "dog",
+      "seats": [
+        {
+          "id": 3
+        }
+      ]
+    }
+  ]
+}
