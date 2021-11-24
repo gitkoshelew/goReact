@@ -7,6 +7,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// ConnectDb ...
 func ConnectDb(config *Config) (*sql.DB, error) {
 	dataSourceName := config.PgDataSource()
 

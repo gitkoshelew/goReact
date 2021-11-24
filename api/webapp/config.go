@@ -8,10 +8,12 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
+// Config ...
 type Config struct {
 	Server struct {
-		Host string `yaml:"host"`
-		Port int    `yaml:"port"`
+		Host     string `yaml:"host"`
+		Port     int    `yaml:"port"`
+		LogLevel string `yaml:"log_level"`
 	} `yaml:"server"`
 	PgConnection struct {
 		Host     string `yaml:"host"`
@@ -22,6 +24,7 @@ type Config struct {
 	} `yaml:"pgConnection"`
 }
 
+// PgDataSource ...
 func (c *Config) PgDataSource() string {
 	return fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
@@ -33,6 +36,7 @@ func (c *Config) PgDataSource() string {
 	)
 }
 
+// ServerAddress ...
 func (c *Config) ServerAddress() string {
 	return fmt.Sprintf("%s:%d", c.Server.Host, c.Server.Port)
 }
@@ -41,6 +45,7 @@ func (c *Config) String() string {
 	return fmt.Sprintf("Server Address: %s\nPG Data Source: %#v", c.ServerAddress(), c.PgDataSource())
 }
 
+// ReadFromFile ...
 func (c *Config) ReadFromFile(fileName string) {
 	file, err := os.Open(fileName)
 	if err != nil {
