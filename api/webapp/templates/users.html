@@ -1,0 +1,25 @@
+{{ define "users"}}
+
+{{ template "header"}}
+
+<main class="px-3">
+    <h1>Users list</h1>
+    <form action="/search_user" method="post">
+        <input type="text" name="ID" id="ID" placeholder="Type ID" class="form-control"><br>
+        <textarea name="anons" id="anons" class="form-control" placeholder="Type ID here..."></textarea><br>
+        <button class="btn btn-warning">Search</button>
+
+    </form>
+
+    {{ range . }}
+    <div class="alert alert-danger">
+        <h2>{{ . }}</h2>
+    </div>
+    {{ else }}
+    <p class="lead">No data</p>
+    {{ end }}
+</main>
+
+{{ template "footer"}}
+
+{{ end }}
