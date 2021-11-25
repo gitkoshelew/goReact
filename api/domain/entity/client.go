@@ -4,24 +4,26 @@ package entity
 type Client struct {
 	User
 	ClientID int
-	Pets     Pet
-	Bookings Booking
+	Pets     []Pet
+	Bookings []Booking
 }
 
-// set Clients Bookings
-func (c *Client) setBookings(b Booking) {
+// SetBookings sets Clients Bookings
+func (c *Client) SetBookings(b []Booking) {
 	c.Bookings = b
 }
 
-// set Clients Pets
-func (c *Client) setPets(p Pet) {
+// SetPets sets Clients Pets
+func (c *Client) SetPets(p []Pet) {
 	c.Pets = p
 }
 
-// Add pets to Client - not realized
-func (c *Client) addPet(p Pet) {
+// AddPet adds pets to Client
+func (c *Client) AddPet(p Pet) {
+	c.Pets = append(c.Pets, p)
 }
 
-// Add Booking to Client - not realized
-func (c *Client) addBooking(b Booking) {
+// AddBooking adds Booking to Client
+func (c *Client) AddBooking(b Booking) {
+	c.Bookings = append(c.Bookings, b)
 }

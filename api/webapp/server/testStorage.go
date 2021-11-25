@@ -16,11 +16,11 @@ type TestStorage struct {
 func GetAccounts() []entity.Account {
 
 	accounts := []entity.Account{
-		entity.Account{1, "login_1", "password_1"},
-		entity.Account{2, "login_2", "password_2"},
-		entity.Account{3, "login_3", "password_3"},
-		entity.Account{4, "login_4", "password_4"},
-		entity.Account{5, "login_5", "password_5"},
+		entity.NewAccount(1, "login_1", "password_1"),
+		entity.NewAccount(2, "login_2", "password_2"),
+		entity.NewAccount(3, "login_3", "password_3"),
+		entity.NewAccount(4, "login_4", "password_4"),
+		entity.NewAccount(5, "login_5", "password_5"),
 	}
 	return accounts
 

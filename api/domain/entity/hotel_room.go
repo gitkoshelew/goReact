@@ -1,17 +1,32 @@
 package entity
 
-type HotelRoomId int
-
+// HotelRoom struct
 type HotelRoom struct {
-	Id         HotelRoomId
-	RoomNumber string
-	PetType    PetType
-	Seats      []HotelRoomSeat
+	HotelRoomID int
+	RoomNumber  int
+	PetType     PetType
+	Seats       []HotelRoomSeat
 }
 
-func (room *HotelRoom) SeatsCount() int {
-	if room == nil {
+// SetRoomNumber sets HotelRooms number
+func (h *HotelRoom) SetRoomNumber(i int) {
+	h.RoomNumber = i
+}
+
+// SetPetType sets HotelRooms pet type
+func (h *HotelRoom) SetPetType(p PetType) {
+	h.PetType = p
+}
+
+// SetSeats sets HotelRooms seats
+func (h *HotelRoom) SetSeats(s []HotelRoomSeat) {
+	h.Seats = s
+}
+
+// SeatsCount returns a numbers of Seats in Hotel Room
+func (h *HotelRoom) SeatsCount() int {
+	if h == nil {
 		return 0
 	}
-	return len(room.Seats)
+	return len(h.Seats)
 }

@@ -17,37 +17,37 @@ type User struct {
 	Email       string
 }
 
-// set Users name
-func (u *User) setName(s string) {
+// SetName sets Users name
+func (u *User) SetName(s string) {
 	u.Name = s
 }
 
-// set Users Surname
-func (u *User) setSurname(s string) {
+// SetSurname sets Users Surname
+func (u *User) SetSurname(s string) {
 	u.Surname = s
 }
 
-// set Users Middlename
-func (u *User) setMiddleName(s string) {
+// SetMiddleName sets Users Middlename
+func (u *User) SetMiddleName(s string) {
 	u.MiddleName = s
 }
 
-// set Users date of birth
-func (u *User) setDateOfBirth(d date.Date) {
+// SetDateOfBirth sets Users date of birth
+func (u *User) SetDateOfBirth(d date.Date) {
 	u.DateOfBirth = d
 }
 
-// set Users Address
-func (u *User) setAddress(s string) {
+// SetAddress sets Users Address
+func (u *User) SetAddress(s string) {
 	u.Address = s
 }
 
-// set Users phone number
-func (u *User) setPhone(s string) {
+// SetPhone sets Users phone number
+func (u *User) SetPhone(s string) {
 	u.Phone = s
 }
 
-// set Users email
-func (u *User) setEmail(s string) {
+// SetEmail sets Users email
+func (u *User) SetEmail(s string) {
 	u.Email = s
 }

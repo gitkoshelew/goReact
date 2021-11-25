@@ -1,42 +1,25 @@
 package entity
 
-import "fmt"
-
-// Employee ...
+// Employee extends User and has all User (and Account) fields
 type Employee struct {
 	User
 	EmployeeID int
-	Hotel      string
+	Hotel      Hotel
 	Position   string
 	Role       string
 }
 
-func (e *Employee) getInfo() string {
-	return fmt.Sprintf("Account ID: %d\n"+
-		"Login: %s\n"+
-		"User ID: %d\n"+
-		"Name: %s\n"+
-		"Surname: %s\n"+
-		"Middlename: %s\n"+
-		"Date of birth: %s\n"+
-		"Address: %s\n"+
-		"Phone number: %s\n"+
-		"Email: %s\n"+
-		"Employee ID: %d\n"+
-		"Hotel: %s\n"+
-		"Position: %s\n"+
-		"Role: %s\n",
-		e.AccountID, e.Login, e.UserID, e.Name, e.Surname, e.MiddleName, e.DateOfBirth, e.Address, e.Phone, e.Email, e.EmployeeID, e.Hotel, e.Position, e.Role)
+// SetHotel sets Employyes Hotel
+func (e *Employee) SetHotel(h Hotel) {
+	e.Hotel = h
 }
 
-func (e *Employee) setHotel(s string) {
-	e.Hotel = s
-}
-
-func (e *Employee) setPosition(s string) {
+// SetPosition sets Employyes Position
+func (e *Employee) SetPosition(s string) {
 	e.Position = s
 }
 
-func (e *Employee) setRole(s string) {
+// SetRole sets Employyes Role
+func (e *Employee) SetRole(s string) {
 	e.Role = s
 }

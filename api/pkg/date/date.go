@@ -13,6 +13,7 @@ type Date struct {
 	civil.Date
 }
 
+// Format ...
 func (d Date) Format(layout string) (string, error) {
 	if !d.IsValid() {
 		return "", errors.New("invalid date")
