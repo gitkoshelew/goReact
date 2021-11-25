@@ -21,6 +21,7 @@ func loadHotelData() {
 	}
 }
 
+// LoadTestData ...
 func LoadTestData() {
 	loadHotelData()
 }

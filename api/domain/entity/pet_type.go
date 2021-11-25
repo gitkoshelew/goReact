@@ -1,14 +1,17 @@
 package entity
 
+// PetType ...
 type PetType string
 
+// PetType constants
 const (
 	PetTypeCat PetType = "cat"
 	PetTypeDog PetType = "dog"
 )
 
-func (pt PetType) IsValid() bool {
-	switch pt {
+//IsValid checks is Pet Type is valid
+func (p PetType) IsValid() bool {
+	switch p {
 	case PetTypeCat, PetTypeDog:
 		return true
 	}

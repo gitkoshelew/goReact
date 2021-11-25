@@ -1,48 +1,29 @@
 package entity
 
-import "fmt"
-
-// Client ...
+// Client extends User and has all User (and Account) fields
 type Client struct {
 	User
 	ClientID int
-	Pets     string
-	Bookings string
+	Pets     []Pet
+	Bookings []Booking
 }
 
-func (c *Client) getInfo() string {
-	return fmt.Sprintf("Account ID: %d\n"+
-		"Login: %s\n"+
-		"User ID: %d\n"+
-		"Name: %s\n"+
-		"Surname: %s\n"+
-		"Middlename: %s\n"+
-		"Date of birth: %s\n"+
-		"Address: %s\n"+
-		"Phone number: %s\n"+
-		"Email: %s\n"+
-		"Client ID: %d\n"+
-		"Pets: %s=\n"+
-		"Bookings: %s\n",
-		c.AccountID, c.Login, c.UserID, c.Name, c.Surname, c.MiddleName, c.DateOfBirth, c.Address, c.Phone, c.Email, c.ClientID, c.Pets, c.Bookings)
-
-	// %v  ||  "data: %v, c"
-}
-
-func (c *Client) setBookings(b string) {
+// SetBookings sets Clients Bookings
+func (c *Client) SetBookings(b []Booking) {
 	c.Bookings = b
 }
 
-func (c *Client) setPets(p string) {
+// SetPets sets Clients Pets
+func (c *Client) SetPets(p []Pet) {
 	c.Pets = p
 }
 
-// addPet
-func (c *Client) addPet(p string) {
-
+// AddPet adds pets to Client
+func (c *Client) AddPet(p Pet) {
+	c.Pets = append(c.Pets, p)
 }
 
-// addBooking
-func (c *Client) addBooking(b string) {
-
+// AddBooking adds Booking to Client
+func (c *Client) AddBooking(b Booking) {
+	c.Bookings = append(c.Bookings, b)
 }

@@ -1,43 +1,36 @@
 package entity
 
-import "fmt"
-
-// Pet ...
+// Pet struct
 type Pet struct {
 	PetID     int
 	Name      string
-	Type      string
+	Type      PetType
 	OwnerID   int
 	Weight    float32
 	Diesieses string
 }
 
-func (p *Pet) getInfo() string {
-	return fmt.Sprintf("Pet ID: %d\n"+
-		"Name: %s\n"+
-		"Type: %s\n"+
-		"OwnerID: %d\n"+
-		"Weight: %f\n"+
-		"Diesieses: %s\n",
-		p.PetID, p.Name, p.Type, p.OwnerID, p.Weight, p.Diesieses)
-}
-
-func (p *Pet) setName(s string) {
+// SetName sets Pets Name
+func (p *Pet) SetName(s string) {
 	p.Name = s
 }
 
-func (p *Pet) setType(s string) {
-	p.Type = s
+// SetType sets Pets Type
+func (p *Pet) SetType(pt PetType) {
+	p.Type = pt
 }
 
-func (p *Pet) setWeight(f float32) {
+// SetWeight sets Pets Weight
+func (p *Pet) SetWeight(f float32) {
 	p.Weight = f
 }
 
-func (p *Pet) setDiesieses(s string) {
+// SetDiesieses sets Pets Diesieses
+func (p *Pet) SetDiesieses(s string) {
 	p.Diesieses = s
 }
 
-func (p *Pet) setOwnerID(i int) {
+// SetOwnerID sets Pets Owner
+func (p *Pet) SetOwnerID(i int) {
 	p.OwnerID = i
 }
