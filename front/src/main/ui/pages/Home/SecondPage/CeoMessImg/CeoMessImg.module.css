@@ -1,0 +1,22 @@
+.ceoMessImg{
+    width: 550px;
+    height: 400px;
+    background: #C4C4C4;
+    border-radius: 12px;
+    position: relative;
+    top: -38px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ceoMessImg p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+}
