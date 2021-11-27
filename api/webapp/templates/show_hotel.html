@@ -1,0 +1,16 @@
+{{ define "show_hotel"}}
+
+{{ template "header"}}
+
+<main class="px-3">
+    <h1> Hotel </h1>
+    <p class="lead">{{ . }}</p>
+    <p class="lead">
+        <a href="/" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Back to main page</a>
+        <a href="/hotels" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Back to hotels menu</a>
+    </p>
+</main>
+
+{{ template "footer"}}
+
+{{ end }}
