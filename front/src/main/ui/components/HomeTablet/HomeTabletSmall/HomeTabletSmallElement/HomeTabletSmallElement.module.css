@@ -4,22 +4,8 @@
     z-index: 5;
     top: -10px;
     left: 30px;
+    margin-bottom:20px;
 }
-
-
-.tabletComponentBody :after {
-    content: "";
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-bottom: 1px solid #DCDBDB;
-    transform: rotate(90deg);
-    display: block;
-    clear: both;
-    left: 179px;
-    top: 4px;
-}
-
 
 .tabletComponentTitle {
     display: flex;
@@ -83,13 +69,10 @@
 }
 
 .tabletComponentBodyBtn {
-    position: absolute;
-    width: 276px;
-    height: 135px;
+    width: 80%;
+    height: 55px;
     background: #063C43;
-    border-radius: 0 20px 0 0;
-    left: 653px;
-    top: -1px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;

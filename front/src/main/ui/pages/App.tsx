@@ -13,10 +13,10 @@ function App() {
     return (
         <div>
             <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse}/>
-            <div>
+            {!isBurgerCollapse && <div>
                 <RoutesInfo/>
                 {/*<Footer/>*/}
-            </div>
+            </div>}
         </div>
     );
 }

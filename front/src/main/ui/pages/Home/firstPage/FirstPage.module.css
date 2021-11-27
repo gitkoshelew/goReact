@@ -1,9 +1,9 @@
 .homeTitle {
-    display: flex;
-    width:100%;
+    width: 300px;
     margin: 0 auto 105px auto;
     position: relative;
 }
+
 
 
 .homeGreenText {
@@ -21,9 +21,9 @@
 .homeBigBlackText {
     text-align: center;
     line-height: 40px;
-    width: 320px;
+    width: 80%;
     height: 106px;
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 600;
     font-size: 35px;
@@ -32,9 +32,9 @@
 }
 
 .greyText {
-    margin-top: 36px;
+    margin: 36px auto 0 auto;
     text-align: center;
-    width: 320px;
+    width: 80%;
     height: 66px;
     font-family: 'Barlow Condensed', sans-serif;;
     font-style: normal;
@@ -45,15 +45,15 @@
 }
 
 .photoBlock {
+    margin: 60px auto 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 630px;
-    height: 762.97px;
+    width: 80%;
+    height: 300px;
     background: #C4C4C4;
-    border-radius: 0 0 0 30px;
+    border-radius: 10px;
     left: 653px;
-    position: absolute;
 }
 
 .photoBlock p {

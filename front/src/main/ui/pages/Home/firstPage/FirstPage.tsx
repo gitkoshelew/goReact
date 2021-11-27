@@ -21,6 +21,9 @@ export const FirstPage = () => {
                     <p>rooms, take in the incredible views and enjoy fresh air</p>
                     <p>from our beautiful sea city.</p>
                 </div>
+                <div className={photoBlock}>
+                    <p>373x335</p>
+                </div>
                 <div className={homeTablet}>
                     <HomeTablet/>
                 </div>
@@ -28,9 +31,7 @@ export const FirstPage = () => {
                     <HomeTabletSmall/>
                 </div>
             </div>
-            {/*<div className={photoBlock}>*/}
-            {/*    <p>373x335</p>*/}
-            {/*</div>*/}
+
         </div>
     )
 }
