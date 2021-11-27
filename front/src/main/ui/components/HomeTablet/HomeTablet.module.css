@@ -1,0 +1,11 @@
+.tabletTitle {
+    background: #FFFFFF;
+    box-shadow: 0 16px 46px rgba(0, 0, 0, 0.06);
+    border-radius: 0 20px;
+    width: 929px;
+    height: 134px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}

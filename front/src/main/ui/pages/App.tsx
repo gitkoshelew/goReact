@@ -1,22 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {NavBar} from '../components/navBar/navBar';
+import {NavBar} from './navBar/navBar';
 import {RoutesInfo} from '../Routes/RoutesInfo';
 import {Footer} from './footer/footer';
-// @ts-ignore
-import Rotate from 'react-reveal/Fade'
 
 
 function App() {
+
+    const [isBurgerCollapse, setIsBurgerCollapse] = useState(false);
+
+
     return (
         <div>
-            <Rotate bottom left>
-            <NavBar/>
-            </Rotate>
-            <Rotate top right>
-            <RoutesInfo/>
-            </Rotate>
-            <Footer/>
+            <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse}/>
+            <div>
+                <RoutesInfo/>
+                {/*<Footer/>*/}
+            </div>
         </div>
     );
 }

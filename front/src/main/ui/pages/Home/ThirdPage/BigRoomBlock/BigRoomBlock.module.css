@@ -1,0 +1,36 @@
+.bigRoomBlock{
+    width: 630px;
+    height: 630px;
+    background: #C4C4C4;
+    border-radius: 10px;
+    position: relative;
+    margin-left: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bigRoomBlock span{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+}
+
+.roomNames{
+    white-space: nowrap;
+    height: 31px;
+    font-family: "Barlow Condensed",sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 31px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    position: absolute;
+    top: 538px;
+    left: 20px;
+}

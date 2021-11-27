@@ -1,0 +1,18 @@
+.miniRoom{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.oneRoomTop{
+    display: flex;
+}
+.oneRoomTop :first-child div{
+    margin-right: 30px;
+}
+.oneRoomBottom{
+    margin-top: 30px;
+    display: flex;
+}
+.oneRoomBottom :first-child div{
+    margin-right: 30px;
+}
