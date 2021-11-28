@@ -1,4 +1,4 @@
-.hotelsTable{
+.hotelsTable {
     width: 500px;
     height: 200px;
     display: flex;
@@ -6,6 +6,6 @@
     justify-content: center;
 }
 
-.hotelsTable img{
+.hotelsTable img {
     border-radius: 13px;
 }

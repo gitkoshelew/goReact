@@ -1,4 +1,4 @@
-.ceoMessImg{
+.ceoMessImg {
     width: 95%;
     height: 270px;
     background: #C4C4C4;
@@ -7,9 +7,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.ceoMessImg p{
     font-style: normal;
     font-weight: normal;
     font-size: 40px;

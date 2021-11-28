@@ -6,7 +6,7 @@ import {CeoMessImg} from './CeoMessImg/CeoMessImg';
 import {CeoMessSignature} from './CeoMessSignature/CeoMessSignature';
 import {ScrollBlock} from './ScrollBlock/ScrollBlock';
 
-const {secondPage, statisticBlock, ceoMessTitle,ceoMessTextBlock} = s;
+const {secondPage, statisticBlock, ceoMessTitle, ceoMessTextBlock} = s;
 
 export const SecondPage = () => {
     return (
@@ -20,8 +20,8 @@ export const SecondPage = () => {
             <div className={ceoMessTitle}>
                 <CeoMessImg/>
                 <div className={ceoMessTextBlock}>
-                    <CeoMessText type={'bigBlackText'}/>
-                    <CeoMessText type={'smallGreyText'}/>
+                    <CeoMessText type={'mainText'}/>
+                    <CeoMessText type={'secondaryText'}/>
                 </div>
                 <CeoMessSignature/>
             </div>

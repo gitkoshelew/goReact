@@ -14,7 +14,7 @@ export const NavLinks = (props: NavLinksPropsType) => {
     const {navNames} = props;
 
 
-    const correctNavLinks = navNames.map(t => <NavLink className={({isActive}) =>
+    const correctNavLinks = navNames.map((t,i) => <NavLink key={i} className={({isActive}) =>
         isActive ? oneLinkActive : oneLink} to={`/${t.replace(/\s/g, '').toLowerCase()}`}>{t}</NavLink>)
 
 

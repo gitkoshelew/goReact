@@ -1,19 +1,23 @@
-.miniRoom{
+.miniRoom {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.oneRoomTop{
+
+.oneRoomTop {
     display: flex;
     flex-direction: column;
 }
-.oneRoomTop :first-child div{
+
+.oneRoomTop :first-child div {
     /*margin-bottom: 30px;*/
 }
-.oneRoomBottom{
+
+.oneRoomBottom {
     display: flex;
     flex-direction: column;
 }
-.oneRoomBottom :first-child div{
+
+.oneRoomBottom :first-child div {
     /*margin-bottom: 30px;*/
 }

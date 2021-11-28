@@ -2,21 +2,19 @@ import s from './BurgerMenu.module.css';
 import {NavLinks} from '../../../components/NavLinks/NavLinks';
 import {NavLinksBurger} from '../../../components/NavLinks/NavLinksBurger/NavLinksBurger';
 
-const {burgerMenu,navLinksBurgerMenu} = s
+const {burgerMenu, navLinksBurgerMenu} = s
 
-type BurgerMenuPropsType={
-    setIsBurgerCollapse:(newStatus:boolean)=>void
-    isBurgerCollapse:boolean
+type BurgerMenuPropsType = {
+    setIsBurgerCollapse: (newStatus: boolean) => void
+    isBurgerCollapse: boolean
 }
 
 
+export const BurgerMenu = ({isBurgerCollapse, setIsBurgerCollapse}: BurgerMenuPropsType) => {
 
-export const BurgerMenu = ({isBurgerCollapse,setIsBurgerCollapse}:BurgerMenuPropsType) => {
-
-    const setBurgerStatus =()=>{
+    const setBurgerStatus = () => {
         setIsBurgerCollapse(!isBurgerCollapse)
     }
-
 
 
     return (

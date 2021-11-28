@@ -1,16 +1,16 @@
 import s from './PriceWindow.module.css';
 
-type PriceWindowPropsType={
-    price:number
+type PriceWindowPropsType = {
+    price: number
 }
 
-const {priceWindow}=s
+const {priceWindow} = s
 
-export const PriceWindow=({price}:PriceWindowPropsType)=>{
+export const PriceWindow = ({price}: PriceWindowPropsType) => {
 
-    return(
+    return (
         <div className={priceWindow}>
-        <p>${price} night</p>
-       </div>
+            <p>${price} night</p>
+        </div>
     )
 }

@@ -9,7 +9,6 @@
 }
 
 
-
 .oneLink {
     width: 100%;
     padding: 30px 0;
@@ -27,19 +26,20 @@
     align-items: center;
     justify-content: center;
     border-top: 1px solid #DCDBDB;
-  }
+}
 
 .navLinkTitle :last-child {
-    border-top:none ;
-   outline: 1px solid #DCDBDB ;
+    border-top: none;
+    outline: 1px solid #DCDBDB;
     padding-bottom: 39px;
 
 }
+
 .navLinkTitle :first-child {
-  margin-top: 86px;
+    margin-top: 86px;
 }
 
-.oneLinkActive{
+.oneLinkActive {
     width: 100%;
     padding: 30px 0;
     height: 18px;

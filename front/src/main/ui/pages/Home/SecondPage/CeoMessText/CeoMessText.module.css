@@ -1,6 +1,6 @@
 
-.bigBlackText {
-    width:100%;
+.mainText {
+    width: 100%;
     height: 106px;
     font-family: "Barlow Condensed", sans-serif;
     font-style: normal;
@@ -11,10 +11,9 @@
     margin: 25px auto 0 auto;
 
 
-
 }
 
-.smallGreyText {
+.secondaryText {
     width: 100%;
     height: 90px;
     font-style: normal;

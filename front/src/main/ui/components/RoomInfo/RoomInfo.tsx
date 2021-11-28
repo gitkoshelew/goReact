@@ -1,17 +1,17 @@
 import s from './RoomInfo.module.css';
-import children from '../../../../assets/img/home/thirdPage/children.svg';
-import adult from '../../../../assets/img/home/thirdPage/adult.svg';
-import square from '../../../../assets/img/home/thirdPage/square.svg';
+import {children} from '../../svgWrapper/HomeSvgWrapper';
+import {adult} from '../../svgWrapper/HomeSvgWrapper';
+import {square} from '../../svgWrapper/HomeSvgWrapper';
 
-const {roomInfo,roomInfoElement} = s
-type RoomInfoPropsTypes={
-    childrenNum:number
-    adultNum:number
-    squareNum:number
+const {roomInfo, roomInfoElement} = s
+type RoomInfoPropsTypes = {
+    childrenNum: number
+    adultNum: number
+    squareNum: number
 }
 
 
-export const RoomInfo = ({childrenNum,adultNum,squareNum}:RoomInfoPropsTypes) => {
+export const RoomInfo = ({childrenNum, adultNum, squareNum}: RoomInfoPropsTypes) => {
     return (
         <div className={roomInfo}>
             <div className={roomInfoElement}>

@@ -1,6 +1,6 @@
 .headerContainer {
     border-bottom: 1px solid rgba(202, 202, 202, 0.5);
-    width:100%;
+    width: 100%;
 }
 
 
@@ -33,8 +33,8 @@
     display: block;
     clear: both;
     position: absolute;
-    left:20px;
-    top:20px;
+    left: 20px;
+    top: 20px;
 }
 
 .selectContainer {
@@ -50,7 +50,7 @@
     margin-left: 185px;
 }
 
-.commonNavBar{
-    display:none;
+.commonNavBar {
+    display: none;
 }
 

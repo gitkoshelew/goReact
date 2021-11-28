@@ -3,16 +3,15 @@ import s from './StatisticBlockElement.module.css';
 
 const {statisticBlockNum, statisticBlockText, statisticElem} = s;
 
-type StatisticBlockElementPropsType={
-    statisticNum:number
-    statisticText:string
+type StatisticBlockElementPropsType = {
+    statisticNum: number
+    statisticText: string
 
 }
 
 
-
-export const StatisticBlockElement = (props:StatisticBlockElementPropsType) => {
-    const{statisticNum,statisticText}=props;
+export const StatisticBlockElement = (props: StatisticBlockElementPropsType) => {
+    const {statisticNum, statisticText} = props;
     return (
         <div className={statisticElem}>
             <div className={statisticBlockNum}>{statisticNum}+</div>

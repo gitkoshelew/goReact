@@ -26,7 +26,7 @@ export const HomeTabletSmallElement = (props: HomeTabletElementPropsType) => {
                     <div className={tabletComponentText}>Check in</div>
                 </div>
                 <div className={tabletComponentBody}>
-                    <input required={true} type="date" value="2021-07-22"/>
+                    <input required={true} type="date" defaultValue="2021-07-22"/>
                 </div>
             </div>}
             {type === 'checkOut' &&
@@ -36,7 +36,7 @@ export const HomeTabletSmallElement = (props: HomeTabletElementPropsType) => {
                     <div className={tabletComponentText}>Check out</div>
                 </div>
                 <div className={tabletComponentBody}>
-                    <input type="date" value="2021-07-22"/>
+                    <input type="date" defaultValue="2021-07-22"/>
                 </div>
             </div>}
             {type === 'calendar' &&

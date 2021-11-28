@@ -1,18 +1,18 @@
 import s from './ThirdPageTextBlock.module.css';
-import arrow from '../../../../../../assets/img/home/thirdPage/greenArrow.svg';
+import {arrow3} from '../../../../svgWrapper/HomeSvgWrapper';
 
 
-const {thirdPageTextBlockTitle,bigBlackText,smallGreenText} = s;
+const {thirdPageTextBlockTitle, mainText, linkText} = s;
 
 export const ThirdPageTextBlock = () => {
     return (
         <div className={thirdPageTextBlockTitle}>
-            <div className={bigBlackText}>
+            <div className={mainText}>
                 <p>OUR FAVORITE ROOMS</p>
             </div>
-            <div className={smallGreenText}>
+            <div className={linkText}>
                 <p>See more</p>
-                <img src={arrow} alt="greenArrow"/>
+                <img src={arrow3} alt="greenArrow"/>
             </div>
         </div>
     )

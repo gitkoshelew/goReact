@@ -1,10 +1,10 @@
 .thirdPageTextBlockTitle {
-  display: flex;
+    display: flex;
     align-items: center;
     margin: 35px 0 10px 15px;
 }
 
-.bigBlackText {
+.mainText {
     width: 90%;
     height: 90px;
     font-family: "Barlow Condensed", sans-serif;
@@ -18,7 +18,7 @@
 }
 
 
-.smallGreenText {
+.linkText {
     white-space: nowrap;
     display: none;
     align-items: center;
@@ -28,7 +28,5 @@
     font-size: 20px;
     line-height: 24px;
     color: #0F97AA;
-}
-.smallGreenText p{
     margin-right: 10px;
 }

@@ -1,11 +1,10 @@
 import s from './footer.module.css';
-const{footerTitle}=s;
+
+const {footerTitle} = s;
 
 
-
-
-export const Footer =()=>{
-    return(
+export const Footer = () => {
+    return (
         <div className={footerTitle}>
 
         </div>

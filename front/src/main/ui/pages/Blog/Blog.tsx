@@ -5,7 +5,7 @@ import s from './Blog.module.css';
 export const Blog = () => {
     return (
         <div>
-           Blog
+            Blog
         </div>
     );
 }

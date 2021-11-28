@@ -18,15 +18,13 @@ const {
     commonNavBar
 } = s;
 
-type NavBarPropsType ={
-    setIsBurgerCollapse:(newStatus:boolean)=>void
-    isBurgerCollapse:boolean
+type NavBarPropsType = {
+    setIsBurgerCollapse: (newStatus: boolean) => void
+    isBurgerCollapse: boolean
 }
 
 
-
-export const NavBar = ({isBurgerCollapse,setIsBurgerCollapse}:NavBarPropsType) => {
-
+export const NavBar = ({isBurgerCollapse, setIsBurgerCollapse}: NavBarPropsType) => {
 
 
     return (

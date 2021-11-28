@@ -5,7 +5,7 @@
     justify-content: center;
 }
 
-.oneLinkActive{
+.oneLinkActive {
     white-space: nowrap;
     color: #000000;
     text-decoration: none;
@@ -15,7 +15,7 @@
     font-size: 16px;
     line-height: 19px;
     text-transform: capitalize;
-    width:41px;
+    width: 41px;
     height: 19px;
     margin-right: 52px;
     display: flex;
@@ -34,7 +34,7 @@
     line-height: 19px;
     text-transform: capitalize;
     color: #808080;
-    width:41px;
+    width: 41px;
     height: 19px;
     margin-right: 52px;
     display: flex;

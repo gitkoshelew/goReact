@@ -1,41 +1,38 @@
-.aboutUsTitle{
+.aboutUsTitle {
     text-align: center;
     margin-top: 5%;
     margin-bottom: 5%;
     font-size: 85px;
-    color:#663399;
+    color: #663399;
     font-family: "Agency FB";
 
 }
 
-.aboutUsTitle h1{
 
-}
-
-
-.aboutUsPhotoBlock img{
+.aboutUsPhotoBlock img {
     height: 500px;
     width: 700px;
     margin-bottom: 20px;
 }
 
-.aboutUsMain{
+.aboutUsMain {
     display: flex;
     align-items: center;
 }
 
-.aboutUsMain div{
+.aboutUsMain div {
     text-align: justify;
     margin: 0 30px
 }
 
 
-.aboutText{
+.aboutText {
     font-family: "Book Antiqua";
-    color:black;
+    color: black;
     font-weight: bold;
     font-size: 25px;
 }
-.aboutText p{
+
+.aboutText p {
     margin-bottom: 10px;
 }

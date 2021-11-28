@@ -4,7 +4,7 @@ import dot from '../../../../assets/img/navBar/dot.svg'
 import s from './Logo.module.css';
 import React from 'react';
 
-const{logo}=s;
+const {logo} = s;
 
 export const Logo = () => {
     return (

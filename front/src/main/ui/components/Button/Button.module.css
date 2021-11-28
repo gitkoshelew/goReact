@@ -1,4 +1,4 @@
-.loginBtn{
+.loginBtn {
     text-decoration: none;
     display: flex;
     flex-direction: row;
@@ -7,7 +7,7 @@
     padding: 12px 20px;
     background: #F4F4F4;
     border-radius: 8px;
-    font-family:'Barlow Condensed', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -15,11 +15,11 @@
     color: #000000;
 }
 
-.buyBtn{
+.buyBtn {
     background: rgba(239, 239, 239, 0.15);
     border: 1px solid #E8E8E8;
     box-sizing: border-box;
     border-radius: 8px;
     padding: 8px 8px;
-    margin-right:24px;
+    margin-right: 24px;
 }

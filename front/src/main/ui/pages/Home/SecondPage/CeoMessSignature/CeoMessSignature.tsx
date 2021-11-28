@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './CeoMessSignature.module.css';
-import signature from '../../../../../../assets/img/home/secondPage/signature.svg'
+import {signature} from '../../../../svgWrapper/HomeSvgWrapper'
 
 const {ceoMessSignature} = s;
 

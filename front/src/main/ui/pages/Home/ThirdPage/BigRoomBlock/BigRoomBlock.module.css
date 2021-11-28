@@ -1,4 +1,4 @@
-.bigRoomBlock{
+.bigRoomBlock {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,9 +8,6 @@
     border-radius: 10px;
     position: relative;
     margin-bottom: 30px;
-}
-
-.bigRoomBlock span{
     font-style: normal;
     font-weight: normal;
     font-size: 40px;
@@ -20,10 +17,10 @@
     color: #000000;
 }
 
-.roomNames{
+.roomNames {
     white-space: nowrap;
     height: 31px;
-    font-family: "Barlow Condensed",sans-serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 26px;
