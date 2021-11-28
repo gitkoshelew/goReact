@@ -1,13 +1,12 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"goReact/domain/entity"
 	"goReact/webapp"
-	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 )
 
 // HandleHotelRooms opens an hotel rooms page, URL: "/rooms". Shows all hotel rooms, can search one by id
@@ -16,12 +15,9 @@ func HandleHotelRooms() http.HandlerFunc {
 	rooms := webapp.GetHotelRooms()
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("webapp/templates/rooms.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
-		tmpl.ExecuteTemplate(w, "rooms", rooms)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(rooms)
 	}
 }
 
@@ -48,15 +44,13 @@ func HandleHotelRoomSearch() http.HandlerFunc {
 			}
 		}
 
-		tmpl, err := template.ParseFiles("webapp/templates/show_room.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
 		if roomFound {
-			tmpl.ExecuteTemplate(w, "show_room", room)
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(room)
 		} else {
-			tmpl.ExecuteTemplate(w, "show_room", "Room not found")
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusNotFound)
 		}
 	}
 }

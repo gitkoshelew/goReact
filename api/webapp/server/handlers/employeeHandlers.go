@@ -1,13 +1,12 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"goReact/domain/entity"
 	"goReact/webapp"
-	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 )
 
 // HandleEmployees opens an employee page, URL: "/employees". Shows all employees, can search one by id
@@ -16,12 +15,9 @@ func HandleEmployees() http.HandlerFunc {
 	employees := webapp.GetEmployees()
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("webapp/templates/employees.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
-		tmpl.ExecuteTemplate(w, "employees", employees)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(employees)
 	}
 }
 
@@ -48,15 +44,13 @@ func HandleEmployeeSearch() http.HandlerFunc {
 			}
 		}
 
-		tmpl, err := template.ParseFiles("webapp/templates/show_employee.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
 		if employeeFound {
-			tmpl.ExecuteTemplate(w, "show_employee", employee)
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(employee)
 		} else {
-			tmpl.ExecuteTemplate(w, "show_employee", "Employee not found")
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusNotFound)
 		}
 
 	}

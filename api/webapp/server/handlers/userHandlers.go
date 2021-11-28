@@ -1,13 +1,12 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"goReact/domain/entity"
 	"goReact/webapp"
-	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 )
 
 // HandleUsers opens an user page, URL: "/users". Shows all user, can search one by id
@@ -16,12 +15,9 @@ func HandleUsers() http.HandlerFunc {
 	users := webapp.GetUsers()
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("webapp/templates/users.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
-		tmpl.ExecuteTemplate(w, "users", users)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(users)
 	}
 }
 
@@ -48,15 +44,13 @@ func HandleUserSearch() http.HandlerFunc {
 			}
 		}
 
-		tmpl, err := template.ParseFiles("webapp/templates/show_user.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
 		if userFound {
-			tmpl.ExecuteTemplate(w, "show_user", user)
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(user)
 		} else {
-			tmpl.ExecuteTemplate(w, "show_user", "User not found")
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusNotFound)
 		}
 
 	}

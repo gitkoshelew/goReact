@@ -1,13 +1,12 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"goReact/domain/entity"
 	"goReact/webapp"
-	"log"
 	"net/http"
 	"strconv"
-	"text/template"
 )
 
 // HandleBookings opens an booking page, URL: "/bookings". Shows all bookings, can search one by id
@@ -16,12 +15,9 @@ func HandleBookings() http.HandlerFunc {
 	bookings := webapp.GetBookings()
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("webapp/templates/bookings.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
-		tmpl.ExecuteTemplate(w, "bookings", bookings)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(bookings)
 	}
 }
 
@@ -48,15 +44,13 @@ func HandleBookingSearch() http.HandlerFunc {
 			}
 		}
 
-		tmpl, err := template.ParseFiles("webapp/templates/show_booking.html", "webapp/templates/header.html", "webapp/templates/footer.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-			log.Fatal(err)
-		}
 		if bookingFound {
-			tmpl.ExecuteTemplate(w, "show_booking", booking)
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(booking)
 		} else {
-			tmpl.ExecuteTemplate(w, "show_booking", "Booking not found")
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusNotFound)
 		}
 	}
 }

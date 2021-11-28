@@ -6,12 +6,9 @@ import (
 
 func (s *Server) configureRouter() {
 	s.router.HandlerFunc("GET", "/", handlers.HandleHomePage())
-	// s.router.HandlerFunc("*", "/api", s.handleApi())
 
 	s.router.HandlerFunc("GET", "/api/accounts", handlers.HandleAccounts())
 	s.router.HandlerFunc("GET", "/api/account", handlers.HandleAccountSearch())
-
-	s.router.HandlerFunc("GET", "/api/accounts/json", handlers.HandleAccountsJson())
 
 	s.router.HandlerFunc("GET", "/api/users", handlers.HandleUsers())
 	s.router.HandlerFunc("GET", "/api/user", handlers.HandleUserSearch())
