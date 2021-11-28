@@ -14,6 +14,7 @@ type Config struct {
 		Host     string `yaml:"host"`
 		Port     int    `yaml:"port"`
 		LogLevel string `yaml:"log_level"`
+		Store    string `yaml:"dbName"`
 	} `yaml:"server"`
 	PgConnection struct {
 		Host     string `yaml:"host"`
