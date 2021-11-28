@@ -1,11 +1,9 @@
 .ceoMessImg{
-    width: 550px;
-    height: 400px;
+    width: 95%;
+    height: 270px;
     background: #C4C4C4;
     border-radius: 12px;
-    position: relative;
-    top: -38px;
-    left: 30px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,24 +1,27 @@
 
 .bigBlackText {
-    width: 382px;
+    width:100%;
     height: 106px;
     font-family: "Barlow Condensed", sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 44px;
-    line-height: 53px;
+    font-size: 34px;
+    line-height: 33px;
     color: #000000;
-    margin: 60px 0px 0px 90px;
+    margin: 25px auto 0 auto;
+
+
 
 }
 
 .smallGreyText {
-    width: 360px;
+    width: 100%;
     height: 90px;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 22px;
     color: #808080;
-    margin: 25px 0px 0px 90px;
+
+
 }

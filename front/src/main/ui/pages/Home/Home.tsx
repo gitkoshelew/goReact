@@ -10,8 +10,8 @@ export const Home = () => {
     return (
         <div>
             <FirstPage/>
-            {/*<SecondPage/>*/}
-            {/*<ThirdPage/>*/}
+            <SecondPage/>
+            <ThirdPage/>
         </div>
     )
 }

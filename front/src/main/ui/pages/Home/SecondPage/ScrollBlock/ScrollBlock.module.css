@@ -1,9 +1,10 @@
 .scrollBlock {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     position: relative;
     left: -660px;
     top: 60px;
+    display: none;
 }
 
 .scrollBlock p {

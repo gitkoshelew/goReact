@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 }
 .oneRoom span{
     font-style: normal;
@@ -20,8 +21,9 @@
 
 .rePositionInfo{
     position: absolute;
-    top:-325px;
-    left:-10px;
+    /*top:-225px;*/
+    top:0;
+    left:0;
 }
 
 .roomNames{

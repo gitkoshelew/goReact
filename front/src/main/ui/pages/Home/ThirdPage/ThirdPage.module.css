@@ -1,5 +1,5 @@
 .thirdPage {
-    min-height: 954px;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -8,4 +8,7 @@
 
 .photoBlock {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
