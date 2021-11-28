@@ -1,24 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {NavBar} from '../components/navBar/navBar';
+import {NavBar} from './navBar/navBar';
 import {RoutesInfo} from '../Routes/RoutesInfo';
-import {Footer} from './footer/footer';
-// @ts-ignore
-import Rotate from 'react-reveal/Fade'
 
 
 function App() {
-    return (
-        <div>
-            <Rotate bottom left>
-            <NavBar/>
-            </Rotate>
-            <Rotate top right>
-            <RoutesInfo/>
-            </Rotate>
-            <Footer/>
-        </div>
-    );
+
+    const [isBurgerCollapse, setIsBurgerCollapse] = useState(false);
+
+
+/*
+              *TODO:-routes system for faster navigation by application
+              * all links are located in /Routes folder
+              * isBurgerCollapse created for burger menu correct work
+
+ */
+
+  return (
+      <div>
+          <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse}/>
+          {!isBurgerCollapse && <div>
+              <RoutesInfo/>
+          </div>}
+      </div>
+  );
 }
 
 export default App;

@@ -1,0 +1,14 @@
+.thirdPage {
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photoBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

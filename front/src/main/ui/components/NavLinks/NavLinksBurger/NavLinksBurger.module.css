@@ -1,0 +1,59 @@
+
+.navLinkTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    transition: all 700ms ease;
+}
+
+
+.oneLink {
+    width: 100%;
+    padding: 30px 0;
+    height: 18px;
+    white-space: nowrap;
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: #808080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #DCDBDB;
+}
+
+.navLinkTitle :last-child {
+    border-top: none;
+    outline: 1px solid #DCDBDB;
+    padding-bottom: 39px;
+
+}
+
+.navLinkTitle :first-child {
+    margin-top: 86px;
+}
+
+.oneLinkActive {
+    width: 100%;
+    padding: 30px 0;
+    height: 18px;
+    white-space: nowrap;
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #DCDBDB;
+}

@@ -1,0 +1,68 @@
+.firstPageTitle {
+    width: 100%;
+    margin: 0 auto 20px auto;
+    position: relative;
+}
+
+
+.firstPageLinkText {
+    width: 121px;
+    height: 22px;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: #0F97AA;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 22px;
+    margin: 25px 0 0 25px;
+}
+
+.firstPageMainText {
+    text-align: center;
+    line-height: 40px;
+    width: 80%;
+    height: 106px;
+    margin: 40px auto 0 auto;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 35px;
+    color: #000000;
+    z-index: 3;
+}
+
+.secondaryText {
+    margin: 36px auto 0 auto;
+    text-align: center;
+    width: 80%;
+    height: 66px;
+    font-family: 'Barlow Condensed', sans-serif;;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #808080;
+}
+
+.photoBlock {
+    margin: 60px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 300px;
+    background: #C4C4C4;
+    border-radius: 10px;
+    left: 653px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+}
+
+.homeTablet {
+    margin-top: 54px;
+    display: none;
+}

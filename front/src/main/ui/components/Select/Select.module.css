@@ -1,0 +1,17 @@
+
+.selectContainer select {
+    color: #063C43;
+    font-weight: 500;
+    width: 40px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    -webkit-appearance: none;
+    background: url('../../../../assets/img/navBar/arrow.svg') no-repeat right white;
+    background-position-x: 29px;
+    margin-left: 55px;
+    position: relative;
+    z-index: 5;
+
+}
+

@@ -53,12 +53,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background:url("./assets/img/startPage/background.jpg") no-repeat;
+    background:#FFFFFF;
     background-size: cover;
     background-attachment: fixed;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+

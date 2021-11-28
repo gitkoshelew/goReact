@@ -1,0 +1,56 @@
+.headerContainer {
+    border-bottom: 1px solid rgba(202, 202, 202, 0.5);
+    width: 100%;
+}
+
+
+.headerNavBar {
+    width: 100%;
+    margin: 0 auto;
+    height: 84px;
+    display: flex;
+    align-items: center;
+
+}
+
+.contentContainer {
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.logoContainer {
+    position: relative;
+    left: 20px;
+}
+
+
+.logoContainer :after {
+    content: "";
+    width: 80px;
+    border-bottom: 1px solid #DCDBDB;
+    transform: rotate(90deg);
+    display: block;
+    clear: both;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.selectContainer {
+    margin: 0 0px 0 -10px;
+}
+
+.navLinksBlock {
+    margin: 0 auto;
+}
+
+.btnBlock {
+    display: flex;
+    margin-left: 185px;
+}
+
+.commonNavBar {
+    display: none;
+}
+
