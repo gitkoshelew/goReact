@@ -6,9 +6,9 @@ import (
 
 // Account ...
 type Account struct {
-	AccountID int
-	Login     string
-	Password  string
+	AccountID int    `json:"accountId"`
+	Login     string `json:"login"`
+	Password  string `json:"password"`
 }
 
 // NewAccount creates Account with encrypted password

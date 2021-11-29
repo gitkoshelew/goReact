@@ -1,4 +1,4 @@
-package server
+package webapp
 
 import (
 	"goReact/domain/entity"
