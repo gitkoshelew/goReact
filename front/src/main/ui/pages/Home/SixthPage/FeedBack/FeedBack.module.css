@@ -1,0 +1,26 @@
+.feedBack{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+    height: 230px;
+    background: #FFFFFF;
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+}
+
+.feedBackText{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #808080;
+}
+.feedBackUser{
+    display: flex;
+}
+
+.infoUserBlock{
+    display: flex;
+    flex-direction: column;
+}

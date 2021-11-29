@@ -1,10 +1,11 @@
 import React from 'react'
-import s from './Home.module.css';
 import {FirstPage} from './firstPage/FirstPage';
 import {SecondPage} from './SecondPage/SecondPage';
 import {ThirdPage} from './ThirdPage/ThirdPage';
+import {FourthPage} from './FourthPage/FourthPage';
+import {FifthPage} from './FifthPage/FifthPage';
+import {SixthPage} from './SixthPage/SixthPage';
 
-const {secondPage, statisticBlock, statisticBlockNum, statisticBlockText, statisticElem} = s;
 
 export const Home = () => {
     return (
@@ -12,6 +13,9 @@ export const Home = () => {
             <FirstPage/>
             <SecondPage/>
             <ThirdPage/>
+            <FourthPage/>
+            <FifthPage/>
+            <SixthPage/>
         </div>
     )
 }

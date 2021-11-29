@@ -58,4 +58,8 @@ body {
     background-attachment: fixed;
 }
 
+.slick-active{
+    filter: grayscale(100%);
+}
+
 

@@ -18,8 +18,7 @@
 }
 
 .firstPageMainText {
-    text-align: center;
-    line-height: 40px;
+    line-height: 35px;
     width: 80%;
     height: 106px;
     margin: 40px auto 0 auto;
@@ -31,8 +30,7 @@
 }
 
 .secondaryText {
-    margin: 36px auto 0 auto;
-    text-align: center;
+    margin: 25px auto 0 auto;
     width: 80%;
     height: 66px;
     font-family: 'Barlow Condensed', sans-serif;;

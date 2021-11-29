@@ -9,21 +9,21 @@ function App() {
     const [isBurgerCollapse, setIsBurgerCollapse] = useState(false);
 
 
-/*
-              *TODO:-routes system for faster navigation by application
-              * all links are located in /Routes folder
-              * isBurgerCollapse created for burger menu correct work
+    /*
+                  *TODO:-routes system for faster navigation by application
+                  * all links are located in /Routes folder
+                  * isBurgerCollapse created for burger menu correct work
 
- */
+     */
 
-  return (
-      <div>
-          <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse}/>
-          {!isBurgerCollapse && <div>
-              <RoutesInfo/>
-          </div>}
-      </div>
-  );
+    return (
+        <div>
+            <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse}/>
+            {!isBurgerCollapse && <div>
+                <RoutesInfo/>
+            </div>}
+        </div>
+    );
 }
 
 export default App;
