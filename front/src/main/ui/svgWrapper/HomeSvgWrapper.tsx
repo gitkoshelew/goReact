@@ -24,6 +24,13 @@ import flower from '../../../assets/img/home/fourthPage/services/flower.svg';
 import sliderDot from '../../../assets/img/home/fourthPage/services/sliderDot.svg';
 
 
+//sixthPage (feedBack elem)
+import staples from '../../../assets/img/home/sixthPage/stapless.svg'
+
+
+
+
+
 export {
     usersShadow,
     calendar,
@@ -48,4 +55,8 @@ export {
     flower,
     forkAndSpoon,
     sliderDot
+}
+
+export{
+    staples
 }

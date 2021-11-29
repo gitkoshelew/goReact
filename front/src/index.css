@@ -62,4 +62,7 @@ body {
     filter: grayscale(100%);
 }
 
+.slick-current{
+    filter:none;
+}
 

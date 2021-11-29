@@ -1,0 +1,19 @@
+.linkInMap{
+    font-family: "Barlow Condensed",sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-decoration-line: underline;
+    color: #FFFFFF;
+    margin:20px 0 10px 67px;
+}
+
+.ftLogo{
+    padding: 30px 25px;
+
+}
+
+.contactInfo{
+    margin: 0 96px 0 120px;
+}
