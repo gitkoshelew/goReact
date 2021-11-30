@@ -1,6 +1,6 @@
-import t from '../../../../assets/img/navBar/t.svg'
-import f from '../../../../assets/img/navBar/Vector.svg'
-import dot from '../../../../assets/img/navBar/dot.svg'
+import {t} from '../../svgWrapper/navBarSvgWrapper'
+import {f} from '../../svgWrapper/navBarSvgWrapper'
+import {dot} from '../../svgWrapper/navBarSvgWrapper'
 import s from './Logo.module.css';
 import React from 'react';
 

@@ -1,0 +1,6 @@
+.sixthPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #F9F9F9;
+}

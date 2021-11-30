@@ -16,6 +16,20 @@ import arrow3 from '../../../assets/img/home/thirdPage/greenArrow.svg';
 import adult from '../../../assets/img/home/thirdPage/adult.svg';
 import square from '../../../assets/img/home/thirdPage/square.svg';
 
+//fourthPage (services)
+import Case from '../../../assets/img/home/fourthPage/services/case.svg';
+import swimmer from '../../../assets/img/home/fourthPage/services/swimmer.svg';
+import forkAndSpoon from '../../../assets/img/home/fourthPage/services/forkAndSpoon.svg';
+import flower from '../../../assets/img/home/fourthPage/services/flower.svg';
+import sliderDot from '../../../assets/img/home/fourthPage/services/sliderDot.svg';
+
+
+//sixthPage (feedBack elem)
+import staples from '../../../assets/img/home/sixthPage/stapless.svg'
+
+
+
+
 
 export {
     usersShadow,
@@ -33,4 +47,16 @@ export {
     arrow3,
     adult,
     square
+}
+
+export {
+    Case,
+    swimmer,
+    flower,
+    forkAndSpoon,
+    sliderDot
+}
+
+export{
+    staples
 }
