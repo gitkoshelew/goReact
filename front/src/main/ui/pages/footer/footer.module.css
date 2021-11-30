@@ -1,4 +1,13 @@
-.footerTitle {
-    background-color: #063C43;
+
+.footerBlock {
     display: flex;
+    flex-direction: column;
+    background-color: #063C43;
 }
+
+.footerTitle {
+    display: flex;
+    padding: 40px 0;
+}
+
+
