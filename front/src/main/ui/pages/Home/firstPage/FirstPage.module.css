@@ -64,3 +64,13 @@
     margin-top: 54px;
     display: none;
 }
+
+
+@media (min-width: 600px) {
+.secondaryText{
+    font-size: 18px;
+    margin: -5px auto -20px auto;
+}
+
+
+}

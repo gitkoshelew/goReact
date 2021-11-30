@@ -40,3 +40,23 @@
     left: 10px;
 }
 
+
+@media(min-width: 575px){
+    .oneRoom{
+        width: 400px;
+        height: 400px;
+    }
+    .roomNames{
+        top:315px;
+    }
+}
+@media(min-width: 767px){
+    .oneRoom{
+        width: 550px;
+        height: 550px;
+    }
+    .roomNames{
+        top:460px;
+        left:20px;
+    }
+}

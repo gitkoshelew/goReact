@@ -1,3 +1,16 @@
 .ceoMessSignature {
     margin: 115px auto 0 auto;
 }
+
+
+@media (min-width: 440px) {
+    .ceoMessSignature {
+        margin: 20px auto 0 auto;
+    }
+}@media (min-width: 767px) {
+    .ceoMessSignature {
+        margin: 20px 0px 0 310px;
+    }
+}
+
+

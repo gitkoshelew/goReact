@@ -2,7 +2,7 @@ import s from './ServiceBlock.module.css';
 import {ServicesElement} from '../../../../components/ServicesElement/ServicesElement';
 import {useState} from 'react';
 
-const {serviceBlock} = s;
+const {serviceBlock,toRows} = s;
 
 export type IsActiveServiceElementType = {
     elem1: boolean
@@ -24,18 +24,22 @@ export const ServiceBlock = () => {
 
     return (
         <div className={serviceBlock}>
+            <div className={toRows}>
             <ServicesElement setIsActive={setIsActive} isActive={isActive} mainTextMess={'TOP RESTAURANT'}
                              secondaryTextMess={'Breakfast & Dinner'}
                              type={'forkAndSpoon'}/>
             <ServicesElement setIsActive={setIsActive} isActive={isActive} mainTextMess={'BEST SUITES'}
                              secondaryTextMess={'Cool View'}
                              type={'case'}/>
+            </div>
+            <div className={toRows}>
             <ServicesElement setIsActive={setIsActive} isActive={isActive} mainTextMess={'SPA & WELLNESS'}
                              secondaryTextMess={'Open Daily'}
                              type={'flower'}/>
             <ServicesElement setIsActive={setIsActive} isActive={isActive} mainTextMess={'Swimming Pool'}
                              secondaryTextMess={'Open Daily'}
                              type={'swimmer'}/>
+        </div>
         </div>
     )
 }

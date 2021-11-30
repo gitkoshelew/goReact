@@ -6,3 +6,12 @@
     margin: 60px 0 -30px 0;
     white-space: nowrap;
 }
+
+
+
+
+@media(min-width: 575px){
+    .titleText{
+        margin: 60px 0 -30px 125px;
+    }
+}

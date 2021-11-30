@@ -4,3 +4,9 @@
     align-items: center;
     background: #F9F9F9;
 }
+
+@media(min-width: 575px){
+    .sixthPageTitle{
+        white-space: nowrap;
+    }
+}

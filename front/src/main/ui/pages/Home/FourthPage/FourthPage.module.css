@@ -21,3 +21,10 @@
 .oneSlide p{
     margin-top: 135px;
 }
+
+
+@media (min-width: 575px) {
+    .titleText{
+        margin-left: 120px
+    }
+}

@@ -101,3 +101,17 @@
     left: 120px;
     top: 11px;
 }
+
+
+@media(min-width: 575px){
+    .mainBlock{
+        width: 400px;
+        height: 450px;
+    }
+    .oneElement{
+        width: 400px;
+    }
+    .secondaryBlock{
+        width:400px;
+    }
+}

@@ -1,6 +1,6 @@
 
 .mainText {
-    width: 100%;
+    width: 290px;
     height: 106px;
     font-family: "Barlow Condensed", sans-serif;
     font-style: normal;
@@ -14,13 +14,44 @@
 }
 
 .secondaryText {
-    width: 100%;
+    margin: 0 auto;
+    width: 80%;
     height: 90px;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 22px;
     color: #808080;
+}
 
 
+
+@media (min-width: 575px) {
+
+    .mainText{
+        text-align: center;
+        margin: 39px 0 -15px 108px
+    }
+  .secondaryText{
+      margin: 0 0 0 95px;
+  }
+}
+
+@media (min-width: 600px) {
+    .secondaryText{
+        font-size: 18px;
+        margin: 0 0 0 85px;
+    }
+
+}
+
+@media (min-width: 767px) {
+    .mainText{
+        text-align: center;
+        margin: 39px 0 -15px 215px
+    }
+    .secondaryText{
+        font-size: 18px;
+        margin: 0 0 0 180px;
+    }
 }

@@ -30,3 +30,19 @@
     color: #0F97AA;
     margin-right: 10px;
 }
+
+
+@media (min-width: 575px) {
+    .TextBlockTitle {
+        margin: 35px 0 10px -40px
+    }
+
+}
+@media (min-width: 767px) {
+    .TextBlockTitle {
+        margin: 35px 125px 10px -40px;
+    }
+
+}
+
+

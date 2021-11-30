@@ -36,20 +36,18 @@
 }
 
 
-
-
 .navLinksBurgerMenu div {
     display: flex;
     flex-direction: column;
     position: absolute;
-    height: 100%;
+    height: 800px;
     width: 100%;
     background-color: white;
     left: 0;
     top: 0;
 }
 
-.burgerClose{
+.burgerClose {
     display: block;
     position: relative;
     width: 30px;
@@ -74,7 +72,7 @@
 }
 
 .burgerClose:after {
-    top:0px;
+    top: 0px;
     transform: rotate(-45deg);
 }
 
@@ -82,3 +80,37 @@
     display: none;
 }
 
+
+@media (min-width: 400px) {
+    .burgerClose,
+    .burgerMenu {
+        left: 220px;
+    }
+}
+
+@media (min-width: 485px) {
+    .burgerClose,
+    .burgerMenu {
+        left: 320px;
+    }
+}
+
+
+@media (min-width: 575px) {
+    .burgerClose,
+    .burgerMenu {
+        left: 390px;
+    }
+}
+@media (min-width: 650px) {
+    .burgerClose,
+    .burgerMenu {
+        left: 470px;
+    }
+}
+@media (min-width: 720px) {
+    .burgerClose,
+    .burgerMenu {
+        left: 550px;
+    }
+}

@@ -64,3 +64,31 @@
     top: -20px
 
 }
+
+@media (min-width: 455px) {
+    .staplesBlock {
+    left:285px
+    }
+    .userPhoto img{
+        margin-left: 10px;
+    }
+
+}@media (min-width: 575px) {
+    .staplesBlock {
+    left:345px
+    }
+    .feedBack {
+        height: 165px;
+    }
+    .userPhoto img{
+        width: 62px;
+        height: 62px;
+    }
+    .userFeedBackNationality{
+        font-size: 19px;
+    }
+    .userFeedbackName{
+        font-size: 22px;
+    }
+
+}

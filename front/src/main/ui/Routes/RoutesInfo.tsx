@@ -8,6 +8,7 @@ import {Gallery} from '../pages/Gallery/Gallery';
 import {Room} from '../pages/Room/Room';
 import {Blog} from '../pages/Blog/Blog';
 import {Service} from '../pages/Service/Service';
+import {Basket} from '../pages/Basket/Basket';
 
 export const PATH = {
     HOME:'/home',
@@ -17,7 +18,8 @@ export const PATH = {
     ROOM:'/room',
     SERVICE:'/service',
     BLOG:'/blog',
-    GALLERY:'/gallery'
+    GALLERY:'/gallery',
+    BASKET:'/basket'
 
 
 }
@@ -36,6 +38,7 @@ export const RoutesInfo = () => {
                 <Route path={PATH.ROOM} element={<Room/>}/>
                 <Route path={PATH.BLOG} element={<Blog/>}/>
                 <Route path={PATH.SERVICE} element={<Service/>}/>
+                <Route path={PATH.BASKET} element={<Basket/>}/>
 
                 <Route path={"*"} element={<Error404/>}/>
             </Routes>

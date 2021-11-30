@@ -28,3 +28,21 @@
 .roomInfoElement img {
     margin-right: 8px;
 }
+
+@media(min-width: 575px){
+    .roomInfo{
+        top: 350px;
+    }
+}
+
+@media(min-width: 767px){
+    .roomInfo{
+        top: 500px;
+        left:20px;
+        width: 320px;
+    }
+    .roomInfoElement{
+        margin-right: 30px;
+        font-size: 16.4px;
+    }
+}

@@ -4,13 +4,14 @@ import {FeedBack} from '../../../components/FeedBack/FeedBack';
 import {flower, forkAndSpoon, swimmer} from '../../../svgWrapper/HomeSvgWrapper';
 import {Carousel} from '../../../components/Carousel/Carousel';
 
-const {sixthPage} = s;
+const {sixthPage,sixthPageTitle} = s;
 
 export const SixthPage = () => {
     return (
         <div className={sixthPage}>
+            <div className={sixthPageTitle}>
             <TitlePageTextBlock mainTextMess={'our guests love us'} isWithLink={false}/>
-
+            </div>
             <Carousel>
                 <FeedBack feedBackMess={`The staff have been amazing and extremely helpful.
                 They respond in a very friendly manner to all questions of us and we will comeback if we have a chance`}

@@ -47,3 +47,11 @@
     text-align: center;
     color: #808080;
 }
+
+
+@media (min-width: 767px) {
+    .oneElement{
+        margin: -30px 20px 35px 0;
+    }
+
+}
