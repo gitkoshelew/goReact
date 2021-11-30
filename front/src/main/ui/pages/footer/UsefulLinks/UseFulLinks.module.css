@@ -1,7 +1,8 @@
 .usefulLinksBlock{
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     position: relative;
+    display: none;
 }
 .linksList{
     display: flex;

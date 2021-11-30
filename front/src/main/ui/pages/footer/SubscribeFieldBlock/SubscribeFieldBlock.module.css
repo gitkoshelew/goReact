@@ -1,8 +1,9 @@
 .subscribeField{
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     margin-left: 155px;
     position: relative;
+    display: none;
 }
 
 .linksTitle{

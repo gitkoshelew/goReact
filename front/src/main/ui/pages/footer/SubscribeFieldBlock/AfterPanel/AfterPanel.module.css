@@ -11,14 +11,14 @@
 }
 
 .addressText{
-   margin-left: 148px;
+   margin-left: 25px;
 }
 
 .imgBlock{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-right:64px;
+    margin-right:25px;
 }
 
 .textBlock{
