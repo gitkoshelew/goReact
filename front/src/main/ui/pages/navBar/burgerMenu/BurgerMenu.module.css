@@ -3,8 +3,7 @@
     position: relative;
     width: 30px;
     height: 20px;
-    left: 110px;
-    z-index: 999;
+    z-index: 100;
 }
 
 .burgerMenu:before,
@@ -52,8 +51,7 @@
     position: relative;
     width: 30px;
     height: 20px;
-    left: 110px;
-    z-index: 999;
+    z-index: 100;
 }
 
 .burgerClose:before,
@@ -81,36 +79,9 @@
 }
 
 
-@media (min-width: 400px) {
+@media (min-width: 920px) {
     .burgerClose,
     .burgerMenu {
-        left: 220px;
-    }
-}
-
-@media (min-width: 485px) {
-    .burgerClose,
-    .burgerMenu {
-        left: 320px;
-    }
-}
-
-
-@media (min-width: 575px) {
-    .burgerClose,
-    .burgerMenu {
-        left: 390px;
-    }
-}
-@media (min-width: 650px) {
-    .burgerClose,
-    .burgerMenu {
-        left: 470px;
-    }
-}
-@media (min-width: 720px) {
-    .burgerClose,
-    .burgerMenu {
-        left: 550px;
+     display: none;
     }
 }

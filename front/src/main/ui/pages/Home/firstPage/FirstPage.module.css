@@ -71,6 +71,19 @@
     font-size: 18px;
     margin: -5px auto -20px auto;
 }
+}
 
+@media (min-width: 1023px) {
+    .homeSmallTablet{
+        display: none;
+    }
+    .homeTablet {
+        margin-top: 54px;
+        display: initial;
+    }
+    .photoBlock{
+        margin: 60px auto 40px auto;
+        height: 400px;
+    }
 
 }

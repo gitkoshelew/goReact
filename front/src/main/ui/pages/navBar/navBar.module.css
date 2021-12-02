@@ -17,6 +17,13 @@
     height: 48px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width:95%;
+}
+
+.logoSelectContainer{
+    display: flex;
+    align-items: center;
 }
 
 .logoContainer {
@@ -38,7 +45,7 @@
 }
 
 .selectContainer {
-    margin: 0 0px 0 -10px;
+    margin: 0 0 0 -20px;
 }
 
 .navLinksBlock {
@@ -54,14 +61,38 @@
     display: none;
 }
 
+.burgerMenu{
+
+}
+
 /*@media (min-width: 575px) {*/
 /*    .logoContainer :after {*/
 /*        width: 75px;*/
 /*    }*/
 /*}*/
 
-/*@media (min-width: 768px) {*/
-/*    .commonNavBar {*/
-/*        display: block;*/
-/*    }*/
-/*}*/
+@media (min-width: 920px) {
+    .commonNavBar {
+        display: flex;
+    }
+
+    .navLinksBlock {
+        margin: 10px 0 0 40px;
+    }
+
+    .btnBlock {
+        margin-left: -10px;
+    }
+}
+
+@media (min-width: 1023px) {
+
+    .navLinksBlock {
+        margin: 10px 0 0 100px;
+    }
+
+    .btnBlock {
+        margin-left: 20px;
+    }
+
+}

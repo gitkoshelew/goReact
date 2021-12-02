@@ -1,5 +1,4 @@
 .scrollBlock {
-    /*display: flex;*/
     align-items: center;
     position: relative;
     left: -660px;
@@ -17,5 +16,11 @@
     font-size: 16px;
     line-height: 19px;
     color: #808080;
+}
+
+@media (min-width: 700px) {
+    .scrollBlock {
+        display: flex;
+    }
 }
 

@@ -29,6 +29,14 @@
 }
 
 
+@media (min-width: 1024px) {
+    .statisticBlock{
+        flex-direction: row ;
+    }
+
+}
+
+
 
 
 

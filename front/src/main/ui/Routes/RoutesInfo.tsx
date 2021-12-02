@@ -15,7 +15,7 @@ export const PATH = {
     LOGIN: '/login',
     HOTELS: '/hotels',
     ABOUT_US: '/aboutus',
-    ROOM:'/room',
+    ROOM:'/rooms',
     SERVICE:'/service',
     BLOG:'/blog',
     GALLERY:'/gallery',

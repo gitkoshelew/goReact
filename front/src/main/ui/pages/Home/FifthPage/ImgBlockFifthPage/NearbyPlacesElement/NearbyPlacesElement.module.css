@@ -115,3 +115,25 @@
         width:400px;
     }
 }
+@media(min-width: 767px){
+    .mainBlock{
+        width: 550px;
+        height: 600px;
+    }
+    .oneElement{
+        width: 550px;
+    }
+    .secondaryBlock{
+        width:550px;
+        height: 350px;
+    }
+    .infoName{
+        font-size: 24px;
+    }
+    .informBlock :after {
+        left: 100px;
+    }
+    .informBlockSecondary :after {
+        left: 145px;
+    }
+}

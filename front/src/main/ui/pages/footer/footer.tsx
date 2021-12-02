@@ -4,7 +4,7 @@ import {UsefulLinks} from './UsefulLinks/UsefulLinks';
 import {SubscribeFieldBlock} from './SubscribeFieldBlock/SubscribeFieldBlock';
 import {AfterPanel} from './SubscribeFieldBlock/AfterPanel/AfterPanel';
 
-const {footerTitle, footerBlock, afterPanel} = s;
+const {footerTitle, footerBlock} = s;
 
 
 export const Footer = () => {

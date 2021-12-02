@@ -7,7 +7,7 @@ import {sliderDot} from '../../svgWrapper/HomeSvgWrapper';
 
 const {carousel, oneSlide} = s;
 
-export const Carousel = ({children}:any) => {
+export const Carousel = ({children}: any) => {
     const settings = {
         customPaging: function (i: any) {
             return (
@@ -21,9 +21,19 @@ export const Carousel = ({children}:any) => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         arrows: false,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            }]
     }
 
     return (

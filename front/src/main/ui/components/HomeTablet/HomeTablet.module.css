@@ -9,3 +9,9 @@
     position: relative;
     z-index: 3;
 }
+
+@media (min-width: 1023px) {
+  .tabletTitle{
+      margin: 0 auto;
+  }
+}

@@ -10,3 +10,9 @@
         white-space: nowrap;
     }
 }
+
+@media(min-width: 767px){
+    .sixthPageTitle{
+        margin: 0px 10px -30px 180px;
+    }
+}

@@ -1,19 +1,20 @@
-.usefulLinksBlock{
+.usefulLinksBlock {
     /*display: flex;*/
     flex-direction: column;
     position: relative;
     display: none;
 }
-.linksList{
+
+.linksList {
     display: flex;
 }
 
-.groupOfLinks{
+.groupOfLinks {
     margin-right: 120px;
 }
 
-.linksTitle{
-    font-family: "Barlow Condensed",sans-serif;
+.linksTitle {
+    font-family: "Barlow Condensed", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -23,13 +24,34 @@
 
 }
 
-.usefulLinksBlock :after{
+.usefulLinksBlock :after {
     content: "";
     width: 60px;
-    height:4px ;
+    height: 4px;
     background: rgba(255, 255, 255, 0.02);
     border-radius: 2px;
     position: absolute;
     left: 0px;
     top: 76px;
+}
+
+
+@media (min-width: 767px) {
+    .usefulLinksBlock {
+        display: flex;
+        margin-left: 50px;
+    }
+}
+
+@media (min-width: 900px) {
+    .usefulLinksBlock {
+
+        margin-left: 120px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .usefulLinksBlock {
+        margin-left: 185px;
+    }
 }

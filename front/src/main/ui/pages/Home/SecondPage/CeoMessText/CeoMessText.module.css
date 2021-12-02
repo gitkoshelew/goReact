@@ -9,8 +9,6 @@
     line-height: 33px;
     color: #000000;
     margin: 25px auto 0 auto;
-
-
 }
 
 .secondaryText {
@@ -25,20 +23,20 @@
 }
 
 
-
 @media (min-width: 575px) {
 
-    .mainText{
+    .mainText {
         text-align: center;
         margin: 39px 0 -15px 108px
     }
-  .secondaryText{
-      margin: 0 0 0 95px;
-  }
+
+    .secondaryText {
+        margin: 0 0 0 95px;
+    }
 }
 
 @media (min-width: 600px) {
-    .secondaryText{
+    .secondaryText {
         font-size: 18px;
         margin: 0 0 0 85px;
     }
@@ -46,12 +44,23 @@
 }
 
 @media (min-width: 767px) {
-    .mainText{
+    .mainText {
         text-align: center;
         margin: 39px 0 -15px 215px
     }
-    .secondaryText{
+
+    .secondaryText {
         font-size: 18px;
         margin: 0 0 0 180px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .mainText {
+        margin: 39px 0 -15px 315px;
+    }
+
+    .secondaryText {
+        margin: 0 0 0 270px;
     }
 }

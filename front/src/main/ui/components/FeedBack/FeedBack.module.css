@@ -67,28 +67,87 @@
 
 @media (min-width: 455px) {
     .staplesBlock {
-    left:285px
+        left: 285px
     }
-    .userPhoto img{
+
+    .userPhoto img {
         margin-left: 10px;
     }
 
-}@media (min-width: 575px) {
+}
+
+@media (min-width: 575px) {
     .staplesBlock {
-    left:345px
+        left: 345px
     }
+
     .feedBack {
         height: 165px;
     }
-    .userPhoto img{
+
+    .userPhoto img {
         width: 62px;
         height: 62px;
     }
-    .userFeedBackNationality{
+
+    .userFeedBackNationality {
         font-size: 19px;
     }
-    .userFeedbackName{
+
+    .userFeedbackName {
         font-size: 22px;
+    }
+
+}
+
+@media (min-width: 767px) {
+    .staplesBlock {
+        left: 612px
+    }
+
+    .feedBack {
+        height: 210px;
+        width: 88%;
+    }
+
+    .userPhoto img {
+        width: 62px;
+        height: 62px;
+    }
+
+    .userFeedBackNationality {
+        font-size: 19px;
+    }
+
+    .userFeedbackName {
+        font-size: 22px;
+    }
+
+}
+@media (min-width: 810px) {
+    .staplesBlock {
+        left: 645px
+    }
+
+}
+
+@media (min-width: 865px) {
+    .staplesBlock {
+        left: 690px
+    }
+
+}
+
+@media (min-width: 905px) {
+    .staplesBlock {
+        left: 720px
+    }
+
+}
+
+@media (min-width: 956px) {
+    .staplesBlock {
+        left: 780px
     }
 
 }

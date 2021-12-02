@@ -14,9 +14,7 @@ export const FifthPage =()=>{
             <div className={titleText}>
                 <TitlePageTextBlock isWithLink={true} linkTextMess={'See more'} mainTextMess={'Places nearby'}/>
             </div>
-            <div>
                 <NearbyPlaces/>
-            </div>
 
         </div>
     )

@@ -15,7 +15,8 @@ const {
     burgerMenu,
     navLinksBlock,
     btnBlock,
-    commonNavBar
+    commonNavBar,
+    logoSelectContainer
 } = s;
 
 type NavBarPropsType = {
@@ -31,12 +32,15 @@ export const NavBar = ({isBurgerCollapse, setIsBurgerCollapse}: NavBarPropsType)
         <div className={headerContainer}>
             <div className={headerNavBar}>
                 <div className={contentContainer}>
+                    <div className={logoSelectContainer}>
                     <div className={logoContainer}>
                         <Logo/>
                     </div>
                     <div className={selectContainer}>
                         <SelectUI/>
                     </div>
+                    </div>
+                        <div>
                     <div className={burgerMenu}>
                         <BurgerMenu setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse}/>
                     </div>
@@ -48,6 +52,7 @@ export const NavBar = ({isBurgerCollapse, setIsBurgerCollapse}: NavBarPropsType)
                             <Button type={'buy'}/>
                             <Button type={'login'}/>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

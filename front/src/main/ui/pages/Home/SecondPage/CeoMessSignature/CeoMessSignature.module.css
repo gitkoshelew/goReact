@@ -7,9 +7,15 @@
     .ceoMessSignature {
         margin: 20px auto 0 auto;
     }
-}@media (min-width: 767px) {
+}
+@media (min-width: 767px) {
     .ceoMessSignature {
         margin: 20px 0px 0 310px;
+    }
+}
+@media (min-width: 1024px) {
+    .ceoMessSignature {
+        margin: 20px 0px 0 400px;
     }
 }
 
