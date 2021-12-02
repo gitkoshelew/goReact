@@ -37,3 +37,15 @@ func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
+
+// GetAccountByID returns Account by Id from storage
+func GetAccountByID(id int) Account {
+	var account Account
+	for _, acc := range GetAccounts() {
+		if id == acc.AccountID {
+			account = acc
+			break
+		}
+	}
+	return account
+}

@@ -7,14 +7,14 @@ import (
 // User extends Account and has all Account fields
 type User struct {
 	Account
-	UserID      int
-	Name        string
-	Surname     string
-	MiddleName  string
-	DateOfBirth date.Date
-	Address     string
-	Phone       string
-	Email       string
+	UserID      int       `json:"userId"`
+	Name        string    `json:"name"`
+	Surname     string    `json:"sName"`
+	MiddleName  string    `json:"mName"`
+	DateOfBirth date.Date `json:"birthDate"`
+	Address     string    `json:"addresd"`
+	Phone       string    `json:"phone"`
+	Email       string    `json:"email"`
 }
 
 // SetName sets Users name
@@ -50,4 +50,15 @@ func (u *User) SetPhone(s string) {
 // SetEmail sets Users email
 func (u *User) SetEmail(s string) {
 	u.Email = s
+}
+
+// GetUserByID returns User by id from storage
+func GetUserByID(id int) User {
+	var user User
+	for _, u := range GetUsers() {
+		if id == u.UserID {
+			user = u
+		}
+	}
+	return user
 }
