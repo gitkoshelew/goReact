@@ -3,9 +3,9 @@ package entity
 // Client extends User and has all User (and Account) fields
 type Client struct {
 	User
-	ClientID int
-	Pets     []Pet
-	Bookings []Booking
+	ClientID int       `json:"clientId"`
+	Pets     []Pet     `json:"petIds"`
+	Bookings []Booking `json:"bookingIds"`
 }
 
 // SetBookings sets Clients Bookings
@@ -26,4 +26,16 @@ func (c *Client) AddPet(p Pet) {
 // AddBooking adds Booking to Client
 func (c *Client) AddBooking(b Booking) {
 	c.Bookings = append(c.Bookings, b)
+}
+
+// GetClientByID returns CLient by id from storage
+func GetClientByID(id int) Client {
+	clients := GetClients()
+	var client Client
+	for _, c := range clients {
+		if id == c.ClientID {
+			client = c
+		}
+	}
+	return client
 }
