@@ -107,3 +107,13 @@
     text-align: center;
     color: #FFFFFF;
 }
+
+@media (min-width: 1144px) {
+    .tabletComponentBodyBtn {
+        left: 550px
+    }
+    .tabletComponent{
+        width: 200px;
+        padding-left: 20px;
+    }
+}

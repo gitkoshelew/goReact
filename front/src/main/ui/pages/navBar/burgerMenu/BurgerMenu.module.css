@@ -79,7 +79,7 @@
 }
 
 
-@media (min-width: 920px) {
+@media (min-width: 1144px) {
     .burgerClose,
     .burgerMenu {
      display: none;

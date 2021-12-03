@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './navBar.module.css';
 import {Logo} from '../../components/Logo/Logo';
 import {SelectUI} from '../../components/Select/Select';

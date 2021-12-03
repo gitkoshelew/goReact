@@ -5,6 +5,10 @@
     justify-content: center;
 }
 
+.navLinkTitle :last-child{
+    margin-right: 3px;
+}
+
 .oneLinkActive {
     white-space: nowrap;
     color: #000000;
@@ -40,4 +44,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+
+@media (min-width: 1144px) {
+ .navLinkTitle{
+     margin: 0 8vw;
+ }
+
 }

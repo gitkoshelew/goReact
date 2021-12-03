@@ -21,11 +21,14 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .ceoMessTextBlock {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin: 40px 0 95px 0;
 }
 
 

@@ -13,3 +13,11 @@
 }
 
 
+@media(min-width: 1144px){
+  .serviceBlock{
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+

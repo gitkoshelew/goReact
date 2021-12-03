@@ -11,7 +11,14 @@
 }
 
 @media (min-width: 1023px) {
-  .tabletTitle{
-      margin: 0 auto;
-  }
+    .tabletTitle {
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1144px) {
+    .tabletTitle {
+        margin: -140px 484px 0 0;
+        width: 565px;
+    }
 }

@@ -18,10 +18,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width:95%;
+    width: 95%;
 }
 
-.logoSelectContainer{
+.logoSelectContainer {
     display: flex;
     align-items: center;
 }
@@ -61,38 +61,35 @@
     display: none;
 }
 
-.burgerMenu{
+.burgerMenu {
 
 }
 
-/*@media (min-width: 575px) {*/
-/*    .logoContainer :after {*/
-/*        width: 75px;*/
-/*    }*/
-/*}*/
 
-@media (min-width: 920px) {
+@media (min-width: 1144px) {
     .commonNavBar {
         display: flex;
+        align-items: center;
     }
 
-    .navLinksBlock {
-        margin: 10px 0 0 40px;
-    }
 
-    .btnBlock {
-        margin-left: -10px;
-    }
 }
 
-@media (min-width: 1023px) {
-
-    .navLinksBlock {
-        margin: 10px 0 0 100px;
+@media (min-width: 1144px) {
+    .contentContainer {
+        justify-content: center;
+    }
+    .headerNavBar{
+        width:90%;
+    }
+    .btnBlock{
+        margin: 0;
+    }
+    .logoContainer :after {
+        width: 50px;
+        top: 16px;
+        left: 38px;
     }
 
-    .btnBlock {
-        margin-left: 20px;
-    }
 
 }
