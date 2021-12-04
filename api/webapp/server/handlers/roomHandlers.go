@@ -13,7 +13,7 @@ type roomRequest struct {
 	HotelRoomID int    `json:"roomId"`
 	RoomNumber  int    `json:"roomNum"`
 	PetType     string `json:"petType"`
-	Seats       []int  `json:"seatsIds"`
+	SeatsID     []int  `json:"seatsIds"`
 }
 
 // HandleHotelRooms GET /api/rooms - returns all rooms(JSON)
@@ -21,7 +21,7 @@ type roomRequest struct {
 //			   		PUT /api/room - update room(JSON)
 func HandleHotelRooms() http.HandlerFunc {
 
-	rooms := entity.GetHotelRooms()
+	rooms := entity.GetHotelRoomsDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -44,9 +44,9 @@ func HandleHotelRooms() http.HandlerFunc {
 				HotelRoomID: req.HotelRoomID,
 				RoomNumber:  req.RoomNumber,
 				PetType:     entity.PetType(req.PetType),
-				Seats:       entity.GetSeatsByID(req.Seats),
+				Seats:       entity.GetSeatsByID(req.SeatsID),
 			}
-			rooms = append(rooms, r)
+			rooms = append(rooms, entity.RoomToDto(r))
 			json.NewEncoder(w).Encode(rooms)
 		// PUT
 		case http.MethodPut:
@@ -60,9 +60,9 @@ func HandleHotelRooms() http.HandlerFunc {
 
 			for index, r := range rooms {
 				if r.HotelRoomID == req.HotelRoomID {
-					rooms[index].PetType = entity.PetType(req.PetType)
+					rooms[index].PetType = req.PetType
 					rooms[index].RoomNumber = req.RoomNumber
-					rooms[index].Seats = entity.GetSeatsByID(req.Seats)
+					rooms[index].SeatsID = req.SeatsID
 					break
 				}
 			}
@@ -77,7 +77,7 @@ func HandleHotelRooms() http.HandlerFunc {
 // 		 	   DELETE /api/room/:id - delete room by ID(JSON)
 func HandleHotelRoom() httprouter.Handle {
 
-	rooms := entity.GetHotelRooms()
+	rooms := entity.GetHotelRoomsDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -90,7 +90,7 @@ func HandleHotelRoom() httprouter.Handle {
 			if err != nil {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
-			json.NewEncoder(w).Encode(entity.GetRoomByID(id))
+			json.NewEncoder(w).Encode(entity.RoomToDto(entity.GetRoomByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")

@@ -22,7 +22,7 @@ type employeeRequest struct {
 //			 	    PUT /api/employee - update employee(JSON)
 func HandleEmployees() http.HandlerFunc {
 
-	employees := entity.GetEmployees()
+	employeesDto := entity.GetEmployeesDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -30,7 +30,7 @@ func HandleEmployees() http.HandlerFunc {
 		case http.MethodGet:
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(employees)
+			json.NewEncoder(w).Encode(employeesDto)
 		// POST
 		case http.MethodPost:
 			w.Header().Set("Content-Type", "application/json")
@@ -48,8 +48,8 @@ func HandleEmployees() http.HandlerFunc {
 				Position:   req.Position,
 				Role:       req.Role,
 			}
-			employees = append(employees, e)
-			json.NewEncoder(w).Encode(employees)
+			employeesDto = append(employeesDto, entity.EmployeeToDto(e))
+			json.NewEncoder(w).Encode(employeesDto)
 		// PUT
 		case http.MethodPut:
 			w.Header().Set("Content-Type", "application/json")
@@ -60,17 +60,15 @@ func HandleEmployees() http.HandlerFunc {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, e := range employees {
+			for index, e := range employeesDto {
 				if e.EmployeeID == req.EmployeeID {
-					employees[index].User = entity.GetUserByID(req.UserID)
-					employees[index].Hotel = entity.GetHotelByID(req.HotelID)
-					employees[index].EmployeeID = req.EmployeeID
-					employees[index].Position = req.Position
-					employees[index].Role = req.Role
+					employeesDto[index].HotelID = req.HotelID
+					employeesDto[index].Position = req.Position
+					employeesDto[index].Role = req.Role
 					break
 				}
 			}
-			json.NewEncoder(w).Encode(employees)
+			json.NewEncoder(w).Encode(employeesDto)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
@@ -81,7 +79,7 @@ func HandleEmployees() http.HandlerFunc {
 // 				  DELETE /api/employee/:id - delete employee by ID(JSON)
 func HandleEmployee() httprouter.Handle {
 
-	employees := entity.GetEmployees()
+	employeesDto := entity.GetEmployeesDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -95,7 +93,7 @@ func HandleEmployee() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			json.NewEncoder(w).Encode(entity.GetEmployeeByID(id))
+			json.NewEncoder(w).Encode(entity.EmployeeToDto(entity.GetEmployeeByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")
@@ -106,11 +104,11 @@ func HandleEmployee() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, e := range employees {
+			for index, e := range employeesDto {
 				if e.EmployeeID == id { // delete object imitation =)
-					employees[index].Position = "DELETE"
-					employees[index].Role = "DELETE"
-					json.NewEncoder(w).Encode(employees)
+					employeesDto[index].Position = "DELETE"
+					employeesDto[index].Role = "DELETE"
+					json.NewEncoder(w).Encode(employeesDto)
 					return
 				}
 			}

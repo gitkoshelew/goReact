@@ -21,7 +21,7 @@ type clientRequest struct {
 //			 	  PUT /api/client - update client(JSON)
 func HandleClients() http.HandlerFunc {
 
-	clients := entity.GetClients()
+	clientsDto := entity.GetClientsDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -29,7 +29,7 @@ func HandleClients() http.HandlerFunc {
 		case http.MethodGet:
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(clients)
+			json.NewEncoder(w).Encode(clientsDto)
 		//POST
 		case http.MethodPost:
 			w.Header().Set("Content-Type", "application/json")
@@ -46,8 +46,8 @@ func HandleClients() http.HandlerFunc {
 				Pets:     entity.GetPetsByID(req.PetsIDs),
 				Bookings: entity.GetBookingsByID(req.BookingsIDs),
 			}
-			clients = append(clients, c)
-			json.NewEncoder(w).Encode(clients)
+			clientsDto = append(clientsDto, entity.ClientToDto(c))
+			json.NewEncoder(w).Encode(clientsDto)
 		// PUT
 		case http.MethodPut:
 			w.Header().Set("Content-Type", "application/json")
@@ -58,15 +58,14 @@ func HandleClients() http.HandlerFunc {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, c := range clients {
+			for index, c := range clientsDto {
 				if c.ClientID == req.ClientID {
-					clients[index].User = entity.GetUserByID(req.UserID)
-					clients[index].Pets = entity.GetPetsByID(req.PetsIDs)
-					clients[index].Bookings = entity.GetBookingsByID(req.BookingsIDs)
+					clientsDto[index].PetsID = req.PetsIDs
+					clientsDto[index].BookingsID = req.BookingsIDs
 					break
 				}
 			}
-			json.NewEncoder(w).Encode(clients)
+			json.NewEncoder(w).Encode(clientsDto)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
@@ -77,7 +76,7 @@ func HandleClients() http.HandlerFunc {
 // 				DELETE /api/client/:id - delete client by ID(JSON)
 func HandleClient() httprouter.Handle {
 
-	clients := entity.GetClients()
+	clientsDto := entity.GetClientsDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -91,7 +90,7 @@ func HandleClient() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			json.NewEncoder(w).Encode(entity.GetClientByID(id))
+			json.NewEncoder(w).Encode(entity.ClientToDto(entity.GetClientByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")
@@ -102,10 +101,10 @@ func HandleClient() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, c := range clients {
+			for index, c := range clientsDto {
 				if c.ClientID == id { // delete object imitation =)
-					clients[index].ClientID = 0
-					json.NewEncoder(w).Encode(clients)
+					clientsDto[index].ClientID = 0
+					json.NewEncoder(w).Encode(clientsDto)
 					return
 				}
 			}

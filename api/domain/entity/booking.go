@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"goReact/domain/dto"
 	"goReact/pkg/date"
 )
 
@@ -81,4 +82,18 @@ func GetBookingsByID(ids []int) []Booking {
 		bookings = append(bookings, GetBookingByID(id))
 	}
 	return bookings
+}
+
+// BookingToDto makes DTO from Booking object
+func BookingToDto(b Booking) dto.Booking {
+	return dto.Booking{
+		BookingID:   b.BookingID,
+		PetID:       b.Pet.PetID,
+		SeatID:      b.Seat.HotelRoomSeatID,
+		Status:      string(b.Status),
+		StartDate:   b.StartDate,
+		EndDate:     b.EndDate,
+		EmployeeID:  b.Employee.EmployeeID,
+		ClientNotes: b.ClientNotes,
+	}
 }

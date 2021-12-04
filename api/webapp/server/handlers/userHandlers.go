@@ -17,7 +17,7 @@ type userRequest struct {
 	Surname     string    `json:"sName"`
 	MiddleName  string    `json:"mName"`
 	DateOfBirth date.Date `json:"birthDate"`
-	Address     string    `json:"addresd"`
+	Address     string    `json:"address"`
 	Phone       string    `json:"phone"`
 	Email       string    `json:"email"`
 }
@@ -27,7 +27,7 @@ type userRequest struct {
 //			    PUT /api/user - update user(JSON)
 func HandleUsers() http.HandlerFunc {
 
-	users := entity.GetUsers()
+	users := entity.GetUsersDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -63,7 +63,7 @@ func HandleUsers() http.HandlerFunc {
 				Phone:       req.Phone,
 				Email:       req.Email,
 			}
-			users = append(users, u)
+			users = append(users, entity.UserToDto(u))
 			json.NewEncoder(w).Encode(users)
 			w.WriteHeader(http.StatusCreated)
 		// PUT
@@ -99,7 +99,7 @@ func HandleUsers() http.HandlerFunc {
 // 				 DELETE /api/user/:id - delete user by ID(JSON)
 func HandleUser() httprouter.Handle {
 
-	users := entity.GetUsers()
+	users := entity.GetUsersDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -113,7 +113,7 @@ func HandleUser() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			json.NewEncoder(w).Encode(entity.GetUserByID(id))
+			json.NewEncoder(w).Encode(entity.UserToDto(entity.GetUserByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")

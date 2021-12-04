@@ -10,11 +10,11 @@ import (
 )
 
 type hotelRequest struct {
-	HotelID  int    `json:"hotelId"`
-	Name     string `json:"nameId"`
-	Address  string `json:"addressId"`
-	Rooms    []int  `json:"roomsIds"`
-	Bookings []int  `json:"bookingsIds"`
+	HotelID    int    `json:"hotelId"`
+	Name       string `json:"nameId"`
+	Address    string `json:"addressId"`
+	RoomsID    []int  `json:"roomsIds"`
+	BookingsID []int  `json:"bookingsIds"`
 }
 
 // HandleHotels  GET /api/hotels - returns all hotels(JSON)
@@ -22,7 +22,7 @@ type hotelRequest struct {
 //			     PUT /api/hotel - update hotel(JSON)
 func HandleHotels() http.HandlerFunc {
 
-	hotels := entity.GetHotels()
+	hotels := entity.GetHotelsDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -45,10 +45,10 @@ func HandleHotels() http.HandlerFunc {
 				HotelID:  req.HotelID,
 				Name:     req.Name,
 				Address:  req.Address,
-				Rooms:    entity.GetRoomsByID(req.Rooms),
-				Bookings: entity.GetBookingsByID(req.Bookings),
+				Rooms:    entity.GetRoomsByID(req.RoomsID),
+				Bookings: entity.GetBookingsByID(req.BookingsID),
 			}
-			hotels = append(hotels, h)
+			hotels = append(hotels, entity.HotelToDto(h))
 			json.NewEncoder(w).Encode(hotels)
 		// PUT
 		case http.MethodPut:
@@ -64,8 +64,8 @@ func HandleHotels() http.HandlerFunc {
 				if h.HotelID == req.HotelID {
 					hotels[index].Name = req.Name
 					hotels[index].Address = req.Address
-					hotels[index].Rooms = entity.GetRoomsByID(req.Rooms)
-					hotels[index].Bookings = entity.GetBookingsByID(req.Bookings)
+					hotels[index].RoomsID = req.RoomsID
+					hotels[index].BookingsID = req.BookingsID
 					break
 				}
 			}
@@ -80,7 +80,7 @@ func HandleHotels() http.HandlerFunc {
 // 		 	   DELETE /api/hotel/:id - delete hotel by ID(JSON)
 func HandleHotel() httprouter.Handle {
 
-	hotels := entity.GetHotels()
+	hotels := entity.GetHotelsDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -93,7 +93,7 @@ func HandleHotel() httprouter.Handle {
 			if err != nil {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
-			json.NewEncoder(w).Encode(entity.GetHotelByID(id))
+			json.NewEncoder(w).Encode(entity.HotelToDto(entity.GetHotelByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")

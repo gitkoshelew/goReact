@@ -1,6 +1,8 @@
 package entity
 
 import (
+	"goReact/domain/dto"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -48,4 +50,13 @@ func GetAccountByID(id int) Account {
 		}
 	}
 	return account
+}
+
+// AccountToDto makes a DTO from Account object
+func AccountToDto(a Account) dto.Account {
+	return dto.Account{
+		AccountID: a.AccountID,
+		Login:     a.Login,
+		Password:  a.Password,
+	}
 }

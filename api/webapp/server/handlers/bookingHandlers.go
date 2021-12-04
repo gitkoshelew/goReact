@@ -12,8 +12,8 @@ import (
 
 type bookingRequest struct {
 	BookingID   int       `json:"bookingId"`
-	PetID       int       `json:"pet"`
-	SeatID      int       `json:"seat"`
+	PetID       int       `json:"petId"`
+	SeatID      int       `json:"seatId"`
 	Status      string    `json:"status"`
 	StartDate   date.Date `json:"start"`
 	EndDate     date.Date `json:"end"`
@@ -26,7 +26,7 @@ type bookingRequest struct {
 //	    	   	  PUT /api/booking - update booking(JSON)
 func HandleBookings() http.HandlerFunc {
 
-	bookings := entity.GetBookings()
+	bookingsDto := entity.GetBookingsDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -34,7 +34,7 @@ func HandleBookings() http.HandlerFunc {
 		case http.MethodGet:
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(bookings)
+			json.NewEncoder(w).Encode(bookingsDto)
 		// POST
 		case http.MethodPost:
 			w.Header().Set("Content-Type", "application/json")
@@ -55,8 +55,8 @@ func HandleBookings() http.HandlerFunc {
 				Employee:    entity.GetEmployeeByID(req.EmployeeID),
 				ClientNotes: req.ClientNotes,
 			}
-			bookings = append(bookings, b)
-			json.NewEncoder(w).Encode(bookings)
+			bookingsDto = append(bookingsDto, entity.BookingToDto(b))
+			json.NewEncoder(w).Encode(bookingsDto)
 		// PUT
 		case http.MethodPut:
 			w.Header().Set("Content-Type", "application/json")
@@ -67,19 +67,19 @@ func HandleBookings() http.HandlerFunc {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, b := range bookings {
+			for index, b := range bookingsDto {
 				if b.BookingID == req.BookingID {
-					bookings[index].Pet = entity.GetPetByID(req.BookingID)
-					bookings[index].Seat = entity.GetSeatByID(req.PetID)
-					bookings[index].Status = entity.BookingStatus(req.Status)
-					bookings[index].StartDate = req.StartDate
-					bookings[index].EndDate = req.EndDate
-					bookings[index].Employee = entity.GetEmployeeByID(req.EmployeeID)
-					bookings[index].ClientNotes = req.ClientNotes
+					bookingsDto[index].PetID = req.PetID
+					bookingsDto[index].SeatID = req.SeatID
+					bookingsDto[index].Status = req.Status
+					bookingsDto[index].StartDate = req.StartDate
+					bookingsDto[index].EndDate = req.EndDate
+					bookingsDto[index].EmployeeID = req.EmployeeID
+					bookingsDto[index].ClientNotes = req.ClientNotes
 					break
 				}
 			}
-			json.NewEncoder(w).Encode(bookings)
+			json.NewEncoder(w).Encode(bookingsDto)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
@@ -90,7 +90,7 @@ func HandleBookings() http.HandlerFunc {
 // 		 		 DELETE /api/booking/:id - delete booking by ID(JSON)
 func HandleBooking() httprouter.Handle {
 
-	bookings := entity.GetBookings()
+	bookingsDto := entity.GetBookingsDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -103,7 +103,7 @@ func HandleBooking() httprouter.Handle {
 			if err != nil {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
-			json.NewEncoder(w).Encode(entity.GetBookingByID(id))
+			json.NewEncoder(w).Encode(entity.BookingToDto(entity.GetBookingByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")
@@ -114,10 +114,10 @@ func HandleBooking() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, b := range bookings {
+			for index, b := range bookingsDto {
 				if b.BookingID == id { // delete object imitation =)
-					bookings[index].ClientNotes = "DELETE"
-					json.NewEncoder(w).Encode(bookings)
+					bookingsDto[index].ClientNotes = "DELETE"
+					json.NewEncoder(w).Encode(bookingsDto)
 					return
 				}
 			}

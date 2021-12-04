@@ -1,5 +1,7 @@
 package entity
 
+import "goReact/domain/dto"
+
 // Employee extends User and has all User (and Account) fields
 type Employee struct {
 	User
@@ -34,4 +36,14 @@ func GetEmployeeByID(id int) Employee {
 		}
 	}
 	return employee
+}
+
+// EmployeeToDto makes DTO from Employee object
+func EmployeeToDto(e Employee) dto.Employee {
+	return dto.Employee{
+		HotelID:    e.Hotel.HotelID,
+		EmployeeID: e.EmployeeID,
+		Position:   e.Position,
+		Role:       e.Role,
+	}
 }

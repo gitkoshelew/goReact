@@ -20,7 +20,7 @@ type seatRequest struct {
 //				   		PUT /api/seat - update seat(JSON)
 func HandleHotelRoomSeats() http.HandlerFunc {
 
-	seats := entity.GetHotelRoomSeats()
+	seatsDto := entity.GetHotelRoomSeatsDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -28,7 +28,7 @@ func HandleHotelRoomSeats() http.HandlerFunc {
 		case http.MethodGet:
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(seats)
+			json.NewEncoder(w).Encode(seatsDto)
 		// POST
 		case http.MethodPost:
 			w.Header().Set("Content-Type", "application/json")
@@ -45,8 +45,8 @@ func HandleHotelRoomSeats() http.HandlerFunc {
 				IsFree:          req.IsFree,
 			}
 
-			seats = append(seats, s)
-			json.NewEncoder(w).Encode(seats)
+			seatsDto = append(seatsDto, entity.SeatToDto(s))
+			json.NewEncoder(w).Encode(seatsDto)
 		// PUT
 		case http.MethodPut:
 			w.Header().Set("Content-Type", "application/json")
@@ -57,14 +57,14 @@ func HandleHotelRoomSeats() http.HandlerFunc {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, s := range seats {
+			for index, s := range seatsDto {
 				if s.HotelRoomSeatID == req.HotelRoomSeatID {
-					seats[index].Description = req.Description
-					seats[index].IsFree = req.IsFree
+					seatsDto[index].Description = req.Description
+					seatsDto[index].IsFree = req.IsFree
 					break
 				}
 			}
-			json.NewEncoder(w).Encode(seats)
+			json.NewEncoder(w).Encode(seatsDto)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
@@ -75,7 +75,7 @@ func HandleHotelRoomSeats() http.HandlerFunc {
 // 		 			   DELETE /api/seat/:id - delete seat by ID(JSON)
 func HandleHotelRoomSeat() httprouter.Handle {
 
-	seats := entity.GetHotelRoomSeats()
+	seats := entity.GetHotelRoomSeatsDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -88,7 +88,7 @@ func HandleHotelRoomSeat() httprouter.Handle {
 			if err != nil {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
-			json.NewEncoder(w).Encode(entity.GetSeatByID(id))
+			json.NewEncoder(w).Encode(entity.SeatToDto(entity.GetSeatByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")

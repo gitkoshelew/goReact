@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"goReact/domain/dto"
 	"goReact/domain/entity"
 	"net/http"
 	"strconv"
@@ -20,7 +21,7 @@ type accountRequest struct {
 //				   PUT /api/account - update account(JSON)
 func HandleAccounts() http.HandlerFunc {
 
-	accounts := entity.GetAccounts()
+	accountsDto := entity.GetAccountsDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -29,7 +30,7 @@ func HandleAccounts() http.HandlerFunc {
 		case http.MethodGet:
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(accounts)
+			json.NewEncoder(w).Encode(accountsDto)
 		//POST
 		case http.MethodPost:
 			w.Header().Set("Content-Type", "application/json")
@@ -43,20 +44,20 @@ func HandleAccounts() http.HandlerFunc {
 				http.Error(w, "Login and password should have at least 3 symbols", http.StatusBadRequest)
 				return
 			}
-			for _, v := range accounts {
+			for _, v := range accountsDto {
 				if req.AccountID == v.AccountID || req.Login == v.Login {
 					http.Error(w, "Login or ID is already taken, try another", http.StatusBadRequest)
 					return
 				}
 			}
 
-			a := entity.Account{
+			a := dto.Account{
 				AccountID: req.AccountID,
 				Login:     req.Login,
 				Password:  req.Password,
 			}
-			accounts = append(accounts, a)
-			json.NewEncoder(w).Encode(accounts)
+			accountsDto = append(accountsDto, a)
+			json.NewEncoder(w).Encode(accountsDto)
 			w.WriteHeader(http.StatusCreated)
 		// PUT
 		case http.MethodPut:
@@ -72,18 +73,18 @@ func HandleAccounts() http.HandlerFunc {
 				return
 			}
 
-			for index, acc := range accounts {
+			for index, acc := range accountsDto {
 				if acc.AccountID == req.AccountID {
-					if accounts[index].Password == req.Password {
+					if accountsDto[index].Password == req.Password {
 						http.Error(w, "New password cannot can't do match the old password", http.StatusBadRequest)
 						return
 					}
-					accounts[index].Password = req.Password
+					accountsDto[index].Password = req.Password
 					break
 				}
 			}
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(accounts)
+			json.NewEncoder(w).Encode(accountsDto)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
@@ -94,7 +95,7 @@ func HandleAccounts() http.HandlerFunc {
 // 				 DELETE /api/account/:id - delete account by ID(JSON)
 func HandleAccount() httprouter.Handle {
 
-	accounts := entity.GetAccounts()
+	accountsDto := entity.GetAccountsDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -109,7 +110,7 @@ func HandleAccount() httprouter.Handle {
 			}
 
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(entity.GetAccountByID(id))
+			json.NewEncoder(w).Encode(entity.AccountToDto(entity.GetAccountByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")
@@ -120,13 +121,13 @@ func HandleAccount() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			for index, acc := range accounts {
+			for index, acc := range accountsDto {
 				if acc.AccountID == id { // delete object imitation =)
-					accounts[index].AccountID = 0
-					accounts[index].Login = "NIL"
-					accounts[index].Password = "NIL"
+					accountsDto[index].AccountID = 0
+					accountsDto[index].Login = "NIL"
+					accountsDto[index].Password = "NIL"
 					w.WriteHeader(http.StatusOK)
-					json.NewEncoder(w).Encode(accounts)
+					json.NewEncoder(w).Encode(accountsDto)
 					return
 				}
 			}

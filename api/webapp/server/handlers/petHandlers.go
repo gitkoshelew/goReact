@@ -23,7 +23,7 @@ type petRequest struct {
 //			   PUT /api/pet - update pet(JSON)
 func HandlePets() http.HandlerFunc {
 
-	pets := entity.GetPets()
+	pets := entity.GetPetsDto()
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -50,7 +50,7 @@ func HandlePets() http.HandlerFunc {
 				Weight:    req.Weight,
 				Diesieses: req.Diesieses,
 			}
-			pets = append(pets, p)
+			pets = append(pets, entity.PetToDto(p))
 			json.NewEncoder(w).Encode(pets)
 		// PUT
 		case http.MethodPut:
@@ -65,7 +65,7 @@ func HandlePets() http.HandlerFunc {
 			for index, p := range pets {
 				if p.PetID == req.PetID {
 					pets[index].Name = req.Name
-					pets[index].Type = entity.PetType(req.Type)
+					pets[index].Type = req.Type
 					pets[index].OwnerID = req.OwnerID
 					pets[index].Weight = req.Weight
 					pets[index].Diesieses = req.Diesieses
@@ -83,7 +83,7 @@ func HandlePets() http.HandlerFunc {
 // 		 	 DELETE /api/pet/:id - delete pet by ID(JSON)
 func HandlePet() httprouter.Handle {
 
-	pets := entity.GetPets()
+	pets := entity.GetPetsDto()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		switch r.Method {
@@ -97,7 +97,7 @@ func HandlePet() httprouter.Handle {
 				http.Error(w, "Bad request", http.StatusBadRequest)
 			}
 
-			json.NewEncoder(w).Encode(entity.GetPetByID(id))
+			json.NewEncoder(w).Encode(entity.PetToDto(entity.GetPetByID(id)))
 		// DELETE
 		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")

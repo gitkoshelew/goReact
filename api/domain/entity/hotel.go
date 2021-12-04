@@ -1,6 +1,9 @@
 package entity
 
-import "errors"
+import (
+	"errors"
+	"goReact/domain/dto"
+)
 
 // Hotel struct
 type Hotel struct {
@@ -94,4 +97,23 @@ func GetHotelByID(id int) Hotel {
 		}
 	}
 	return hotel
+}
+
+// HotelToDto makes DTO from Hotel object
+func HotelToDto(h Hotel) dto.Hotel {
+	var bookingIds []int
+	for _, v := range h.Bookings {
+		bookingIds = append(bookingIds, v.BookingID)
+	}
+	var roomsIds []int
+	for _, v := range h.Rooms {
+		roomsIds = append(roomsIds, v.HotelRoomID)
+	}
+	return dto.Hotel{
+		HotelID:    h.HotelID,
+		Name:       h.Name,
+		Address:    h.Address,
+		RoomsID:    roomsIds,
+		BookingsID: bookingIds,
+	}
 }
