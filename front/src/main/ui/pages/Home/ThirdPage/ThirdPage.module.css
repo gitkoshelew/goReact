@@ -12,3 +12,12 @@
     align-items: center;
     justify-content: center;
 }
+
+
+
+@media (min-width: 1250px) {
+    .photoBlock{
+        flex-direction: row;
+    }
+
+}

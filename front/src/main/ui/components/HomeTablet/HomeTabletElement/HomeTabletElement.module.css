@@ -112,8 +112,21 @@
     .tabletComponentBodyBtn {
         left: 550px
     }
-    .tabletComponent{
+
+    .tabletComponent {
         width: 200px;
         padding-left: 20px;
+    }
+}
+
+@media (min-width: 1250px) {
+    .tabletComponentBodyBtn {
+        left: 634px;
+    }
+
+    .tabletComponent {
+        width: 222px;
+        padding: 0;
+        text-align: center;
     }
 }

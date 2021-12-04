@@ -104,23 +104,23 @@
     .photoBlock {
         position: relative;
         left: 275px;
-        top: -190px;
+        top: -140px;
         height: 600px;
         width: 500px;
+        margin: 0;
     }
 
     .photoTabletBlock {
         display: flex;
         flex-direction: row-reverse;
         justify-content: center;
-        height:500px;
+        height: 500px;
     }
 
     .informText {
         position: relative;
         top: 220px;
-
-    }
+       }
 
     .firstPageMainText {
         margin: 0;
@@ -138,4 +138,23 @@
     }
 
 
+}
+
+@media (min-width: 1250px) {
+    .informText {
+        left:40px;
+    }
+    .photoBlock{
+        height: 755px;
+        top:-195px;
+        left:310px;
+        border-radius: 0 0 0 30px;
+    }
+
+}
+
+@media (min-width: 1350px) {
+    .informText {
+        left:120px;
+    }
 }

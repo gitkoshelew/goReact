@@ -10,32 +10,39 @@
     flex-direction: column;
 }
 
-.oneRoomTop :first-child div {
-    /*margin-bottom: 30px;*/
-}
+
 
 .oneRoomBottom {
     display: flex;
     flex-direction: column;
 }
 
-.oneRoomBottom :first-child div {
-    /*margin-bottom: 30px;*/
-}
 
-
-@media(min-width: 1144px){
-    .oneRoomTop{
+@media (min-width: 1144px) {
+    .oneRoomTop {
         flex-direction: row;
     }
-    .oneRoomBottom{
+
+    .oneRoomBottom {
         flex-direction: row;
     }
+
     .oneRoomTop :first-child div {
         margin-right: 70px;
     }
+
     .oneRoomBottom :first-child div {
         margin-right: 70px;
+    }
+}
+
+@media (min-width: 1250px) {
+    .oneRoomTop :first-child div {
+        margin-right: 20px;
+    }
+
+    .oneRoomBottom :first-child div {
+        margin-right: 20px;
     }
 }
 

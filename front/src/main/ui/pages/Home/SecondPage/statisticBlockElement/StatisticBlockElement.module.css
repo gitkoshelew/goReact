@@ -32,3 +32,10 @@
     text-transform: uppercase;
     color: #808080;
 }
+
+
+@media (min-width: 1250px) {
+    .statisticElem {
+        margin: 70px 100px 60px 120px;
+    }
+}
