@@ -18,19 +18,31 @@
     margin: auto auto;
 }
 
-.oneSlide p{
+.oneSlide p {
     margin-top: 135px;
 }
 
 
 @media (min-width: 575px) {
-    .titleText{
+    .titleText {
         margin-left: 120px
     }
 }
 
 @media (min-width: 767px) {
-    .oneSlide{
-       width:95%!important;
+    .oneSlide {
+        width: 95% !important;
     }
 }
+
+
+@media (min-width: 1144px) {
+    .oneSlide {
+        height: 330px;
+    }
+    .titleText{
+        padding: 10px 0 50px 0;
+    }
+
+}
+

@@ -151,3 +151,9 @@
     }
 
 }
+@media (min-width: 1144px) {
+    .staplesBlock {
+        left: 910px
+    }
+
+}

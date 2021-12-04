@@ -1,12 +1,13 @@
 
 
 
-/*@media (min-width: 1024px) {*/
-/*   .secondaryNearby{*/
-/*       display: flex;*/
-/*       flex-direction: column;*/
-/*   }*/
-/*    .nearbyPlaces{*/
-/*        display: flex;*/
-/*    }*/
-/*}*/
+@media (min-width: 1144px) {
+    .nearbyPlaces{
+        display: flex;
+        justify-content: center;
+    }
+    .secondaryNearby{
+        margin-left: 10.5vw;
+        margin-right: 20px;
+    }
+}

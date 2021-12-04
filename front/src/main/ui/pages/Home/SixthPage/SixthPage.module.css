@@ -5,14 +5,21 @@
     background: #F9F9F9;
 }
 
-@media(min-width: 575px){
-    .sixthPageTitle{
+@media (min-width: 575px) {
+    .sixthPageTitle {
         white-space: nowrap;
     }
 }
 
-@media(min-width: 767px){
-    .sixthPageTitle{
+@media (min-width: 767px) {
+    .sixthPageTitle {
         margin: 0px 10px -30px 180px;
+    }
+}
+
+@media (min-width: 1144px) {
+    .sixthPageTitle {
+        margin: 0px 165px -30px 180px;
+        padding:10px 0;
     }
 }

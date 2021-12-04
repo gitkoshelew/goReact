@@ -41,7 +41,14 @@
     .contactInfo {
         margin-left: 85px;
     }
+
     .contactInfo:after {
         width: 790px;
+    }
+}
+
+@media (min-width: 1144px) {
+    .contactInfo:after {
+        width: 915px;
     }
 }

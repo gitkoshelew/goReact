@@ -46,3 +46,9 @@
         font-size: 16.4px;
     }
 }
+
+@media(min-width: 1144px){
+    .roomInfoElement{
+        margin-right:30px!important;
+    }
+}

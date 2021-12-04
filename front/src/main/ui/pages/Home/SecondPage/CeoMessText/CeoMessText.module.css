@@ -22,11 +22,18 @@
 }
 
 
-
 @media (min-width: 767px) {
-    .mainText {
-    }
     .secondaryText {
-font-size: 18px;
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1144px) {
+    .secondaryText {
+        text-align: left;
+        white-space: nowrap;
+    }
+    .mainText{
+        font-size: 36px;
     }
 }

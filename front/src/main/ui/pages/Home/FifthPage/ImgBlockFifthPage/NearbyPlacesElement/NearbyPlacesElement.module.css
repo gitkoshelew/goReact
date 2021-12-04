@@ -103,37 +103,60 @@
 }
 
 
-@media(min-width: 575px){
-    .mainBlock{
+@media (min-width: 575px) {
+    .mainBlock {
         width: 400px;
         height: 450px;
     }
-    .oneElement{
+
+    .oneElement {
         width: 400px;
     }
-    .secondaryBlock{
-        width:400px;
+
+    .secondaryBlock {
+        width: 400px;
     }
 }
-@media(min-width: 767px){
-    .mainBlock{
+
+@media (min-width: 767px) {
+    .mainBlock {
         width: 550px;
         height: 600px;
     }
-    .oneElement{
+
+    .oneElement {
         width: 550px;
     }
-    .secondaryBlock{
-        width:550px;
+
+    .secondaryBlock {
+        width: 550px;
         height: 350px;
     }
-    .infoName{
+
+    .infoName {
         font-size: 24px;
     }
+
     .informBlock :after {
         left: 100px;
     }
+
     .informBlockSecondary :after {
         left: 145px;
+    }
+}
+
+@media (min-width: 1144px) {
+    .oneElement {
+        width: 100%;
+    }
+    .mainBlock{
+        height: 680px;
+        width:580px;
+    }
+
+    .secondaryBlock {
+        width: 300px;
+        height: 300px;
     }
 }

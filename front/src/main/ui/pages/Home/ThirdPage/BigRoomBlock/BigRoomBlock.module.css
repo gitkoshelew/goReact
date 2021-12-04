@@ -54,3 +54,9 @@
     }
 }
 
+@media(min-width: 1144px){
+    .bigRoomBlock{
+        width: 970px;
+    }
+}
+

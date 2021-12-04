@@ -1,22 +1,9 @@
-.ceoMessSignature {
-
-}
-
-
-@media (min-width: 440px) {
-    /*.ceoMessSignature {*/
-
-    /*}*/
-}
-@media (min-width: 767px) {
-    /*.ceoMessSignature {*/
-    /* */
-    /*}*/
-}
-@media (min-width: 1024px) {
-    /*.ceoMessSignature {*/
-    /*   */
-    /*}*/
+@media (min-width: 1144px) {
+    .ceoMessSignature {
+        position: relative;
+        top: 120px;
+        left: -200px;
+    }
 }
 
 

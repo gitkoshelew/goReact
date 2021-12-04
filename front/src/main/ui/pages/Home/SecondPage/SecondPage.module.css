@@ -33,9 +33,24 @@
 
 
 @media (min-width: 1024px) {
-    .statisticBlock{
-        flex-direction: row ;
+    .statisticBlock {
+        flex-direction: row;
     }
+
+}
+
+@media (min-width: 1144px) {
+    .secondPage {
+        background-color: #F9F9F9;
+    }
+
+    .ceoMessTitle {
+        flex-direction: row;
+        background: white;
+        margin: 70px auto;
+        width: 90%;
+    }
+
 
 }
 

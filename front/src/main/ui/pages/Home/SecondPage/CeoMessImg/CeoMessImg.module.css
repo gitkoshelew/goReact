@@ -22,3 +22,10 @@
         width: 490px;
     }
 }
+
+@media (min-width: 1144px) {
+    .ceoMessImg{
+        position: relative;
+        top: -40px;
+    }
+}

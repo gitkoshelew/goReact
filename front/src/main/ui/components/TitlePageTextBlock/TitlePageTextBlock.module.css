@@ -44,5 +44,12 @@
     }
 
 }
+@media (min-width: 1144px) {
+    .TextBlockTitle {
+        white-space: nowrap;
+        margin: 35px -35px 10px -40px
+    }
+
+}
 
 
