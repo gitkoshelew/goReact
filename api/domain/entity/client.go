@@ -1,7 +1,5 @@
 package entity
 
-import "goReact/domain/dto"
-
 // Client extends User and has all User (and Account) fields
 type Client struct {
 	User
@@ -40,22 +38,4 @@ func GetClientByID(id int) Client {
 		}
 	}
 	return client
-}
-
-// ClientToDto makes DTO from Client object
-func ClientToDto(c Client) dto.Client {
-	var petsIds []int
-	for _, v := range c.Pets {
-		petsIds = append(petsIds, v.PetID)
-	}
-	var bookingIds []int
-	for _, v := range c.Bookings {
-		bookingIds = append(bookingIds, v.BookingID)
-	}
-	return dto.Client{
-		UserID:     c.UserID,
-		ClientID:   c.ClientID,
-		PetsID:     petsIds,
-		BookingsID: bookingIds,
-	}
 }

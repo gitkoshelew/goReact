@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"goReact/domain/dto"
 	"goReact/pkg/date"
 
 	"cloud.google.com/go/civil"
@@ -18,18 +17,6 @@ func GetAccounts() []Account {
 	}
 }
 
-// GetAccountsDto ...
-func GetAccountsDto() []dto.Account {
-	accounts := GetAccounts()
-	return []dto.Account{
-		dto.Account(accounts[0]),
-		dto.Account(accounts[1]),
-		dto.Account(accounts[2]),
-		dto.Account(accounts[3]),
-		dto.Account(accounts[4]),
-	}
-}
-
 // GetUsers ...
 func GetUsers() []User {
 	accounts := GetAccounts()
@@ -42,18 +29,6 @@ func GetUsers() []User {
 	}
 }
 
-// GetUserDto ...
-func GetUsersDto() []dto.User {
-	users := GetUsers()
-	return []dto.User{
-		UserToDto(users[0]),
-		UserToDto(users[1]),
-		UserToDto(users[2]),
-		UserToDto(users[3]),
-		UserToDto(users[4]),
-	}
-}
-
 // GetEmployees ...
 func GetEmployees() []Employee {
 	users := GetUsers()
@@ -61,15 +36,6 @@ func GetEmployees() []Employee {
 	return []Employee{
 		Employee{users[0], hotels[0], 1, "Manager", "Owner"},
 		Employee{users[1], hotels[1], 2, "Administrator", "Employee"},
-	}
-}
-
-// GetEmployeesDto ...
-func GetEmployeesDto() []dto.Employee {
-	employees := GetEmployees()
-	return []dto.Employee{
-		EmployeeToDto(employees[0]),
-		EmployeeToDto(employees[1]),
 	}
 }
 
@@ -84,32 +50,12 @@ func GetClients() []Client {
 	}
 }
 
-// GetClientsDto ...
-func GetClientsDto() []dto.Client {
-	clients := GetClients()
-	return []dto.Client{
-		ClientToDto(clients[0]),
-		ClientToDto(clients[1]),
-		ClientToDto(clients[2]),
-	}
-}
-
 //GetPets ...
 func GetPets() []Pet {
 	return []Pet{
 		Pet{1, "Barsik", PetTypeCat, 3, 4.6, "none"},
 		Pet{2, "Murzik", PetTypeCat, 4, 4.6, "none"},
 		Pet{3, "Bobik", PetTypeDog, 5, 4.6, "none"},
-	}
-}
-
-// GetPetsDto ...
-func GetPetsDto() []dto.Pet {
-	pets := GetPets()
-	return []dto.Pet{
-		PetToDto(pets[0]),
-		PetToDto(pets[1]),
-		PetToDto(pets[2]),
 	}
 }
 
@@ -122,16 +68,6 @@ func GetHotels() []Hotel {
 	}
 }
 
-// GetHotelDto ...
-func GetHotelsDto() []dto.Hotel {
-	hotels := GetHotels()
-	return []dto.Hotel{
-		HotelToDto(hotels[0]),
-		HotelToDto(hotels[1]),
-		HotelToDto(hotels[2]),
-	}
-}
-
 // GetHotelRooms ...
 func GetHotelRooms() []HotelRoom {
 	seats := GetHotelRoomSeats()
@@ -140,17 +76,6 @@ func GetHotelRooms() []HotelRoom {
 		HotelRoom{2, 202, PetTypeCat, []HotelRoomSeat{seats[1], seats[3]}},
 		HotelRoom{3, 303, PetTypeDog, []HotelRoomSeat{seats[2]}},
 		HotelRoom{4, 404, PetTypeDog, []HotelRoomSeat{seats[4], seats[5]}},
-	}
-}
-
-// GetHotelRoomsDto ...
-func GetHotelRoomsDto() []dto.Room {
-	rooms := GetHotelRooms()
-	return []dto.Room{
-		RoomToDto(rooms[0]),
-		RoomToDto(rooms[1]),
-		RoomToDto(rooms[2]),
-		RoomToDto(rooms[3]),
 	}
 }
 
@@ -166,19 +91,6 @@ func GetHotelRoomSeats() []HotelRoomSeat {
 	}
 }
 
-// GetHotelRoomSeatsDto ...
-func GetHotelRoomSeatsDto() []dto.Seat {
-	seats := GetHotelRoomSeats()
-	return []dto.Seat{
-		SeatToDto(seats[0]),
-		SeatToDto(seats[1]),
-		SeatToDto(seats[2]),
-		SeatToDto(seats[3]),
-		SeatToDto(seats[4]),
-		SeatToDto(seats[5]),
-	}
-}
-
 // GetBookings ...
 func GetBookings() []Booking {
 	pets := GetPets()
@@ -188,15 +100,5 @@ func GetBookings() []Booking {
 		Booking{1, pets[0], seats[0], BookingStatusInProgress, date.Date{Date: civil.Date{Year: 2021, Month: 11, Day: 21}}, date.Date{Date: civil.Date{Year: 2021, Month: 11, Day: 30}}, employees[0], "Booking note1"},
 		Booking{2, pets[1], seats[1], BookingStatusCompleted, date.Date{Date: civil.Date{Year: 2021, Month: 11, Day: 19}}, date.Date{Date: civil.Date{Year: 2021, Month: 11, Day: 20}}, employees[0], "Booking note2"},
 		Booking{3, pets[2], seats[2], BookingStatusPending, date.Date{Date: civil.Date{Year: 2021, Month: 11, Day: 30}}, date.Date{Date: civil.Date{Year: 2021, Month: 12, Day: 10}}, employees[1], "Booking note3"},
-	}
-}
-
-// GetBookingsDto ...
-func GetBookingsDto() []dto.Booking {
-	bookings := GetBookings()
-	return []dto.Booking{
-		BookingToDto(bookings[0]),
-		BookingToDto(bookings[1]),
-		BookingToDto(bookings[2]),
 	}
 }

@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"goReact/domain/dto"
 	"goReact/pkg/date"
 )
 
@@ -62,19 +61,4 @@ func GetUserByID(id int) User {
 		}
 	}
 	return user
-}
-
-// UserToDto makes DTO from user object
-func UserToDto(u User) dto.User {
-	return dto.User{
-		AccountID:   u.AccountID,
-		UserID:      u.UserID,
-		Name:        u.Name,
-		Surname:     u.Surname,
-		MiddleName:  u.MiddleName,
-		DateOfBirth: u.DateOfBirth,
-		Address:     u.Address,
-		Phone:       u.Phone,
-		Email:       u.Email,
-	}
 }

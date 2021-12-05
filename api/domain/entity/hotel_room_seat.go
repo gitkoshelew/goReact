@@ -1,7 +1,5 @@
 package entity
 
-import "goReact/domain/dto"
-
 // HotelRoomSeat struct
 type HotelRoomSeat struct {
 	HotelRoomSeatID int    `json:"seatId"`
@@ -37,13 +35,4 @@ func GetSeatsByID(ids []int) []HotelRoomSeat {
 		seats = append(seats, GetSeatByID(id))
 	}
 	return seats
-}
-
-// SeatToDto makes DTO from HOtelRoomSeat object
-func SeatToDto(s HotelRoomSeat) dto.Seat {
-	return dto.Seat{
-		HotelRoomSeatID: s.HotelRoomSeatID,
-		Description:     s.Description,
-		IsFree:          s.IsFree,
-	}
 }

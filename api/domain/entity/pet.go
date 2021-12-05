@@ -1,7 +1,5 @@
 package entity
 
-import "goReact/domain/dto"
-
 // Pet struct
 type Pet struct {
 	PetID     int     `json:"petId"`
@@ -55,16 +53,4 @@ func GetPetsByID(ids []int) []Pet {
 		pets = append(pets, GetPetByID(id))
 	}
 	return pets
-}
-
-// PetToDto makes DTO from Pet object
-func PetToDto(p Pet) dto.Pet {
-	return dto.Pet{
-		PetID:     p.PetID,
-		Name:      p.Name,
-		Type:      string(p.Type),
-		OwnerID:   p.OwnerID,
-		Weight:    p.Weight,
-		Diesieses: p.Diesieses,
-	}
 }
