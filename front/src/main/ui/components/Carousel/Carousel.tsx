@@ -27,7 +27,7 @@ export const Carousel = ({
                          }: CarouselPropsType) => {
 
     function SampleNextArrow(props: any) {
-        const {className, style, onClick} = props;
+        const {className, onClick} = props;
         return (
             <div
                 className={className}
@@ -40,7 +40,7 @@ export const Carousel = ({
     }
 
     function SamplePrevArrow(props: any) {
-        const {className, style, onClick} = props;
+        const {className, onClick} = props;
         return (
             <div
                 className={className}
@@ -56,9 +56,9 @@ export const Carousel = ({
     const settings = {
         customPaging: function (i: any) {
             return (
-                <a>
+                <button>
                     <img src={sliderDot} alt={'sliderDot'}/>
-                </a>
+                </button>
 
             );
         },
