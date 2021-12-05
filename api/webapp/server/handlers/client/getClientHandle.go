@@ -1,4 +1,4 @@
-package handlers
+package client
 
 import (
 	"encoding/json"
@@ -9,9 +9,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// Test ...
-func Test() httprouter.Handle {
-	accounts := entity.GetAccounts()
+// GetClientHandle returns Client by ID
+func GetClientHandle() httprouter.Handle {
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,10 +21,6 @@ func Test() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for _, acc := range accounts {
-			if acc.AccountID == id {
-				json.NewEncoder(w).Encode(acc)
-			}
-		}
+		json.NewEncoder(w).Encode(entity.ClientToDto(entity.GetClientByID(id)))
 	}
 }
