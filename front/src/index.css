@@ -70,4 +70,18 @@ body {
     filter: none;
 }
 
+.slick-next:before{
+display: none;
+}
+.slick-prev:before{
+  display: none;
+}
+
+.slick-next{
+    top: 145px;
+}
+.slick-prev{
+    left:-50px;
+    top: 145px;
+}
 

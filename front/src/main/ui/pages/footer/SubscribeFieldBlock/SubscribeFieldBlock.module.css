@@ -1,5 +1,4 @@
 .subscribeField{
-    /*display: flex;*/
     flex-direction: column;
     margin-left: 155px;
     position: relative;
@@ -25,5 +24,12 @@
     position: absolute;
     left: 0px;
     top: 76px;
+}
+
+@media(min-width: 1250px){
+   .subscribeField{
+       display: flex;
+       margin-left: 95px;
+   }
 }
 

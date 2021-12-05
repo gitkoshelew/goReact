@@ -1,5 +1,4 @@
 .usefulLinksBlock {
-    /*display: flex;*/
     flex-direction: column;
     position: relative;
     display: none;
@@ -53,5 +52,11 @@
 @media (min-width: 1024px) {
     .usefulLinksBlock {
         margin-left: 185px;
+    }
+}
+
+@media (min-width: 1250px) {
+    .usefulLinksBlock {
+        margin-left: 85px;
     }
 }

@@ -8,7 +8,7 @@
     height: 30px;
     padding: 10px 15px;
     float: left;
-    font-family: "Barlow Condensed",sans-serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -23,9 +23,9 @@
 .formWrapper input:focus {
     outline: 0;
     background: #fff;
-    -moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
-    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
-    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+    -moz-box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
 }
 
 .formWrapper input::-webkit-input-placeholder {
@@ -42,7 +42,7 @@
     cursor: pointer;
     height: 50px;
     width: 110px;
-    font-family: "Barlow Condensed",sans-serif;
+    font-family: "Barlow Condensed", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -51,12 +51,30 @@
     color: #FFFFFF;
     background: #0F97AA;
     border-radius: 0 6px 6px 0;
-    text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
 }
 
-.formWrapper button:hover{
+.formWrapper button:hover {
     background: cadetblue;
 }
 
+
+@media (min-width: 1250px) {
+    .formWrapper input{
+        width:290px;
+    }
+    .formWrapper button {
+        left: -20px;
+    }
+}
+
+@media (min-width: 1350px) {
+    .formWrapper input{
+        width:310px;
+    }
+    .formWrapper button {
+        left: 0;
+    }
+}
 
 

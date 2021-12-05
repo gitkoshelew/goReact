@@ -2,12 +2,57 @@ import React from 'react';
 // @ts-ignore
 import Slider from 'react-slick';
 import s from './Carousel.module.css';
-import {sliderDot} from '../../svgWrapper/HomeSvgWrapper';
+import {nextArrow, prevArrow, sliderDot} from '../../svgWrapper/HomeSvgWrapper';
 
 
-const {carousel, oneSlide} = s;
+const {carousel,carouselBig} = s;
 
-export const Carousel = ({children}: any) => {
+type CarouselPropsType = {
+    children: any
+    responsiveArrForCarousel?: any
+    startSlideToShow: number
+    startSlideScroll: number
+    type: string
+    isWithArrows:boolean
+}
+
+
+export const Carousel = ({
+                             children,
+                             responsiveArrForCarousel,
+                             startSlideToShow,
+                             startSlideScroll,
+                             type,
+                             isWithArrows
+                         }: CarouselPropsType) => {
+
+    function SampleNextArrow(props: any) {
+        const {className, style, onClick} = props;
+        return (
+            <div
+                className={className}
+                // style={{ ...style, display: "block", background: "red" }} to custom update
+                onClick={onClick}
+            >
+                <img src={nextArrow} alt="nextArrow"/>
+            </div>
+        );
+    }
+
+    function SamplePrevArrow(props: any) {
+        const {className, style, onClick} = props;
+        return (
+            <div
+                className={className}
+                // style={{ ...style, display: "block", background: "red" }} to custom update
+                onClick={onClick}
+            >
+                <img src={prevArrow} alt="nextArrow"/>
+            </div>
+        );
+    }
+
+
     const settings = {
         customPaging: function (i: any) {
             return (
@@ -21,26 +66,29 @@ export const Carousel = ({children}: any) => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        arrows: false,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            }]
+        slidesToShow: startSlideToShow,
+        slidesToScroll: startSlideScroll,
+        arrows: isWithArrows,
+        responsive: responsiveArrForCarousel,
+        nextArrow: <SampleNextArrow/>,
+        prevArrow: <SamplePrevArrow/>
     }
 
     return (
-        <div className={carousel}>
-            <Slider {...settings}>
-                {children}
-            </Slider>
-        </div>
+        <>
+            {type === 'smallWidth' && <div className={carousel}>
+                <Slider {...settings}>
+                    {children}
+                </Slider>
+            </div>
+            }
+            {type === 'bigWidth' &&
+            <div className={carouselBig}>
+                <Slider {...settings}>
+                    {children}
+                </Slider>
+            </div>
+            }
+        </>
     );
 }

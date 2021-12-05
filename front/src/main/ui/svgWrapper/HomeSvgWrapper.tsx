@@ -27,6 +27,10 @@ import sliderDot from '../../../assets/img/home/fourthPage/services/sliderDot.sv
 //sixthPage (feedBack elem)
 import staples from '../../../assets/img/home/sixthPage/stapless.svg'
 
+//carousel
+import nextArrow from '../../../assets/img/home/carousel/nextArrow.svg'
+import prevArrow from '../../../assets/img/home/carousel/prevArrow.svg'
+
 
 
 
@@ -59,4 +63,9 @@ export {
 
 export{
     staples
+}
+
+export{
+    nextArrow,
+    prevArrow
 }

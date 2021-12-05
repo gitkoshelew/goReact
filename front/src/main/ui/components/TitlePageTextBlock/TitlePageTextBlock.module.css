@@ -52,4 +52,17 @@
 
 }
 
+@media (min-width: 1250px) {
+    .linkText {
+        display: block;
+        top: -30px;
+        left: -113px;
+        position: relative;
+    }
+    .linkText img{
+        margin-left: 10px;
+    }
+
+}
+
 

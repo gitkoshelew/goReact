@@ -3,7 +3,25 @@
     height: 300px;
     margin: 0 auto;
 }
+.carouselBig {
+    width: 90%;
+    height: 300px;
+    margin: 0 auto;
+}
 
 
+@media (min-width: 1250px) {
+    .carousel{
+        width: 500px;
+        margin: 0;
+        position: relative;
+        left: 130px;
+        top: -30px;
+    }
+    .carouselBig{
+
+    }
+
+}
 
 

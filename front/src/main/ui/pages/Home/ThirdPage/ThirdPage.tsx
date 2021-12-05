@@ -9,7 +9,7 @@ const {thirdPage, photoBlock} = s;
 export const ThirdPage = () => {
     return (
         <div className={thirdPage}>
-            <TitlePageTextBlock isWithLink={true} linkTextMess={'See more'} mainTextMess={'OUR FAVORITE ROOMS'}/>
+            <TitlePageTextBlock isWithLink={false} mainTextMess={'OUR FAVORITE ROOMS'}/>
             <div className={photoBlock}>
                 <BigRoomBlock roomName={'Luxure'} price={100} adultNum={2} childrenNum={2} squareNum={100}/>
                 <MiniRoomBlock/>

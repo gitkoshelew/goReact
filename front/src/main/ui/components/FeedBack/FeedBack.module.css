@@ -24,6 +24,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    justify-content: space-between;
 }
 
 .infoUserBlock {
@@ -58,18 +59,18 @@
     margin-left: -10px;
 }
 
+.userPhotoNameNationalityBlock {
+    display: flex;
+    align-items: center;
+}
+
 .staplesBlock {
-    position: absolute;
-    left: 195px;
-    top: -20px
+    position: relative;
+    top: -30px
 
 }
 
 @media (min-width: 455px) {
-    .staplesBlock {
-        left: 285px
-    }
-
     .userPhoto img {
         margin-left: 10px;
     }
@@ -77,10 +78,6 @@
 }
 
 @media (min-width: 575px) {
-    .staplesBlock {
-        left: 345px
-    }
-
     .feedBack {
         height: 165px;
     }
@@ -101,10 +98,6 @@
 }
 
 @media (min-width: 767px) {
-    .staplesBlock {
-        left: 612px
-    }
-
     .feedBack {
         height: 210px;
         width: 88%;
@@ -121,39 +114,6 @@
 
     .userFeedbackName {
         font-size: 22px;
-    }
-
-}
-@media (min-width: 810px) {
-    .staplesBlock {
-        left: 645px
-    }
-
-}
-
-@media (min-width: 865px) {
-    .staplesBlock {
-        left: 690px
-    }
-
-}
-
-@media (min-width: 905px) {
-    .staplesBlock {
-        left: 720px
-    }
-
-}
-
-@media (min-width: 956px) {
-    .staplesBlock {
-        left: 780px
-    }
-
-}
-@media (min-width: 1144px) {
-    .staplesBlock {
-        left: 910px
     }
 
 }
