@@ -1,15 +1,15 @@
 import s from './Button.module.css';
 import buy from '../../../../assets/img/navBar/Buy.svg';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const {loginBtn, buyBtn} = s
+const { loginBtn, buyBtn } = s
 
 type BtnPropsType = {
     type: string
 }
 
 
-export const Button = ({type}: BtnPropsType) => {
+export const Button = ({ type }: BtnPropsType) => {
 
     return (<div>
             {type === 'login' && <NavLink className={loginBtn} to={'/login'}>

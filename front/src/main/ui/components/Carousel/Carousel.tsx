@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 // @ts-ignore
-import Slider from 'react-slick';
-import s from './Carousel.module.css';
-import {nextArrow, prevArrow, sliderDot} from '../../svgWrapper/HomeSvgWrapper';
+import Slider from 'react-slick'
+import s from './Carousel.module.css'
+import { nextArrow, prevArrow, sliderDot } from '../../svgWrapper/HomeSvgWrapper'
 
 
-const {carousel,carouselBig} = s;
+const { carousel,carouselBig } = s;
 
 type CarouselPropsType = {
     children: any
@@ -27,7 +27,7 @@ export const Carousel = ({
                          }: CarouselPropsType) => {
 
     function SampleNextArrow(props: any) {
-        const {className, onClick} = props;
+        const { className, onClick } = props;
         return (
             <div
                 className={className}
@@ -40,7 +40,7 @@ export const Carousel = ({
     }
 
     function SamplePrevArrow(props: any) {
-        const {className, onClick} = props;
+        const { className, onClick } = props;
         return (
             <div
                 className={className}
@@ -54,7 +54,7 @@ export const Carousel = ({
 
 
     const settings = {
-        customPaging: function (i: any) {
+        customPaging: function () {
             return (
                 <button>
                     <img src={sliderDot} alt={'sliderDot'}/>

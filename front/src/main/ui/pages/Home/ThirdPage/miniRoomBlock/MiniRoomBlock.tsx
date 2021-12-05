@@ -1,7 +1,7 @@
 import s from './MiniRoomBlock.module.css';
-import {MiniRoomElement} from './MiniRoomElement/MiniRoomElement';
+import { MiniRoomElement } from './MiniRoomElement/MiniRoomElement';
 
-const {miniRoom, oneRoomTop, oneRoomBottom} = s;
+const { miniRoom, oneRoomTop, oneRoomBottom } = s;
 
 export const MiniRoomBlock = () => {
     return (

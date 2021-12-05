@@ -1,8 +1,8 @@
 import React from 'react'
 import s from './CeoMessSignature.module.css';
-import {signature} from '../../../../svgWrapper/HomeSvgWrapper'
+import { signature } from '../../../../svgWrapper/HomeSvgWrapper'
 
-const {ceoMessSignature} = s;
+const { ceoMessSignature } = s;
 
 export const CeoMessSignature = () => {
     return (

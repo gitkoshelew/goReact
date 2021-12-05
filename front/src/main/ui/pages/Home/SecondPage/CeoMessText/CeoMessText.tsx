@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './CeoMessText.module.css';
 
-const {mainText, secondaryText} = s;
+const { mainText, secondaryText } = s;
 
 type CeoMessTextPropsType = {
     type: string
@@ -9,7 +9,7 @@ type CeoMessTextPropsType = {
 
 
 export const CeoMessText = (props: CeoMessTextPropsType) => {
-    const {type} = props;
+    const { type } = props;
     return (
         <>
             {type === 'mainText' &&

@@ -1,7 +1,7 @@
 import s from './AfterPanel.module.css';
-import {planet} from '../../../../svgWrapper/footerSvgWrapper';
+import { planet } from '../../../../svgWrapper/footerSvgWrapper';
 
-const {afterPanelBlock, imgBlock, textBlock,addressText} = s;
+const { afterPanelBlock, imgBlock, textBlock,addressText } = s;
 
 
 export const AfterPanel = () => {

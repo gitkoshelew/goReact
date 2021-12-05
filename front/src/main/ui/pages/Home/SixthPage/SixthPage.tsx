@@ -1,10 +1,10 @@
-import {TitlePageTextBlock} from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
+import { TitlePageTextBlock } from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
 import s from './SixthPage.module.css';
-import {FeedBack} from '../../../components/FeedBack/FeedBack';
-import {flower, forkAndSpoon, swimmer} from '../../../svgWrapper/HomeSvgWrapper';
-import {Carousel} from '../../../components/Carousel/Carousel';
+import { FeedBack } from '../../../components/FeedBack/FeedBack';
+import { flower, forkAndSpoon, swimmer } from '../../../svgWrapper/HomeSvgWrapper';
+import { Carousel } from '../../../components/Carousel/Carousel';
 
-const {sixthPage, sixthPageTitle} = s;
+const { sixthPage, sixthPageTitle } = s;
 
 export const SixthPage = () => {
 

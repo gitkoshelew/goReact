@@ -1,10 +1,10 @@
 import s from './footer.module.css';
-import {ContactInfo} from './ContactInfo/ContactInfo';
-import {UsefulLinks} from './UsefulLinks/UsefulLinks';
-import {SubscribeFieldBlock} from './SubscribeFieldBlock/SubscribeFieldBlock';
-import {AfterPanel} from './SubscribeFieldBlock/AfterPanel/AfterPanel';
+import { ContactInfo } from './ContactInfo/ContactInfo';
+import { UsefulLinks } from './UsefulLinks/UsefulLinks';
+import { SubscribeFieldBlock } from './SubscribeFieldBlock/SubscribeFieldBlock';
+import { AfterPanel } from './SubscribeFieldBlock/AfterPanel/AfterPanel';
 
-const {footerTitle, footerBlock} = s;
+const { footerTitle, footerBlock } = s;
 
 
 export const Footer = () => {

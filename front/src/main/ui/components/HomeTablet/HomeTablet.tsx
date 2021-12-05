@@ -1,7 +1,7 @@
 import s from './HomeTablet.module.css';
-import {HomeTabletElement} from './HomeTabletElement/HomeTabletElement';
+import { HomeTabletElement } from './HomeTabletElement/HomeTabletElement';
 
-const {tabletTitle} = s
+const { tabletTitle } = s
 
 export const HomeTablet = () => {
     return (

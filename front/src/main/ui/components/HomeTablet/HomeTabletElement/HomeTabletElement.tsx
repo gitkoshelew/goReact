@@ -1,6 +1,6 @@
 import s from './HomeTabletElement.module.css';
-import {calendar} from '../../../svgWrapper/HomeSvgWrapper'
-import {usersShadow} from '../../../svgWrapper/HomeSvgWrapper'
+import { calendar } from '../../../svgWrapper/HomeSvgWrapper'
+import { usersShadow } from '../../../svgWrapper/HomeSvgWrapper'
 
 const {
     tabletComponent,
@@ -16,7 +16,7 @@ type HomeTabletElementPropsType = {
 
 
 export const HomeTabletElement = (props: HomeTabletElementPropsType) => {
-    const {type} = props;
+    const { type } = props;
     return (
         <>
             {type === 'checkIn' &&

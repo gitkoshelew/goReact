@@ -1,8 +1,8 @@
 import s from './ServiceBlock.module.css';
-import {ServicesElement} from '../../../../components/ServicesElement/ServicesElement';
-import {useState} from 'react';
+import { ServicesElement } from '../../../../components/ServicesElement/ServicesElement';
+import { useState } from 'react';
 
-const {serviceBlock,toRows} = s;
+const { serviceBlock,toRows } = s;
 
 export type IsActiveServiceElementType = {
     elem1: boolean

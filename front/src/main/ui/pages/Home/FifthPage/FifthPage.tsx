@@ -1,9 +1,9 @@
 import s from './FifthPage.module.css'
-import {TitlePageTextBlock} from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
-import {NearbyPlaces} from './ImgBlockFifthPage/NearbyPlaces';
+import { TitlePageTextBlock } from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
+import { NearbyPlaces } from './ImgBlockFifthPage/NearbyPlaces';
 
 
-const {fifthPage,titleText}=s
+const { fifthPage,titleText }=s
 
 
 

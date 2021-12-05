@@ -1,7 +1,7 @@
 import s from './BurgerMenu.module.css';
-import {NavLinksBurger} from '../../../components/NavLinks/NavLinksBurger/NavLinksBurger';
+import { NavLinksBurger } from '../../../components/NavLinks/NavLinksBurger/NavLinksBurger';
 
-const {burgerMenu, navLinksBurgerMenu,burgerClose} = s
+const { burgerMenu, navLinksBurgerMenu,burgerClose } = s
 
 type BurgerMenuPropsType = {
     setIsBurgerCollapse: (newStatus: boolean) => void
@@ -9,7 +9,7 @@ type BurgerMenuPropsType = {
 }
 
 
-export const BurgerMenu = ({isBurgerCollapse, setIsBurgerCollapse}: BurgerMenuPropsType) => {
+export const BurgerMenu = ({ isBurgerCollapse, setIsBurgerCollapse }: BurgerMenuPropsType) => {
 
     const setBurgerStatus = () => {
         setIsBurgerCollapse(!isBurgerCollapse)

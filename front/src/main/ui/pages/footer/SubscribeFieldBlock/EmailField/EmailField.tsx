@@ -1,6 +1,6 @@
 import s from './EmailField.module.css';
 
-const {formWrapper} = s;
+const { formWrapper } = s;
 
 
 export const EmailField = () => {

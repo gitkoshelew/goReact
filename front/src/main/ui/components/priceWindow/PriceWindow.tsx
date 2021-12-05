@@ -4,9 +4,9 @@ type PriceWindowPropsType = {
     price: number
 }
 
-const {priceWindow} = s
+const { priceWindow } = s
 
-export const PriceWindow = ({price}: PriceWindowPropsType) => {
+export const PriceWindow = ({ price }: PriceWindowPropsType) => {
 
     return (
         <div className={priceWindow}>

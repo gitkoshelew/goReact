@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import {NavBar} from './navBar/navBar';
-import {RoutesInfo} from '../Routes/RoutesInfo';
-import {Footer} from './footer/footer';
+import { NavBar } from './navBar/navBar';
+import { RoutesInfo } from '../Routes/RoutesInfo';
+import { Footer } from './footer/footer';
 
 
 function App() {

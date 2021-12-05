@@ -1,8 +1,8 @@
 import s from './BigRoomBlock.module.css';
-import {PriceWindow} from '../../../../components/priceWindow/PriceWindow';
-import {RoomInfo} from '../../../../components/RoomInfo/RoomInfo';
+import { PriceWindow } from '../../../../components/priceWindow/PriceWindow';
+import { RoomInfo } from '../../../../components/RoomInfo/RoomInfo';
 
-const {bigRoomBlock, roomNames} = s;
+const { bigRoomBlock, roomNames } = s;
 
 type BigRoomBlockType = {
     childrenNum: number
@@ -13,7 +13,8 @@ type BigRoomBlockType = {
 }
 
 
-export const BigRoomBlock = ({childrenNum, adultNum, squareNum, price, roomName}: BigRoomBlockType) => {
+export const BigRoomBlock = (props: BigRoomBlockType) => {
+  const{ childrenNum, adultNum, squareNum, price, roomName }=props;
     return (
         <div className={bigRoomBlock}>
             <span>630x630</span>

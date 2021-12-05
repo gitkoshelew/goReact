@@ -1,10 +1,10 @@
 import s from './ImgLinks.module.css';
-import {facebook} from '../../../../svgWrapper/footerSvgWrapper'
-import {twitter} from '../../../../svgWrapper/footerSvgWrapper'
-import {instagram} from '../../../../svgWrapper/footerSvgWrapper'
-import {youtube} from '../../../../svgWrapper/footerSvgWrapper'
+import { facebook } from '../../../../svgWrapper/footerSvgWrapper'
+import { twitter } from '../../../../svgWrapper/footerSvgWrapper'
+import { instagram } from '../../../../svgWrapper/footerSvgWrapper'
+import { youtube } from '../../../../svgWrapper/footerSvgWrapper'
 
-const {imgLinksBlock, imgLinkElement} = s;
+const { imgLinksBlock, imgLinkElement } = s;
 
 
 export const ImgLinks = () => {

@@ -3,7 +3,7 @@ import React from 'react';
 
 import s from './Select.module.css';
 
-const {selectContainer} = s
+const { selectContainer } = s
 
 export const SelectUI = () => {
 

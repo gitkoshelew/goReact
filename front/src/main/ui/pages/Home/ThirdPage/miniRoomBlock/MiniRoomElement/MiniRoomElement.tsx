@@ -1,8 +1,8 @@
 import s from './MiniRoomElement.module.css';
-import {PriceWindow} from '../../../../../components/priceWindow/PriceWindow';
-import {RoomInfo} from '../../../../../components/RoomInfo/RoomInfo';
+import { PriceWindow } from '../../../../../components/priceWindow/PriceWindow';
+import { RoomInfo } from '../../../../../components/RoomInfo/RoomInfo';
 
-const {oneRoom, rePositionInfo, roomNames} = s;
+const { oneRoom, rePositionInfo, roomNames } = s;
 
 type MiniRoomElementPropsType = {
     childrenNum: number
@@ -12,7 +12,8 @@ type MiniRoomElementPropsType = {
     roomName: string
 }
 
-export const MiniRoomElement = ({childrenNum, adultNum, squareNum, price, roomName}: MiniRoomElementPropsType) => {
+export const MiniRoomElement = ({ childrenNum, adultNum, squareNum, price, roomName }: MiniRoomElementPropsType) => {
+
     return (
         <div className={oneRoom}>
             <PriceWindow price={price}/>

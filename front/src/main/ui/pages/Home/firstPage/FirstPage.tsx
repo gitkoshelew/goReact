@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './FirstPage.module.css';
-import {HomeTablet} from '../../../components/HomeTablet/HomeTablet';
-import {HomeTabletSmall} from '../../../components/HomeTablet/HomeTabletSmall/HomeTabletSmall';
+import { HomeTablet } from '../../../components/HomeTablet/HomeTablet';
+import { HomeTabletSmall } from '../../../components/HomeTablet/HomeTabletSmall/HomeTabletSmall';
 
 const {
     firstPageLinkText,

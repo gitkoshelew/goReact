@@ -1,8 +1,8 @@
 import s from './NearbyPlaces.module.css';
-import {NearbyPlacesElement} from './NearbyPlacesElement/NearbyPlacesElement';
+import { NearbyPlacesElement } from './NearbyPlacesElement/NearbyPlacesElement';
 
 
-const {secondaryNearby,nearbyPlaces} = s;
+const { secondaryNearby,nearbyPlaces } = s;
 
 export const NearbyPlaces = () => {
     return (

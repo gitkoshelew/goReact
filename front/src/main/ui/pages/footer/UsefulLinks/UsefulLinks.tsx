@@ -1,7 +1,7 @@
 import s from './UseFulLinks.module.css';
-import {UsefulLinksElement} from './UseFulLinksElement/UsefulLinksElement';
+import { UsefulLinksElement } from './UseFulLinksElement/UsefulLinksElement';
 
-const {usefulLinksBlock, linksTitle, linksList,groupOfLinks} = s;
+const { usefulLinksBlock, linksTitle, linksList,groupOfLinks } = s;
 
 
 export const UsefulLinks = () => {

@@ -1,10 +1,10 @@
 import s from './ThirdPage.module.css';
-import {TitlePageTextBlock} from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
-import {BigRoomBlock} from './BigRoomBlock/BigRoomBlock';
-import {MiniRoomBlock} from './miniRoomBlock/MiniRoomBlock';
+import { TitlePageTextBlock } from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
+import { BigRoomBlock } from './BigRoomBlock/BigRoomBlock';
+import { MiniRoomBlock } from './miniRoomBlock/MiniRoomBlock';
 
 
-const {thirdPage, photoBlock} = s;
+const { thirdPage, photoBlock } = s;
 
 export const ThirdPage = () => {
     return (

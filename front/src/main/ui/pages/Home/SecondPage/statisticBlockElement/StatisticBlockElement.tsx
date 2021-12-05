@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './StatisticBlockElement.module.css';
 
-const {statisticBlockNum, statisticBlockText, statisticElem} = s;
+const { statisticBlockNum, statisticBlockText, statisticElem } = s;
 
 type StatisticBlockElementPropsType = {
     statisticNum: number
@@ -11,7 +11,7 @@ type StatisticBlockElementPropsType = {
 
 
 export const StatisticBlockElement = (props: StatisticBlockElementPropsType) => {
-    const {statisticNum, statisticText} = props;
+    const { statisticNum, statisticText } = props;
     return (
         <div className={statisticElem}>
             <div className={statisticBlockNum}>{statisticNum}+</div>

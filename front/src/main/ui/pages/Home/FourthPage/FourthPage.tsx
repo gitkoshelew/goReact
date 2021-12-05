@@ -1,11 +1,11 @@
 import s from './FourthPage.module.css';
-import {TitlePageTextBlock} from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
-import {Carousel} from '../../../components/Carousel/Carousel';
-import {ServiceBlock} from './ServiceBlock/ServiceBlock';
+import { TitlePageTextBlock } from '../../../components/TitlePageTextBlock/TitlePageTextBlock';
+import { Carousel } from '../../../components/Carousel/Carousel';
+import { ServiceBlock } from './ServiceBlock/ServiceBlock';
 import React from 'react';
 
 
-const {fourthPage, titleText, oneSlide, serviceCarouselBlock} = s;
+const { fourthPage, titleText, oneSlide, serviceCarouselBlock } = s;
 export const FourthPage = () => {
 
     const startSlideToShow = 1;

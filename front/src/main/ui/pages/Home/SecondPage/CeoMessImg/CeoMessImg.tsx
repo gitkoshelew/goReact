@@ -2,7 +2,7 @@ import React from 'react'
 import s from './CeoMessImg.module.css';
 
 
-const {ceoMessImg} = s;
+const { ceoMessImg } = s;
 
 export const CeoMessImg = () => {
     return (

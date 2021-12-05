@@ -16,7 +16,7 @@ type HomeTabletElementPropsType = {
 
 
 export const HomeTabletSmallElement = (props: HomeTabletElementPropsType) => {
-    const {type} = props;
+    const { type } = props;
     return (
         <>
             {type === 'checkIn' &&

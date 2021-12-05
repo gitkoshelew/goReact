@@ -1,12 +1,12 @@
 import React from 'react'
 import s from './SecondPage.module.css';
-import {StatisticBlockElement} from './statisticBlockElement/StatisticBlockElement';
-import {CeoMessText} from './CeoMessText/CeoMessText';
-import {CeoMessImg} from './CeoMessImg/CeoMessImg';
-import {CeoMessSignature} from './CeoMessSignature/CeoMessSignature';
-import {ScrollBlock} from './ScrollBlock/ScrollBlock';
+import { StatisticBlockElement } from './statisticBlockElement/StatisticBlockElement';
+import { CeoMessText } from './CeoMessText/CeoMessText';
+import { CeoMessImg } from './CeoMessImg/CeoMessImg';
+import { CeoMessSignature } from './CeoMessSignature/CeoMessSignature';
+import { ScrollBlock } from './ScrollBlock/ScrollBlock';
 
-const {secondPage, statisticBlock, ceoMessTitle, ceoMessTextBlock} = s;
+const { secondPage, statisticBlock, ceoMessTitle, ceoMessTextBlock } = s;
 
 export const SecondPage = () => {
     return (

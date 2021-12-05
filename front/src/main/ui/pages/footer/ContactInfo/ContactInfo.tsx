@@ -1,12 +1,12 @@
 import s from './ConstactInfo.module.css';
-import {ft} from '../../../svgWrapper/footerSvgWrapper';
-import {home} from '../../../svgWrapper/footerSvgWrapper';
-import {mobile} from '../../../svgWrapper/footerSvgWrapper';
-import {gmail} from '../../../svgWrapper/footerSvgWrapper';
-import {ContactInfoElement} from './ContactInfoElement/ContactInfoElement';
+import { ft } from '../../../svgWrapper/footerSvgWrapper';
+import { home } from '../../../svgWrapper/footerSvgWrapper';
+import { mobile } from '../../../svgWrapper/footerSvgWrapper';
+import { gmail } from '../../../svgWrapper/footerSvgWrapper';
+import { ContactInfoElement } from './ContactInfoElement/ContactInfoElement';
 
 
-const{contactInfo,linkInMap,ftLogo}=s;
+const{ contactInfo,linkInMap,ftLogo }=s;
 
 
 

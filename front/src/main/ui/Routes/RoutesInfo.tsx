@@ -1,14 +1,14 @@
-import {Home} from '../pages/Home/Home';
-import {Navigate, Route, Routes} from 'react-router-dom';
-import {Hotels} from '../pages/Hotels/Hotels';
-import {AboutUs} from '../pages/AboutUs/AboutUs';
-import {Error404} from '../pages/error404/error404';
-import {Login} from '../pages/Login/Login';
-import {Gallery} from '../pages/Gallery/Gallery';
-import {Room} from '../pages/Room/Room';
-import {Blog} from '../pages/Blog/Blog';
-import {Service} from '../pages/Service/Service';
-import {Basket} from '../pages/Basket/Basket';
+import { Home } from '../pages/Home/Home';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Hotels } from '../pages/Hotels/Hotels';
+import { AboutUs } from '../pages/AboutUs/AboutUs';
+import { Error404 } from '../pages/error404/error404';
+import { Login } from '../pages/Login/Login';
+import { Gallery } from '../pages/Gallery/Gallery';
+import { Room } from '../pages/Room/Room';
+import { Blog } from '../pages/Blog/Blog';
+import { Service } from '../pages/Service/Service';
+import { Basket } from '../pages/Basket/Basket';
 
 export const PATH = {
     HOME:'/home',
