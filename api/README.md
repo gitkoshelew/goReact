@@ -8,6 +8,3 @@ or run docker-compose for developers
 4. Change password for app user
 `ALTER USER goreact_app WITH PASSWORD 'changeme';`
 5. Update password in `config.yaml`
-
-
-

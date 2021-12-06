@@ -18,11 +18,9 @@ RUN go mod download
 
 COPY ./ ./
 
-#make witt-for-postgres.sh executable
+#make wait-for-postgres.sh executable
 RUN chmod +x wait-for-postgres.sh
 
 RUN go build -o goreact ./main.go
 
 CMD [ "/goreact" ]
-
-
