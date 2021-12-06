@@ -1,9 +1,7 @@
 @media (min-width: 1144px) {
-    .ceoMessSignature {
-        position: relative;
-        top: 120px;
-        left: -200px;
-    }
+  .ceoMessSignature {
+    position: relative;
+    top: 120px;
+    left: -200px;
+  }
 }
-
-

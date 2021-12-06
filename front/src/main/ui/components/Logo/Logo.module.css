@@ -1,13 +1,11 @@
 .logo {
-    position: relative;
-    z-index: 5;
+  position: relative;
+  z-index: 5;
 }
 
-
 @media (min-width: 1144px) {
-    /*.logo{*/
-    /*    display: flex;*/
-    /*    margin-left: 60px;*/
-    /*}*/
-
+  /*.logo{*/
+  /*    display: flex;*/
+  /*    margin-left: 60px;*/
+  /*}*/
 }

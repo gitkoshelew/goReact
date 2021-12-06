@@ -1,7 +1,6 @@
 import s from './FeedBack.module.css'
 import { staples } from '../../svgWrapper/HomeSvgWrapper'
 
-
 const {
   feedBackText,
   feedBack,
@@ -14,7 +13,6 @@ const {
   userPhotoNameNationalityBlock,
 } = s
 
-
 type FeedBackPropsType = {
   photo: string
   feedBackMess: string
@@ -22,17 +20,14 @@ type FeedBackPropsType = {
   nationality: string
 }
 
-
 export const FeedBack = ({ photo, feedBackMess, userName, nationality }: FeedBackPropsType) => {
   return (
     <div className={feedBack}>
-      <div className={feedBackText}>
-        {`"${feedBackMess}"`}
-      </div>
+      <div className={feedBackText}>{`"${feedBackMess}"`}</div>
       <div className={feedBackUser}>
         <div className={userPhotoNameNationalityBlock}>
           <div className={userPhoto}>
-            <img src={photo} alt='userPhoto' />
+            <img src={photo} alt="userPhoto" />
           </div>
           <div className={infoUserBlock}>
             <div className={userFeedbackName}>{userName}</div>
@@ -40,10 +35,9 @@ export const FeedBack = ({ photo, feedBackMess, userName, nationality }: FeedBac
           </div>
         </div>
         <div className={staplesBlock}>
-          <img src={staples} alt='staples' />
+          <img src={staples} alt="staples" />
         </div>
       </div>
-
     </div>
   )
 }

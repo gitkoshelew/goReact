@@ -1,54 +1,52 @@
 .linkInMap {
-    font-family: "Barlow Condensed", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    text-decoration-line: underline;
-    color: #FFFFFF;
-    margin: 20px 0 10px 67px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-decoration-line: underline;
+  color: #ffffff;
+  margin: 20px 0 10px 67px;
 }
 
 .ftLogo {
-    padding: 30px 25px;
-
+  padding: 30px 25px;
 }
 
 .contactInfo {
-    /*margin: 0 96px 0 120px;*/
-    margin: 0 auto;
-    position: relative;
+  margin: 0 auto;
+  position: relative;
 }
 
 .contactInfo:after {
-    content: "";
-    height: 1px;
-    background: rgba(255, 255, 255, 0.27);
-    border-radius: 2px;
-    position: absolute;
-    width: 260px;
-    left: 29px;
-    top: 365px;
+  content: '';
+  height: 1px;
+  background: rgba(255, 255, 255, 0.27);
+  border-radius: 2px;
+  position: absolute;
+  width: 260px;
+  left: 29px;
+  top: 365px;
 }
 
 @media (min-width: 767px) {
-    .contactInfo {
-        margin: 0;
-    }
+  .contactInfo {
+    margin: 0;
+  }
 }
 
 @media (min-width: 1024px) {
-    .contactInfo {
-        margin-left: 85px;
-    }
+  .contactInfo {
+    margin-left: 85px;
+  }
 
-    .contactInfo:after {
-        width: 790px;
-    }
+  .contactInfo:after {
+    width: 790px;
+  }
 }
 
 @media (min-width: 1144px) {
-    .contactInfo:after {
-        width: 915px;
-    }
+  .contactInfo:after {
+    width: 915px;
+  }
 }

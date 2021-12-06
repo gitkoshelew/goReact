@@ -1,68 +1,59 @@
 .TextBlockTitle {
-    display: flex;
-    align-items: center;
-    margin: 35px 0 10px 15px;
+  display: flex;
+  align-items: center;
+  margin: 35px 0 10px 15px;
 }
 
 .mainText {
-    width: 90%;
-    height: 90px;
-    font-family: "Barlow Condensed", sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 34px;
-    line-height: 33px;
-    text-transform: uppercase;
-    color: #000000;
-
+  width: 90%;
+  height: 90px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 33px;
+  text-transform: uppercase;
+  color: #000000;
 }
-
 
 .linkText {
-    white-space: nowrap;
-    display: none;
-    align-items: center;
-    font-family: "Barlow Condensed", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    color: #0F97AA;
-    margin-right: 10px;
+  white-space: nowrap;
+  display: none;
+  align-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0f97aa;
+  margin-right: 10px;
 }
-
 
 @media (min-width: 575px) {
-    .TextBlockTitle {
-        margin: 35px 0 10px -40px
-    }
-
+  .TextBlockTitle {
+    margin: 35px 0 10px -40px;
+  }
 }
 @media (min-width: 767px) {
-    .TextBlockTitle {
-        margin: 35px 125px 10px -40px;
-    }
-
+  .TextBlockTitle {
+    margin: 35px 125px 10px -40px;
+  }
 }
 @media (min-width: 1144px) {
-    .TextBlockTitle {
-        white-space: nowrap;
-        margin: 35px -35px 10px -40px
-    }
-
+  .TextBlockTitle {
+    white-space: nowrap;
+    margin: 35px -35px 10px -40px;
+  }
 }
 
 @media (min-width: 1250px) {
-    .linkText {
-        display: block;
-        top: -30px;
-        left: -113px;
-        position: relative;
-    }
-    .linkText img{
-        margin-left: 10px;
-    }
-
+  .linkText {
+    display: block;
+    top: -30px;
+    left: -113px;
+    position: relative;
+  }
+  .linkText img {
+    margin-left: 10px;
+  }
 }
-
-

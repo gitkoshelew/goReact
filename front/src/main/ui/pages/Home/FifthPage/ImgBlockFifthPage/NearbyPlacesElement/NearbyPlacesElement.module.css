@@ -1,174 +1,170 @@
 .oneElement {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 15px;
-    background-color: grey;
-    width: 300px;
-    margin: 20px auto;
-    border-radius: 10px;
-
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  background-color: grey;
+  width: 300px;
+  margin: 20px auto;
+  border-radius: 10px;
 }
 
-
 .mainBlock {
-    width: 300px;
-    height: 400px;
-    display: flex;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-    background: #C4C4C4;
-    position: relative;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
-    line-height: 47px;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #000000;
-    margin-bottom: 10px;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  background: #c4c4c4;
+  position: relative;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin-bottom: 10px;
 }
 
 .secondaryBlock {
-    width: 300px;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #C4C4C4;
-    border-radius: 10px;
-    position: relative;
-    margin: 0 auto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 37px;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #000000;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #c4c4c4;
+  border-radius: 10px;
+  position: relative;
+  margin: 0 auto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 37px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #000000;
 }
 
 .informBlock {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 0 0 20px;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0 20px;
+  position: relative;
 }
 
 .infoName {
-    font-family: "Barlow Condensed", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 25px;
-    color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  color: white;
 }
 
 .informBlock :after {
-    content: "";
-    width: 34px;
-    border-bottom: 1px solid white;
-    transform: rotate(90deg);
-    position: absolute;
-    left: 80px;
-    top: 11px;
+  content: '';
+  width: 34px;
+  border-bottom: 1px solid white;
+  transform: rotate(90deg);
+  position: absolute;
+  left: 80px;
+  top: 11px;
 }
 
-
 .infoDistance {
-    font-family: "Barlow Condensed", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    color: #0F97AA;
-    margin-right: 40px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #0f97aa;
+  margin-right: 40px;
 }
 
 .informBlockSecondary {
-    display: flex;
-    justify-content: space-between;
-    margin: 15px 0 0 20px;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 0 20px;
+  position: relative;
 }
 
 .informBlockSecondary :after {
-    content: "";
-    width: 36px;
-    border-bottom: 1px solid white;
-    transform: rotate(90deg);
-    position: absolute;
-    left: 120px;
-    top: 11px;
+  content: '';
+  width: 36px;
+  border-bottom: 1px solid white;
+  transform: rotate(90deg);
+  position: absolute;
+  left: 120px;
+  top: 11px;
 }
 
-
 @media (min-width: 575px) {
-    .mainBlock {
-        width: 400px;
-        height: 450px;
-    }
+  .mainBlock {
+    width: 400px;
+    height: 450px;
+  }
 
-    .oneElement {
-        width: 400px;
-    }
+  .oneElement {
+    width: 400px;
+  }
 
-    .secondaryBlock {
-        width: 400px;
-    }
+  .secondaryBlock {
+    width: 400px;
+  }
 }
 
 @media (min-width: 767px) {
-    .mainBlock {
-        width: 550px;
-        height: 600px;
-    }
+  .mainBlock {
+    width: 550px;
+    height: 600px;
+  }
 
-    .oneElement {
-        width: 550px;
-    }
+  .oneElement {
+    width: 550px;
+  }
 
-    .secondaryBlock {
-        width: 550px;
-        height: 350px;
-    }
+  .secondaryBlock {
+    width: 550px;
+    height: 350px;
+  }
 
-    .infoName {
-        font-size: 24px;
-    }
+  .infoName {
+    font-size: 24px;
+  }
 
-    .informBlock :after {
-        left: 100px;
-    }
+  .informBlock :after {
+    left: 100px;
+  }
 
-    .informBlockSecondary :after {
-        left: 145px;
-    }
+  .informBlockSecondary :after {
+    left: 145px;
+  }
 }
 
 @media (min-width: 1144px) {
-    .oneElement {
-        width: 100%;
-    }
-    .mainBlock{
-        height: 680px;
-        width:580px;
-    }
+  .oneElement {
+    width: 100%;
+  }
+  .mainBlock {
+    height: 680px;
+    width: 580px;
+  }
 
-    .secondaryBlock {
-        width: 300px;
-        height: 300px;
-    }
+  .secondaryBlock {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 @media (min-width: 1250px) {
-    .secondaryBlock {
-        width: 500px;
-    }
+  .secondaryBlock {
+    width: 500px;
+  }
 }
 
 @media (min-width: 1350px) {
-    .secondaryBlock {
-        width: 630px;
-    }
+  .secondaryBlock {
+    width: 630px;
+  }
 }

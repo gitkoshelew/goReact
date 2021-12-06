@@ -1,25 +1,25 @@
 .sixthPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #F9F9F9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9f9f9;
 }
 
 @media (min-width: 575px) {
-    .sixthPageTitle {
-        white-space: nowrap;
-    }
+  .sixthPageTitle {
+    white-space: nowrap;
+  }
 }
 
 @media (min-width: 767px) {
-    .sixthPageTitle {
-        margin: 0px 10px -30px 180px;
-    }
+  .sixthPageTitle {
+    margin: 0px 10px -30px 180px;
+  }
 }
 
 @media (min-width: 1144px) {
-    .sixthPageTitle {
-        margin: 0px 165px -30px 180px;
-        padding:10px 0;
-    }
+  .sixthPageTitle {
+    margin: 0px 165px -30px 180px;
+    padding: 10px 0;
+  }
 }

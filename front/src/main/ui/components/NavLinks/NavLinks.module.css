@@ -1,56 +1,51 @@
-
 .navLinkTitle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.navLinkTitle :last-child{
-    margin-right: 3px;
+.navLinkTitle :last-child {
+  margin-right: 3px;
 }
 
 .oneLinkActive {
-    white-space: nowrap;
-    color: #000000;
-    text-decoration: none;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    text-transform: capitalize;
-    width: 41px;
-    height: 19px;
-    margin-right: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  white-space: nowrap;
+  color: #000000;
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: capitalize;
+  width: 41px;
+  height: 19px;
+  margin-right: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 
 .oneLink {
-    white-space: nowrap;
-    text-decoration: none;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    text-transform: capitalize;
-    color: #808080;
-    width: 41px;
-    height: 19px;
-    margin-right: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  white-space: nowrap;
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: capitalize;
+  color: #808080;
+  width: 41px;
+  height: 19px;
+  margin-right: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-
 @media (min-width: 1144px) {
- .navLinkTitle{
-     margin: 0 8vw;
- }
-
+  .navLinkTitle {
+    margin: 0 8vw;
+  }
 }

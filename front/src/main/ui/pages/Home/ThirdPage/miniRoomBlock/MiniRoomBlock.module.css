@@ -1,49 +1,43 @@
 .miniRoom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 
 .oneRoomTop {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-
-
 
 .oneRoomBottom {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-
 @media (min-width: 1144px) {
-    .oneRoomTop {
-        flex-direction: row;
-    }
+  .oneRoomTop {
+    flex-direction: row;
+  }
 
-    .oneRoomBottom {
-        flex-direction: row;
-    }
+  .oneRoomBottom {
+    flex-direction: row;
+  }
 
-    .oneRoomTop :first-child div {
-        margin-right: 70px;
-    }
+  .oneRoomTop :first-child div {
+    margin-right: 70px;
+  }
 
-    .oneRoomBottom :first-child div {
-        margin-right: 70px;
-    }
+  .oneRoomBottom :first-child div {
+    margin-right: 70px;
+  }
 }
 
 @media (min-width: 1250px) {
-    .oneRoomTop :first-child div {
-        margin-right: 20px;
-    }
+  .oneRoomTop :first-child div {
+    margin-right: 20px;
+  }
 
-    .oneRoomBottom :first-child div {
-        margin-right: 20px;
-    }
+  .oneRoomBottom :first-child div {
+    margin-right: 20px;
+  }
 }
-
-

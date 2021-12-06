@@ -1,7 +1,3 @@
-export const Basket=()=>{
-    return(
-        <div>
-            BASKET
-        </div>
-    )
+export const Basket = () => {
+  return <div>BASKET</div>
 }

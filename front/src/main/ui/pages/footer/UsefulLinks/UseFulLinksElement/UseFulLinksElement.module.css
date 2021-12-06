@@ -1,14 +1,10 @@
-
-
-
-.link{
-    font-family: "Barlow Condensed",sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FFFFFF;
-    margin-bottom: 24px;
-    text-decoration: none;
+.link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  margin-bottom: 24px;
+  text-decoration: none;
 }
-

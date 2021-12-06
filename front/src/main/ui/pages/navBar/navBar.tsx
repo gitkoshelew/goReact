@@ -24,10 +24,7 @@ type NavBarPropsType = {
   isBurgerCollapse: boolean
 }
 
-
 export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsType) => {
-
-
   return (
     <div className={headerContainer}>
       <div className={headerNavBar}>
@@ -42,8 +39,10 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
           </div>
           <div>
             <div className={burgerMenu}>
-              <BurgerMenu setIsBurgerCollapse={setIsBurgerCollapse}
-                          isBurgerCollapse={isBurgerCollapse} />
+              <BurgerMenu
+                setIsBurgerCollapse={setIsBurgerCollapse}
+                isBurgerCollapse={isBurgerCollapse}
+              />
             </div>
             <div className={commonNavBar}>
               <div className={navLinksBlock}>

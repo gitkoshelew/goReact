@@ -1,15 +1,12 @@
-import s from './EmailField.module.css';
+import s from './EmailField.module.css'
 
-const { formWrapper } = s;
-
+const { formWrapper } = s
 
 export const EmailField = () => {
-    return (
-
-        <form className={formWrapper}>
-            <input type="text" placeholder="Enter your email" required/>
-                <button type="submit">Subscribe</button>
-        </form>
-
-)
+  return (
+    <form className={formWrapper}>
+      <input type="text" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  )
 }

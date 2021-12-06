@@ -1,36 +1,35 @@
 .scrollBlock {
-    align-items: center;
-    position: relative;
-    left: -660px;
-    top: 60px;
-    display: none;
+  align-items: center;
+  position: relative;
+  left: -660px;
+  top: 60px;
+  display: none;
 }
 
 .scrollBlock p {
-    transform: rotate(-90deg);
-    width: 41px;
-    height: 19px;
-    font-family: "Barlow Condensed", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color: #808080;
+  transform: rotate(-90deg);
+  width: 41px;
+  height: 19px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #808080;
 }
 
 @media (min-width: 700px) {
-    .scrollBlock {
-        display: flex;
-    }
+  .scrollBlock {
+    display: flex;
+  }
 }
 @media (min-width: 1250px) {
-    .scrollBlock {
-        left: -550px;
-    }
+  .scrollBlock {
+    left: -550px;
+  }
 }
 @media (min-width: 1350px) {
-    .scrollBlock {
-        left: -650px;
-    }
+  .scrollBlock {
+    left: -650px;
+  }
 }
-
