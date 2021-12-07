@@ -1,0 +1,93 @@
+#circle {
+    position: relative;
+    width: 30%;
+    padding-top: 29%;
+    border-radius: 100%; /* сделать "резиновый" круг */
+    background: url('../../../../assets/img/startPage/general.jpg') no-repeat;
+    background-size: contain;
+    font: 8vmin monospace; /* моноширный шрифт */
+    color: white;
+    margin: 6% auto;
+}
+
+#circle b {
+    position: absolute;
+    left: 50%; /* все буквы собрать в одну точку по середине */
+    width: 0; /* убрать отступ */
+}
+
+/* верхние 17 букв «Шпаргалка блоггера» */
+#circle b:nth-of-type(-n+17) {
+    bottom: 50%;
+    transform-origin: 0% 100%;
+    padding-bottom: 50%; /* от значения свойства зависит приближение текста к центру круга */
+}
+
+#circle b:nth-of-type(1) {
+    transform: rotate(294deg);
+}
+
+#circle b:nth-of-type(2) {
+    transform: rotate(301deg);
+}
+
+#circle b:nth-of-type(3) {
+    transform: rotate(309deg);
+}
+
+#circle b:nth-of-type(4) {
+    transform: rotate(316deg);
+}
+
+#circle b:nth-of-type(5) {
+    transform: rotate(326deg);
+}
+
+#circle b:nth-of-type(6) {
+    transform: rotate(333deg);
+}
+
+#circle b:nth-of-type(7) {
+    transform: rotate(340deg);
+}
+
+#circle b:nth-of-type(8) {
+    transform: rotate(347deg);
+}
+
+#circle b:nth-of-type(9) {
+    transform: rotate(358deg);
+}
+
+#circle b:nth-of-type(10) {
+    transform: rotate(5deg);
+}
+
+#circle b:nth-of-type(11) {
+    transform: rotate(16deg);
+}
+
+#circle b:nth-of-type(12) {
+    transform: rotate(23deg);
+}
+
+#circle b:nth-of-type(13) {
+    transform: rotate(30deg);
+}
+
+#circle b:nth-of-type(14) {
+    transform: rotate(40deg);
+}
+
+#circle b:nth-of-type(15) {
+    transform: rotate(47deg);
+}
+
+#circle b:nth-of-type(16) {
+    transform: rotate(54deg);
+}
+
+#circle b:nth-of-type(17) {
+    transform: rotate(61deg);
+}
+
