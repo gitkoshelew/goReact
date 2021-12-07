@@ -23,9 +23,3 @@ require (
 	golang.org/x/text v0.3.6 // indirect
 	gopkg.in/ini.v1 v1.63.2 // indirect
 )
-
-require (
-	github.com/julienschmidt/httprouter v1.3.0 // indirect
-	github.com/spf13/viper v1.9.0
-	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871
-)
