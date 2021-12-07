@@ -6,6 +6,11 @@
 *.dylib
 *.vscode
 
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
 # Test binary, built with `go test -c`
 *.test
 

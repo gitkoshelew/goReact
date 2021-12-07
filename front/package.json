@@ -31,7 +31,21 @@
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src",
-    "prettierPreccommit": "prettier --write"
+    "precommit": "lint-staged",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,html,md}": [
+      "prettier --write",
+      "npm run lint --max-warnings=0",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test",
+      "pre-push": "npm run lint && npm test"
+    }
   },
   "eslintConfig": {
     "extends": [
