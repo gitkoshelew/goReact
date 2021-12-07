@@ -14,6 +14,8 @@ function App() {
 
      */
 
+  const r = 120
+
   return (
     <div className={'app'}>
       <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
