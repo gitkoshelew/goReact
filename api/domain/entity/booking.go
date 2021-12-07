@@ -17,24 +17,24 @@ var (
 
 // Booking struct
 type Booking struct {
-	BookingID   int
-	Pet         *Pet
-	Seat        *HotelRoomSeat
-	Status      BookingStatus
-	StartDate   date.Date
-	EndDate     date.Date
-	Employee    Employee
-	ClientNotes string
+	BookingID   int           `json:"bookingId"`
+	Pet         Pet           `json:"pet"`
+	Seat        HotelRoomSeat `json:"seat"`
+	Status      BookingStatus `json:"status"`
+	StartDate   date.Date     `json:"start"`
+	EndDate     date.Date     `json:"end"`
+	Employee    Employee      `json:"employeeId"`
+	ClientNotes string        `json:"notes"`
 }
 
 // SetPet sets pet to booking
 func (b *Booking) SetPet(p Pet) {
-	b.Pet = &p
+	b.Pet = p
 }
 
 // SetSeat sets Seat to booking
 func (b *Booking) SetSeat(h HotelRoomSeat) {
-	b.Seat = &h
+	b.Seat = h
 }
 
 // SetStatus sets status to booking
@@ -60,4 +60,25 @@ func (b *Booking) SetEmployee(e Employee) {
 // SetClientNotes sets Client Notes to booking
 func (b *Booking) SetClientNotes(s string) {
 	b.ClientNotes = s
+}
+
+// GetBookingByID returns Booking by Id from storage
+func GetBookingByID(id int) Booking {
+	var booking Booking
+	for _, bk := range GetBookings() {
+		if id == bk.BookingID {
+			booking = bk
+			break
+		}
+	}
+	return booking
+}
+
+// GetBookingsByID returns []Bookings by []ids from storage
+func GetBookingsByID(ids []int) []Booking {
+	var bookings []Booking
+	for _, id := range ids {
+		bookings = append(bookings, GetBookingByID(id))
+	}
+	return bookings
 }

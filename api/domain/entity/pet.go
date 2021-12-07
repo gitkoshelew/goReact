@@ -2,12 +2,12 @@ package entity
 
 // Pet struct
 type Pet struct {
-	PetID     int
-	Name      string
-	Type      PetType
-	OwnerID   int
-	Weight    float32
-	Diesieses string
+	PetID     int     `json:"petId"`
+	Name      string  `json:"name"`
+	Type      PetType `json:"petType"`
+	OwnerID   int     `json:"ownerId"`
+	Weight    float32 `json:"weight"`
+	Diesieses string  `json:"diesieses"`
 }
 
 // SetName sets Pets Name
@@ -33,4 +33,24 @@ func (p *Pet) SetDiesieses(s string) {
 // SetOwnerID sets Pets Owner
 func (p *Pet) SetOwnerID(i int) {
 	p.OwnerID = i
+}
+
+// GetPetByID returns Pet by id from storage
+func GetPetByID(id int) Pet {
+	var pet Pet
+	for _, p := range GetPets() {
+		if id == p.PetID {
+			pet = p
+		}
+	}
+	return pet
+}
+
+// GetPetsByID returns []Pets by []ids from storage
+func GetPetsByID(ids []int) []Pet {
+	var pets []Pet
+	for _, id := range ids {
+		pets = append(pets, GetPetByID(id))
+	}
+	return pets
 }
