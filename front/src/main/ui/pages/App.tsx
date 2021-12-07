@@ -14,7 +14,7 @@ function App() {
 
      */
 
-  const c = 10
+  const o = 20
 
   return (
     <div className={'app'}>
