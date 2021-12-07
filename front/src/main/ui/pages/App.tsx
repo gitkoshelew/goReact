@@ -14,7 +14,7 @@ function App() {
 
      */
 
-  const r = 120
+  const z = 120
 
   return (
     <div className={'app'}>
