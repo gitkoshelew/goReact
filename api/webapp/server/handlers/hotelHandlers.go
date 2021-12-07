@@ -2,55 +2,118 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"goReact/domain/entity"
-	"goReact/webapp"
 	"net/http"
 	"strconv"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-// HandleHotels opens a hotel page, URL: "/hotels". Shows all hotels, can search one by id
+type hotelRequest struct {
+	HotelID  int    `json:"hotelId"`
+	Name     string `json:"nameId"`
+	Address  string `json:"addressId"`
+	Rooms    []int  `json:"roomsIds"`
+	Bookings []int  `json:"bookingsIds"`
+}
+
+// HandleHotels  GET /api/hotels - returns all hotels(JSON)
+//	   	  	     POST /api/hotel - add hotel(JSON)
+//			     PUT /api/hotel - update hotel(JSON)
 func HandleHotels() http.HandlerFunc {
 
-	hotels := webapp.GetHotels()
+	hotels := entity.GetHotels()
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(hotels)
+		switch r.Method {
+		// GET
+		case http.MethodGet:
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(hotels)
+		// POST
+		case http.MethodPost:
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+
+			req := &hotelRequest{}
+			if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+				http.Error(w, "Bad request", http.StatusBadRequest)
+			}
+
+			h := entity.Hotel{
+				HotelID:  req.HotelID,
+				Name:     req.Name,
+				Address:  req.Address,
+				Rooms:    entity.GetRoomsByID(req.Rooms),
+				Bookings: entity.GetBookingsByID(req.Bookings),
+			}
+			hotels = append(hotels, h)
+			json.NewEncoder(w).Encode(hotels)
+		// PUT
+		case http.MethodPut:
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+
+			req := &hotelRequest{}
+			if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+				http.Error(w, "Bad request", http.StatusBadRequest)
+			}
+
+			for index, h := range hotels {
+				if h.HotelID == req.HotelID {
+					hotels[index].Name = req.Name
+					hotels[index].Address = req.Address
+					hotels[index].Rooms = entity.GetRoomsByID(req.Rooms)
+					hotels[index].Bookings = entity.GetBookingsByID(req.Bookings)
+					break
+				}
+			}
+			json.NewEncoder(w).Encode(hotels)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
 	}
 }
 
-// HandleHotelSearch shows a hotel by id, URL"/hotel?id="
-func HandleHotelSearch() http.HandlerFunc {
+// HandleHotel GET /api/hotel/:id - returns hotel by ID (JSON)
+// 		 	   DELETE /api/hotel/:id - delete hotel by ID(JSON)
+func HandleHotel() httprouter.Handle {
 
-	hotels := webapp.GetHotels()
+	hotels := entity.GetHotels()
 
-	return func(w http.ResponseWriter, r *http.Request) {
-		urlQuery := r.URL.Query()
-		id, err := strconv.Atoi(urlQuery.Get("id"))
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-		}
-
-		var hotel entity.Hotel
-		hotelFound := false
-
-		for _, a := range hotels {
-			if a.HotelID == id {
-				hotel = a
-				hotelFound = true
-				break
-			}
-		}
-
-		if hotelFound {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		switch r.Method {
+		// GET
+		case http.MethodGet:
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(hotel)
-		} else {
+			id, err := strconv.Atoi(ps.ByName("id"))
+
+			if err != nil {
+				http.Error(w, "Bad request", http.StatusBadRequest)
+			}
+			json.NewEncoder(w).Encode(entity.GetHotelByID(id))
+		// DELETE
+		case http.MethodDelete:
 			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(http.StatusNotFound)
+			w.WriteHeader(http.StatusOK)
+			id, err := strconv.Atoi(ps.ByName("id"))
+
+			if err != nil {
+				http.Error(w, "Bad request", http.StatusBadRequest)
+			}
+
+			for index, h := range hotels {
+				if h.HotelID == id { // delete object imitation =)
+					hotels[index].Name = "DELETE"
+					json.NewEncoder(w).Encode(hotels)
+					return
+				}
+			}
+			http.Error(w, "Cant find Hotel", http.StatusBadRequest)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
 	}
 }

@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
     
@@ -9,7 +9,7 @@ services:
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
             - POSTGRES_DB=${POSTGRES_DB}
         ports: 
-            - "8081:5432"
+            - "${POSTGRES_PORT}:5432"
         restart: always
         volumes:
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql 
@@ -23,7 +23,7 @@ services:
             - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
             - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
         ports:
-            - '5050:80'
+            - "${PGADMIN_PORT}:80"
         restart: always
         volumes: 
             - pgadmin:/root/.pgadmin
@@ -33,12 +33,11 @@ services:
     rabbitmq:
         image: rabbitmq:3-management
         ports:
-            - '4369:4369'
-            - '5551:5551'
-            - '5552:5552'
-            - '5672:5672'
-            - '25672:25672'
-            - '15672:15672'
+            - "${RABBIT_DEMON_PORT}:4369"
+            - "${RABBIT_TCP_PORT}:5672"
+            - "${RABBIT_SSL_PORT}:15671"
+            - "${RABBIT_HTTP_PORT_V3}:15672"
+            - "${RABBIT_TOOL_PORT}:25672"
         environment:
             - RABBITMQ_SECURE_PASSWORD=yes
             - RABBITMQ_PASSWORD=my_password

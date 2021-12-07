@@ -8,7 +8,7 @@ import (
 type Account struct {
 	AccountID int    `json:"accountId"`
 	Login     string `json:"login"`
-	Password  string `json:"password"`
+	Password  string `json:"-"`
 }
 
 // NewAccount creates Account with encrypted password
@@ -36,4 +36,16 @@ func encryptPassword(s string) (string, error) {
 func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
+}
+
+// GetAccountByID returns Account by Id from storage
+func GetAccountByID(id int) Account {
+	var account Account
+	for _, acc := range GetAccounts() {
+		if id == acc.AccountID {
+			account = acc
+			break
+		}
+	}
+	return account
 }
