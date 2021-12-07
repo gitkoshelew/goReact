@@ -1,0 +1,32 @@
+.TextBlockTitle {
+    display: flex;
+    align-items: center;
+    margin: 35px 0 10px 15px;
+}
+
+.mainText {
+    width: 90%;
+    height: 90px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 33px;
+    text-transform: uppercase;
+    color: #000000;
+
+}
+
+
+.linkText {
+    white-space: nowrap;
+    display: none;
+    align-items: center;
+    font-family: "Barlow Condensed", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #0F97AA;
+    margin-right: 10px;
+}
