@@ -11,7 +11,8 @@ services:
         ports: 
             - "8081:5432"
         restart: always
-        volumes: 
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql 
             - database-data:/var/lib/postgresql/data/
         networks:
             - app_net
