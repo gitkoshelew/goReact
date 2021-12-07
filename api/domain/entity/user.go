@@ -12,7 +12,7 @@ type User struct {
 	Surname     string    `json:"sName"`
 	MiddleName  string    `json:"mName"`
 	DateOfBirth date.Date `json:"birthDate"`
-	Address     string    `json:"addresd"`
+	Address     string    `json:"address"`
 	Phone       string    `json:"phone"`
 	Email       string    `json:"email"`
 }
