@@ -31,7 +31,8 @@
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,json,css,scss,html,md}": [
@@ -42,7 +43,7 @@
   },
   "husky": {
     "hooks": {
-      "precommit": "npm run lint && npm test",
+      "pre-commit": "npm run lint && npm test",
       "pre-push": "npm run lint && npm test"
     }
   },
@@ -91,7 +92,7 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-webpack-plugin": "^3.1.1",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",
     "prettier-eslint": "^13.0.0",
