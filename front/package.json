@@ -28,19 +28,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint --debug src/",
-    "format": "prettier --check src/main/**/*.{ts,tsx,scss,css,json}",
-    "isready": "npm run format && npm run lint"
+    "lint": "eslint src"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "precommit": "npm run lint && npm test",
+      "pre-push": "npm run lint && npm test"
     }
-  },
-  "lint-staged": {
-    "*.(ts|tsx|css|scss)": ["npm run isready --max-warnings=0", "git add"]
   },
   "eslintConfig": {
     "extends": [
@@ -73,6 +69,7 @@
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint-config-airbnb": "19.0.2",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "^8.3.0",
