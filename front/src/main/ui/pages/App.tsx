@@ -14,9 +14,11 @@ function App() {
 
      */
 
+  const a = 10
+
   return (
     <div className={'app'}>
-      <NavBar setIsBurgerCollapse={setIsBurgerCollapse}                            isBurgerCollapse={isBurgerCollapse} />
+      <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
       {!isBurgerCollapse && (
         <div>
           <RoutesInfo />
