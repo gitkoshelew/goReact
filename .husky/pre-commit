@@ -3,5 +3,7 @@
 
 
 cd ./front
-npm precommit
+npm run prettierPreccommit
+npm run lint
+
 
