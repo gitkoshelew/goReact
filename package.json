@@ -4,6 +4,7 @@
   "description": "golang react postgres rabbitmq docker project",
   "main": "index.js",
   "scripts": {
+    "test": "npm-run-all frontend",
     "frontend": "cd front && lint-staged",
     "frontend:admin": "cd front-admin && yarn lint"
   },

@@ -13,9 +13,9 @@ function App() {
                   * isBurgerCollapse created for burger menu correct work
 
      */
+
   const x = 134
   const c = 150
-
   return (
     <div className={'app'}>
       <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
