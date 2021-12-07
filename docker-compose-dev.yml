@@ -5,25 +5,29 @@ services:
     postgresql_database:
         image: postgres:latest
         environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=changeme
-            - POSTGRES_DB=goreact
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
         ports: 
             - "8081:5432"
         restart: always
         volumes: 
             - database-data:/var/lib/postgresql/data/
+        networks:
+            - app_net
 
     pgadmin:
         image: dpage/pgadmin4
         environment: 
-            - PGADMIN_DEFAULT_EMAIL=pgadmi@pgadmin.org
-            - PGADMIN_DEFAULT_PASSWORD=admin1234
+            - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+            - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
         ports:
             - '5050:80'
         restart: always
         volumes: 
             - pgadmin:/root/.pgadmin
+        networks:
+            - app_net
    
     rabbitmq:
         image: rabbitmq:3-management
@@ -38,7 +42,12 @@ services:
             - RABBITMQ_SECURE_PASSWORD=yes
             - RABBITMQ_PASSWORD=my_password
         volumes:
-             - rabbitmq_data:/bitnami/rabbitmq/mnesia
+            - rabbitmq_data:/bitnami/rabbitmq/mnesia
+        networks:
+            - app_net
+networks:
+    app_net:
+        driver: bridge
 volumes:
     database-data:
     pgadmin:

@@ -23,4 +23,4 @@ RUN chmod +x wait-for-postgres.sh
 
 RUN go build -o goreact ./main.go
 
-CMD [ "/goreact" ]
+CMD [ "./goreact" ]
