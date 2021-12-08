@@ -13,6 +13,7 @@ function App() {
                   * isBurgerCollapse created for burger menu correct work
 
      */
+const c = 20;
 
   return (
     <div className={'app'}>
