@@ -2,9 +2,9 @@ server:
   host: 127.0.0.1
   port: 8080
   log_level: debug
-pgConnection:
+postgresql_database:
   host: postgresql_database
   port: 5432
-  username: goreact_app
+  username: postgres
   password: changeme
   dbName: goreact
