@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/gitkoshelew/goReact#readme",
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
     "husky": "^7.0.0"
   },
   "dependencies": {

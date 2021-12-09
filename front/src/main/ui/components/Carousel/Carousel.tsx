@@ -1,5 +1,4 @@
 import React from 'react'
-// @ts-ignore
 import Slider from 'react-slick'
 import s from './Carousel.module.css'
 import { nextArrow, prevArrow, sliderDot } from '../../svgWrapper/HomeSvgWrapper'

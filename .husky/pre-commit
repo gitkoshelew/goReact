@@ -3,7 +3,6 @@
 
 
 cd ./front
-npm run prettierPreccommit
 npm run lint
 
 
