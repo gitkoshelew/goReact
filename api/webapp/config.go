@@ -2,38 +2,51 @@ package webapp
 
 import (
 	"fmt"
-	"log"
 	"os"
-
-	yaml "gopkg.in/yaml.v2"
+	"strconv"
 )
 
 // Config ...
 type Config struct {
 	Server struct {
-		Host     string `yaml:"host"`
-		Port     int    `yaml:"port"`
-		LogLevel string `yaml:"log_level"`
-		Store    string `yaml:"dbName"`
-	} `yaml:"server"`
-	PgConnection struct {
-		Host     string `yaml:"host"`
-		Port     int    `yaml:"port"`
-		Username string `yaml:"username"`
-		Password string `yaml:"password"`
-		DbName   string `yaml:"dbName"`
-	} `yaml:"pgConnection"`
+		Host     string
+		Port     int
+		LogLevel string
+		Store    string
+	}
+	DbConnection struct {
+		Host     string
+		Port     int
+		Username string
+		Password string
+		DbName   string
+	}
+}
+
+// NewConfig ..
+func (c *Config) NewConfig() {
+	c.Server.Host = os.Getenv("SERVER_HOST")
+	c.Server.Port, _ = strconv.Atoi(os.Getenv("SERVER_PORT"))
+	c.Server.LogLevel = os.Getenv("SEVER_LOG_LEVEL")
+	c.Server.Store = os.Getenv("SERVER_STORE")
+
+	c.DbConnection.Host = os.Getenv("POSTGRES_HOST")
+	c.DbConnection.DbName = os.Getenv("POSTGRES_DB")
+	c.DbConnection.Username = os.Getenv("POSTGRES_USER")
+	c.DbConnection.Password = os.Getenv("POSTGRES_PASSWORD")
+	c.DbConnection.Port, _ = strconv.Atoi(os.Getenv("POSTGRES_PORT"))
+
 }
 
 // PgDataSource ...
 func (c *Config) PgDataSource() string {
 	return fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		c.PgConnection.Host,
-		c.PgConnection.Port,
-		c.PgConnection.Username,
-		c.PgConnection.Password,
-		c.PgConnection.DbName,
+		c.DbConnection.Host,
+		c.DbConnection.Port,
+		c.DbConnection.Username,
+		c.DbConnection.Password,
+		c.DbConnection.DbName,
 	)
 }
 
@@ -44,25 +57,4 @@ func (c *Config) ServerAddress() string {
 
 func (c *Config) String() string {
 	return fmt.Sprintf("Server Address: %s\nPG Data Source: %#v", c.ServerAddress(), c.PgDataSource())
-}
-
-// ReadFromFile ...
-func (c *Config) ReadFromFile(fileName string) {
-	file, err := os.Open(fileName)
-	if err != nil {
-		log.Fatalf("Could not open config file due to error: %v", err)
-	}
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-			log.Fatalf("Could not close config file due to error: %v", err)
-		}
-	}(file)
-
-	d := yaml.NewDecoder(file)
-	d.SetStrict(true)
-	err = d.Decode(&c)
-	if err != nil {
-		log.Fatalf("Could not decode config due to error: %v", err)
-	}
 }

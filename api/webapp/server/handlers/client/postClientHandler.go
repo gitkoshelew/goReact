@@ -20,13 +20,14 @@ func PostClientsHandler() http.HandlerFunc {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, c := range clientsDto {
-			if c.ClientID == req.ClientID {
-				clientsDto[index].PetsID = req.PetsIDs
-				clientsDto[index].BookingsID = req.BookingsIDs
-				break
-			}
+		client := dto.ClientDto{
+			UserID:     req.UserID,
+			ClientID:   req.ClientID,
+			PetsID:     req.PetsIDs,
+			BookingsID: req.BookingsIDs,
 		}
+
+		clientsDto = append(clientsDto, client)
 
 		json.NewEncoder(w).Encode(clientsDto)
 	}
