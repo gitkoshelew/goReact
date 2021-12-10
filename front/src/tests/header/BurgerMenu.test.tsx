@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { BurgerMenu } from '../../main/ui/pages/navBar/burgerMenu/BurgerMenu'
 
-describe('navBar', () => {
+describe('BurgerMenu', () => {
   it('BurgerMenu should show only 8 links whithout burgerMenu', () => {
     render(
       <BrowserRouter>

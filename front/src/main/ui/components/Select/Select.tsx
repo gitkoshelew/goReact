@@ -8,9 +8,9 @@ export const SelectUI = () => {
   return (
     <div className={selectContainer}>
       <select>
-        <option>EN</option>
-        <option>RU</option>
-        <option>FR</option>
+        <option value={'1'}>EN</option>
+        <option value={'2'}>RU</option>
+        <option value={'3'}>FR</option>
       </select>
     </div>
   )
