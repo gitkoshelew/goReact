@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm-run-all frontend",
     "frontend": "cd front && lint-staged",
-    "frontend:admin": "cd front-admin && yarn lint"
+    "frontend:admin": "cd front-admin && yarn lint",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {

@@ -52,9 +52,15 @@
   .oneElement {
     margin: -30px 20px 35px 0;
   }
+  .oneElementActive {
+    margin: -30px 20px 35px 0;
+  }
 }
 @media (min-width: 1250px) {
   .oneElement {
+    margin: 0 20px 25px 0;
+  }
+  .oneElementActive {
     margin: 0 20px 25px 0;
   }
 }
