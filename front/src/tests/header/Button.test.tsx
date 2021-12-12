@@ -9,7 +9,6 @@ describe('Button', () => {
         <Button type={'login'} />
       </BrowserRouter>
     )
-    screen.debug()
     expect(screen.getByText(/login/i)).toBeInTheDocument()
   })
   it('if transferred /buy/ type should contain img elem with alt=buyContainer', () => {
@@ -18,7 +17,7 @@ describe('Button', () => {
         <Button type={'buy'} />
       </BrowserRouter>
     )
-    screen.debug()
+
     expect(screen.getByRole('img')).toBeInTheDocument()
     expect(screen.getByAltText('buyContainer')).toBeInTheDocument()
   })

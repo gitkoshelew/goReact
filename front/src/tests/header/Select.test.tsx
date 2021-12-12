@@ -4,7 +4,7 @@ import { SelectUI } from '../../main/ui/components/Select/Select'
 describe('SelectUI', () => {
   it('Select should contain 3 option', () => {
     render(<SelectUI />)
-    screen.debug()
+
     expect(screen.queryAllByRole('option')).toHaveLength(3)
   })
 })

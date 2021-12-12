@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { Footer } from '../../main/ui/pages/footer/footer'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -8,7 +8,6 @@ test('footer should contain useFullLinks && stayInTouch block', () => {
       <Footer />
     </BrowserRouter>
   )
-  screen.debug()
   //is useFullLinks block exist
   const useFullLinksBlockCheck = getByText(/USEFUL LINKS/i)
   const useFullLinksElem = getByText(/rooms/i)
