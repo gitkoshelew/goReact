@@ -1,49 +1,66 @@
-.oneElement{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 200px;
-    background: #FFFFFF;
-    box-shadow: 10px 30px 40px rgba(0, 0, 0, 0.05);
-    border-radius: 6px;
-    padding: 10px;
-    margin: -30px auto 35px auto;
+.oneElement {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  background: #ffffff;
+  box-shadow: 10px 30px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+  margin: -30px auto 35px auto;
 }
 
-.oneElementActive{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 200px;
-    background: #C4C4C4;
-    box-shadow: 10px 30px 40px rgba(0, 0, 0, 0.05);
-    border-radius: 6px;
-    padding: 10px;
-    margin: -30px auto 35px auto;
+.oneElementActive {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  background: #c4c4c4;
+  box-shadow: 10px 30px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+  margin: -30px auto 35px auto;
 }
 
-.textBlock{
-    display: flex;
-    flex-direction: column;
+.textBlock {
+  display: flex;
+  flex-direction: column;
 }
 
-.mainText{
-    font-family: "Barlow Condensed",sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 15px;
-    text-align: center;
-    text-transform: uppercase;
-    color: #000000;
+.mainText {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
 }
 
-.secondaryText{
-    font-family: "Barlow Condensed",sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 19px;
-    text-align: center;
-    color: #808080;
+.secondaryText {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  color: #808080;
+}
+
+@media (min-width: 767px) {
+  .oneElement {
+    margin: -30px 20px 35px 0;
+  }
+  .oneElementActive {
+    margin: -30px 20px 35px 0;
+  }
+}
+@media (min-width: 1250px) {
+  .oneElement {
+    margin: 0 20px 25px 0;
+  }
+  .oneElementActive {
+    margin: 0 20px 25px 0;
+  }
 }

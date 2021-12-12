@@ -1,0 +1,34 @@
+.subscribeField {
+  flex-direction: column;
+  margin-left: 155px;
+  position: relative;
+  display: none;
+}
+
+.linksTitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #ffffff;
+  margin: 35px 0 58px 0;
+}
+
+.subscribeField:after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.27);
+  border-radius: 2px;
+  position: absolute;
+  left: 0px;
+  top: 76px;
+}
+
+@media (min-width: 1250px) {
+  .subscribeField {
+    display: flex;
+    margin-left: 95px;
+  }
+}

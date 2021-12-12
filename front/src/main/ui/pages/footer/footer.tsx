@@ -1,18 +1,22 @@
-import s from './footer.module.css';
-import {ContactInfo} from './ContactInfo/ContactInfo';
-import {UsefulLinks} from './UsefulLinks/UsefulLinks';
+import s from './footer.module.css'
+import { ContactInfo } from './ContactInfo/ContactInfo'
+import { UsefulLinks } from './UsefulLinks/UsefulLinks'
+import { SubscribeFieldBlock } from './SubscribeFieldBlock/SubscribeFieldBlock'
+import { AfterPanel } from './SubscribeFieldBlock/AfterPanel/AfterPanel'
 
-const {footerTitle, contactInfo, usefulLinks, subscribeFieldsBlock} = s;
-
+const { footerTitle, footerBlock } = s
 
 export const Footer = () => {
-    return (
-        <div className={footerTitle}>
-            <div>
-                <ContactInfo/>
-            </div>
-            <UsefulLinks/>
-            <div className={subscribeFieldsBlock}></div>
-        </div>
-    )
+  return (
+    <div className={footerBlock}>
+      <div className={footerTitle}>
+        <ContactInfo />
+        <UsefulLinks />
+        <SubscribeFieldBlock />
+      </div>
+      <div>
+        <AfterPanel />
+      </div>
+    </div>
+  )
 }

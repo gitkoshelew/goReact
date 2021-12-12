@@ -1,14 +1,14 @@
 import React from 'react'
-import s from './ScrollBlock.module.css';
-import arrow from '../../../../../../assets/img/home/secondPage/Arrow.svg';
+import s from './ScrollBlock.module.css'
+import arrow from '../../../../../../assets/img/home/secondPage/Arrow.svg'
 
-const {scrollBlock} = s;
+const { scrollBlock } = s
 
 export const ScrollBlock = () => {
-    return (
-        <div className={scrollBlock}>
-            <p>Scroll</p>
-            <img src={arrow} alt="arrowScroll"/>
-        </div>
-    )
+  return (
+    <div className={scrollBlock}>
+      <p>Scroll</p>
+      <img src={arrow} alt="arrowScroll" />
+    </div>
+  )
 }

@@ -1,20 +1,17 @@
-import React from 'react';
+import React from 'react'
 
+import s from './Select.module.css'
 
-import s from './Select.module.css';
-
-const {selectContainer} = s
+const { selectContainer } = s
 
 export const SelectUI = () => {
-
-
-    return (
-        <div className={selectContainer}>
-            <select>
-                <option>EN</option>
-                <option>RU</option>
-                <option>FR</option>
-            </select>
-        </div>
-    );
+  return (
+    <div className={selectContainer}>
+      <select>
+        <option value={'1'}>EN</option>
+        <option value={'2'}>RU</option>
+        <option value={'3'}>FR</option>
+      </select>
+    </div>
+  )
 }

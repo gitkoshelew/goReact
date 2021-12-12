@@ -1,34 +1,59 @@
-.usefulLinksBlock{
+.usefulLinksBlock {
+  flex-direction: column;
+  position: relative;
+  display: none;
+}
+
+.linksList {
+  display: flex;
+}
+
+.groupOfLinks {
+  margin-right: 120px;
+}
+
+.linksTitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #ffffff;
+  margin: 35px 0 58px 0;
+}
+
+.usefulLinksBlock :after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 2px;
+  position: absolute;
+  left: 0px;
+  top: 76px;
+}
+
+@media (min-width: 767px) {
+  .usefulLinksBlock {
     display: flex;
-    flex-direction: column;
-    position: relative;
-}
-.linksList{
-    display: flex;
+    margin-left: 50px;
+  }
 }
 
-.groupOfLinks{
-    margin-right: 120px;
+@media (min-width: 900px) {
+  .usefulLinksBlock {
+    margin-left: 120px;
+  }
 }
 
-.linksTitle{
-    font-family: "Barlow Condensed",sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
-    color: #FFFFFF;
-    margin: 35px 0 58px 0;
-
+@media (min-width: 1024px) {
+  .usefulLinksBlock {
+    margin-left: 185px;
+  }
 }
 
-.usefulLinksBlock :after{
-    content: "";
-    width: 60px;
-    height:4px ;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 2px;
-    position: absolute;
-    left: 0px;
-    top: 76px;
+@media (min-width: 1250px) {
+  .usefulLinksBlock {
+    margin-left: 85px;
+  }
 }

@@ -1,14 +1,12 @@
 import React from 'react'
-import s from './CeoMessImg.module.css';
+import s from './CeoMessImg.module.css'
 
-
-const {ceoMessImg} = s;
+const { ceoMessImg } = s
 
 export const CeoMessImg = () => {
-    return (
-        <div className={ceoMessImg}>
-            <p>550x400</p>
-        </div>
-
-    )
+  return (
+    <div className={ceoMessImg}>
+      <p>550x400</p>
+    </div>
+  )
 }

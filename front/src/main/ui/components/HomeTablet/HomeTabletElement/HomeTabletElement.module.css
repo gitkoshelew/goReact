@@ -1,109 +1,127 @@
 .tabletComponent {
-    width: 222px;
-    position: relative;
-    z-index: 5;
-    top: -10px;
-    left: 30px;
+  width: 222px;
+  position: relative;
+  z-index: 5;
+  top: -10px;
+  left: 30px;
 }
-
 
 .tabletComponentBody :after {
-    content: "";
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-bottom: 1px solid #DCDBDB;
-    transform: rotate(90deg);
-    display: block;
-    clear: both;
-    left: 179px;
-    top: 4px;
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-bottom: 1px solid #dcdbdb;
+  transform: rotate(90deg);
+  display: block;
+  clear: both;
+  left: 179px;
+  top: 4px;
 }
 
-
 .tabletComponentTitle {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .tabletComponentText {
-    width: 67px;
-    height: 22px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #808080;
-    white-space: nowrap;
-    margin-left: 11px;
+  width: 67px;
+  height: 22px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #808080;
+  white-space: nowrap;
+  margin-left: 11px;
 }
 
-
 ::-webkit-calendar-picker-indicator {
-    -webkit-appearance: none;
-    background-size: cover;
-    background: url('../../../../../assets/img/home/arrow.svg') no-repeat center;
+  -webkit-appearance: none;
+  background-size: cover;
+  background: url('../../../../../assets/img/home/arrow.svg') no-repeat center;
 }
 
 .tabletComponentBody input::-webkit-clear-button {
-    -webkit-appearance: none;
-    display: none;
+  -webkit-appearance: none;
+  display: none;
 }
 
 .tabletComponentBody input {
-    outline: none;
-    border: none;
-    width: 160px;
-    color: #063C43;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-
+  outline: none;
+  border: none;
+  width: 160px;
+  color: #063c43;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .tabletComponentBody select {
-    outline: none;
-    border: none;
-    width: 160px;
-    color: #063C43;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    -webkit-appearance: none;
-    background-size: cover;
-    background: url('../../../../../assets/img/home/arrow.svg') no-repeat center;
-    background-position-x: 105px;
+  outline: none;
+  border: none;
+  width: 160px;
+  color: #063c43;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  -webkit-appearance: none;
+  background-size: cover;
+  background: url('../../../../../assets/img/home/arrow.svg') no-repeat center;
+  background-position-x: 105px;
 }
 
 .tabletComponentBodyBtn {
-    position: absolute;
-    width: 276px;
-    height: 135px;
-    background: #063C43;
-    border-radius: 0 20px 0 0;
-    left: 653px;
-    top: -1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  width: 276px;
+  height: 135px;
+  background: #063c43;
+  border-radius: 0 20px 0 0;
+  left: 653px;
+  top: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
 .tabletComponentBodyBtn p {
-    width: 96px;
-    height: 48px;
-    font-family: "Barlow Condensed", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
+  width: 96px;
+  height: 48px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+}
+
+@media (min-width: 1144px) {
+  .tabletComponentBodyBtn {
+    left: 550px;
+  }
+
+  .tabletComponent {
+    width: 200px;
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .tabletComponentBodyBtn {
+    left: 634px;
+  }
+
+  .tabletComponent {
+    width: 222px;
+    padding: 0;
     text-align: center;
-    color: #FFFFFF;
+  }
 }

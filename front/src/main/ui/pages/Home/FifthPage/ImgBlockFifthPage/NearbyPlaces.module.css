@@ -1,0 +1,16 @@
+@media (min-width: 1144px) {
+  .nearbyPlaces {
+    display: flex;
+    justify-content: center;
+  }
+  .secondaryNearby {
+    margin-left: 10.5vw;
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .secondaryNearby {
+    margin-left: 3vw;
+  }
+}
