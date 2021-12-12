@@ -1,8 +1,8 @@
 package employee
 
 import (
-	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,7 +11,7 @@ import (
 
 // DeleteEmployeeHandle deletes Employee by ID
 func DeleteEmployeeHandle() httprouter.Handle {
-	employeesDto := dto.GetEmployeesDto()
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,15 +22,12 @@ func DeleteEmployeeHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, e := range employeesDto {
-			if e.EmployeeID == id { // delete object imitation =)
-				employeesDto[index].Position = "DELETE"
-				employeesDto[index].Role = "DELETE"
-				json.NewEncoder(w).Encode(employeesDto)
-				return
-			}
+		result, err := db.Exec("DELETE from EMPLOYEE WHERE id = $1", id)
+
+		if err != nil {
+			panic(err)
 		}
 
-		http.Error(w, "Cant find Employee", http.StatusBadRequest)
+		log.Print(result.RowsAffected())
 	}
 }

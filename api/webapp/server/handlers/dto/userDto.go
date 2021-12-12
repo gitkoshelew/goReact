@@ -1,6 +1,8 @@
 package dto
 
-import "goReact/pkg/date"
+import (
+	"time"
+)
 
 // UserDto ...
 type UserDto struct {
@@ -9,7 +11,7 @@ type UserDto struct {
 	Name        string    `json:"name"`
 	Surname     string    `json:"sName"`
 	MiddleName  string    `json:"mName"`
-	DateOfBirth date.Date `json:"birthDate"`
+	DateOfBirth time.Time `json:"birthDate"`
 	Address     string    `json:"address"`
 	Phone       string    `json:"phone"`
 	Email       string    `json:"email"`

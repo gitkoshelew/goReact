@@ -2,8 +2,8 @@ package room
 
 import (
 	"encoding/json"
-	"goReact/domain/entity"
 	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
 
@@ -12,6 +12,7 @@ import (
 
 // GetRoomHandle returns Room by ID
 func GetRoomHandle() httprouter.Handle {
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -21,6 +22,19 @@ func GetRoomHandle() httprouter.Handle {
 		if err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
-		json.NewEncoder(w).Encode(dto.RoomToDto(entity.GetRoomByID(id)))
+
+		row := db.QueryRow("SELECT * FROM ROOM WHERE id = $1", id)
+
+		room := dto.RoomDto{}
+		err = row.Scan(
+			&room.RoomID,
+			&room.RoomNumber,
+			&room.PetType,
+			&room.HotelID)
+		if err != nil {
+			panic(err)
+		}
+
+		json.NewEncoder(w).Encode(room)
 	}
 }

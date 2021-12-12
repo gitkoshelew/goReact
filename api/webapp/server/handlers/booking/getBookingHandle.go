@@ -2,8 +2,8 @@ package booking
 
 import (
 	"encoding/json"
-	"goReact/domain/entity"
 	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
 
@@ -12,6 +12,8 @@ import (
 
 // GetBookingHandle returns Booking by ID
 func GetBookingHandle() httprouter.Handle {
+	db := utils.HandlerDbConnection()
+
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
@@ -21,6 +23,22 @@ func GetBookingHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		json.NewEncoder(w).Encode(dto.BookingToDto(entity.GetBookingByID(id)))
+		bookingRow := db.QueryRow("SELECT * FROM BOOKING WHERE id = $1", id)
+
+		booking := dto.BookingDto{}
+		err = bookingRow.Scan(
+			&booking.BookingID,
+			&booking.SeatID,
+			&booking.PetID,
+			&booking.EmployeeID,
+			&booking.Status,
+			&booking.StartDate,
+			&booking.EndDate,
+			&booking.ClientNotes)
+		if err != nil {
+			panic(err)
+		}
+
+		json.NewEncoder(w).Encode(booking)
 	}
 }

@@ -1,18 +1,21 @@
 package dto
 
-import "goReact/domain/entity"
+import (
+	"goReact/domain/store"
+)
 
 // AccountToDto makes a DTO from Account object
-func AccountToDto(a entity.Account) AccountDto {
+func AccountToDto(a store.Account) AccountDto {
 	return AccountDto{
 		AccountID: a.AccountID,
 		Login:     a.Login,
 		Password:  a.Password,
 	}
+
 }
 
 // UserToDto makes DTO from user object
-func UserToDto(u entity.User) UserDto {
+func UserToDto(u store.User) UserDto {
 	return UserDto{
 		AccountID:   u.AccountID,
 		UserID:      u.UserID,
@@ -27,97 +30,72 @@ func UserToDto(u entity.User) UserDto {
 }
 
 // EmployeeToDto makes DTO from Employee object
-func EmployeeToDto(e entity.Employee) EmployeeDto {
+func EmployeeToDto(e store.Employee) EmployeeDto {
 	return EmployeeDto{
-		HotelID:    e.Hotel.HotelID,
 		EmployeeID: e.EmployeeID,
+		UserID:     e.UserID,
+		HotelID:    e.Hotel.HotelID,
 		Position:   e.Position,
 		Role:       e.Role,
 	}
 }
 
 // ClientToDto makes DTO from Client object
-func ClientToDto(c entity.Client) ClientDto {
-	var petsIds []int
-	for _, v := range c.Pets {
-		petsIds = append(petsIds, v.PetID)
-	}
-	var bookingIds []int
-	for _, v := range c.Bookings {
-		bookingIds = append(bookingIds, v.BookingID)
-	}
+func ClientToDto(c store.Client) ClientDto {
 	return ClientDto{
-		UserID:     c.UserID,
-		ClientID:   c.ClientID,
-		PetsID:     petsIds,
-		BookingsID: bookingIds,
-	}
+		ClientID: c.ClientID,
+		UserID:   c.UserID}
 }
 
 // PetToDto makes DTO from Pet object
-func PetToDto(p entity.Pet) PetDto {
+func PetToDto(p store.Pet) PetDto {
 	return PetDto{
 		PetID:     p.PetID,
 		Name:      p.Name,
 		Type:      string(p.Type),
-		OwnerID:   p.OwnerID,
 		Weight:    p.Weight,
 		Diesieses: p.Diesieses,
-	}
+		OwnerID:   p.Owner.ClientID}
 }
 
 // SeatToDto makes DTO from HotelRoomSeat object
-func SeatToDto(s entity.HotelRoomSeat) SeatDto {
+func SeatToDto(s store.Seat) SeatDto {
 	return SeatDto{
-		HotelRoomSeatID: s.HotelRoomSeatID,
-		Description:     s.Description,
-		IsFree:          s.IsFree,
+		SeatID:      s.SeatID,
+		Description: s.Description,
+		IsFree:      s.IsFree,
+		RoomID:      s.Room.RoomID,
 	}
 }
 
 // RoomToDto makes DTO from HotelRoom object
-func RoomToDto(r entity.HotelRoom) RoomDto {
-	var seatsID []int
-	for _, v := range r.Seats {
-		seatsID = append(seatsID, v.HotelRoomSeatID)
-	}
+func RoomToDto(r store.Room) RoomDto {
 	return RoomDto{
-		HotelRoomID: r.HotelRoomID,
-		RoomNumber:  r.RoomNumber,
-		PetType:     string(r.PetType),
-		SeatsID:     seatsID,
-	}
+		RoomID:     r.RoomID,
+		RoomNumber: r.RoomNumber,
+		PetType:    string(r.PetType),
+		HotelID:    r.Hotel.HotelID}
 }
 
 // HotelToDto makes DTO from Hotel object
-func HotelToDto(h entity.Hotel) HotelDto {
-	var bookingIds []int
-	for _, v := range h.Bookings {
-		bookingIds = append(bookingIds, v.BookingID)
-	}
-	var roomsIds []int
-	for _, v := range h.Rooms {
-		roomsIds = append(roomsIds, v.HotelRoomID)
-	}
+func HotelToDto(h store.Hotel) HotelDto {
 	return HotelDto{
-		HotelID:    h.HotelID,
-		Name:       h.Name,
-		Address:    h.Address,
-		RoomsID:    roomsIds,
-		BookingsID: bookingIds,
+		HotelID: h.HotelID,
+		Name:    h.Name,
+		Address: h.Address,
 	}
 }
 
 // BookingToDto makes DTO from Booking object
-func BookingToDto(b entity.Booking) BookingDto {
+func BookingToDto(b store.Booking) BookingDto {
 	return BookingDto{
 		BookingID:   b.BookingID,
+		SeatID:      b.Seat.SeatID,
 		PetID:       b.Pet.PetID,
-		SeatID:      b.Seat.HotelRoomSeatID,
+		EmployeeID:  b.Employee.EmployeeID,
 		Status:      string(b.Status),
 		StartDate:   b.StartDate,
 		EndDate:     b.EndDate,
-		EmployeeID:  b.Employee.EmployeeID,
 		ClientNotes: b.ClientNotes,
 	}
 }

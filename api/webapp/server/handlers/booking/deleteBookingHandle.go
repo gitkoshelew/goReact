@@ -1,8 +1,8 @@
 package booking
 
 import (
-	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,7 +11,7 @@ import (
 
 // DeleteBookingHandle returns Booking by ID
 func DeleteBookingHandle() httprouter.Handle {
-	bookingsDto := dto.GetBookingsDto()
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,13 +22,12 @@ func DeleteBookingHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, b := range bookingsDto {
-			if b.BookingID == id { // delete object imitation =)
-				bookingsDto[index].ClientNotes = "DELETE"
-				json.NewEncoder(w).Encode(bookingsDto)
-				return
-			}
+		result, err := db.Exec("DELETE from BOOKING WHERE id = $1", id)
+
+		if err != nil {
+			panic(err)
 		}
-		http.Error(w, "Cant find Booking", http.StatusBadRequest)
+
+		log.Print(result.RowsAffected())
 	}
 }

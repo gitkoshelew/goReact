@@ -2,7 +2,8 @@ package dto
 
 // SeatDto ...
 type SeatDto struct {
-	HotelRoomSeatID int    `json:"seatId"`
-	Description     string `json:"desc"`
-	IsFree          bool   `json:"isFree"`
+	SeatID      int    `json:"seatId"`
+	RoomID      int    `json:"roomId"`
+	IsFree      bool   `json:"isFree"`
+	Description string `json:"desc"`
 }
