@@ -2,5 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd ./front
-npm run test
 npm run lint
