@@ -1,0 +1,34 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0">Pet Hotel</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link active" aria-current="page" href="/">Main</a>
+                    <a class="nav-link" href="/api/accounts">accounts</a>
+                    <a class="nav-link" href="/api/users">users</a>
+                    <a class="nav-link" href="/api/employees">employees</a>
+                    <a class="nav-link" href="/api/clients">client</a>
+                    <a class="nav-link" href="/api/pets">pets</a>
+                    <a class="nav-link" href="/api/hotels">hotels</a>
+                    <a class="nav-link" href="/api/seats">seats</a>
+                    <a class="nav-link" href="/api/rooms">rooms</a>
+                    <a class="nav-link" href="/api/bookings">bookings</a>
+
+
+                </nav>
+            </div>
+        </header>
+        {{ end }}
