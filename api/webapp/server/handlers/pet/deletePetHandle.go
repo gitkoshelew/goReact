@@ -1,8 +1,8 @@
 package pet
 
 import (
-	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,7 +11,7 @@ import (
 
 // DeletePetHandle deletes Pet
 func DeletePetHandle() httprouter.Handle {
-	pets := dto.GetPetsDto()
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,14 +22,12 @@ func DeletePetHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, p := range pets {
-			if p.PetID == id { // delete object imitation =)
-				pets[index].Name = "DELETE"
-				json.NewEncoder(w).Encode(pets)
-				return
-			}
+		result, err := db.Exec("DELETE from PET WHERE id = $1", id)
+
+		if err != nil {
+			panic(err)
 		}
 
-		http.Error(w, "Cant find Pet", http.StatusBadRequest)
+		log.Print(result.RowsAffected())
 	}
 }

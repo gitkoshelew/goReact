@@ -1,8 +1,8 @@
 package account
 
 import (
-	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,7 +11,7 @@ import (
 
 // DeleteAccountHandle deletes account
 func DeleteAccountHandle() httprouter.Handle {
-	accountsDto := dto.GetAccountsDto()
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,16 +22,12 @@ func DeleteAccountHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, acc := range accountsDto {
-			if acc.AccountID == id { // delete object imitation =)
-				accountsDto[index].AccountID = 0
-				accountsDto[index].Login = "NIL"
-				accountsDto[index].Password = "NIL"
-				w.WriteHeader(http.StatusOK)
-				json.NewEncoder(w).Encode(accountsDto)
-				return
-			}
+		result, err := db.Exec("DELETE from ACCOUNT WHERE id = $1", id)
+
+		if err != nil {
+			panic(err)
 		}
-		http.Error(w, "Cant find account", http.StatusBadRequest)
+
+		log.Print(result.RowsAffected())
 	}
 }

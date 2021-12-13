@@ -2,8 +2,8 @@ package client
 
 import (
 	"encoding/json"
-	"goReact/domain/entity"
 	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
 
@@ -12,6 +12,7 @@ import (
 
 // GetClientHandle returns Client by ID
 func GetClientHandle() httprouter.Handle {
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,6 +23,17 @@ func GetClientHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		json.NewEncoder(w).Encode(dto.ClientToDto(entity.GetClientByID(id)))
+		row := db.QueryRow("SELECT * FROM CLIENT WHERE id = $1", id)
+
+		client := dto.ClientDto{}
+		err = row.Scan(
+			&client.ClientID,
+			&client.UserID)
+
+		if err != nil {
+			panic(err)
+		}
+
+		json.NewEncoder(w).Encode(client)
 	}
 }

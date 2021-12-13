@@ -2,8 +2,8 @@ package seat
 
 import (
 	"encoding/json"
-	"goReact/domain/entity"
 	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
 
@@ -12,6 +12,7 @@ import (
 
 // GetSeatHandle returns Seat by ID
 func GetSeatHandle() httprouter.Handle {
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,6 +23,18 @@ func GetSeatHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		json.NewEncoder(w).Encode(dto.SeatToDto(entity.GetSeatByID(id)))
+		row := db.QueryRow("SELECT * FROM SEAT WHERE id = $1", id)
+
+		seat := dto.SeatDto{}
+		err = row.Scan(
+			&seat.SeatID,
+			&seat.RoomID,
+			&seat.IsFree,
+			&seat.Description)
+		if err != nil {
+			panic(err)
+		}
+
+		json.NewEncoder(w).Encode(seat)
 	}
 }

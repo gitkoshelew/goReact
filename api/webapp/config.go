@@ -20,6 +20,7 @@ type Config struct {
 		Username string
 		Password string
 		DbName   string
+		Sslmode  string
 	}
 }
 
@@ -35,18 +36,20 @@ func (c *Config) NewConfig() {
 	c.DbConnection.Username = os.Getenv("POSTGRES_USER")
 	c.DbConnection.Password = os.Getenv("POSTGRES_PASSWORD")
 	c.DbConnection.Port, _ = strconv.Atoi(os.Getenv("POSTGRES_PORT"))
+	c.DbConnection.Sslmode = os.Getenv("POSTGRES_SSLMODE")
 
 }
 
 // PgDataSource ...
 func (c *Config) PgDataSource() string {
 	return fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
 		c.DbConnection.Host,
 		c.DbConnection.Port,
 		c.DbConnection.Username,
 		c.DbConnection.Password,
 		c.DbConnection.DbName,
+		c.DbConnection.Sslmode,
 	)
 }
 

@@ -1,6 +1,8 @@
 package dto
 
-import "goReact/pkg/date"
+import (
+	"time"
+)
 
 // BookingDto ...
 type BookingDto struct {
@@ -8,8 +10,8 @@ type BookingDto struct {
 	PetID       int       `json:"petId"`
 	SeatID      int       `json:"seatId"`
 	Status      string    `json:"status"`
-	StartDate   date.Date `json:"start"`
-	EndDate     date.Date `json:"end"`
+	StartDate   time.Time `json:"start"`
+	EndDate     time.Time `json:"end"`
 	EmployeeID  int       `json:"employeeId"`
 	ClientNotes string    `json:"notes"`
 }

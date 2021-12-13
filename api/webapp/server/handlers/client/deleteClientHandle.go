@@ -1,8 +1,8 @@
 package client
 
 import (
-	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -12,7 +12,7 @@ import (
 // DeleteClientHandle delete Client by ID
 func DeleteClientHandle() httprouter.Handle {
 
-	clientsDto := dto.GetClientsDto()
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -23,14 +23,12 @@ func DeleteClientHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, c := range clientsDto {
-			if c.ClientID == id { // delete object imitation =)
-				clientsDto[index].ClientID = 0
-				json.NewEncoder(w).Encode(clientsDto)
-				return
-			}
+		result, err := db.Exec("DELETE from CLIENT WHERE id = $1", id)
+
+		if err != nil {
+			panic(err)
 		}
 
-		http.Error(w, "Cant find Client", http.StatusBadRequest)
+		log.Print(result.RowsAffected())
 	}
 }

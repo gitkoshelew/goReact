@@ -2,9 +2,9 @@ package dto
 
 // EmployeeDto ...
 type EmployeeDto struct {
+	EmployeeID int    `json:"employeeId"`
 	UserID     int    `json:"userId"`
 	HotelID    int    `json:"hotelId"`
-	EmployeeID int    `json:"employeeId"`
 	Position   string `json:"position"`
 	Role       string `json:"role"`
 }

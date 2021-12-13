@@ -2,8 +2,8 @@ package account
 
 import (
 	"encoding/json"
-	"goReact/domain/entity"
 	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
 
@@ -12,6 +12,7 @@ import (
 
 // GetAccountHandle returns account by ID
 func GetAccountHandle() httprouter.Handle {
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,7 +23,17 @@ func GetAccountHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(dto.AccountToDto(entity.GetAccountByID(id)))
+		accountRow := db.QueryRow("SELECT * FROM ACCOUNT WHERE id = $1", id)
+
+		account := dto.AccountDto{}
+		err = accountRow.Scan(
+			&account.AccountID,
+			&account.Login,
+			&account.Password)
+		if err != nil {
+			panic(err)
+		}
+
+		json.NewEncoder(w).Encode(account)
 	}
 }

@@ -1,8 +1,8 @@
 package seat
 
 import (
-	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,7 +11,7 @@ import (
 
 // DeleteSeatHandle deletes Room by ID
 func DeleteSeatHandle() httprouter.Handle {
-	seats := dto.GetHotelRoomSeatsDto()
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,14 +22,12 @@ func DeleteSeatHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, s := range seats {
-			if s.HotelRoomSeatID == id { // delete object imitation =)
-				seats[index].Description = "DELETE"
-				json.NewEncoder(w).Encode(seats)
-				return
-			}
+		result, err := db.Exec("DELETE from SEAT WHERE id = $1", id)
+
+		if err != nil {
+			panic(err)
 		}
 
-		http.Error(w, "Cant find Seat", http.StatusBadRequest)
+		log.Print(result.RowsAffected())
 	}
 }

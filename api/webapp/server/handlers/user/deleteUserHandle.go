@@ -1,8 +1,8 @@
 package user
 
 import (
-	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,8 +11,7 @@ import (
 
 // DeleteUserHandle deletes User
 func DeleteUserHandle() httprouter.Handle {
-
-	users := dto.GetUsersDto()
+	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -23,16 +22,12 @@ func DeleteUserHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		for index, u := range users {
-			if u.UserID == id { // delete object imitation =)
-				users[index].Name = "DELETE"
-				users[index].Surname = "DELETE"
-				users[index].MiddleName = "DELETE"
-				json.NewEncoder(w).Encode(users)
-				return
-			}
+		result, err := db.Exec("DELETE from USERS WHERE id = $1", id)
+
+		if err != nil {
+			panic(err)
 		}
 
-		http.Error(w, "Cant find User", http.StatusBadRequest)
+		log.Print(result.RowsAffected())
 	}
 }
