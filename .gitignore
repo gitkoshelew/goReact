@@ -21,6 +21,7 @@
 /.idea
 /.pnp
 .pnp.js
+/init.sql
 
 # misc
 .DS_Store

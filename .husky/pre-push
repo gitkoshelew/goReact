@@ -3,3 +3,4 @@
 
 cd ./front
 npm run lint
+npm run test
