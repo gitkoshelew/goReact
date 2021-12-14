@@ -9,11 +9,6 @@
     "frontend:admin": "cd front-admin && yarn lint",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all frontend"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gitkoshelew/goReact.git"

@@ -11,7 +11,6 @@ describe('BurgerMenu', () => {
         <BurgerMenu setIsBurgerCollapse={() => {}} isBurgerCollapse={true} />
       </BrowserRouter>
     )
-    screen.debug()
     expect(screen.getAllByRole('link')).toHaveLength(8)
   })
 
