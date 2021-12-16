@@ -46,7 +46,7 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
             </div>
             <div className={commonNavBar}>
               <div className={navLinksBlock}>
-                <NavLinks navNames={['Home', 'About Us', 'Room', 'Service', 'Blog', 'Gallery']} />
+                <NavLinks navNames={['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery']} />
               </div>
               <div className={btnBlock}>
                 <Button type={'buy'} />

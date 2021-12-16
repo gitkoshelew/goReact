@@ -16,7 +16,7 @@ export const UsefulLinks = () => {
         <div>
           <UsefulLinksElement linkName={'Home'} />
           <UsefulLinksElement linkName={'Gallery'} />
-          <UsefulLinksElement linkName={'Blog'} />
+          <UsefulLinksElement linkName={'Booking'} />
         </div>
       </div>
     </div>

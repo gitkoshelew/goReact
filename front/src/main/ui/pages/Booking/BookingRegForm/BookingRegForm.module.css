@@ -1,0 +1,45 @@
+.bookingForm {
+    width: 450px;
+    height: 500px;
+    background-color: white;
+    margin: -20px 0 40px 0;
+    border: 1px solid #0f97aa;
+    border-radius: 12px;
+}
+
+.clientDescription{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+
+.inputInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
+    white-space: nowrap;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+.inputInfo:nth-child(n){
+    margin: 20px 20px;
+}
+
+.inputInfo input{
+    width: 350px;
+    margin-top: 30px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 22px;
+}
+
+

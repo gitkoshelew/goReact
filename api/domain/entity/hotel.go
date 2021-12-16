@@ -6,7 +6,7 @@ type Hotel struct {
 	Id       HotelId
 	Name     string
 	Rooms    []HotelRoom
-	Bookings []Booking
+	Bookings []BookingRegForm
 }
 
 func (hotel *Hotel) RoomsCount() int {

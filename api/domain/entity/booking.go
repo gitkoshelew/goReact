@@ -15,7 +15,7 @@ var (
 	BookingStatusCancelled  BookingStatus = "cancelled"
 )
 
-type Booking struct {
+type BookingRegForm struct {
 	Id        BookingId
 	Pet       *Pet
 	Seat      *HotelRoomSeat
