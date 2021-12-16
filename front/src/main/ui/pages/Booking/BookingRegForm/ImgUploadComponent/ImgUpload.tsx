@@ -1,37 +1,35 @@
 /* eslint-disable */
 import s from "./ImgUpload.module.css";
 import { FileUploader } from "react-drag-drop-files";
-import { useState } from "react";
-import { ProgressType } from "../BookingRegForm";
+import { changePhotoUrl, changeProgressStatus, ProgressType } from "../../../../../bll/reducers/BookingRegForm-reducer";
+import { useAppDispatch } from "../../../../../bll/store/store";
 
-const {uploadTablet,customTablet} = s;
+
+const { uploadTablet, customTablet } = s;
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 type ImgUploadPropsType = {
-  setProgress: (newStatus: ProgressType) => void
   progress: ProgressType
-  setPhotoUrl: (newPhoto: any) => void
 }
 
 
-export const ImgUpload = ({ progress, setProgress, setPhotoUrl }: ImgUploadPropsType) => {
+export const ImgUpload = ({ progress }: ImgUploadPropsType) => {
 
-  const [file, setFile] = useState<null | Blob>(null);
+  const dispatch = useAppDispatch();
 
-
-  const handleChange = (file: any) => {
-    setFile(file);
-    setProgress("uploaded");
+  const handleChange = (file:any) => {
+    dispatch(changeProgressStatus({ newStatus: "uploaded" }));
     const correctFile = Object.assign(file, {
       preview: URL.createObjectURL(file)
-    })
-    setPhotoUrl(correctFile.preview)
+    });
+    dispatch(changePhotoUrl({newPhotoUrl: correctFile.preview }));
   };
 
 
   return (
     <div className={uploadTablet}>
-      {progress === "getUpload" && <FileUploader classes={customTablet} handleChange={handleChange} name="file" types={fileTypes} />}
+      {progress === "getUpload" &&
+      <FileUploader classes={customTablet} handleChange={handleChange} name="file" types={fileTypes} />}
     </div>
   );
 };

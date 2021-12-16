@@ -3,32 +3,35 @@ import React, { useState } from "react";
 import s from "./BookingRegForm.module.css";
 import { ImgUpload } from "./ImgUploadComponent/ImgUpload";
 import { Button } from "../../../components/Button/Button";
+import { useSelector } from "react-redux";
+import { AppRootStateType } from "../../../../bll/store/store";
+import { ProgressType } from "../../../../bll/reducers/BookingRegForm-reducer";
 
 const { bookingForm, clientDescription, inputInfo, uploadedImg } = s;
-
-export type ProgressType = "getUpload" | "uploading" | "uploaded" | "uploadError"
 
 
 export const BookingRegForm = () => {
 
-  const [progress, setProgress] = useState<ProgressType>("getUpload");
-  const [photoUrl, setPhotoUrl] = useState<any>(undefined);
-  const [errorMSG, setErrorMSG] = useState<string | null>(null);
-  const [isActiveBtn, setIsActiveBtn] = useState<boolean>(true);
 
+
+  const progress = useSelector<AppRootStateType, ProgressType>(state => state.BookingRegForm.progress);
+  const photoUrl = useSelector<AppRootStateType, string | null>(state => state.BookingRegForm.photoUrl);
+  const errorMSG = useSelector<AppRootStateType, string>(state => state.BookingRegForm.errorMSG);
+
+  const isActiveBtn = progress==='uploaded'
 
   const actualContent = () => {
     switch (progress) {
       case ("getUpload"):
         return <>
           Upload your pet photo:
-          <ImgUpload setPhotoUrl={setPhotoUrl} setProgress={setProgress} progress={progress} />
+          <ImgUpload progress={progress} />
         </>;
       case("uploading"):
         return <div>uploading...</div>;
       case ("uploaded"):
         return <div className={uploadedImg}>
-          <img src={photoUrl} alt="uploadedImg" />
+          <img src={photoUrl? photoUrl:''} alt="uploadedImg" />
         </div>;
       case("uploadError"):
         return <>
