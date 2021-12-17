@@ -1,9 +1,8 @@
 import { changePhotoUrl, changeProgressStatus } from './BookingRegForm-reducer'
 import { put, call } from 'redux-saga/effects'
 
-const dataGivers = async (data: any) => {
-  debugger
-  const result: any = await new Promise<any>((res, rej) => {
+const dataGivers = async (data: Blob | MediaSource) => {
+  const result: Blob | MediaSource = await new Promise<Blob | MediaSource>((res) => {
     setTimeout(() => {
       res(data)
     }, 1000)
@@ -22,5 +21,8 @@ export function* BookingUploadPetImgSagaWorker(action: BookingUploadPetImgType) 
   yield put(changeProgressStatus({ newStatus: 'uploaded' }))
 }
 
-export const BookingUploadPetImg = (file: any) => ({ type: 'BOOKING_REG_FORM/BOOKING_PET_IMG_UPLOAD', file })
+export const BookingUploadPetImg = (file: Blob | MediaSource) => ({
+  type: 'BOOKING_REG_FORM/BOOKING_PET_IMG_UPLOAD',
+  file,
+})
 type BookingUploadPetImgType = ReturnType<typeof BookingUploadPetImg>

@@ -5,11 +5,13 @@ import { BookingRegFormReducer } from '../reducers/BookingRegFormReducer/Booking
 import { useDispatch } from 'react-redux'
 import { takeEvery } from 'redux-saga/effects'
 import { BookingUploadPetImgSagaWorker } from '../reducers/BookingRegFormReducer/BookindRegForm-saga'
+import { BookingRoomPickReducer } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 
 const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
   BookingRegForm: BookingRegFormReducer,
+  BookingRoomPick: BookingRoomPickReducer,
 })
 
 export type RootReducerType = typeof rootReducer
