@@ -25,3 +25,9 @@
   width: 668px;
   height: 660px;
 }
+
+.uploadOrderedRoomsBlock {
+  display: flex;
+  align-items: center;
+  position: relative;
+}

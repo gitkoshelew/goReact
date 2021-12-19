@@ -57,5 +57,13 @@
   border-radius: 8px;
   border: 1px solid #0f97aa;
   cursor: no-drop;
-  margin: 30px;
+  margin: 40px;
+}
+
+.orderBtn {
+  padding: 5px 30px;
+  border-radius: 8px;
+  background: aquamarine;
+  cursor: pointer;
+  margin-top: -20px;
 }

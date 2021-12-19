@@ -2,14 +2,15 @@ import s from './Button.module.css'
 import buy from '../../../../assets/img/navBar/Buy.svg'
 import { NavLink } from 'react-router-dom'
 
-const { loginBtn, buyBtn,uploadPetPhoto,uploadPetPhotoActive } = s
+const { loginBtn, buyBtn, uploadPetPhoto, uploadPetPhotoActive, orderBtn } = s
 
 type BtnPropsType = {
   type: string
-  isActive?:boolean
+  isActive?: boolean
+  onClick?: () => void
 }
 
-export const Button = ({ type,isActive }: BtnPropsType) => {
+export const Button = ({ onClick, type, isActive }: BtnPropsType) => {
   return (
     <div>
       {type === 'login' && (
@@ -22,8 +23,15 @@ export const Button = ({ type,isActive }: BtnPropsType) => {
           <img src={buy} alt="buyContainer" />
         </div>
       )}
+      {type === 'order' && (
+        <button onClick={onClick} className={orderBtn}>
+          Order
+        </button>
+      )}
       {type === 'Upload' && (
-          <button disabled={isActive} className={ isActive? uploadPetPhotoActive:uploadPetPhoto}>Upload</button>
+        <button disabled={isActive} className={isActive ? uploadPetPhotoActive : uploadPetPhoto}>
+          Confirm
+        </button>
       )}
     </div>
   )
