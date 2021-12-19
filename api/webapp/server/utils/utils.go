@@ -12,7 +12,7 @@ func HandlerDbConnection() *sql.DB {
 	config.NewConfig()
 	db, err := webapp.ConnectDb(config)
 	if err != nil {
-		log.Fatal("Connection to db failed")
+		log.Fatal("Connection to db failed: ", err.Error())
 	}
 	return db
 }

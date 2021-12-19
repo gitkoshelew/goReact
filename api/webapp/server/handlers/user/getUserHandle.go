@@ -2,7 +2,6 @@ package user
 
 import (
 	"encoding/json"
-	"goReact/domain/store"
 	"goReact/webapp/server/handlers/dto"
 	"goReact/webapp/server/utils"
 	"net/http"
@@ -26,7 +25,7 @@ func GetUserHandle() httprouter.Handle {
 
 		row := db.QueryRow("SELECT * FROM USERS WHERE id = $1", id)
 
-		user := store.User{}
+		user := dto.UserDto{}
 		err = row.Scan(
 			&user.UserID,
 			&user.Name,
@@ -36,11 +35,11 @@ func GetUserHandle() httprouter.Handle {
 			&user.DateOfBirth,
 			&user.Address,
 			&user.Phone,
-			&user.Account)
+			&user.AccountID)
 		if err != nil {
 			panic(err)
 		}
 
-		json.NewEncoder(w).Encode(dto.UserToDto(user))
+		json.NewEncoder(w).Encode(user)
 	}
 }

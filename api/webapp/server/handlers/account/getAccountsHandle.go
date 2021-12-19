@@ -18,16 +18,16 @@ func GetAccountsHandle() httprouter.Handle {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		accountRows, err := db.Query("SELECT * FROM ACCOUNT")
+		rows, err := db.Query("SELECT * FROM ACCOUNT")
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		accounts := []dto.AccountDto{}
 
-		for accountRows.Next() {
+		for rows.Next() {
 			account := dto.AccountDto{}
-			err := accountRows.Scan(
+			err := rows.Scan(
 				&account.AccountID,
 				&account.Login,
 				&account.Password)

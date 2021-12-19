@@ -40,7 +40,6 @@ func ConnectDb(config *Config) (*sql.DB, error) {
 	if err != nil {
 		panic(err)
 	}
-	log.Printf("DataSourceName: %s", dataSourceName)
 	log.Printf("Database connection successfull!")
 	return db, err
 }

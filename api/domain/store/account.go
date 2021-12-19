@@ -14,17 +14,17 @@ type Account struct {
 // NewAccount creates Account with encrypted password
 func NewAccount(id int, login, password string) Account {
 	acc := Account{id, login, password}
-	acc.Password, _ = encryptPassword(acc.Password)
+	acc.Password, _ = EncryptPassword(acc.Password)
 	return acc
 }
 
-// setPassword sets encrypted password to Account
-func (a *Account) setPassword(s string) {
-	a.Password, _ = encryptPassword(s)
+// SetPassword sets encrypted password to Account
+func (a *Account) SetPassword(s string) {
+	a.Password, _ = EncryptPassword(s)
 }
 
-// encryptPassword
-func encryptPassword(s string) (string, error) {
+// EncryptPassword ...
+func EncryptPassword(s string) (string, error) {
 	b, err := bcrypt.GenerateFromPassword([]byte(s), bcrypt.MinCost)
 	if err != nil {
 		return "", err
@@ -33,7 +33,7 @@ func encryptPassword(s string) (string, error) {
 }
 
 // CheckPasswordHash matches password with encrypted password<returns true/false
-func CheckPasswordHash(password, hash string) bool {
+func CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
+	return err
 }

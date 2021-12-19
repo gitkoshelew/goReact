@@ -2,6 +2,7 @@ package account
 
 import (
 	"encoding/json"
+	"goReact/domain/store"
 	"goReact/webapp/server/utils"
 	"log"
 	"net/http"
@@ -21,9 +22,13 @@ func PutAccountHandle() httprouter.Handle {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
+		encryptedPassword, err := store.EncryptPassword(req.Password)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		result, err := db.Exec("UPDATE ACCOUNT set password = $1 WHERE id = $2",
-			req.Password, req.AccountID)
+			encryptedPassword, req.AccountID)
 
 		if err != nil {
 			panic(err)

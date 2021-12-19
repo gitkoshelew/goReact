@@ -14,7 +14,8 @@ import (
 )
 
 func (s *Server) configureRouter() {
-	s.router.HandlerFunc("GET", "/", handlers.HandleHomePage())
+	s.router.Handle("GET", "/", handlers.HandleHomePage())
+	s.router.Handle("GET", "/login", account.Validation())
 
 	s.router.Handle("GET", "/api/accounts", account.GetAccountsHandle())
 	s.router.Handle("POST", "/api/account", account.PostAccountHandle())
