@@ -58,6 +58,7 @@ func (c *Config) ServerAddress() string {
 	return fmt.Sprintf("%s:%d", c.Server.Host, c.Server.Port)
 }
 
-func (c *Config) String() string {
+// ServerInfo ...
+func (c *Config) ServerInfo() string {
 	return fmt.Sprintf("Server Address: %s\nPG Data Source: %#v", c.ServerAddress(), c.PgDataSource())
 }

@@ -31,6 +31,7 @@ func (s *Server) Start() error {
 	s.configureRouter()
 
 	s.logger.Printf("Server starting ...")
+	s.logger.Printf(s.config.ServerInfo())
 
 	return http.ListenAndServe(s.config.ServerAddress(), s.router)
 }

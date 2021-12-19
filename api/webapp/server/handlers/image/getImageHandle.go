@@ -1,8 +1,8 @@
-package account
+package image
 
 import (
 	"encoding/json"
-	"goReact/domain/store"
+	"goReact/webapp/server/handlers/dto"
 	"goReact/webapp/server/utils"
 	"log"
 	"net/http"
@@ -10,31 +10,32 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// PutAccountHandle updates Account
-func PutAccountHandle() httprouter.Handle {
+// GetImageHandle returns image by ID
+func GetImageHandle() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		req := &accountRequest{}
+		req := &imageRequest{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
-		encryptedPassword, err := store.EncryptPassword(req.Password)
-		if err != nil {
-			log.Fatal(err)
-		}
+		log.Printf("%d + %s", req.ImageID, req.Type)
 
-		result, err := db.Exec("UPDATE ACCOUNT set password = $1 WHERE id = $2",
-			encryptedPassword, req.AccountID)
+		row := db.QueryRow("SELECT * FROM IMAGES WHERE id = $1 and type = $2", req.ImageID, req.Type)
+
+		image := dto.ImageDto{}
+		err := row.Scan(
+			&image.ImageID,
+			&image.Type,
+			&image.URL,
+			&image.OwnerID)
 		if err != nil {
 			panic(err)
 		}
 
-		log.Println(result.RowsAffected())
-
-		w.WriteHeader(http.StatusCreated)
+		json.NewEncoder(w).Encode(image)
 	}
 }

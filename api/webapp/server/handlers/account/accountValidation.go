@@ -27,14 +27,14 @@ func Validation() httprouter.Handle {
 		account := store.Account{}
 		if err := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1",
 			req.Login).Scan(&account.AccountID, &account.Login, &account.Password); err != nil {
-			http.Error(w, "Invalid login or password1", http.StatusUnauthorized)
+			http.Error(w, "Invalid login or password", http.StatusUnauthorized)
 			log.Println(err.Error())
 			return
 		}
 
 		err := store.CheckPasswordHash(account.Password, req.Password)
 		if err != nil {
-			http.Error(w, "Invalid login or password2", http.StatusUnauthorized)
+			http.Error(w, "Invalid login or password", http.StatusUnauthorized)
 			log.Println(err.Error())
 			return
 		}
