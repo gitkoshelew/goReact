@@ -12,7 +12,7 @@ func HomeAdmin() http.HandlerFunc {
 
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request) {
-		var id int
+		//var id int
 		//var password1 string
 		Login := r.FormValue("login")
 		Password := r.FormValue("password")
