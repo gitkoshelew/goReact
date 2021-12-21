@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="api/static/css/style.css">
+</head>
+
+
+<body>
+    <h2>Users</h2>
+    <form action="/admin/allusers" >
+        <button>all users</button>
+    </form>
+    <script src="api/static/js/index.js"> </script>
+</body>
+
+<body>
+    <h2>Users</h2>
+    <form action="/user/new" method="POST">
+        <th>Имя</th>
+        <input type="text" name="First_name">
+        <th>Фамилия</th>
+        <input type="text" name="Surname"><br><br>
+        <th>Отчество</th>
+        <input type="text" name="Middle_name">
+        <th>Телефон</th>
+        <input type="text" name="Phone"><br><br>
+        <th>Группа</th>
+        <input type="number" name="Group_id">
+        <button>new</button>
+    </form>
+    <script src="api/static/js/index.js"> </script>
+</body>
+
+<body>
+    <h2>Users</h2>
+    <form action="/user/update" method="POST">
+        <th>ID</th>
+        <input type="number" name="Id">
+        <th>Имя</th>
+        <input type="text" name="First_name">
+        <th>Фамилия</th>
+        <input type="text" name="Surname"><br><br>
+        <th>Отчество</th>
+        <input type="text" name="Middle_name">
+        <th>Телефон</th>
+        <input type="text" name="Phone"><br><br>
+        <th>Группа</th>
+        <input type="number" name="Group_id"><br><br>
+        <button>update</button>
+    </form>
+    <script src="api/static/js/index.js"> </script>
+</body>
+
+</html>

@@ -76,7 +76,7 @@ INSERT INTO ACCOUNT ( Login, Password) VALUES
 ('login3', 'password3'),
 ('login4', 'password4'),
 ('login5', 'password5'),
-('login6', 'password6');
+('visbm@mail.ru', 'password6');
 
 INSERT INTO USERS (first_name , surname, middle_name, email, date_of_birth, address, phone, account_id) VALUES 
 ('Ivan','Ivanov','Ivanovich','ivan@mail.ru','2000-01-01' ,'Minsk Pr. Nezavisimosti 22-222' ,'+375-29-154-89-33', 1),
