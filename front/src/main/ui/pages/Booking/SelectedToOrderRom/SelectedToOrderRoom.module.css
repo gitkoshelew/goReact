@@ -1,48 +1,48 @@
 .selectedRoomsTablet div div {
-  padding: 4px 25px;
-  width: 200px;
-  border: 2px solid #0f97aa;
-  white-space: nowrap;
-  border-left: 0;
-  border-bottom: 0;
+    padding: 4px 25px;
+    width: 200px;
+    border: 2px solid #0f97aa;
+    white-space: nowrap;
+    border-left: 0;
+    border-bottom: 0;
 }
 
 .roomType {
-  display: flex;
+    display: flex;
 }
 
 .roomType img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .roomType img:hover {
-  background-color: indianred;
-  outline: 2px solid #0f97aa;
-  border-radius: 8px;
+    background-color: indianred;
+    outline: 2px solid #0f97aa;
+    border-radius: 8px;
 }
 
 .selectedRoomsTablet {
-  flex-direction: column;
-  display: flex;
-  border: 2px solid #0f97aa;
-  position: absolute;
-  top: -90px;
-  left: -495px;
-  border-radius: 4px;
+    flex-direction: column;
+    display: flex;
+    border: 2px solid #0f97aa;
+    position: absolute;
+    top: -25px;
+    left: -600px;
+    border-radius: 4px;
 }
 
 .selectedRoomsTablet div {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .selectedRoomsTablet div:first-child div {
-  border-top: 0;
+    border-top: 0;
 }
 
 .selectedRoomsTablet div:last-child {
-  border-right: 0;
+    border-right: 0;
 }

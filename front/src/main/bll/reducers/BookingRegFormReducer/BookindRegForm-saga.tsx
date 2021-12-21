@@ -21,7 +21,7 @@ export function* BookingUploadPetImgSagaWorker(action: BookingUploadPetImgType) 
   yield put(changeProgressStatus({ newStatus: 'uploaded' }))
 }
 
-export const BookingUploadPetImg = (file: Blob | MediaSource) => ({
+export const BookingUploadPetImg = (file: any) => ({
   type: 'BOOKING_REG_FORM/BOOKING_PET_IMG_UPLOAD',
   file,
 })

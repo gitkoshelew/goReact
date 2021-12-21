@@ -15,7 +15,7 @@ export const Button = ({ onClick, type, isActive }: BtnPropsType) => {
     <div>
       {type === 'login' && (
         <NavLink className={loginBtn} to={'/login'}>
-          <div>Login</div>
+          <div>login</div>
         </NavLink>
       )}
       {type === 'buy' && (
@@ -24,12 +24,12 @@ export const Button = ({ onClick, type, isActive }: BtnPropsType) => {
         </div>
       )}
       {type === 'order' && (
-        <button onClick={onClick} className={orderBtn}>
-          Order
+        <button type={'button'} onClick={onClick} className={orderBtn}>
+          order
         </button>
       )}
-      {type === 'Upload' && (
-        <button disabled={isActive} className={isActive ? uploadPetPhotoActive : uploadPetPhoto}>
+      {type === 'upload' && (
+        <button  type={'submit'} disabled={!isActive} className={isActive ? uploadPetPhotoActive : uploadPetPhoto}>
           Confirm
         </button>
       )}

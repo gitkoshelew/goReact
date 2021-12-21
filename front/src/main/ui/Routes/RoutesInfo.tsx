@@ -17,7 +17,7 @@ export const PATH = {
   ABOUT_US: '/aboutus',
   ROOM: '/rooms',
   SERVICE: '/service',
-  BLOG: '/booking',
+  BOOKING: '/booking',
   GALLERY: '/gallery',
   BASKET: '/basket',
 }
@@ -33,7 +33,7 @@ export const RoutesInfo = () => {
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.GALLERY} element={<Gallery />} />
         <Route path={PATH.ROOM} element={<Room />} />
-        <Route path={PATH.BLOG} element={<Booking/>} />
+        <Route path={PATH.BOOKING} element={<Booking/>} />
         <Route path={PATH.SERVICE} element={<Service />} />
         <Route path={PATH.BASKET} element={<Basket />} />
 
