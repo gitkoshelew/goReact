@@ -19,7 +19,7 @@ export const SelectedToOrderRoom = ({ orderedRoomBasket }: SelectedToOrderRoomPr
 
   const onDeleteOrderRoomHandler = useCallback((roomToDelete: OrderedRoomsType) => {
     dispatch(deleteOrderedRoom({ newOrderedRooms: roomToDelete }));
-  }, []);
+  }, [orderedRoomBasket]);
 
   const orderedRoomsView = orderedRoomBasket.map((t, i) => (
     <div key={i}>

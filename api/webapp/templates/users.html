@@ -4,9 +4,8 @@
 
 <main class="px-3">
     <h1>Users list</h1>
-    <form action="/search_user" method="post">
-        <input type="text" name="ID" id="ID" placeholder="Type ID" class="form-control"><br>
-        <textarea name="anons" id="anons" class="form-control" placeholder="Type ID here..."></textarea><br>
+    <form action="/api/user" method="get">
+        <input type="text" name="id" id="id" placeholder="Type ID" class="form-control"><br>
         <button class="btn btn-warning">Search</button>
 
     </form>
