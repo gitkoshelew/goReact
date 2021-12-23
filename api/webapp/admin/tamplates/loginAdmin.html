@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html>
+{{template "base" .}}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="stylesheet" href="api/static/css/style.css">
-</head>
+{{define "title"}}Login{{end}}
 
-<body>
-    <h2>Users</h2>
-    <form action="/admin/home" method="GET">
-        <th>Login</th>
-        <input type="email" name="login" required><br><br>
-        <th>Password</th>
-        <input type="text" name="password" required>
-        <button>Login</button>
-    </form>
-    <script src="api/static/js/index.js"> </script>
-</body>
+{{define "main"}}
+<form action="/admin/home" method="GET">
+    <th>Login</th>
+    <input type="email" name="login" required><br><br>
+    <th>Password</th>
+    <input type="text" name="password" required>
+    <button>Login</button>
+</form>
+{{end}}
 
 
-</html>

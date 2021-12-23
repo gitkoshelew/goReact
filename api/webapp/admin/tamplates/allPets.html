@@ -1,0 +1,34 @@
+{{template "base" .}}
+
+{{define "title"}}All hotels{{end}}
+
+{{define "main"}}
+
+<head>
+    <title>All pets</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>id</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Weight</th>
+        <th>Diesieses</th>
+        <th>Owner</th>
+
+        {{range . }}
+        <tr>
+            <td>{{.PetID}}</td>
+            <td>{{.Name}}</td>
+            <td>{{.Type}}</td>
+            <td>{{.Weight}}</td>
+            <td>{{.Diesieses}}</td>
+            <td>{{.Owner}}</td>
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}

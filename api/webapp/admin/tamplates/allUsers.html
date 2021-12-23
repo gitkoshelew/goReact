@@ -1,0 +1,38 @@
+{{template "base" .}}
+
+{{define "title"}}All users{{end}}
+
+{{define "main"}}
+
+<head>
+    <title>All users</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>UserID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>MiddleName</th>
+        <th>DateOfBirth</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+
+        {{range . }}
+        <tr>
+            <td>{{.UserID}}</td>
+            <td>{{.Name}}</td>
+            <td>{{.Surname}}</td>
+            <td>{{.MiddleName}}</td>
+            <td>{{.DateOfBirth}}</td>
+            <td>{{.Address}}</td>
+            <td>{{.Phone}}</td>
+            <td>{{.Email}}</td>
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}

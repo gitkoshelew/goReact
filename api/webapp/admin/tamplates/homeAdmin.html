@@ -1,21 +1,35 @@
+{{template "base" .}}
+
+{{define "title"}}Home{{end}}
+
+{{define "main"}}
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="api/static/css/style.css">
 </head>
 
 
 <body>
     <h2>Users</h2>
-    <form action="/admin/allusers" >
+    <form action="/admin/allusers">
         <button>all users</button>
     </form>
-    <script src="api/static/js/index.js"> </script>
 </body>
-
+<body>
+    <h2>Hotel</h2>
+    <form action="/admin/allhotels">
+        <button>all hotels</button>
+    </form>
+</body>
+<body>
+    <h2>Hotel</h2>
+    <form action="/admin/allpets">
+        <button>all hotels</button>
+    </form>
+</body>
 <body>
     <h2>Users</h2>
     <form action="/user/new" method="POST">
@@ -31,7 +45,6 @@
         <input type="number" name="Group_id">
         <button>new</button>
     </form>
-    <script src="api/static/js/index.js"> </script>
 </body>
 
 <body>
@@ -51,7 +64,31 @@
         <input type="number" name="Group_id"><br><br>
         <button>update</button>
     </form>
-    <script src="api/static/js/index.js"> </script>
+</body>
+
+<body>
+    <h2>Get user by id</h2>
+    <form action="/user/id" method="GET">
+        <input type="number" name="id">
+        <button>Get</button>
+    </form>
+    <p><a href="/users/1">1</a></p>
+    <p><a href="/users/2">2</a></p>
+    <p><a href="/users/3">3</a></p>
+    <p><a href="/users/4">4</a></p>
+    <p><a href="/users/5">5</a></p>
+    <p><a href="/users/6">6</a></p>
+</body>
+
+<body>
+    <h2>Delete user by id</h2>
+    <p><a href="/user/delete/1">1</a></p>
+    <p><a href="/user/delete/2">2</a></p>
+    <p><a href="/user/delete/3">3</a></p>
+    <p><a href="/user/delete/4">4</a></p>
+    <p><a href="/user/delete/5">5</a></p>
+    <p><a href="/user/delete/6">6</a></p>
 </body>
 
 </html>
+{{end}}
