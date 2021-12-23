@@ -31,7 +31,6 @@ export const Carousel = ({
     return (
       <div
         className={className}
-        // style={{ ...style, display: "block", background: "red" }} to custom render
         onClick={onClick}
       >
         <img src={nextArrow} alt="nextArrow" />
@@ -44,7 +43,6 @@ export const Carousel = ({
     return (
       <div
         className={className}
-        // style={{ ...style, display: "block", background: "red" }} to custom render
         onClick={onClick}
       >
         <img src={prevArrow} alt="nextArrow" />
