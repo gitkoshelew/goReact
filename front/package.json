@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
     "@brainhubeu/react-carousel": "^2.0.4",
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.1.1",
     "@reduxjs/toolkit": "^1.6.2",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@types/react-calendar": "^3.4.3",
     "axios": "^0.24.0",
     "babel-plugin-react-css-modules": "^5.2.6",
     "formik": "^2.2.9",
@@ -32,7 +31,6 @@
     "redux-saga": "^1.1.3",
     "slick-carousel": "^1.8.1",
     "typed-css-modules": "^0.7.0",
-    "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -42,7 +40,7 @@
     "test:coverage": "react-scripts test --passWithNoTests --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint src",
-    "prettierPreccommit": "prettier --write"
+    "prettierPreccommit": "prettier --write src/"
   },
   "eslintConfig": {
     "extends": [
@@ -63,6 +61,8 @@
     ]
   },
   "devDependencies": {
+    "typescript": "^4.1.2",
+    "@types/react-calendar": "^3.4.3",
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/react": "^12.1.2",

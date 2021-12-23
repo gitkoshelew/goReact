@@ -1,17 +1,21 @@
-import React from 'react'
-import Slider from 'react-slick'
+import React, { ReactChild, ReactChildren } from 'react'
+import Slider, { ResponsiveObject } from 'react-slick'
 import s from './Carousel.module.css'
 import { nextArrow, prevArrow, sliderDot } from '../../svgWrapper/HomeSvgWrapper'
 
 const { carousel, carouselBig } = s
 
 type CarouselPropsType = {
-  children: any
-  responsiveArrForCarousel?: any
+  children: ReactChild | ReactChild[] | ReactChildren | ReactChildren[]
+  responsiveArrForCarousel?: ResponsiveObject[]
   startSlideToShow: number
   startSlideScroll: number
   type: string
   isWithArrows: boolean
+}
+type SampleArrowPropsType = {
+  className?: string
+  onClick?: () => void
 }
 
 export const Carousel = ({
@@ -22,12 +26,12 @@ export const Carousel = ({
   type,
   isWithArrows,
 }: CarouselPropsType) => {
-  function SampleNextArrow(props: any) {
+  function SampleNextArrow(props: SampleArrowPropsType) {
     const { className, onClick } = props
     return (
       <div
         className={className}
-        // style={{ ...style, display: "block", background: "red" }} to custom update
+        // style={{ ...style, display: "block", background: "red" }} to custom render
         onClick={onClick}
       >
         <img src={nextArrow} alt="nextArrow" />
@@ -35,12 +39,12 @@ export const Carousel = ({
     )
   }
 
-  function SamplePrevArrow(props: any) {
+  function SamplePrevArrow(props: SampleArrowPropsType) {
     const { className, onClick } = props
     return (
       <div
         className={className}
-        // style={{ ...style, display: "block", background: "red" }} to custom update
+        // style={{ ...style, display: "block", background: "red" }} to custom render
         onClick={onClick}
       >
         <img src={prevArrow} alt="nextArrow" />

@@ -2,13 +2,7 @@ import s from './HomeTabletSmallElement.module.css'
 import calendar from '../../../../../../assets/img/home/Calendar.svg'
 import usersShadow from '../../../../../../assets/img/home/usersShadow.svg'
 
-const {
-  tabletComponent,
-  tabletComponentTitle,
-  tabletComponentText,
-  tabletComponentBody,
-  tabletComponentBodyBtn,
-} = s
+const { tabletComponent, tabletComponentTitle, tabletComponentText, tabletComponentBody, tabletComponentBodyBtn } = s
 
 type HomeTabletElementPropsType = {
   type: string

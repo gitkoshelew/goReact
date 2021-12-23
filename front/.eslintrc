@@ -31,6 +31,12 @@
         "args": "none"
       }
     ],
+    "@typescript-eslint/no-explicit-any": [
+      "warn",
+      {
+        "ignoreRestArgs": true
+      }
+    ],
     "max-len": [
         "warn",
       {

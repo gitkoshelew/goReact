@@ -4,8 +4,3 @@ docs/*
 templates/*
 src/react-app-env.d.ts
 src/serviceWorker.ts
-src/main/ui/components/Carousel/Carousel.tsx
-src/main/ui/components/ServicesElement/ServicesElement.tsx
-
-
-

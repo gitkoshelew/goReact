@@ -29,7 +29,7 @@ export const Button = ({ onClick, type, isActive }: BtnPropsType) => {
         </button>
       )}
       {type === 'upload' && (
-        <button  type={'submit'} disabled={!isActive} className={isActive ? uploadPetPhotoActive : uploadPetPhoto}>
+        <button type={'submit'} disabled={!isActive} className={isActive ? uploadPetPhotoActive : uploadPetPhoto}>
           Confirm
         </button>
       )}

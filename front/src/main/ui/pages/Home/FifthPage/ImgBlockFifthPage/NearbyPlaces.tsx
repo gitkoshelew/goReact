@@ -10,16 +10,8 @@ export const NearbyPlaces = () => {
         <NearbyPlacesElement infoDistanceMess={500} infoNameMess={'Nile river'} type={'main'} />
       </div>
       <div className={secondaryNearby}>
-        <NearbyPlacesElement
-          type={'secondary'}
-          infoNameMess={'Lakeside Asia'}
-          infoDistanceMess={500}
-        />
-        <NearbyPlacesElement
-          type={'secondary'}
-          infoNameMess={'Beach resort'}
-          infoDistanceMess={500}
-        />
+        <NearbyPlacesElement type={'secondary'} infoNameMess={'Lakeside Asia'} infoDistanceMess={500} />
+        <NearbyPlacesElement type={'secondary'} infoNameMess={'Beach resort'} infoDistanceMess={500} />
       </div>
     </div>
   )

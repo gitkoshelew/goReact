@@ -39,10 +39,7 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
           </div>
           <div>
             <div className={burgerMenu}>
-              <BurgerMenu
-                setIsBurgerCollapse={setIsBurgerCollapse}
-                isBurgerCollapse={isBurgerCollapse}
-              />
+              <BurgerMenu setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
             </div>
             <div className={commonNavBar}>
               <div className={navLinksBlock}>

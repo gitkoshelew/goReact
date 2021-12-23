@@ -8,21 +8,9 @@ type NearbyPlacesElementPropsType = {
   infoDistanceMess: number
 }
 
-const {
-  oneElement,
-  mainBlock,
-  secondaryBlock,
-  informBlock,
-  infoName,
-  infoDistance,
-  informBlockSecondary,
-} = s
+const { oneElement, mainBlock, secondaryBlock, informBlock, infoName, infoDistance, informBlockSecondary } = s
 
-export const NearbyPlacesElement = ({
-  type,
-  infoNameMess,
-  infoDistanceMess,
-}: NearbyPlacesElementPropsType) => {
+export const NearbyPlacesElement = ({ type, infoNameMess, infoDistanceMess }: NearbyPlacesElementPropsType) => {
   return (
     <div className={oneElement}>
       {type === 'main' && (

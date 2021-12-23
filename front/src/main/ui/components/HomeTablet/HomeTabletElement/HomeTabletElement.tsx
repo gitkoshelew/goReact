@@ -2,13 +2,7 @@ import s from './HomeTabletElement.module.css'
 import { calendar } from '../../../svgWrapper/HomeSvgWrapper'
 import { usersShadow } from '../../../svgWrapper/HomeSvgWrapper'
 
-const {
-  tabletComponent,
-  tabletComponentTitle,
-  tabletComponentText,
-  tabletComponentBody,
-  tabletComponentBodyBtn,
-} = s
+const { tabletComponent, tabletComponentTitle, tabletComponentText, tabletComponentBody, tabletComponentBodyBtn } = s
 
 type HomeTabletElementPropsType = {
   type: string
