@@ -12,8 +12,7 @@ func HomeAdmin() http.HandlerFunc {
 
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request) {
-		//var id int
-		//var password1 string
+		var id int
 		Login := r.FormValue("login")
 		Password := r.FormValue("password")
 		if Login == "" || Password == "" {
@@ -44,12 +43,12 @@ func HomeAdmin() http.HandlerFunc {
 			return
 		}
 
-		/*row := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1 AND password=$2", Login,Password)
+		row := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1 AND password=$2", Login,Password)
 		err = row.Scan(&id,&Login)
 		if err !=nil{
 			http.Error(w, err.Error(), 400)
 		return
-		}*/
+		}
 
 		files := []string{
 			"/api/webapp/admin/tamplates/homeAdmin.html",
