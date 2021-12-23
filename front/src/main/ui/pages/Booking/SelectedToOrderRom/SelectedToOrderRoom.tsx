@@ -8,7 +8,13 @@ import { deleteIcon } from '../../../svgWrapper/BookingRoomSvgWrapper'
 import { useAppDispatch } from '../../../../bll/store/store'
 import { useCallback } from 'react'
 
-const { selectedRoomsTablet, roomType } = s
+const {
+  selectedRoomsTablet,
+  selectedRoomsTabletElem,
+  selectedRoomsTabletTitle,
+  orderedRoomList,
+  onDeleteOrderRoomIcon,
+} = s
 
 type SelectedToOrderRoomPropsType = {
   orderedRoomBasket: OrderedRoomsType[]
@@ -25,20 +31,25 @@ export const SelectedToOrderRoom = ({ orderedRoomBasket }: SelectedToOrderRoomPr
   )
 
   const orderedRoomsView = orderedRoomBasket.map((t, i) => (
-    <div key={i}>
-      <div>{moment(t.id, 'MMDDYY').format('DD MMMM YYYY')}</div>
-      <div className={roomType}>
+    <div className={orderedRoomList} key={i}>
+      <div className={selectedRoomsTabletElem}>{moment(t.id, 'MMDDYY').format('DD MMMM YYYY')}</div>
+      <div className={selectedRoomsTabletElem}>
         {t.orderedRoomType}
-        <img onClick={() => onDeleteOrderRoomHandler(t)} src={deleteIcon} alt="deleteHandler" />
+        <img
+          className={onDeleteOrderRoomIcon}
+          onClick={() => onDeleteOrderRoomHandler(t)}
+          src={deleteIcon}
+          alt="deleteHandler"
+        />
       </div>
     </div>
   ))
 
   return (
     <div className={selectedRoomsTablet}>
-      <div>
-        <div>Date</div>
-        <div>Room Name</div>
+      <div className={selectedRoomsTabletTitle}>
+        <div className={selectedRoomsTabletElem}>Date</div>
+        <div className={selectedRoomsTabletElem}>Room Name</div>
       </div>
       {orderedRoomsView}
     </div>

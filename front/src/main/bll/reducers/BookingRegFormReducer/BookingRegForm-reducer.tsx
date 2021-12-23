@@ -8,7 +8,7 @@ const initialState: InitialStateType = {
 
 const BookingRegFormSlice = createSlice({
   name: 'BookingRegForm',
-  initialState: initialState as InitialStateType,
+  initialState: initialState,
   reducers: {
     changeProgressStatus(state, action: PayloadAction<{ newStatus: ProgressType }>) {
       state.progress = action.payload.newStatus

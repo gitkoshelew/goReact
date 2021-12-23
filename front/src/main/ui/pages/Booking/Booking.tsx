@@ -26,12 +26,12 @@ export const Booking = () => {
     if (!values.firstName) {
       errors.firstName = 'Required field'
     } else if (values.firstName.length > 15) {
-      errors.firstName = 'Must be 20 characters or less'
+      errors.firstName = 'Must be 15 characters or less'
     }
     if (!values.lastName) {
       errors.lastName = 'Required field'
     } else if (values.lastName.length > 15) {
-      errors.lastName = 'Must be 20 characters or less'
+      errors.lastName = 'Must be 15 characters or less'
     }
     if (!values.email) {
       errors.email = 'Required field'

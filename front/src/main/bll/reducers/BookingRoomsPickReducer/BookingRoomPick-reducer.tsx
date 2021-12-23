@@ -35,7 +35,7 @@ const initialState: InitialStateType = {
     { id: '123021', firstRoom: false, secondRoom: true },
     { id: '123121', firstRoom: true, secondRoom: false },
   ],
-  actualDay: new Date() as Date | string,
+  actualDay: new Date(),
   orderedRoomBasket: [],
 }
 

@@ -16,7 +16,7 @@ export const BurgerMenu = ({ isBurgerCollapse, setIsBurgerCollapse }: BurgerMenu
   return (
     <div>
       <div data-testid="test" onClick={setBurgerStatus} className={isBurgerCollapse ? burgerClose : burgerMenu}>
-        <span></span>
+        <span> </span>
       </div>
       {isBurgerCollapse && (
         <div onClick={setBurgerStatus} className={navLinksBurgerMenu}>

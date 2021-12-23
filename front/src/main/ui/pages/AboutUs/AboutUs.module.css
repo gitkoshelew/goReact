@@ -4,7 +4,7 @@
   margin-bottom: 5%;
   font-size: 85px;
   color: #663399;
-  font-family: 'Agency FB';
+  font-family: 'Agency FB', sans-serif;
 }
 
 .aboutUsTitle h1 {
@@ -27,7 +27,7 @@
 }
 
 .aboutText {
-  font-family: 'Book Antiqua';
+  font-family: 'Book Antiqua', sans-serif;
   color: black;
   font-weight: bold;
   font-size: 25px;

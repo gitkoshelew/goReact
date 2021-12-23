@@ -69,7 +69,7 @@
 }
 
 .burgerClose:after {
-  top: 0px;
+  top: 0;
   transform: rotate(-45deg);
 }
 
