@@ -8,19 +8,24 @@
   font-size: 16px;
   line-height: 19px;
   color: #ffffff;
+
+  .addressText {
+    margin-left: 25px;
+  }
+  .imgBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+
+    .textBlock {
+      margin-left: 8px;
+    }
+
+  }
+
 }
 
-.addressText {
-  margin-left: 25px;
-}
 
-.imgBlock {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 25px;
-}
 
-.textBlock {
-  margin-left: 8px;
-}
+

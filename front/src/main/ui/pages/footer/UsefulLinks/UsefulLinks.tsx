@@ -1,4 +1,4 @@
-import s from './UseFulLinks.module.css'
+import s from './UseFulLinks.module.scss'
 import { UsefulLinksElement } from './UseFulLinksElement/UsefulLinksElement'
 
 const { usefulLinksBlock, linksTitle, linksList, groupOfLinks } = s

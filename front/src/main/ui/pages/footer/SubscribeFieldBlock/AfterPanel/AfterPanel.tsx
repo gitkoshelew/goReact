@@ -1,4 +1,4 @@
-import s from './AfterPanel.module.css'
+import s from './AfterPanel.module.scss'
 import { planet } from '../../../../svgWrapper/footerSvgWrapper'
 
 const { afterPanelBlock, imgBlock, textBlock, addressText } = s
