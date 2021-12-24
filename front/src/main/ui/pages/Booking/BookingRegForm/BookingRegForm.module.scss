@@ -1,0 +1,94 @@
+.bookingForm {
+  width: 450px;
+  height: 670px;
+  background-color: white;
+  margin: -20px 0 40px 0;
+  border: 1px solid #0f97aa;
+  border-radius: 12px;
+
+  .clientDescription {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .errorInputInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      white-space: nowrap;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #000000;
+      &:nth-child(n) {
+        margin: 10px 20px;
+      }
+    }
+
+    .inputInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      white-space: nowrap;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #000000;
+      &:nth-child(n) {
+        margin: 20px 20px;
+      }
+    }
+    .errorMsg {
+      color: red;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+}
+
+
+.inputInfoInput {
+  width: 350px;
+  margin-top: 30px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 22px;
+}
+
+.uploadedImg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .uploadedImgContent {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px groove #0f97aa;
+    margin-top: 20px;
+  }
+}
+
+.errorInputInfoInput {
+  width: 350px;
+  margin-top: 30px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 22px;
+  border: 3px solid red;
+  outline: none !important;
+  &:nth-child(n) {
+    margin: 20px 20px;
+  }
+}

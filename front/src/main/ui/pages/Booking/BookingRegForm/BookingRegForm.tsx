@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './BookingRegForm.module.css'
+import s from './BookingRegForm.module.scss'
 import { ImgUpload } from './ImgUploadComponent/ImgUpload'
 import { useSelector } from 'react-redux'
 import { AppRootStateType } from '../../../../bll/store/store'
