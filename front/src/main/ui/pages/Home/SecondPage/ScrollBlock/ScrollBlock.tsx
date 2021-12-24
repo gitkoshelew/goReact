@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './ScrollBlock.module.css'
+import s from './ScrollBlock.module.scss'
 import arrow from '../../../../../../assets/img/home/secondPage/Arrow.svg'
 
 const { scrollBlock } = s

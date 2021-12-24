@@ -1,4 +1,4 @@
-import s from './MiniRoomBlock.module.css'
+import s from './MiniRoomBlock.module.scss'
 import { MiniRoomElement } from './MiniRoomElement/MiniRoomElement'
 
 const { miniRoom, oneRoomTop, oneRoomBottom } = s

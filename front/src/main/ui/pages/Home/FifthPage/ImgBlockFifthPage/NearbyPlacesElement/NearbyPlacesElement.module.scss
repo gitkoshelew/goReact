@@ -1,0 +1,183 @@
+.oneElement {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  background-color: grey;
+  width: 300px;
+  margin: 20px auto;
+  border-radius: 10px;
+  @media (min-width: 575px) {
+    width: 400px;
+  }
+  @media (min-width: 767px) {
+    width: 550px;
+  }
+  @media (min-width: 1144px) {
+    width: 100%;
+  }
+
+  .mainBlock {
+    width: 300px;
+    height: 400px;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    background: #c4c4c4;
+    position: relative;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+    margin-bottom: 10px;
+    @media (min-width: 575px) {
+      width: 400px;
+      height: 450px;
+    }
+    @media (min-width: 767px) {
+      width: 550px;
+      height: 600px;
+    }
+    @media (min-width: 1144px) {
+      height: 680px;
+      width: 580px;
+    }
+  }
+
+  .informBlock {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 0 20px;
+    position: relative;
+
+    &:after {
+      content: '';
+      width: 34px;
+      border-bottom: 1px solid white;
+      transform: rotate(90deg);
+      position: absolute;
+      left: 80px;
+      top: 11px;
+    }
+
+    @media (min-width: 767px) {
+      &:after {
+        left: 100px;
+      }
+    }
+
+    .infoName {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 25px;
+      color: white;
+      @media (min-width: 767px) {
+        font-size: 24px;
+      }
+    }
+
+    .infoDistance {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      color: #0f97aa;
+      margin-right: 40px;
+    }
+  }
+
+
+  .secondaryBlock {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #c4c4c4;
+    border-radius: 10px;
+    position: relative;
+    margin: 0 auto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 37px;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #000000;
+    @media (min-width: 575px) {
+      width: 400px;
+    }
+    @media (min-width: 767px) {
+      width: 550px;
+      height: 350px;
+    }
+    @media (min-width: 1144px) {
+      width: 300px;
+      height: 300px;
+    }
+
+    @media (min-width: 1250px) {
+      width: 500px;
+    }
+    @media (min-width: 1350px) {
+      width: 630px;
+    }
+  }
+}
+
+.informBlockSecondary {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 0 20px;
+  position: relative;
+
+  &:after {
+    content: '';
+    width: 36px;
+    border-bottom: 1px solid white;
+    transform: rotate(90deg);
+    position: absolute;
+    left: 120px;
+    top: 11px;
+  }
+
+  @media (min-width: 767px) {
+    &:after {
+      left: 145px;
+    }
+  }
+
+  .infoName {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+    color: white;
+    @media (min-width: 767px) {
+      font-size: 24px;
+    }
+  }
+
+  .infoDistance {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #0f97aa;
+    margin-right: 40px;
+  }
+}
+
+
+
+
+
+

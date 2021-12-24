@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './CeoMessText.module.css'
+import s from './CeoMessText.module.scss'
 
 const { mainText, secondaryText } = s
 

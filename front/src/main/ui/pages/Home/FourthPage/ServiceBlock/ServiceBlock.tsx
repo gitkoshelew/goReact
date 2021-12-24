@@ -1,4 +1,4 @@
-import s from './ServiceBlock.module.css'
+import s from './ServiceBlock.module.scss'
 import { ServicesElement } from '../../../../components/ServicesElement/ServicesElement'
 import { useState } from 'react'
 

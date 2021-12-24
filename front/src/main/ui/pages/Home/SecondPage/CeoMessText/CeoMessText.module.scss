@@ -7,6 +7,9 @@
   font-size: 34px;
   line-height: 33px;
   color: #000000;
+  @media (min-width: 1144px) {
+    font-size: 36px;
+  }
 }
 
 .secondaryText {
@@ -17,20 +20,14 @@
   font-size: 16px;
   line-height: 22px;
   color: #808080;
-}
-
-@media (min-width: 767px) {
-  .secondaryText {
+  @media (min-width: 767px) {
     font-size: 18px;
   }
-}
-
-@media (min-width: 1144px) {
-  .secondaryText {
+  @media (min-width: 1144px) {
     text-align: left;
     white-space: nowrap;
   }
-  .mainText {
-    font-size: 36px;
-  }
 }
+
+
+

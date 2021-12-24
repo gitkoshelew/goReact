@@ -96,10 +96,10 @@
   justify-content: center;
   @media (min-width: 1144px) {
     left: 550px;
+    z-index: 10;
   }
   @media (min-width: 1250px) {
     left: 605px;
-    z-index: 10;
   }
 
   p {

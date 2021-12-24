@@ -3,23 +3,19 @@
   flex-direction: column;
   align-items: center;
   background: #f9f9f9;
-}
-
-@media (min-width: 575px) {
-  .sixthPageTitle {
+  @media (min-width: 575px) {
     white-space: nowrap;
   }
-}
-
-@media (min-width: 767px) {
-  .sixthPageTitle {
+  @media (min-width: 767px) {
     margin: 0 10px -30px 180px;
   }
-}
-
-@media (min-width: 1144px) {
-  .sixthPageTitle {
+  @media (min-width: 1144px) {
     margin: 0 165px -30px 180px;
     padding: 10px 0;
   }
 }
+
+
+
+
+

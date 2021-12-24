@@ -14,18 +14,15 @@
   text-align: center;
   letter-spacing: 0.01em;
   color: #000000;
-}
-
-@media (min-width: 1023px) {
-  .ceoMessImg {
+  @media (min-width: 1023px) {
     height: 400px;
     width: 490px;
   }
-}
-
-@media (min-width: 1144px) {
-  .ceoMessImg {
+  @media (min-width: 1144px) {
     position: relative;
     top: -40px;
   }
 }
+
+
+

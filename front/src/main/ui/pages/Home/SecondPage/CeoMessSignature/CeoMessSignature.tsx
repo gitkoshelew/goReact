@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './CeoMessSignature.module.css'
+import s from './CeoMessSignature.module.scss'
 import { signature } from '../../../../svgWrapper/HomeSvgWrapper'
 
 const { ceoMessSignature } = s

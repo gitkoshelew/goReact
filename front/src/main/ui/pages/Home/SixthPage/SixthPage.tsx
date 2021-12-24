@@ -1,5 +1,5 @@
 import { TitlePageTextBlock } from '../../../components/TitlePageTextBlock/TitlePageTextBlock'
-import s from './SixthPage.module.css'
+import s from './SixthPage.module.scss'
 import { FeedBack } from '../../../components/FeedBack/FeedBack'
 import { flower, forkAndSpoon, swimmer } from '../../../svgWrapper/HomeSvgWrapper'
 import { Carousel } from '../../../components/Carousel/Carousel'
