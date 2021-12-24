@@ -5,18 +5,20 @@ import (
 	"goReact/domain/store"
 	"goReact/webapp/server/utils"
 	"net/http"
+	"strconv"
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-func AllEmployeeHandler() httprouter.Handle {
+func GetEmployeeByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		employees := []store.Employee{}
 
-		rows, err := db.Query("select * from employee")
+		id, _ := strconv.Atoi(ps.ByName("id"))
+		rows, err := db.Query("select * from employee where id=$1", id)
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -31,6 +33,11 @@ func AllEmployeeHandler() httprouter.Handle {
 				continue
 			}
 			employees = append(employees, e)
+		}
+
+		if len(employees) == 0 {
+			http.Error(w, "No employee with such id!", 400)
+			return
 		}
 
 		files := []string{

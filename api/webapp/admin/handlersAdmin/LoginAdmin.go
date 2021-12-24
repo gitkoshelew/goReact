@@ -3,13 +3,13 @@ package handlersadmin
 import (
 	"html/template"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func LoginAdmin() http.HandlerFunc {
+func LoginAdmin() httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-	return func(w http.ResponseWriter, r *http.Request) {
-
-		
 		files := []string{
 			"/api/webapp/admin/tamplates/loginAdmin.html",
 			"/api/webapp/admin/tamplates/base.html",

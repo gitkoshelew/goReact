@@ -1,4 +1,4 @@
-package hotelhandlers
+package bookingHandlers
 
 import (
 	"fmt"
@@ -6,11 +6,13 @@ import (
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func AllBookingsHandler() http.HandlerFunc {
+func AllBookingsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		bookings := []store.Booking{}
 
@@ -23,7 +25,7 @@ func AllBookingsHandler() http.HandlerFunc {
 
 		for rows.Next() {
 			b := store.Booking{}
-			err := rows.Scan(&b.BookingID, &b.Seat.SeatID, &b.Pet.PetID ,&b.Employee.EmployeeID, &b.Status, &b.StartDate, &b.EndDate, &b.ClientNotes)
+			err := rows.Scan(&b.BookingID, &b.Seat.SeatID, &b.Pet.PetID, &b.Employee.EmployeeID, &b.Status, &b.StartDate, &b.EndDate, &b.ClientNotes)
 			if err != nil {
 				fmt.Println(err)
 				continue
@@ -47,6 +49,5 @@ func AllBookingsHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), 400)
 			return
 		}
-
 	}
 }

@@ -1,18 +1,20 @@
 package handlersadmin
 
 import (
-	"fmt"
-	"goReact/domain/store"
-	"goReact/webapp/server/utils"
+	//"fmt"
+	//"goReact/domain/store"
+	//"goReact/webapp/server/utils"
 	"html/template"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func HomeAdmin() http.HandlerFunc {
+func HomeAdmin() httprouter.Handle {
 
-	db := utils.HandlerDbConnection()
-	return func(w http.ResponseWriter, r *http.Request) {
-		var id int
+	//	db := utils.HandlerDbConnection()
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		/*var id int
 		Login := r.FormValue("login")
 		Password := r.FormValue("password")
 		if Login == "" || Password == "" {
@@ -48,7 +50,7 @@ func HomeAdmin() http.HandlerFunc {
 		if err !=nil{
 			http.Error(w, err.Error(), 400)
 		return
-		}
+		}*/
 
 		files := []string{
 			"/api/webapp/admin/tamplates/homeAdmin.html",

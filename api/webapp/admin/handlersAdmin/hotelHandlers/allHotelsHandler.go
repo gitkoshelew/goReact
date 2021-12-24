@@ -6,11 +6,13 @@ import (
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func AllHotelsHandler() http.HandlerFunc {
+func AllHotelsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		hotels := []store.Hotel{}
 
@@ -47,6 +49,5 @@ func AllHotelsHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), 400)
 			return
 		}
-
 	}
 }

@@ -1,22 +1,24 @@
-package employeeHandlers
+package hotelhandlers
 
 import (
 	"fmt"
 	"goReact/domain/store"
 	"goReact/webapp/server/utils"
 	"net/http"
+	"strconv"
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-func AllEmployeeHandler() httprouter.Handle {
+func GetHotelByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		employees := []store.Employee{}
+		hotels := []store.Hotel{}
 
-		rows, err := db.Query("select * from employee")
+		id, _ := strconv.Atoi(ps.ByName("id"))
+		rows, err := db.Query("select * from hotel where id=$1", id)
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -24,17 +26,22 @@ func AllEmployeeHandler() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			e := store.Employee{}
-			err := rows.Scan(&e.EmployeeID, &e.User.UserID, &e.Hotel.HotelID, &e.Position, &e.Role)
+			h := store.Hotel{}
+			err := rows.Scan(&h.HotelID, &h.Name, &h.Address)
 			if err != nil {
 				fmt.Println(err)
 				continue
 			}
-			employees = append(employees, e)
+			hotels = append(hotels, h)
+		}
+
+		if len(hotels) == 0 {
+			http.Error(w, "No hotel with such id!", 400)
+			return
 		}
 
 		files := []string{
-			"/api/webapp/admin/tamplates/allEmployee.html",
+			"/api/webapp/admin/tamplates/allHotels.html",
 			"/api/webapp/admin/tamplates/base.html",
 		}
 
@@ -44,7 +51,7 @@ func AllEmployeeHandler() httprouter.Handle {
 			return
 		}
 
-		err = tmpl.Execute(w, employees)
+		err = tmpl.Execute(w, hotels)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
 			return

@@ -1,22 +1,24 @@
-package employeeHandlers
+package petHandlers 
 
 import (
 	"fmt"
 	"goReact/domain/store"
 	"goReact/webapp/server/utils"
 	"net/http"
+	"strconv"
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-func AllEmployeeHandler() httprouter.Handle {
+func GetPetByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
-		employees := []store.Employee{}
-
-		rows, err := db.Query("select * from employee")
+	
+		pets := []store.Pet{}
+		
+		id, _ := strconv.Atoi(ps.ByName("id"))
+		rows, err := db.Query("select * from pet where id=$1", id)
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -24,17 +26,22 @@ func AllEmployeeHandler() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			e := store.Employee{}
-			err := rows.Scan(&e.EmployeeID, &e.User.UserID, &e.Hotel.HotelID, &e.Position, &e.Role)
+			p := store.Pet{}
+			err := rows.Scan(&p.PetID, &p.Name, &p.Type, &p.Weight, &p.Diesieses, &p.Owner.ClientID)
 			if err != nil {
 				fmt.Println(err)
 				continue
 			}
-			employees = append(employees, e)
+			pets = append(pets, p)
+		}
+
+		if len(pets) == 0 {
+			http.Error(w, "No pet with such id!", 400)
+			return
 		}
 
 		files := []string{
-			"/api/webapp/admin/tamplates/allEmployee.html",
+			"/api/webapp/admin/tamplates/allPets.html",
 			"/api/webapp/admin/tamplates/base.html",
 		}
 
@@ -44,7 +51,7 @@ func AllEmployeeHandler() httprouter.Handle {
 			return
 		}
 
-		err = tmpl.Execute(w, employees)
+		err = tmpl.Execute(w, pets)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
 			return

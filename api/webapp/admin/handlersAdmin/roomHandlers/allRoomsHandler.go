@@ -1,4 +1,4 @@
-package hotelhandlers
+package roomHandlers
 
 import (
 	"fmt"
@@ -6,11 +6,13 @@ import (
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func AllRoomsHandler() http.HandlerFunc {
+func AllRoomsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		rooms := []store.Room{}
 
@@ -47,6 +49,5 @@ func AllRoomsHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), 400)
 			return
 		}
-
 	}
 }

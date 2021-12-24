@@ -6,11 +6,13 @@ import (
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func AllPetsHandler() http.HandlerFunc {
+func AllPetsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		pets := []store.Pet{}
 

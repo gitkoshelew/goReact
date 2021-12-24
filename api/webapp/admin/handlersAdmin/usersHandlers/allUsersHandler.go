@@ -6,11 +6,13 @@ import (
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
+
+	"github.com/julienschmidt/httprouter"
 )
 
-func AllUsersHandler() http.HandlerFunc {
+func AllUsersHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		users := []store.User{}
 
@@ -47,6 +49,5 @@ func AllUsersHandler() http.HandlerFunc {
 			http.Error(w, err.Error(), 400)
 			return
 		}
-
 	}
 }
