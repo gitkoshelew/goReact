@@ -1,4 +1,4 @@
-import s from './NavLinks.module.css'
+import s from './NavLinks.module.scss'
 import { NavLink } from 'react-router-dom'
 
 const { navLinkTitle, oneLink, oneLinkActive } = s

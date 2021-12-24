@@ -8,6 +8,19 @@
   top: 255px;
   left: 5px;
   padding: 0 10px;
+  @media (min-width: 575px) {
+    top: 350px;
+  }
+  @media (min-width: 767px) {
+    top: 500px;
+    left: 20px;
+    width: 320px;
+  }
+  @media (min-width: 1250px) {
+    top: 575px;
+    width: 260px;
+    left: 10px;
+  }
 }
 
 .roomInfoElement {
@@ -23,44 +36,16 @@
   text-align: center;
   letter-spacing: 0.01em;
   color: #ffffff;
-}
 
-.roomInfoElement img {
-  margin-right: 8px;
-}
-
-@media (min-width: 575px) {
-  .roomInfo {
-    top: 350px;
-  }
-}
-
-@media (min-width: 767px) {
-  .roomInfo {
-    top: 500px;
-    left: 20px;
-    width: 320px;
+  img {
+    margin-right: 8px;
   }
 
-  .roomInfoElement {
+  @media (min-width: 767px) {
     margin-right: 30px;
     font-size: 16.4px;
   }
-}
-
-@media (min-width: 1144px) {
-  .roomInfoElement {
-    margin-right: 30px !important;
-  }
-}
-
-@media (min-width: 1250px) {
-  .roomInfo {
-    top: 575px;
-    width: 260px;
-    left: 10px;
-  }
-  .roomInfoElement {
+  @media (min-width: 1250px) {
     font-size: 11.4px;
     margin-right: 24px !important;
   }

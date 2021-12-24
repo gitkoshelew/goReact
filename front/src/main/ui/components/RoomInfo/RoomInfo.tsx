@@ -1,4 +1,4 @@
-import s from './RoomInfo.module.css'
+import s from './RoomInfo.module.scss'
 import { children } from '../../svgWrapper/HomeSvgWrapper'
 import { adult } from '../../svgWrapper/HomeSvgWrapper'
 import { square } from '../../svgWrapper/HomeSvgWrapper'
