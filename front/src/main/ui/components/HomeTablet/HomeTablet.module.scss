@@ -8,23 +8,15 @@
   align-items: center;
   position: relative;
   z-index: 3;
-}
-
-@media (min-width: 1023px) {
-  .tabletTitle {
+  @media (min-width: 1023px) {
     margin: 0 auto;
   }
-}
-
-@media (min-width: 1144px) {
-  .tabletTitle {
+  @media (min-width: 1144px) {
     margin: -140px 484px 0 0;
     width: 565px;
   }
-}
-@media (min-width: 1250px) {
-  .tabletTitle {
-    margin: -140px 527px 0 0;
+  @media (min-width: 1250px) {
+    margin: -140px 470px 0 0;
     width: 620px;
   }
 }

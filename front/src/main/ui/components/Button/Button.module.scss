@@ -38,10 +38,9 @@
   font-size: 23px;
   font-weight: 300;
   margin: 30px;
-}
-
-.uploadPetPhotoActive:hover {
-  background: aquamarine;
+  &:hover {
+    background: aquamarine;
+  }
 }
 
 .uploadPetPhoto {

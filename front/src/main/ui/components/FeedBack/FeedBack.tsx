@@ -1,4 +1,4 @@
-import s from './FeedBack.module.css'
+import s from './FeedBack.module.scss'
 import { staples } from '../../svgWrapper/HomeSvgWrapper'
 
 const {
