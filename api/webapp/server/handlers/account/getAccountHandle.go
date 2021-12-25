@@ -23,10 +23,10 @@ func GetAccountHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		accountRow := db.QueryRow("SELECT * FROM ACCOUNT WHERE id = $1", id)
+		row := db.QueryRow("SELECT * FROM ACCOUNT WHERE id = $1", id)
 
 		account := dto.AccountDto{}
-		err = accountRow.Scan(
+		err = row.Scan(
 			&account.AccountID,
 			&account.Login,
 			&account.Password)

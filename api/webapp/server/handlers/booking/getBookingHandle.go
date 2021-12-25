@@ -23,10 +23,10 @@ func GetBookingHandle() httprouter.Handle {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		bookingRow := db.QueryRow("SELECT * FROM BOOKING WHERE id = $1", id)
+		row := db.QueryRow("SELECT * FROM BOOKING WHERE id = $1", id)
 
 		booking := dto.BookingDto{}
-		err = bookingRow.Scan(
+		err = row.Scan(
 			&booking.BookingID,
 			&booking.SeatID,
 			&booking.PetID,

@@ -2,7 +2,9 @@ package account
 
 import (
 	"encoding/json"
+	"goReact/domain/store"
 	"goReact/webapp/server/utils"
+	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -20,10 +22,14 @@ func PostAccountHandle() httprouter.Handle {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
+		encryptedPassword, err := store.EncryptPassword(req.Password)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		var id int
-		err := db.QueryRow("INSERT into ACCOUNT (Login, Password) VALUES ($1, $2) RETURNING id",
-			req.Login, req.Password,
+		err = db.QueryRow("INSERT into ACCOUNT (Login, Password) VALUES ($1, $2) RETURNING id",
+			req.Login, encryptedPassword,
 		).Scan(&id)
 
 		if err != nil {
