@@ -1,4 +1,4 @@
-package account
+package authentication
 
 import (
 	"encoding/json"
@@ -11,13 +11,17 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// Validation is GET method. Checkes login and password and returns accounts user if validation was passed
-func Validation() httprouter.Handle {
+// LoginHandle is GET method. Checkes login and password and returns accounts user if validation was passed
+func LoginHandle() httprouter.Handle {
 	db := utils.HandlerDbConnection()
+	type accountRequest struct {
+		AccountID int    `json:"accountId"`
+		Login     string `json:"login"`
+		Password  string `json:"password"`
+	}
 
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
 
 		req := &accountRequest{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
@@ -56,6 +60,25 @@ func Validation() httprouter.Handle {
 			panic(err)
 		}
 
+		tk, err := CreateToken(uint64(user.AccountID))
+		tokens := map[string]string{
+			"access_token":  tk.AccessToken,
+			"refresh_token": tk.RefreshToken,
+		}
+		err = CreateAuth(uint64(user.AccountID), tk)
+		if err != nil {
+			log.Printf("%v. %v", http.StatusUnprocessableEntity, err)
+		}
+
+		c := http.Cookie{
+			Name:     "JWT",
+			Value:    tk.AccessToken,
+			HttpOnly: true,
+		}
+
+		http.SetCookie(w, &c)
+		json.NewEncoder(w).Encode(tokens)
 		json.NewEncoder(w).Encode(user)
+
 	}
 }

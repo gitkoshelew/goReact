@@ -24,6 +24,8 @@ func main() {
 	webapp.ConnectDb(config)
 	initAccountDb()
 
+	webapp.ConnectRedis(config)
+
 	s := server.New(config)
 
 	if err := s.Start(); err != nil {

@@ -14,8 +14,7 @@ import (
 func GetHotelHandle() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 
-	return func(
-		w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 

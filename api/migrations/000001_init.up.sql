@@ -76,3 +76,9 @@ CREATE TABLE IF NOT EXISTS IMAGES
     URL             TEXT NOT NULL ,
     ownerId         INTEGER 
 );
+
+CREATE TABLE IF NOT EXISTS TOKENS 
+(   uuid TEXT,
+    userid INTEGER,
+    expire CHARACTER VARYING(30)
+);
