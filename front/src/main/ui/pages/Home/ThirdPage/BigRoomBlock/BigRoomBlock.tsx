@@ -1,4 +1,4 @@
-import s from './BigRoomBlock.module.css'
+import s from './BigRoomBlock.module.scss'
 import { PriceWindow } from '../../../../components/priceWindow/PriceWindow'
 import { RoomInfo } from '../../../../components/RoomInfo/RoomInfo'
 
