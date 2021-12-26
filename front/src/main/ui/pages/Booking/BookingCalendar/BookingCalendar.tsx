@@ -23,7 +23,7 @@ export const BookingCalendar = () => {
   )
 
   const searchInRentArr = (props: CalendarTileProperties) => {
-    const singleDay = isRentArr.find((t) => t.id === moment(props.date).format('MMDDYY'))
+    const singleDay = isRentArr?.length && isRentArr.find((t) => t.id === moment(props.date).format('MMDDYY'))
     if (singleDay) {
       return !singleDay.secondRoom && !singleDay.firstRoom
     }
