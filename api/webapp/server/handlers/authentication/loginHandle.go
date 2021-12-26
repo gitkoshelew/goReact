@@ -57,6 +57,8 @@ func LoginHandle() httprouter.Handle {
 			return
 		}
 
+		log.Printf("USER ID before create token: %d", user.UserID)
+
 		tk, err := CreateToken(uint64(user.UserID))
 		tokens := map[string]string{
 			"access_token":  tk.AccessToken,

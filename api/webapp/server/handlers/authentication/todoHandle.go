@@ -11,7 +11,6 @@ import (
 // Todo ...
 type Todo struct {
 	UserID uint64 `json:"userId"`
-	Title  string `json:"title"`
 }
 
 // TodoHandle ...

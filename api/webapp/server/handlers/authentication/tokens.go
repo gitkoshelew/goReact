@@ -71,12 +71,15 @@ func CreateAuth(userid uint64, td *Token) error {
 	at := time.Unix(td.AtExpires, 0)
 	rt := time.Unix(td.RtExpires, 0)
 	now := time.Now()
-	errAccess := db.QueryRow("INSERT into TOKENS (uuid, userid, dur) VALUES ($1, $2, $3)",
+
+	log.Printf("USER ID afrer create token: %d", userid)
+
+	errAccess := db.QueryRow("INSERT into TOKENS (uuid, userid, expire) VALUES ($1, $2, $3)",
 		td.AccessUUID, userid, at.Sub(now).String()).Err()
 	if errAccess != nil {
 		return errAccess
 	}
-	errRefresh := db.QueryRow("INSERT into TOKENS (uuid, userid, dur) VALUES ($1, $2, $3)",
+	errRefresh := db.QueryRow("INSERT into TOKENS (uuid, userid, expire) VALUES ($1, $2, $3)",
 		td.RefreshUUID, userid, rt.Sub(now).String()).Err()
 	if errRefresh != nil {
 		return errRefresh

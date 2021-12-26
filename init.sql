@@ -74,6 +74,12 @@ CREATE TABLE IF NOT EXISTS BOOKING
     client_notes     TEXT
 );
 
+CREATE TABLE IF NOT EXISTS TOKENS 
+(   uuid TEXT,
+    userid INTEGER,
+    expire CHARACTER VARYING(30)
+);
+
 INSERT INTO ACCOUNT ( Login, Password) VALUES 
 ('login1', 'password1'),
 ('login2', 'password2'),
