@@ -6,14 +6,18 @@ CREATE TABLE IF NOT EXISTS ACCOUNT
 
 CREATE TABLE IF NOT EXISTS USERS 
 (   id              serial PRIMARY key,
+    email           CHARACTER VARYING(30) ,
+    password        TEXT ,
+    role            CHARACTER VARYING(30) NOT NULL ,
+    verified        BOOLEAN NOT NULL ,
     first_name      CHARACTER VARYING(30) NOT NULL ,
     surname         CHARACTER VARYING(30) NOT NULL ,
-    middle_name     CHARACTER VARYING(30) ,
-    email           CHARACTER VARYING(30) ,
+    middle_name     CHARACTER VARYING(30) NOT NULL ,
+    sex             INTEGER NOT NULL, /* 0 = male, 1 = female */
     date_of_birth   DATE NOT NULL ,
-    address         TEXT NOT NULL ,
-    phone           CHARACTER VARYING(30) NOT NULL ,
-    account_id      INTEGER REFERENCES ACCOUNT(id) ON DELETE CASCADE NOT NULL 
+    address         TEXT ,
+    phone           CHARACTER VARYING(30) NOT NULL , 
+    photo           TEXT
 );
 
 CREATE TABLE IF NOT EXISTS HOTEL 
@@ -78,13 +82,13 @@ INSERT INTO ACCOUNT ( Login, Password) VALUES
 ('login5', 'password5'),
 ('login6', 'password6');
 
-INSERT INTO USERS (first_name , surname, middle_name, email, date_of_birth, address, phone, account_id) VALUES 
-('Ivan','Ivanov','Ivanovich','ivan@mail.ru','2000-01-01' ,'Minsk Pr. Nezavisimosti 22-222' ,'+375-29-154-89-33', 1),
-('Petr','Petrov','Petrovich','petr@mail.ru','1999-03-13 ','Minsk Pr. Pobediteley 11-111' ,'+375-29-159-11-78', 2),
-('Maria','Petrova','Evgenievna','liza@mail.ru','2001-11-11' ,'Minsk Pr. Pobediteley 111-111' ,'+375-29-655-99-14', 3),
-('Olga','Oleeva','Vladimirovna','olga@mail.ru','2001-01-01' ,'Minsk ul. Nesterova 1-32' ,'+375-29-675-00-00', 4),
-('Vladzimir','Sakhonchik','Alekseevish','leha@mail.ru','1998-02-11' ,'Minsk Partizanskiy 124-1' ,'+375-29-111-22-33', 5),
-('Mikhail','Valevach','Dmitrievich','miha@mail.ru','1997-01-12' ,'Minsk Pr. Dzerjinskogo 01-01' ,'+375-29-777-55-44', 6);
+INSERT INTO USERS (email, password, role, verified, first_name , surname, middle_name, sex, date_of_birth, address, phone, photo) VALUES 
+('ivan@mail.ru', 'password1', 'client', true, 'Ivan','Ivanov','Ivanovich', 0, '2000-01-01', 'Minsk Pr. Nezavisimosti 22-222' ,'+375-29-154-89-33', 'PhotoURL...'),
+('petr@mail.ru', 'password2', 'client', true, 'Petr','Petrov','Petrovich', 0, '1999-03-13 ', 'Minsk Pr. Pobediteley 11-111' ,'+375-29-159-11-78', 'PhotoURL...'),
+('liza@mail.ru', 'password3', 'client', true, 'Maria','Petrova','Evgenievna', 1, '2001-11-11', 'Minsk Pr. Pobediteley 111-111' ,'+375-29-655-99-14', 'PhotoURL...'),
+('olga@mail.ru', 'password4', 'employee', true, 'Olga','Oleeva','Vladimirovna', 1, '2001-01-01', 'Minsk ul. Nesterova 1-32' ,'+375-29-675-00-00', 'PhotoURL...'),
+('leha@mail.ru', 'password5', 'employee', true, 'Vladzimir','Sakhonchik','Alekseevish', 0, '1998-02-11', 'Minsk Partizanskiy 124-1' ,'+375-29-111-22-33', 'PhotoURL...'),
+('miha@mail.ru', 'password6', 'employee', true, 'Mikhail','Valevach','Dmitrievich', 0, '1997-01-12', 'Minsk Pr. Dzerjinskogo 01-01' ,'+375-29-777-55-44', 'PhotoURL...');
 
 INSERT INTO HOTEL (name, address) VALUES 
 ('PetsHotel1','ul. Pushkina 12'),

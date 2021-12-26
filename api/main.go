@@ -43,7 +43,7 @@ func initAccountDb() {
 			log.Fatal(err)
 		}
 
-		result, err := db.Exec("UPDATE ACCOUNT set password = $1 WHERE id = $2",
+		result, err := db.Exec("UPDATE USERS set password = $1 WHERE id = $2",
 			encryptedPassword, i+1)
 		if err != nil {
 			panic(err)

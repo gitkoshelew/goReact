@@ -16,6 +16,8 @@ import (
 
 func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/", handlers.HandleHomePage())
+
+	s.router.Handle("POST", "/registration", authentication.RegistrationHandle())
 	s.router.Handle("POST", "/login", authentication.LoginHandle())
 	s.router.Handle("POST", "/logout", authentication.LogoutHandle())
 	s.router.Handle("POST", "/todo", authentication.TodoHandle())

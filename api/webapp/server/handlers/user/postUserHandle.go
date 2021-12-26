@@ -16,14 +16,14 @@ func PostUserHandle() httprouter.Handle {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		req := &userRequest{}
+		req := &UserRequest{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
 		var id int
-		err := db.QueryRow("INSERT into USERS (first_name, surname, middle_name, email, date_of_birth, address, phone, account_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id",
-			req.Name, req.Surname, req.MiddleName, req.Email, req.DateOfBirth, req.Address, req.Phone, req.AccountID,
+		err := db.QueryRow("INSERT INTO USERS (email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id",
+			req.Email, req.Password, req.Role, req.Verified, req.Name, req.Surname, req.MiddleName, req.Sex, req.DateOfBirth, req.Address, req.Phone, req.Photo,
 		).Scan(&id)
 
 		if err != nil {

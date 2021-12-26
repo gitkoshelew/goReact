@@ -2,52 +2,69 @@ package store
 
 import (
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
+)
+
+// Role ...
+type Role string
+
+// Role constants
+const (
+	ClientRole    Role = "client"
+	EmployeeRole  Role = "employee"
+	AnonymousRole Role = "anonymous"
 )
 
 // User extends Account and has all Account fields
 type User struct {
-	Account
 	UserID      int       `json:"userId"`
+	Email       string    `json:"email"`
+	Password    string    `json:"-"`
+	Role        Role      `json:"role"`
+	Verified    bool      `json:"verified"`
 	Name        string    `json:"name"`
 	Surname     string    `json:"sName"`
 	MiddleName  string    `json:"mName"`
+	Sex         int       `json:"sex"`
 	DateOfBirth time.Time `json:"birthDate"`
 	Address     string    `json:"address"`
 	Phone       string    `json:"phone"`
-	Email       string    `json:"email"`
+	Photo       string    `json:"photo"`
 }
 
-// SetName sets Users name
-func (u *User) SetName(s string) {
-	u.Name = s
+// NewUser creates User with encrypted password
+func NewUser(id, sex int, email, password, role, name, surname, middleName, address, phone, photo string, verified bool, dateOfBirth time.Time) User {
+	user := User{
+		UserID:      id,
+		Email:       email,
+		Password:    password,
+		Role:        Role(role),
+		Verified:    verified,
+		Name:        name,
+		Surname:     surname,
+		MiddleName:  middleName,
+		Sex:         sex,
+		DateOfBirth: dateOfBirth,
+		Address:     address,
+		Phone:       phone,
+		Photo:       photo,
+	}
+	user.Password, _ = EncryptPassword(user.Password)
+	return user
 }
 
-// SetSurname sets Users Surname
-func (u *User) SetSurname(s string) {
-	u.Surname = s
+// EncryptPassword ...
+func EncryptPassword(s string) (string, error) {
+	b, err := bcrypt.GenerateFromPassword([]byte(s), bcrypt.MinCost)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
 
-// SetMiddleName sets Users Middlename
-func (u *User) SetMiddleName(s string) {
-	u.MiddleName = s
-}
-
-// SetDateOfBirth sets Users date of birth
-func (u *User) SetDateOfBirth(t time.Time) {
-	u.DateOfBirth = t
-}
-
-// SetAddress sets Users Address
-func (u *User) SetAddress(s string) {
-	u.Address = s
-}
-
-// SetPhone sets Users phone number
-func (u *User) SetPhone(s string) {
-	u.Phone = s
-}
-
-// SetEmail sets Users email
-func (u *User) SetEmail(s string) {
-	u.Email = s
+// CheckPasswordHash matches password with encrypted password<returns true/false
+func CheckPasswordHash(hash, password string) error {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err
 }
