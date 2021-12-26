@@ -10,13 +10,7 @@ export const ThirdPage = () => {
     <div className={thirdPage}>
       <TitlePageTextBlock isWithLink={false} mainTextMess={'OUR FAVORITE ROOMS'} />
       <div className={photoBlock}>
-        <BigRoomBlock
-          roomName={'Luxure'}
-          price={100}
-          adultNum={2}
-          childrenNum={2}
-          squareNum={100}
-        />
+        <BigRoomBlock roomName={'Luxure'} price={100} adultNum={2} childrenNum={2} squareNum={100} />
         <MiniRoomBlock />
       </div>
     </div>

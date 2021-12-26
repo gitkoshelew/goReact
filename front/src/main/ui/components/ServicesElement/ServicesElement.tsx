@@ -22,7 +22,7 @@ export const ServicesElement = ({
   setIsActive,
 }: ServicesElementPropsType) => {
   const onActiveClassHandler = (propertyName: string) => {
-    const newIsActive: any = { ...isActive }
+    const newIsActive: IsActiveServiceElementType = { ...isActive }
     for (const key in newIsActive) {
       key === propertyName ? (newIsActive[key] = true) : (newIsActive[key] = false)
     }
@@ -32,10 +32,7 @@ export const ServicesElement = ({
   return (
     <>
       {type === 'forkAndSpoon' && (
-        <div
-          onClick={() => onActiveClassHandler('elem1')}
-          className={isActive.elem1 ? oneElementActive : oneElement}
-        >
+        <div onClick={() => onActiveClassHandler('elem1')} className={isActive.elem1 ? oneElementActive : oneElement}>
           <div className={imgBlock}>
             <img src={forkAndSpoon} alt="forkAndSpoon" />
           </div>
@@ -46,10 +43,7 @@ export const ServicesElement = ({
         </div>
       )}
       {type === 'swimmer' && (
-        <div
-          onClick={() => onActiveClassHandler('elem4')}
-          className={isActive.elem4 ? oneElementActive : oneElement}
-        >
+        <div onClick={() => onActiveClassHandler('elem4')} className={isActive.elem4 ? oneElementActive : oneElement}>
           <div className={imgBlock}>
             <img src={swimmer} alt="swimmer" />
           </div>
@@ -60,10 +54,7 @@ export const ServicesElement = ({
         </div>
       )}
       {type === 'flower' && (
-        <div
-          onClick={() => onActiveClassHandler('elem3')}
-          className={isActive.elem3 ? oneElementActive : oneElement}
-        >
+        <div onClick={() => onActiveClassHandler('elem3')} className={isActive.elem3 ? oneElementActive : oneElement}>
           <div className={imgBlock}>
             <img src={flower} alt="flower" />
           </div>
@@ -74,10 +65,7 @@ export const ServicesElement = ({
         </div>
       )}
       {type === 'case' && (
-        <div
-          onClick={() => onActiveClassHandler('elem2')}
-          className={isActive.elem2 ? oneElementActive : oneElement}
-        >
+        <div onClick={() => onActiveClassHandler('elem2')} className={isActive.elem2 ? oneElementActive : oneElement}>
           <div className={imgBlock}>
             <img src={Case} alt="case" />
           </div>

@@ -8,11 +8,7 @@ export const FifthPage = () => {
   return (
     <div className={fifthPage}>
       <div className={titleText}>
-        <TitlePageTextBlock
-          isWithLink={true}
-          linkTextMess={'See more'}
-          mainTextMess={'Places nearby'}
-        />
+        <TitlePageTextBlock isWithLink={true} linkTextMess={'See more'} mainTextMess={'Places nearby'} />
       </div>
       <NearbyPlaces />
     </div>

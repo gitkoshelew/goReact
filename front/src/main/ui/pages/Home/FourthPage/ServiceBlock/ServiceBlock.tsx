@@ -5,7 +5,7 @@ import { useState } from 'react'
 const { serviceBlock, toRows } = s
 
 export type IsActiveServiceElementType = {
-  elem1: boolean
+  [elem1: string]: boolean
   elem2: boolean
   elem3: boolean
   elem4: boolean

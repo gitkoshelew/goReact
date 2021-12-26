@@ -1,0 +1,44 @@
+.selectedRoomsTablet {
+  flex-direction: column;
+  display: flex;
+  border: 2px solid #0f97aa;
+  position: absolute;
+  top: -25px;
+  left: -600px;
+  border-radius: 4px;
+  border-top: 0;
+  border-right: 0;
+}
+
+.selectedRoomsTabletTitle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.selectedRoomsTabletElem {
+  padding: 4px 25px;
+  width: 200px;
+  border: 2px solid #0f97aa;
+  white-space: nowrap;
+  border-left: 0;
+  border-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.onDeleteOrderRoomIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.onDeleteOrderRoomIcon:hover {
+  background-color: indianred;
+  outline: 2px solid #0f97aa;
+  border-radius: 8px;
+}
+
+.orderedRoomList {
+  display: flex;
+}

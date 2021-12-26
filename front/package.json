@@ -7,13 +7,16 @@
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.1.1",
-    "@testing-library/jest-dom": "^5.16.1",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.24.0",
     "babel-plugin-react-css-modules": "^5.2.6",
+    "formik": "^2.2.9",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-burger-menu": "^3.0.6",
+    "react-calendar": "^3.5.0",
     "react-dom": "^17.0.2",
+    "react-drag-drop-files": "^2.2.2",
     "react-redux": "^7.2.6",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^6.0.2",
@@ -23,7 +26,6 @@
     "redux-saga": "^1.1.3",
     "slick-carousel": "^1.8.1",
     "typed-css-modules": "^0.7.0",
-    "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -33,7 +35,7 @@
     "test:coverage": "react-scripts test --passWithNoTests --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint src",
-    "prettierPreccommit": "prettier --write"
+    "prettierPreccommit": "prettier --write src/"
   },
   "eslintConfig": {
     "extends": [
@@ -54,8 +56,11 @@
     ]
   },
   "devDependencies": {
+    "typescript": "^4.1.2",
+    "@types/react-calendar": "^3.4.3",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@testing-library/jest-dom": "^5.16.1",
     "@types/brainhubeu__react-carousel": "^2.0.4",
     "@types/jest": "^27.0.3",
     "@types/node": "^12.0.0",
@@ -75,17 +80,17 @@
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-jest-dom": "^3.9.2",
+    "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-testing-library": "^5.0.1",
     "eslint-webpack-plugin": "^3.1.1",
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/react-hooks": "^7.0.2",
-    "eslint-plugin-jest-dom": "^3.9.2",
-    "eslint-plugin-jest-formatting": "^3.1.0",
-    "eslint-plugin-testing-library": "^5.0.1",
     "husky": "^7.0.0",
     "lint-staged": "^12.1.2",
     "prettier": "^2.5.1",

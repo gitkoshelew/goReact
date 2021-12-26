@@ -12,13 +12,7 @@ type MiniRoomElementPropsType = {
   roomName: string
 }
 
-export const MiniRoomElement = ({
-  childrenNum,
-  adultNum,
-  squareNum,
-  price,
-  roomName,
-}: MiniRoomElementPropsType) => {
+export const MiniRoomElement = ({ childrenNum, adultNum, squareNum, price, roomName }: MiniRoomElementPropsType) => {
   return (
     <div className={oneRoom}>
       <PriceWindow price={price} />

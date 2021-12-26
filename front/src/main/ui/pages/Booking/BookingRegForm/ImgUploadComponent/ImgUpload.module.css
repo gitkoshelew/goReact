@@ -1,0 +1,11 @@
+.uploadTablet {
+  margin: 30px 0;
+}
+
+.customTablet {
+  border: dashed 2px #0f97aa;
+}
+
+.customTablet span {
+  margin: 0 3px;
+}
