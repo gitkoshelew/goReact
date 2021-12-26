@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .contactInfo {
   margin: 0 auto;
   position: relative;
@@ -39,7 +41,7 @@
     font-size: 16px;
     line-height: 19px;
     text-decoration-line: underline;
-    color: #ffffff;
+    color: $MainBackgroundColor;
     margin: 20px 0 10px 67px;
   }
 }

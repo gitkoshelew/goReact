@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .mainText {
   width: 290px;
   height: 106px;
@@ -6,7 +8,7 @@
   font-weight: 600;
   font-size: 34px;
   line-height: 33px;
-  color: #000000;
+  color: $MainTextColor;
   @media (min-width: 1144px) {
     font-size: 36px;
   }
@@ -19,7 +21,7 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  color: #808080;
+  color: $SecondaryTextColor;
   @media (min-width: 767px) {
     font-size: 18px;
   }

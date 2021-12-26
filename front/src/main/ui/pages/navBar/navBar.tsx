@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './navBar.module.css'
+import s from './navBar.module.scss'
 import { Logo } from '../../components/Logo/Logo'
 import { SelectUI } from '../../components/Select/Select'
 import { NavLinks } from '../../components/NavLinks/NavLinks'

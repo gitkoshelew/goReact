@@ -47,14 +47,16 @@ export const SixthPage = () => {
       >
         <FeedBack
           feedBackMess={`The staff have been amazing and extremely helpful.
-                They respond in a very friendly manner to all questions of us and we will comeback if we have a chance`}
+                         They respond in a very friendly manner to all
+                          questions of us and we will comeback if we have a chance`}
           nationality={'American'}
           userName={'Ralph Edwards'}
           photo={flower}
         />
         <FeedBack
           feedBackMess={`Every year, we come back to FT hotel for our holiday. 
-                     It was extremely interesting and enjoyable ! We are happy with our stay in this hotel and we love meals here.`}
+                     It was extremely interesting and enjoyable !
+                      We are happy with our stay in this hotel and we love meals here.`}
           nationality={'American'}
           userName={'Ralph Edwards'}
           photo={swimmer}

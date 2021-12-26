@@ -1,7 +1,9 @@
+@import '../../../styles/variables';
+
 .fifthPage {
-  background: white;
+  background: $SecondaryBackgroundColor;
   @media (min-width: 1144px) {
-    background: #f9f9f9;
+    background: $SecondaryBackgroundColor;
   }
 
   .titleText {

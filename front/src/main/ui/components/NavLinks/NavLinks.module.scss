@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .navLinkTitle {
   display: flex;
   align-items: center;
@@ -13,7 +15,7 @@
 
   .oneLinkActive {
     white-space: nowrap;
-    color: #000000;
+    color: $MainTextColor;
     text-decoration: none;
     font-family: 'Barlow Condensed', sans-serif;
     font-style: normal;
@@ -38,7 +40,7 @@
     font-size: 16px;
     line-height: 19px;
     text-transform: capitalize;
-    color: #808080;
+    color: $SecondaryTextColor;
     width: 41px;
     height: 19px;
     margin-right: 52px;

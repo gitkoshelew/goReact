@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .loginBtn {
   text-decoration: none;
   display: flex;
@@ -5,14 +7,14 @@
   justify-content: center;
   align-items: center;
   padding: 12px 20px;
-  background: #f4f4f4;
+  background: $SecondaryBackgroundColor;
   border-radius: 8px;
   font-family: 'Barlow Condensed', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
   line-height: 18px;
-  color: #000000;
+  color: $MainTextColor;
 }
 
 .buyBtn {
@@ -25,7 +27,7 @@
 }
 
 .uploadPetPhotoActive {
-  background: rgba(239, 239, 239);
+  background: $SecondaryBackgroundColor;
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -33,7 +35,7 @@
   color: #0f97aa;
   padding: 10px 50px;
   border-radius: 8px;
-  border: 1px solid #0f97aa;
+  border: 1px solid $MainContrastColor;
   cursor: pointer;
   font-size: 23px;
   font-weight: 300;
@@ -49,12 +51,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #999999;
+  color: $SecondaryTextColor;
   font-size: 23px;
   font-weight: 300;
   padding: 10px 50px;
   border-radius: 8px;
-  border: 1px solid #0f97aa;
+  border: 1px solid $MainContrastColor;
   cursor: no-drop;
   margin: 40px;
 }

@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .tabletComponent {
   width: 222px;
   position: relative;
@@ -20,7 +22,7 @@
       font-weight: 500;
       font-size: 18px;
       line-height: 22px;
-      color: #808080;
+      color: $SecondaryTextColor;
       white-space: nowrap;
       margin-left: 11px;
     }
@@ -36,7 +38,7 @@
       outline: none;
       border: none;
       width: 160px;
-      color: #063c43;
+      color: $SecondaryContrastColor;
       font-family: 'Barlow Condensed', sans-serif;
       font-style: normal;
       font-weight: 500;
@@ -48,7 +50,7 @@
       outline: none;
       border: none;
       width: 160px;
-      color: #063c43;
+      color: $SecondaryContrastColor;
       font-family: 'Barlow Condensed', sans-serif;
       font-style: normal;
       font-weight: 500;
@@ -65,7 +67,7 @@
 .tabletComponentBodyBtn {
   width: 80%;
   height: 55px;
-  background: #063c43;
+  background: $SecondaryContrastColor;
   border-radius: 10px;
   display: flex;
   align-items: center;

@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .feedBack {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@
   width: 80%;
   margin: 0 auto;
   height: 220px;
-  background: #ffffff;
+  background: $MainBackgroundColor;
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
   padding: 15px;
@@ -22,8 +24,8 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
-    color: #808080;
-    width: 100%;
+    color: $SecondaryTextColor;
+    white-space: normal;
   }
 
   .feedBackUser {
@@ -65,7 +67,7 @@
           font-weight: 500;
           font-size: 18px;
           line-height: 20px;
-          color: #000000;
+          color: $MainTextColor;
           @media (min-width: 575px) {
             font-size: 22px;
           }
@@ -81,7 +83,7 @@
           font-weight: 500;
           font-size: 16px;
           line-height: 18px;
-          color: #808080;
+          color: $SecondaryTextColor;
           @media (min-width: 575px) {
             font-size: 19px;
           }

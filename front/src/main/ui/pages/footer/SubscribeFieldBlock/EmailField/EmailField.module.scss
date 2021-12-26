@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .formWrapper {
   width: 450px;
   margin: 0 auto 50px auto;
@@ -17,6 +19,7 @@
       left: 0;
     }
   }
+
   button {
     overflow: visible;
     position: relative;
@@ -32,8 +35,8 @@
     font-size: 14px;
     line-height: 19px;
     text-transform: uppercase;
-    color: #ffffff;
-    background: #0f97aa;
+    color: $MainBackgroundColor;
+    background: $MainContrastColor;
     border-radius: 0 6px 6px 0;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 
@@ -52,7 +55,7 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
-    color: #808080;
+    color: $SecondaryTextColor;
     border: 0;
     -moz-border-radius: 3px 0 0 3px;
     -webkit-border-radius: 3px 0 0 3px;

@@ -1,8 +1,10 @@
+@import '../../styles/variables';
+
 .priceWindow {
   position: absolute;
   width: 92px;
   height: 33px;
-  background: #f9f9f9;
+  background: $MainBackgroundColor;
   border-radius: 6px;
   display: flex;
   justify-content: center;
@@ -17,7 +19,7 @@
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.01em;
-    color: #063c43;
+    color: $SecondaryContrastColor;
     white-space: nowrap;
   }
 }

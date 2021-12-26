@@ -1,7 +1,9 @@
+@import '../../styles/variables';
+
 .footerBlock {
   display: flex;
   flex-direction: column;
-  background-color: #063c43;
+  background-color: $SecondaryContrastColor;
   .footerTitle {
     display: flex;
     padding: 20px 0;

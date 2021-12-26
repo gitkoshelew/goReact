@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .TextBlockTitle {
   display: flex;
   align-items: center;
@@ -22,7 +24,7 @@
     font-size: 34px;
     line-height: 33px;
     text-transform: uppercase;
-    color: #000000;
+    color: $MainTextColor;
   }
 
   .linkText {
@@ -34,7 +36,7 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
-    color: #0f97aa;
+    color: $MainContrastColor;
     margin-right: 10px;
     @media (min-width: 1250px) {
       display: block;

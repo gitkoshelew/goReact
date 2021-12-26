@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .oneElement {
   display: flex;
   align-items: center;
@@ -48,7 +50,7 @@
     line-height: 15px;
     text-align: center;
     text-transform: uppercase;
-    color: #000000;
+    color: $MainTextColor;
   }
 
   .secondaryText {
@@ -58,6 +60,6 @@
     font-size: 14px;
     line-height: 19px;
     text-align: center;
-    color: #808080;
+    color: $SecondaryTextColor;
   }
 }

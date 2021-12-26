@@ -1,0 +1,72 @@
+@import '../../styles/variables';
+
+.headerContainer {
+  border-bottom: 1px solid rgba(202, 202, 202, 0.5);
+  width: 100%;
+  .headerNavBar {
+    width: 100%;
+    margin: 0 auto;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    @media (min-width: 1144px) {
+      width: 90%;
+    }
+    .contentContainer {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 95%;
+      @media (min-width: 1144px) {
+        justify-content: center;
+      }
+      .logoSelectContainer {
+        display: flex;
+        align-items: center;
+        .logoContainer {
+          position: relative;
+          left: 20px;
+          &:after {
+            content: '';
+            width: 80px;
+            border-bottom: 2px solid $SecondaryBackgroundColor;
+            transform: rotate(90deg);
+            display: block;
+            clear: both;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+          }
+          @media (min-width: 1144px) {
+            &:after {
+              width: 50px;
+              top: 16px;
+              left: 38px;
+            }
+          }
+        }
+        .selectContainer {
+          margin: 0 0 0 -20px;
+        }
+      }
+      .commonNavBar {
+        display: none;
+        @media (min-width: 1144px) {
+          display: flex;
+          align-items: center;
+        }
+        .navLinksBlock {
+          margin: 0 auto;
+        }
+        .btnBlock {
+          display: flex;
+          margin-left: 185px;
+          @media (min-width: 1144px) {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,10 @@
+@import '../../../styles/variables';
+
 .sixthPage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f9f9f9;
+  background: $MainBackgroundColor;
   @media (min-width: 575px) {
     white-space: nowrap;
   }
@@ -12,5 +14,6 @@
   @media (min-width: 1144px) {
     margin: 0 165px -30px 180px;
     padding: 10px 0;
+    background: white;
   }
 }

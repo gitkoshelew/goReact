@@ -1,4 +1,4 @@
-import s from './BurgerMenu.module.css'
+import s from './BurgerMenu.module.scss'
 import { NavLinksBurger } from '../../../components/NavLinks/NavLinksBurger/NavLinksBurger'
 
 const { burgerMenu, navLinksBurgerMenu, burgerClose } = s
