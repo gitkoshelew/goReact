@@ -1,13 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: InitialStateType = {
-  isRent: [
-    { id: '122721', firstRoom: false, secondRoom: true },
-    { id: '122821', firstRoom: false, secondRoom: true },
-    { id: '122921', firstRoom: true, secondRoom: false },
-    { id: '123021', firstRoom: false, secondRoom: true },
-    { id: '123121', firstRoom: true, secondRoom: false },
-  ],
+  isRent: [],
+  loadingStatus: 'success',
   actualDay: new Date(),
   orderedRoomBasket: [],
 }
@@ -18,6 +13,9 @@ const BookingRoomPickSlice = createSlice({
   reducers: {
     changeActualDay(state, action: PayloadAction<{ newActualDay: string }>) {
       state.actualDay = action.payload.newActualDay
+    },
+    setIsRent(state, action: PayloadAction<{ newIsRent: IsRentType[] }>) {
+      state.isRent = action.payload.newIsRent
     },
     addNewIsRent(state, action: PayloadAction<{ newIsRent: IsRentType[] }>) {
       state.isRent = [...state.isRent, ...action.payload.newIsRent]
@@ -32,6 +30,9 @@ const BookingRoomPickSlice = createSlice({
     addOrderedRoom(state, action: PayloadAction<{ newOrderedRooms: OrderedRoomsType }>) {
       state.orderedRoomBasket.push(action.payload.newOrderedRooms)
     },
+    setLoadingStatus(state, action: PayloadAction<{ newStatus: LoadingStatusBookingPickType }>) {
+      state.loadingStatus = action.payload.newStatus
+    },
     deleteOrderedRoom(state, action: PayloadAction<{ newOrderedRooms: OrderedRoomsType }>) {
       const roomForDeleteIndex = state.orderedRoomBasket.findIndex((t) => t.id === action.payload.newOrderedRooms.id)
       state.orderedRoomBasket.splice(roomForDeleteIndex, 1)
@@ -45,7 +46,7 @@ const BookingRoomPickSlice = createSlice({
 
 export const BookingRoomPickReducer = BookingRoomPickSlice.reducer
 
-export const { changeActualDay, addNewIsRent, addOrderedRoom, changeRoomStatus, deleteOrderedRoom } =
+export const { changeActualDay, setIsRent, addOrderedRoom, changeRoomStatus, deleteOrderedRoom, setLoadingStatus } =
   BookingRoomPickSlice.actions
 
 //types
@@ -57,6 +58,8 @@ type InitialStateType = {
   isRent: IsRentType[]
   actualDay: string | Date
   orderedRoomBasket: OrderedRoomsType[]
+  loadingStatus: LoadingStatusBookingPickType
 }
 
+export type LoadingStatusBookingPickType = 'loading' | 'success' | 'error'
 export type RentRoomType = 'firstRoom' | 'secondRoom'

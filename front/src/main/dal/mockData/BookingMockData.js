@@ -1,4 +1,4 @@
-export const bookingOrderDay = {
+const bookingOrderDay = {
   bookingRoom: [
     {
       id: '122721',
