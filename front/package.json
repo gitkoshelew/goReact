@@ -10,6 +10,7 @@
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.24.0",
     "babel-plugin-react-css-modules": "^5.2.6",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -29,7 +30,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f ./.env.production react-scripts start",
+    "devStart":"env-cmd -f ./.env.development react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "test:coverage": "react-scripts test --passWithNoTests --coverage",

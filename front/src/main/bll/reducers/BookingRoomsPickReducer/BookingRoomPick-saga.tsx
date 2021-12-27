@@ -7,7 +7,6 @@ export function* BookingRoomPickSagaWorker() {
     yield put(setLoadingStatus({ newStatus: 'loading' }))
     const newIsRent: { bookingRoom: IsRentType[] } = yield call(BookingPageAPI.getRoomList)
     yield put(setIsRent({ newIsRent: newIsRent.bookingRoom }))
-    debugger
     yield put(setLoadingStatus({ newStatus: 'success' }))
   } catch (err) {
     yield put(setLoadingStatus({ newStatus: 'error' }))
