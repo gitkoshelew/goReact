@@ -28,17 +28,17 @@ func GetUserHandle() httprouter.Handle {
 		user := dto.UserDto{}
 		err = row.Scan(
 			&user.UserID,
-			&user.Email,
-			&user.Password,
-			&user.Role,
-			&user.Verified,
 			&user.Name,
 			&user.Surname,
 			&user.MiddleName,
-			&user.Sex,
+			&user.Email,
 			&user.DateOfBirth,
 			&user.Address,
 			&user.Phone,
+			&user.Password,
+			&user.Role,
+			&user.Verified,
+			&user.Sex,
 			&user.Photo,
 		)
 		if err != nil {

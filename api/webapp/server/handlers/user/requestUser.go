@@ -4,8 +4,8 @@ import (
 	"time"
 )
 
-// UserRequest ...
-type UserRequest struct {
+// Request ...
+type Request struct {
 	UserID      int       `json:"userId"`
 	Email       string    `json:"email"`
 	Password    string    `json:"password"`
@@ -14,7 +14,7 @@ type UserRequest struct {
 	Name        string    `json:"name"`
 	Surname     string    `json:"sName"`
 	MiddleName  string    `json:"mName"`
-	Sex         int       `json:"sex"`
+	Sex         string    `json:"sex"`
 	DateOfBirth time.Time `json:"birthDate"`
 	Address     string    `json:"address"`
 	Phone       string    `json:"phone"`

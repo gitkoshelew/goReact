@@ -17,7 +17,7 @@ func PutUserHandle() httprouter.Handle {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		req := &UserRequest{}
+		req := &Request{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}

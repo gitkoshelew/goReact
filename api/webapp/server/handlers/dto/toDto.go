@@ -25,7 +25,7 @@ func UserToDto(u store.User) UserDto {
 		Name:        u.Name,
 		Surname:     u.Surname,
 		MiddleName:  u.MiddleName,
-		Sex:         u.Sex,
+		Sex:         string(u.Sex),
 		DateOfBirth: u.DateOfBirth,
 		Address:     u.Address,
 		Phone:       u.Phone,

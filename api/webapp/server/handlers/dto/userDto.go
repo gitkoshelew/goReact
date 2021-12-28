@@ -14,7 +14,7 @@ type UserDto struct {
 	Name        string    `json:"name"`
 	Surname     string    `json:"sName"`
 	MiddleName  string    `json:"mName"`
-	Sex         int       `json:"sex"`
+	Sex         string    `json:"sex"`
 	DateOfBirth time.Time `json:"birthDate"`
 	Address     string    `json:"address"`
 	Phone       string    `json:"phone"`

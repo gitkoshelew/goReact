@@ -30,17 +30,17 @@ func LoginHandle() httprouter.Handle {
 		if err := db.QueryRow("SELECT * FROM users WHERE email = $1",
 			req.Email).Scan(
 			&user.UserID,
-			&user.Email,
-			&user.Password,
-			&user.Role,
-			&user.Verified,
 			&user.Name,
 			&user.Surname,
 			&user.MiddleName,
-			&user.Sex,
+			&user.Email,
 			&user.DateOfBirth,
 			&user.Address,
 			&user.Phone,
+			&user.Password,
+			&user.Role,
+			&user.Verified,
+			&user.Sex,
 			&user.Photo,
 		); err != nil {
 			log.Print("email check failed")
