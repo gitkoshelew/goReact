@@ -12,7 +12,7 @@
 
   &:before {
     content: '';
-    background-color: $MainContrastColor;
+    background-color: $main-contrast-color;
     position: absolute;
     width: 100%;
     height: 3px;
@@ -22,7 +22,7 @@
 
   &:after {
     content: '';
-    background-color: $MainContrastColor;
+    background-color: $main-contrast-color;
     position: absolute;
     width: 100%;
     height: 3px;
@@ -32,7 +32,7 @@
 
   span {
     content: '';
-    background-color: $MainContrastColor;
+    background-color: $main-contrast-color;
     position: absolute;
     width: 100%;
     height: 3.5px;
@@ -47,7 +47,7 @@
   position: absolute;
   height: 800px;
   width: 100%;
-  background-color: $MainBackgroundColor;
+  background-color: $main-background-color;
   left: 0;
   top: 0;
 }

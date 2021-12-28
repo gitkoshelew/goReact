@@ -8,7 +8,7 @@
   font-weight: 600;
   font-size: 34px;
   line-height: 33px;
-  color: $MainTextColor;
+  color: $main-text-color;
   @media (min-width: 1144px) {
     font-size: 36px;
   }
@@ -21,7 +21,7 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  color: $SecondaryTextColor;
+  color: $secondary-text-color;
   @media (min-width: 767px) {
     font-size: 18px;
   }

@@ -15,7 +15,7 @@
 
   .oneLinkActive {
     white-space: nowrap;
-    color: $MainTextColor;
+    color: $main-text-color;
     text-decoration: none;
     font-family: 'Barlow Condensed', sans-serif;
     font-style: normal;
@@ -40,7 +40,7 @@
     font-size: 16px;
     line-height: 19px;
     text-transform: capitalize;
-    color: $SecondaryTextColor;
+    color: $secondary-text-color;
     width: 41px;
     height: 19px;
     margin-right: 52px;

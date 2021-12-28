@@ -24,7 +24,7 @@
     font-size: 34px;
     line-height: 33px;
     text-transform: uppercase;
-    color: $MainTextColor;
+    color: $main-text-color;
   }
 
   .linkText {
@@ -36,7 +36,7 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
-    color: $MainContrastColor;
+    color: $main-contrast-color;
     margin-right: 10px;
     @media (min-width: 1250px) {
       display: block;

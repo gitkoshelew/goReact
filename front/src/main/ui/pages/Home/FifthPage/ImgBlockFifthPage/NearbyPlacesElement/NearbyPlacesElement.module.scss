@@ -33,7 +33,7 @@
     line-height: 47px;
     text-align: center;
     letter-spacing: 0.01em;
-    color: $MainTextColor;
+    color: $main-text-color;
     margin-bottom: 10px;
     @media (min-width: 575px) {
       width: 400px;
@@ -77,7 +77,7 @@
       font-weight: 500;
       font-size: 20px;
       line-height: 25px;
-      color: $MainBackgroundColor;
+      color: $main-background-color;
       @media (min-width: 767px) {
         font-size: 24px;
       }
@@ -89,7 +89,7 @@
       font-weight: 500;
       font-size: 20px;
       line-height: 24px;
-      color: $MainContrastColor;
+      color: $main-contrast-color;
       margin-right: 40px;
     }
   }
@@ -110,7 +110,7 @@
     line-height: 37px;
     text-align: center;
     letter-spacing: 0.01em;
-    color: $MainTextColor;
+    color: $main-text-color;
     @media (min-width: 575px) {
       width: 400px;
     }
@@ -172,7 +172,7 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
-    color: $MainContrastColor;
+    color: $main-contrast-color;
     margin-right: 40px;
   }
 }

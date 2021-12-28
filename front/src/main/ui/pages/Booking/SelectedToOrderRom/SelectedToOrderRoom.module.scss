@@ -3,7 +3,7 @@
 .selectedRoomsTablet {
   flex-direction: column;
   display: flex;
-  border: 2px solid $MainContrastColor;
+  border: 2px solid $main-contrast-color;
   position: absolute;
   top: -25px;
   left: -600px;
@@ -19,7 +19,7 @@
     .selectedRoomsTabletElem {
       padding: 4px 25px;
       width: 200px;
-      border: 2px solid $MainContrastColor;
+      border: 2px solid $main-contrast-color;
       white-space: nowrap;
       border-left: 0;
       border-bottom: 0;
@@ -33,7 +33,7 @@
 
         :hover {
           background-color: indianred;
-          outline: 2px solid $MainContrastColor;
+          outline: 2px solid $main-contrast-color;
           border-radius: 8px;
         }
       }

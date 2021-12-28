@@ -35,8 +35,8 @@
     font-size: 14px;
     line-height: 19px;
     text-transform: uppercase;
-    color: $MainBackgroundColor;
-    background: $MainContrastColor;
+    color: $main-background-color;
+    background: $main-contrast-color;
     border-radius: 0 6px 6px 0;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 
@@ -55,7 +55,7 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
-    color: $SecondaryTextColor;
+    color: $secondary-text-color;
     border: 0;
     -moz-border-radius: 3px 0 0 3px;
     -webkit-border-radius: 3px 0 0 3px;

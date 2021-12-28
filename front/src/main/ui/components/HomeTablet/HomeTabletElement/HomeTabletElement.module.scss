@@ -54,7 +54,7 @@
       outline: none;
       border: none;
       width: 160px;
-      color: $SecondaryContrastColor;
+      color: $secondary-contrast-color;
       font-family: 'Barlow Condensed', sans-serif;
       font-style: normal;
       font-weight: 500;
@@ -71,7 +71,7 @@
       outline: none;
       border: none;
       width: 160px;
-      color: $SecondaryContrastColor;
+      color: $secondary-contrast-color;
       font-family: 'Barlow Condensed', sans-serif;
       font-style: normal;
       font-weight: 500;
@@ -89,7 +89,7 @@
   position: absolute;
   width: 276px;
   height: 135px;
-  background: $SecondaryContrastColor;
+  background: $secondary-contrast-color;
   border-radius: 0 20px 0 0;
   left: 653px;
   top: -1px;
@@ -113,7 +113,7 @@
     font-size: 20px;
     line-height: 24px;
     text-align: center;
-    color: $SecondaryBackgroundColor;
+    color: $secondary-background-color;
   }
 }
 

@@ -16,7 +16,7 @@
   line-height: 47px;
   text-align: center;
   letter-spacing: 0.01em;
-  color: $MainTextColor;
+  color: $main-text-color;
   @media (min-width: 575px) {
     height: 400px;
     width: 400px;
@@ -51,7 +51,7 @@
     font-size: 26px;
     line-height: 31px;
     letter-spacing: 0.01em;
-    color: $MainBackgroundColor;
+    color: $main-background-color;
     position: absolute;
     top: 215px;
     left: 10px;
