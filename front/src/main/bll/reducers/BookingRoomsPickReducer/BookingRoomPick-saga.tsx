@@ -1,16 +1,15 @@
-import { IsRentType, setIsRent, setLoadingStatus } from './BookingRoomPick-reducer'
+import { reqCalendarDataFailed, reqCalendarDataStarted, reqCalendarDataSucceeded } from './BookingRoomPick-reducer'
 import { call, put } from 'redux-saga/effects'
-import { BookingPageAPI } from '../../../dal/API'
+import { BookingPageAPI, IsRentType } from '../../../dal/API'
 
 export function* BookingRoomPickSagaWorker() {
   try {
-    yield put(setLoadingStatus({ newStatus: 'loading' }))
-    const newIsRent: { bookingRoom: IsRentType[] } = yield call(BookingPageAPI.getRoomList)
-    yield put(setIsRent({ newIsRent: newIsRent.bookingRoom }))
-    debugger
-    yield put(setLoadingStatus({ newStatus: 'success' }))
+    yield put(reqCalendarDataStarted())
+
+    const newIsRent: IsRentType[] = yield call(BookingPageAPI.getCalendarData)
+    yield put(reqCalendarDataSucceeded({ newCalendarData: newIsRent }))
   } catch (err) {
-    yield put(setLoadingStatus({ newStatus: 'error' }))
+    yield put(reqCalendarDataFailed())
   }
 }
 
