@@ -7,7 +7,10 @@ services:
         restart: unless-stopped
         ports:
             - ${REDIS_EXPOSE_PORT}:${REDIS_PORT}
+        networks:
+            - app_net
     postgresql_database:
+        container_name: postgresql_database
         image: postgres:latest
         env_file:
             - .env
@@ -21,7 +24,6 @@ services:
             - "8081:5432"
         restart: always
         volumes:
-            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
             - database-data:/var/lib/postgresql/data/
         networks:
             - app_net
@@ -74,6 +76,25 @@ services:
             - SERVER_HOST=0.0.0.0
             - ENV=prod
         tty: true
+        networks:
+            - app_net
+
+    migrate:
+        container_name: migrates
+        image: "migrate/migrate:v4.4.0"
+        depends_on:
+            - postgresql_database
+        volumes:
+            - "../migrations:/api/migrations"
+        command:
+            [
+                "-path",
+                "/api/migrations/",
+                "-database",
+                "postgres://postgresql_database/goreact?sslmode=disable&user=\
+                  user&password=userpass",
+                "up"
+            ]
         networks:
             - app_net
 

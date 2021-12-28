@@ -72,8 +72,6 @@ func CreateAuth(userid uint64, td *Token) error {
 	rt := time.Unix(td.RtExpires, 0)
 	now := time.Now()
 
-	log.Printf("USER ID afrer create token: %d", userid)
-
 	errAccess := db.QueryRow("INSERT into TOKENS (uuid, userid, expire) VALUES ($1, $2, $3)",
 		td.AccessUUID, userid, at.Sub(now).String()).Err()
 	if errAccess != nil {
@@ -160,8 +158,6 @@ func FetchAuth(authD *AccessDetails) (uint64, error) {
 		log.Print(err)
 		return 0, err
 	}
-
-	log.Printf("uuid parsed %d", uuid.UserID)
 	return uuid.UserID, nil
 }
 

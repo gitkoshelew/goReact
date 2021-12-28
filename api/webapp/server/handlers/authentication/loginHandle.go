@@ -57,17 +57,15 @@ func LoginHandle() httprouter.Handle {
 			return
 		}
 
-		log.Printf("USER ID before create token: %d", user.UserID)
-
 		tk, err := CreateToken(uint64(user.UserID))
 		tokens := map[string]string{
 			"access_token":  tk.AccessToken,
 			"refresh_token": tk.RefreshToken,
 		}
-		err = CreateAuth(uint64(user.UserID), tk)
-		if err != nil {
-			log.Printf("%v. %v", http.StatusUnprocessableEntity, err)
-		}
+		// err = CreateAuth(uint64(user.UserID), tk)
+		// if err != nil {
+		// 	log.Printf("%v. %v", http.StatusUnprocessableEntity, err)
+		// }
 
 		c := http.Cookie{
 			Name:     "JWT",

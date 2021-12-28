@@ -6,18 +6,14 @@ CREATE TABLE IF NOT EXISTS ACCOUNT
 
 CREATE TABLE IF NOT EXISTS USERS 
 (   id              serial PRIMARY key,
-    email           CHARACTER VARYING(30) ,
-    password        TEXT ,
-    role            CHARACTER VARYING(30) NOT NULL ,
-    verified        BOOLEAN NOT NULL ,
     first_name      CHARACTER VARYING(30) NOT NULL ,
     surname         CHARACTER VARYING(30) NOT NULL ,
-    middle_name     CHARACTER VARYING(30) NOT NULL ,
-    sex             INTEGER NOT NULL, /* 0 = male, 1 = female */
+    middle_name     CHARACTER VARYING(30) ,
+    email           CHARACTER VARYING(30) ,
     date_of_birth   DATE NOT NULL ,
-    address         TEXT ,
-    phone           CHARACTER VARYING(30) NOT NULL , 
-    photo           TEXT
+    address         TEXT NOT NULL ,
+    phone           CHARACTER VARYING(30) NOT NULL ,
+    account_id      INTEGER REFERENCES ACCOUNT(id) ON DELETE CASCADE NOT NULL 
 );
 
 CREATE TABLE IF NOT EXISTS HOTEL 

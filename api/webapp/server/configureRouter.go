@@ -22,6 +22,7 @@ func (s *Server) configureRouter() {
 	s.router.Handle("POST", "/logout", authentication.LogoutHandle())
 	s.router.Handle("POST", "/todo", authentication.TodoHandle())
 	s.router.Handle("POST", "/refresh", authentication.RefreshHandle())
+	s.router.Handle("POST", "/stateless", authentication.StatelessHandle())
 
 	s.router.Handle("GET", "/api/accounts", account.GetAccountsHandle())
 	s.router.Handle("POST", "/api/account", account.PostAccountHandle())
