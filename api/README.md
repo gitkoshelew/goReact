@@ -24,7 +24,7 @@ Request data:
     "name": string,             NOT NULL
     "sName": string,            NOT NULL
     "mName": string,            
-    "sex": int,                 NOT NULL # 0 - male, 1 - female # 
+    "sex": string,              NOT NULL 
     "birthDate": time.Time,     NOT NULL # format: "2111-01-01" #
     "address": string,          
     "phone": string,            NOT NULL
@@ -58,11 +58,8 @@ Cookie:
 			Value:    tk.AccessToken,
 			HttpOnly: true,
 }
+Header: access_token
 JSON:
-{
-    "access_token": string,
-    "refresh_token": string 
-}
 {
     "userId": int,
     "email": string,
@@ -71,7 +68,7 @@ JSON:
     "name": string,       
     "sName": string,          
     "mName": string,            
-    "sex": int,                 # 0 - male, 1 - female # 
+    "sex": string,
     "birthDate": time.Time,     # format: "2111-01-01" #
     "address": string,          
     "phone": string,          
