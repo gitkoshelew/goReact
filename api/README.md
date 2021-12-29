@@ -23,7 +23,7 @@ Request data:
     "verified": bool,           NOT NULL
     "name": string,             NOT NULL
     "sName": string,            NOT NULL
-    "mName": string,            NOT NULL
+    "mName": string,            
     "sex": int,                 NOT NULL # 0 - male, 1 - female # 
     "birthDate": time.Time,     NOT NULL # format: "2111-01-01" #
     "address": string,          

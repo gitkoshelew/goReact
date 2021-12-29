@@ -2,7 +2,6 @@ package authentication
 
 import (
 	"fmt"
-	"goReact/webapp/server/utils"
 	"log"
 	"net/http"
 	"os"
@@ -65,38 +64,25 @@ func CreateToken(userid uint64) (*Token, error) {
 	return token, nil
 }
 
-// CreateAuth ...
-func CreateAuth(userid uint64, td *Token) error {
-	db := utils.HandlerDbConnection()
-	at := time.Unix(td.AtExpires, 0)
-	rt := time.Unix(td.RtExpires, 0)
-	now := time.Now()
-
-	errAccess := db.QueryRow("INSERT into TOKENS (uuid, userid, expire) VALUES ($1, $2, $3)",
-		td.AccessUUID, userid, at.Sub(now).String()).Err()
-	if errAccess != nil {
-		return errAccess
-	}
-	errRefresh := db.QueryRow("INSERT into TOKENS (uuid, userid, expire) VALUES ($1, $2, $3)",
-		td.RefreshUUID, userid, rt.Sub(now).String()).Err()
-	if errRefresh != nil {
-		return errRefresh
-	}
-	return nil
-}
-
-// ExtractToken ...
-func ExtractToken(r *http.Request) string {
-	JWTcookie, err := r.Cookie("JWT")
+// ExtractRefreshToken ...
+func ExtractRefreshToken(r *http.Request) string {
+	JWTcookie, err := r.Cookie("Refresh-Token")
 	if err != nil {
 		log.Print("Error occured while reading cookie")
 	}
 	return JWTcookie.Value
 }
 
+// ExtractAccessToken ...
+func ExtractAccessToken(r *http.Request) string {
+	accessToken := r.Header.Get("Access-Token")
+	log.Printf("access token from header: %s", accessToken)
+	return accessToken
+}
+
 // VerifyToken ...
 func VerifyToken(r *http.Request) (*jwt.Token, error) {
-	tokenString := ExtractToken(r)
+	tokenString := ExtractAccessToken(r)
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
@@ -143,37 +129,4 @@ func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 		}, nil
 	}
 	return nil, err
-}
-
-// FetchAuth ...
-func FetchAuth(authD *AccessDetails) (uint64, error) {
-	db := utils.HandlerDbConnection()
-	row := db.QueryRow("SELECT uuid, userid FROM tokens WHERE uuid = $1", authD.AccessUUID)
-
-	var uuid AccessDetails
-	err := row.Scan(
-		&uuid.AccessUUID,
-		&uuid.UserID)
-	if err != nil {
-		log.Print(err)
-		return 0, err
-	}
-	return uuid.UserID, nil
-}
-
-// DeleteAuth ...
-func DeleteAuth(UUID string) (int64, error) {
-	db := utils.HandlerDbConnection()
-
-	result, err := db.Exec("DELETE FROM tokens WHERE uuid = $1", UUID)
-	if err != nil {
-		log.Print(err)
-		return 0, err
-	}
-	resultInt, err := result.RowsAffected()
-	if err != nil {
-		log.Print(err.Error())
-	}
-
-	return resultInt, nil
 }

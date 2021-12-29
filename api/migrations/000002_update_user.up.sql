@@ -6,6 +6,6 @@ ALTER TABLE USERS
 ADD COLUMN      password        TEXT ,   
 ADD COLUMN      role            user_type NOT NULL ,
 ADD COLUMN      verified        BOOLEAN NOT NULL ,
-ADD COLUMN      sex             INTEGER NOT NULL, /* 0 = male, 1 = female */
+ADD COLUMN      sex             sex NOT NULL,
 ADD COLUMN      photo           TEXT,
 DROP COLUMN     account_id CASCADE;

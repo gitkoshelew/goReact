@@ -43,7 +43,6 @@ func LoginHandle() httprouter.Handle {
 			&user.Sex,
 			&user.Photo,
 		); err != nil {
-			log.Print("email check failed")
 			http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 			log.Println(err.Error())
 			return
@@ -51,31 +50,21 @@ func LoginHandle() httprouter.Handle {
 
 		err := store.CheckPasswordHash(user.Password, req.Password)
 		if err != nil {
-			log.Print("email check failed")
 			http.Error(w, "Invalid login or password", http.StatusUnauthorized)
 			log.Println(err.Error())
 			return
 		}
 
 		tk, err := CreateToken(uint64(user.UserID))
-		tokens := map[string]string{
-			"access_token":  tk.AccessToken,
-			"refresh_token": tk.RefreshToken,
-		}
-		// err = CreateAuth(uint64(user.UserID), tk)
-		// if err != nil {
-		// 	log.Printf("%v. %v", http.StatusUnprocessableEntity, err)
-		// }
 
 		c := http.Cookie{
-			Name:     "JWT",
-			Value:    tk.AccessToken,
+			Name:     "Refresh-Token",
+			Value:    tk.RefreshToken,
 			HttpOnly: true,
 		}
 
 		http.SetCookie(w, &c)
-		json.NewEncoder(w).Encode(tokens)
+		w.Header().Add("Access-Token", tk.AccessToken)
 		json.NewEncoder(w).Encode(user)
-		w.WriteHeader(http.StatusCreated)
 	}
 }

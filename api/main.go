@@ -38,7 +38,7 @@ func initAccountDb() {
 	db := utils.HandlerDbConnection()
 	for i := 0; i < 6; i++ {
 
-		encryptedPassword, err := store.EncryptPassword(fmt.Sprintf("password%d", i+1))
+		encryptedPassword, err := store.EncryptPassword(fmt.Sprintf("password"))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -48,6 +48,7 @@ func initAccountDb() {
 		if err != nil {
 			panic(err)
 		}
+		log.Println("password ecnrypted")
 		log.Println(result.RowsAffected())
 	}
 

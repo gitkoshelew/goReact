@@ -64,7 +64,7 @@ services:
         build:
             context: ./api
         ports:
-            - ${SERVER_PORT}
+            - "8080:8080"
         depends_on:
             - postgresql_database
         env_file:
