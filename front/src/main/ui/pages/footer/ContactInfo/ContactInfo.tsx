@@ -1,4 +1,4 @@
-import s from './ConstactInfo.module.css'
+import s from './ContactInfo.module.scss'
 import { ft } from '../../../svgWrapper/footerSvgWrapper'
 import { home } from '../../../svgWrapper/footerSvgWrapper'
 import { mobile } from '../../../svgWrapper/footerSvgWrapper'

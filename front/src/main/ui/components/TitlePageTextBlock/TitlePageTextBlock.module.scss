@@ -1,0 +1,51 @@
+@import '../../styles/variables';
+
+.TextBlockTitle {
+  display: flex;
+  align-items: center;
+  margin: 35px 0 10px 15px;
+  @media (min-width: 575px) {
+    margin: 35px 0 10px -40px;
+  }
+  @media (min-width: 767px) {
+    margin: 35px 125px 10px -40px;
+  }
+  @media (min-width: 1144px) {
+    white-space: nowrap;
+    margin: 35px -35px 10px -40px;
+  }
+
+  .mainText {
+    width: 90%;
+    height: 90px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 33px;
+    text-transform: uppercase;
+    color: $main-text-color;
+  }
+
+  .linkText {
+    white-space: nowrap;
+    display: none;
+    align-items: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: $main-contrast-color;
+    margin-right: 10px;
+    @media (min-width: 1250px) {
+      display: block;
+      top: -30px;
+      left: -113px;
+      position: relative;
+      .linkText img {
+        margin-left: 10px;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import s from './HomeTabletSmall.module.css'
+import s from './HomeTabletSmall.module.scss'
 import { HomeTabletSmallElement } from './HomeTabletSmallElement/HomeTabletSmallElement'
 
 const { tabletTitle } = s

@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './StatisticBlockElement.module.css'
+import s from './StatisticBlockElement.module.scss'
 
 const { statisticBlockNum, statisticBlockText, statisticElem } = s
 

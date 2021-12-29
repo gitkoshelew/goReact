@@ -1,4 +1,4 @@
-import s from './MiniRoomElement.module.css'
+import s from './MiniRoomElement.module.scss'
 import { PriceWindow } from '../../../../../components/priceWindow/PriceWindow'
 import { RoomInfo } from '../../../../../components/RoomInfo/RoomInfo'
 

@@ -1,4 +1,4 @@
-import s from './Button.module.css'
+import s from './Button.module.scss'
 import buy from '../../../../assets/img/navBar/Buy.svg'
 import { NavLink } from 'react-router-dom'
 

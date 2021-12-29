@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import s from './Booking.module.css'
+import s from './Booking.module.scss'
 import { TitlePageTextBlock } from '../../components/TitlePageTextBlock/TitlePageTextBlock'
 import { BookingRegForm } from './BookingRegForm/BookingRegForm'
 import { BookingCalendar } from './BookingCalendar/BookingCalendar'

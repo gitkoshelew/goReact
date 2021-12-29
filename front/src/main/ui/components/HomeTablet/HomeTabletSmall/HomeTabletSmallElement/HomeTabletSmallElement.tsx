@@ -1,8 +1,15 @@
-import s from './HomeTabletSmallElement.module.css'
+import s from './HomeTabletSmallElement.module.scss'
 import calendar from '../../../../../../assets/img/home/Calendar.svg'
 import usersShadow from '../../../../../../assets/img/home/usersShadow.svg'
 
-const { tabletComponent, tabletComponentTitle, tabletComponentText, tabletComponentBody, tabletComponentBodyBtn } = s
+const {
+  tabletComponent,
+  tabletComponentTitle,
+  tabletComponentText,
+  tabletComponentBody,
+  tabletComponentBodyBtn,
+  tabletComponentBodySelect,
+} = s
 
 type HomeTabletElementPropsType = {
   type: string
@@ -47,7 +54,7 @@ export const HomeTabletSmallElement = (props: HomeTabletElementPropsType) => {
             <div className={tabletComponentText}>Guest</div>
           </div>
           <div className={tabletComponentBody}>
-            <select name="howMuchPerson">
+            <select className={tabletComponentBodySelect} name="howMuchPerson">
               <option>4 Persons</option>
               <option>3 Persons</option>
               <option>2 Persons</option>

@@ -1,4 +1,4 @@
-import s from './FourthPage.module.css'
+import s from './FourthPage.module.scss'
 import { TitlePageTextBlock } from '../../../components/TitlePageTextBlock/TitlePageTextBlock'
 import { Carousel } from '../../../components/Carousel/Carousel'
 import { ServiceBlock } from './ServiceBlock/ServiceBlock'

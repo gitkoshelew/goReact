@@ -1,4 +1,4 @@
-import s from './SubscribeFieldBlock.module.css'
+import s from './SubscribeFieldBlock.module.scss'
 import { EmailField } from './EmailField/EmailField'
 import { ImgLinks } from './ImgLinks/ImgLinks'
 

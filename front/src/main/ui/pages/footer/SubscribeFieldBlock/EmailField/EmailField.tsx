@@ -1,4 +1,4 @@
-import s from './EmailField.module.css'
+import s from './EmailField.module.scss'
 
 const { formWrapper } = s
 

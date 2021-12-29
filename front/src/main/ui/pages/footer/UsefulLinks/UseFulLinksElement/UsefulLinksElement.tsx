@@ -1,4 +1,4 @@
-import s from './UseFulLinksElement.module.css'
+import s from './UseFulLinksElement.module.scss'
 import { NavLink } from 'react-router-dom'
 
 const { link } = s

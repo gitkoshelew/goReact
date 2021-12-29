@@ -1,4 +1,4 @@
-import s from './ImgLinks.module.css'
+import s from './ImgLinks.module.scss'
 import { facebook } from '../../../../svgWrapper/footerSvgWrapper'
 import { twitter } from '../../../../svgWrapper/footerSvgWrapper'
 import { instagram } from '../../../../svgWrapper/footerSvgWrapper'

@@ -1,0 +1,27 @@
+@import '../../../../styles/variables';
+
+.ceoMessImg {
+  width: 95%;
+  height: 270px;
+  background: #c4c4c4;
+  border-radius: 12px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 47px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: $main-text-color;
+  @media (min-width: 1023px) {
+    height: 400px;
+    width: 490px;
+  }
+  @media (min-width: 1144px) {
+    position: relative;
+    top: -40px;
+  }
+}

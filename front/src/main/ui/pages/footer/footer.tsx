@@ -1,4 +1,4 @@
-import s from './footer.module.css'
+import s from './footer.module.scss'
 import { ContactInfo } from './ContactInfo/ContactInfo'
 import { UsefulLinks } from './UsefulLinks/UsefulLinks'
 import { SubscribeFieldBlock } from './SubscribeFieldBlock/SubscribeFieldBlock'

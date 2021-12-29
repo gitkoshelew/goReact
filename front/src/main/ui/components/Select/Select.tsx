@@ -1,6 +1,6 @@
 import React from 'react'
 
-import s from './Select.module.css'
+import s from './Select.module.scss'
 
 const { selectContainer } = s
 

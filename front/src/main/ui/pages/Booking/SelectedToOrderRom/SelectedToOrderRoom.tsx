@@ -1,4 +1,4 @@
-import s from './SelectedToOrderRoom.module.css'
+import s from './SelectedToOrderRoom.module.scss'
 import {
   deleteOrderedRoom,
   OrderedRoomsType,

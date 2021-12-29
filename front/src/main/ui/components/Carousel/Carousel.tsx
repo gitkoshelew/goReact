@@ -1,6 +1,6 @@
 import React, { ReactChild, ReactChildren } from 'react'
 import Slider, { ResponsiveObject } from 'react-slick'
-import s from './Carousel.module.css'
+import s from './Carousel.module.scss'
 import { nextArrow, prevArrow, sliderDot } from '../../svgWrapper/HomeSvgWrapper'
 
 const { carousel, carouselBig } = s
@@ -29,10 +29,7 @@ export const Carousel = ({
   function SampleNextArrow(props: SampleArrowPropsType) {
     const { className, onClick } = props
     return (
-      <div
-        className={className}
-        onClick={onClick}
-      >
+      <div className={className} onClick={onClick}>
         <img src={nextArrow} alt="nextArrow" />
       </div>
     )
@@ -41,10 +38,7 @@ export const Carousel = ({
   function SamplePrevArrow(props: SampleArrowPropsType) {
     const { className, onClick } = props
     return (
-      <div
-        className={className}
-        onClick={onClick}
-      >
+      <div className={className} onClick={onClick}>
         <img src={prevArrow} alt="nextArrow" />
       </div>
     )

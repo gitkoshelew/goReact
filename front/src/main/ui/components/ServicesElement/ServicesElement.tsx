@@ -1,4 +1,4 @@
-import s from './ServicesElement.module.css'
+import s from './ServicesElement.module.scss'
 import { Case, flower, forkAndSpoon, swimmer } from '../../svgWrapper/HomeSvgWrapper'
 import { IsActiveServiceElementType } from '../../pages/Home/FourthPage/ServiceBlock/ServiceBlock'
 
