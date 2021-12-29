@@ -17,15 +17,19 @@ func AccountToDto(a store.Account) AccountDto {
 // UserToDto makes DTO from user object
 func UserToDto(u store.User) UserDto {
 	return UserDto{
-		AccountID:   u.AccountID,
 		UserID:      u.UserID,
+		Email:       u.Email,
+		Password:    u.Password,
+		Role:        string(u.Role),
+		Verified:    u.Verified,
 		Name:        u.Name,
 		Surname:     u.Surname,
 		MiddleName:  u.MiddleName,
+		Sex:         string(u.Sex),
 		DateOfBirth: u.DateOfBirth,
 		Address:     u.Address,
 		Phone:       u.Phone,
-		Email:       u.Email,
+		Photo:       u.Photo,
 	}
 }
 

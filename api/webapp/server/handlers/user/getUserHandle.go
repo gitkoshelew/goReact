@@ -35,7 +35,12 @@ func GetUserHandle() httprouter.Handle {
 			&user.DateOfBirth,
 			&user.Address,
 			&user.Phone,
-			&user.AccountID)
+			&user.Password,
+			&user.Role,
+			&user.Verified,
+			&user.Sex,
+			&user.Photo,
+		)
 		if err != nil {
 			panic(err)
 		}
