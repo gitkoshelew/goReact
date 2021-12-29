@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -75,9 +76,12 @@ func ExtractRefreshToken(r *http.Request) string {
 
 // ExtractAccessToken ...
 func ExtractAccessToken(r *http.Request) string {
-	accessToken := r.Header.Get("Access-Token")
-	log.Printf("access token from header: %s", accessToken)
-	return accessToken
+	bearToken := r.Header.Get("Authorization")
+	strArr := strings.Split(bearToken, " ")
+	if len(strArr) == 2 {
+		return strArr[1]
+	}
+	return ""
 }
 
 // VerifyToken ...
