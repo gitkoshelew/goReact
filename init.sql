@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS ROOM
     number      CHARACTER VARYING(30) NOT NULL ,
     pet_type    TEXT NOT NULL ,
     hotel_id    INTEGER REFERENCES HOTEL(id) ON DELETE CASCADE 
-
 );
 
 CREATE TABLE IF NOT EXISTS SEAT 
@@ -76,7 +75,7 @@ INSERT INTO ACCOUNT ( Login, Password) VALUES
 ('login3', 'password3'),
 ('login4', 'password4'),
 ('login5', 'password5'),
-('login6', 'password6');
+('visbm@mail.ru', 'password6');
 
 INSERT INTO USERS (first_name , surname, middle_name, email, date_of_birth, address, phone, account_id) VALUES 
 ('Ivan','Ivanov','Ivanovich','ivan@mail.ru','2000-01-01' ,'Minsk Pr. Nezavisimosti 22-222' ,'+375-29-154-89-33', 1),
@@ -91,10 +90,10 @@ INSERT INTO HOTEL (name, address) VALUES
 ('PetsHotel2','ul. Sovetskaya 16'),
 ('PetsHotel3','ul. Ilimskaya 33');
 
-INSERT INTO ROOM (pet_type, number, hotel_id) VALUES 
-('Cat', 101, 1),
-('Dog', 202, 2),
-('Cat', 303, 3);
+INSERT INTO ROOM ( number , pet_type, hotel_id) VALUES 
+( 101, 'Cat', 1),
+( 202,'Dog', 2),
+( 303, 'Cat', 3);
 
 INSERT INTO SEAT (room_id, is_free, description) VALUES 
 (1, false, 'VIP seat'),

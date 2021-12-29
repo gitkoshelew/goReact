@@ -1,0 +1,15 @@
+{{template "base" .}}
+
+{{define "title"}}Login{{end}}
+
+{{define "main"}}
+<form action="/admin/home" method="GET">
+    <th>Login</th>
+    <input type="email" name="login" required><br><br>
+    <th>Password</th>
+    <input type="text" name="password" required>
+    <button>Login</button>
+</form>
+{{end}}
+
+
