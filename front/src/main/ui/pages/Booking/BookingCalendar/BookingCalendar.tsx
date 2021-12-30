@@ -4,8 +4,9 @@ import 'react-calendar/dist/Calendar.css'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
-import { changeActualDay, IsRentType } from '../../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
+import { changeActualDay } from '../../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { MomentInput } from 'moment'
+import { IsRentType } from '../../../../dal/API'
 
 export const BookingCalendar = () => {
   const isRentArr = useSelector<AppRootStateType, IsRentType[]>((state) => state.BookingRoomPick.isRent)
@@ -23,7 +24,7 @@ export const BookingCalendar = () => {
   )
 
   const searchInRentArr = (props: CalendarTileProperties) => {
-    const singleDay = isRentArr.find((t) => t.id === moment(props.date).format('MMDDYY'))
+    const singleDay = isRentArr?.length && isRentArr.find((t) => t.id === moment(props.date).format('MMDDYY'))
     if (singleDay) {
       return !singleDay.secondRoom && !singleDay.firstRoom
     }

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { takeEvery } from 'redux-saga/effects'
 import { BookingUploadPetImgSagaWorker } from '../reducers/BookingRegFormReducer/BookindRegForm-saga'
 import { BookingRoomPickReducer } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
+import { BookingRoomPickSagaWorker } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -35,4 +36,5 @@ sagaMiddleware.run(rootWatcher)
 
 function* rootWatcher() {
   yield takeEvery('BOOKING_REG_FORM/BOOKING_PET_IMG_UPLOAD', BookingUploadPetImgSagaWorker)
+  yield takeEvery('BOOKING_ROOM_PICK/NEW_IS_RENT_ROOMS_FOR_CALENDAR', BookingRoomPickSagaWorker)
 }
