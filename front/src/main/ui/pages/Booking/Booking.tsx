@@ -15,6 +15,7 @@ import { ProgressType } from '../../../bll/reducers/BookingRegFormReducer/Bookin
 import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
 import Preloader from '../../components/preloader/preloader'
+import { ErrorMsg } from '../../components/ErrorMsg/ErrorMsg'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
 import { IsRentType } from '../../../dal/API'
 
@@ -63,6 +64,7 @@ export const Booking = () => {
     (state) => state.BookingRoomPick.loadingStatus
   )
 
+
   const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
   const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
   const dispatch = useAppDispatch()
@@ -84,6 +86,7 @@ export const Booking = () => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
     return newActualDay ? newActualDay : null
   }, [actualDay, isRentArr])
+  
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className={bookingPage}>
