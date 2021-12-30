@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './CeoMessImg.module.css'
+import s from './CeoMessImg.module.scss'
 
 const { ceoMessImg } = s
 

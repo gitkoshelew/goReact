@@ -1,4 +1,4 @@
-import s from './ImgUpload.module.css'
+import s from './ImgUpload.module.scss'
 import { FileUploader } from 'react-drag-drop-files'
 import { ProgressType } from '../../../../../bll/reducers/BookingRegFormReducer/BookingRegForm-reducer'
 import { useAppDispatch } from '../../../../../bll/store/store'

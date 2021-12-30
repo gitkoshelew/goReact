@@ -1,4 +1,4 @@
-import s from './NearbyPlacesElement.module.css'
+import s from './NearbyPlacesElement.module.scss'
 
 type NearbyPlacesBlockType = 'main' | 'secondary'
 

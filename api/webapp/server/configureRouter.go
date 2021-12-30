@@ -3,11 +3,11 @@ package server
 import (
 	"goReact/webapp/server/handlers"
 	"goReact/webapp/server/handlers/account"
+	"goReact/webapp/server/handlers/authentication"
 	"goReact/webapp/server/handlers/booking"
 	"goReact/webapp/server/handlers/client"
 	"goReact/webapp/server/handlers/employee"
 	"goReact/webapp/server/handlers/hotel"
-	"goReact/webapp/server/handlers/image"
 	"goReact/webapp/server/handlers/pet"
 	"goReact/webapp/server/handlers/room"
 	"goReact/webapp/server/handlers/seat"
@@ -16,8 +16,12 @@ import (
 
 func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/", handlers.HandleHomePage())
-	s.router.Handle("GET", "/login", account.Validation())
-	s.router.Handle("GET", "/image", image.GetImageHandle())
+
+	s.router.Handle("POST", "/registration", authentication.RegistrationHandle())
+	s.router.Handle("POST", "/login", authentication.LoginHandle())
+	s.router.Handle("POST", "/logout", authentication.LogoutHandle())
+	s.router.Handle("POST", "/refresh", authentication.RefreshHandle())
+	s.router.Handle("POST", "/todo", authentication.TodoHandle())
 
 	s.router.Handle("GET", "/api/accounts", account.GetAccountsHandle())
 	s.router.Handle("POST", "/api/account", account.PostAccountHandle())

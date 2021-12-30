@@ -1,4 +1,4 @@
-import s from './NearbyPlaces.module.css'
+import s from './NearbyPlaces.module.scss'
 import { NearbyPlacesElement } from './NearbyPlacesElement/NearbyPlacesElement'
 
 const { secondaryNearby, nearbyPlaces } = s

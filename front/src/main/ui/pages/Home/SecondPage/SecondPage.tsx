@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './SecondPage.module.css'
+import s from './SecondPage.module.scss'
 import { StatisticBlockElement } from './statisticBlockElement/StatisticBlockElement'
 import { CeoMessText } from './CeoMessText/CeoMessText'
 import { CeoMessImg } from './CeoMessImg/CeoMessImg'

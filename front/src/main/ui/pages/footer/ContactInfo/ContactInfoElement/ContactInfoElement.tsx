@@ -1,4 +1,4 @@
-import s from './ConstactInfoElement.module.css'
+import s from './ConstactInfoElement.module.scss'
 
 const { contactInfoElement, contactInfoElementLinks, contactInfoElementImg } = s
 

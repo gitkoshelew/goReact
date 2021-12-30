@@ -1,4 +1,4 @@
-import s from './TitlePageTextBlock.module.css'
+import s from './TitlePageTextBlock.module.scss'
 import { arrow3 } from '../../svgWrapper/HomeSvgWrapper'
 
 const { TextBlockTitle, mainText, linkText } = s

@@ -17,13 +17,13 @@ func PutUserHandle() httprouter.Handle {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 
-		req := &userRequest{}
+		req := &Request{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		result, err := db.Exec("UPDATE USERS set first_name = $1, surname = $2, middle_name = $3, email = $4, date_of_birth =$5, address = $6, phone = $7 WHERE id = $8",
-			req.Name, req.Surname, req.MiddleName, req.Email, req.DateOfBirth, req.Address, req.Phone, req.UserID)
+		result, err := db.Exec("UPDATE USERS set email = $1, password = $2, role = $3, verified = $4, first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, address = $10, phone = $11, photo = $12 WHERE id = $13",
+			req.Email, req.Password, req.Role, req.Verified, req.Name, req.Surname, req.MiddleName, req.Sex, req.DateOfBirth, req.Address, req.Phone, req.Photo, req.UserID)
 
 		if err != nil {
 			panic(err)

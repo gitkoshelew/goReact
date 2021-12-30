@@ -30,6 +30,8 @@ func (s *Server) Start() error {
 
 	s.configureRouter()
 
+	s.configureRoutesAdmin()
+
 	s.logger.Printf("Server starting ...")
 	s.logger.Printf(s.config.ServerInfo())
 

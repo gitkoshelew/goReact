@@ -1,5 +1,5 @@
 import { MiniRoomElement } from '../../Home/ThirdPage/miniRoomBlock/MiniRoomElement/MiniRoomElement'
-import s from './BookingRoom.module.css'
+import s from './BookingRoom.module.scss'
 import { rented } from '../../../svgWrapper/BookingRoomSvgWrapper'
 import { Button } from '../../../components/Button/Button'
 import { useAppDispatch } from '../../../../bll/store/store'

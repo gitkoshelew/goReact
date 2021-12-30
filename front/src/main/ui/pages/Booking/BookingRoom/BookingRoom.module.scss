@@ -1,0 +1,17 @@
+.roomBookingTitle {
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-around;
+  .oneBookRoom {
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .rentedImg img {
+    width: 300px;
+    height: 300px;
+    transform: rotate(35deg);
+  }
+}

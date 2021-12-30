@@ -1,0 +1,93 @@
+@import '../../../../styles/variables';
+
+.tabletComponent {
+  width: 222px;
+  position: relative;
+  z-index: 5;
+  top: -10px;
+  left: 30px;
+  margin-bottom: 20px;
+
+  .tabletComponentTitle {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .tabletComponentText {
+      width: 67px;
+      height: 22px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: $secondary-text-color;
+      white-space: nowrap;
+      margin-left: 11px;
+    }
+  }
+
+  .tabletComponentBody {
+    input::-webkit-clear-button {
+      -webkit-appearance: none;
+      display: none;
+    }
+
+    input[type='date'] {
+      outline: none;
+      border: none;
+      width: 160px;
+      color: $secondary-contrast-color;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .tabletComponentBodySelect {
+      outline: none;
+      border: none;
+      width: 160px;
+      color: $secondary-contrast-color;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      -webkit-appearance: none;
+      background-size: cover;
+      background: url('../../../../../../assets/img/home/arrow.svg') no-repeat center;
+      background-position-x: 105px;
+    }
+  }
+}
+
+.tabletComponentBodyBtn {
+  width: 80%;
+  height: 55px;
+  background: $secondary-contrast-color;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    width: 96px;
+    height: 48px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #ffffff;
+  }
+}
+
+::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  background-size: cover;
+  background: url('../../../../../../assets/img/home/arrow.svg') no-repeat center;
+}

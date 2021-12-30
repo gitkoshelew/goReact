@@ -1,4 +1,4 @@
-import s from './FifthPage.module.css'
+import s from './FifthPage.module.scss'
 import { TitlePageTextBlock } from '../../../components/TitlePageTextBlock/TitlePageTextBlock'
 import { NearbyPlaces } from './ImgBlockFifthPage/NearbyPlaces'
 

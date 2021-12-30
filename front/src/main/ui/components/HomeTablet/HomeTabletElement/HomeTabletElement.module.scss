@@ -1,0 +1,124 @@
+@import '../../../styles/variables';
+
+.tabletComponent {
+  width: 222px;
+  position: relative;
+  z-index: 5;
+  top: -10px;
+  left: 30px;
+  @media (min-width: 1144px) {
+    width: 200px;
+    padding-left: 20px;
+  }
+  @media (min-width: 1250px) {
+    width: 222px;
+    padding: 0;
+    text-align: center;
+  }
+
+  .tabletComponentTitle {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .tabletComponentText {
+      width: 67px;
+      height: 22px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: #808080;
+      white-space: nowrap;
+      margin-left: 11px;
+    }
+  }
+
+  .tabletComponentBody {
+    &:after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-bottom: 1px solid #dcdbdb;
+      transform: rotate(90deg);
+      display: block;
+      clear: both;
+      left: 190px;
+      top: 4px;
+    }
+
+    input[type='date'] {
+      outline: none;
+      border: none;
+      width: 160px;
+      color: $secondary-contrast-color;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+
+      ::-webkit-clear-button {
+        -webkit-appearance: none;
+        display: none;
+      }
+    }
+
+    select {
+      outline: none;
+      border: none;
+      width: 160px;
+      color: $secondary-contrast-color;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      -webkit-appearance: none;
+      background-size: cover;
+      background: url('../../../../../assets/img/home/arrow.svg') no-repeat center;
+      background-position-x: 105px;
+    }
+  }
+}
+
+.tabletComponentBodyBtn {
+  position: absolute;
+  width: 276px;
+  height: 135px;
+  background: $secondary-contrast-color;
+  border-radius: 0 20px 0 0;
+  left: 653px;
+  top: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (min-width: 1144px) {
+    left: 550px;
+    z-index: 10;
+  }
+  @media (min-width: 1250px) {
+    left: 605px;
+  }
+
+  p {
+    width: 96px;
+    height: 48px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: $secondary-background-color;
+  }
+}
+
+::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  background-size: cover;
+  background: url('../../../../../assets/img/home/arrow.svg') no-repeat center;
+}

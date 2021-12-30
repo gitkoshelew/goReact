@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './FirstPage.module.css'
+import s from './FirstPage.module.scss'
 import { HomeTablet } from '../../../components/HomeTablet/HomeTablet'
 import { HomeTabletSmall } from '../../../components/HomeTablet/HomeTabletSmall/HomeTabletSmall'
 
@@ -32,6 +32,7 @@ export const FirstPage = () => {
             <p>from our beautiful sea city.</p>
           </div>
         </div>
+
         <div className={photoTabletBlock}>
           <div className={photoBlock}>
             <p>373x335</p>

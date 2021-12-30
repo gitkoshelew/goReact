@@ -1,0 +1,20 @@
+@import '../../../styles/variables';
+
+.fifthPage {
+  background: $secondary-background-color;
+  @media (min-width: 1144px) {
+    background: $secondary-background-color;
+  }
+
+  .titleText {
+    margin: 60px 0 -30px 0;
+    white-space: nowrap;
+    @media (min-width: 575px) {
+      margin: 60px 0 -30px 125px;
+    }
+    @media (min-width: 1144px) {
+      margin: 100px 0 -30px 125px;
+      padding-top: 10px;
+    }
+  }
+}

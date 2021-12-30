@@ -24,6 +24,8 @@ func main() {
 	webapp.ConnectDb(config)
 	initAccountDb()
 
+	webapp.ConnectRedis(config)
+
 	s := server.New(config)
 
 	if err := s.Start(); err != nil {
@@ -36,16 +38,17 @@ func initAccountDb() {
 	db := utils.HandlerDbConnection()
 	for i := 0; i < 6; i++ {
 
-		encryptedPassword, err := store.EncryptPassword(fmt.Sprintf("password%d", i+1))
+		encryptedPassword, err := store.EncryptPassword(fmt.Sprintf("password"))
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		result, err := db.Exec("UPDATE ACCOUNT set password = $1 WHERE id = $2",
+		result, err := db.Exec("UPDATE USERS set password = $1 WHERE id = $2",
 			encryptedPassword, i+1)
 		if err != nil {
 			panic(err)
 		}
+		log.Println("password ecnrypted")
 		log.Println(result.RowsAffected())
 	}
 

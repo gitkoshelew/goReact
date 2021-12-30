@@ -1,7 +1,7 @@
 import { t } from '../../svgWrapper/navBarSvgWrapper'
 import { f } from '../../svgWrapper/navBarSvgWrapper'
 import { dot } from '../../svgWrapper/navBarSvgWrapper'
-import s from './Logo.module.css'
+import s from './Logo.module.scss'
 import React from 'react'
 
 const { logo } = s

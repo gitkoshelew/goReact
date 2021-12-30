@@ -1,4 +1,4 @@
-import s from './HomeTabletElement.module.css'
+import s from './HomeTabletElement.module.scss'
 import { calendar } from '../../../svgWrapper/HomeSvgWrapper'
 import { usersShadow } from '../../../svgWrapper/HomeSvgWrapper'
 

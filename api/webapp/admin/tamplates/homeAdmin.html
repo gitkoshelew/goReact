@@ -1,0 +1,122 @@
+{{template "base" .}}
+
+{{define "title"}}Home{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+
+<body>
+    <h2>Users</h2>
+    <form action="/admin/users">
+        <button>all users</button>
+    </form>
+</body>
+<form action="/admin/users/" method="GET">
+    <th>Get user id</th>
+    <input type="number" name="id" required><br><br>
+    <button>Get</button>
+</form>
+
+<body>
+    <h2>Hotels</h2>
+    <form action="/admin/hotels">
+        <button>all hotels</button>
+    </form>
+</body>
+
+<body>
+    <h2>Pets</h2>
+    <form action="/admin/pets">
+        <button>all pets</button>
+    </form>
+
+    <body>
+        <h2>Rooms</h2>
+        <form action="/admin/rooms">
+            <button>all rooms</button>
+        </form>
+    </body>
+
+    <body>
+        <h2>Employees</h2>
+        <form action="/admin/employees">
+            <button>all employees</button>
+        </form>
+    </body>
+
+    <body>
+        <h2>Bookings</h2>
+        <form action="/admin/bookings">
+            <button>all bookings</button>
+        </form>
+    </body>
+
+    <body>
+        <h2>Users</h2>
+        <form action="/user/new" method="POST">
+            <th>Имя</th>
+            <input type="text" name="First_name">
+            <th>Фамилия</th>
+            <input type="text" name="Surname"><br><br>
+            <th>Отчество</th>
+            <input type="text" name="Middle_name">
+            <th>Телефон</th>
+            <input type="text" name="Phone"><br><br>
+            <th>Группа</th>
+            <input type="number" name="Group_id">
+            <button>new</button>
+        </form>
+    </body>
+
+    <body>
+        <h2>Users</h2>
+        <form action="/user/update" method="POST">
+            <th>ID</th>
+            <input type="number" name="Id">
+            <th>Имя</th>
+            <input type="text" name="First_name">
+            <th>Фамилия</th>
+            <input type="text" name="Surname"><br><br>
+            <th>Отчество</th>
+            <input type="text" name="Middle_name">
+            <th>Телефон</th>
+            <input type="text" name="Phone"><br><br>
+            <th>Группа</th>
+            <input type="number" name="Group_id"><br><br>
+            <button>update</button>
+        </form>
+    </body>
+
+    <body>
+        <h2>Get user by id</h2>
+        <form action="/user/id" method="GET">
+            <input type="number" name="id">
+            <button>Get</button>
+        </form>
+        <p><a href="/users/1">1</a></p>
+        <p><a href="/users/2">2</a></p>
+        <p><a href="/users/3">3</a></p>
+        <p><a href="/users/4">4</a></p>
+        <p><a href="/users/5">5</a></p>
+        <p><a href="/users/6">6</a></p>
+    </body>
+
+    <body>
+        <h2>Delete user by id</h2>
+        <p><a href="/user/delete/1">1</a></p>
+        <p><a href="/user/delete/2">2</a></p>
+        <p><a href="/user/delete/3">3</a></p>
+        <p><a href="/user/delete/4">4</a></p>
+        <p><a href="/user/delete/5">5</a></p>
+        <p><a href="/user/delete/6">6</a></p>
+    </body>
+
+</html>
+{{end}}

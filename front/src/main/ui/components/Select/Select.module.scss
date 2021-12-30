@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.selectContainer {
+  select {
+    color: $secondary-contrast-color;
+    font-weight: 500;
+    width: 75px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    -webkit-appearance: none;
+    background: url('../../../../assets/img/navBar/arrow.svg') no-repeat right white;
+    background-position-x: 55px;
+    margin-left: 60px;
+    position: relative;
+    z-index: 2;
+    text-align-last: center;
+    text-align: center;
+    padding-left: calc(20% - 1em);
+  }
+
+  .selectContainer {
+    option {
+      text-align: left;
+    }
+  }
+}

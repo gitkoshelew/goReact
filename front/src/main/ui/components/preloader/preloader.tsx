@@ -19,7 +19,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -27,7 +29,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="-0.875s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>
@@ -42,7 +46,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -50,7 +56,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="-0.75s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>
@@ -65,7 +73,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -73,7 +83,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="-0.625s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>
@@ -88,7 +100,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -96,7 +110,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="-0.5s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>
@@ -111,7 +127,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -119,7 +137,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="-0.375s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>
@@ -134,7 +154,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -142,7 +164,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="-0.25s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>
@@ -157,7 +181,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -165,7 +191,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="-0.125s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>
@@ -180,7 +208,9 @@ export const Preloader = () => {
               keyTimes="0;1"
               dur="1s"
               repeatCount="indefinite"
-            ></animateTransform>
+            >
+              {' '}
+            </animateTransform>
             <animate
               attributeName="fillOpacity"
               keyTimes="0;1"
@@ -188,7 +218,9 @@ export const Preloader = () => {
               repeatCount="indefinite"
               values="1;0"
               begin="0s"
-            ></animate>
+            >
+              {' '}
+            </animate>
           </circle>
         </g>
       </g>

@@ -1,4 +1,4 @@
-import s from './PriceWindow.module.css'
+import s from './PriceWindow.module.scss'
 
 type PriceWindowPropsType = {
   price: number
