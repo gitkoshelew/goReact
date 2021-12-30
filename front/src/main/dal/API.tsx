@@ -1,10 +1,9 @@
-import bookingOrderDay from './mockData/BookingMockData';
-import {isDev} from './env/env';
+import bookingOrderDay from './mockData/BookingMockData'
 
+export type IsRentType = { id: string; firstRoom: boolean; secondRoom: boolean }
 
 export const BookingPageAPI = {
-    getRoomList() {
-        return isDev ? Promise.resolve(bookingOrderDay) : Promise.reject('error')
-
-    },
+  getCalendarData(): Promise<IsRentType[]> {
+    return Promise.resolve(bookingOrderDay.bookingRoomPageMockData.calendarData).then((res) => res)
+  },
 }
