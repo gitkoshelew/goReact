@@ -7,7 +7,6 @@ import { BookingRoom } from './BookingRoom/BookingRoom'
 import { useSelector } from 'react-redux'
 import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
 import {
-  IsRentType,
   LoadingStatusBookingPickType,
   OrderedRoomsType,
 } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
@@ -17,6 +16,7 @@ import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
 import Preloader from '../../components/preloader/preloader'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
+import { IsRentType } from '../../../dal/API'
 
 const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
 
@@ -63,9 +63,8 @@ export const Booking = () => {
     (state) => state.BookingRoomPick.loadingStatus
   )
 
-  const isError = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
-  const correctView = loadingStatus === 'loading' ? <Preloader /> : isError
-
+  const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
+  const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -85,7 +84,6 @@ export const Booking = () => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
     return newActualDay ? newActualDay : null
   }, [actualDay, isRentArr])
-  console.log(loadingStatus)
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className={bookingPage}>
