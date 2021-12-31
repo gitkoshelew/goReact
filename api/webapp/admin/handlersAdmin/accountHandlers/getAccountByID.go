@@ -11,6 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// GetAccountByID ...
 func GetAccountByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -33,7 +34,6 @@ func GetAccountByID() httprouter.Handle {
 			}
 			accounts = append(accounts, a)
 		}
-
 
 		if len(accounts) == 0 {
 			http.Error(w, "No account with such id!", 400)

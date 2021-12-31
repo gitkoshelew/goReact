@@ -56,7 +56,7 @@ func LoginHandle() httprouter.Handle {
 			return
 		}
 
-		tk, err := CreateToken(uint64(user.UserID))
+		tk, err := CreateToken(uint64(user.UserID), string(user.Role))
 
 		c := http.Cookie{
 			Name:     "Refresh-Token",

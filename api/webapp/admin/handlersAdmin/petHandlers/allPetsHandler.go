@@ -1,4 +1,4 @@
-package petHandlers
+package pethandlers
 
 import (
 	"fmt"
@@ -10,6 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// AllPetsHandler ...
 func AllPetsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
