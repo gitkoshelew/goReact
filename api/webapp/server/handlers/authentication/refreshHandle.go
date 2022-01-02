@@ -56,7 +56,7 @@ func RefreshHandle() httprouter.Handle {
 			}
 
 			c := http.Cookie{
-				Name:     "JWT",
+				Name:     "Refresh-Token",
 				Value:    tk.RefreshToken,
 				HttpOnly: true,
 			}

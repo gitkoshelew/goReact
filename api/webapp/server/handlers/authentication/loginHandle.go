@@ -20,7 +20,7 @@ func LoginHandle() httprouter.Handle {
 
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
-		utils.EnableCors(&w)
+		// utils.EnableCors(&w)
 
 		req := &loginRequest{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {

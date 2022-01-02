@@ -8,6 +8,7 @@ import (
 	"goReact/webapp/server/handlers/client"
 	"goReact/webapp/server/handlers/employee"
 	"goReact/webapp/server/handlers/hotel"
+	"goReact/webapp/server/handlers/middleware"
 	"goReact/webapp/server/handlers/pet"
 	"goReact/webapp/server/handlers/room"
 	"goReact/webapp/server/handlers/seat"
@@ -15,7 +16,13 @@ import (
 )
 
 func (s *Server) configureRouter() {
+	s.router.GlobalOPTIONS = handlers.CorsHandle()
+
 	s.router.Handle("GET", "/", handlers.HandleHomePage())
+
+	s.router.Handle("GET", "/private/whoami", middleware.Private(middleware.WhoAmI()))
+	s.router.Handle("GET", "/private/client", middleware.Private(middleware.ClientHome()))
+	s.router.Handle("GET", "/private/employee", middleware.Private(middleware.EmployeetHome()))
 
 	s.router.Handle("POST", "/registration", authentication.RegistrationHandle())
 	s.router.Handle("POST", "/login", authentication.LoginHandle())
