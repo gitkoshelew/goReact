@@ -10,9 +10,10 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// HomeAdmin ...
 func HomeAdmin() httprouter.Handle {
 
-		db := utils.HandlerDbConnection()
+	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		var id int
 		Login := r.FormValue("login")
@@ -37,16 +38,16 @@ func HomeAdmin() httprouter.Handle {
 		isConfirmed := store.CheckPasswordHash(Password, hashPassword)
 		fmt.Println("ac login and pas 3 : ", hashlogin, account.Password, hashPid)
 		fmt.Println(isConfirmed)
-		if !isConfirmed {
-			http.Error(w, "Check your email or password2", 401)
-			return
-		}
+		// if !isConfirmed {
+		// 	http.Error(w, "Check your email or password2", 401)
+		// 	return
+		// }
 
-		row := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1 AND password=$2", Login,Password)
-		err = row.Scan(&id,&Login)
-		if err !=nil{
+		row := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1 AND password=$2", Login, Password)
+		err = row.Scan(&id, &Login)
+		if err != nil {
 			http.Error(w, err.Error(), 400)
-		return
+			return
 		}
 
 		files := []string{

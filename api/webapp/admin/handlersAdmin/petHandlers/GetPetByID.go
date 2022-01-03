@@ -1,4 +1,4 @@
-package petHandlers 
+package pethandlers
 
 import (
 	"fmt"
@@ -11,12 +11,13 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// GetPetByID ...
 func GetPetByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	
+
 		pets := []store.Pet{}
-		
+
 		id, _ := strconv.Atoi(ps.ByName("id"))
 		rows, err := db.Query("select * from pet where id=$1", id)
 		if err != nil {

@@ -43,14 +43,20 @@ func RefreshHandle() httprouter.Handle {
 				return
 			}
 
-			tk, createErr := CreateToken(userID)
+			role := fmt.Sprint(claims["role"])
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
+				return
+			}
+
+			tk, createErr := CreateToken(userID, role)
 			if createErr != nil {
 				http.Error(w, err.Error(), http.StatusForbidden)
 				return
 			}
 
 			c := http.Cookie{
-				Name:     "JWT",
+				Name:     "Refresh-Token",
 				Value:    tk.RefreshToken,
 				HttpOnly: true,
 			}

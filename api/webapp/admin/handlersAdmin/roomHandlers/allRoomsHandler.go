@@ -1,4 +1,4 @@
-package roomHandlers
+package roomhandlers
 
 import (
 	"fmt"
@@ -10,6 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// AllRoomsHandler ...
 func AllRoomsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
