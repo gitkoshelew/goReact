@@ -3,6 +3,7 @@ package hotelhandlers
 import (
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
@@ -14,7 +15,7 @@ import (
 func GetHotelByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
+		session.CheckSession(w, r)
 		hotels := []store.Hotel{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))

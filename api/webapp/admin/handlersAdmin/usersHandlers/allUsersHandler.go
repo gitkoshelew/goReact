@@ -25,7 +25,8 @@ func AllUsersHandler() httprouter.Handle {
 
 		for rows.Next() {
 			u := store.User{}
-			err := rows.Scan(&u.UserID, &u.Name, &u.Surname, &u.MiddleName, &u.Email, &u.DateOfBirth, &u.Address, &u.Phone, &u.Account.AccountID)
+			err := rows.Scan(&u.UserID, &u.Email, &u.Password, &u.Role, u.Verified, &u.Name, &u.Surname, &u.MiddleName, &u.Sex, &u.DateOfBirth,
+				 &u.Address, &u.Phone, &u.Photo)
 			if err != nil {
 				fmt.Println(err)
 				continue

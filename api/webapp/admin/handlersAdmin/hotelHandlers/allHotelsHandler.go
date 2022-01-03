@@ -3,6 +3,7 @@ package hotelhandlers
 import (
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
@@ -15,6 +16,8 @@ func AllHotelsHandler() httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		hotels := []store.Hotel{}
+
+		session.CheckSession(w, r)
 
 		rows, err := db.Query("select * from hotel")
 		if err != nil {

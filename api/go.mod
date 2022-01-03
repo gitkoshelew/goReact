@@ -11,8 +11,11 @@ require (
 	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871
 )
 
+require github.com/gorilla/securecookie v1.1.1 // indirect
+
 require (
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-redis/redis/v7 v7.4.1 // indirect
+	github.com/gorilla/sessions v1.2.1
 	github.com/twinj/uuid v1.0.0 // indirect
 )

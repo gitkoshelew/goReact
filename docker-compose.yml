@@ -91,8 +91,7 @@ services:
                 "-path",
                 "/api/migrations/",
                 "-database",
-                "postgres://postgresql_database/goreact?sslmode=disable&user=\
-                  user&password=userpass",
+                "postgres://postgresql_database/goreact?sslmode=disable&user=user&password=userpass",
                 "up"
             ]
         networks:
