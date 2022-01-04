@@ -1,23 +1,22 @@
-import React, { useEffect, useMemo } from 'react'
-import s from './Booking.module.css'
-import { TitlePageTextBlock } from '../../components/TitlePageTextBlock/TitlePageTextBlock'
-import { BookingRegForm } from './BookingRegForm/BookingRegForm'
-import { BookingCalendar } from './BookingCalendar/BookingCalendar'
-import { BookingRoom } from './BookingRoom/BookingRoom'
-import { useSelector } from 'react-redux'
-import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
+import React, {useEffect, useMemo} from 'react'
+import s from './Booking.module.scss'
+import {TitlePageTextBlock} from '../../components/TitlePageTextBlock/TitlePageTextBlock'
+import {BookingRegForm} from './BookingRegForm/BookingRegForm'
+import {BookingCalendar} from './BookingCalendar/BookingCalendar'
+import {BookingRoom} from './BookingRoom/BookingRoom'
+import {useSelector} from 'react-redux'
+import {AppRootStateType, useAppDispatch} from '../../../bll/store/store'
 import {
   LoadingStatusBookingPickType,
   OrderedRoomsType,
 } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
-import { Button } from '../../components/Button/Button'
-import { ProgressType } from '../../../bll/reducers/BookingRegFormReducer/BookingRegForm-reducer'
-import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
-import { FormikErrors, useFormik } from 'formik'
+import {Button} from '../../components/Button/Button'
+import {ProgressType} from '../../../bll/reducers/BookingRegFormReducer/BookingRegForm-reducer'
+import {SelectedToOrderRoom} from './SelectedToOrderRom/SelectedToOrderRoom'
+import {FormikErrors, useFormik} from 'formik'
 import Preloader from '../../components/preloader/preloader'
-import { ErrorMsg } from '../../components/ErrorMsg/ErrorMsg'
-import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
-import { IsRentType } from '../../../dal/API'
+import {BookingRoomPickSaga} from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
+import {IsRentType} from '../../../dal/API'
 
 const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
 
