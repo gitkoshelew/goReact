@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "3c9e4401-6c35-4c7f-96d1-e97fce24925e",
+		"name": "goreact",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Access-Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjQyNTk4NGRhLWQ0NTgtNDY5NC05YmMyLTUzYjBiM2I4OTBjYyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MDczODQ5OSwidXNlcl9pZCI6NH0.ds8JjA_oi70ao5phJ3hR452x8Oif0CZ4r0W4JBk-zt8",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Origin",
+								"value": "google.com",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"email\": \"ivdadan@mail.ru\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"verified\": true,\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentiction",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"email\": \"ivdadand@mail.ru\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"verified\": true,\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjkzY2U2MjMyLTdjMTItNDk3MC1iOTY4LTU0MDA2ZTcwY2RkNyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3NzYzNywicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.-HJ6qJSuDLjsUv0yqQq3gm1cafXAiPCQxLaclERhs6U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"olga@mail.ru\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/todo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"todo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Who am i",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/private/whoami",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"private",
+								"whoami"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
