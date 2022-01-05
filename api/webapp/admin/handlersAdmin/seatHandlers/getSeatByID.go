@@ -3,6 +3,7 @@ package seathandlers
 import (
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
@@ -14,6 +15,7 @@ import (
 func GetSeatByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
 		seats := []store.Seat{}
 		id, _ := strconv.Atoi(ps.ByName("id"))

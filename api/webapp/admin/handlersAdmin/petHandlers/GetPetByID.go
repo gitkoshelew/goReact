@@ -1,8 +1,9 @@
-package petHandlers 
+package petHandlers
 
 import (
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
@@ -14,9 +15,10 @@ import (
 func GetPetByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	
+		session.CheckSession(w, r)
+
 		pets := []store.Pet{}
-		
+
 		id, _ := strconv.Atoi(ps.ByName("id"))
 		rows, err := db.Query("select * from pet where id=$1", id)
 		if err != nil {

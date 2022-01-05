@@ -14,10 +14,9 @@ import (
 func AllHotelsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
 		hotels := []store.Hotel{}
-
-		session.CheckSession(w, r)
 
 		rows, err := db.Query("select * from hotel")
 		if err != nil {

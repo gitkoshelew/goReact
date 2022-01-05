@@ -3,6 +3,7 @@ package accounthandlers
 import (
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"html/template"
 	"net/http"
@@ -14,6 +15,7 @@ import (
 func GetAccountByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
 		accounts := []store.Account{}
 		id, _ := strconv.Atoi(ps.ByName("id"))
@@ -33,7 +35,6 @@ func GetAccountByID() httprouter.Handle {
 			}
 			accounts = append(accounts, a)
 		}
-
 
 		if len(accounts) == 0 {
 			http.Error(w, "No account with such id!", 400)

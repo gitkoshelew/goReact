@@ -16,6 +16,9 @@ import (
 
 func (s *Server) configureRoutesAdmin() {
 	s.router.Handle("GET", "/admin/login", handlersadmin.LoginAdmin())
+	s.router.Handle("POST", "/admin/auth", handlersadmin.AuthAdmin())
+	s.router.Handle("GET", "/admin/logout", handlersadmin.LogoutAdmin())
+	
 
 	s.router.Handle("GET", "/admin/home", handlersadmin.HomeAdmin())
 
@@ -45,4 +48,6 @@ func (s *Server) configureRoutesAdmin() {
 
 	s.router.ServeFiles("/admin/templates/*filepath", http.Dir("templates"))
 
+
+	
 }
