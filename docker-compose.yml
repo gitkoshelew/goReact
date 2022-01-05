@@ -1,14 +1,6 @@
 version: '3.9'
 
 services:
-    redis:
-        image: redis:alpine
-        container_name: "redis"
-        restart: unless-stopped
-        ports:
-            - ${REDIS_EXPOSE_PORT}:${REDIS_PORT}
-        networks:
-            - app_net
     postgresql_database:
         container_name: postgresql_database
         image: postgres:latest
@@ -26,7 +18,28 @@ services:
         volumes:
             - database-data:/var/lib/postgresql/data/
         networks:
-            - app_net
+            new:
+                aliases:
+                    - database
+
+    test_postgresql_database:
+        container_name: test_postgresql_database
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
+        ports:
+            - "8082:5434"
+        restart: always
+        volumes:
+            - database-data:/var/lib/test_postgresql/data/
+        networks:
+            - new
 
     pgadmin:
         image: dpage/pgadmin4
@@ -41,7 +54,7 @@ services:
         volumes:
             - pgadmin:/root/.pgadmin
         networks:
-            - app_net
+            - new
 
     rabbitmq:
         image: rabbitmq:3-management
@@ -58,7 +71,7 @@ services:
         volumes:
             - rabbitmq_data:/bitnami/rabbitmq/mnesia
         networks:
-            - app_net
+            - new
 
     goreact:
         build:
@@ -77,7 +90,7 @@ services:
             - ENV=prod
         tty: true
         networks:
-            - app_net
+            - new
 
     migrate:
         container_name: migrates
@@ -94,11 +107,13 @@ services:
                 "postgres://postgresql_database/goreact?sslmode=disable&user=user&password=userpass",
                 "up"
             ]
+        links:
+            - postgresql_database
         networks:
-            - app_net
+            - new
 
 networks:
-    app_net:
+    new:
         driver: bridge
 volumes:
     database-data: null

@@ -2,6 +2,7 @@ package authentication
 
 import (
 	"fmt"
+	"goReact/domain/store"
 	"net/http"
 	"os"
 	"strconv"
@@ -11,7 +12,7 @@ import (
 )
 
 // RefreshHandle ...
-func RefreshHandle() httprouter.Handle {
+func RefreshHandle(s *store.Store) httprouter.Handle {
 
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -65,9 +66,10 @@ func RefreshHandle() httprouter.Handle {
 
 			w.Header().Add("Access-Token", tk.AccessToken)
 			w.WriteHeader(http.StatusOK)
+			fmt.Fprintln(w, "Successfully refreshed")
 
 		} else {
-			http.Error(w, "refresh expired", http.StatusUnauthorized)
+			http.Error(w, "Refresh expired", http.StatusUnauthorized)
 		}
 
 	}

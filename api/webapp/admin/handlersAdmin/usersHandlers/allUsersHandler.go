@@ -2,7 +2,7 @@ package usershandlers
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
@@ -15,7 +15,7 @@ func AllUsersHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		users := []store.User{}
+		users := []model.User{}
 
 		rows, err := db.Query("select * from users")
 		if err != nil {
@@ -25,7 +25,7 @@ func AllUsersHandler() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			u := store.User{}
+			u := model.User{}
 			err := rows.Scan(&u.UserID, &u.Email, &u.Password, &u.Role, &u.Verified, &u.Name, &u.Surname, &u.MiddleName, &u.Sex, &u.DateOfBirth,
 				&u.Address, &u.Phone, &u.Photo)
 

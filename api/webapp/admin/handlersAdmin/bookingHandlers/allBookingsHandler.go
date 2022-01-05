@@ -2,8 +2,11 @@ package bookinghandlers
 
 import (
 	"fmt"
-	"goReact/domain/store"
+
 	"goReact/webapp/admin/session"
+
+	"goReact/domain/model"
+
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
@@ -17,7 +20,7 @@ func AllBookingsHandler() httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
-		bookings := []store.Booking{}
+		bookings := []model.Booking{}
 
 		rows, err := db.Query("select * from booking")
 		if err != nil {
@@ -27,8 +30,8 @@ func AllBookingsHandler() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			b := store.Booking{}
-			err := rows.Scan(&b.BookingID, &b.Seat.SeatID, &b.Pet.PetID, &b.Employee.EmployeeID, &b.Status, &b.StartDate, &b.EndDate, &b.ClientNotes)
+			b := model.Booking{}
+			err := rows.Scan(&b.BookingID, &b.Seat.SeatID, &b.Pet.PetID, &b.Employee.EmployeeID, &b.Status, &b.StartDate, &b.EndDate, &b.Notes)
 			if err != nil {
 				fmt.Println(err)
 				continue

@@ -33,8 +33,8 @@ type AccessDetails struct {
 // CreateToken ...
 func CreateToken(userid uint64, role string) (*Token, error) {
 	token := &Token{}
-	token.AtExpires = time.Now().Add(time.Minute * 15).Unix() // Expire time of Access token
-	token.AccessUUID = uuid.NewV4().String()                  // Create a random RFC4122 version 4 UUID a cryptographically secure for Access token
+	token.AtExpires = time.Now().Add(time.Minute * 120).Unix() // Expire time of Access token
+	token.AccessUUID = uuid.NewV4().String()                   // Create a random RFC4122 version 4 UUID a cryptographically secure for Access token
 
 	token.RtExpires = time.Now().Add(time.Hour * 24 * 7).Unix() // Expire time of Refresh token
 	token.RefreshUUID = uuid.NewV4().String()                   // Create a random RFC4122 version 4 UUID a cryptographically secure for Refresh token

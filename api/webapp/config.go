@@ -22,10 +22,6 @@ type Config struct {
 		DbName   string
 		Sslmode  string
 	}
-	Redis struct {
-		Host string
-		Port int
-	}
 }
 
 // NewConfig ..
@@ -41,9 +37,6 @@ func (c *Config) NewConfig() {
 	c.DbConnection.Password = os.Getenv("POSTGRES_PASSWORD")
 	c.DbConnection.Port, _ = strconv.Atoi(os.Getenv("POSTGRES_PORT"))
 	c.DbConnection.Sslmode = os.Getenv("POSTGRES_SSLMODE")
-
-	c.Redis.Host = os.Getenv("REDIS_HOST")
-	c.Redis.Port, _ = strconv.Atoi(os.Getenv("REDIS_PORT"))
 }
 
 // PgDataSource ...
@@ -57,11 +50,6 @@ func (c *Config) PgDataSource() string {
 		c.DbConnection.DbName,
 		c.DbConnection.Sslmode,
 	)
-}
-
-// RedisInfo ...
-func (c *Config) RedisInfo() string {
-	return fmt.Sprintf("%s:%d", c.Redis.Host, c.Redis.Port)
 }
 
 // ServerAddress ...

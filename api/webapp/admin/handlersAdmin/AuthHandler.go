@@ -1,7 +1,7 @@
 package handlersadmin
 
 import (
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
@@ -14,14 +14,14 @@ func AuthAdmin() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		LoginForm := r.FormValue("login")
+		EmailForm := r.FormValue("email")
 		Password := r.FormValue("password")
-		account := store.Account{}
-		rowPassword := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1 ", LoginForm)
-		err := rowPassword.Scan(&account.AccountID, &account.Login, &account.Password)
+		user := model.User{}
+		rowPassword := db.QueryRow("SELECT * FROM ACCOUNT WHERE Email = $1 ", EmailForm)
+		err := rowPassword.Scan(&user.UserID, &user.Email, &user.Password)
 
-		hashPassword := account.Password
-		id := account.AccountID
+		hashPassword := user.Password
+		id := user.UserID
 
 		if err != nil {
 			http.Redirect(w, r, "/admin/login", http.StatusFound)
@@ -29,7 +29,7 @@ func AuthAdmin() httprouter.Handle {
 
 		}
 
-		isConfirmed := store.CheckPasswordHash(hashPassword, Password)
+		isConfirmed := model.CheckPasswordHash(hashPassword, Password)
 		if isConfirmed != nil {
 			http.Redirect(w, r, "/admin/login", http.StatusFound)
 

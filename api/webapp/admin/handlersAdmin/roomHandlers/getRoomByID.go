@@ -2,7 +2,7 @@ package roomhandlers
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
@@ -18,7 +18,7 @@ func GetRoomByID() httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
-		rooms := []store.Room{}
+		rooms := []model.Room{}
 		id, _ := strconv.Atoi(ps.ByName("id"))
 
 		rows, err := db.Query("select * from room where id=$1", id)
@@ -29,7 +29,7 @@ func GetRoomByID() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			r := store.Room{}
+			r := model.Room{}
 			err := rows.Scan(&r.RoomID, &r.RoomNumber, &r.PetType, &r.Hotel.HotelID)
 			if err != nil {
 				fmt.Println(err)

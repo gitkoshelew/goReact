@@ -2,7 +2,7 @@ package hotelhandlers
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
@@ -17,8 +17,8 @@ func GetHotelByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		
-		hotels := []store.Hotel{}
+
+		hotels := []model.Hotel{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
 		rows, err := db.Query("select * from hotel where id=$1", id)
@@ -29,7 +29,7 @@ func GetHotelByID() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			h := store.Hotel{}
+			h := model.Hotel{}
 			err := rows.Scan(&h.HotelID, &h.Name, &h.Address)
 			if err != nil {
 				fmt.Println(err)
