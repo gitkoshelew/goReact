@@ -1,7 +1,6 @@
 package session
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 
@@ -13,7 +12,6 @@ var store = sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 func CheckSession(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")
 	_, ok := session.Values["accountID"]
-	fmt.Println("ok:", ok)
 	if !ok {
 		http.Redirect(w, r, "/admin/login", http.StatusFound)
 		return

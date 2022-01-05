@@ -1,7 +1,6 @@
 package handlersadmin
 
 import (
-	"fmt"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
@@ -23,22 +22,15 @@ func AuthAdmin() httprouter.Handle {
 
 		hashPassword := account.Password
 		id := account.AccountID
-		hashlogin := account.Login
-		fmt.Println(Password, hashlogin)
 
 		if err != nil {
-			//	http.Error(w, "Check your email or password1", http.StatusBadRequest)
 			http.Redirect(w, r, "/admin/login", http.StatusFound)
 			return
 
 		}
 
 		isConfirmed := store.CheckPasswordHash(hashPassword, Password)
-		fmt.Println("hashPassword and pas : ", hashPassword, Password, id)
-		fmt.Println("ac login and pas 3 : ", hashlogin, account.Password, id)
-		fmt.Println(isConfirmed)
 		if isConfirmed != nil {
-			//	http.Error(w, "Check your email or password2", http.StatusBadRequest)
 			http.Redirect(w, r, "/admin/login", http.StatusFound)
 
 			return
@@ -46,7 +38,6 @@ func AuthAdmin() httprouter.Handle {
 		session.AuthSession(w, r, id)
 
 		http.Redirect(w, r, "/admin/home", http.StatusFound)
-		
 
 	}
 }
