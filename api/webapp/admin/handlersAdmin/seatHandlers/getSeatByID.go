@@ -20,6 +20,13 @@ func GetSeatByID() httprouter.Handle {
 
 		seats := []model.Seat{}
 		id, _ := strconv.Atoi(ps.ByName("id"))
+
+		/*s.Open()
+		seats, err := s.Seat().FindByID(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
 		rows, err := db.Query("select * from seat where id=$1", id)
 		if err != nil {
 			fmt.Println(err)

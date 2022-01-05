@@ -20,6 +20,13 @@ func AllPetsHandler() httprouter.Handle {
 
 		pets := []model.Pet{}
 
+		/*s.Open()
+		pets, err := s.Pet().GetAll()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
+
 		rows, err := db.Query("select * from pet")
 		if err != nil {
 			fmt.Println(err)

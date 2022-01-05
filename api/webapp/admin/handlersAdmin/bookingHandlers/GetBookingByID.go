@@ -18,9 +18,16 @@ func GetBookingByID() httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
-		bookings := []model.Booking{}
+		booking := []model.Booking{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
+
+		/*s.Open()
+		pets, err := s.Booking().FindByID(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
 		rows, err := db.Query("select * from booking where id=$1", id)
 		if err != nil {
 			fmt.Println(err)
@@ -35,10 +42,10 @@ func GetBookingByID() httprouter.Handle {
 				fmt.Println(err)
 				continue
 			}
-			bookings = append(bookings, b)
+			booking = append(booking, b)
 
 		}
-		if len(bookings) == 0 {
+		if len(booking) == 0 {
 			http.Error(w, "No booking with such id!", 400)
 			return
 		}
@@ -54,7 +61,7 @@ func GetBookingByID() httprouter.Handle {
 			return
 		}
 
-		err = tmpl.Execute(w, bookings)
+		err = tmpl.Execute(w, booking)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
 			return

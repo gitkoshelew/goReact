@@ -19,6 +19,13 @@ func AllHotelsHandler() httprouter.Handle {
 
 		hotels := []model.Hotel{}
 
+		/*	s.Open()
+			hotels, err := s.Hotel().GetAll()
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusNotFound)
+				return
+			}*/
+
 		rows, err := db.Query("select * from hotel")
 		if err != nil {
 			fmt.Println(err)

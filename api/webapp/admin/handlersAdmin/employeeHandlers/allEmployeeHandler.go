@@ -19,6 +19,13 @@ func AllEmployeeHandler() httprouter.Handle {
 
 		employees := []model.Employee{}
 
+		/*s.Open()
+		employess, err := s.Employee().GetAll()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
+
 		rows, err := db.Query("select * from employee")
 		if err != nil {
 			fmt.Println(err)

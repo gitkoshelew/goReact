@@ -21,6 +21,15 @@ func GetEmployeeByID() httprouter.Handle {
 		employees := []model.Employee{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
+
+		/*
+			s.Open()
+			employess, err := s.Employee().FindByID(id)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusNotFound)
+				return
+			}*/
+
 		rows, err := db.Query("select * from employee where id=$1", id)
 		if err != nil {
 			fmt.Println(err)

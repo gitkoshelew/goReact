@@ -2,8 +2,8 @@ package pethandlers
 
 import (
 	"fmt"
-	"goReact/webapp/admin/session"
 	"goReact/domain/model"
+	"goReact/webapp/admin/session"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
@@ -21,6 +21,13 @@ func GetPetByID() httprouter.Handle {
 		pets := []model.Pet{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
+		/*	s.Open()
+			pets, err := s.Pet().FindByID(id)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusNotFound)
+				return
+			}*/
+
 		rows, err := db.Query("select * from pet where id=$1", id)
 		if err != nil {
 			fmt.Println(err)

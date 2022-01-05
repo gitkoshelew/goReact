@@ -19,9 +19,16 @@ func AllBookingsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
+			/*
+			s.Open()
+		booking, err := s.Booking().GetAll()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		}*/
 
-		bookings := []model.Booking{}
-
+		booking := []model.Booking{}
 		rows, err := db.Query("select * from booking")
 		if err != nil {
 			fmt.Println(err)
@@ -36,7 +43,7 @@ func AllBookingsHandler() httprouter.Handle {
 				fmt.Println(err)
 				continue
 			}
-			bookings = append(bookings, b)
+			booking = append(booking, b)
 		}
 
 		files := []string{
@@ -50,7 +57,7 @@ func AllBookingsHandler() httprouter.Handle {
 			return
 		}
 
-		err = tmpl.Execute(w, bookings)
+		err = tmpl.Execute(w, booking)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
 			return

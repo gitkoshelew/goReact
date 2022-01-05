@@ -19,6 +19,13 @@ func AllSeatsHandler() httprouter.Handle {
 
 		seats := []model.Seat{}
 
+		/*s.Open()
+		seats, err := s.Seat().GetAll()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
+
 		rows, err := db.Query("select * from seat")
 		if err != nil {
 			fmt.Println(err)

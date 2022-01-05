@@ -21,6 +21,13 @@ func GetRoomByID() httprouter.Handle {
 		rooms := []model.Room{}
 		id, _ := strconv.Atoi(ps.ByName("id"))
 
+		/*s.Open()
+		rooms, err := s.Room().FindByID(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
+
 		rows, err := db.Query("select * from room where id=$1", id)
 		if err != nil {
 			fmt.Println(err)

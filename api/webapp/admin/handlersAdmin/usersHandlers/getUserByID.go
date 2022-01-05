@@ -25,6 +25,14 @@ func GetUserByID() httprouter.Handle {
 		users := []model.User{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
+
+		/*s.Open()
+		user, err := s.User().FindByID(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
+
 		rows, err := db.Query("select * from users where id=$1", id)
 		if err != nil {
 			fmt.Println(err)

@@ -19,6 +19,13 @@ func AllRoomsHandler() httprouter.Handle {
 
 		rooms := []model.Room{}
 
+		/*s.Open()
+		rooms, err := s.Room().GetAll()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
+
 		rows, err := db.Query("select * from room")
 		if err != nil {
 			fmt.Println(err)

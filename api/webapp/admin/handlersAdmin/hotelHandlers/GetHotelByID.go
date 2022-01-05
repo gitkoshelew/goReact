@@ -21,6 +21,13 @@ func GetHotelByID() httprouter.Handle {
 		hotels := []model.Hotel{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
+
+		/*		s.Open()
+				hotels, err := s.Hotel().FindByID(id)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusNotFound)
+					return
+				}*/
 		rows, err := db.Query("select * from hotel where id=$1", id)
 		if err != nil {
 			fmt.Println(err)

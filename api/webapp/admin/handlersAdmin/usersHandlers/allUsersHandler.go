@@ -17,6 +17,13 @@ func AllUsersHandler() httprouter.Handle {
 
 		users := []model.User{}
 
+		/*s.Open()
+		users, err := s.User().GetAll()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}*/
+
 		rows, err := db.Query("select * from users")
 		if err != nil {
 			fmt.Println(err)
