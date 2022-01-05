@@ -2,7 +2,7 @@ package employeehandlers
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
@@ -16,7 +16,7 @@ func GetEmployeeByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		employees := []store.Employee{}
+		employees := []model.Employee{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
 		rows, err := db.Query("select * from employee where id=$1", id)
@@ -27,7 +27,7 @@ func GetEmployeeByID() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			e := store.Employee{}
+			e := model.Employee{}
 			err := rows.Scan(&e.EmployeeID, &e.User.UserID, &e.Hotel.HotelID, &e.Position, &e.Role)
 			if err != nil {
 				fmt.Println(err)

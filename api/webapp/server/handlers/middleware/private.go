@@ -1,12 +1,11 @@
 package middleware
 
 import (
+	"goReact/domain/store"
 	"net/http"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 // Private ...
-func Private(next http.HandlerFunc) httprouter.Handle {
-	return AuthenticateUser(next)
+func Private(next http.HandlerFunc, s *store.Store) http.Handler {
+	return AuthenticateUser(next, s)
 }

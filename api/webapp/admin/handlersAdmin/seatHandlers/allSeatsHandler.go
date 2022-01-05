@@ -2,7 +2,7 @@ package seathandlers
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
@@ -15,7 +15,7 @@ func AllSeatsHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		seats := []store.Seat{}
+		seats := []model.Seat{}
 
 		rows, err := db.Query("select * from seat")
 		if err != nil {
@@ -25,7 +25,7 @@ func AllSeatsHandler() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			s := store.Seat{}
+			s := model.Seat{}
 			err := rows.Scan(&s.SeatID, &s.Room.RoomID, &s.IsFree, &s.Description)
 			if err != nil {
 				fmt.Println(err)

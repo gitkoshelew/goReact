@@ -1,6 +1,7 @@
 package server
 
 import (
+	"goReact/domain/store"
 	"goReact/webapp"
 	"log"
 	"net/http"
@@ -14,6 +15,7 @@ type Server struct {
 	config *webapp.Config
 	logger *log.Logger
 	router *httprouter.Router
+	Store  *store.Store
 }
 
 // New ...
@@ -31,6 +33,10 @@ func (s *Server) Start() error {
 	s.configureRouter()
 
 	s.configureRoutesAdmin()
+
+	if err := s.configureStore(); err != nil {
+		return err
+	}
 
 	s.logger.Printf("Server starting ...")
 	s.logger.Printf(s.config.ServerInfo())
