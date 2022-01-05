@@ -2,7 +2,6 @@ package authentication
 
 import (
 	"encoding/json"
-	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/server/handlers/request"
@@ -46,6 +45,6 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		w.Header().Add("Access-Token", tk.AccessToken)
 		json.NewEncoder(w).Encode(user)
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "Login successfull")
+
 	})
 }
