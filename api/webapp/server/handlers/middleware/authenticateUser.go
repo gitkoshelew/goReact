@@ -14,7 +14,7 @@ func AuthenticateUser(next http.Handler, s *store.Store) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		AccessDetails, err := authentication.ExtractTokenMetadata(r)
 		if err != nil {
-			fmt.Fprintln(w, "You are not uthorized")
+			fmt.Fprintln(w, "You are not authorized")
 			w.WriteHeader(http.StatusUnauthorized)
 			log.Print(err.Error())
 			return
