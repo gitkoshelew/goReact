@@ -27,10 +27,11 @@ type Token struct {
 type AccessDetails struct {
 	AccessUUID string `json:"accessUuid"`
 	UserID     uint64 `json:"userId"`
+	Role       string `json:"role"`
 }
 
 // CreateToken ...
-func CreateToken(userid uint64) (*Token, error) {
+func CreateToken(userid uint64, role string) (*Token, error) {
 	token := &Token{}
 	token.AtExpires = time.Now().Add(time.Minute * 15).Unix() // Expire time of Access token
 	token.AccessUUID = uuid.NewV4().String()                  // Create a random RFC4122 version 4 UUID a cryptographically secure for Access token
@@ -45,6 +46,7 @@ func CreateToken(userid uint64) (*Token, error) {
 	atClaims["authorized"] = true
 	atClaims["access_uuid"] = token.AccessUUID
 	atClaims["user_id"] = userid
+	atClaims["role"] = role
 	atClaims["exp"] = token.AtExpires
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
 	token.AccessToken, err = at.SignedString([]byte(os.Getenv("ACCESS_SECRET")))
@@ -56,6 +58,7 @@ func CreateToken(userid uint64) (*Token, error) {
 	rtClaims := jwt.MapClaims{}
 	rtClaims["refresh_uuid"] = token.RefreshUUID
 	rtClaims["user_id"] = userid
+	rtClaims["role"] = role
 	rtClaims["exp"] = token.RtExpires
 	rt := jwt.NewWithClaims(jwt.SigningMethodHS256, rtClaims)
 	token.RefreshToken, err = rt.SignedString([]byte(os.Getenv("REFRESH_SECRET")))
@@ -123,13 +126,21 @@ func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 		if !ok {
 			return nil, err
 		}
+
 		userID, err := strconv.ParseUint(fmt.Sprintf("%.f", claims["user_id"]), 10, 64)
 		if err != nil {
 			return nil, err
 		}
+
+		role := fmt.Sprint(claims["role"])
+		if err != nil {
+			return nil, err
+		}
+
 		return &AccessDetails{
 			AccessUUID: accessUUID,
 			UserID:     userID,
+			Role:       role,
 		}, nil
 	}
 	return nil, err

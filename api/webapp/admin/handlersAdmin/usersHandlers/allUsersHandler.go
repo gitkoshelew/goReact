@@ -10,6 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// AllUsersHandler ...
 func AllUsersHandler() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -26,7 +27,8 @@ func AllUsersHandler() httprouter.Handle {
 		for rows.Next() {
 			u := store.User{}
 			err := rows.Scan(&u.UserID, &u.Email, &u.Password, &u.Role, &u.Verified, &u.Name, &u.Surname, &u.MiddleName, &u.Sex, &u.DateOfBirth,
-				 &u.Address, &u.Phone, &u.Photo)
+				&u.Address, &u.Phone, &u.Photo)
+
 			if err != nil {
 				fmt.Println(err)
 				continue

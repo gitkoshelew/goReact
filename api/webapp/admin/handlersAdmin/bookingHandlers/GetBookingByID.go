@@ -1,4 +1,4 @@
-package bookingHandlers
+package bookinghandlers
 
 import (
 	"fmt"
@@ -12,6 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// GetBookingByID ...
 func GetBookingByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

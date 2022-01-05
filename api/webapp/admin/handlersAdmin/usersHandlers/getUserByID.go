@@ -12,11 +12,12 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// GetUserByID ...
 func GetUserByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		session.CheckSession(w , r)
+		session.CheckSession(w, r)
 
 		users := []store.User{}
 		id, _ := strconv.Atoi(ps.ByName("id"))

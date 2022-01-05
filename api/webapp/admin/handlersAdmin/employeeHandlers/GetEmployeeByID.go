@@ -1,4 +1,4 @@
-package employeeHandlers
+package employeehandlers
 
 import (
 	"fmt"
@@ -12,6 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// GetEmployeeByID ...
 func GetEmployeeByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
