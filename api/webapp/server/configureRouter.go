@@ -14,7 +14,7 @@ func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/", handlers.HandleHomePage())
 
 	s.router.Handler("GET", "/private/whoami", middleware.Private(middleware.WhoAmI(), store.New(s.config)))
-	s.router.Handler("POST", "api/login", middleware.IsLoggedIn(authentication.LoginHandle(store.New(s.config))))
+	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(authentication.LoginHandle(store.New(s.config))))
 
 	s.router.Handle("POST", "/api/registration", authentication.RegistrationHandle(store.New(s.config)))
 	s.router.Handle("POST", "/api/logout", authentication.LogoutHandle(store.New(s.config)))
