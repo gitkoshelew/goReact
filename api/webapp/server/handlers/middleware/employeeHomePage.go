@@ -3,8 +3,7 @@ package middleware
 import (
 	"encoding/json"
 	"fmt"
-	"goReact/domain/store"
-	"goReact/webapp/server/handlers/dto"
+	"goReact/domain/model"
 	"net/http"
 )
 
@@ -13,9 +12,9 @@ func EmployeetHome() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		user := r.Context().Value(CtxKeyUser).(dto.UserDto)
+		user := r.Context().Value(CtxKeyUser).(model.User)
 
-		if store.Role(user.Role) != store.EmployeeRole {
+		if model.Role(user.Role) != model.EmployeeRole {
 			http.Error(w, "Sorry, you are not an employee", http.StatusUnauthorized)
 			return
 		}

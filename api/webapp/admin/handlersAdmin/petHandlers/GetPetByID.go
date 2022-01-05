@@ -2,7 +2,7 @@ package pethandlers
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/server/utils"
 	"net/http"
 	"strconv"
@@ -16,7 +16,7 @@ func GetPetByID() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		pets := []store.Pet{}
+		pets := []model.Pet{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
 		rows, err := db.Query("select * from pet where id=$1", id)
@@ -27,8 +27,8 @@ func GetPetByID() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			p := store.Pet{}
-			err := rows.Scan(&p.PetID, &p.Name, &p.Type, &p.Weight, &p.Diesieses, &p.Owner.ClientID)
+			p := model.Pet{}
+			err := rows.Scan(&p.PetID, &p.Name, &p.Type, &p.Weight, &p.Diesieses, &p.Owner.UserID)
 			if err != nil {
 				fmt.Println(err)
 				continue

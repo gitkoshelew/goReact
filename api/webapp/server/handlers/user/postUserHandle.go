@@ -2,35 +2,48 @@ package user
 
 import (
 	"encoding/json"
-	"goReact/webapp/server/utils"
+	"goReact/domain/model"
+	"goReact/domain/store"
+	"goReact/webapp/server/handlers/request"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 )
 
 // PostUserHandle creates User
-func PostUserHandle() httprouter.Handle {
-	db := utils.HandlerDbConnection()
-
+func PostUserHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
 
-		req := &Request{}
+		req := &request.User{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
-		var id int
-		err := db.QueryRow("INSERT INTO USERS (email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id",
-			req.Email, req.Password, req.Role, req.Verified, req.Name, req.Surname, req.MiddleName, req.Sex, req.DateOfBirth, req.Address, req.Phone, req.Photo,
-		).Scan(&id)
+		u := model.NewUser(
+			0,
+			req.Email,
+			req.Password,
+			req.Role,
+			req.Name,
+			req.Surname,
+			req.MiddleName,
+			req.Sex,
+			req.Address,
+			req.Phone,
+			req.Photo,
+			req.Verified,
+			req.DateOfBirth,
+		)
 
+		s.Open()
+		_, err := s.User().Create(&u)
 		if err != nil {
-			panic(err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
 
-		json.NewEncoder(w).Encode(id)
+		json.NewEncoder(w).Encode(u.UserID)
 		w.WriteHeader(http.StatusCreated)
 	}
 }

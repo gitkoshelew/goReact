@@ -2,14 +2,14 @@ package authentication
 
 import (
 	"fmt"
+	"goReact/domain/store"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 )
 
 // LogoutHandle ...
-func LogoutHandle() httprouter.Handle {
-
+func LogoutHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 		_, err := ExtractTokenMetadata(r)
@@ -19,7 +19,7 @@ func LogoutHandle() httprouter.Handle {
 		}
 
 		c := http.Cookie{
-			Name:     "JWT",
+			Name:     "Refresh-Token",
 			Value:    "",
 			HttpOnly: true,
 		}

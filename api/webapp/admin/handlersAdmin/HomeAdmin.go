@@ -2,7 +2,7 @@ package handlersadmin
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp/server/utils"
 	"html/template"
 	"net/http"
@@ -16,35 +16,35 @@ func HomeAdmin() httprouter.Handle {
 	db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		var id int
-		Login := r.FormValue("login")
+		email := r.FormValue("email")
 		Password := r.FormValue("password")
-		if Login == "" || Password == "" {
+		if email == "" || Password == "" {
 			http.Error(w, "Enter email or password", 400)
 			return
 		}
-		account := store.Account{}
-		rowPassword := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1 ", Login)
-		err := rowPassword.Scan(&account.AccountID, &account.Login, &account.Password)
+		user := model.User{}
+		rowPassword := db.QueryRow("SELECT * FROM users WHERE email = $1 ", email)
+		err := rowPassword.Scan(&user.UserID, &user.Email, &user.Password)
 
-		hashPassword := account.Password
-		hashPid := account.AccountID
-		hashlogin := account.Login
+		hashPassword := user.Password
+		hashPid := user.UserID
+		hashEMail := user.Email
 
 		if err != nil {
 			http.Error(w, "Check your email or password1", 400)
 			return
 		}
 
-		isConfirmed := store.CheckPasswordHash(Password, hashPassword)
-		fmt.Println("ac login and pas 3 : ", hashlogin, account.Password, hashPid)
+		isConfirmed := model.CheckPasswordHash(Password, hashPassword)
+		fmt.Println("ac login and pas 3 : ", hashEMail, user.Password, hashPid)
 		fmt.Println(isConfirmed)
 		// if !isConfirmed {
 		// 	http.Error(w, "Check your email or password2", 401)
 		// 	return
 		// }
 
-		row := db.QueryRow("SELECT * FROM ACCOUNT WHERE login = $1 AND password=$2", Login, Password)
-		err = row.Scan(&id, &Login)
+		row := db.QueryRow("SELECT * FROM users WHERE email = $1 AND password=$2", email, Password)
+		err = row.Scan(&id, &email)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
 			return

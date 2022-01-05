@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp"
 	"goReact/webapp/server"
 	"goReact/webapp/server/utils"
@@ -24,8 +24,6 @@ func main() {
 	webapp.ConnectDb(config)
 	initAccountDb()
 
-	webapp.ConnectRedis(config)
-
 	s := server.New(config)
 
 	if err := s.Start(); err != nil {
@@ -38,7 +36,7 @@ func initAccountDb() {
 	db := utils.HandlerDbConnection()
 	for i := 0; i < 6; i++ {
 
-		encryptedPassword, err := store.EncryptPassword(fmt.Sprintf("password"))
+		encryptedPassword, err := model.EncryptPassword(fmt.Sprintf("password"))
 		if err != nil {
 			log.Fatal(err)
 		}

@@ -2,55 +2,24 @@ package user
 
 import (
 	"encoding/json"
-	"goReact/webapp/server/handlers/dto"
-	"goReact/webapp/server/utils"
-	"log"
+	"goReact/domain/store"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetUsersHandle returns all Users
-func GetUsersHandle() httprouter.Handle {
-	db := utils.HandlerDbConnection()
-
+// GetUsersHandle returns all users
+func GetUsersHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
 
-		rows, err := db.Query("SELECT * FROM USERS")
+		s.Open()
+		users, err := s.User().GetAll()
 		if err != nil {
-			log.Fatal(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
 		}
-
-		usersDto := []dto.UserDto{}
-
-		for rows.Next() {
-			user := dto.UserDto{}
-			err := rows.Scan(
-				&user.UserID,
-				&user.Name,
-				&user.Surname,
-				&user.MiddleName,
-				&user.Email,
-				&user.DateOfBirth,
-				&user.Address,
-				&user.Phone,
-				&user.Password,
-				&user.Role,
-				&user.Verified,
-				&user.Sex,
-				&user.Photo,
-			)
-
-			if err != nil {
-				log.Printf(err.Error())
-				continue
-			}
-
-			usersDto = append(usersDto, user)
-		}
-
-		json.NewEncoder(w).Encode(usersDto)
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(users)
 	}
 }
