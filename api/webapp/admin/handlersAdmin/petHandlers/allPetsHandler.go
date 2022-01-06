@@ -1,11 +1,8 @@
 package pethandlers
 
 import (
-	"fmt"
-
+	"goReact/domain/store"
 	"goReact/webapp/admin/session"
-	"goReact/domain/model"
-	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
 
@@ -13,21 +10,21 @@ import (
 )
 
 // AllPetsHandler ...
-func AllPetsHandler() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func AllPetsHandler(s *store.Store) httprouter.Handle {
+	//db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
-		pets := []model.Pet{}
+		//pets := []model.Pet{}
 
-		/*s.Open()
+		s.Open()
 		pets, err := s.Pet().GetAll()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
-		}*/
+		}
 
-		rows, err := db.Query("select * from pet")
+		/*rows, err := db.Query("select * from pet")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -43,7 +40,7 @@ func AllPetsHandler() httprouter.Handle {
 			}
 			pets = append(pets, p)
 		}
-
+		*/
 		files := []string{
 			"/api/webapp/admin/tamplates/allPets.html",
 			"/api/webapp/admin/tamplates/base.html",

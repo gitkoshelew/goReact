@@ -1,10 +1,8 @@
 package seathandlers
 
 import (
-	"fmt"
-	"goReact/domain/model"
+	"goReact/domain/store"
 	"goReact/webapp/admin/session"
-	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
 
@@ -12,35 +10,14 @@ import (
 )
 
 // AllSeatsHandler ...
-func AllSeatsHandler() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func AllSeatsHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-
-		seats := []model.Seat{}
-
-		/*s.Open()
+		s.Open()
 		seats, err := s.Seat().GetAll()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
-		}*/
-
-		rows, err := db.Query("select * from seat")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			s := model.Seat{}
-			err := rows.Scan(&s.SeatID, &s.Room.RoomID, &s.IsFree, &s.Description)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			seats = append(seats, s)
 		}
 
 		files := []string{

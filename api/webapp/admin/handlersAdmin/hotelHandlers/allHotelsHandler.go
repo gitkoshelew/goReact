@@ -1,10 +1,8 @@
 package hotelhandlers
 
 import (
-	"fmt"
-	"goReact/domain/model"
+	"goReact/domain/store"
 	"goReact/webapp/admin/session"
-	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
 
@@ -12,35 +10,15 @@ import (
 )
 
 // AllHotelsHandler ...
-func AllHotelsHandler() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func AllHotelsHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
-		hotels := []model.Hotel{}
-
-		/*	s.Open()
-			hotels, err := s.Hotel().GetAll()
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusNotFound)
-				return
-			}*/
-
-		rows, err := db.Query("select * from hotel")
+		s.Open()
+		hotels, err := s.Hotel().GetAll()
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			h := model.Hotel{}
-			err := rows.Scan(&h.HotelID, &h.Name, &h.Address)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			hotels = append(hotels, h)
 		}
 
 		files := []string{

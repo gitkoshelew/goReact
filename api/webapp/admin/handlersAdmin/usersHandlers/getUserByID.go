@@ -1,13 +1,11 @@
 package usershandlers
 
 import (
-	"fmt"
-
 	"goReact/webapp/admin/session"
 
 	"goReact/domain/model"
- 
-	"goReact/webapp/server/utils"
+	"goReact/domain/store"
+
 	"net/http"
 	"strconv"
 	"text/template"
@@ -16,8 +14,7 @@ import (
 )
 
 // GetUserByID ...
-func GetUserByID() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func GetUserByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
@@ -26,35 +23,14 @@ func GetUserByID() httprouter.Handle {
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
 
-		/*s.Open()
+		s.Open()
 		user, err := s.User().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
-		}*/
-
-		rows, err := db.Query("select * from users where id=$1", id)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			u := model.User{}
-			err := rows.Scan(&u.UserID, &u.Email, &u.Password, &u.Role, &u.Verified, &u.Name, &u.Surname, &u.MiddleName, &u.Sex, &u.DateOfBirth,
-				&u.Address, &u.Phone, &u.Photo)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			users = append(users, u)
 		}
 
-		if len(users) == 0 {
-			http.Error(w, "No user with such id!", 400)
-			return
-		}
+		users = append(users, *user)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allUsers.html",

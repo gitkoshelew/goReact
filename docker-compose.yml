@@ -22,25 +22,6 @@ services:
                 aliases:
                     - database
 
-    test_postgresql_database:
-        container_name: test_postgresql_database
-        image: postgres:latest
-        env_file:
-            - .env
-        environment:
-            - POSTGRES_USER=${TEST_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${TEST_POSTGRES_DB}
-            - POSTGRES_HOST=${TEST_POSTGRES_HOST}
-            - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
-        ports:
-            - "8082:5434"
-        restart: always
-        volumes:
-            - database-data:/var/lib/test_postgresql/data/
-        networks:
-            - new
-
     pgadmin:
         image: dpage/pgadmin4
         env_file:
@@ -91,27 +72,6 @@ services:
         tty: true
         networks:
             - new
-
-    migrate:
-        container_name: migrates
-        image: "migrate/migrate:v4.4.0"
-        depends_on:
-            - postgresql_database
-        volumes:
-            - "../migrations:/api/migrations"
-        command:
-            [
-                "-path",
-                "/api/migrations/",
-                "-database",
-                "postgres://postgresql_database/goreact?sslmode=disable&user=user&password=userpass",
-                "up"
-            ]
-        links:
-            - postgresql_database
-        networks:
-            - new
-
 networks:
     new:
         driver: bridge

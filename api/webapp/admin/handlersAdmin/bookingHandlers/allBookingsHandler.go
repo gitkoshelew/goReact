@@ -1,13 +1,9 @@
 package bookinghandlers
 
 import (
-	"fmt"
-
+	"goReact/domain/store"
 	"goReact/webapp/admin/session"
 
-	"goReact/domain/model"
-
-	"goReact/webapp/server/utils"
 	"net/http"
 	"text/template"
 
@@ -15,35 +11,15 @@ import (
 )
 
 // AllBookingsHandler ...
-func AllBookingsHandler() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func AllBookingsHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-			/*
-			s.Open()
+
+		s.Open()
 		booking, err := s.Booking().GetAll()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
-		}
-		}*/
-
-		booking := []model.Booking{}
-		rows, err := db.Query("select * from booking")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			b := model.Booking{}
-			err := rows.Scan(&b.BookingID, &b.Seat.SeatID, &b.Pet.PetID, &b.Employee.EmployeeID, &b.Status, &b.StartDate, &b.EndDate, &b.Notes)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			booking = append(booking, b)
 		}
 
 		files := []string{
