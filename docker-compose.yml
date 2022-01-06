@@ -85,11 +85,11 @@ services:
         depends_on:
             - postgresql_database
         volumes:
-            - "../migrations:/api/migrations"
+            - "../migrations:/api_client/migrations"
         command:
             [
                 "-path",
-                "/api/migrations/",
+                "/api_client/migrations/",
                 "-database",
                 "postgres://postgresql_database/goreact?sslmode=disable&user=\
                   user&password=userpass",

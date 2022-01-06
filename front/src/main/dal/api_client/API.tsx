@@ -1,4 +1,4 @@
-import bookingOrderDay from './mockData/BookingMockData'
+import bookingOrderDay from '../mockData/BookingMockData'
 
 export type IsRentType = { id: string; firstRoom: boolean; secondRoom: boolean }
 

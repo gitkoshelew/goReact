@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.1.1",
     "@reduxjs/toolkit": "^1.6.2",
+    "@types/axios": "^0.14.0",
     "axios": "^0.24.0",
     "babel-plugin-react-css-modules": "^5.2.6",
     "env-cmd": "^10.1.0",

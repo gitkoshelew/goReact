@@ -1,6 +1,6 @@
 import { reqCalendarDataFailed, reqCalendarDataStarted, reqCalendarDataSucceeded } from './BookingRoomPick-reducer'
 import { call, put } from 'redux-saga/effects'
-import { BookingPageAPI, IsRentType } from '../../../dal/API'
+import { BookingPageAPI, IsRentType } from '../../../dal/api_client/API'
 
 export function* BookingRoomPickSagaWorker() {
   try {
