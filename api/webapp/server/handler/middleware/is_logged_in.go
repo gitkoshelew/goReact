@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"fmt"
-	"goReact/webapp/server/handlers/authentication"
+	"goReact/webapp/server/handler/authentication"
 	"log"
 	"net/http"
 )

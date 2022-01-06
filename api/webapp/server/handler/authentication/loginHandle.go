@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/handlers/request"
+	"goReact/webapp/server/handler/request"
 	"log"
 	"net/http"
 )

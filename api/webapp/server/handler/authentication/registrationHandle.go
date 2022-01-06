@@ -1,17 +1,17 @@
-package user
+package authentication
 
 import (
 	"encoding/json"
 	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/handlers/request"
+	"goReact/webapp/server/handler/request"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-// PostUserHandle creates User
-func PostUserHandle(s *store.Store) httprouter.Handle {
+// RegistrationHandle ...
+func RegistrationHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 

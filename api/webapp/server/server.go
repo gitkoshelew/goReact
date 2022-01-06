@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gorilla/handlers"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -40,6 +41,7 @@ func (s *Server) Start() error {
 
 	s.logger.Printf("Server starting ...")
 	s.logger.Printf(s.config.ServerInfo())
-
-	return http.ListenAndServe(s.config.ServerAddress(), s.router)
+	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
+	origins := handlers.AllowedOrigins([]string{"*"})
+	return http.ListenAndServe(s.config.ServerAddress(), handlers.CORS(methods, origins)(s.router))
 }
