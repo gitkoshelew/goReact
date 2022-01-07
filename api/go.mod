@@ -11,18 +11,15 @@ require (
 )
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.0 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
 	go.uber.org/atomic v1.6.0 // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )
 
 require (
 	github.com/golang-migrate/migrate/v4 v4.15.1
-	github.com/gorilla/handlers v1.5.1
+	github.com/rs/cors v1.8.2
 	github.com/twinj/uuid v1.0.0
 )
