@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gorilla/handlers"
 	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
 )
 
 // Server ...
@@ -41,7 +41,21 @@ func (s *Server) Start() error {
 
 	s.logger.Printf("Server starting ...")
 	s.logger.Printf(s.config.ServerInfo())
-	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
-	origins := handlers.AllowedOrigins([]string{"*"})
-	return http.ListenAndServe(s.config.ServerAddress(), handlers.CORS(methods, origins)(s.router))
+	CORS := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedMethods: []string{
+			http.MethodHead,
+			http.MethodGet,
+			http.MethodPost,
+			http.MethodPut,
+			http.MethodPatch,
+			http.MethodDelete,
+		},
+		AllowedHeaders:   []string{"*"},
+		AllowCredentials: true,
+	})
+
+	cors.Default()
+	handler := CORS.Handler(s.router)
+	return http.ListenAndServe(s.config.ServerAddress(), handler)
 }

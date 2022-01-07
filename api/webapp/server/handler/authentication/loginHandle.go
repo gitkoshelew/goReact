@@ -18,7 +18,7 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
-
+		log.Println(req.Email)
 		s.Open()
 		user, err := s.User().FindByEmail(req.Email)
 		if err != nil {
