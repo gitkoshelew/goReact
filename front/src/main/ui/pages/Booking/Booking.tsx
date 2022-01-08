@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import s from './Booking.module.css'
+import s from './Booking.module.scss'
 import { TitlePageTextBlock } from '../../components/TitlePageTextBlock/TitlePageTextBlock'
 import { BookingRegForm } from './BookingRegForm/BookingRegForm'
 import { BookingCalendar } from './BookingCalendar/BookingCalendar'
@@ -15,9 +15,8 @@ import { ProgressType } from '../../../bll/reducers/BookingRegFormReducer/Bookin
 import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
 import Preloader from '../../components/preloader/preloader'
-import { ErrorMsg } from '../../components/ErrorMsg/ErrorMsg'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
-import { IsRentType } from '../../../dal/API'
+import { IsRentType } from '../../../dal/api_client/API'
 
 const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
 
@@ -64,7 +63,6 @@ export const Booking = () => {
     (state) => state.BookingRoomPick.loadingStatus
   )
 
-
   const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
   const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
   const dispatch = useAppDispatch()
@@ -86,7 +84,7 @@ export const Booking = () => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
     return newActualDay ? newActualDay : null
   }, [actualDay, isRentArr])
-  
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className={bookingPage}>

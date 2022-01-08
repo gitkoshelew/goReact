@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IsRentType } from '../../../dal/API'
+import { IsRentType } from '../../../dal/api_client/API'
 
 const initialState: InitialStateType = {
   isRent: [],
