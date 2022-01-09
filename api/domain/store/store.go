@@ -3,7 +3,7 @@ package store
 import (
 	"database/sql"
 	"goReact/webapp"
-	"log"
+	"goReact/webapp/server/logging"
 
 	_ "github.com/lib/pq" // ...
 )
@@ -20,28 +20,32 @@ type Store struct {
 	PetRepository      *PetRepository
 	BookingRepository  *BookingRepository
 	ImageRepository    *ImageRepository
+	Logger             *logging.Logger
 }
 
 // New ...
 func New(config *webapp.Config) *Store {
 	return &Store{
 		Config: config,
+		Logger: logging.GetLogger(),
 	}
 }
 
 // Open ...
 func (s *Store) Open() error {
 	dataSourceName := s.Config.PgDataSource()
-	log.Printf("Connecting to database via %#v", dataSourceName)
+	s.Logger.Infof("Connecting to database via %#v", dataSourceName)
 	db, err := sql.Open("postgres", dataSourceName)
 	if err != nil {
+		s.Logger.Errorf("Error while trying open Data base. Msg: %v", err)
 		return err
 	}
 
 	if err := db.Ping(); err != nil {
+		s.Logger.Errorf("Error while ping to data base. MSG: %v", err)
 		return err
 	}
-	log.Printf("Database connection successfull!")
+	s.Logger.Infof("Database connection successfull!")
 
 	s.Db = db
 

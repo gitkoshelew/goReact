@@ -5,7 +5,6 @@ import (
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/request"
-	"log"
 	"net/http"
 )
 
@@ -16,20 +15,26 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 
 		req := &request.Login{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+			s.Logger.Errorf("Eror during JSON request decoding. Err msg: %s", err.Error())
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
-		log.Println(req.Email)
-		s.Open()
+
+		err := s.Open()
+		if err != nil {
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 		user, err := s.User().FindByEmail(req.Email)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusUnauthorized)
+			s.Logger.Errorf("Eror during searching user by email. Err msg: %s", err.Error())
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
 		err = model.CheckPasswordHash(user.Password, req.Password)
 		if err != nil {
-			http.Error(w, "Invalid login or password", http.StatusUnauthorized)
-			log.Println(err.Error())
+			s.Logger.Errorf("Eror during checking users password. Err msg: %s", err.Error())
+			http.Error(w, "Invalid login or password", http.StatusBadRequest)
 			return
 		}
 
@@ -42,6 +47,7 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		}
 
 		http.SetCookie(w, &c)
+
 		w.Header().Add("Access-Token", tk.AccessToken)
 		json.NewEncoder(w).Encode(user)
 		w.WriteHeader(http.StatusOK)

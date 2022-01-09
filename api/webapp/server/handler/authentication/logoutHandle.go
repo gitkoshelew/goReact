@@ -1,7 +1,7 @@
 package authentication
 
 import (
-	"fmt"
+	"encoding/json"
 	"goReact/domain/store"
 	"net/http"
 
@@ -14,7 +14,9 @@ func LogoutHandle(s *store.Store) httprouter.Handle {
 		w.Header().Set("Content-Type", "application/json")
 		_, err := ExtractTokenMetadata(r)
 		if err != nil {
-			http.Error(w, "unauthorized", http.StatusUnauthorized)
+			s.Logger.Errorf("Error while extraction token metadata. Msg: %v", err)
+			http.Error(w, "You are unauthorized", http.StatusUnauthorized)
+			json.NewEncoder(w).Encode("You are unauthorized")
 			return
 		}
 
@@ -26,6 +28,6 @@ func LogoutHandle(s *store.Store) httprouter.Handle {
 		w.Header().Add("Access-Token", "")
 		http.SetCookie(w, &c)
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "Successfully logged out")
+		json.NewEncoder(w).Encode("Successfully logged out")
 	}
 }

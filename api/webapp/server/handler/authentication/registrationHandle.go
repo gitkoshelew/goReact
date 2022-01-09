@@ -17,6 +17,7 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 
 		req := &request.User{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
 
@@ -36,9 +37,15 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 			req.DateOfBirth,
 		)
 
-		s.Open()
-		_, err := s.User().Create(&u)
+		err := s.Open()
 		if err != nil {
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		_, err = s.User().Create(&u)
+		if err != nil {
+			s.Logger.Errorf("Cant create user. Err msg:%v.", err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}

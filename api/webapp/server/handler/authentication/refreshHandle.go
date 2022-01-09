@@ -1,6 +1,7 @@
 package authentication
 
 import (
+	"encoding/json"
 	"fmt"
 	"goReact/domain/store"
 	"net/http"
@@ -21,17 +22,20 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 
 		token, err := jwt.Parse(refreshToken, func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				s.Logger.Errorf("Unexpected signing method. %v", token.Header["alg"])
 				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 			}
 			return []byte(os.Getenv("REFRESH_SECRET")), nil
 		})
 
 		if err != nil {
+			s.Logger.Errorf("Refresh token expired. Errors msg: %v", err)
 			http.Error(w, "Refresh token expired", http.StatusUnauthorized)
 			return
 		}
 
 		if _, ok := token.Claims.(jwt.Claims); !ok && !token.Valid {
+			s.Logger.Errorf("Can't parse token. Errors msg: %v", err)
 			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
@@ -40,19 +44,22 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 		if ok && token.Valid {
 			userID, err := strconv.ParseUint(fmt.Sprintf("%.f", claims["user_id"]), 10, 64)
 			if err != nil {
+				s.Logger.Errorf("Eror while parsing token. Errors msg: %v", err)
 				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 				return
 			}
 
 			role := fmt.Sprint(claims["role"])
 			if err != nil {
+				s.Logger.Errorf("Eror while parsing token. Errors msg: %v", err)
 				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 				return
 			}
 
 			tk, createErr := CreateToken(userID, role)
 			if createErr != nil {
-				http.Error(w, err.Error(), http.StatusForbidden)
+				s.Logger.Errorf("Can't create token. Errors msg: %v", err)
+				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 				return
 			}
 
@@ -66,10 +73,12 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 
 			w.Header().Add("Access-Token", tk.AccessToken)
 			w.WriteHeader(http.StatusOK)
-			fmt.Fprintln(w, "Successfully refreshed")
+			json.NewEncoder(w).Encode("Successfully refreshed")
 
 		} else {
+			s.Logger.Error("Refresh token is expired")
 			http.Error(w, "Refresh expired", http.StatusUnauthorized)
+			json.NewEncoder(w).Encode(err.Error())
 		}
 
 	}

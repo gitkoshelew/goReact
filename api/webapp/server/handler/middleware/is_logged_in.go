@@ -3,7 +3,6 @@ package middleware
 import (
 	"fmt"
 	"goReact/webapp/server/handler/authentication"
-	"log"
 	"net/http"
 )
 
@@ -13,7 +12,6 @@ func IsLoggedIn(next http.HandlerFunc) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, err := authentication.ExtractTokenMetadata(r)
 		if err != nil {
-			log.Print(err.Error())
 			next.ServeHTTP(w, r)
 			return
 		}

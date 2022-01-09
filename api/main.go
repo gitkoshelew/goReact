@@ -1,12 +1,12 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"goReact/domain/model"
 	"goReact/migrations"
 	"goReact/webapp"
 	"goReact/webapp/server"
-	"goReact/webapp/server/utils"
 	"log"
 	"path/filepath"
 
@@ -22,9 +22,8 @@ func main() {
 
 	config := &webapp.Config{}
 	config.NewConfig()
-	webapp.ConnectDb(config)
 	migrations.Up()
-	initAccountDb()
+	initAccountDb(config)
 
 	s := server.New(config)
 
@@ -35,8 +34,19 @@ func main() {
 }
 
 // initAccountDb hashes accounts password from  DB, that creates by ini.sql
-func initAccountDb() {
-	db := utils.HandlerDbConnection()
+func initAccountDb(c *webapp.Config) {
+	dataSourceName := c.PgDataSource()
+
+	log.Printf("Connecting to database via %#v", dataSourceName)
+	db, err := sql.Open("postgres", dataSourceName)
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
 	for i := 0; i < 6; i++ {
 
 		encryptedPassword, err := model.EncryptPassword(fmt.Sprintf("password"))
