@@ -3,7 +3,7 @@ import { call, put } from 'redux-saga/effects'
 import { BookingPageAPI, IsRentType } from '../../../dal/api_client/API'
 
 export function* BookingRoomPickSagaWorker() {
-  try{
+  try {
     yield put(reqCalendarDataStarted())
     const newIsRent: IsRentType[] = yield call(BookingPageAPI.getCalendarData)
     yield put(reqCalendarDataSucceeded({ newCalendarData: newIsRent }))

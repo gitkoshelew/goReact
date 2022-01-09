@@ -1,14 +1,6 @@
 version: '3.9'
 
 services:
-    redis:
-        image: redis:alpine
-        container_name: "redis"
-        restart: unless-stopped
-        ports:
-            - ${REDIS_EXPOSE_PORT}:${REDIS_PORT}
-        networks:
-            - app_net
     postgresql_database:
         container_name: postgresql_database
         image: postgres:latest
@@ -25,9 +17,15 @@ services:
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/data/
+        healthcheck:
+            test: pg_isready -U user -d goreact
+            interval: 15s
+            timeout: 4s
+            retries: 10
         networks:
-            - app_net
-
+            new:
+                aliases:
+                    - database
     pgadmin:
         image: dpage/pgadmin4
         env_file:
@@ -41,7 +39,7 @@ services:
         volumes:
             - pgadmin:/root/.pgadmin
         networks:
-            - app_net
+            - new
 
     rabbitmq:
         image: rabbitmq:3-management
@@ -58,13 +56,13 @@ services:
         volumes:
             - rabbitmq_data:/bitnami/rabbitmq/mnesia
         networks:
-            - app_net
+            - new
 
     goreact:
         build:
             context: ./api
         ports:
-            - "8080:8080"
+            - $SERVER_PORT:$SERVER_PORT
         depends_on:
             - postgresql_database
         env_file:
@@ -77,32 +75,13 @@ services:
             - ENV=prod
         tty: true
         networks:
-            - app_net
-
-    migrate:
-        container_name: migrates
-        image: "migrate/migrate:v4.4.0"
-        depends_on:
-            - postgresql_database
-        volumes:
-            - "../migrations:/api_client/migrations"
-        command:
-            [
-                "-path",
-                "/api_client/migrations/",
-                "-database",
-                "postgres://postgresql_database/goreact?sslmode=disable&user=\
-                  user&password=userpass",
-                "up"
-            ]
-        networks:
-            - app_net
+            - new
 
 networks:
-    app_net:
+    new:
         driver: bridge
 volumes:
     database-data: null
     pgadmin: null
     rabbitmq_data:
-        driver: local
+        driver: localw

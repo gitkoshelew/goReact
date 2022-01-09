@@ -1,35 +1,50 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { LogInResponseType } from '../../../dal/api_client/API'
 
 const initialState: InitialStateLoginPageType = {
-    loadingStatus: 'onWaiting',
-    userForLogin: null,
+  loadingStatus: 'onWaiting',
+  errorMsg: '',
+  user: null,
 }
 
-
 const loginPageSlice = createSlice({
-    name: 'loginPage',
-    initialState,
-    reducers: {
-        changeUserParams(state, action: PayloadAction<{ user: UserForLoginType }>) {
-            state.userForLogin = action.payload.user
-        }
-    }
+  name: 'loginPage',
+  initialState,
+  reducers: {
+    reqLoginLogoutStart(state) {
+      state.loadingStatus = 'loading'
+      state.errorMsg = ''
+    },
+    reqLoginSuccess(state, action: PayloadAction<{ user: LogInResponseType }>) {
+      state.loadingStatus = 'success'
+      state.user = action.payload.user
+    },
+    reqLoginError(state, action: PayloadAction<{ errorMsg: string }>) {
+      state.loadingStatus = 'error'
+      state.errorMsg = action.payload.errorMsg
+    },
+    reqLogOutSuccess(state) {
+      state.loadingStatus = 'success'
+      state.user = null
+    },
+    reqLogOutError(state, action: PayloadAction<{ errorMsg: string }>) {
+      state.loadingStatus = 'error'
+      state.errorMsg = action.payload.errorMsg
+    },
+  },
 })
 
 export const LoginPageReducer = loginPageSlice.reducer
-export const {changeUserParams} = loginPageSlice.actions
-
-
-
+export const { reqLoginLogoutStart, reqLoginSuccess, reqLoginError, reqLogOutSuccess, reqLogOutError } =
+  loginPageSlice.actions
 
 //types
 
 export type InitialStateLoginPageType = {
-    loadingStatus: LoadingStatusType,
-    userForLogin: UserForLoginType
+  loadingStatus: LoginPageLoadingStatusType
+  errorMsg: string
+  user: UserType
 }
 
-
-export type LoadingStatusType = 'onWaiting' | 'loading' | 'success' | 'error'
-export type UserForLoginType = { email: string, password: string } | null
+export type LoginPageLoadingStatusType = 'onWaiting' | 'loading' | 'success' | 'error'
+export type UserType = LogInResponseType | null

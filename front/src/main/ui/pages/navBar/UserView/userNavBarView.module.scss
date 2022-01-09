@@ -1,0 +1,49 @@
+@import '../../../styles/variables';
+.userNavView {
+  position: relative;
+
+  .userNav {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .userPhoto {
+      img {
+        height: 50px;
+        width: 50px;
+      }
+    }
+
+    .userName {
+      font-size: 16px;
+    }
+  }
+
+  .logoutField {
+    cursor: pointer;
+    position: absolute;
+    z-index: 999;
+    top: 68px;
+    left: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid $main-contrast-color;
+    width: 200px;
+    height: 60px;
+    background-color: $secondary-background-color;
+    color: $main-text-color;
+
+    &:hover {
+      background-color: $main-contrast-color;
+      color: $main-background-color;
+      border: 3px solid $secondary-text-color;
+    }
+  }
+}
+
+.preloaderNav {
+  height: 70px;
+  width: 70px;
+}

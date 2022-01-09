@@ -61,7 +61,8 @@
         }
         .btnBlock {
           display: flex;
-          margin-left: 185px;
+          align-items: center;
+          margin-left: 205px;
           @media (min-width: 1144px) {
             margin: 0;
           }

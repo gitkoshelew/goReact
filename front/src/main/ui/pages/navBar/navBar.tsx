@@ -5,6 +5,10 @@ import { SelectUI } from '../../components/Select/Select'
 import { NavLinks } from '../../components/NavLinks/NavLinks'
 import { Button } from '../../components/Button/Button'
 import { BurgerMenu } from './burgerMenu/BurgerMenu'
+import { useSelector } from 'react-redux'
+import { AppRootStateType } from '../../../bll/store/store'
+import { UserType } from '../../../bll/reducers/LoginPageReduser/loginPage-reducer'
+import { UserNavBarView } from './UserView/userNavBarView'
 
 const {
   headerNavBar,
@@ -25,6 +29,10 @@ type NavBarPropsType = {
 }
 
 export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsType) => {
+  const userLogin = useSelector<AppRootStateType, UserType>((state) => state.LoginPage.user)
+
+  const userView = userLogin ? <UserNavBarView user={userLogin} /> : <Button type={'login'} />
+
   return (
     <div className={headerContainer}>
       <div className={headerNavBar}>
@@ -47,7 +55,7 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
               </div>
               <div className={btnBlock}>
                 <Button type={'buy'} />
-                <Button type={'login'} />
+                {userView}
               </div>
             </div>
           </div>
