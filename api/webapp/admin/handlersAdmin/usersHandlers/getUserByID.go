@@ -13,7 +13,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetUserByID ...
 func GetUserByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 

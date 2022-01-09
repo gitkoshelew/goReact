@@ -1,7 +1,6 @@
 package usershandlers
 
 import (
-	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
@@ -16,6 +15,7 @@ func NewUser(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
+		s.Open()
 		email := r.FormValue("Email")
 		password := r.FormValue("Password")
 		role := r.FormValue("Role")
@@ -46,6 +46,13 @@ func NewUser(s *store.Store) httprouter.Handle {
 			verified,
 			dateOfBirth,
 		)
-		fmt.Fprint(w, u)
+
+		_, err := s.User().Create(&u)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		http.Redirect(w, r, "/admin/home", http.StatusFound)
+
 	}
 }

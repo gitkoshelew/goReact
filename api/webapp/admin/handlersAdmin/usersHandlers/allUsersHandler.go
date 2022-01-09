@@ -2,16 +2,16 @@ package usershandlers
 
 import (
 	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-// AllUsersHandler ...
 func AllUsersHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
+		session.CheckSession(w, r)
 		s.Open()
 		users, err := s.User().GetAll()
 		if err != nil {
