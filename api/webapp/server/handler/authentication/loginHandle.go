@@ -15,30 +15,41 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 
 		req := &request.Login{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
-			s.Logger.Errorf("Eror during JSON request decoding. Err msg: %s", err.Error())
+			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %v", r.Body, err)
 			http.Error(w, "Bad request", http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err.Error())
 		}
 
 		err := s.Open()
 		if err != nil {
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(err.Error())
+			return
 		}
 		user, err := s.User().FindByEmail(req.Email)
 		if err != nil {
-			s.Logger.Errorf("Eror during searching user by email. Err msg: %s", err.Error())
+			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err.Error())
 			return
 		}
 
 		err = model.CheckPasswordHash(user.Password, req.Password)
 		if err != nil {
-			s.Logger.Errorf("Eror during checking users password. Err msg: %s", err.Error())
+			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
 			http.Error(w, "Invalid login or password", http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err.Error())
 			return
 		}
 
 		tk, err := CreateToken(uint64(user.UserID), string(user.Role))
+		if err != nil {
+			s.Logger.Errorf("Eror during createing tokens. Err msg: %s", err.Error())
+			http.Error(w, "Eror during createing tokens", http.StatusUnprocessableEntity)
+			json.NewEncoder(w).Encode(err.Error())
+			return
+		}
 
 		c := http.Cookie{
 			Name:     "Refresh-Token",
@@ -47,10 +58,8 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		}
 
 		http.SetCookie(w, &c)
-
 		w.Header().Add("Access-Token", tk.AccessToken)
 		json.NewEncoder(w).Encode(user)
 		w.WriteHeader(http.StatusOK)
-
 	})
 }

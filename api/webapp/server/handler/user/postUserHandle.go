@@ -19,6 +19,7 @@ func PostUserHandle(s *store.Store) httprouter.Handle {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			http.Error(w, "Bad request", http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err.Error())
 		}
 
 		u := model.NewUser(
@@ -41,11 +42,14 @@ func PostUserHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(err.Error())
+			return
 		}
 		_, err = s.User().Create(&u)
 		if err != nil {
 			s.Logger.Errorf("Can't create user. Err msg:%v.", err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err.Error())
 			return
 		}
 
