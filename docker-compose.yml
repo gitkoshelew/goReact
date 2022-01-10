@@ -81,6 +81,7 @@ networks:
     new:
         driver: bridge
 volumes:
+    test-database-data: null
     database-data: null
     pgadmin: null
     rabbitmq_data:
