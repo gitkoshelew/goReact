@@ -1,9 +1,8 @@
 package employeehandlers
 
 import (
-	"fmt"
-	"goReact/domain/model"
-	"goReact/webapp/server/utils"
+	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"text/template"
 
@@ -11,27 +10,15 @@ import (
 )
 
 // AllEmployeeHandler ...
-func AllEmployeeHandler() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func AllEmployeeHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
-		employees := []model.Employee{}
-
-		rows, err := db.Query("select * from employee")
+		s.Open()
+		employees, err := s.Employee().GetAll()
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			e := model.Employee{}
-			err := rows.Scan(&e.EmployeeID, &e.User.UserID, &e.Hotel.HotelID, &e.Position, &e.Role)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			employees = append(employees, e)
 		}
 
 		files := []string{
