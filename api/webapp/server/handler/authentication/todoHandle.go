@@ -2,9 +2,7 @@ package authentication
 
 import (
 	"encoding/json"
-	"fmt"
 	"goReact/domain/store"
-	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -24,8 +22,8 @@ func TodoHandle(s *store.Store) httprouter.Handle {
 		AccessDetails, err := ExtractTokenMetadata(r)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
-			log.Print(err.Error())
-			fmt.Fprintln(w, "You're not authorized")
+			s.Logger.Errorf("Can't. Errors msg: %v", err)
+			json.NewEncoder(w).Encode(err.Error())
 			return
 		}
 
@@ -34,7 +32,7 @@ func TodoHandle(s *store.Store) httprouter.Handle {
 			Role:   AccessDetails.Role,
 		}
 
-		w.WriteHeader(http.StatusCreated)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response)
 	}
 }

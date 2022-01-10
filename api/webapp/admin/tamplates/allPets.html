@@ -15,7 +15,7 @@
         <th>Type</th>
         <th>Weight</th>
         <th>Diesieses</th>
-        <th>OwnerID</th>
+        <th>ClientID</th>
 
         {{range . }}
         <tr>
@@ -24,7 +24,7 @@
             <td>{{.Type}}</td>
             <td>{{.Weight}}</td>
             <td>{{.Diesieses}}</td>
-            <td>{{.Owner.ClientID}}</td>
+            <td>{{.Owner.UserID}}</td>
         </tr>
         {{end}}
 

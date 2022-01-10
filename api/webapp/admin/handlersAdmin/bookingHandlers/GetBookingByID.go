@@ -1,9 +1,9 @@
 package bookinghandlers
 
 import (
-	"fmt"
 	"goReact/domain/model"
-	"goReact/webapp/server/utils"
+	"goReact/domain/store"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -12,34 +12,21 @@ import (
 )
 
 // GetBookingByID ...
-func GetBookingByID() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func GetBookingByID(s *store.Store) httprouter.Handle { //db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
 		bookings := []model.Booking{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
-		rows, err := db.Query("select * from booking where id=$1", id)
+
+		s.Open()
+		booking, err := s.Booking().FindByID(id)
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
-		defer rows.Close()
-
-		for rows.Next() {
-			b := model.Booking{}
-			err := rows.Scan(&b.BookingID, &b.Seat.SeatID, &b.Pet.PetID, &b.Employee.EmployeeID, &b.Status, &b.StartDate, &b.EndDate, &b.Notes)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			bookings = append(bookings, b)
-
-		}
-		if len(bookings) == 0 {
-			http.Error(w, "No booking with such id!", 400)
-			return
-		}
+		bookings = append(bookings, *booking)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allBookings.html",
