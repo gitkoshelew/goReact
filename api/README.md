@@ -8,8 +8,8 @@ or run docker-compose for developers
 4. Change password for app user
 `ALTER USER goreact_app WITH PASSWORD 'changeme';`
 5. Update password in `config.yaml`
-6. Run MIGRATES:
-`migrate -path api/migrations/ -database "postgres://localhost:8081/goreact?sslmode=disable&user=user&password=userpass" up`
+6. Cope logs from container:
+`docker cp goreact_goreact_1:api/logs /logs`  
 
 Endpoints info:
 -----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ http.Error - "Email already in use", "Bad request"
 POST    /login - login
 
 Request data:
- {
+{
 		Email    string         NOT NULL
 		Password string         NOT NULL
 }

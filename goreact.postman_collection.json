@@ -24,7 +24,7 @@
 							},
 							{
 								"key": "Origin",
-								"value": "google.com",
+								"value": "",
 								"type": "default",
 								"disabled": true
 							}
@@ -49,7 +49,8 @@
 								"api",
 								"user"
 							]
-						}
+						},
+						"description": "Create user and save into USERS table in DB\n\nPassword will be encrypred in server and then will be saved in DB\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n201 - http.StatusCreated\n\n{\n\nuserID: \"int\"\n\n}"
 					},
 					"response": []
 				},
@@ -69,7 +70,8 @@
 								"api",
 								"users"
 							]
-						}
+						},
+						"description": "Send a request to server to get all Users from DB.\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON massieve:\n\n\\[\n\n{   \n\n\"userId\": int,   \n\n\"email\": string,   \n\n\"role\": string,    \n\n\"verified\": bool,          \n\n\"name\": string,          \n\n\"sName\": string,             \n\n\"mName\": string,               \n\n\"sex\": string,   \n\n\"birthDate\": time.Time,     # format: \"2111-01-01\" #   \n\n\"address\": string,             \n\n\"phone\": string,             \n\n\"photo\": string            \n\n},\n\n{user JSON...},\n\n{user JSON...},\n\n...\n\n\\]"
 					},
 					"response": []
 				},
@@ -79,7 +81,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/user/1",
+							"raw": "http://localhost:8080/api/user/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -88,13 +90,15 @@
 							"path": [
 								"api",
 								"user",
-								"1"
+								"2"
 							]
-						}
+						},
+						"description": "Return user from DB by userID. ID need to be set in URL params api/user/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"userId\": int,\n\n\"email\": string,\n\n\"role\": string,\n\n\"verified\": bool,\n\n\"name\": string,\n\n\"sName\": string,\n\n\"mName\": string,\n\n\"sex\": string,\n\n\"birthDate\": time.Time, # format: \"2111-01-01\" #\n\n\"address\": string,\n\n\"phone\": string,\n\n\"photo\": string\n\n}"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "## User's struct:\n\n| Field | type | JSON |\n| --- | --- | --- |\n| UserID | int | userId |\n| Email | string | \"email\" |\n| Password | string | \"password\" |\n| Role | string | \"role\" |\n| Verified | bool | \"verified\" |\n| Name | string | \"name |\n| Surname | string | \"sName\" |\n| MiddleName | string | \"mName\" |\n| Sex | string | \"sex\" |\n| DateOfBirth | time.Time | \"birthDate\" |\n| Address | string | \"address\" |\n| Phone | string | \"phone |\n| Photo | string | \"photo\" |"
 		},
 		{
 			"name": "Authentiction",
@@ -124,37 +128,8 @@
 								"api",
 								"registration"
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Logout",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
-									"type": "string"
-								}
-							]
 						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/logout",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"logout"
-							]
-						}
+						"description": "Create user. Giving back ID for user\n\n## Request data:\n\nJSON\n\n{\n\n\"email\": string,\n\n\"password\": string,\n\n\"role\": string, NOT NULL # \"client\", \"employee\", \"anonymous\" #\n\n\"verified\": bool, NOT NULL\n\n\"name\": string, NOT NULL\n\n\"sName\": string, NOT NULL\n\n\"mName\": string,\n\n\"sex\": string, NOT NULL\n\n\"birthDate\": time.Time, NOT NULL # format: \"2111-01-01\" #\n\n\"address\": string,\n\n\"phone\": string, NOT NULL\n\n\"photo\": string\n\n}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n201- http.StatusCreated  \n\nJSON:\n\n{\n\n\"userId\": int\n\n}"
 					},
 					"response": []
 				},
@@ -166,7 +141,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjkzY2U2MjMyLTdjMTItNDk3MC1iOTY4LTU0MDA2ZTcwY2RkNyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3NzYzNywicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.-HJ6qJSuDLjsUv0yqQq3gm1cafXAiPCQxLaclERhs6U",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6Ijg5Nzk5MDhkLWYzMGItNDJiMi1iYmE4LWM5N2E0OTk4ZjZjMiIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTQyMzExMCwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.uFMa30dqQvqWv0Hl1xsvBLacaA2YAXiyZJt_mepo70Q",
 									"type": "string"
 								}
 							]
@@ -193,7 +168,39 @@
 								"api",
 								"login"
 							]
-						}
+						},
+						"description": "SImple login endpoint. Checks first if usser already logged in. If true return msg by response writer.\n\n### Request data:\n\n{\n\nEmail string NOT NULL\n\nPassword string NOT NULL\n\n}\n\nResponse data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nCookie: Refresh-Token\n\nHeader: access_token\n\n#### JSON:\n\n{\n\n\"userId\": int,\n\n\"email\": string,\n\n\"role\": string,\n\n\"verified\": bool,\n\n\"name\": string,\n\n\"sName\": string,\n\n\"mName\": string,\n\n\"sex\": string,\n\n\"birthDate\": time.Time, # format: \"2111-01-01\" #\n\n\"address\": string,\n\n\"phone\": string,\n\n\"photo\": string\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjFmMTEyNGVhLWYxNzMtNDIyYS05NmMyLTc4YTA5MjYyNzg3NSIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTc3NjAzMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.TfL37dreBGhTnWkTCXQ_8ezdf_Q5dUlouX6OB1xCiew",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/todo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"todo"
+							]
+						},
+						"description": "Who Am I endpoin. Checks if user is authorized by using access token. If true giving back userId and user role. if false send msg that user is unauthorized\n\n### Request data:\n\nAuthorization Bearer Token\n\n### Response data:\n\n401-StatusUnauthorized\n\n200- http.StatusOK  \n{\n\n\"userId\": int,\n\n\"role\": string\n\n}"
 					},
 					"response": []
 				},
@@ -223,19 +230,20 @@
 								"api",
 								"refresh"
 							]
-						}
+						},
+						"description": "Creates new access and refresh tokens and sends them back by header(access) and cookie(refresh). Needed valid refresh token\n\n### Request data:\n\nCookie: Refresh-Token\n\n### Response data:\n\n401 - StatusUnauthorized  \n422 - StatusUnprocessableEntity\n\n402 - StatusOK\n\nCookie: Refresh-Token\n\nHeader: access_token"
 					},
 					"response": []
 				},
 				{
-					"name": "Todo",
+					"name": "Logout",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImMxOTBlNjQ2LWQ4ODQtNGM4OS05OTU0LWYyOTYxNDhlMzdkZSIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTQyMzE2Niwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.rkOcj3yv4upOFXyztKwWdptdogAyq1-vNR-bE0aK0wM",
 									"type": "string"
 								}
 							]
@@ -243,7 +251,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/todo",
+							"raw": "http://localhost:8080/api/logout",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -251,39 +259,10 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"todo"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Who am i",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
-									"type": "string"
-								}
+								"logout"
 							]
 						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/private/whoami",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"private",
-								"whoami"
-							]
-						}
+						"description": "### Request data:\n\nAuthorization Bearer Token\n\n### Response data:\n\n401 - StatusUnauthorized  \n  \n200 - StatusOK\n\nCookie: Refresh-Token - null\n\nHeader: access_token - null"
 					},
 					"response": []
 				}

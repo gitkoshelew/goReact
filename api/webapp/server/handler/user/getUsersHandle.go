@@ -13,10 +13,18 @@ func GetUsersHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
-		s.Open()
+		err := s.Open()
+		if err != nil {
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(err.Error())
+		}
+
 		users, err := s.User().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Can't find user. Err msg: %v", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err.Error())
 			return
 		}
 		w.WriteHeader(http.StatusOK)

@@ -17,11 +17,12 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Error while checking if email ia already in use. Err msg: %v", err)
 		return nil, err
 	}
 
 	if emailIsUsed {
+		r.Store.Logger.Error("Email %v already in use", u.Email)
 		return nil, errors.New("Email already in use")
 	}
 
@@ -40,7 +41,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		u.Phone,
 		u.Photo,
 	).Scan(&u.UserID); err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Cant't insert into users table. Err msg: %v", err)
 		return nil, err
 	}
 	log.Print(u)
@@ -51,7 +52,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Cant't select form users table. Err msg: %v", err)
 		return nil, err
 	}
 	users := []model.User{}
@@ -74,7 +75,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Photo,
 		)
 		if err != nil {
-			log.Printf(err.Error())
+			r.Store.Logger.Errorf("Error while scanning rows. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -101,7 +102,7 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant't select form users table. Err msg: %v", err)
 		return nil, err
 	}
 	return user, nil
@@ -126,7 +127,7 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant't select form users table. Err msg: %v", err)
 		return nil, err
 	}
 	return user, nil
@@ -136,10 +137,10 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 func (r *UserRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM users WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant't delete form users table. Err msg: %v", err)
 		return err
 	}
-	log.Printf("User deleted, rows affectet: %d", result)
+	r.Store.Logger.Infof("User %d deleted. Rows affected: %d", id, result)
 	return nil
 }
 
@@ -147,7 +148,7 @@ func (r *UserRepository) Delete(id int) error {
 func (r *UserRepository) Update(u *model.User) error {
 	encryptedPassword, err := model.EncryptPassword(u.Password)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
 		return err
 	}
 
@@ -172,10 +173,10 @@ func (r *UserRepository) Update(u *model.User) error {
 		u.UserID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
 		return err
 	}
-	log.Printf("User updated, rows affectet: %d", result)
+	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
 	return nil
 }
 
@@ -184,7 +185,7 @@ func (r *UserRepository) EmailCheck(email string) *bool {
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", email).Scan(&emailIsUsed)
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Error while checking if email ia already in use. Err msg: %v", err)
 	}
 	return &emailIsUsed
 }

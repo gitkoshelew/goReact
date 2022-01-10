@@ -2,10 +2,10 @@ package middleware
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/authentication"
-	"log"
 	"net/http"
 )
 
@@ -14,16 +14,18 @@ func AuthenticateUser(next http.Handler, s *store.Store) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		AccessDetails, err := authentication.ExtractTokenMetadata(r)
 		if err != nil {
-			fmt.Fprintln(w, "You are not authorized")
+			s.Logger.Errorf("Extract token meta data error. MSG: %v", err)
+			json.NewEncoder(w).Encode(fmt.Sprintf("You are unauthorized. Err msg: %v", err))
 			w.WriteHeader(http.StatusUnauthorized)
-			log.Print(err.Error())
 			return
 		}
 
 		s.Open()
 		user, err := s.User().FindByID(int(AccessDetails.UserID))
 		if err != nil {
+			s.Logger.Errorf("Can't find user. Error msg: %v", err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err.Error())
 			return
 		}
 
