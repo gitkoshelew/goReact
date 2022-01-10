@@ -2,16 +2,15 @@ package server
 
 import (
 	"goReact/domain/store"
-	"goReact/webapp/server/handlers"
-	"goReact/webapp/server/handlers/authentication"
-	"goReact/webapp/server/handlers/middleware"
-	"goReact/webapp/server/handlers/user"
+	"goReact/webapp/server/handler"
+	"goReact/webapp/server/handler/authentication"
+	"goReact/webapp/server/handler/middleware"
+	"goReact/webapp/server/handler/user"
 )
 
 func (s *Server) configureRouter() {
-	s.router.GlobalOPTIONS = handlers.CorsHandle()
 
-	s.router.Handle("GET", "/", handlers.HandleHomePage())
+	s.router.Handle("GET", "/", handler.HandleHomePage())
 
 	s.router.Handler("GET", "/private/whoami", middleware.Private(middleware.WhoAmI(), store.New(s.config)))
 	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(authentication.LoginHandle(store.New(s.config))))

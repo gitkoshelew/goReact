@@ -2,10 +2,9 @@ package authentication
 
 import (
 	"encoding/json"
-	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/handlers/request"
+	"goReact/webapp/server/handler/request"
 	"log"
 	"net/http"
 )
@@ -19,7 +18,7 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			http.Error(w, "Bad request", http.StatusBadRequest)
 		}
-
+		log.Println(req.Email)
 		s.Open()
 		user, err := s.User().FindByEmail(req.Email)
 		if err != nil {
@@ -46,6 +45,6 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		w.Header().Add("Access-Token", tk.AccessToken)
 		json.NewEncoder(w).Encode(user)
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "Login successfull")
+
 	})
 }

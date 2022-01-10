@@ -16,7 +16,6 @@ require (
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.0 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
-	github.com/pmezard/go-difflib v1.0.0 // indirect
 	go.uber.org/atomic v1.6.0 // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )
@@ -26,5 +25,6 @@ require (
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/golang-migrate/migrate/v4 v4.15.1
 	github.com/gorilla/sessions v1.2.1
+	github.com/rs/cors v1.8.2
 	github.com/twinj/uuid v1.0.0
 )

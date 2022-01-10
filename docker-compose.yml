@@ -17,11 +17,15 @@ services:
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/data/
+        healthcheck:
+            test: pg_isready -U user -d goreact
+            interval: 15s
+            timeout: 4s
+            retries: 10
         networks:
             new:
                 aliases:
                     - database
-
     pgadmin:
         image: dpage/pgadmin4
         env_file:
@@ -58,7 +62,7 @@ services:
         build:
             context: ./api
         ports:
-            - "8080:8080"
+            - $SERVER_PORT:$SERVER_PORT
         depends_on:
             - postgresql_database
         env_file:
@@ -72,6 +76,7 @@ services:
         tty: true
         networks:
             - new
+
 networks:
     new:
         driver: bridge
