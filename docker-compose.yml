@@ -17,15 +17,61 @@ services:
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/data/
-        healthcheck:
-            test: pg_isready -U user -d goreact
-            interval: 15s
-            timeout: 4s
-            retries: 10
+        # healthcheck:
+
+        #     test: pg_isready -U user -d goreact
+
+        #     interval: 15s
+
+        #     timeout: 4s
+
+        #     retries: 10
         networks:
             new:
                 aliases:
                     - database
+
+    test_database:
+        container_name: test_database
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_POSTGRES_DB}
+            - POSTGRES_HOST=172.20.0.5
+            - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
+        ports:
+            - "6543:5432"
+        restart: unless-stopped
+        volumes:
+            - test-database:/var/lib/test-data/data/
+        networks:
+            - new
+
+    migrate:
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./migrations:/migrations
+
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@postgresql_database:5432/goreact?ss\
+                  lmode=disable",
+                "up"
+            ]
+        links:
+            - postgresql_database
+        depends_on:
+            - postgresql_database
+
     pgadmin:
         image: dpage/pgadmin4
         env_file:
@@ -35,7 +81,7 @@ services:
             - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
         ports:
             - "5050:80"
-        restart: always
+        restart: unless-stopped
         volumes:
             - pgadmin:/root/.pgadmin
         networks:
@@ -74,6 +120,8 @@ services:
             - SERVER_HOST=0.0.0.0
             - ENV=prod
         tty: true
+        volumes:
+            - api:/api
         networks:
             - new
 
@@ -81,6 +129,9 @@ networks:
     new:
         driver: bridge
 volumes:
+    test-database: null
+    api: null
+    test-database-data: null
     database-data: null
     pgadmin: null
     rabbitmq_data:

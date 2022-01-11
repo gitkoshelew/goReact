@@ -10,11 +10,12 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// DeleteUser ...
 func DeleteUser(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 		//id, _ := strconv.Atoi(ps.ByName("id"))
-		id , _:= strconv.Atoi(r.FormValue("id"))
+		id, _ := strconv.Atoi(r.FormValue("id"))
 		s.Open()
 		err := s.User().Delete(id)
 		if err != nil {

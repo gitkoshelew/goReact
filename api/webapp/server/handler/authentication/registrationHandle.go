@@ -2,9 +2,11 @@ package authentication
 
 import (
 	"encoding/json"
+	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/request"
+	"goReact/webapp/server/handler/response"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -19,7 +21,7 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			http.Error(w, "Bad request", http.StatusBadRequest)
-			json.NewEncoder(w).Encode(err.Error())
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 		}
 
 		u := model.NewUser(
@@ -42,7 +44,7 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(err.Error())
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
@@ -50,11 +52,10 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			s.Logger.Errorf("Cant create user. Err msg: %v", err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			json.NewEncoder(w).Encode(err.Error())
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-
-		json.NewEncoder(w).Encode(u.UserID)
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", u.UserID)})
 		w.WriteHeader(http.StatusCreated)
 	}
 }

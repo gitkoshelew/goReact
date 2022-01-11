@@ -17,10 +17,9 @@ func (s *Server) configureRouter() {
 	s.router.Handle("POST", "/api/registration", authentication.RegistrationHandle(store.New(s.config)))
 	s.router.Handle("POST", "/api/logout", authentication.LogoutHandle(store.New(s.config)))
 	s.router.Handle("POST", "/api/refresh", authentication.RefreshHandle(store.New(s.config)))
-	s.router.Handle("POST", "/api/todo", authentication.TodoHandle(store.New(s.config)))
+	s.router.Handle("POST", "/api/me", authentication.MeHandle(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/users", user.GetUsersHandle(store.New(s.config)))
 	s.router.Handle("POST", "/api/user", user.PostUserHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/user/:id", user.GetUserHandle(store.New(s.config)))
 }
-
