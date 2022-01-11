@@ -3,6 +3,7 @@ package middleware
 import (
 	"encoding/json"
 	"goReact/webapp/server/handler/authentication"
+	"goReact/webapp/server/handler/response"
 	"net/http"
 )
 
@@ -15,7 +16,7 @@ func IsLoggedIn(next http.HandlerFunc) http.Handler {
 			next.ServeHTTP(w, r)
 			return
 		}
-		json.NewEncoder(w).Encode("You are already logged in")
+		json.NewEncoder(w).Encode(response.Info{Messsage: "You are already logged in"})
 		return
 
 	})
