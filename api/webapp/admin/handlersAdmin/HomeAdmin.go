@@ -23,6 +23,7 @@ func HomeAdmin() httprouter.Handle {
 	}
 }
 
+// HomePage ...
 func HomePage(w http.ResponseWriter) {
 	files := []string{
 		"/api/webapp/admin/tamplates/homeAdmin.html",
