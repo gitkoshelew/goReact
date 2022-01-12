@@ -54,6 +54,7 @@ func (s *Server) Start() error {
 			http.MethodDelete,
 		},
 		AllowedHeaders:   []string{"*"},
+		ExposedHeaders:   []string{"Access-Token"},
 		AllowCredentials: true,
 	})
 

@@ -1,22 +1,7 @@
 import bookingOrderDay from '../mockData/BookingMockData'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 export type IsRentType = { id: string; firstRoom: boolean; secondRoom: boolean }
-export type UserRequestDataType = { email: string; password: string }
-export type LogInResponseType = {
-  userId: number
-  email: string
-  role: string
-  verified: boolean
-  name: string
-  sName: string
-  mName: string
-  sex: string
-  birthDate: string
-  address: string
-  phone: string
-  photo: string
-}
 
 const API_URL = 'http://localhost:8080/'
 
@@ -29,16 +14,25 @@ export const $api = axios.create({
   ...settings,
 })
 
-export const AuthAPI = {
-  async logIn(user: UserRequestDataType): Promise<AxiosResponse<LogInResponseType>> {
-    const res = await $api.post('api/login', user)
-    return res
+$api.interceptors.request.use((config) => {
+  config.headers = config.headers ?? {}
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+  return config
+})
+
+$api.interceptors.response.use(
+  (config) => {
+    return config
   },
-  async logOut(): Promise<AxiosResponse> {
-    const res = await $api.post('api/logout')
-    return res
-  },
-}
+  async (error) => {
+    const originalRequest = error.config
+    if (error.response.status === 401) {
+      const response = await $api.post('/api/refresh')
+      localStorage.setItem('token', response.headers['Access-Token'])
+      return $api.request(originalRequest)
+    }
+  }
+)
 
 export const BookingPageAPI = {
   getCalendarData(): Promise<IsRentType[]> {

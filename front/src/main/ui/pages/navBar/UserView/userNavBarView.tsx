@@ -1,12 +1,12 @@
 import { userPhotoBoilerPlate } from '../../../svgWrapper/navBarSvgWrapper'
 import React, { useState } from 'react'
-import { LogInResponseType } from '../../../../dal/api_client/API'
 import s from './userNavBarView.module.scss'
 import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
 import { LogOutRequest } from '../../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
 import { LoginPageLoadingStatusType } from '../../../../bll/reducers/LoginPageReduser/loginPage-reducer'
 import Preloader from '../../../components/preloader/preloader'
+import { LogInResponseType } from '../../../../dal/api_client/AuthService'
 
 const { userNav, userPhoto, userName, logoutField, userNavView, preloaderNav } = s
 

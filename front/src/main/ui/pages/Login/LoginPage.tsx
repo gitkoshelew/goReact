@@ -2,7 +2,6 @@ import s from './Login.module.scss'
 import { Form, Formik } from 'formik'
 import { authenticationSchema } from './validations/authValidation'
 import { TextField } from '../../components/TextField/TextField'
-import { LogInResponseType, UserRequestDataType } from '../../../dal/api_client/API'
 import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
 import { LoginRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
@@ -10,6 +9,7 @@ import { LoginPageLoadingStatusType } from '../../../bll/reducers/LoginPageRedus
 import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
+import { LogInResponseType, UserRequestDataType } from '../../../dal/api_client/AuthService'
 
 const { authenticationForm, authenticationTitle, sendReqBtn, sendReqErrorBtn } = s
 
