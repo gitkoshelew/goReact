@@ -2,6 +2,7 @@ package usershandlers
 
 import (
 	"goReact/webapp/admin/session"
+	"goReact/webapp/validation"
 
 	"goReact/domain/model"
 	"goReact/domain/store"
@@ -20,7 +21,9 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 
 		users := []model.User{}
 
-		id, _ := strconv.Atoi(ps.ByName("id"))
+		//id, _ := strconv.Atoi(ps.ByName("id"))
+		id, _ := strconv.Atoi(r.FormValue("id"))
+		validation.ValidateId(id,w)
 
 		s.Open()
 		user, err := s.User().FindByID(id)

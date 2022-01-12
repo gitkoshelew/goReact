@@ -22,7 +22,7 @@ func (s *Server) configureRoutesAdmin() {
 
 	s.router.Handle("GET", "/admin/users", usershandlers.AllUsersHandler(store.New(s.config)))
 	s.router.Handle("POST", "/admin/user/new", usershandlers.NewUser(store.New(s.config)))
-	s.router.Handle("GET", "/admin/users/id:id", usershandlers.GetUserByID(store.New(s.config)))
+	s.router.Handle("GET", "/admin/users/id", usershandlers.GetUserByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/users/delete/", usershandlers.DeleteUser(store.New(s.config)))
 
 	s.router.Handle("GET", "/admin/hotels", hotelhandlers.AllHotelsHandler(store.New(s.config)))
