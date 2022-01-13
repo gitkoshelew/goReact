@@ -39,8 +39,14 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 			Verified:    req.Verified,
 			DateOfBirth: req.DateOfBirth,
 		}
+		err := u.Validate()
+		if err != nil {
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
+			http.Error(w, "Bad request", http.StatusBadRequest)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+		}
 
-		err := u.NewUser()
+		err = u.NewUser()
 		if err != nil {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			http.Error(w, "Bad request", http.StatusBadRequest)
