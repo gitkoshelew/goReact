@@ -3,7 +3,6 @@ package validation
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"net"
 	"net/http"
 	"regexp"
@@ -22,10 +21,14 @@ func ValidateId(id int, w http.ResponseWriter) error {
 }
 
 func ValidateName(str string, w http.ResponseWriter) error {
-	if len(str) < 2 && len(str) > 20 {
+	if len(str) < 2 {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode("Enter correct names")
-		return errors.New("enter correct names")
+		json.NewEncoder(w).Encode("The entered name is too short")
+		return errors.New("the entered name is too short")
+	} else if len(str) > 20 {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode("The entered name is too long")
+		return errors.New("the entered name is too long")
 	} else {
 		for _, r := range str {
 			if !unicode.IsLetter(r) {
@@ -40,8 +43,6 @@ func ValidateName(str string, w http.ResponseWriter) error {
 
 func ValidateDateOfBirth(d time.Time, w http.ResponseWriter) error {
 	now := time.Now()
-	fmt.Println("now", now)
-	fmt.Println(now.Year())
 	s := now.Year() - d.Year()
 	if s < 1 || s > 99 {
 		w.WriteHeader(http.StatusBadRequest)
