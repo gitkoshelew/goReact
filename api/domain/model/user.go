@@ -3,6 +3,8 @@ package model
 import (
 	"time"
 
+	validation "github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/is"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -38,29 +40,37 @@ type Sex string
 
 // Sex constants
 const (
-	male   Sex = "male"
-	female Sex = "female"
+	Male   Sex = "male"
+	Female Sex = "female"
 )
 
+// Validate ...
+func (u *User) Validate() error {
+	return validation.ValidateStruct(
+		u,
+		validation.Field(&u.Email, validation.Required, is.Email),
+		validation.Field(&u.Password, validation.Required, validation.Length(5, 100)),
+		validation.Field(&u.Role, validation.Required, validation.By(IsRole)),
+		validation.Field(&u.Verified, validation.Required),
+		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
+		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
+		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
+		validation.Field(&u.Sex, validation.Required, validation.By(IsSex)),
+		validation.Field(&u.DateOfBirth, validation.Required),
+		validation.Field(&u.Address, validation.Required, validation.Length(10, 40)),
+		validation.Field(&u.Phone, validation.Required, validation.By(IsPhone)),
+	)
+}
+
 // NewUser creates User with encrypted password
-func NewUser(id int, email, password, role, name, surname, middleName, sex, address, phone, photo string, verified bool, dateOfBirth time.Time) User {
-	user := User{
-		UserID:      id,
-		Email:       email,
-		Password:    password,
-		Role:        Role(role),
-		Verified:    verified,
-		Name:        name,
-		Surname:     surname,
-		MiddleName:  middleName,
-		Sex:         Sex(sex),
-		DateOfBirth: dateOfBirth,
-		Address:     address,
-		Phone:       phone,
-		Photo:       photo,
+func (u *User) NewUser() error {
+	EncryptPassword, err := EncryptPassword(u.Password)
+	if err != nil {
+		return err
 	}
-	user.Password, _ = EncryptPassword(user.Password)
-	return user
+
+	u.Password = EncryptPassword
+	return nil
 }
 
 // EncryptPassword ...
