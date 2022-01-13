@@ -17,24 +17,24 @@ func MeHandle(s *store.Store) httprouter.Handle {
 
 		AccessDetails, err := ExtractTokenMetadata(r)
 		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Can't. Errors msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 		user, err := s.User().FindByID(int(AccessDetails.UserID))
 		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 

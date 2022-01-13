@@ -16,19 +16,20 @@ func GetUsersHandle(s *store.Store) httprouter.Handle {
 
 		err := s.Open()
 		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			w.WriteHeader(http.StatusInternalServerError)
 
 		}
 
 		users, err := s.User().GetAll()
 		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Can't find user. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(users)
 	}
