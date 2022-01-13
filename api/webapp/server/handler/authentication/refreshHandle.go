@@ -32,15 +32,15 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 
 		if err != nil {
 			s.Logger.Errorf("Refresh token expired. Errors msg: %v", err)
-			http.Error(w, "Refresh token expired", http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 
 		if _, ok := token.Claims.(jwt.Claims); !ok && !token.Valid {
 			s.Logger.Errorf("Can't parse token. Errors msg: %v", err)
-			http.Error(w, err.Error(), http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 
@@ -49,8 +49,8 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 			userID, err := strconv.ParseUint(fmt.Sprintf("%.f", claims["user_id"]), 10, 64)
 			if err != nil {
 				s.Logger.Errorf("Eror while parsing token. Errors msg: %v", err)
-				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 				json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+				w.WriteHeader(http.StatusUnprocessableEntity)
 				return
 			}
 
@@ -65,8 +65,8 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 			tk, createErr := CreateToken(userID, role)
 			if createErr != nil {
 				s.Logger.Errorf("Can't create token. Errors msg: %v", err)
-				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 				json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+				w.WriteHeader(http.StatusUnprocessableEntity)
 				return
 			}
 
@@ -83,8 +83,8 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 
 		} else {
 			s.Logger.Error("Refresh token is expired")
-			http.Error(w, "Refresh expired", http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusUnauthorized)
 		}
 
 	}

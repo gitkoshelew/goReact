@@ -17,36 +17,38 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %v", r.Body, err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusInternalServerError)
+			return
 		}
 
 		err := s.Open()
 		if err != nil {
 			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
-			http.Error(w, err.Error(), http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 		user, err := s.User().FindByEmail(req.Email)
 		if err != nil {
 			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
-			http.Error(w, err.Error(), http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
 		err = model.CheckPasswordHash(user.Password, req.Password)
 		if err != nil {
 			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
-			http.Error(w, "Invalid login or password", http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
 		tk, err := CreateToken(uint64(user.UserID), string(user.Role))
 		if err != nil {
 			s.Logger.Errorf("Eror during createing tokens. Err msg: %s", err.Error())
-			http.Error(w, "Eror during createing tokens", http.StatusUnprocessableEntity)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			w.WriteHeader(http.StatusUnprocessableEntity)
 			return
 		}
 
