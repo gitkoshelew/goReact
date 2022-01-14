@@ -5,6 +5,8 @@ import {
   reqLoginSuccess,
   reqLogOutError,
   reqLogOutSuccess,
+  reqMeError,
+  reqMeSuccess,
 } from './loginPage-reducer'
 import { AxiosResponse } from 'axios'
 import { AuthAPI, LogInResponseType, UserRequestDataType } from '../../../dal/api_client/AuthService'
@@ -46,9 +48,27 @@ export const LogOutRequest = () => ({
   type: 'LOGIN_PAGE/LOGOUT_SAGA',
 })
 
+export function* LoginPageMeRequestSagaWorker() {
+  try {
+    yield put(reqLoginLogoutStart())
+    const { data }: AxiosResponse<LogInResponseType> = yield call(AuthAPI.AuthMe)
+    yield put(reqMeSuccess({ user: data }))
+  } catch (err) {
+    if (err instanceof Error) {
+      yield put(reqMeError({ errorMsg: err.message }))
+    }
+  }
+}
+
+export const MeRequest = () => ({
+  type: 'LOGIN_PAGE/ME_SAGA',
+})
+
 async function storeToken(token: string) {
   try {
-    await localStorage.setItem('token', token)
+    if (token) {
+      await localStorage.setItem('token', token)
+    }
   } catch (error) {
     console.log('Localstorage error during token store:', error)
   }

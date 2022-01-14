@@ -8,7 +8,11 @@ import { BookingUploadPetImgSagaWorker } from '../reducers/BookingRegFormReducer
 import { BookingRoomPickReducer } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { BookingRoomPickSagaWorker } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
 import { LoginPageReducer } from '../reducers/LoginPageReduser/loginPage-reducer'
-import { LoginPageLoginSagaWorker, LoginPageLogoutSagaWorker } from '../reducers/LoginPageReduser/loginPage-saga'
+import {
+  LoginPageLoginSagaWorker,
+  LoginPageLogoutSagaWorker,
+  LoginPageMeRequestSagaWorker,
+} from '../reducers/LoginPageReduser/loginPage-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -42,4 +46,5 @@ function* rootWatcher() {
   yield takeEvery('BOOKING_ROOM_PICK/NEW_IS_RENT_ROOMS_FOR_CALENDAR', BookingRoomPickSagaWorker)
   yield takeEvery('LOGIN_PAGE/LOGIN_SAGA', LoginPageLoginSagaWorker)
   yield takeEvery('LOGIN_PAGE/LOGOUT_SAGA', LoginPageLogoutSagaWorker)
+  yield takeEvery('LOGIN_PAGE/ME_SAGA', LoginPageMeRequestSagaWorker)
 }
