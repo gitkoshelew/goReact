@@ -32,3 +32,13 @@ func TestHotel(t *testing.T) *Hotel {
 		Address: "Minsk ul sovetskaya 18",
 	}
 }
+
+func TestRoom(t *testing.T) *Room {
+	return &Room{
+		RoomID:       1,
+		RoomNumber:   1,
+		PetType:      PetTypeCat,
+		Hotel:        *TestHotel(t),
+		RoomPhotoURL: "/photo/1",
+	}
+}
