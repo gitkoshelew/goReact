@@ -24,23 +24,36 @@ func PostUserHandle(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 		}
 
-		u := model.NewUser(
-			0,
-			req.Email,
-			req.Password,
-			req.Role,
-			req.Name,
-			req.Surname,
-			req.MiddleName,
-			req.Sex,
-			req.Address,
-			req.Phone,
-			req.Photo,
-			req.Verified,
-			req.DateOfBirth,
-		)
+		u := model.User{
+			UserID:      0,
+			Email:       req.Email,
+			Password:    req.Password,
+			Role:        model.Role(req.Role),
+			Name:        req.Name,
+			Surname:     req.Surname,
+			MiddleName:  req.MiddleName,
+			Sex:         model.Sex(req.Sex),
+			Address:     req.Address,
+			Phone:       req.Phone,
+			Photo:       req.Photo,
+			Verified:    req.Verified,
+			DateOfBirth: req.DateOfBirth,
+		}
+		err := u.Validate()
+		if err != nil {
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
+			http.Error(w, "Bad request", http.StatusBadRequest)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+		}
 
-		err := s.Open()
+		err = u.NewUser()
+		if err != nil {
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
+			http.Error(w, "Bad request", http.StatusBadRequest)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+		}
+
+		err = s.Open()
 		if err != nil {
 			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)

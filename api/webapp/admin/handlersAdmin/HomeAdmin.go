@@ -17,9 +17,8 @@ func HomeAdmin() httprouter.Handle {
 		if exist {
 			HomePage(w)
 			return
-		} else {
-			http.Redirect(w, r, "/admin/login", http.StatusFound)
 		}
+		http.Redirect(w, r, "/admin/login", http.StatusFound)
 	}
 }
 

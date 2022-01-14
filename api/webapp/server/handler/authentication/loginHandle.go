@@ -16,7 +16,6 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		req := &request.Login{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %v", r.Body, err)
-			http.Error(w, "Bad request", http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 		}
 

@@ -17,15 +17,6 @@ services:
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/data/
-        # healthcheck:
-
-        #     test: pg_isready -U user -d goreact
-
-        #     interval: 15s
-
-        #     timeout: 4s
-
-        #     retries: 10
         networks:
             new:
                 aliases:
@@ -40,7 +31,7 @@ services:
             - POSTGRES_USER=${TEST_POSTGRES_USER}
             - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
             - POSTGRES_DB=${TEST_POSTGRES_DB}
-            - POSTGRES_HOST=172.20.0.5
+            - POSTGRES_HOST=${TEST_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
         ports:
             - "6543:5432"
@@ -48,7 +39,9 @@ services:
         volumes:
             - test-database:/var/lib/test-data/data/
         networks:
-            - new
+            new:
+                aliases:
+                    - database
 
     migrate:
         image: migrate/migrate
@@ -71,6 +64,27 @@ services:
             - postgresql_database
         depends_on:
             - postgresql_database
+
+    test-migrate:
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./migrations:/migrations
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@test_database:5432/test_goreact?ssl\
+                  mode=disable",
+                "up"
+            ]
+        links:
+            - test_database
+        depends_on:
+            - test_database
 
     pgadmin:
         image: dpage/pgadmin4

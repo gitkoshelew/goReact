@@ -32,23 +32,29 @@ func NewUser(s *store.Store) httprouter.Handle {
 		phone := r.FormValue("Phone")
 		photo := r.FormValue("Photo")
 
-		u := model.NewUser(
-			0,
-			email,
-			password,
-			role,
-			name,
-			surname,
-			middleName,
-			sex,
-			address,
-			phone,
-			photo,
-			verified,
-			dateOfBirth,
-		)
+		u := model.User{
+			UserID:      0,
+			Email:       email,
+			Password:    password,
+			Role:        model.Role(role),
+			Name:        name,
+			Surname:     surname,
+			MiddleName:  middleName,
+			Sex:         model.Sex(sex),
+			Address:     address,
+			Phone:       phone,
+			Photo:       photo,
+			Verified:    verified,
+			DateOfBirth: dateOfBirth,
+		}
 
-		_, err := s.User().Create(&u)
+		err := u.NewUser()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		_, err = s.User().Create(&u)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
