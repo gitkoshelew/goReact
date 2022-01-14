@@ -13,6 +13,10 @@ type UserRepository struct {
 
 // Create user and save it to DB
 func (r *UserRepository) Create(u *model.User) (*model.User, error) {
+	if err := u.Validate(); err != nil {
+		r.Store.Logger.Errorf("User %v is invalid. Error msg: %s", u, err.Error())
+		return nil, err
+	}
 
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
@@ -22,7 +26,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	}
 
 	if emailIsUsed {
-		r.Store.Logger.Error("Email %v already in use", u.Email)
+		r.Store.Logger.Errorf("Email %s already in use", u.Email)
 		return nil, errors.New("Email already in use")
 	}
 

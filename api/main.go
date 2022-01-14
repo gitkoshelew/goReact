@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"goReact/domain/model"
-	"goReact/migrations"
 	"goReact/webapp"
 	"goReact/webapp/server"
 	"log"
@@ -22,7 +21,6 @@ func main() {
 
 	config := &webapp.Config{}
 	config.NewConfig()
-	migrations.Up()
 	initAccountDb(config)
 
 	s := server.New(config)

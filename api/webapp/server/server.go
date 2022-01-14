@@ -56,6 +56,7 @@ func (s *Server) Start() error {
 		AllowedHeaders:   []string{"*"},
 		ExposedHeaders:   []string{"Access-Token"},
 		AllowCredentials: true,
+		ExposedHeaders:   []string{"Access-Token"},
 	})
 
 	handler := CORS.Handler(s.router)

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/server/handler/response"
 	"net/http"
 	"os"
 	"strconv"
@@ -23,7 +24,7 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 		token, err := jwt.Parse(refreshToken, func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				s.Logger.Errorf("Unexpected signing method. %v", token.Header["alg"])
-				json.NewEncoder(w).Encode(fmt.Sprintf("Unexpected signing method. %v", token.Header["alg"]))
+				json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Unexpected signing method. %v", token.Header["alg"])})
 				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 			}
 			return []byte(os.Getenv("REFRESH_SECRET")), nil
@@ -32,14 +33,14 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			s.Logger.Errorf("Refresh token expired. Errors msg: %v", err)
 			http.Error(w, "Refresh token expired", http.StatusUnauthorized)
-			json.NewEncoder(w).Encode(err.Error())
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
 		if _, ok := token.Claims.(jwt.Claims); !ok && !token.Valid {
 			s.Logger.Errorf("Can't parse token. Errors msg: %v", err)
 			http.Error(w, err.Error(), http.StatusUnauthorized)
-			json.NewEncoder(w).Encode(err.Error())
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
@@ -49,7 +50,7 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 			if err != nil {
 				s.Logger.Errorf("Eror while parsing token. Errors msg: %v", err)
 				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
-				json.NewEncoder(w).Encode(err.Error())
+				json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 				return
 			}
 
@@ -57,7 +58,7 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 			if err != nil {
 				s.Logger.Errorf("Eror while parsing token. Errors msg: %v", err)
 				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
-				json.NewEncoder(w).Encode(err.Error())
+				json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 				return
 			}
 
@@ -65,7 +66,7 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 			if createErr != nil {
 				s.Logger.Errorf("Can't create token. Errors msg: %v", err)
 				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
-				json.NewEncoder(w).Encode(err.Error())
+				json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 				return
 			}
 
@@ -78,12 +79,12 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 			http.SetCookie(w, &c)
 			w.Header().Add("Access-Token", tk.AccessToken)
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode("Successfully refreshed")
+			json.NewEncoder(w).Encode(response.Info{Messsage: "Successfully refreshed"})
 
 		} else {
 			s.Logger.Error("Refresh token is expired")
 			http.Error(w, "Refresh expired", http.StatusUnauthorized)
-			json.NewEncoder(w).Encode(err.Error())
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 		}
 
 	}

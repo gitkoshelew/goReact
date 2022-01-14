@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/server/handler/response"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -18,7 +19,7 @@ func LogoutHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			s.Logger.Errorf("Unauthorized. Msg: %v", err)
 			http.Error(w, "You are unauthorized", http.StatusUnauthorized)
-			json.NewEncoder(w).Encode(fmt.Sprintf("You are unauthorized. Err msg: %v", err))
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("You are unauthorized. Err msg: %v", err)})
 			return
 		}
 
@@ -30,6 +31,6 @@ func LogoutHandle(s *store.Store) httprouter.Handle {
 		w.Header().Add("Access-Token", "")
 		http.SetCookie(w, &c)
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode("Successfully logged out")
+		json.NewEncoder(w).Encode(response.Info{Messsage: "Successfully logged out"})
 	}
 }
