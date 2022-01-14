@@ -23,3 +23,12 @@ func TestUser(t *testing.T) *User {
 	}
 
 }
+
+// Testing instance of hotel
+func TestHotel(t *testing.T) *Hotel {
+	return &Hotel{
+		HotelID: 1,
+		Name:    "Name",
+		Address: "Minsk ul sovetskaya 18",
+	}
+}
