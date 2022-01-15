@@ -1,4 +1,3 @@
-import { userPhotoBoilerPlate } from '../../../svgWrapper/navBarSvgWrapper'
 import React, { useState } from 'react'
 import s from './userNavBarView.module.scss'
 import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
@@ -6,12 +5,12 @@ import { LogOutRequest } from '../../../../bll/reducers/LoginPageReduser/loginPa
 import { useSelector } from 'react-redux'
 import { LoginPageLoadingStatusType } from '../../../../bll/reducers/LoginPageReduser/loginPage-reducer'
 import Preloader from '../../../components/preloader/preloader'
-import { LogInResponseType } from '../../../../dal/api_client/AuthService'
+import { LogInResponse } from '../../../../dal/api_client/AuthService'
 
 const { userNav, userPhoto, userName, logoutField, userNavView, preloaderNav } = s
 
 export type UserNavBarViewPropsType = {
-  user: LogInResponseType
+  user: LogInResponse
 }
 
 export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
@@ -23,7 +22,7 @@ export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
   const [isLogoutVisible, setIsLogoutVisible] = useState(false)
 
   const onLogoutFieldView = () => {
-    setIsLogoutVisible(!isLogoutVisible)
+    setIsLogoutVisible((currentValue) => !currentValue)
   }
 
   const onLogoutHandler = () => {
@@ -43,11 +42,7 @@ export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
     <div className={userNavView}>
       <div onClick={onLogoutFieldView} className={userNav}>
         <div className={userPhoto}>
-          {user.photo === 'PhotoURL...' ? (
-            <img src={userPhotoBoilerPlate} alt="userBoilerPlate" />
-          ) : (
-            <img src={user.photo} alt="userPhoto" />
-          )}
+          <img src={user.photo} alt="userPhoto" />
         </div>
         <div className={userName}>{`${user.name} ${user.sName}`}</div>
       </div>

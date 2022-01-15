@@ -7,7 +7,7 @@ import { Button } from '../../components/Button/Button'
 import { BurgerMenu } from './burgerMenu/BurgerMenu'
 import { useSelector } from 'react-redux'
 import { AppRootStateType } from '../../../bll/store/store'
-import { UserType } from '../../../bll/reducers/LoginPageReduser/loginPage-reducer'
+import { User } from '../../../bll/reducers/LoginPageReduser/loginPage-reducer'
 import { UserNavBarView } from './UserView/userNavBarView'
 
 const {
@@ -29,7 +29,7 @@ type NavBarPropsType = {
 }
 
 export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsType) => {
-  const userLogin = useSelector<AppRootStateType, UserType>((state) => state.LoginPage.user)
+  const userLogin = useSelector<AppRootStateType, User>((state) => state.LoginPage.user)
 
   const userView = userLogin ? <UserNavBarView user={userLogin} /> : <Button type={'login'} />
 

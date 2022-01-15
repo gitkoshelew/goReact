@@ -3,7 +3,7 @@
 .tabletComponent {
   width: 222px;
   position: relative;
-  z-index: 5;
+  z-index: $middle-z-index-priority;
   top: -10px;
   left: 30px;
   @media (min-width: 1144px) {
@@ -98,7 +98,7 @@
   justify-content: center;
   @media (min-width: 1144px) {
     left: 550px;
-    z-index: 10;
+    z-index: $middle-z-index-priority;
   }
   @media (min-width: 1250px) {
     left: 605px;

@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux'
 import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
 import { changeActualDay } from '../../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { MomentInput } from 'moment'
-import { IsRentType } from '../../../../dal/api_client/API'
+import { IsRent } from '../../../../dal/api_client/API'
 
 export const BookingCalendar = () => {
-  const isRentArr = useSelector<AppRootStateType, IsRentType[]>((state) => state.BookingRoomPick.isRent)
+  const isRentArr = useSelector<AppRootStateType, IsRent[]>((state) => state.BookingRoomPick.isRent)
 
   const dispatch = useAppDispatch()
 

@@ -1,17 +1,13 @@
 import bookingOrderDay from '../mockData/BookingMockData'
 import axios from 'axios'
 
-export type IsRentType = { id: string; firstRoom: boolean; secondRoom: boolean }
+export type IsRent = { id: string; firstRoom: boolean; secondRoom: boolean }
 
 const API_URL = 'http://localhost:8080/'
 
-const settings = {
+export const $api = axios.create({
   withCredentials: true,
   baseURL: API_URL,
-}
-
-export const $api = axios.create({
-  ...settings,
 })
 
 $api.interceptors.request.use((config) => {
@@ -25,17 +21,21 @@ $api.interceptors.response.use(
     return config
   },
   async (error) => {
-    const originalRequest = error.config
-    if (error.response.status === 401) {
-      const response = await $api.post('/api/refresh')
-      localStorage.setItem('token', response.headers['Access-Token'])
-      return $api.request(originalRequest)
+    if (localStorage.getItem('token') || localStorage.getItem('MockToken')) {
+      let refreshStopper = 0
+      const originalRequest = error.config
+      if (error.response.status === 401 && refreshStopper === 0) {
+        const response = await $api.post('/api/refresh')
+        localStorage.setItem('token', response.headers['Access-Token'])
+        refreshStopper = refreshStopper + 1
+        return $api.request(originalRequest)
+      }
     }
   }
 )
 
 export const BookingPageAPI = {
-  getCalendarData(): Promise<IsRentType[]> {
+  getCalendarData(): Promise<IsRent[]> {
     return Promise.resolve(bookingOrderDay.bookingRoomPageMockData.calendarData).then((res) => res)
   },
 }

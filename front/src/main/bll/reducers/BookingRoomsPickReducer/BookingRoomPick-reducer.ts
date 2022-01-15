@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IsRentType } from '../../../dal/api_client/API'
+import { IsRent } from '../../../dal/api_client/API'
 
 const initialState: InitialStateType = {
   isRent: [],
@@ -15,10 +15,10 @@ const BookingRoomPickSlice = createSlice({
     changeActualDay(state, action: PayloadAction<{ newActualDay: string }>) {
       state.actualDay = action.payload.newActualDay
     },
-    setIsRent(state, action: PayloadAction<{ newIsRent: IsRentType[] }>) {
+    setIsRent(state, action: PayloadAction<{ newIsRent: IsRent[] }>) {
       state.isRent = action.payload.newIsRent
     },
-    addNewIsRent(state, action: PayloadAction<{ newIsRent: IsRentType[] }>) {
+    addNewIsRent(state, action: PayloadAction<{ newIsRent: IsRent[] }>) {
       state.isRent = [...state.isRent, ...action.payload.newIsRent]
     },
     changeRoomStatus(state, action: PayloadAction<{ roomType: RentRoomType; dayId: string }>) {
@@ -34,9 +34,8 @@ const BookingRoomPickSlice = createSlice({
     reqCalendarDataStarted(state) {
       state.loadingStatus = 'loading'
     },
-    reqCalendarDataSucceeded(state, action: PayloadAction<{ newCalendarData: IsRentType[] }>) {
+    reqCalendarDataSucceeded(state, action: PayloadAction<{ newCalendarData: IsRent[] }>) {
       state.loadingStatus = 'success'
-      debugger
       state.isRent = action.payload.newCalendarData
     },
     reqCalendarDataFailed(state) {
@@ -71,7 +70,7 @@ export const {
 export type OrderedRoomsType = { id: string; orderedRoomType: RentRoomType }
 
 type InitialStateType = {
-  isRent: IsRentType[]
+  isRent: IsRent[]
   actualDay: string | Date
   orderedRoomBasket: OrderedRoomsType[]
   loadingStatus: LoadingStatusBookingPickType

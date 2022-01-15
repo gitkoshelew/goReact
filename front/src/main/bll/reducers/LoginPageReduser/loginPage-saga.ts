@@ -9,13 +9,19 @@ import {
   reqMeSuccess,
 } from './loginPage-reducer'
 import { AxiosResponse } from 'axios'
-import { AuthAPI, LogInResponseType, UserRequestDataType } from '../../../dal/api_client/AuthService'
+import { AuthAPI, LogInResponse, UserRequestData } from '../../../dal/api_client/AuthService'
+import { LoginResponse } from '../../../dal/mockData/LoginUserMockData'
+import { isDev } from '../../../dal/env/env'
 
 export function* LoginPageLoginSagaWorker(action: LoginRequestType) {
   try {
     yield put(reqLoginLogoutStart())
-    const { data, headers }: AxiosResponse<LogInResponseType> = yield call(AuthAPI.logIn, action.user)
-    yield call(storeToken, headers['access-token'])
+    const { data, headers }: AxiosResponse<LogInResponse> = yield call(AuthAPI.logIn, action.user)
+    if (!isDev) {
+      yield call(storeToken, headers['access-token'])
+    } else if (isDev) {
+      yield call(storeToken, LoginResponse.accessToken)
+    }
     yield put(reqLoginSuccess({ user: data }))
   } catch (err) {
     if (err instanceof Error) {
@@ -24,7 +30,7 @@ export function* LoginPageLoginSagaWorker(action: LoginRequestType) {
   }
 }
 
-export const LoginRequest = (user: UserRequestDataType) => ({
+export const LoginRequest = (user: UserRequestData) => ({
   type: 'LOGIN_PAGE/LOGIN_SAGA',
   user,
 })
@@ -35,7 +41,11 @@ export function* LoginPageLogoutSagaWorker() {
   try {
     yield put(reqLoginLogoutStart())
     yield call(AuthAPI.logOut)
-    localStorage.removeItem('token')
+    if (!isDev) {
+      localStorage.removeItem('token')
+    } else {
+      localStorage.removeItem('MockToken')
+    }
     yield put(reqLogOutSuccess())
   } catch (err) {
     if (err instanceof Error) {
@@ -51,7 +61,7 @@ export const LogOutRequest = () => ({
 export function* LoginPageMeRequestSagaWorker() {
   try {
     yield put(reqLoginLogoutStart())
-    const { data }: AxiosResponse<LogInResponseType> = yield call(AuthAPI.AuthMe)
+    const { data }: AxiosResponse<LogInResponse> = yield call(AuthAPI.AuthMe)
     yield put(reqMeSuccess({ user: data }))
   } catch (err) {
     if (err instanceof Error) {
@@ -65,11 +75,21 @@ export const MeRequest = () => ({
 })
 
 async function storeToken(token: string) {
-  try {
-    if (token) {
-      await localStorage.setItem('token', token)
+  if (isDev) {
+    try {
+      if (token) {
+        await localStorage.setItem('MockToken', token)
+      }
+    } catch (error) {
+      console.log('Localstorage error during token store:', error)
     }
-  } catch (error) {
-    console.log('Localstorage error during token store:', error)
+  } else {
+    try {
+      if (token) {
+        await localStorage.setItem('token', token)
+      }
+    } catch (error) {
+      console.log('Localstorage error during token store:', error)
+    }
   }
 }

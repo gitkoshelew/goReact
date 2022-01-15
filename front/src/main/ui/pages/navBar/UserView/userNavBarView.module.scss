@@ -23,8 +23,8 @@
   .logoutField {
     cursor: pointer;
     position: absolute;
-    z-index: 999;
-    top: 68px;
+    z-index: $height-z-index-priority;
+    top: 65px;
     left: -20px;
     display: flex;
     align-items: center;

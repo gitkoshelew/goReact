@@ -3,7 +3,7 @@
 .tabletComponent {
   width: 222px;
   position: relative;
-  z-index: 5;
+  z-index: $low-z-index-priority;
   top: -10px;
   left: 30px;
   margin-bottom: 20px;

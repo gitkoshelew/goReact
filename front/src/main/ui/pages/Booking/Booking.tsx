@@ -16,7 +16,7 @@ import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
 import Preloader from '../../components/preloader/preloader'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
-import { IsRentType } from '../../../dal/api_client/API'
+import { IsRent } from '../../../dal/api_client/API'
 
 const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
 
@@ -73,7 +73,7 @@ export const Booking = () => {
 
   const progress = useSelector<AppRootStateType, ProgressType>((state) => state.BookingRegForm.progress)
   const actualDay = useSelector<AppRootStateType, string | Date>((state) => state.BookingRoomPick.actualDay)
-  const isRentArr = useSelector<AppRootStateType, IsRentType[]>((state) => state.BookingRoomPick.isRent)
+  const isRentArr = useSelector<AppRootStateType, IsRent[]>((state) => state.BookingRoomPick.isRent)
   const orderedRoomBasket = useSelector<AppRootStateType, OrderedRoomsType[]>(
     (state) => state.BookingRoomPick.orderedRoomBasket
   )

@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  z-index: 3;
+  z-index: $low-z-index-priority;
   @media (min-width: 1023px) {
     margin: 0 auto;
   }

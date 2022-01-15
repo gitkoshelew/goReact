@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { LogInResponseType } from '../../../dal/api_client/AuthService'
+import { LogInResponse } from '../../../dal/api_client/AuthService'
 
 const initialState: InitialStateLoginPageType = {
-  loadingStatus: 'onWaiting',
+  loadingStatus: 'waitingForUser',
   errorMsg: '',
   user: null,
 }
@@ -15,7 +15,7 @@ const loginPageSlice = createSlice({
       state.loadingStatus = 'loading'
       state.errorMsg = ''
     },
-    reqLoginSuccess(state, action: PayloadAction<{ user: LogInResponseType }>) {
+    reqLoginSuccess(state, action: PayloadAction<{ user: LogInResponse }>) {
       state.loadingStatus = 'success'
       state.user = action.payload.user
     },
@@ -31,12 +31,12 @@ const loginPageSlice = createSlice({
       state.loadingStatus = 'error'
       state.errorMsg = action.payload.errorMsg
     },
-    reqMeSuccess(state, action: PayloadAction<{ user: LogInResponseType }>) {
+    reqMeSuccess(state, action: PayloadAction<{ user: LogInResponse }>) {
       state.loadingStatus = 'success'
       state.user = action.payload.user
     },
     reqMeError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = 'onWaiting'
+      state.loadingStatus = 'waitingForUser'
       state.errorMsg = action.payload.errorMsg
     },
   },
@@ -58,8 +58,8 @@ export const {
 export type InitialStateLoginPageType = {
   loadingStatus: LoginPageLoadingStatusType
   errorMsg: string
-  user: UserType
+  user: User
 }
 
-export type LoginPageLoadingStatusType = 'onWaiting' | 'loading' | 'success' | 'error'
-export type UserType = LogInResponseType | null
+export type LoginPageLoadingStatusType = 'waitingForUser' | 'loading' | 'success' | 'error'
+export type User = LogInResponse | null

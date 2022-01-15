@@ -9,16 +9,17 @@ import { LoginPageLoadingStatusType } from '../../../bll/reducers/LoginPageRedus
 import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
-import { LogInResponseType, UserRequestDataType } from '../../../dal/api_client/AuthService'
+import { LogInResponse, UserRequestData } from '../../../dal/api_client/AuthService'
 
 const { authenticationForm, authenticationTitle, sendReqBtn, sendReqErrorBtn } = s
 
 export const LoginPage = () => {
+  console.log(process.env)
   const dispatch = useAppDispatch()
   const LoginPageLoadingStatus = useSelector<AppRootStateType, LoginPageLoadingStatusType>(
     (state) => state.LoginPage.loadingStatus
   )
-  const userProfile = useSelector<AppRootStateType, LogInResponseType | null>((state) => state.LoginPage.user)
+  const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
   const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.LoginPage.errorMsg)
 
   const errMsg = ErrorMsg && <LoginErrorMsg ErrorMsg={ErrorMsg} />
@@ -37,7 +38,7 @@ export const LoginPage = () => {
         password: '',
       }}
       validationSchema={authenticationSchema}
-      onSubmit={(user: UserRequestDataType) => {
+      onSubmit={(user: UserRequestData) => {
         dispatch(LoginRequest(user))
       }}
     >

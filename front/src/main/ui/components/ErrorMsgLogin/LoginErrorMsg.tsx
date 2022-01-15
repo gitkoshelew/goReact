@@ -6,13 +6,13 @@ export type LoginErrorMsgPropsType = {
 }
 
 export const LoginErrorMsg = ({ ErrorMsg }: LoginErrorMsgPropsType) => {
-  const [openSnack, setOpenShack] = useState<boolean>(true)
+  const [isSnackOpen, setSnackOpen] = useState<boolean>(true)
   const handleClose = () => {
-    setOpenShack(false)
+    setSnackOpen(false)
   }
   return (
     <Snackbar
-      open={openSnack}
+      open={isSnackOpen}
       onClose={handleClose}
       autoHideDuration={4000}
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
