@@ -16,14 +16,14 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "valid",
 			u: func() *model.User {
-				return model.TestUser(t)
+				return model.TestUser()
 			},
 			isValid: true,
 		},
 		{
 			name: "empty email",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Email = ""
 				return u
 			},
@@ -32,7 +32,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "invalid email",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Email = "invalid"
 				return u
 			},
@@ -41,7 +41,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "empty password",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Password = ""
 				return u
 			},
@@ -50,7 +50,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "short password",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Password = "1234"
 				return u
 			},
@@ -59,7 +59,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Invalid Name",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Name = "Name@123"
 				return u
 			},
@@ -68,7 +68,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Empty Name",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Name = ""
 				return u
 			},
@@ -77,7 +77,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Invalid Surname",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Surname = "Surname-Фамилия"
 				return u
 			},
@@ -86,7 +86,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Empty Surname",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Surname = ""
 				return u
 			},
@@ -95,7 +95,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Invalid MiddleName",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.MiddleName = "MiddleName %?№"
 				return u
 			},
@@ -104,7 +104,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Empty MiddleName",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.MiddleName = ""
 				return u
 			},
@@ -113,7 +113,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Invalid Role",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Role = "Invalid"
 				return u
 			},
@@ -122,7 +122,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Invalid Sex",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Sex = "Invalid"
 				return u
 			},
@@ -131,7 +131,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Invalid Phone",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Phone = "Invalid"
 				return u
 			},
@@ -140,7 +140,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "Empty Phone",
 			u: func() *model.User {
-				u := model.TestUser(t)
+				u := model.TestUser()
 				u.Phone = ""
 				return u
 			},
@@ -160,40 +160,42 @@ func TestUser_Validate(t *testing.T) {
 }
 
 func TestUser_NewUser(t *testing.T) {
-	u := model.TestUser(t)
+	u := model.TestUser()
 	u.UserID = 1
-	err := u.NewUser()
+	err := u.WithEncryptedPassword()
 
 	assert.NoError(t, err)
 	assert.NotNil(t, u)
 }
 
 func TestUser_EncryptPassword(t *testing.T) {
+	password := "password"
 
-	pass, err := model.EncryptPassword("password")
+	pass, err := model.EncryptPassword(password)
 	assert.NoError(t, err)
 	assert.NotNil(t, pass)
+
+	assert.NotEqual(t, pass, password)
 }
 
 func TestUser_CheckPasswordHash(t *testing.T) {
 	password := "password"
-	encrypt, _ := model.EncryptPassword(password)
+	encryptedPassword, _ := model.EncryptPassword(password)
 
-	err := model.CheckPasswordHash(encrypt, password)
-	assert.NoError(t, err)
+	t.Run("TestUser_CheckPasswordHash: Valid", func(t *testing.T) {
+		err := model.CheckPasswordHash(encryptedPassword, password)
+		assert.NoError(t, err)
+	})
 
-	err = model.CheckPasswordHash(encrypt, "AnotherPassword")
-	assert.Error(t, err)
+	t.Run("TestUser_CheckPasswordHash: Initial password is invalid", func(t *testing.T) {
+		anotherPassword := "Another Password"
+		err := model.CheckPasswordHash(encryptedPassword, anotherPassword)
+		assert.Error(t, err)
+	})
 
-	err = model.CheckPasswordHash(encrypt, "")
-	assert.Error(t, err)
-
-	err = model.CheckPasswordHash("encrypt", password)
-	assert.Error(t, err)
-
-	err = model.CheckPasswordHash("", password)
-	assert.Error(t, err)
-
-	err = model.CheckPasswordHash("", "")
-	assert.Error(t, err)
+	t.Run("TestUser_CheckPasswordHash: Encrypted password is invalid", func(t *testing.T) {
+		anotherEncryptedPassword := "another encryptedPassword"
+		err := model.CheckPasswordHash(encryptedPassword, anotherEncryptedPassword)
+		assert.Error(t, err)
+	})
 }
