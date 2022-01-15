@@ -47,7 +47,7 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err = u.NewUser()
+		err = u.WithEncryptedPassword()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
