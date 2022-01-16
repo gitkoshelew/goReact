@@ -5,15 +5,19 @@ import (
 	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
+	"goReact/service"
 	"goReact/webapp/server/handler/request"
 	"goReact/webapp/server/handler/response"
 	"net/http"
+	"os"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/julienschmidt/httprouter"
 )
 
 // RegistrationHandle ...
-func RegistrationHandle(s *store.Store) httprouter.Handle {
+func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -36,7 +40,7 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 			Address:     req.Address,
 			Phone:       req.Phone,
 			Photo:       req.Photo,
-			Verified:    req.Verified,
+			Verified:    false,
 			DateOfBirth: req.DateOfBirth,
 		}
 		err := u.Validate()
@@ -71,7 +75,21 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		epClaims := jwt.MapClaims{}
+		epClaims["user_id"] = u.UserID
+		epClaims["exp"] = time.Now().Add(time.Minute * 120).Unix()
+		at := jwt.NewWithClaims(jwt.SigningMethodHS256, epClaims)
+		endpoint, err := at.SignedString([]byte(os.Getenv("EMAIL_CONFIRM_SECRET")))
+
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Error while email confirmation endpoint creating. Err msg: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
+		}
+
 		w.WriteHeader(http.StatusCreated)
+		m.Send(service.EmailConfirmation, endpoint, []string{u.Email})
 		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", u.UserID)})
 	}
 }

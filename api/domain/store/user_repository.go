@@ -157,11 +157,11 @@ func (r *UserRepository) Update(u *model.User) error {
 	}
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE users SET",
-		"email = $1, password = $2, role = $3, verified = $4,",
-		"first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9,",
-		"address = $10, phone = $11, photo = $12",
-		"WHERE id = $13",
+		"UPDATE users SET "+
+			"email = $1, password = $2, role = $3, verified = $4, "+
+			"first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, "+
+			"address = $10, phone = $11, photo = $12 "+
+			"WHERE id = $13",
 		u.Email,
 		encryptedPassword,
 		string(u.Role),
@@ -175,6 +175,22 @@ func (r *UserRepository) Update(u *model.User) error {
 		u.Phone,
 		u.Photo,
 		u.UserID,
+	)
+	if err != nil {
+		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
+		return err
+	}
+	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
+	return nil
+}
+
+// VerifyEmail user from DB
+func (r *UserRepository) VerifyEmail(userID int) error {
+	result, err := r.Store.Db.Exec(
+		"UPDATE users SET "+
+			"verified = $1 WHERE id = $2",
+		true,
+		userID,
 	)
 	if err != nil {
 		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)

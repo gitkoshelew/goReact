@@ -13,10 +13,11 @@ require (
 require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible // indirect
 	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/sendgrid/rest v2.6.7+incompatible // indirect
+	github.com/sendgrid/sendgrid-go v3.10.5+incompatible // indirect
 	github.com/stretchr/objx v0.1.0 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
 	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
@@ -25,6 +26,7 @@ require (
 )
 
 require (
+	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/gorilla/sessions v1.2.1
 	github.com/rs/cors v1.8.2
 	github.com/sirupsen/logrus v1.8.1

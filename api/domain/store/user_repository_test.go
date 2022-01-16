@@ -82,3 +82,24 @@ func TestUserRepository_GetAll(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, u)
 }
+
+func TestUserRepository_VerifyEmail(t *testing.T) {
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	defer teardown("users")
+
+	u := model.TestUser()
+	user, _ := s.User().Create(u)
+
+	t.Run("Valid", func(t *testing.T) {
+		err := s.User().VerifyEmail(user.UserID)
+
+		assert.NoError(t, err)
+	})
+
+	t.Run("Invalid user ID", func(t *testing.T) {
+		err := s.User().VerifyEmail(-1)
+
+		assert.Error(t, err)
+	})
+
+}

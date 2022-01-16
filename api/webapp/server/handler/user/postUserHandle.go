@@ -36,7 +36,7 @@ func PostUserHandle(s *store.Store) httprouter.Handle {
 			Address:     req.Address,
 			Phone:       req.Phone,
 			Photo:       req.Photo,
-			Verified:    req.Verified,
+			Verified:    false,
 			DateOfBirth: req.DateOfBirth,
 		}
 		err := u.Validate()

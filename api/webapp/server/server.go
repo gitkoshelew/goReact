@@ -2,6 +2,7 @@ package server
 
 import (
 	"goReact/domain/store"
+	"goReact/service"
 	"goReact/webapp"
 	"goReact/webapp/server/logging"
 	"net/http"
@@ -16,6 +17,7 @@ type Server struct {
 	logger *logging.Logger
 	router *httprouter.Router
 	Store  *store.Store
+	Mail   *service.Mail
 }
 
 // New ...
@@ -24,6 +26,7 @@ func New(config *webapp.Config) *Server {
 		config: config,
 		logger: logging.GetLogger(),
 		router: httprouter.New(),
+		Mail:   service.GetMail(config),
 	}
 }
 

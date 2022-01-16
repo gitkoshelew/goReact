@@ -51,7 +51,6 @@ func (u *User) Validate() error {
 		validation.Field(&u.Email, validation.Required, is.Email),
 		validation.Field(&u.Password, validation.Required, validation.Length(5, 100)),
 		validation.Field(&u.Role, validation.Required, validation.By(IsRole)),
-		validation.Field(&u.Verified, validation.Required),
 		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
 		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
 		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
