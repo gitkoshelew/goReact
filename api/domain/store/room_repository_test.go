@@ -48,7 +48,7 @@ func TestRoomRepository_FindByID(t *testing.T) {
 
 	r := model.TestRoom(t)
 
-	t.Run("invalid ID", func(t *testing.T) {
+	t.Run("valid ID", func(t *testing.T) {
 		r, err := s.Room().FindByID(r.RoomID)
 		assert.NoError(t, err)
 		assert.NotNil(t, r)
@@ -64,27 +64,4 @@ func TestRoomRepository_GetAll(t *testing.T) {
 		assert.NotNil(t, r)
 	})
 
-}
-
-func TestRoomRepository_Update(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("rooms")
-
-	r := model.Room{
-		RoomID:       2,
-		RoomNumber:   2,
-		PetType:      model.PetTypeDog,
-		Hotel:        *model.TestHotel(t),
-		RoomPhotoURL: "//photo//2",
-	}
-	t.Run("invalid", func(t *testing.T) {
-		err := s.Room().Update(&r)
-		assert.Error(t, err)
-	})
-
-	r1 := model.TestRoom(t)
-	t.Run("invalid", func(t *testing.T) {
-		err := s.Room().Update(r1)
-		assert.NoError(t, err)
-	})
 }
