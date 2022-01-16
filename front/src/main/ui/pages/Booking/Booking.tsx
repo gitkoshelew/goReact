@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import s from './Booking.module.css'
+import s from './Booking.module.scss'
 import { TitlePageTextBlock } from '../../components/TitlePageTextBlock/TitlePageTextBlock'
 import { BookingRegForm } from './BookingRegForm/BookingRegForm'
 import { BookingCalendar } from './BookingCalendar/BookingCalendar'
@@ -15,7 +15,7 @@ import { ProgressType } from '../../../bll/reducers/BookingRegFormReducer/Bookin
 import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
 import Preloader from '../../components/preloader/preloader'
-import { ErrorMsg } from '../../components/ErrorMsg/ErrorMsg'
+// import { ErrorMsg } from '../../components/ErrorMsg/ErrorMsg'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
 import { IsRentType } from '../../../dal/API'
 
