@@ -21,7 +21,7 @@ export type LogInResponse = {
   photo: string
 }
 
-export type RegisterResponse = {
+export type RegisterRequestUser = {
   email: string
   password: string
   role: string
@@ -34,6 +34,10 @@ export type RegisterResponse = {
   address: string
   phone: string
   photo: string
+}
+
+export type RegisterResponseData = {
+  InfoMsg: string
 }
 
 export const AuthAPI = {
@@ -59,6 +63,10 @@ export const AuthAPI = {
     }
     const res = await $api.post('api/me')
     return photoFieldChecker(res)
+  },
+  async RegisterAPI(newUser: RegisterRequestUser): Promise<AxiosResponse<RegisterResponseData>> {
+    const res = await $api.post('api/registration', newUser)
+    return res
   },
 }
 

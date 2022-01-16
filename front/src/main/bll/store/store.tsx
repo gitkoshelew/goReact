@@ -13,6 +13,8 @@ import {
   LoginPageLogoutSagaWorker,
   LoginPageMeRequestSagaWorker,
 } from '../reducers/LoginPageReduser/loginPage-saga'
+import { RegisterPageReducer } from '../reducers/RegistrationPageReducer/registrationPage-reducer'
+import { RegisterPageSagaWorker } from '../reducers/RegistrationPageReducer/registrationPage-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
   BookingRegForm: BookingRegFormReducer,
   BookingRoomPick: BookingRoomPickReducer,
   LoginPage: LoginPageReducer,
+  RegisterPage: RegisterPageReducer,
 })
 
 export type RootReducerType = typeof rootReducer
@@ -47,4 +50,5 @@ function* rootWatcher() {
   yield takeEvery('LOGIN_PAGE/LOGIN_SAGA', LoginPageLoginSagaWorker)
   yield takeEvery('LOGIN_PAGE/LOGOUT_SAGA', LoginPageLogoutSagaWorker)
   yield takeEvery('LOGIN_PAGE/ME_SAGA', LoginPageMeRequestSagaWorker)
+  yield takeEvery('REGISTER_PAGE/REGISTER_SAGA', RegisterPageSagaWorker)
 }

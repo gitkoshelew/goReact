@@ -1,18 +1,18 @@
 import s from './RegistrationPage.module.scss'
 import { Form, Formik } from 'formik'
 import { TextField } from '../../components/TextField/TextField'
-import { AppRootStateType } from '../../../bll/store/store'
+import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
 import { useSelector } from 'react-redux'
-import { LoginPageLoadingStatusType } from '../../../bll/reducers/LoginPageReduser/loginPage-reducer'
 import Preloader from '../../components/preloader/preloader'
-import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
-import { LogInResponse, RegisterResponse } from '../../../dal/api_client/AuthService'
+import { RegisterRequestUser } from '../../../dal/api_client/AuthService'
 import { closedEye, openedEye } from '../../svgWrapper/LoginSwgWrapper'
 import { useState } from 'react'
 import { PATH } from '../../Routes/RoutesInfo'
 import { NavLink } from 'react-router-dom'
 import { RegistrationSchema } from './validations/RegisterValidation'
+import { RegisterRequest } from '../../../bll/reducers/RegistrationPageReducer/registrationPage-saga'
+import { RegisterPageLoadingStatusType } from '../../../bll/reducers/RegistrationPageReducer/registrationPage-reducer'
 
 type OnSubmitValues = {
   email: string
@@ -40,11 +40,12 @@ const {
 } = s
 
 export const RegistrationPage = () => {
-  const LoginPageLoadingStatus = useSelector<AppRootStateType, LoginPageLoadingStatusType>(
-    (state) => state.LoginPage.loadingStatus
+  const dispatch = useAppDispatch()
+  const RegisterPageLoadingStatus = useSelector<AppRootStateType, RegisterPageLoadingStatusType>(
+    (state) => state.RegisterPage.loadingStatus
   )
-  const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
-  const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.LoginPage.errorMsg)
+
+  const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.RegisterPage.errorMsg)
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false)
 
@@ -56,11 +57,8 @@ export const RegistrationPage = () => {
   const correctEyeRender = isPasswordOpen ? closedEye : openedEye
   const correctPasswordInputType = isPasswordOpen ? 'text' : 'password'
 
-  if (LoginPageLoadingStatus === 'loading') {
+  if (RegisterPageLoadingStatus === 'loading') {
     return <Preloader />
-  }
-  if (userProfile) {
-    return <Home />
   }
 
   return (
@@ -78,17 +76,19 @@ export const RegistrationPage = () => {
       }}
       validationSchema={RegistrationSchema}
       onSubmit={(newUser: OnSubmitValues) => {
-        const dataForRequest: RegisterResponse = {
+        const dataForRequest: RegisterRequestUser = {
           ...newUser,
+          birthDate: '2000-01-01T00:00:00Z',
           photo: 'PhotoURL...',
           verified: true,
           role: 'client',
         }
-        console.log(dataForRequest)
+        dispatch(RegisterRequest(dataForRequest))
       }}
     >
       {(formik) => (
         <Form>
+          {errMsg}
           <div className={RegistrationForm}>
             <div className={RegistrationTitle}>SIGN UP</div>
             <TextField inputMsgLabel={'Email'} inputType={'register'} name="email" type="text" />
@@ -127,7 +127,6 @@ export const RegistrationPage = () => {
               </NavLink>
             </div>
           </div>
-          {errMsg}
         </Form>
       )}
     </Formik>
