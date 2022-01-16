@@ -21,6 +21,17 @@
     font-size: 20px;
     line-height: 25px;
   }
+  .passwordField {
+    position: relative;
+    .passwordRenderEye {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 75px;
+      left: 230px;
+      cursor: pointer;
+    }
+  }
   .sendReqBtn {
     width: 60px;
     height: 30px;

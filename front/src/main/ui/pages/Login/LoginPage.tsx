@@ -10,11 +10,12 @@ import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
 import { LogInResponse, UserRequestData } from '../../../dal/api_client/AuthService'
+import { closedEye, openedEye } from '../../svgWrapper/LoginSwgWrapper'
+import { useState } from 'react'
 
-const { authenticationForm, authenticationTitle, sendReqBtn, sendReqErrorBtn } = s
+const { authenticationForm, authenticationTitle, sendReqBtn, sendReqErrorBtn, passwordField, passwordRenderEye } = s
 
 export const LoginPage = () => {
-  console.log(process.env)
   const dispatch = useAppDispatch()
   const LoginPageLoadingStatus = useSelector<AppRootStateType, LoginPageLoadingStatusType>(
     (state) => state.LoginPage.loadingStatus
@@ -22,7 +23,15 @@ export const LoginPage = () => {
   const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
   const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.LoginPage.errorMsg)
 
+  const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false)
+
+  const showPasswordHandler = () => {
+    setIsPasswordOpen(!isPasswordOpen)
+  }
+
   const errMsg = ErrorMsg && <LoginErrorMsg ErrorMsg={ErrorMsg} />
+  const correctEyeRender = isPasswordOpen ? closedEye : openedEye
+  const correctPasswordInputType = isPasswordOpen ? 'text' : 'password'
 
   if (LoginPageLoadingStatus === 'loading') {
     return <Preloader />
@@ -47,7 +56,10 @@ export const LoginPage = () => {
           <div className={authenticationForm}>
             <div className={authenticationTitle}>Log in</div>
             <TextField label="Email" name="email" type="text" />
-            <TextField label="Password" name="password" type="text" />
+            <div className={passwordField}>
+              <TextField label="Password" name="password" type={correctPasswordInputType} />
+              <img onClick={showPasswordHandler} className={passwordRenderEye} src={correctEyeRender} alt="eye" />
+            </div>
             <button
               className={formik.errors.email || formik.errors.password ? sendReqErrorBtn : sendReqBtn}
               type="submit"
