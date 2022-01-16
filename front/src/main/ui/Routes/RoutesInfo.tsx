@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 import { AppRootStateType } from '../../bll/store/store'
 import { LogInResponse } from '../../dal/api_client/AuthService'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
+import { RegistrationPage } from '../pages/Registration/RegistrationPage'
 
 type LoginWrapperType = {
   children: ReactJSXElement
@@ -29,6 +30,7 @@ export const PATH = {
   BOOKING: '/booking',
   GALLERY: '/gallery',
   BASKET: '/basket',
+  REGISTRATION: '/registration',
 }
 
 export const RoutesInfo = () => {
@@ -57,6 +59,7 @@ export const RoutesInfo = () => {
         <Route path={PATH.BOOKING} element={<Booking />} />
         <Route path={PATH.SERVICE} element={<Service />} />
         <Route path={PATH.BASKET} element={<Basket />} />
+        <Route path={PATH.REGISTRATION} element={<RegistrationPage />} />
 
         <Route path={'*'} element={<Error404 />} />
       </Routes>

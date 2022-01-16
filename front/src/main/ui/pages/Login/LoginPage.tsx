@@ -1,6 +1,6 @@
 import s from './Login.module.scss'
 import { Form, Formik } from 'formik'
-import { authenticationSchema } from './validations/authValidation'
+import { authenticationSchema } from './validations/LoginValidation'
 import { TextField } from '../../components/TextField/TextField'
 import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
 import { LoginRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
@@ -12,8 +12,19 @@ import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
 import { LogInResponse, UserRequestData } from '../../../dal/api_client/AuthService'
 import { closedEye, openedEye } from '../../svgWrapper/LoginSwgWrapper'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { PATH } from '../../Routes/RoutesInfo'
 
-const { authenticationForm, authenticationTitle, sendReqBtn, sendReqErrorBtn, passwordField, passwordRenderEye } = s
+const {
+  authenticationForm,
+  authenticationTitle,
+  sendReqBtn,
+  sendReqErrorBtn,
+  passwordField,
+  passwordRenderEye,
+  signUpLink,
+  loginBtnLinkBlock,
+} = s
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch()
@@ -54,18 +65,23 @@ export const LoginPage = () => {
       {(formik) => (
         <Form>
           <div className={authenticationForm}>
-            <div className={authenticationTitle}>Log in</div>
-            <TextField label="Email" name="email" type="text" />
+            <div className={authenticationTitle}>SING IN</div>
+            <TextField inputType={'login'} label="Email" name="email" type="text" />
             <div className={passwordField}>
-              <TextField label="Password" name="password" type={correctPasswordInputType} />
+              <TextField inputType={'register'} label="Password" name="password" type={correctPasswordInputType} />
               <img onClick={showPasswordHandler} className={passwordRenderEye} src={correctEyeRender} alt="eye" />
             </div>
-            <button
-              className={formik.errors.email || formik.errors.password ? sendReqErrorBtn : sendReqBtn}
-              type="submit"
-            >
-              Login
-            </button>
+            <div className={loginBtnLinkBlock}>
+              <button
+                className={formik.errors.email || formik.errors.password ? sendReqErrorBtn : sendReqBtn}
+                type="submit"
+              >
+                Sign In
+              </button>
+              <NavLink to={PATH.REGISTRATION} className={signUpLink}>
+                Sign Up
+              </NavLink>
+            </div>
           </div>
           {errMsg}
         </Form>

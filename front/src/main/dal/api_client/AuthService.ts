@@ -5,9 +5,25 @@ import { userPhotoBoilerPlate } from '../../ui/svgWrapper/navBarSvgWrapper'
 import { isDev } from '../env/env'
 
 export type UserRequestData = { email: string; password: string }
+
 export type LogInResponse = {
   userId: number
   email: string
+  role: string
+  verified: boolean
+  name: string
+  sName: string
+  mName: string
+  sex: string
+  birthDate: string
+  address: string
+  phone: string
+  photo: string
+}
+
+export type RegisterResponse = {
+  email: string
+  password: string
   role: string
   verified: boolean
   name: string
