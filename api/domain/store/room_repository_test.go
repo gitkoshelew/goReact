@@ -22,42 +22,48 @@ func TestRoomRepository_Delete(t *testing.T) {
 	defer teardown("rooms")
 
 	id := 2
-
-	err := s.Room().Delete(id)
-	assert.Error(t, err)
+	t.Run("invalid ID", func(t *testing.T) {
+		err := s.Room().Delete(id)
+		assert.Error(t, err)
+	})
 
 	r := model.TestRoom(t)
 
-	_, err = s.Room().Create(r)
+	t.Run("valid ID", func(t *testing.T) {
+		_, err := s.Room().Create(r)
+		err = s.Room().Delete(r.RoomID)
+		assert.NoError(t, err)
+	})
 
-	err = s.Room().Delete(r.RoomID)
-	assert.NoError(t, err)
 }
 
 func TestRoomRepository_FindByID(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	defer teardown("rooms")
 	id := 2
-
-	_, err := s.Room().FindByID(id)
-	assert.Error(t, err)
+	t.Run("invalid ID", func(t *testing.T) {
+		_, err := s.Room().FindByID(id)
+		assert.Error(t, err)
+	})
 
 	r := model.TestRoom(t)
 
-	r, err = s.Room().FindByID(r.RoomID)
-
-	assert.NoError(t, err)
-	assert.NotNil(t, r)
+	t.Run("invalid ID", func(t *testing.T) {
+		r, err := s.Room().FindByID(r.RoomID)
+		assert.NoError(t, err)
+		assert.NotNil(t, r)
+	})
 }
 
 func TestRoomRepository_GetAll(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	defer teardown("rooms")
+	t.Run("valid", func(t *testing.T) {
+		r, err := s.Room().GetAll()
+		assert.NoError(t, err)
+		assert.NotNil(t, r)
+	})
 
-	r, err := s.Room().GetAll()
-
-	assert.NoError(t, err)
-	assert.NotNil(t, r)
 }
 
 func TestRoomRepository_Update(t *testing.T) {
@@ -65,18 +71,20 @@ func TestRoomRepository_Update(t *testing.T) {
 	defer teardown("rooms")
 
 	r := model.Room{
-		RoomID: 2,
-		RoomNumber: 2,
-		PetType: model.PetTypeDog,
-		Hotel: *model.TestHotel(t),
+		RoomID:       2,
+		RoomNumber:   2,
+		PetType:      model.PetTypeDog,
+		Hotel:        *model.TestHotel(t),
 		RoomPhotoURL: "//photo//2",
 	}
+	t.Run("invalid", func(t *testing.T) {
+		err := s.Room().Update(&r)
+		assert.Error(t, err)
+	})
 
-	err := s.Room().Update(&r)
-	assert.Error(t, err)
 	r1 := model.TestRoom(t)
-	err = s.Room().Update(r1)
-
-	assert.NoError(t, err)
-	assert.NotNil(t, r)
+	t.Run("invalid", func(t *testing.T) {
+		err := s.Room().Update(r1)
+		assert.NoError(t, err)
+	})
 }

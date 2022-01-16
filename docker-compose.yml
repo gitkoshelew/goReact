@@ -134,6 +134,7 @@ services:
             - SERVER_HOST=0.0.0.0
             - ENV=prod
         tty: true
+        restart: on-failure
         volumes:
             - api:/api
         networks:
@@ -149,4 +150,4 @@ volumes:
     database-data: null
     pgadmin: null
     rabbitmq_data:
-        driver: local
+       driver: local
