@@ -18,6 +18,8 @@ import (
 var (
 	// ErrUnexpectedSigningMethod ...
 	ErrUnexpectedSigningMethod = errors.New("unexpected signing method")
+	// ErrBadRequest ...
+	ErrBadRequest = errors.New("bad request")
 )
 
 var (
@@ -161,6 +163,22 @@ func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 
 // CreateCustomToken ...
 func CreateCustomToken(payload map[string]string, expireTime time.Duration, secretKey string) (string, error) {
+	if expireTime < 1 {
+		logger.Debugf("Bad request expire time: %v. Err msg: %v", expireTime, ErrBadRequest)
+		return "", fmt.Errorf("%v, expire time = %v", ErrBadRequest, expireTime)
+	}
+
+	checkSecret := strings.ReplaceAll(secretKey, " ", "")
+	if checkSecret == "" {
+		logger.Debugf("Bad request secret key: %v. Err msg: %v", secretKey, ErrBadRequest)
+		return "", fmt.Errorf("%v, secret key: %v", ErrBadRequest, secretKey)
+	}
+
+	if len(payload) < 1 {
+		logger.Debugf("Bad request empty payload: %v. Err msg: %v", payload, ErrBadRequest)
+		return "", fmt.Errorf("%v, empty payload: %v", ErrBadRequest, payload)
+
+	}
 
 	claims := jwt.MapClaims{}
 	for key, element := range payload {
