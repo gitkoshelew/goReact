@@ -1,12 +1,13 @@
 import { call, put } from 'redux-saga/effects'
 import { AuthAPI, RegisterRequestUser } from '../../../dal/api_client/AuthService'
-import { reqRegisterError, reqRegisterStart, reqRegisterSuccess } from './registrationPage-reducer'
+import { RegisterEnd, reqRegisterError, reqRegisterStart, reqRegisterSuccess } from './registrationPage-reducer'
 
 export function* RegisterPageSagaWorker(action: RegistrationRequestType) {
   try {
     yield put(reqRegisterStart())
     yield call(AuthAPI.RegisterAPI, action.user)
     yield put(reqRegisterSuccess())
+    yield put(RegisterEnd())
   } catch (err) {
     if (err instanceof Error) {
       yield put(reqRegisterError({ errorMsg: err.message }))

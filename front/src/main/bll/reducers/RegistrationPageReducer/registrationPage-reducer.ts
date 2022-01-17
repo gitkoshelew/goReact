@@ -20,12 +20,15 @@ const registerPageSlice = createSlice({
       state.loadingStatus = 'error'
       state.errorMsg = action.payload.errorMsg
     },
+    RegisterEnd(state) {
+      state.loadingStatus = 'waitingForUser'
+    },
   },
 })
 
 export const RegisterPageReducer = registerPageSlice.reducer
 
-export const { reqRegisterStart, reqRegisterSuccess, reqRegisterError } = registerPageSlice.actions
+export const { reqRegisterStart, reqRegisterSuccess, reqRegisterError, RegisterEnd } = registerPageSlice.actions
 
 type InitialRegisterStateType = {
   loadingStatus: RegisterPageLoadingStatusType

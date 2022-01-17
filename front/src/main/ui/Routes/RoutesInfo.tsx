@@ -14,10 +14,15 @@ import { AppRootStateType } from '../../bll/store/store'
 import { LogInResponse } from '../../dal/api_client/AuthService'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { RegistrationPage } from '../pages/Registration/RegistrationPage'
+import { RegisterPageLoadingStatusType } from '../../bll/reducers/RegistrationPageReducer/registrationPage-reducer'
 
 type LoginWrapperType = {
   children: ReactJSXElement
   user: LogInResponse | null
+}
+type RegisterWrapper = {
+  children: ReactJSXElement
+  loadingStatus: RegisterPageLoadingStatusType
 }
 
 export const PATH = {
@@ -35,9 +40,15 @@ export const PATH = {
 
 export const RoutesInfo = () => {
   const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
+  const RegisterPageLoadingStatus = useSelector<AppRootStateType, RegisterPageLoadingStatusType>(
+    (state) => state.RegisterPage.loadingStatus
+  )
 
   const LoginWrapper = ({ children, user }: LoginWrapperType) => {
     return user ? <Navigate to={PATH.HOME} replace /> : children
+  }
+  const RegisterWrapper = ({ children, loadingStatus }: RegisterWrapper) => {
+    return loadingStatus === 'success' ? <Navigate to={PATH.LOGIN} replace /> : children
   }
   return (
     <div>
@@ -54,12 +65,19 @@ export const RoutesInfo = () => {
             </LoginWrapper>
           }
         />
+        <Route
+          path={PATH.REGISTRATION}
+          element={
+            <RegisterWrapper loadingStatus={RegisterPageLoadingStatus}>
+              <RegistrationPage />
+            </RegisterWrapper>
+          }
+        />
         <Route path={PATH.GALLERY} element={<Gallery />} />
         <Route path={PATH.ROOM} element={<Room />} />
         <Route path={PATH.BOOKING} element={<Booking />} />
         <Route path={PATH.SERVICE} element={<Service />} />
         <Route path={PATH.BASKET} element={<Basket />} />
-        <Route path={PATH.REGISTRATION} element={<RegistrationPage />} />
 
         <Route path={'*'} element={<Error404 />} />
       </Routes>
