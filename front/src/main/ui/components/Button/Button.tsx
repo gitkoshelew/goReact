@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 const { loginBtn, buyBtn, uploadPetPhoto, uploadPetPhotoActive, orderBtn } = s
 
-type BtnPropsType = {
+export type BtnPropsType = {
   type: string
   isActive?: boolean
   onClick?: () => void
