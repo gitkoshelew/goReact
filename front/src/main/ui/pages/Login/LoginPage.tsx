@@ -10,7 +10,7 @@ import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
 import { LogInResponse, UserRequestData } from '../../../dal/api_client/AuthService'
-import { closedEye, openedEye } from '../../svgWrapper/LoginSwgWrapper'
+import { closedEye, openedEye } from '../../svgWrapper/LoginSvgWrapper'
 import { useState } from 'react'
 
 const { authenticationForm, authenticationTitle, sendReqBtn, sendReqErrorBtn, passwordField, passwordRenderEye } = s
@@ -23,7 +23,7 @@ export const LoginPage = () => {
   const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
   const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.LoginPage.errorMsg)
 
-  const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false)
+  const [isPasswordOpen, setIsPasswordOpen] = useState(false)
 
   const showPasswordHandler = () => {
     setIsPasswordOpen(!isPasswordOpen)
