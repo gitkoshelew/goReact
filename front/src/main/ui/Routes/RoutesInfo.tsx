@@ -10,11 +10,11 @@ import { Booking } from '../pages/Booking/Booking'
 import { Service } from '../pages/Service/Service'
 import { Basket } from '../pages/Basket/Basket'
 import { useSelector } from 'react-redux'
-import { AppRootStateType } from '../../bll/store/store'
+import { AppRootState } from '../../bll/store/store'
 import { LogInResponse } from '../../dal/api_client/AuthService'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { RegistrationPage } from '../pages/Registration/RegistrationPage'
-import { RegisterPageLoadingStatusType } from '../../bll/reducers/RegistrationPageReducer/registrationPage-reducer'
+import { RegisterPageLoadingStatus } from '../../bll/reducers/RegistrationPageReducer/registrationPage-reducer'
 
 type LoginWrapperType = {
   children: ReactJSXElement
@@ -22,7 +22,7 @@ type LoginWrapperType = {
 }
 type RegisterWrapper = {
   children: ReactJSXElement
-  loadingStatus: RegisterPageLoadingStatusType
+  loadingStatus: RegisterPageLoadingStatus
 }
 
 export const PATH = {
@@ -39,9 +39,9 @@ export const PATH = {
 }
 
 export const RoutesInfo = () => {
-  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
+  const userProfile = useSelector((state: AppRootState) => state.LoginPage.user)
 
-  const RegisterPageLoadingStatus = useSelector((state: AppRootStateType) => state.RegisterPage.loadingStatus)
+  const registerPageLoadingStatus = useSelector((state: AppRootState) => state.RegisterPage.loadingStatus)
 
   const LoginWrapper = ({ children, user }: LoginWrapperType) => {
     return user ? <Navigate to={PATH.HOME} replace /> : children
@@ -67,7 +67,7 @@ export const RoutesInfo = () => {
         <Route
           path={PATH.REGISTRATION}
           element={
-            <RegisterWrapper loadingStatus={RegisterPageLoadingStatus}>
+            <RegisterWrapper loadingStatus={registerPageLoadingStatus}>
               <RegistrationPage />
             </RegisterWrapper>
           }

@@ -1,7 +1,7 @@
 import s from './RegistrationPage.module.scss'
 import { Form, Formik } from 'formik'
 import { TextField } from '../../components/TextField/TextField'
-import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
+import { AppRootState, useAppDispatch } from '../../../bll/store/store'
 import { useSelector } from 'react-redux'
 import Preloader from '../../components/preloader/preloader'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
@@ -12,7 +12,6 @@ import { PATH } from '../../Routes/RoutesInfo'
 import { NavLink } from 'react-router-dom'
 import { RegistrationSchema } from './validations/RegisterValidation'
 import { RegisterRequest } from '../../../bll/reducers/RegistrationPageReducer/registrationPage-saga'
-import { RegisterPageLoadingStatusType } from '../../../bll/reducers/RegistrationPageReducer/registrationPage-reducer'
 
 type OnSubmitValues = {
   email: string
@@ -41,11 +40,9 @@ const {
 
 export const RegistrationPage = () => {
   const dispatch = useAppDispatch()
-  const RegisterPageLoadingStatus = useSelector<AppRootStateType, RegisterPageLoadingStatusType>(
-    (state) => state.RegisterPage.loadingStatus
-  )
+  const RegisterPageLoadingStatus = useSelector((state: AppRootState) => state.RegisterPage.loadingStatus)
 
-  const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.RegisterPage.errorMsg)
+  const ErrorMsg = useSelector<AppRootState, string>((state) => state.RegisterPage.errorMsg)
 
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false)
 

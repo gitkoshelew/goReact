@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState: InitialRegisterStateType = {
-  loadingStatus: 'waitingForUser',
+const initialState: InitialRegisterState = {
+  loadingStatus: 'idle',
   errorMsg: '',
 }
 
@@ -21,7 +21,7 @@ const registerPageSlice = createSlice({
       state.errorMsg = action.payload.errorMsg
     },
     RegisterEnd(state) {
-      state.loadingStatus = 'waitingForUser'
+      state.loadingStatus = 'idle'
     },
   },
 })
@@ -30,9 +30,9 @@ export const RegisterPageReducer = registerPageSlice.reducer
 
 export const { reqRegisterStart, reqRegisterSuccess, reqRegisterError, RegisterEnd } = registerPageSlice.actions
 
-type InitialRegisterStateType = {
-  loadingStatus: RegisterPageLoadingStatusType
+type InitialRegisterState = {
+  loadingStatus: RegisterPageLoadingStatus
   errorMsg: string
 }
 
-export type RegisterPageLoadingStatusType = 'waitingForUser' | 'loading' | 'success' | 'error'
+export type RegisterPageLoadingStatus = 'idle' | 'loading' | 'success' | 'error'

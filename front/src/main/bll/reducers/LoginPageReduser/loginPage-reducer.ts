@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { LogInResponse } from '../../../dal/api_client/AuthService'
 
-const initialState: InitialStateLoginPageType = {
-  loadingStatus: 'waitingForUser',
+const initialState: InitialStateLoginPage = {
+  loadingStatus: 'idle',
   errorMsg: '',
   user: null,
 }
@@ -36,7 +36,7 @@ const loginPageSlice = createSlice({
       state.user = action.payload.user
     },
     reqMeError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = 'waitingForUser'
+      state.loadingStatus = 'idle'
       state.errorMsg = action.payload.errorMsg
     },
   },
@@ -55,11 +55,11 @@ export const {
 
 //types
 
-export type InitialStateLoginPageType = {
-  loadingStatus: LoginPageLoadingStatusType
+export type InitialStateLoginPage = {
+  loadingStatus: LoginPageLoadingStatus
   errorMsg: string
   user: User
 }
 
-export type LoginPageLoadingStatusType = 'waitingForUser' | 'loading' | 'success' | 'error'
+export type LoginPageLoadingStatus = 'idle' | 'loading' | 'success' | 'error'
 export type User = LogInResponse | null

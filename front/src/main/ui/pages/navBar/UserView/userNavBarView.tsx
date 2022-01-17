@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import s from './userNavBarView.module.scss'
-import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
+import { AppRootState, useAppDispatch } from '../../../../bll/store/store'
 import { LogOutRequest } from '../../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
 import Preloader from '../../../components/preloader/preloader'
@@ -14,7 +14,7 @@ export type UserNavBarViewPropsType = {
 
 export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
   const dispatch = useAppDispatch()
-  const loadingStatus = useSelector((state: AppRootStateType) => state.LoginPage.loadingStatus)
+  const loadingStatus = useSelector((state: AppRootState) => state.LoginPage.loadingStatus)
 
   const [isLogoutVisible, setIsLogoutVisible] = useState(false)
 

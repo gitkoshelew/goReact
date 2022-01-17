@@ -13,6 +13,7 @@ const {
   inputRegisterField,
   inputRegisterFieldError,
   inputRegisterTitle,
+  registerField_error__msg,
 } = s
 
 export const TextField = ({ label, inputType, inputMsgLabel, ...props }: any) => {
@@ -44,7 +45,7 @@ export const TextField = ({ label, inputType, inputMsgLabel, ...props }: any) =>
               {...props}
             />
           </div>
-          <ErrorMessage component="div" name={field.name} className={error__msg} />
+          <ErrorMessage component="div" name={field.name} className={registerField_error__msg} />
         </div>
       )}
     </>

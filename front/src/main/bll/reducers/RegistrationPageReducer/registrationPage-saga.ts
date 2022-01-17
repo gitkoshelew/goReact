@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects'
 import { AuthAPI, RegisterRequestUser } from '../../../dal/api_client/AuthService'
 import { RegisterEnd, reqRegisterError, reqRegisterStart, reqRegisterSuccess } from './registrationPage-reducer'
 
-export function* RegisterPageSagaWorker(action: RegistrationRequestType) {
+export function* RegisterPageSagaWorker(action: RegistrationRequest) {
   try {
     yield put(reqRegisterStart())
     yield call(AuthAPI.RegisterAPI, action.user)
@@ -20,4 +20,4 @@ export const RegisterRequest = (user: RegisterRequestUser) => ({
   user,
 })
 
-type RegistrationRequestType = ReturnType<typeof RegisterRequest>
+type RegistrationRequest = ReturnType<typeof RegisterRequest>

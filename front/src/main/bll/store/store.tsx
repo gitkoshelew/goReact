@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
   RegisterPage: RegisterPageReducer,
 })
 
-export type RootReducerType = typeof rootReducer
+export type RootReducer = typeof rootReducer
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -35,11 +35,11 @@ export const store = configureStore({
     }).prepend(sagaMiddleware),
 })
 
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootState = ReturnType<typeof rootReducer>
 
-export type AppDispatchType = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch
 
-export const useAppDispatch = () => useDispatch<AppDispatchType>()
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 //sagaWatcher
 sagaMiddleware.run(rootWatcher)

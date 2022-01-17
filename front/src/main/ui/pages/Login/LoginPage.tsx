@@ -2,7 +2,7 @@ import s from './Login.module.scss'
 import { Form, Formik } from 'formik'
 import { authenticationSchema } from './validations/LoginValidation'
 import { TextField } from '../../components/TextField/TextField'
-import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
+import { AppRootState, useAppDispatch } from '../../../bll/store/store'
 import { LoginRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
 import Preloader from '../../components/preloader/preloader'
@@ -27,9 +27,9 @@ const {
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch()
-  const LoginPageLoadingStatus = useSelector((state: AppRootStateType) => state.LoginPage.loadingStatus)
-  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
-  const ErrorMsg = useSelector((state: AppRootStateType) => state.LoginPage.errorMsg)
+  const LoginPageLoadingStatus = useSelector((state: AppRootState) => state.LoginPage.loadingStatus)
+  const userProfile = useSelector((state: AppRootState) => state.LoginPage.user)
+  const ErrorMsg = useSelector((state: AppRootState) => state.LoginPage.errorMsg)
 
   const [isPasswordOpen, setIsPasswordOpen] = useState(false)
 
