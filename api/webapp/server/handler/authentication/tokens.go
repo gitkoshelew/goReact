@@ -1,7 +1,9 @@
 package authentication
 
 import (
+	"errors"
 	"fmt"
+	"goReact/webapp/server/logging"
 	"log"
 	"net/http"
 	"os"
@@ -11,6 +13,17 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/twinj/uuid"
+)
+
+var (
+	// ErrUnexpectedSigningMethod ...
+	ErrUnexpectedSigningMethod = errors.New("unexpected signing method")
+)
+
+var (
+	// EmailSecretKey ...
+	EmailSecretKey = os.Getenv("EMAIL_CONFIRM_SECRET")
+	logger         = logging.GetLogger()
 )
 
 // Token ...
@@ -144,4 +157,55 @@ func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 		}, nil
 	}
 	return nil, err
+}
+
+// CreateCustomToken ...
+func CreateCustomToken(payload map[string]string, expireTime time.Duration, secretKey string) (string, error) {
+
+	claims := jwt.MapClaims{}
+	for key, element := range payload {
+		claims[key] = element
+	}
+	claims["exp"] = time.Now().Add(time.Minute * expireTime).Unix()
+
+	logger.Debugf("JWT.MapClaims created: %v", claims)
+
+	tk := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token, err := tk.SignedString([]byte(secretKey))
+
+	if err != nil {
+		logger.Debugf("Error during complete signed token creating. Err msg: %v", err)
+		return "", err
+	}
+	return token, nil
+}
+
+// ParseCustomToken ...
+func ParseCustomToken(tokenStr, secretKey string) (jwt.MapClaims, error) {
+	token, err := jwt.Parse(tokenStr,
+		func(token *jwt.Token) (interface{}, error) {
+			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				logger.Debugf("Unexpected signing method: %v", token.Header["alg"])
+				return nil, fmt.Errorf("%v. %v", ErrUnexpectedSigningMethod, token.Header["alg"])
+			}
+			return []byte(secretKey), nil
+		})
+	if err != nil {
+		logger.Debugf("Error during token parsing. Err msg: %v", err)
+		return nil, err
+	}
+
+	_, ok := token.Claims.(jwt.Claims)
+	if !ok && !token.Valid {
+		logger.Debugf("Error during jwt.Claims creating. Err msg: %v", err)
+		return nil, err
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok && !token.Valid {
+		logger.Debugf("Error during jwt.MapClaims creating. Err msg: %v", err)
+		return nil, err
+	}
+
+	return claims, nil
 }
