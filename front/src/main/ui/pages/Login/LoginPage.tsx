@@ -5,12 +5,11 @@ import { TextField } from '../../components/TextField/TextField'
 import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
 import { LoginRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
-import { LoginPageLoadingStatusType } from '../../../bll/reducers/LoginPageReduser/loginPage-reducer'
 import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
-import { LogInResponse, UserRequestData } from '../../../dal/api_client/AuthService'
-import { closedEye, openedEye } from '../../svgWrapper/LoginSwgWrapper'
+import { UserRequestData } from '../../../dal/api_client/AuthService'
+import { closedEye, openedEye } from '../../svgWrapper/LoginSvgWrapper'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../Routes/RoutesInfo'
@@ -28,16 +27,14 @@ const {
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch()
-  const LoginPageLoadingStatus = useSelector<AppRootStateType, LoginPageLoadingStatusType>(
-    (state) => state.LoginPage.loadingStatus
-  )
-  const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
-  const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.LoginPage.errorMsg)
+  const LoginPageLoadingStatus = useSelector((state: AppRootStateType) => state.LoginPage.loadingStatus)
+  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
+  const ErrorMsg = useSelector((state: AppRootStateType) => state.LoginPage.errorMsg)
 
-  const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false)
+  const [isPasswordOpen, setIsPasswordOpen] = useState(false)
 
   const showPasswordHandler = () => {
-    setIsPasswordOpen(!isPasswordOpen)
+    setIsPasswordOpen((currentValue) => !currentValue)
   }
 
   const errMsg = ErrorMsg && <LoginErrorMsg ErrorMsg={ErrorMsg} />

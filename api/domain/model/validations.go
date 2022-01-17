@@ -70,7 +70,7 @@ func IsRole(value interface{}) error {
 // Female  = "female"
 func IsSex(value interface{}) error {
 	s := value.(Sex)
-	if s == Male || s == Female {
+	if s == SexMale || s == SexFemale {
 		return nil
 	}
 	return errors.New("Allowed genders: 'male', 'female'")

@@ -8,11 +8,10 @@ import { SixthPage } from './SixthPage/SixthPage'
 import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
 import { MeRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
-import { LogInResponse } from '../../../dal/api_client/AuthService'
 
 export const Home = () => {
   const dispatch = useAppDispatch()
-  const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
+  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
 
   useEffect(() => {
     if ((userProfile === null && localStorage.getItem('token')) || localStorage.getItem('MockToken')) {

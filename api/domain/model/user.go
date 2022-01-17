@@ -40,8 +40,8 @@ type Sex string
 
 // Sex constants
 const (
-	Male   Sex = "male"
-	Female Sex = "female"
+	SexMale   Sex = "male"
+	SexFemale Sex = "female"
 )
 
 // Validate ...
@@ -62,14 +62,14 @@ func (u *User) Validate() error {
 	)
 }
 
-// NewUser creates User with encrypted password
-func (u *User) NewUser() error {
-	EncryptPassword, err := EncryptPassword(u.Password)
+// WithEncryptedPassword creates User with encrypted password
+func (u *User) WithEncryptedPassword() error {
+	EncryptedPassword, err := EncryptPassword(u.Password)
 	if err != nil {
 		return err
 	}
 
-	u.Password = EncryptPassword
+	u.Password = EncryptedPassword
 	return nil
 }
 

@@ -17,7 +17,7 @@
     .tabletComponentText {
       width: 67px;
       height: 22px;
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: $main-fonts;
       font-style: normal;
       font-weight: 500;
       font-size: 18px;
@@ -39,7 +39,7 @@
       border: none;
       width: 160px;
       color: $secondary-contrast-color;
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: $main-fonts;
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
@@ -51,7 +51,7 @@
       border: none;
       width: 160px;
       color: $secondary-contrast-color;
-      font-family: 'Barlow Condensed', sans-serif;
+      font-family: $main-fonts;
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
@@ -76,7 +76,7 @@
   p {
     width: 96px;
     height: 48px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;

@@ -3,7 +3,6 @@ import s from './userNavBarView.module.scss'
 import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
 import { LogOutRequest } from '../../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
-import { LoginPageLoadingStatusType } from '../../../../bll/reducers/LoginPageReduser/loginPage-reducer'
 import Preloader from '../../../components/preloader/preloader'
 import { LogInResponse } from '../../../../dal/api_client/AuthService'
 
@@ -15,9 +14,7 @@ export type UserNavBarViewPropsType = {
 
 export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
   const dispatch = useAppDispatch()
-  const loadingStatus = useSelector<AppRootStateType, LoginPageLoadingStatusType>(
-    (state) => state.LoginPage.loadingStatus
-  )
+  const loadingStatus = useSelector((state: AppRootStateType) => state.LoginPage.loadingStatus)
 
   const [isLogoutVisible, setIsLogoutVisible] = useState(false)
 
@@ -25,7 +22,7 @@ export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
     setIsLogoutVisible((currentValue) => !currentValue)
   }
 
-  const onLogoutHandler = () => {
+  const handleLogout = () => {
     dispatch(LogOutRequest())
     setIsLogoutVisible(false)
   }
@@ -47,7 +44,7 @@ export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
         <div className={userName}>{`${user.name} ${user.sName}`}</div>
       </div>
       {isLogoutVisible && (
-        <div onClick={onLogoutHandler} className={logoutField}>
+        <div onClick={handleLogout} className={logoutField}>
           Logout
         </div>
       )}

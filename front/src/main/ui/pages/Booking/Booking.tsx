@@ -6,17 +6,11 @@ import { BookingCalendar } from './BookingCalendar/BookingCalendar'
 import { BookingRoom } from './BookingRoom/BookingRoom'
 import { useSelector } from 'react-redux'
 import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
-import {
-  LoadingStatusBookingPickType,
-  OrderedRoomsType,
-} from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { Button } from '../../components/Button/Button'
-import { ProgressType } from '../../../bll/reducers/BookingRegFormReducer/BookingRegForm-reducer'
 import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
 import Preloader from '../../components/preloader/preloader'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
-import { IsRent } from '../../../dal/api_client/API'
 
 const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
 
@@ -59,9 +53,7 @@ export const Booking = () => {
     },
   })
 
-  const loadingStatus = useSelector<AppRootStateType, LoadingStatusBookingPickType>(
-    (state) => state.BookingRoomPick.loadingStatus
-  )
+  const loadingStatus = useSelector((state: AppRootStateType) => state.BookingRoomPick.loadingStatus)
 
   const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
   const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
@@ -71,12 +63,10 @@ export const Booking = () => {
     dispatch(BookingRoomPickSaga())
   }, [])
 
-  const progress = useSelector<AppRootStateType, ProgressType>((state) => state.BookingRegForm.progress)
-  const actualDay = useSelector<AppRootStateType, string | Date>((state) => state.BookingRoomPick.actualDay)
-  const isRentArr = useSelector<AppRootStateType, IsRent[]>((state) => state.BookingRoomPick.isRent)
-  const orderedRoomBasket = useSelector<AppRootStateType, OrderedRoomsType[]>(
-    (state) => state.BookingRoomPick.orderedRoomBasket
-  )
+  const progress = useSelector((state: AppRootStateType) => state.BookingRegForm.progress)
+  const actualDay = useSelector((state: AppRootStateType) => state.BookingRoomPick.actualDay)
+  const isRentArr = useSelector((state: AppRootStateType) => state.BookingRoomPick.isRent)
+  const orderedRoomBasket = useSelector((state: AppRootStateType) => state.BookingRoomPick.orderedRoomBasket)
 
   const isActiveBtn = progress === 'uploaded' && orderedRoomBasket.length !== 0
 

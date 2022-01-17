@@ -48,7 +48,7 @@ func NewUser(s *store.Store) httprouter.Handle {
 			DateOfBirth: dateOfBirth,
 		}
 
-		err := u.NewUser()
+		err := u.WithEncryptedPassword()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return

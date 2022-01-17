@@ -43,6 +43,7 @@ export const RoutesInfo = () => {
   const RegisterPageLoadingStatus = useSelector<AppRootStateType, RegisterPageLoadingStatusType>(
     (state) => state.RegisterPage.loadingStatus
   )
+  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
 
   const LoginWrapper = ({ children, user }: LoginWrapperType) => {
     return user ? <Navigate to={PATH.HOME} replace /> : children

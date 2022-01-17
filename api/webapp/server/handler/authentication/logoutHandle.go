@@ -17,8 +17,8 @@ func LogoutHandle(s *store.Store) httprouter.Handle {
 
 		_, err := ExtractTokenMetadata(r)
 		if err != nil {
+			w.WriteHeader(http.StatusUnauthorized)
 			s.Logger.Errorf("Unauthorized. Msg: %v", err)
-			http.Error(w, "You are unauthorized", http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("You are unauthorized. Err msg: %v", err)})
 			return
 		}
@@ -28,9 +28,10 @@ func LogoutHandle(s *store.Store) httprouter.Handle {
 			Value:    "",
 			HttpOnly: true,
 		}
+
+		w.WriteHeader(http.StatusOK)
 		w.Header().Add("Access-Token", "")
 		http.SetCookie(w, &c)
-		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response.Info{Messsage: "Successfully logged out"})
 	}
 }

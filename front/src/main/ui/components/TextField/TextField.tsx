@@ -8,7 +8,7 @@ const {
   inputField,
   inputFieldError,
   inputLabel,
-  errorMsg,
+  error__msg,
   registerDataField,
   inputRegisterField,
   inputRegisterFieldError,
@@ -30,7 +30,7 @@ export const TextField = ({ label, inputType, inputMsgLabel, ...props }: any) =>
             {...field}
             {...props}
           />
-          <ErrorMessage component="div" name={field.name} className={errorMsg} />
+          <ErrorMessage component="div" name={field.name} className={error__msg} />
         </div>
       )}
       {inputType === 'register' && (
