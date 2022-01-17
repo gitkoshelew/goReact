@@ -25,12 +25,7 @@ export const TextField = ({ label, inputType, inputMsgLabel, ...props }: any) =>
           <label htmlFor={field.name} className={inputLabel}>
             {label}
           </label>
-          <input
-            autocomplete="new-password"
-            className={meta.touched && meta.error ? inputFieldError : inputField}
-            {...field}
-            {...props}
-          />
+          <input className={meta.touched && meta.error ? inputFieldError : inputField} {...field} {...props} />
           <ErrorMessage component="div" name={field.name} className={error__msg} />
         </div>
       )}
@@ -39,7 +34,6 @@ export const TextField = ({ label, inputType, inputMsgLabel, ...props }: any) =>
           <div className={registerDataField}>
             <div>{inputMsgLabel}</div>
             <input
-              autocomplete="new-password"
               className={meta.touched && meta.error ? inputRegisterFieldError : inputRegisterField}
               {...field}
               {...props}
