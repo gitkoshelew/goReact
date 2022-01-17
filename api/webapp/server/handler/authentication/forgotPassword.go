@@ -58,7 +58,7 @@ func ForgotPassword(s *store.Store, m *service.Mail) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		m.Send(service.EmailConfirmation, endpoint, []string{u.Email})
+		m.Send(service.PassReset, endpoint, []string{u.Email})
 		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Messege sent = %s", u.Email)})
 	}
 }
