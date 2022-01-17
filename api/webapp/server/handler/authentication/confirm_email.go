@@ -28,7 +28,6 @@ func EmailConfirm(s *store.Store) httprouter.Handle {
 			}
 			return []byte(os.Getenv("EMAIL_CONFIRM_SECRET")), nil
 		})
-
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Link is expired. Errors msg: %v", err)
