@@ -44,7 +44,7 @@ export const TextField = ({ label, inputType, inputMsgLabel, ...props }: any) =>
               {...props}
             />
           </div>
-          <ErrorMessage component="div" name={field.name} className={errorMsg} />
+          <ErrorMessage component="div" name={field.name} className={error__msg} />
         </div>
       )}
     </>
