@@ -25,4 +25,8 @@ func (s *Server) configureRouter() {
 
 	s.router.Handle("GET", "/api/emailconfirm/:token", authentication.EmailConfirm(store.New(s.config)))
 
+	s.router.Handle("GET", "/api/forgotpassword", authentication.ForgotPassword(store.New(s.config), s.Mail))
+	s.router.Handle("GET", "/api/emailrestore/:token", authentication.СhekingLinkForRestorePassword(store.New(s.config)))
+	s.router.Handle("GET", "/api/passwordchange", authentication.ChangePassword(store.New(s.config)))
+
 }
