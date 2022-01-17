@@ -22,6 +22,7 @@ func PostUserHandle(s *store.Store) httprouter.Handle {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
 		}
 
 		u := model.User{
@@ -36,18 +37,11 @@ func PostUserHandle(s *store.Store) httprouter.Handle {
 			Address:     req.Address,
 			Phone:       req.Phone,
 			Photo:       req.Photo,
-			Verified:    req.Verified,
+			Verified:    false,
 			DateOfBirth: req.DateOfBirth,
 		}
-		err := u.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 
-		}
-
-		err = u.WithEncryptedPassword()
+		err := u.WithEncryptedPassword()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
