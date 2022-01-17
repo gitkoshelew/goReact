@@ -1,86 +1,25 @@
 package server
 
 import (
-	"goReact/webapp/server/handlers"
-	"goReact/webapp/server/handlers/account"
-	"goReact/webapp/server/handlers/authentication"
-	"goReact/webapp/server/handlers/booking"
-	"goReact/webapp/server/handlers/client"
-	"goReact/webapp/server/handlers/employee"
-	"goReact/webapp/server/handlers/hotel"
-	"goReact/webapp/server/handlers/middleware"
-	"goReact/webapp/server/handlers/pet"
-	"goReact/webapp/server/handlers/room"
-	"goReact/webapp/server/handlers/seat"
-	"goReact/webapp/server/handlers/user"
+	"goReact/domain/store"
+	"goReact/webapp/server/handler"
+	"goReact/webapp/server/handler/authentication"
+	"goReact/webapp/server/handler/middleware"
+	"goReact/webapp/server/handler/user"
 )
 
 func (s *Server) configureRouter() {
-	s.router.GlobalOPTIONS = handlers.CorsHandle()
 
-	s.router.Handle("GET", "/", handlers.HandleHomePage())
+	s.router.Handle("GET", "/", handler.HandleHomePage())
 
-	s.router.Handle("GET", "/private/whoami", middleware.Private(middleware.WhoAmI()))
-	s.router.Handle("GET", "/private/client", middleware.Private(middleware.ClientHome()))
-	s.router.Handle("GET", "/private/employee", middleware.Private(middleware.EmployeetHome()))
+	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(authentication.LoginHandle(store.New(s.config))))
 
-	s.router.Handle("POST", "/registration", authentication.RegistrationHandle())
-	s.router.Handle("POST", "/login", authentication.LoginHandle())
-	s.router.Handle("POST", "/logout", authentication.LogoutHandle())
-	s.router.Handle("POST", "/refresh", authentication.RefreshHandle())
-	s.router.Handle("POST", "/todo", authentication.TodoHandle())
+	s.router.Handle("POST", "/api/registration", authentication.RegistrationHandle(store.New(s.config)))
+	s.router.Handle("POST", "/api/logout", authentication.LogoutHandle(store.New(s.config)))
+	s.router.Handle("POST", "/api/refresh", authentication.RefreshHandle(store.New(s.config)))
+	s.router.Handle("POST", "/api/me", authentication.MeHandle(store.New(s.config)))
 
-	s.router.Handle("GET", "/api/accounts", account.GetAccountsHandle())
-	s.router.Handle("POST", "/api/account", account.PostAccountHandle())
-	s.router.Handle("PUT", "/api/account", account.PutAccountHandle())
-	s.router.Handle("GET", "/api/account/:id", account.GetAccountHandle())
-	s.router.Handle("DELETE", "/api/account/:id", account.DeleteAccountHandle())
-
-	s.router.Handle("GET", "/api/users", user.GetUsersHandle())
-	s.router.Handle("POST", "/api/user", user.PostUserHandle())
-	s.router.Handle("PUT", "/api/user", user.PutUserHandle())
-	s.router.Handle("GET", "/api/user/:id", user.GetUserHandle())
-	s.router.Handle("DELETE", "/api/user/:id", user.DeleteUserHandle())
-
-	s.router.Handle("GET", "/api/employees", employee.GetEmployeesHandle())
-	s.router.Handle("POST", "/api/employee", employee.PostEmployeesHandle())
-	s.router.Handle("PUT", "/api/employee", employee.PutEmployeesHandle())
-	s.router.Handle("GET", "/api/employee/:id", employee.GetEmployeeHandle())
-	s.router.Handle("DELETE", "/api/employee/:id", employee.DeleteEmployeeHandle())
-
-	s.router.Handle("GET", "/api/clients", client.GetClientsHandle())
-	s.router.Handle("POST", "/api/client", client.PostClientsHandle())
-	s.router.Handle("PUT", "/api/client", client.PutClientsHandle())
-	s.router.Handle("GET", "/api/client/:id", client.GetClientHandle())
-	s.router.Handle("DELETE", "/api/client/:id", client.DeleteClientHandle())
-
-	s.router.Handle("GET", "/api/pets", pet.GetPetsHandle())
-	s.router.Handle("POST", "/api/pet", pet.PostPetHandle())
-	s.router.Handle("PUT", "/api/pet", pet.PutPetHandle())
-	s.router.Handle("GET", "/api/pet/:id", pet.GetPetHandle())
-	s.router.Handle("DELETE", "/api/pet/:id", pet.DeletePetHandle())
-
-	s.router.Handle("GET", "/api/hotels", hotel.GetHotelsHandle())
-	s.router.Handle("POST", "/api/hotel", hotel.PostHotelHandle())
-	s.router.Handle("PUT", "/api/hotel", hotel.PutHotelHandle())
-	s.router.Handle("GET", "/api/hotel/:id", hotel.GetHotelHandle())
-	s.router.Handle("DELETE", "/api/hotel/:id", hotel.DeleteHotel())
-
-	s.router.Handle("GET", "/api/rooms", room.GetRoomsHandle())
-	s.router.Handle("POST", "/api/room", room.PostRoomHandle())
-	s.router.Handle("PUT", "/api/room", room.PutRoomHandle())
-	s.router.Handle("GET", "/api/room/:id", room.GetRoomHandle())
-	s.router.Handle("DELETE", "/api/room/:id", room.DeleteRoomHandle())
-
-	s.router.Handle("GET", "/api/seats", seat.GetSeatsHandle())
-	s.router.Handle("POST", "/api/seat", seat.PostSeatHandle())
-	s.router.Handle("PUT", "/api/seat", seat.PutSeatHandle())
-	s.router.Handle("GET", "/api/seat/:id", seat.GetSeatHandle())
-	s.router.Handle("DELETE", "/api/seat/:id", seat.DeleteSeatHandle())
-
-	s.router.Handle("GET", "/api/bookings", booking.GetBookingsHandle())
-	s.router.Handle("POST", "/api/booking", booking.PostBookingsHandle())
-	s.router.Handle("PUT", "/api/booking", booking.PutBookingsHandle())
-	s.router.Handle("GET", "/api/booking/:id", booking.GetBookingHandle())
-	s.router.Handle("DELETE", "/api/booking/:id", booking.DeleteBookingHandle())
+	s.router.Handle("GET", "/api/users", user.GetUsersHandle(store.New(s.config)))
+	s.router.Handle("POST", "/api/user", user.PostUserHandle(store.New(s.config)))
+	s.router.Handle("GET", "/api/user/:id", user.GetUserHandle(store.New(s.config)))
 }

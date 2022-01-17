@@ -1,14 +1,6 @@
 version: '3.9'
 
 services:
-    redis:
-        image: redis:alpine
-        container_name: "redis"
-        restart: unless-stopped
-        ports:
-            - ${REDIS_EXPOSE_PORT}:${REDIS_PORT}
-        networks:
-            - app_net
     postgresql_database:
         container_name: postgresql_database
         image: postgres:latest
@@ -26,7 +18,73 @@ services:
         volumes:
             - database-data:/var/lib/postgresql/data/
         networks:
-            - app_net
+            new:
+                aliases:
+                    - database
+
+    test_database:
+        container_name: test_database
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
+        ports:
+            - "6543:5432"
+        restart: unless-stopped
+        volumes:
+            - test-database:/var/lib/test-data/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    migrate:
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./migrations:/migrations
+
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@postgresql_database:5432/goreact?ss\
+                  lmode=disable",
+                "up"
+            ]
+        links:
+            - postgresql_database
+        depends_on:
+            - postgresql_database
+
+    test-migrate:
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./migrations:/migrations
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@test_database:5432/test_goreact?ssl\
+                  mode=disable",
+                "up"
+            ]
+        links:
+            - test_database
+        depends_on:
+            - test_database
 
     pgadmin:
         image: dpage/pgadmin4
@@ -37,11 +95,11 @@ services:
             - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
         ports:
             - "5050:80"
-        restart: always
+        restart: unless-stopped
         volumes:
             - pgadmin:/root/.pgadmin
         networks:
-            - app_net
+            - new
 
     rabbitmq:
         image: rabbitmq:3-management
@@ -58,13 +116,13 @@ services:
         volumes:
             - rabbitmq_data:/bitnami/rabbitmq/mnesia
         networks:
-            - app_net
+            - new
 
     goreact:
         build:
             context: ./api
         ports:
-            - "8080:8080"
+            - $SERVER_PORT:$SERVER_PORT
         depends_on:
             - postgresql_database
         env_file:
@@ -76,32 +134,19 @@ services:
             - SERVER_HOST=0.0.0.0
             - ENV=prod
         tty: true
-        networks:
-            - app_net
-
-    migrate:
-        container_name: migrates
-        image: "migrate/migrate:v4.4.0"
-        depends_on:
-            - postgresql_database
+        restart: on-failure
         volumes:
-            - "../migrations:/api/migrations"
-        command:
-            [
-                "-path",
-                "/api/migrations/",
-                "-database",
-                "postgres://postgresql_database/goreact?sslmode=disable&user=\
-                  user&password=userpass",
-                "up"
-            ]
+            - api:/api
         networks:
-            - app_net
+            - new
 
 networks:
-    app_net:
+    new:
         driver: bridge
 volumes:
+    test-database: null
+    api: null
+    test-database-data: null
     database-data: null
     pgadmin: null
     rabbitmq_data:

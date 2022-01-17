@@ -1,11 +1,11 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
-	"goReact/domain/store"
+	"goReact/domain/model"
 	"goReact/webapp"
 	"goReact/webapp/server"
-	"goReact/webapp/server/utils"
 	"log"
 	"path/filepath"
 
@@ -21,34 +21,43 @@ func main() {
 
 	config := &webapp.Config{}
 	config.NewConfig()
-	webapp.ConnectDb(config)
-	initAccountDb()
-
-	webapp.ConnectRedis(config)
+	initAccountDb(config)
 
 	s := server.New(config)
 
 	if err := s.Start(); err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 // initAccountDb hashes accounts password from  DB, that creates by ini.sql
-func initAccountDb() {
-	db := utils.HandlerDbConnection()
+func initAccountDb(c *webapp.Config) {
+	dataSourceName := c.PgDataSource()
+
+	log.Printf("Connecting to database via %#v", dataSourceName)
+	db, err := sql.Open("postgres", dataSourceName)
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
 	for i := 0; i < 6; i++ {
 
-		encryptedPassword, err := store.EncryptPassword(fmt.Sprintf("password"))
+		encryptedPassword, err := model.EncryptPassword(fmt.Sprintf("password"))
 		if err != nil {
-			log.Fatal(err)
+			log.Print(err)
 		}
 
 		result, err := db.Exec("UPDATE USERS set password = $1 WHERE id = $2",
 			encryptedPassword, i+1)
 		if err != nil {
-			panic(err)
+			log.Print(err)
 		}
-		log.Println("password ecnrypted")
+		log.Println("password encrypted")
 		log.Println(result.RowsAffected())
 	}
 

@@ -1,9 +1,8 @@
 package pethandlers
 
 import (
-	"fmt"
 	"goReact/domain/store"
-	"goReact/webapp/server/utils"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"text/template"
 
@@ -11,13 +10,21 @@ import (
 )
 
 // AllPetsHandler ...
-func AllPetsHandler() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func AllPetsHandler(s *store.Store) httprouter.Handle {
+	//db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
-		pets := []store.Pet{}
+		//pets := []model.Pet{}
 
-		rows, err := db.Query("select * from pet")
+		s.Open()
+		pets, err := s.Pet().GetAll()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+
+		/*rows, err := db.Query("select * from pet")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -25,15 +32,15 @@ func AllPetsHandler() httprouter.Handle {
 		defer rows.Close()
 
 		for rows.Next() {
-			p := store.Pet{}
-			err := rows.Scan(&p.PetID, &p.Name, &p.Type, &p.Weight, &p.Diesieses, &p.Owner.ClientID)
+			p := model.Pet{}
+			err := rows.Scan(&p.PetID, &p.Name, &p.Type, &p.Weight, &p.Diesieses, &p.Owner.UserID)
 			if err != nil {
 				fmt.Println(err)
 				continue
 			}
 			pets = append(pets, p)
 		}
-
+		*/
 		files := []string{
 			"/api/webapp/admin/tamplates/allPets.html",
 			"/api/webapp/admin/tamplates/base.html",

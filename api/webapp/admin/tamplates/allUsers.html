@@ -11,25 +11,33 @@
 <body class="d-flex flex-column h-100">
     <table class="table">
         <th>UserID</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Verified</th>
         <th>Name</th>
         <th>Surname</th>
         <th>MiddleName</th>
+        <th>Sex</th>
         <th>DateOfBirth</th>
         <th>Address</th>
         <th>Phone</th>
-        <th>Email</th>
+        <th>Photo</th>
+
 
         {{range . }}
         <tr>
             <td>{{.UserID}}</td>
+            <td>{{.Email}}</td>
+            <td>{{.Role}}</td>
+            <td>{{.Verified}}</td>
             <td>{{.Name}}</td>
             <td>{{.Surname}}</td>
             <td>{{.MiddleName}}</td>
+            <td>{{.Sex}}</td>
             <td>{{.DateOfBirth}}</td>
             <td>{{.Address}}</td>
             <td>{{.Phone}}</td>
-            <td>{{.Email}}</td>
-            <td>{{.Account}}</td>
+            <td>{{.Photo}}</td>
         </tr>
         {{end}}
 

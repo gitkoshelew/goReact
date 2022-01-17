@@ -1,9 +1,9 @@
 package employeehandlers
 
 import (
-	"fmt"
+	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/utils"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -12,34 +12,22 @@ import (
 )
 
 // GetEmployeeByID ...
-func GetEmployeeByID() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func GetEmployeeByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
-		employees := []store.Employee{}
+		employees := []model.Employee{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
-		rows, err := db.Query("select * from employee where id=$1", id)
+
+		s.Open()
+		employee, err := s.Employee().FindByID(id)
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
-		defer rows.Close()
 
-		for rows.Next() {
-			e := store.Employee{}
-			err := rows.Scan(&e.EmployeeID, &e.User.UserID, &e.Hotel.HotelID, &e.Position, &e.Role)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			employees = append(employees, e)
-		}
-
-		if len(employees) == 0 {
-			http.Error(w, "No employee with such id!", 400)
-			return
-		}
+		employees = append(employees, *employee)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allEmployee.html",

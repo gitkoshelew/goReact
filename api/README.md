@@ -8,72 +8,7 @@ or run docker-compose for developers
 4. Change password for app user
 `ALTER USER goreact_app WITH PASSWORD 'changeme';`
 5. Update password in `config.yaml`
-6. Run MIGRATES:
-`migrate -path api/migrations/ -database "postgres://localhost:8081/goreact?sslmode=disable&user=user&password=userpass" up`
-
-Endpoints info:
------------------------------------------------------------------------------
-POST    /registration - register a new User
-
-Request data:
-{
-    "email": string,            
-    "password": string,
-    "role": string,             NOT NULL # "client", "employee", "anonymous" #
-    "verified": bool,           NOT NULL
-    "name": string,             NOT NULL
-    "sName": string,            NOT NULL
-    "mName": string,            
-    "sex": string,              NOT NULL 
-    "birthDate": time.Time,     NOT NULL # format: "2111-01-01" #
-    "address": string,          
-    "phone": string,            NOT NULL
-    "photo": string             
-}
-
-Response data:
-
-STATUS 201:
-{
-    id: int
-}
-
-STATUS 400:
-http.Error - "Email already in use", "Bad request"
------------------------------------------------------------------------------
-POST    /login - login
-
-Request data:
- {
-		Email    string         NOT NULL
-		Password string         NOT NULL
-}
-
-Response data:
-
-STATUS 201:
-Cookie:
-{
-			Name:     "JWT",
-			Value:    tk.AccessToken,
-			HttpOnly: true,
-}
-Header: access_token
-JSON:
-{
-    "userId": int,
-    "email": string,
-    "role": string, 
-    "verified": bool,       
-    "name": string,       
-    "sName": string,          
-    "mName": string,            
-    "sex": string,
-    "birthDate": time.Time,     # format: "2111-01-01" #
-    "address": string,          
-    "phone": string,          
-    "photo": string             
-}
-
-STATUS 401:
-http.error: "Invalid login or password", "Bad request"
+6. Copy logs from container:
+`docker cp goreact_goreact_1:api/logs /logs`  
+7. Run APIs tests:
+`go test -v -race -timeout 30s ./...`

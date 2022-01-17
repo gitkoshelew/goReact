@@ -13,15 +13,12 @@
         <th>UserID</th>
         <th>HotelID</th>
         <th>Position</th>
-        <th>Role</th>
-
         {{range . }}
         <tr>
             <td>{{.EmployeeID}}</td>
             <td>{{.User.UserID}}</td>
             <td>{{.Hotel.HotelID}}</td>
             <td>{{.Position}}</td>
-            <td>{{.Role}}</td>
         </tr>
         {{end}}
 

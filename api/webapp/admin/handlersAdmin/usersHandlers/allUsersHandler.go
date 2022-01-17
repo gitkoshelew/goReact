@@ -1,9 +1,8 @@
 package usershandlers
 
 import (
-	"fmt"
 	"goReact/domain/store"
-	"goReact/webapp/server/utils"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"text/template"
 
@@ -11,27 +10,14 @@ import (
 )
 
 // AllUsersHandler ...
-func AllUsersHandler() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func AllUsersHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
-		users := []store.User{}
-
-		rows, err := db.Query("select * from users")
+		session.CheckSession(w, r)
+		s.Open()
+		users, err := s.User().GetAll()
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			u := store.User{}
-			err := rows.Scan(&u.UserID, &u.Name, &u.Surname, &u.MiddleName, &u.Email, &u.DateOfBirth, &u.Address, &u.Phone)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			users = append(users, u)
 		}
 
 		files := []string{

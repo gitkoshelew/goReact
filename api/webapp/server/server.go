@@ -1,26 +1,28 @@
 package server
 
 import (
+	"goReact/domain/store"
 	"goReact/webapp"
-	"log"
+	"goReact/webapp/server/logging"
 	"net/http"
-	"os"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
 )
 
 // Server ...
 type Server struct {
 	config *webapp.Config
-	logger *log.Logger
+	logger *logging.Logger
 	router *httprouter.Router
+	Store  *store.Store
 }
 
 // New ...
 func New(config *webapp.Config) *Server {
 	return &Server{
 		config: config,
-		logger: log.New(os.Stdout, "http: ", log.Ldate|log.Ltime|log.Lmsgprefix),
+		logger: logging.GetLogger(),
 		router: httprouter.New(),
 	}
 }
@@ -28,12 +30,34 @@ func New(config *webapp.Config) *Server {
 // Start ...
 func (s *Server) Start() error {
 
+	s.logger.Info("Router starts ...")
 	s.configureRouter()
 
+	s.logger.Info("Admin router starts ...")
 	s.configureRoutesAdmin()
 
-	s.logger.Printf("Server starting ...")
-	s.logger.Printf(s.config.ServerInfo())
+	s.logger.Info("Store starts ...")
+	if err := s.configureStore(); err != nil {
+		s.logger.Errorf("Error while configure store. ERR MSG: %s", err.Error())
+		return err
+	}
 
-	return http.ListenAndServe(s.config.ServerAddress(), s.router)
+	s.logger.Infof("Server starts at %s ...", s.config.ServerInfo())
+	CORS := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedMethods: []string{
+			http.MethodHead,
+			http.MethodGet,
+			http.MethodPost,
+			http.MethodPut,
+			http.MethodPatch,
+			http.MethodDelete,
+		},
+		AllowedHeaders:   []string{"*"},
+		AllowCredentials: true,
+		ExposedHeaders:   []string{"Access-Token"},
+	})
+
+	handler := CORS.Handler(s.router)
+	return http.ListenAndServe(s.config.ServerAddress(), handler)
 }

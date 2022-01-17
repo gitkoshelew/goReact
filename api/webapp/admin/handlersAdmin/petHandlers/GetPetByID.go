@@ -1,9 +1,9 @@
 package pethandlers
 
 import (
-	"fmt"
+	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/utils"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -12,34 +12,21 @@ import (
 )
 
 // GetPetByID ...
-func GetPetByID() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func GetPetByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
-		pets := []store.Pet{}
+		pets := []model.Pet{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
-		rows, err := db.Query("select * from pet where id=$1", id)
+		s.Open()
+		pet, err := s.Pet().FindByID(id)
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
-		defer rows.Close()
 
-		for rows.Next() {
-			p := store.Pet{}
-			err := rows.Scan(&p.PetID, &p.Name, &p.Type, &p.Weight, &p.Diesieses, &p.Owner.ClientID)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			pets = append(pets, p)
-		}
-
-		if len(pets) == 0 {
-			http.Error(w, "No pet with such id!", 400)
-			return
-		}
+		pets = append(pets, *pet)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allPets.html",

@@ -1,9 +1,9 @@
 package roomhandlers
 
 import (
-	"fmt"
+	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/utils"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -12,34 +12,20 @@ import (
 )
 
 // GetRoomByID ...
-func GetRoomByID() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func GetRoomByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
-		rooms := []store.Room{}
+		rooms := []model.Room{}
 		id, _ := strconv.Atoi(ps.ByName("id"))
 
-		rows, err := db.Query("select * from room where id=$1", id)
+		s.Open()
+		room, err := s.Room().FindByID(id)
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
-		defer rows.Close()
-
-		for rows.Next() {
-			r := store.Room{}
-			err := rows.Scan(&r.RoomID, &r.RoomNumber, &r.PetType, &r.Hotel.HotelID)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			rooms = append(rooms, r)
-		}
-
-		if len(rooms) == 0 {
-			http.Error(w, "No room with such id!", 400)
-			return
-		}
+		rooms = append(rooms, *room)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allRooms.html",

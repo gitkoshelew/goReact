@@ -1,9 +1,9 @@
 package hotelhandlers
 
 import (
-	"fmt"
+	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/utils"
+	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -12,34 +12,22 @@ import (
 )
 
 // GetHotelByID ...
-func GetHotelByID() httprouter.Handle {
-	db := utils.HandlerDbConnection()
+func GetHotelByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session.CheckSession(w, r)
 
-		hotels := []store.Hotel{}
+		hotels := []model.Hotel{}
 
 		id, _ := strconv.Atoi(ps.ByName("id"))
-		rows, err := db.Query("select * from hotel where id=$1", id)
+
+		s.Open()
+		hotel, err := s.Hotel().FindByID(id)
 		if err != nil {
-			fmt.Println(err)
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
-		defer rows.Close()
 
-		for rows.Next() {
-			h := store.Hotel{}
-			err := rows.Scan(&h.HotelID, &h.Name, &h.Address)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			hotels = append(hotels, h)
-		}
-
-		if len(hotels) == 0 {
-			http.Error(w, "No hotel with such id!", 400)
-			return
-		}
+		hotels = append(hotels, *hotel)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allHotels.html",
