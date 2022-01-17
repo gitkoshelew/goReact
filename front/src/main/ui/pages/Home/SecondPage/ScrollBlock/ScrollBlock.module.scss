@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .scrollBlock {
   align-items: center;
   position: relative;
@@ -20,7 +22,7 @@
     transform: rotate(-90deg);
     width: 41px;
     height: 19px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;

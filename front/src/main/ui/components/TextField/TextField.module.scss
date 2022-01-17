@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+
 .inputTitle {
   display: flex;
   align-items: center;
@@ -7,31 +8,28 @@
   margin: 30px auto;
 
   .inputLabel {
-    margin: 0 0 15px 0;
+    margin-bottom: 15px;
     font-weight: 500;
     font-size: 20px;
-    color:$secondary-text-color;
+    color: $secondary-text-color;
   }
 
   .inputField {
     width: 250px;
     height: 30px;
     font-size: 20px;
-    margin:5px;
+    margin: 5px;
     border-radius: 12px;
   }
+
   .inputFieldError {
-    width: 250px;
-    height: 30px;
-    margin:5px;
-    font-size: 20px;
-    border-radius: 12px;
+    @extend .inputField;
     border: none;
     outline: 3px solid red;
   }
 
-  .errorMsg{
-    color:red;
+  .error__msg {
+    color: red;
     font-weight: 600;
   }
 }
