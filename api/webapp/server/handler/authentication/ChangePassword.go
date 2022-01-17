@@ -24,16 +24,6 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 			return
 		}
 
-
-		//todo
-		/*AccessDetails, err := ExtractTokenMetadata(r)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Can't. Errors msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
-*/
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -42,7 +32,6 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		//user, err := s.User().FindByID(int(AccessDetails.UserID))
 		user, err := s.User().FindByEmail(req.Email)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -50,12 +39,17 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-		fmt.Print("1user.Password reqest  " ,req.Password)
+		fmt.Print("//1user.Password reqest  -", req.Password)//1
+		fmt.Print("   ///2user.Password 2  -", req.Password)//2
 		user.Password = req.Password
-		fmt.Print("   2user.Password 2" ,req.Password)
-		user.WithEncryptedPassword()
-		fmt.Println("   3user.Password ENCRYPTED  " ,user.Password)
-		
+		/*err = user.WithEncryptedPassword()
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
+		}
+		fmt.Println("   ///3user.Password ENCRYPTED-  ", user.Password)//3*/
 
 		err = s.User().Update(user)
 		if err != nil {

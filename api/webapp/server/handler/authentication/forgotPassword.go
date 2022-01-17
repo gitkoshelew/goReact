@@ -15,7 +15,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// Forgot pass ...
+// ForgotPassword pass ...
 func ForgotPassword(s *store.Store, m *service.Mail) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -52,7 +52,7 @@ func ForgotPassword(s *store.Store, m *service.Mail) httprouter.Handle {
 
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Error while email confirmation endpoint creating. Err msg: %v", err)
+			s.Logger.Errorf("Error while password reset endpoint creating. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
