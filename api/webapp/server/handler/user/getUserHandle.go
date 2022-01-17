@@ -20,6 +20,7 @@ func GetUserHandle(s *store.Store) httprouter.Handle {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
 		}
 
 		err = s.Open()

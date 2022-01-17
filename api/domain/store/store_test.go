@@ -1,20 +1,24 @@
 package store_test
 
 import (
-	"os"
+	"goReact/domain/store"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var (
-	host, port, dbName, user, password, sslMode string
+	host     = "localhost"
+	dbName   = "test_goreact"
+	user     = "user"
+	password = "userpass"
+	port     = "6543"
+	sslMode  = "disable"
 )
 
-func TestMain(m *testing.M) {
-
-	host = os.Getenv("TEST_POSTGRES_HOST")
-	dbName = os.Getenv("TEST_POSTGRES_DB")
-	user = os.Getenv("TEST_POSTGRES_USER")
-	password = os.Getenv("TEST_POSTGRES_PASSWORD")
-	port = os.Getenv("TEST_POSTGRES_PORT")
-	sslMode = os.Getenv("TEST_POSTGRES_SSLMODE")
+func TestStore_Open(t *testing.T) {
+	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	err := s.Open()
+	assert.NoError(t, err)
+	assert.NotNil(t, s)
 }

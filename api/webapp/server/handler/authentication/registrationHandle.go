@@ -26,6 +26,7 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
 		}
 
 		u := model.User{
@@ -43,15 +44,8 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 			Verified:    false,
 			DateOfBirth: req.DateOfBirth,
 		}
-		err := u.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
 
-		err = u.WithEncryptedPassword()
+		err := u.WithEncryptedPassword()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)

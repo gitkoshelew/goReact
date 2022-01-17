@@ -34,7 +34,7 @@ services:
             - POSTGRES_HOST=${TEST_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
         ports:
-            - "6543:5432"
+            - '6543:5432'
         restart: unless-stopped
         volumes:
             - test-database:/var/lib/test-data/data/
@@ -146,7 +146,6 @@ networks:
 volumes:
     test-database: null
     api: null
-    test-database-data: null
     database-data: null
     pgadmin: null
     rabbitmq_data:
