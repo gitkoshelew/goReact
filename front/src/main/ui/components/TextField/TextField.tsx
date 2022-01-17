@@ -12,7 +12,7 @@ export const TextField = ({ label, ...props }: any) => {
       <label htmlFor={field.name} className={inputLabel}>
         {label}
       </label>
-      <input className={meta.touched && meta.error ? inputFieldError : inputField} {...field} />
+      <input className={meta.touched && meta.error ? inputFieldError : inputField} {...field} {...props} />
       <ErrorMessage component="div" name={field.name} className={error__msg} />
     </div>
   )

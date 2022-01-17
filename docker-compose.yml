@@ -52,14 +52,14 @@ services:
             - ./migrations:/migrations
 
         command:
-            [
-                "-path",
-                "/migrations",
-                "-database",
-                "postgres://user:userpass@postgresql_database:5432/goreact?ss\
+          [
+                  "-path",
+                  "/migrations",
+                  "-database",
+                  "postgres://user:userpass@postgresql_database:5432/goreact?ss\
                   lmode=disable",
-                "up"
-            ]
+                  "up"
+          ]
         links:
             - postgresql_database
         depends_on:
@@ -73,14 +73,14 @@ services:
         volumes:
             - ./migrations:/migrations
         command:
-            [
-                "-path",
-                "/migrations",
-                "-database",
-                "postgres://user:userpass@test_database:5432/test_goreact?ssl\
+          [
+                  "-path",
+                  "/migrations",
+                  "-database",
+                  "postgres://user:userpass@test_database:5432/test_goreact?ssl\
                   mode=disable",
-                "up"
-            ]
+                  "up"
+          ]
         links:
             - test_database
         depends_on:

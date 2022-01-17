@@ -70,7 +70,7 @@
     @media (min-width: 1144px) {
       top: -250px;
       left: 0;
-      z-index: 10;
+      z-index: $middle-z-index-priority;
     }
     @media (min-width: 1250px) {
       top: -325px;

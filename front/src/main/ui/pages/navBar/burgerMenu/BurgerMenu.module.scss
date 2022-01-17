@@ -5,7 +5,7 @@
   position: relative;
   width: 30px;
   height: 20px;
-  z-index: 100;
+  z-index: $height-z-index-priority;
   @media (min-width: 1144px) {
     display: none;
   }
@@ -57,7 +57,7 @@
   position: relative;
   width: 30px;
   height: 20px;
-  z-index: 100;
+  z-index: $height-z-index-priority;
   @media (min-width: 1144px) {
     display: none;
   }
