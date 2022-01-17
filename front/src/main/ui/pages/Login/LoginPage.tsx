@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
-import { LogInResponse, UserRequestData } from '../../../dal/api_client/AuthService'
+import { UserRequestData } from '../../../dal/api_client/AuthService'
 import { closedEye, openedEye } from '../../svgWrapper/LoginSvgWrapper'
 import { useState } from 'react'
 
@@ -23,7 +23,7 @@ export const LoginPage = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState(false)
 
   const showPasswordHandler = () => {
-    setIsPasswordOpen(!isPasswordOpen)
+    setIsPasswordOpen((currentValue) => !currentValue)
   }
 
   const errMsg = ErrorMsg && <LoginErrorMsg ErrorMsg={ErrorMsg} />
