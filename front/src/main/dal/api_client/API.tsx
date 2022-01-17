@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export type IsRent = { id: string; firstRoom: boolean; secondRoom: boolean }
 
-const API_URL = 'http://localhost:8080/'
+export const API_URL = process.env.REACT_APP_API_LINK
 
 export const $api = axios.create({
   withCredentials: true,
