@@ -17,7 +17,7 @@ var (
 )
 
 func TestStore_Open(t *testing.T) {
-	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	s, _ := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	err := s.Open()
 	assert.NoError(t, err)
 	assert.NotNil(t, s)

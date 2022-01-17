@@ -135,7 +135,7 @@ func (r *UserRepository) Delete(id int) error {
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		return nil
+		return err
 	}
 
 	if rowsAffected < 1 {

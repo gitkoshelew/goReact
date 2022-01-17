@@ -9,10 +9,8 @@ import (
 )
 
 func TestUserRepository_Create(t *testing.T) {
-	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(func() {
-		s.Db.Exec("TRUNCATE users CASCADE")
-	})
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
 
 	u, err := s.User().Create(model.TestUser())
 	assert.NoError(t, err)
@@ -20,10 +18,8 @@ func TestUserRepository_Create(t *testing.T) {
 }
 
 func TestUserRepository_Delete(t *testing.T) {
-	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(func() {
-		s.Db.Exec("TRUNCATE users CASCADE")
-	})
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
 
 	id := -1
 
@@ -39,10 +35,8 @@ func TestUserRepository_Delete(t *testing.T) {
 }
 
 func TestUserRepository_FindByEmail(t *testing.T) {
-	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(func() {
-		s.Db.Exec("TRUNCATE users CASCADE")
-	})
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
 
 	t.Run("Invalid email", func(t *testing.T) {
 		u, err := s.User().FindByEmail("invalid@example.org")
@@ -62,10 +56,8 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 }
 
 func TestUserRepository_FindByID(t *testing.T) {
-	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(func() {
-		s.Db.Exec("TRUNCATE users CASCADE")
-	})
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
 
 	t.Run("Invalid ID", func(t *testing.T) {
 		u, err := s.User().FindByID(-1)
@@ -88,10 +80,8 @@ func TestUserRepository_FindByID(t *testing.T) {
 }
 
 func TestUserRepository_GetAll(t *testing.T) {
-	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(func() {
-		s.Db.Exec("TRUNCATE users CASCADE")
-	})
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
 
 	u, err := s.User().GetAll()
 
@@ -100,10 +90,8 @@ func TestUserRepository_GetAll(t *testing.T) {
 }
 
 func TestUserRepository_VerifyEmail(t *testing.T) {
-	s := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(func() {
-		s.Db.Exec("TRUNCATE users CASCADE")
-	})
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
 
 	t.Run("Invalid user ID", func(t *testing.T) {
 		err := s.User().VerifyEmail(-1)
