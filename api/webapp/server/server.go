@@ -33,17 +33,17 @@ func New(config *webapp.Config) *Server {
 // Start ...
 func (s *Server) Start() error {
 
-	s.logger.Info("Router starts ...")
 	s.configureRouter()
+	s.logger.Info("Router starts successful")
 
-	s.logger.Info("Admin router starts ...")
 	s.configureRoutesAdmin()
+	s.logger.Info("Admin router starts successful")
 
-	s.logger.Info("Store starts ...")
 	if err := s.configureStore(); err != nil {
 		s.logger.Errorf("Error while configure store. ERR MSG: %s", err.Error())
 		return err
 	}
+	s.logger.Info("Store starts successful")
 
 	s.logger.Infof("Server starts at %s ...", s.config.ServerInfo())
 	CORS := cors.New(cors.Options{
