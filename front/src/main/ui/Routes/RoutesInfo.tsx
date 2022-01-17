@@ -9,6 +9,15 @@ import { Room } from '../pages/Room/Room'
 import { Booking } from '../pages/Booking/Booking'
 import { Service } from '../pages/Service/Service'
 import { Basket } from '../pages/Basket/Basket'
+import { useSelector } from 'react-redux'
+import { AppRootStateType } from '../../bll/store/store'
+import { LogInResponse } from '../../dal/api_client/AuthService'
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
+
+type LoginWrapperType = {
+  children: ReactJSXElement
+  user: LogInResponse | null
+}
 
 export const PATH = {
   HOME: '/home',
@@ -23,6 +32,11 @@ export const PATH = {
 }
 
 export const RoutesInfo = () => {
+  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
+
+  const LoginWrapper = ({ children, user }: LoginWrapperType) => {
+    return user ? <Navigate to={PATH.HOME} replace /> : children
+  }
   return (
     <div>
       <Routes>
@@ -30,7 +44,14 @@ export const RoutesInfo = () => {
         <Route path={PATH.HOME} element={<Home />} />
         <Route path={PATH.HOTELS} element={<Hotels />} />
         <Route path={PATH.ABOUT_US} element={<AboutUs />} />
-        <Route path={PATH.LOGIN} element={<LoginPage />} />
+        <Route
+          path={PATH.LOGIN}
+          element={
+            <LoginWrapper user={userProfile}>
+              <LoginPage />
+            </LoginWrapper>
+          }
+        />
         <Route path={PATH.GALLERY} element={<Gallery />} />
         <Route path={PATH.ROOM} element={<Room />} />
         <Route path={PATH.BOOKING} element={<Booking />} />

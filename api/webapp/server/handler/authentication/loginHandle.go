@@ -61,7 +61,7 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 
 		w.WriteHeader(http.StatusOK)
 		http.SetCookie(w, &c)
-		w.Header().Add("Access-Token", tk.AccessToken)
+		w.Header().Set("Access-Token", tk.AccessToken)
 		json.NewEncoder(w).Encode(user)
 	})
 }

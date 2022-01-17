@@ -7,12 +7,19 @@ import { takeEvery } from 'redux-saga/effects'
 import { BookingUploadPetImgSagaWorker } from '../reducers/BookingRegFormReducer/BookindRegForm-saga'
 import { BookingRoomPickReducer } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { BookingRoomPickSagaWorker } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
+import { LoginPageReducer } from '../reducers/LoginPageReduser/loginPage-reducer'
+import {
+  LoginPageLoginSagaWorker,
+  LoginPageLogoutSagaWorker,
+  LoginPageMeRequestSagaWorker,
+} from '../reducers/LoginPageReduser/loginPage-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
   BookingRegForm: BookingRegFormReducer,
   BookingRoomPick: BookingRoomPickReducer,
+  LoginPage: LoginPageReducer,
 })
 
 export type RootReducerType = typeof rootReducer
@@ -37,4 +44,7 @@ sagaMiddleware.run(rootWatcher)
 function* rootWatcher() {
   yield takeEvery('BOOKING_REG_FORM/BOOKING_PET_IMG_UPLOAD', BookingUploadPetImgSagaWorker)
   yield takeEvery('BOOKING_ROOM_PICK/NEW_IS_RENT_ROOMS_FOR_CALENDAR', BookingRoomPickSagaWorker)
+  yield takeEvery('LOGIN_PAGE/LOGIN_SAGA', LoginPageLoginSagaWorker)
+  yield takeEvery('LOGIN_PAGE/LOGOUT_SAGA', LoginPageLogoutSagaWorker)
+  yield takeEvery('LOGIN_PAGE/ME_SAGA', LoginPageMeRequestSagaWorker)
 }

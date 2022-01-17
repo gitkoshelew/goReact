@@ -50,7 +50,7 @@
         font-weight: 600;
         font-size: 35px;
         color: $main-text-color;
-        z-index: 3;
+        z-index: $low-z-index-priority;
         @media (min-width: 1144px) {
           margin: 0;
         }

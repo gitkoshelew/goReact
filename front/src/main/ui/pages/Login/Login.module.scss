@@ -21,18 +21,18 @@
     font-size: 20px;
     line-height: 25px;
   }
-  .sendReqBtn {
+  .sendReqBtn{
     width: 60px;
     height: 30px;
     border-radius: 5px;
-    background-color: $main-contrast-color;
-    color: $main-background-color;
+    background-color:$main-contrast-color ;
+    color:$main-background-color
   }
-  .sendReqErrorBtn {
+  .sendReqErrorBtn{
     width: 60px;
     height: 30px;
     border-radius: 5px;
-    background-color: $secondary-text-color;
-    color: $main-background-color;
+    background-color:$secondary-text-color ;
+    color:$main-background-color
   }
 }
