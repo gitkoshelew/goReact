@@ -18,7 +18,7 @@
   .mainText {
     width: 90%;
     height: 90px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     font-style: normal;
     font-weight: 600;
     font-size: 34px;
@@ -31,7 +31,7 @@
     white-space: nowrap;
     display: none;
     align-items: center;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;

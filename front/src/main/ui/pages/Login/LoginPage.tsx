@@ -5,7 +5,6 @@ import { TextField } from '../../components/TextField/TextField'
 import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
 import { LoginRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
-import { LoginPageLoadingStatusType } from '../../../bll/reducers/LoginPageReduser/loginPage-reducer'
 import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
@@ -17,11 +16,9 @@ const { authenticationForm, authenticationTitle, sendReqBtn, sendReqErrorBtn, pa
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch()
-  const LoginPageLoadingStatus = useSelector<AppRootStateType, LoginPageLoadingStatusType>(
-    (state) => state.LoginPage.loadingStatus
-  )
-  const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
-  const ErrorMsg = useSelector<AppRootStateType, string>((state) => state.LoginPage.errorMsg)
+  const LoginPageLoadingStatus = useSelector((state: AppRootStateType) => state.LoginPage.loadingStatus)
+  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
+  const ErrorMsg = useSelector((state: AppRootStateType) => state.LoginPage.errorMsg)
 
   const [isPasswordOpen, setIsPasswordOpen] = useState(false)
 

@@ -32,7 +32,7 @@ export const PATH = {
 }
 
 export const RoutesInfo = () => {
-  const userProfile = useSelector<AppRootStateType, LogInResponse | null>((state) => state.LoginPage.user)
+  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
 
   const LoginWrapper = ({ children, user }: LoginWrapperType) => {
     return user ? <Navigate to={PATH.HOME} replace /> : children

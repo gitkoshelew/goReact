@@ -15,7 +15,7 @@
   .authenticationTitle {
     text-align: center;
     margin: 0 auto;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     color: $main-text-color;
     font-weight: 600;
     font-size: 20px;
@@ -36,14 +36,14 @@
     width: 60px;
     height: 30px;
     border-radius: 5px;
-    background-color: $main-contrast-color;
-    color: $main-background-color;
+    background-color:$main-contrast-color ;
+    color:$main-background-color
   }
-  .sendReqErrorBtn {
+  .sendReqErrorBtn{
     width: 60px;
     height: 30px;
     border-radius: 5px;
-    background-color: $secondary-text-color;
-    color: $main-background-color;
+    background-color:$secondary-text-color ;
+    color:$main-background-color
   }
 }

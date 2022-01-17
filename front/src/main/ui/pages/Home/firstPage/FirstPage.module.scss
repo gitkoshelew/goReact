@@ -26,7 +26,7 @@
       .firstPageLinkText {
         width: 121px;
         height: 22px;
-        font-family: 'Barlow Condensed', sans-serif;
+        font-family: $main-fonts;
         color: $main-contrast-color;
         font-weight: 500;
         font-style: normal;
@@ -46,7 +46,7 @@
         width: 80%;
         height: 106px;
         margin: 40px auto 0 auto;
-        font-family: 'Barlow Condensed', sans-serif;
+        font-family: $main-fonts;
         font-weight: 600;
         font-size: 35px;
         color: $main-text-color;
@@ -60,7 +60,7 @@
         margin: 25px auto 0 auto;
         width: 80%;
         height: 66px;
-        font-family: 'Barlow Condensed', sans-serif;
+        font-family: $main-fonts;
         font-style: normal;
         font-weight: normal;
         font-size: 16px;
