@@ -62,7 +62,7 @@
         margin-left: 20px;
 
         .userFeedbackName {
-          font-family: 'Barlow Condensed', sans-serif;
+          font-family: $main-fonts;
           font-style: normal;
           font-weight: 500;
           font-size: 18px;
@@ -78,7 +78,7 @@
         }
 
         .userFeedBackNationality {
-          font-family: 'Barlow Condensed', sans-serif;
+          font-family: $main-fonts;
           font-style: normal;
           font-weight: 500;
           font-size: 16px;
