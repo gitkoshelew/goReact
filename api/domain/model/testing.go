@@ -1,12 +1,11 @@
 package model
 
 import (
-	"testing"
 	"time"
 )
 
 // TestUser ...
-func TestUser(t *testing.T) *User {
+func TestUser() *User {
 	return &User{
 		Email:       "email@example.org",
 		Password:    "password",
@@ -43,11 +42,11 @@ func TestRoom() *Room {
 	}
 }
 
-func TestEmployee() *Employee{
+func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,
-		User: *TestUser(),
-		Hotel: *TestHotel(),
-		Position: OwnerPosition,
+		User:       *TestUser(),
+		Hotel:      *TestHotel(),
+		Position:   OwnerPosition,
 	}
 }

@@ -85,8 +85,7 @@ func IsPetType(value interface{}) error {
 	if s == "cat" || s == "dog" {
 		return nil
 	}
-<<<<<<< HEAD
-	return errors.New("Allowed pet types: 'PetTypeCat', 'PetTypeDog'")
+	return errors.New("allowed pet types: 'PetTypeCat', 'PetTypeDog'")
 }
 
 // IsPetType checks if string matchs to a Pet types of Pets
@@ -97,8 +96,5 @@ func IsEmployeePosition(value interface{}) error {
 	if s == ManagerPosition || s == EmployeePosition || s == OwnerPosition || s == AdminPosition {
 		return nil
 	}
-	return errors.New("fllowed pet types: 'ManagerPosition', 'EmployeePosition' ,'OwnerPosition','AdminPosition'")
-=======
-	return errors.New("allowed pet types: 'PetTypeCat', 'PetTypeDog'")
->>>>>>> test-hotel/room
+	return errors.New("allowed pet types: 'ManagerPosition', 'EmployeePosition' ,'OwnerPosition','AdminPosition'")
 }
