@@ -14,7 +14,7 @@ export type BtnPropsType = {
    */
   isActive?: boolean
   /**
-   * Optional click handler
+   * Click handler
    */
   onClick?: () => void
 }
