@@ -46,7 +46,9 @@ func ForgotPassword(s *store.Store, m *service.Mail) httprouter.Handle {
 
 		epClaims := jwt.MapClaims{}
 		epClaims["user_id"] = u.UserID
+		epClaims["user_email"] = u.Email
 		epClaims["exp"] = time.Now().Add(time.Minute * 60).Unix()
+		
 		at := jwt.NewWithClaims(jwt.SigningMethodHS256, epClaims)
 		endpoint, err := at.SignedString([]byte(os.Getenv("RESTORE_PASSWORD_SECRET")))
 
