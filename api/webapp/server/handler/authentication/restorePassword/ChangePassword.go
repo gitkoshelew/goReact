@@ -39,18 +39,8 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-		fmt.Print("//1user.Password reqest  -", req.Password)//1
-		fmt.Print("   ///2user.Password 2  -", req.Password)//2
 		user.Password = req.Password
-		/*err = user.WithEncryptedPassword()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
-		fmt.Println("   ///3user.Password ENCRYPTED-  ", user.Password)//3*/
-
+	
 		err = s.User().PasswordChange(user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
