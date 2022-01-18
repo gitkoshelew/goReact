@@ -12,7 +12,7 @@ func TestUserRepository_Create(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 
-	u, err := s.User().Create(model.TestUser(t))
+	u, err := s.User().Create(model.TestUser())
 	assert.NoError(t, err)
 	assert.NotNil(t, u)
 }
@@ -26,7 +26,7 @@ func TestUserRepository_Delete(t *testing.T) {
 	err := s.User().Delete(id)
 	assert.Error(t, err)
 
-	u := model.TestUser(t)
+	u := model.TestUser()
 	u.UserID = id
 
 	_, err = s.User().Create(u)
@@ -41,16 +41,20 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 
 	email := "email@example.org"
 
-	_, err := s.User().FindByEmail(email)
-	assert.Error(t, err)
+	t.Run("FindByEmail: Invalid email", func(t *testing.T) {
+		_, err := s.User().FindByEmail(email)
+		assert.Error(t, err)
+	})
 
-	u := model.TestUser(t)
+	u := model.TestUser()
 	u.Email = email
 
-	u, err = s.User().FindByEmail(email)
+	t.Run("FindByEmail: valid email", func(t *testing.T) {
+		u, err := s.User().FindByEmail(email)
+		assert.NoError(t, err)
+		assert.NotNil(t, u)
+	})
 
-	assert.NoError(t, err)
-	assert.NotNil(t, u)
 }
 
 func TestUserRepository_FindByID(t *testing.T) {
@@ -61,7 +65,7 @@ func TestUserRepository_FindByID(t *testing.T) {
 	_, err := s.User().FindByID(id)
 	assert.Error(t, err)
 
-	u := model.TestUser(t)
+	u := model.TestUser()
 	u.UserID = id
 
 	u, err = s.User().FindByID(id)

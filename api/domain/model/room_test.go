@@ -66,27 +66,6 @@ func TestRoom_Validate(t *testing.T) {
 			},
 			isValid: true,
 		},
-<<<<<<< HEAD
-=======
-		{
-			name: "Empty RoomPhotoURL",
-			r: func() *model.Room {
-				r := model.TestRoom()
-				r.RoomPhotoURL = ""
-				return r
-			},
-			isValid: false,
-		},
-		{
-			name: "Invalid RoomPhotoURL",
-			r: func() *model.Room {
-				r := model.TestRoom()
-				r.RoomPhotoURL = "/"
-				return r
-			},
-			isValid: false,
-		},
->>>>>>> test-hotel/room
 	}
 
 	for _, tc := range testCases {

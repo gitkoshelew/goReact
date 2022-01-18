@@ -14,7 +14,7 @@ func TestUser() *User {
 		Name:        "Name",
 		Surname:     "Surname",
 		MiddleName:  "MiddleName",
-		Sex:         Male,
+		Sex:         SexMale,
 		DateOfBirth: time.Time{}.AddDate(2000, 2, 2),
 		Address:     "Minsk Pr. Nezavisimosti 22-222",
 		Phone:       "+375-29-154-89-33",

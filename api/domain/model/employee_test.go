@@ -16,15 +16,15 @@ func TestEmployee_Validate(t *testing.T) {
 		{
 			name: "valid",
 			e: func() *model.Employee {
-				return model.TestEmployee(t)
+				return model.TestEmployee()
 			},
 			isValid: true,
 		},
 		{
 			name: "valid user",
 			e: func() *model.Employee {
-				u := model.TestUser(t)
-				e := model.TestEmployee(t)
+				u := model.TestUser()
+				e := model.TestEmployee()
 				e.User = *u
 				return e
 			},
@@ -33,7 +33,7 @@ func TestEmployee_Validate(t *testing.T) {
 		{
 			name: "valid position",
 			e: func() *model.Employee {
-				e := model.TestEmployee(t)
+				e := model.TestEmployee()
 				e.Position = model.OwnerPosition
 				return e
 			},
@@ -42,7 +42,7 @@ func TestEmployee_Validate(t *testing.T) {
 		{
 			name: "valid position",
 			e: func() *model.Employee {
-				e := model.TestEmployee(t)
+				e := model.TestEmployee()
 				e.Position = model.EmployeePosition
 				return e
 			},
@@ -51,7 +51,7 @@ func TestEmployee_Validate(t *testing.T) {
 		{
 			name: "invalid position",
 			e: func() *model.Employee {
-				e := model.TestEmployee(t)
+				e := model.TestEmployee()
 				e.Position = "wwww"
 				return e
 			},
@@ -60,8 +60,8 @@ func TestEmployee_Validate(t *testing.T) {
 		{
 			name: "valid hotel",
 			e: func() *model.Employee {
-				h := model.TestHotel(t)
-				e := model.TestEmployee(t)
+				h := model.TestHotel()
+				e := model.TestEmployee()
 				e.Hotel = *h
 				return e
 			},
