@@ -37,7 +37,7 @@
   .roomNames {
     white-space: nowrap;
     height: 31px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     font-style: normal;
     font-weight: 600;
     font-size: 26px;
@@ -70,7 +70,7 @@
     @media (min-width: 1144px) {
       top: -250px;
       left: 0;
-      z-index: 10;
+      z-index: $middle-z-index-priority;
     }
     @media (min-width: 1250px) {
       top: -325px;

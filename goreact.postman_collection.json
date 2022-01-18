@@ -31,7 +31,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"ivdadan@mail.ru\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"verified\": true,\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+							"raw": "{\r\n        \"email\": \"ivdadan@mail.ru\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,7 +110,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"ivdddjrdakdasnd@msail.ru\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"verified\": true,\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+							"raw": "{\r\n        \"email\": \"olga@gmail.com\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -129,7 +129,7 @@
 								"registration"
 							]
 						},
-						"description": "Create user. Giving back ID for user\n\n## Request data:\n\nJSON\n\n{\n\n\"email\": string,\n\n\"password\": string,\n\n\"role\": string, NOT NULL # \"client\", \"employee\", \"anonymous\" #\n\n\"verified\": bool, NOT NULL\n\n\"name\": string, NOT NULL\n\n\"sName\": string, NOT NULL\n\n\"mName\": string,\n\n\"sex\": string, NOT NULL\n\n\"birthDate\": time.Time, NOT NULL # format: \"2111-01-01\" #\n\n\"address\": string,\n\n\"phone\": string, NOT NULL\n\n\"photo\": string\n\n}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n201- http.StatusCreated  \n\nJSON:\n\n{\n\n\"userId\": int\n\n}"
+						"description": "Create user. Giving back ID for user. If registration was successufull send email verification to user. If verification will be done changes verifiend field to true\n\n## Request data:\n\nJSON\n\n{\n\n\"email\": string,\n\n\"password\": string,\n\n\"role\": string, NOT NULL # \"client\", \"employee\", \"anonymous\" #\n\n\"verified\": bool, NOT NULL\n\n\"name\": string, NOT NULL\n\n\"sName\": string, NOT NULL\n\n\"mName\": string,\n\n\"sex\": string, NOT NULL\n\n\"birthDate\": time.Time, NOT NULL # format: \"2111-01-01\" #\n\n\"address\": string,\n\n\"phone\": string, NOT NULL\n\n\"photo\": string\n\n}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n201- http.StatusCreated\n\nJSON:\n\n{\n\n\"userId\": int\n\n}"
 					},
 					"response": []
 				},

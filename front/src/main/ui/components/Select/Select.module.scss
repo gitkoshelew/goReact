@@ -13,7 +13,7 @@
     background-position-x: 55px;
     margin-left: 60px;
     position: relative;
-    z-index: 2;
+    z-index: $low-z-index-priority;
     text-align-last: center;
     text-align: center;
     padding-left: calc(20% - 1em);

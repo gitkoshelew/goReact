@@ -1,15 +1,13 @@
 import React, { SetStateAction, useCallback, useState } from 'react'
 import Calendar, { CalendarTileProperties } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
-import moment from 'moment'
+import moment, { MomentInput } from 'moment'
 import { useSelector } from 'react-redux'
 import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
 import { changeActualDay } from '../../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
-import { MomentInput } from 'moment'
-import { IsRentType } from '../../../../dal/API'
 
 export const BookingCalendar = () => {
-  const isRentArr = useSelector<AppRootStateType, IsRentType[]>((state) => state.BookingRoomPick.isRent)
+  const isRentArr = useSelector((state: AppRootStateType) => state.BookingRoomPick.isRent)
 
   const dispatch = useAppDispatch()
 

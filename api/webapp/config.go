@@ -22,6 +22,12 @@ type Config struct {
 		DbName   string
 		Sslmode  string
 	}
+	MailService struct {
+		Source   string
+		Address  string
+		From     string
+		Password string
+	}
 }
 
 // NewConfig ..
@@ -37,6 +43,11 @@ func (c *Config) NewConfig() {
 	c.DbConnection.Password = os.Getenv("POSTGRES_PASSWORD")
 	c.DbConnection.Port, _ = strconv.Atoi(os.Getenv("POSTGRES_PORT"))
 	c.DbConnection.Sslmode = os.Getenv("POSTGRES_SSLMODE")
+
+	c.MailService.Source = os.Getenv("MAIL_SOURCE")
+	c.MailService.Address = os.Getenv("MAIL_ADDRESS")
+	c.MailService.From = os.Getenv("MAIL_FROM")
+	c.MailService.Password = os.Getenv("MAIL_PASSWORD")
 }
 
 // PgDataSource ...

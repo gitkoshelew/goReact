@@ -2,6 +2,7 @@ package server
 
 import (
 	"goReact/domain/store"
+	"goReact/service"
 	"goReact/webapp"
 	"goReact/webapp/server/logging"
 	"net/http"
@@ -16,6 +17,7 @@ type Server struct {
 	logger *logging.Logger
 	router *httprouter.Router
 	Store  *store.Store
+	Mail   *service.Mail
 }
 
 // New ...
@@ -24,23 +26,24 @@ func New(config *webapp.Config) *Server {
 		config: config,
 		logger: logging.GetLogger(),
 		router: httprouter.New(),
+		Mail:   service.GetMail(config),
 	}
 }
 
 // Start ...
 func (s *Server) Start() error {
 
-	s.logger.Info("Router starts ...")
 	s.configureRouter()
+	s.logger.Info("Router started successfully")
 
-	s.logger.Info("Admin router starts ...")
 	s.configureRoutesAdmin()
+	s.logger.Info("Admin router started successfully")
 
-	s.logger.Info("Store starts ...")
 	if err := s.configureStore(); err != nil {
 		s.logger.Errorf("Error while configure store. ERR MSG: %s", err.Error())
 		return err
 	}
+	s.logger.Info("Store started successfully")
 
 	s.logger.Infof("Server starts at %s ...", s.config.ServerInfo())
 	CORS := cors.New(cors.Options{
