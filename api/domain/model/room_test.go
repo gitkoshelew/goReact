@@ -16,15 +16,15 @@ func TestRoom_Validate(t *testing.T) {
 		{
 			name: "valid",
 			r: func() *model.Room {
-				return model.TestRoom(t)
+				return model.TestRoom()
 			},
 			isValid: true,
 		},
 		{
-			name: "empty room number",
+			name: "0 or less room number",
 			r: func() *model.Room {
-				r := model.TestRoom(t)
-				r.RoomNumber = 0 ///todo
+				r := model.TestRoom()
+				r.RoomNumber = -5 
 				return r
 			},
 			isValid: false,
@@ -32,7 +32,7 @@ func TestRoom_Validate(t *testing.T) {
 		{
 			name: "invalid pet type",
 			r: func() *model.Room {
-				r := model.TestRoom(t)
+				r := model.TestRoom()
 				r.PetType = "invalid"
 				return r
 			},
@@ -41,7 +41,7 @@ func TestRoom_Validate(t *testing.T) {
 		{
 			name: "valid pet type",
 			r: func() *model.Room {
-				r := model.TestRoom(t)
+				r := model.TestRoom()
 				r.PetType = model.PetTypeCat
 				return r
 			},
@@ -50,7 +50,7 @@ func TestRoom_Validate(t *testing.T) {
 		{
 			name: "valid pet type",
 			r: func() *model.Room {
-				r := model.TestRoom(t)
+				r := model.TestRoom()
 				r.PetType = model.PetTypeDog
 				return r
 			},
@@ -59,13 +59,34 @@ func TestRoom_Validate(t *testing.T) {
 		{
 			name: "valid hotel",
 			r: func() *model.Room {
-				h := model.TestHotel(t)
-				r := model.TestRoom(t)
+				h := model.TestHotel()
+				r := model.TestRoom()
 				r.Hotel = *h
 				return r
 			},
 			isValid: true,
 		},
+<<<<<<< HEAD
+=======
+		{
+			name: "Empty RoomPhotoURL",
+			r: func() *model.Room {
+				r := model.TestRoom()
+				r.RoomPhotoURL = ""
+				return r
+			},
+			isValid: false,
+		},
+		{
+			name: "Invalid RoomPhotoURL",
+			r: func() *model.Room {
+				r := model.TestRoom()
+				r.RoomPhotoURL = "/"
+				return r
+			},
+			isValid: false,
+		},
+>>>>>>> test-hotel/room
 	}
 
 	for _, tc := range testCases {

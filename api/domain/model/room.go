@@ -17,7 +17,7 @@ type Room struct {
 func (r *Room) Validate() error {
 	return validation.ValidateStruct(
 		r,
-		validation.Field(&r.RoomNumber, validation.Required),
+		validation.Field(&r.RoomNumber, validation.Required, validation.Min(1), validation.Max(999999999999)),
 		validation.Field(&r.PetType, validation.Required, validation.By(IsPetType)),
 		validation.Field(&r.Hotel, validation.Required),
 	)

@@ -24,8 +24,8 @@ func TestUser(t *testing.T) *User {
 
 }
 
-// TestHotel instance of hotel
-func TestHotel(t *testing.T) *Hotel {
+// Testing instance of hotel
+func TestHotel() *Hotel {
 	return &Hotel{
 		HotelID: 1,
 		Name:    "Name",
@@ -33,21 +33,21 @@ func TestHotel(t *testing.T) *Hotel {
 	}
 }
 
-func TestRoom(t *testing.T) *Room {
+func TestRoom() *Room {
 	return &Room{
 		RoomID:       1,
 		RoomNumber:   1,
 		PetType:      PetTypeCat,
-		Hotel:        *TestHotel(t),
+		Hotel:        *TestHotel(),
 		RoomPhotoURL: "/photo/1",
 	}
 }
 
-func TestEmployee(t *testing.T) *Employee{
+func TestEmployee() *Employee{
 	return &Employee{
 		EmployeeID: 1,
-		User: *TestUser(t),
-		Hotel: *TestHotel(t),
+		User: *TestUser(),
+		Hotel: *TestHotel(),
 		Position: OwnerPosition,
 	}
 }

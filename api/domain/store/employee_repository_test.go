@@ -10,9 +10,9 @@ import (
 
 func TestEmployeeRepository_Create(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("employee")
+	t.Cleanup(teardown)
 	t.Run("valid", func(t *testing.T) {
-		e, err := s.Employee().Create(model.TestEmployee(t))
+		e, err := s.Employee().Create(model.TestEmployee())
 		assert.NoError(t, err)
 		assert.NotNil(t, e)
 	})
@@ -20,7 +20,7 @@ func TestEmployeeRepository_Create(t *testing.T) {
 
 func TestEmployeeRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("employee")
+	t.Cleanup(teardown)
 
 	t.Run("invalid id", func(t *testing.T) {
 		id := 2
@@ -28,7 +28,7 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 		assert.Error(t, err)
 	})
 	t.Run("valid", func(t *testing.T) {
-		e := model.TestEmployee(t)
+		e := model.TestEmployee()
 		_, err := s.Employee().Create(e)
 		err = s.Employee().Delete(e.EmployeeID)
 		assert.NoError(t, err)
@@ -37,14 +37,14 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 
 func TestEmployeeRepository_FindByID(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("employee")
+	t.Cleanup(teardown)
 	t.Run("invalid id", func(t *testing.T) {
 		id := 2
 		_, err := s.Employee().FindByID(id)
 		assert.Error(t, err)
 	})
 	t.Run("valid", func(t *testing.T) {
-		e := model.TestEmployee(t)
+		e := model.TestEmployee()
 		e, err := s.Employee().FindByID(e.EmployeeID)
 		assert.NoError(t, err)
 		assert.NotNil(t, e)
@@ -53,7 +53,7 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 
 func TestEmployeeRepository_GetAll(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("employee")
+	t.Cleanup(teardown)
 	t.Run("valid ", func(t *testing.T) {
 		e, err := s.Employee().GetAll()
 		assert.NoError(t, err)
