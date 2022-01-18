@@ -15,14 +15,14 @@ func TestHotel_Validate(t *testing.T) {
 	}{{
 		name: "valid",
 		h: func() *model.Hotel {
-			return model.TestHotel(t)
+			return model.TestHotel()
 		},
 		isValid: true,
 		},
 		{
 			name: "Invalid Name",
 			h: func() *model.Hotel {
-				h := model.TestHotel(t)
+				h := model.TestHotel()
 				h.Name = "Name@123"
 				return h
 			},
@@ -31,7 +31,7 @@ func TestHotel_Validate(t *testing.T) {
 		{
 			name: "Empty Name",
 			h: func() *model.Hotel {
-				h := model.TestHotel(t)
+				h := model.TestHotel()
 				h.Name = ""
 				return h
 			},
@@ -40,7 +40,7 @@ func TestHotel_Validate(t *testing.T) {
 		{
 			name: "Empty Address",
 			h: func() *model.Hotel {
-				h := model.TestHotel(t)
+				h := model.TestHotel()
 				h.Address = ""
 				return h
 			},

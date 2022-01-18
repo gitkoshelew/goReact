@@ -10,23 +10,23 @@ import (
 
 func TestRoomRepository_Create(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("rooms")
+	t.Cleanup(teardown)
 
-	r, err := s.Room().Create(model.TestRoom(t))
+	r, err := s.Room().Create(model.TestRoom())
 	assert.NoError(t, err)
 	assert.NotNil(t, r)
 }
 
 func TestRoomRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("rooms")
+	t.Cleanup(teardown)
 
 	id := 2
 
 	err := s.Room().Delete(id)
 	assert.Error(t, err)
 
-	r := model.TestRoom(t)
+	r := model.TestRoom()
 
 	_, err = s.Room().Create(r)
 
@@ -36,13 +36,13 @@ func TestRoomRepository_Delete(t *testing.T) {
 
 func TestRoomRepository_FindByID(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("rooms")
+	t.Cleanup(teardown)
 	id := 2
 
 	_, err := s.Room().FindByID(id)
 	assert.Error(t, err)
 
-	r := model.TestRoom(t)
+	r := model.TestRoom()
 
 	r, err = s.Room().FindByID(r.RoomID)
 
@@ -52,7 +52,7 @@ func TestRoomRepository_FindByID(t *testing.T) {
 
 func TestRoomRepository_GetAll(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("rooms")
+	t.Cleanup(teardown)
 
 	r, err := s.Room().GetAll()
 
@@ -62,19 +62,19 @@ func TestRoomRepository_GetAll(t *testing.T) {
 
 func TestRoomRepository_Update(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("rooms")
+	t.Cleanup(teardown)
 
 	r := model.Room{
 		RoomID: 2,
 		RoomNumber: 2,
 		PetType: model.PetTypeDog,
-		Hotel: *model.TestHotel(t),
+		Hotel: *model.TestHotel(),
 		RoomPhotoURL: "//photo//2",
 	}
 
 	err := s.Room().Update(&r)
 	assert.Error(t, err)
-	r1 := model.TestRoom(t)
+	r1 := model.TestRoom()
 	err = s.Room().Update(r1)
 
 	assert.NoError(t, err)

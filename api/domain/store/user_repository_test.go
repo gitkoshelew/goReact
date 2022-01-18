@@ -10,7 +10,7 @@ import (
 
 func TestUserRepository_Create(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("users")
+	t.Cleanup(teardown)
 
 	u, err := s.User().Create(model.TestUser(t))
 	assert.NoError(t, err)
@@ -19,7 +19,7 @@ func TestUserRepository_Create(t *testing.T) {
 
 func TestUserRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("users")
+	t.Cleanup(teardown)
 
 	id := 1
 
@@ -37,7 +37,7 @@ func TestUserRepository_Delete(t *testing.T) {
 
 func TestUserRepository_FindByEmail(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("users")
+	t.Cleanup(teardown)
 
 	email := "email@example.org"
 
@@ -55,7 +55,7 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 
 func TestUserRepository_FindByID(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("users")
+	t.Cleanup(teardown)
 	id := 1
 
 	_, err := s.User().FindByID(id)
@@ -72,7 +72,7 @@ func TestUserRepository_FindByID(t *testing.T) {
 
 func TestUserRepository_GetAll(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	defer teardown("users")
+	t.Cleanup(teardown)
 
 	u, err := s.User().GetAll()
 
