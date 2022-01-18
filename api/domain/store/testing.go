@@ -6,6 +6,8 @@ import (
 	"testing"
 )
 
+
+// TestStore ...
 func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string) (*Store, func()) {
 	t.Helper()
 

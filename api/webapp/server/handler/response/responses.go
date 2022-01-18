@@ -7,5 +7,5 @@ type Error struct {
 
 // Info ...
 type Info struct {
-	Messsage string `json:"InfoMsg"`
+	Messsage string `json:"infoMsg"`
 }

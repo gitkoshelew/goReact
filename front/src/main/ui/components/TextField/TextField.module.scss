@@ -1,0 +1,35 @@
+@import '../../styles/variables';
+
+.inputTitle {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  margin: 30px auto;
+
+  .inputLabel {
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 20px;
+    color: $secondary-text-color;
+  }
+
+  .inputField {
+    width: 250px;
+    height: 30px;
+    font-size: 20px;
+    margin: 5px;
+    border-radius: 12px;
+  }
+
+  .inputFieldError {
+    @extend .inputField;
+    border: none;
+    outline: 3px solid red;
+  }
+
+  .error__msg {
+    color: red;
+    font-weight: 600;
+  }
+}

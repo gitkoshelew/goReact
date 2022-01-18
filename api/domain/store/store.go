@@ -34,18 +34,14 @@ func New(config *webapp.Config) *Store {
 // Open ...
 func (s *Store) Open() error {
 	dataSourceName := s.Config.PgDataSource()
-	s.Logger.Infof("Connecting to database via %#v", dataSourceName)
 	db, err := sql.Open("postgres", dataSourceName)
 	if err != nil {
-		s.Logger.Errorf("Error while trying open Data base. Msg: %v", err)
 		return err
 	}
 
 	if err := db.Ping(); err != nil {
-		s.Logger.Errorf("Error while ping to data base. MSG: %v", err)
 		return err
 	}
-	s.Logger.Infof("Database connection successfull!")
 
 	s.Db = db
 

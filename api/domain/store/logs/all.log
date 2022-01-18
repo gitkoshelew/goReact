@@ -1,0 +1,194 @@
+[36mINFO[0m[2022-01-17T09:24:41+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[36mINFO[0m[2022-01-17T09:24:41+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[31mERRO[0m[2022-01-17T09:24:41+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[31mERRO[0m[2022-01-17T09:24:41+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[36mINFO[0m[2022-01-17T09:26:30+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[36mINFO[0m[2022-01-17T09:26:30+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[31mERRO[0m[2022-01-17T09:26:30+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[31mERRO[0m[2022-01-17T09:26:30+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[36mINFO[0m[2022-01-17T09:27:26+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[36mINFO[0m[2022-01-17T09:27:26+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[31mERRO[0m[2022-01-17T09:27:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[31mERRO[0m[2022-01-17T09:27:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[36mINFO[0m[2022-01-17T09:28:57+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T09:28:57+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T09:28:59+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T09:28:59+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T09:29:33+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T09:29:33+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T09:29:33+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T09:29:33+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T09:30:21+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T09:30:21+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T09:30:21+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T09:30:21+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T09:31:43+03:00]store.go:39 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T09:31:43+03:00]store.go:39 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T09:31:43+03:00]store.go:47 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T09:31:43+03:00]store.go:47 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T09:33:14+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=6453 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T09:33:14+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=6453 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T09:33:16+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp [::1]:6453: connectex: No connection could be made because the target machine actively refused it. 
+[31mERRO[0m[2022-01-17T09:33:16+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp [::1]:6453: connectex: No connection could be made because the target machine actively refused it. 
+[36mINFO[0m[2022-01-17T09:34:10+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T09:34:10+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T09:34:10+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T09:34:10+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T09:35:07+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=0 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T09:35:07+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=0 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T09:35:07+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp [::1]:0: connectex: The requested address is not valid in its context. 
+[31mERRO[0m[2022-01-17T09:35:07+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp [::1]:0: connectex: The requested address is not valid in its context. 
+[36mINFO[0m[2022-01-17T09:38:35+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[36mINFO[0m[2022-01-17T09:38:35+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[31mERRO[0m[2022-01-17T09:38:35+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[31mERRO[0m[2022-01-17T09:38:35+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[36mINFO[0m[2022-01-17T09:44:32+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[36mINFO[0m[2022-01-17T09:44:32+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[31mERRO[0m[2022-01-17T09:44:32+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[31mERRO[0m[2022-01-17T09:44:32+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[36mINFO[0m[2022-01-17T09:45:23+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[36mINFO[0m[2022-01-17T09:45:23+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[31mERRO[0m[2022-01-17T09:45:23+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[31mERRO[0m[2022-01-17T09:45:23+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[36mINFO[0m[2022-01-17T09:45:43+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[36mINFO[0m[2022-01-17T09:45:43+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host= port=0 user= password= dbname= sslmode=" 
+[31mERRO[0m[2022-01-17T09:45:44+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[31mERRO[0m[2022-01-17T09:45:44+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup port=0: no such host 
+[36mINFO[0m[2022-01-17T11:03:03+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:03:03+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:03:03+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:03:03+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:05:46+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:05:46+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:05:46+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:05:46+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:06:34+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:06:34+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:06:37+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T11:06:37+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T11:06:57+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=postgresql_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:06:57+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=postgresql_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:06:58+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup postgresql_database: no such host 
+[31mERRO[0m[2022-01-17T11:06:58+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup postgresql_database: no such host 
+[36mINFO[0m[2022-01-17T11:12:30+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=postgresql_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:12:30+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=postgresql_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:12:31+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup postgresql_database: no such host 
+[31mERRO[0m[2022-01-17T11:12:31+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup postgresql_database: no such host 
+[36mINFO[0m[2022-01-17T11:13:13+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:13:13+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:13:15+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T11:13:15+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T11:13:31+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:13:31+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:13:31+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:13:31+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:14:06+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=172.20.0.4 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:14:06+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=172.20.0.4 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:14:07+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=172.20.0.4 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:14:07+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=172.20.0.4 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:14:17+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=172.20.0.4 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:14:17+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=172.20.0.4 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:14:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp 172.20.0.4:5432: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. 
+[31mERRO[0m[2022-01-17T11:14:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp 172.20.0.4:5432: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. 
+[31mERRO[0m[2022-01-17T11:14:28+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp 172.20.0.4:5432: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. 
+[31mERRO[0m[2022-01-17T11:14:28+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp 172.20.0.4:5432: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. 
+[31mERRO[0m[2022-01-17T11:14:38+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp 172.20.0.4:5432: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. 
+[31mERRO[0m[2022-01-17T11:14:38+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp 172.20.0.4:5432: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. 
+[36mINFO[0m[2022-01-17T11:18:19+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:18:19+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:18:21+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T11:18:21+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T11:18:34+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:18:34+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:18:34+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:18:34+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:19:27+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:19:27+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:19:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:19:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:19:52+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:19:52+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:19:52+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:19:52+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:23:53+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:23:53+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:23:53+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:23:53+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:26:55+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:26:55+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:26:55+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:26:55+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:27:12+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:27:12+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:27:12+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:27:12+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:28:01+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:28:01+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=0.0.0.0 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:28:01+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:28:01+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:28:54+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:28:54+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:28:57+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T11:28:57+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T11:30:34+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=100.100.100.100 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:30:34+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=100.100.100.100 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:30:55+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:30:55+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:30:57+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T11:30:57+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T11:31:52+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=127.0.0.1 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:31:52+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=127.0.0.1 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:31:52+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:31:52+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:54:37+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=127.0.0.1 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:54:37+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=127.0.0.1 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:54:37+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:54:37+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:55:00+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=127.0.0.1 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:55:00+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=127.0.0.1 port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:55:01+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:55:01+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T11:56:06+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:56:06+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:56:08+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T11:56:08+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T11:59:09+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:59:09+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=test_database port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:59:11+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[31mERRO[0m[2022-01-17T11:59:11+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: dial tcp: lookup test_database: no such host 
+[36mINFO[0m[2022-01-17T11:59:27+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T11:59:27+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T11:59:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T11:59:27+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T12:00:26+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T12:00:26+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T12:00:26+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T12:00:26+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T12:03:45+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T12:03:45+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T12:03:45+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T12:03:45+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T12:04:36+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[36mINFO[0m[2022-01-17T12:04:36+03:00]store.go:37 goReact/domain/store.(*Store).Open Connecting to database via "host=localhost port=5432 user=user password=userpass dbname=test_goreact sslmode=disable" 
+[31mERRO[0m[2022-01-17T12:04:37+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[31mERRO[0m[2022-01-17T12:04:37+03:00]store.go:45 goReact/domain/store.(*Store).Open Error while ping to data base. MSG: pq: роль "user" не существует 
+[36mINFO[0m[2022-01-17T14:31:28+03:00]user_repository.go:186 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634779184 1} 
+[36mINFO[0m[2022-01-17T14:31:28+03:00]user_repository.go:186 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634779184 1} 
+[36mINFO[0m[2022-01-17T14:31:28+03:00]user_repository.go:186 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634779184 0} 
+[36mINFO[0m[2022-01-17T14:31:28+03:00]user_repository.go:186 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634779184 0} 
+[36mINFO[0m[2022-01-17T14:37:21+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634525664 1} 
+[36mINFO[0m[2022-01-17T14:37:21+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634525664 1} 
+[36mINFO[0m[2022-01-17T14:37:21+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634525664 0} 
+[36mINFO[0m[2022-01-17T14:37:21+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634525664 0} 
+[36mINFO[0m[2022-01-17T14:40:55+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634934976 1} 
+[36mINFO[0m[2022-01-17T14:40:55+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634934976 1} 
+[36mINFO[0m[2022-01-17T14:40:55+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634934976 0} 
+[36mINFO[0m[2022-01-17T14:40:55+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634934976 0} 
+[36mINFO[0m[2022-01-17T14:46:41+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824637382800 1} 
+[36mINFO[0m[2022-01-17T14:46:41+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824637382800 1} 
+[36mINFO[0m[2022-01-17T14:46:41+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824637382800 0} 
+[36mINFO[0m[2022-01-17T14:46:41+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824637382800 0} 
+[36mINFO[0m[2022-01-17T14:48:11+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634909968 0} 
+[36mINFO[0m[2022-01-17T14:48:11+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634909968 0} 
+[36mINFO[0m[2022-01-17T14:48:11+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634909968 1} 
+[36mINFO[0m[2022-01-17T14:48:11+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634909968 1} 
