@@ -51,7 +51,7 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 		}
 		fmt.Println("   ///3user.Password ENCRYPTED-  ", user.Password)//3*/
 
-		err = s.User().Update(user)
+		err = s.User().PasswordChange(user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Cant update password. Err msg:%v.", err)
