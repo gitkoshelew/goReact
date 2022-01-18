@@ -1,4 +1,4 @@
-package authentication
+package restorePassword
 
 import (
 	"encoding/json"
