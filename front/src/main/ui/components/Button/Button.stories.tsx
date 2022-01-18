@@ -23,12 +23,11 @@ BuyButton.args = {
 OrderButton.args = {
     type: 'order',
     isActive: true,
-    onClick: action('click')
+    onClick: action('OrderButton click')
 }
 UploadButton.args = {
     type: 'upload',
-    isActive: true,
-    onClick: action('click')
+    isActive: true
 }
 
 
