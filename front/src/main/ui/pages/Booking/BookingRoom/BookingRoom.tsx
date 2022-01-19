@@ -1,4 +1,4 @@
-import { MiniRoomElement } from '../../Home/ThirdPage/miniRoomBlock/MiniRoomElement/MiniRoomElement'
+import { MiniRoomElement } from '../../Home/FavoriteRoomsPage/miniRoomBlock/MiniRoomElement/MiniRoomElement'
 import s from './BookingRoom.module.scss'
 import { rented } from '../../../svgWrapper/BookingRoomSvgWrapper'
 import { Button } from '../../../components/Button/Button'
