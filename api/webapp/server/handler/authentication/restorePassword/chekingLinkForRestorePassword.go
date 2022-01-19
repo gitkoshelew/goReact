@@ -52,8 +52,19 @@ func СhekingLinkForRestorePassword(s *store.Store) httprouter.Handle {
 				return
 			}
 		}
-		w.Header().Add("UserEmail", email)		
-		w.WriteHeader(http.StatusOK)
+		fmt.Println("///////////////////111111111111")
+		
+		c := http.Cookie{
+			Name:     "UserEmail",
+			Value:    email,
+			HttpOnly: true,
+			MaxAge: 12000,
+		}		
+		
+		fmt.Println("///////////////////2222222222222222222")
+		http.SetCookie(w, &c)
+		fmt.Println("///////////////////333333333333333333333333")
+		w.WriteHeader(http.StatusOK)		
 		json.NewEncoder(w).Encode(response.Info{Messsage: "Link is confirmed"})
 
 	}

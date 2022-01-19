@@ -17,6 +17,14 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 		w.Header().Set("Content-Type", "application/json")
 
 		req := &request.Login{}
+		cookie, err := r.Cookie("Refresh-Token")
+		if err != nil {					
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf(" Error occured while reading cookie. Request body: %v, Err msg: %v", r.Body, err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+		}
+		Email := cookie.Value
+		fmt.Println(Email)
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %v", r.Body, err)
@@ -24,7 +32,7 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err := s.Open()
+		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
