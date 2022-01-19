@@ -2,7 +2,7 @@ import React from 'react'
 import s from './BookingRegForm.module.scss'
 import { ImgUpload } from './ImgUploadComponent/ImgUpload'
 import { useSelector } from 'react-redux'
-import { AppRootStateType } from '../../../../bll/store/store'
+import { AppRootState } from '../../../../bll/store/store'
 import Preloader from '../../../components/preloader/preloader'
 import { FormikValues } from 'formik/dist/types'
 
@@ -23,9 +23,9 @@ type BookingRegFormType = {
 }
 
 export const BookingRegForm = ({ formik }: BookingRegFormType) => {
-  const progress = useSelector((state: AppRootStateType) => state.BookingRegForm.progress)
-  const photoUrl = useSelector((state: AppRootStateType) => state.BookingRegForm.photoUrl)
-  const errorMSG = useSelector((state: AppRootStateType) => state.BookingRegForm.errorMSG)
+  const progress = useSelector((state: AppRootState) => state.BookingRegForm.progress)
+  const photoUrl = useSelector((state: AppRootState) => state.BookingRegForm.photoUrl)
+  const errorMSG = useSelector((state: AppRootState) => state.BookingRegForm.errorMSG)
 
   const actualContent = () => {
     switch (progress) {

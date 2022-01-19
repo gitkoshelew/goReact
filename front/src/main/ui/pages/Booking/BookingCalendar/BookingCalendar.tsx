@@ -3,11 +3,11 @@ import Calendar, { CalendarTileProperties } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import moment, { MomentInput } from 'moment'
 import { useSelector } from 'react-redux'
-import { AppRootStateType, useAppDispatch } from '../../../../bll/store/store'
+import { AppRootState, useAppDispatch } from '../../../../bll/store/store'
 import { changeActualDay } from '../../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 
 export const BookingCalendar = () => {
-  const isRentArr = useSelector((state: AppRootStateType) => state.BookingRoomPick.isRent)
+  const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
 
   const dispatch = useAppDispatch()
 
