@@ -76,9 +76,9 @@ func RefreshHandle(s *store.Store) httprouter.Handle {
 				HttpOnly: true,
 			}
 
-			w.WriteHeader(http.StatusOK)
 			http.SetCookie(w, &c)
 			w.Header().Add("Access-Token", tk.AccessToken)
+			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(response.Info{Messsage: "Successfully refreshed"})
 
 		} else {
