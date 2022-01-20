@@ -3,28 +3,25 @@ package restorePassword
 import (
 	"encoding/json"
 	"fmt"
+	"goReact/domain/model"
 	"goReact/domain/store"
+	"goReact/webapp/server/handler/middleware"
 	"goReact/webapp/server/handler/request"
 	"goReact/webapp/server/handler/response"
 	"net/http"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 // New pass ...
-func ChangePassword(s *store.Store) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func ChangePassword(s *store.Store) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		req := &request.Login{}
-		cookie, err := r.Cookie("Refresh-Token")
-		if err != nil {					
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf(" Error occured while reading cookie. Request body: %v, Err msg: %v", r.Body, err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-		}
-		Email := cookie.Value
-		fmt.Println(Email)
+
+		email := middleware.ContextEmail(r.Context())
+
+		fmt.Println("EMAIL FORM CONTEX ///*/*/*/*/*/*", email)
+
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %v", r.Body, err)
@@ -32,7 +29,7 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err = s.Open()
+		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
@@ -40,13 +37,26 @@ func ChangePassword(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		user, err := s.User().FindByEmail(req.Email)
+		user, err := s.User().FindByEmail(email)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
+		fmt.Println(" user   ", user.UserID)
+		fmt.Println(" req.Password and user.Password 455 ", req.Password, user.Password)
+
+		err = model.CheckPasswordHash(user.Password, req.Password)
+		fmt.Println(" ERR   ", err)
+		if err == nil {
+			fmt.Println(" ERR req.Password == user.Password  ", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Password cannot be the same")
+			json.NewEncoder(w).Encode(response.Error{Messsage: "Password cannot be the same"})
+			return
+		}
+
 		user.Password = req.Password
 
 		err = s.User().PasswordChange(user)
