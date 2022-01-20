@@ -18,9 +18,13 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 
 		req := &request.Login{}
 
-		email := middleware.ContextEmail(r.Context())
-
-		fmt.Println("EMAIL FORM CONTEX ///*/*/*/*/*/*", email)
+		email , err:= middleware.ContextEmail(r.Context())
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Cannot parse email: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
+		}
 
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -29,7 +33,7 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 			return
 		}
 
-		err := s.Open()
+		err= s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
@@ -44,11 +48,8 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-		fmt.Println(" user   ", user.UserID)
-		fmt.Println(" req.Password and user.Password 455 ", req.Password, user.Password)
 
 		err = model.CheckPasswordHash(user.Password, req.Password)
-		fmt.Println(" ERR   ", err)
 		if err == nil {
 			fmt.Println(" ERR req.Password == user.Password  ", err)
 			w.WriteHeader(http.StatusInternalServerError)

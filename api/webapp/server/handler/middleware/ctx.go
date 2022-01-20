@@ -14,14 +14,11 @@ const (
 	CtxKeyEmail CtxKey = iota
 )
 
-func ContextEmail(ctx context.Context) string {
-	fmt.Println("HELLO FROM CONTEXT EMAIL start ")
+func ContextEmail(ctx context.Context) (string , error) {
 	email := ctx.Value(CtxKeyEmail)
 	if email == "" {
 
-		return " email is 0"
+		return "" , fmt.Errorf("email is empty")
 	}
-
-	fmt.Println("HELLO FROM CONTEXT EMAIL ", email)
-	return email.(string)
+	return email.(string), nil
 }
