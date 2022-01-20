@@ -56,21 +56,8 @@ func СhekingLinkForRestorePassword(s *store.Store, next http.HandlerFunc) httpr
 			}
 		}
 
-		/*_, ok := token.Claims.(jwt.MapClaims)
-		if ok && token.Valid {
-			if err != nil {
-				w.WriteHeader(http.StatusUnprocessableEntity)
-				s.Logger.Errorf("Eror while parsing token. Errors msg: %v", err)
-				json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-				return
-			}
-		}*/
-
-		//w.WriteHeader(http.StatusOK)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response.Info{Messsage: "Link is confirmed"})
-
-		//w.Header().Add("Token", endp)
-		//w.Header().Add("UserEmail", email)
 		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), middleware.CtxKeyEmail, email)))
 	}
 }

@@ -51,7 +51,6 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 
 		err = model.CheckPasswordHash(user.Password, req.Password)
 		if err == nil {
-			fmt.Println(" ERR req.Password == user.Password  ", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Password cannot be the same")
 			json.NewEncoder(w).Encode(response.Error{Messsage: "Password cannot be the same"})
