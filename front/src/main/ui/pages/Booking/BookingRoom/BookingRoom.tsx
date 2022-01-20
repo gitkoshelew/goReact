@@ -32,7 +32,7 @@ export const BookingRoom = (props: BookingRoomPropsTypes) => {
         {firstRoom ? (
           <>
             <MiniRoomElement childrenNum={1} adultNum={1} squareNum={100} price={100} roomName={'First Room'} />
-            <Button type={'order'} onClick={() => onOrderClickHandler('firstRoom')} />
+            <Button view={'order'} onClick={() => onOrderClickHandler('firstRoom')} />
           </>
         ) : (
           <div className={rentedImg}>
@@ -44,7 +44,7 @@ export const BookingRoom = (props: BookingRoomPropsTypes) => {
         {secondRoom ? (
           <>
             <MiniRoomElement childrenNum={1} adultNum={1} squareNum={100} price={100} roomName={'Second Room'} />
-            <Button type={'order'} onClick={() => onOrderClickHandler('secondRoom')} />
+            <Button view={'order'} onClick={() => onOrderClickHandler('secondRoom')} />
           </>
         ) : (
           <div className={rentedImg}>
