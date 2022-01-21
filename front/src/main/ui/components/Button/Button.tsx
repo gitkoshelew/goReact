@@ -4,9 +4,18 @@ import { NavLink } from 'react-router-dom'
 
 const { loginBtn, buyBtn, uploadPetPhoto, uploadPetPhotoActive, orderBtn } = s
 
-type BtnPropsType = {
+export type BtnPropsType = {
+  /**
+   The display content of the button(buy, order, upload)
+   */
   type: string
+  /**
+   * Checks if the button should be disabled
+   */
   isActive?: boolean
+  /**
+   * Click handler
+   */
   onClick?: () => void
 }
 

@@ -53,6 +53,7 @@ func TestRoomRepository_FindByID(t *testing.T) {
 		assert.NoError(t, err)
 		assert.NotNil(t, r)
 	})
+
 }
 
 func TestRoomRepository_GetAll(t *testing.T) {

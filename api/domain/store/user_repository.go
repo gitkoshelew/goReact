@@ -27,7 +27,10 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	}
 
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO users (email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id",
+		`INSERT INTO users 
+		(email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
+		RETURNING id`,
 		u.Email,
 		u.Password,
 		string(u.Role),
@@ -153,11 +156,11 @@ func (r *UserRepository) Update(u *model.User) error {
 	}
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE users SET "+
-			"email = $1, password = $2, role = $3, verified = $4, "+
-			"first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, "+
-			"address = $10, phone = $11, photo = $12 "+
-			"WHERE id = $13",
+		`UPDATE users SET 
+			email = $1, password = $2, role = $3, verified = $4, 
+			first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, 
+			address = $10, phone = $11, photo = $12 
+			WHERE id = $13`,
 		u.Email,
 		encryptedPassword,
 		string(u.Role),

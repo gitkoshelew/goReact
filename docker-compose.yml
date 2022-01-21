@@ -52,14 +52,13 @@ services:
             - ./migrations:/migrations
 
         command:
-          [
-                  "-path",
-                  "/migrations",
-                  "-database",
-                  "postgres://user:userpass@postgresql_database:5432/goreact?ss\
-                  lmode=disable",
-                  "up"
-          ]
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@postgresql_database:5432/goreact?sslmode=disable",
+                "up"
+            ]
         links:
             - postgresql_database
         depends_on:
@@ -73,14 +72,13 @@ services:
         volumes:
             - ./migrations:/migrations
         command:
-          [
-                  "-path",
-                  "/migrations",
-                  "-database",
-                  "postgres://user:userpass@test_database:5432/test_goreact?ssl\
-                  mode=disable",
-                  "up"
-          ]
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@test_database:5432/test_goreact?sslmode=disable",
+                "up"
+            ]
         links:
             - test_database
         depends_on:
@@ -122,7 +120,7 @@ services:
         build:
             context: ./api
         ports:
-            - $SERVER_PORT:$SERVER_PORT
+            - 8080:8080
         depends_on:
             - postgresql_database
         env_file:
@@ -150,4 +148,3 @@ volumes:
     pgadmin: null
     rabbitmq_data:
         driver: local
-

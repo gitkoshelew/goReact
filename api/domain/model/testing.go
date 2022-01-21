@@ -41,7 +41,6 @@ func TestRoom() *Room {
 		RoomPhotoURL: "/photo/1",
 	}
 }
-
 func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,

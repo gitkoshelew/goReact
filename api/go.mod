@@ -16,10 +16,6 @@ require (
 	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/sendgrid/rest v2.6.7+incompatible // indirect
-	github.com/sendgrid/sendgrid-go v3.10.5+incompatible // indirect
-	github.com/stretchr/objx v0.1.0 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
 	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
@@ -30,5 +26,6 @@ require (
 	github.com/gorilla/sessions v1.2.1
 	github.com/rs/cors v1.8.2
 	github.com/sirupsen/logrus v1.8.1
+	github.com/stretchr/testify v1.7.0
 	github.com/twinj/uuid v1.0.0
 )

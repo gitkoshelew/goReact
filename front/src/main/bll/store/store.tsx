@@ -13,6 +13,8 @@ import {
   LoginPageLogoutSagaWorker,
   LoginPageMeRequestSagaWorker,
 } from '../reducers/LoginPageReduser/loginPage-saga'
+import { RegisterPageReducer } from '../reducers/RegistrationPageReducer/registrationPage-reducer'
+import { RegisterPageSagaWorker } from '../reducers/RegistrationPageReducer/registrationPage-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -20,9 +22,10 @@ const rootReducer = combineReducers({
   BookingRegForm: BookingRegFormReducer,
   BookingRoomPick: BookingRoomPickReducer,
   LoginPage: LoginPageReducer,
+  RegisterPage: RegisterPageReducer,
 })
 
-export type RootReducerType = typeof rootReducer
+export type RootReducer = typeof rootReducer
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -32,11 +35,11 @@ export const store = configureStore({
     }).prepend(sagaMiddleware),
 })
 
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootState = ReturnType<typeof rootReducer>
 
-export type AppDispatchType = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch
 
-export const useAppDispatch = () => useDispatch<AppDispatchType>()
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 //sagaWatcher
 sagaMiddleware.run(rootWatcher)
@@ -47,4 +50,5 @@ function* rootWatcher() {
   yield takeEvery('LOGIN_PAGE/LOGIN_SAGA', LoginPageLoginSagaWorker)
   yield takeEvery('LOGIN_PAGE/LOGOUT_SAGA', LoginPageLogoutSagaWorker)
   yield takeEvery('LOGIN_PAGE/ME_SAGA', LoginPageMeRequestSagaWorker)
+  yield takeEvery('REGISTER_PAGE/REGISTER_SAGA', RegisterPageSagaWorker)
 }

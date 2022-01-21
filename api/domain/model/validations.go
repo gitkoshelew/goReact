@@ -97,4 +97,3 @@ func IsEmployeePosition(value interface{}) error {
 		return nil
 	}
 	return errors.New("allowed pet types: 'ManagerPosition', 'EmployeePosition' ,'OwnerPosition','AdminPosition'")
-}
