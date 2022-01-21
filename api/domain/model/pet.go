@@ -1,5 +1,9 @@
 package model
 
+import (
+	validation "github.com/go-ozzo/ozzo-validation"
+)
+
 // Pet struct
 type Pet struct {
 	PetID       int     `json:"petId"`
@@ -19,3 +23,13 @@ const (
 	PetTypeCat PetType = "cat"
 	PetTypeDog PetType = "dog"
 )
+
+func (p *Pet) Validate() error {
+	return validation.ValidateStruct(
+		p,
+		validation.Field(&p.Type, validation.Required, validation.By(IsPetType)),
+		validation.Field(&p.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(1, 20)),
+		validation.Field(&p.Weight, validation.Required, validation.Min(0.1), validation.Max(49.9)),
+		validation.Field(&p.Owner, validation.Required),
+	)
+}

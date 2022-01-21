@@ -41,3 +41,14 @@ func TestRoom() *Room {
 		RoomPhotoURL: "/photo/1",
 	}
 }
+
+func TestPet() *Pet {
+	return &Pet{
+		Name: "Name",
+		Type: PetTypeCat,
+		Weight: 1,
+		Diesieses: "Disease",
+		Owner: *TestUser(),
+		PetPhotoURL: "/",
+	}
+}
