@@ -13,9 +13,7 @@ type PetRepository struct {
 // Create pet and save it to DB
 func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO pet",
-		"(name, type, weight, dieses, user_id)",
-		"VALUES ($1, $2, $3, $4, $5) RETURNING id",
+		"INSERT INTO pet (name, type, weigt, dieses, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id",
 		p.Name,
 		string(p.Type),
 		p.Weight,
