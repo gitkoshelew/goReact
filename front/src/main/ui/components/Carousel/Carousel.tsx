@@ -5,7 +5,7 @@ import { nextArrow, prevArrow, sliderDot } from '../../svgWrapper/HomeSvgWrapper
 
 const { carousel, carouselBig } = s
 
-type CarouselPropsType = {
+export type CarouselPropsType = {
   children: ReactChild | ReactChild[] | ReactChildren | ReactChildren[]
   responsiveArrForCarousel?: ResponsiveObject[]
   startSlideToShow: number
@@ -13,7 +13,7 @@ type CarouselPropsType = {
   type: string
   isWithArrows: boolean
 }
-type SampleArrowPropsType = {
+export type SampleArrowPropsType = {
   className?: string
   onClick?: () => void
 }
