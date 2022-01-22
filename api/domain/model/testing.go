@@ -33,12 +33,11 @@ func TestHotel() *Hotel {
 }
 
 func TestRoom() *Room {
-	Hotel := TestHotel()
 	return &Room{
 		RoomID:       1,
 		RoomNumber:   1,
 		PetType:      PetTypeCat,
-		Hotel:        *Hotel,
+		Hotel:        *TestHotel(),
 		RoomPhotoURL: "/photo/1",
 	}
 }
