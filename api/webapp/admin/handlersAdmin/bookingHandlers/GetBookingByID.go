@@ -12,18 +12,30 @@ import (
 )
 
 // GetBookingByID ...
-func GetBookingByID(s *store.Store) httprouter.Handle { //db := utils.HandlerDbConnection()
+func GetBookingByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
 		bookings := []model.Booking{}
 
-		id, _ := strconv.Atoi(ps.ByName("id"))
+		id, err := strconv.Atoi(ps.ByName("id"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			return
+		}
 
-		s.Open()
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
+		}
+
 		booking, err := s.Booking().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Cant find booking. Err msg:%v.", err)
 			return
 		}
 		bookings = append(bookings, *booking)
@@ -36,12 +48,14 @@ func GetBookingByID(s *store.Store) httprouter.Handle { //db := utils.HandlerDbC
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, bookings)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 	}

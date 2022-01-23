@@ -49,6 +49,8 @@ func TestEmployee() *Employee {
 		Hotel:      *TestHotel(),
 		Position:   OwnerPosition,
 
+	}
+}
 
 func TestPet() *Pet {
 	return &Pet{
@@ -58,6 +60,5 @@ func TestPet() *Pet {
 		Diesieses: "Disease",
 		Owner: *TestUser(),
 		PetPhotoURL: "/",
-
 	}
 }

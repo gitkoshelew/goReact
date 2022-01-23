@@ -17,12 +17,24 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 		session.CheckSession(w, r)
 
 		seats := []model.Seat{}
-		id, _ := strconv.Atoi(ps.ByName("id"))
+		id, err := strconv.Atoi(ps.ByName("id"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			return
+		}
 
-		s.Open()
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
+		}
+
 		seat, err := s.Seat().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Cant find seat. Err msg:%v.", err)
 			return
 		}
 
@@ -36,12 +48,14 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, seats)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 	}

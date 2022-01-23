@@ -13,10 +13,18 @@ import (
 func AllUsersHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		s.Open()
+
+		err := s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
+		}
+		
 		users, err := s.User().GetAll()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Can't find users. Err msg: %v", err)
 			return
 		}
 
@@ -28,12 +36,14 @@ func AllUsersHandler(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, users)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 	}

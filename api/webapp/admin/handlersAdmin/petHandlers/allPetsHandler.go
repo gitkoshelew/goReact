@@ -11,36 +11,22 @@ import (
 
 // AllPetsHandler ...
 func AllPetsHandler(s *store.Store) httprouter.Handle {
-	//db := utils.HandlerDbConnection()
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
-		//pets := []model.Pet{}
-
-		s.Open()
+		err := s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
+		}
 		pets, err := s.Pet().GetAll()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Can't find pets. Err msg: %v", err)
 			return
 		}
 
-		/*rows, err := db.Query("select * from pet")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer rows.Close()
-
-		for rows.Next() {
-			p := model.Pet{}
-			err := rows.Scan(&p.PetID, &p.Name, &p.Type, &p.Weight, &p.Diesieses, &p.Owner.UserID)
-			if err != nil {
-				fmt.Println(err)
-				continue
-			}
-			pets = append(pets, p)
-		}
-		*/
 		files := []string{
 			"/api/webapp/admin/tamplates/allPets.html",
 			"/api/webapp/admin/tamplates/base.html",
@@ -49,12 +35,14 @@ func AllPetsHandler(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, pets)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 

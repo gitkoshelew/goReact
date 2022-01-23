@@ -21,12 +21,23 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 
 		users := []model.User{}
 
-		id, _ := strconv.Atoi(r.FormValue("id"))
+		id, err := strconv.Atoi(r.FormValue("id"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
+			return
+		}
 
-		s.Open()
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
+		}
 		user, err := s.User().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
 			return
 		}
 
@@ -40,12 +51,14 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, users)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 	}

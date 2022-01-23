@@ -57,7 +57,7 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 
 func TestUserRepository_FindByID(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown
+	t.Cleanup(teardown)
             
 	t.Run("Invalid ID", func(t *testing.T) {
 		u, err := s.User().FindByID(-1)

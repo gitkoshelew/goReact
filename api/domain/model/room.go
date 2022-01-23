@@ -21,3 +21,5 @@ func (r *Room) Validate() error {
 		validation.Field(&r.PetType, validation.Required, validation.By(IsPetType)),
 		validation.Field(&r.Hotel, validation.Required),
 		validation.Field(&r.RoomPhotoURL, validation.Required, validation.Length(2, 40)),
+	)
+}
