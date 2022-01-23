@@ -87,3 +87,13 @@ func IsPetType(value interface{}) error {
 	}
 	return errors.New("allowed pet types: 'PetTypeCat', 'PetTypeDog'")
 }
+
+// IsPetType checks if string matchs to a Pet types of Pets
+// PetTypeCat = "cat"
+// PetTypeDog = "dog"
+func IsEmployeePosition(value interface{}) error {
+	s := value.(Position)
+	if s == ManagerPosition || s == EmployeePosition || s == OwnerPosition || s == AdminPosition {
+		return nil
+	}
+	return errors.New("allowed pet types: 'ManagerPosition', 'EmployeePosition' ,'OwnerPosition','AdminPosition'")

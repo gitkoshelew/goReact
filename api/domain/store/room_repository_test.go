@@ -25,6 +25,7 @@ func TestRoomRepository_Create(t *testing.T) {
 func TestRoomRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
+
 	t.Run("invalid delete id", func(t *testing.T) {
 		id := 2
 
@@ -44,12 +45,13 @@ func TestRoomRepository_Delete(t *testing.T) {
 func TestRoomRepository_FindByID(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
+
 	t.Run("invalid find id", func(t *testing.T) {
 		id := 2
+
 		_, err := s.Room().FindByID(id)
 		assert.Error(t, err)
 	})
-
 	t.Run("valid find id", func(t *testing.T) {
 		r := model.TestRoom()
 		h, err := s.Hotel().Create(model.TestHotel())

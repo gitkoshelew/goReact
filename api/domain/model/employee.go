@@ -1,5 +1,7 @@
 package model
 
+import validation "github.com/go-ozzo/ozzo-validation"
+
 // Employee extends User and has all User fields
 type Employee struct {
 	EmployeeID int `json:"employeeId"`
@@ -18,3 +20,14 @@ const (
 	OwnerPosition    Position = "owner"
 	AdminPosition    Position = "admin"
 )
+
+// Validate ...
+func (e *Employee) Validate() error {
+	return validation.ValidateStruct(
+		e,
+		validation.Field(&e.EmployeeID, validation.Required),
+		validation.Field(&e.User, validation.Required),
+		validation.Field(&e.Hotel, validation.Required),
+		validation.Field(&e.Position, validation.Required, validation.By(IsEmployeePosition)),
+	)
+}
