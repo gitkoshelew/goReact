@@ -41,11 +41,23 @@ func TestRoom() *Room {
 		RoomPhotoURL: "/photo/1",
 	}
 }
+
 func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,
 		User:       *TestUser(),
 		Hotel:      *TestHotel(),
 		Position:   OwnerPosition,
+
+
+func TestPet() *Pet {
+	return &Pet{
+		Name: "Name",
+		Type: PetTypeCat,
+		Weight: 1,
+		Diesieses: "Disease",
+		Owner: *TestUser(),
+		PetPhotoURL: "/",
+
 	}
 }

@@ -138,6 +138,39 @@ services:
         networks:
             - new
 
+    chat_db:
+        image: postgres
+        container_name: socket-chat-postrgres
+        ports:
+            - "5444:5432"
+        environment:
+            POSTGRES_PASSWORD: 123
+            POSTGRES_DB: socket_chat
+            PGDATA: /var/lib/postgresql/data/pgdata
+        restart: always
+
+    chat_server:
+        build: ./socket-chat-server
+        image: socket-chat-express
+        container_name: socket-chat-express
+        ports:
+            - "5001:5000"
+        environment:
+            DB_HOST: chat_db
+            DB_PASSWORD: 123
+        restart: always
+        depends_on:
+            - chat_db
+
+    chat_pgadmin:
+        image: dpage/pgadmin4
+        container_name: socket-chat-pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5051:80"
+
 networks:
     new:
         driver: bridge
