@@ -1,6 +1,7 @@
 package store
 
 import (
+	"errors"
 	"goReact/domain/model"
 	"log"
 )
@@ -77,8 +78,15 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 func (r *PetRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM pet WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
 		return err
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected < 1 {
+		return errors.New("no rows affected")
 	}
 	log.Printf("Pet deleted, rows affectet: %d", result)
 	return nil

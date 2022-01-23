@@ -1,6 +1,7 @@
 package store
 
 import (
+	"errors"
 	"goReact/domain/model"
 	"log"
 )
@@ -13,12 +14,8 @@ type HotelRepository struct {
 // Create hotel and save it to DB
 func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO hotel",
-		"(name, address)",
-		"VALUES ($1, $2) RETURNING id",
-		h.Name, h.Address,
-	).Scan(&h.HotelID); err != nil {
-		log.Print(err)
+		"INSERT INTO hotel (name, address) VALUES ($1, $2) RETURNING id", h.Name, h.Address).Scan(&h.HotelID); err != nil {
+
 		return nil, err
 	}
 	return h, nil
@@ -67,8 +64,15 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 func (r *HotelRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM hotel WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
 		return err
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected < 1 {
+		return errors.New("no rows affected")
 	}
 	log.Printf("Hotel deleted, rows affectet: %d", result)
 	return nil
