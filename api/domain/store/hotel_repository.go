@@ -82,9 +82,7 @@ func (r *HotelRepository) Delete(id int) error {
 func (r *HotelRepository) Update(e *model.Hotel) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE hotel SET",
-		"name = $1, address = $2",
-		"WHERE id = $3",
+		"UPDATE hotel SET name = $1, address = $2 WHERE id = $3",
 		e.Name,
 		e.Address,
 		e.HotelID,

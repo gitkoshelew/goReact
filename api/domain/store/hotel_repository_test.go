@@ -60,3 +60,17 @@ func TestHotelRepository_GetAll(t *testing.T) {
 		assert.NotNil(t, h)
 	})
 }
+
+func TestHotelRepository_Update(t *testing.T) {
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
+	t.Run("valid update", func(t *testing.T) {
+		h, err := s.Hotel().Create(model.TestHotel())
+		
+		h.Name = "Minsk"
+		h.Address = "Minsk"
+
+		err = s.Hotel().Update(h)
+		assert.NoError(t, err)
+	})
+}
