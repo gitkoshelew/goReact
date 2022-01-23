@@ -1,6 +1,7 @@
 package store
 
 import (
+	"errors"
 	"goReact/domain/model"
 	"log"
 )
@@ -13,7 +14,7 @@ type PetRepository struct {
 // Create pet and save it to DB
 func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO pet (name, type, weigt, dieses, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id",
+		"INSERT INTO pet (name, type, weight, dieseses, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id",
 		p.Name,
 		string(p.Type),
 		p.Weight,
@@ -75,8 +76,15 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 func (r *PetRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM pet WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
 		return err
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected < 1 {
+		return errors.New("no rows affected")
 	}
 	log.Printf("Pet deleted, rows affectet: %d", result)
 	return nil
@@ -87,8 +95,7 @@ func (r *PetRepository) Update(p *model.Pet) error {
 
 	result, err := r.Store.Db.Exec(
 		"UPDATE pet SET",
-		"name = $1, type = $2, weight = $3, dieseses = $4, client_id = $5",
-		"WHERE id = $6",
+		"name = $1, type = $2, weight = $3, dieseses = $4, client_id = $5 WHERE id = $6",
 		p.Name,
 		string(p.Type),
 		p.Weight,
