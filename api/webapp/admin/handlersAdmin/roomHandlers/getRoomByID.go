@@ -17,12 +17,24 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 		session.CheckSession(w, r)
 
 		rooms := []model.Room{}
-		id, _ := strconv.Atoi(ps.ByName("id"))
+		id, err := strconv.Atoi(ps.ByName("id"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			return
+		}
 
-		s.Open()
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
+		}
+
 		room, err := s.Room().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Cant find pet. Err msg:%v.", err)
 			return
 		}
 		rooms = append(rooms, *room)
@@ -35,12 +47,14 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, rooms)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 	}

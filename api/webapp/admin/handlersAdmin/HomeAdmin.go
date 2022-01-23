@@ -1,6 +1,7 @@
 package handlersadmin
 
 import (
+	"goReact/domain/store"
 	"goReact/webapp/admin/session"
 	"html/template"
 	"net/http"
@@ -9,13 +10,14 @@ import (
 )
 
 // HomeAdmin ...
-func HomeAdmin() httprouter.Handle {
+func HomeAdmin(s *store.Store) httprouter.Handle {
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		exist := session.IsExist(w, r)
 		if exist {
-			HomePage(w)
+			HomePage(w , s)
+			s.Logger.Errorf("Unauthorized")
 			return
 		}
 		http.Redirect(w, r, "/admin/login", http.StatusFound)
@@ -23,7 +25,7 @@ func HomeAdmin() httprouter.Handle {
 }
 
 // HomePage ...
-func HomePage(w http.ResponseWriter) {
+func HomePage(w http.ResponseWriter , s *store.Store) {
 	files := []string{
 		"/api/webapp/admin/tamplates/homeAdmin.html",
 		"/api/webapp/admin/tamplates/base.html",
@@ -31,11 +33,13 @@ func HomePage(w http.ResponseWriter) {
 	tmpl, err := template.ParseFiles(files...)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
+		s.Logger.Errorf("Can not parse template: %v", err)
 		return
 	}
 	err = tmpl.Execute(w, nil)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
+		s.Logger.Errorf("Can not parse template: %v", err)
 		return
 	}
 }

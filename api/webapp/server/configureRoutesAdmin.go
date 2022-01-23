@@ -14,15 +14,15 @@ import (
 )
 
 func (s *Server) configureRoutesAdmin() {
-	s.router.Handle("GET", "/admin/login", handlersadmin.LoginAdmin())
+	s.router.Handle("GET", "/admin/login", handlersadmin.LoginAdmin(store.New(s.config)))
 	s.router.Handle("POST", "/admin/auth", handlersadmin.AuthAdmin(store.New(s.config)))
-	s.router.Handle("GET", "/admin/logout", handlersadmin.LogoutAdmin())
+	s.router.Handle("GET", "/admin/logout", handlersadmin.LogoutAdmin(store.New(s.config)))
 
-	s.router.Handle("GET", "/admin/home", handlersadmin.HomeAdmin())
+	s.router.Handle("GET", "/admin/home", handlersadmin.HomeAdmin(store.New(s.config)))
 
 	s.router.Handle("GET", "/admin/users", usershandlers.AllUsersHandler(store.New(s.config)))
 	s.router.Handle("POST", "/admin/user/new", usershandlers.NewUser(store.New(s.config)))
-	s.router.Handle("GET", "/admin/users/id:id", usershandlers.GetUserByID(store.New(s.config)))
+	s.router.Handle("GET", "/admin/users/id", usershandlers.GetUserByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/users/delete/", usershandlers.DeleteUser(store.New(s.config)))
 
 	s.router.Handle("GET", "/admin/hotels", hotelhandlers.AllHotelsHandler(store.New(s.config)))

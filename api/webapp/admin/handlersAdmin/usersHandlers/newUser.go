@@ -16,7 +16,11 @@ func NewUser(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
-		s.Open()
+		err := s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+		}
 		email := r.FormValue("Email")
 		password := r.FormValue("Password")
 		role := r.FormValue("Role")
@@ -48,17 +52,20 @@ func NewUser(s *store.Store) httprouter.Handle {
 			DateOfBirth: dateOfBirth,
 		}
 
-		err := u.WithEncryptedPassword()
+		err = u.WithEncryptedPassword()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v.", err)
 			return
 		}
 
 		_, err = s.User().Create(&u)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
+			s.Logger.Errorf("Can't create user. Err msg:%v.", err)
 			return
 		}
+		s.Logger.Info("Creat user with id = %d", u.UserID)
 		http.Redirect(w, r, "/admin/home", http.StatusFound)
 
 	}
