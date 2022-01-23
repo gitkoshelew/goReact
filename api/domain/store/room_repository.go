@@ -1,6 +1,7 @@
 package store
 
 import (
+	"errors"
 	"goReact/domain/model"
 	"log"
 )
@@ -13,13 +14,8 @@ type RoomRepository struct {
 // Create room and save it to DB
 func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room",
-		"(pet_type, number, hotel_id)",
-		"VALUES ($1, $2, $3) RETURNING id",
-		string(rm.PetType),
-		rm.RoomNumber,
-		rm.Hotel.HotelID,
-	).Scan(&rm.RoomID); err != nil {
+		"INSERT INTO room (pet_type, number, hotel_id) VALUES ($1, $2, $3) RETURNING id",
+		string(rm.PetType), rm.RoomNumber, rm.Hotel.HotelID).Scan(&rm.RoomID); err != nil {
 		log.Print(err)
 		return nil, err
 	}
@@ -74,6 +70,14 @@ func (r *RoomRepository) Delete(id int) error {
 		log.Printf(err.Error())
 		return err
 	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected < 1 {
+		return errors.New("No rows affected")
+	}
 	log.Printf("Room deleted, rows affectet: %d", result)
 	return nil
 }
@@ -82,9 +86,7 @@ func (r *RoomRepository) Delete(id int) error {
 func (r *RoomRepository) Update(rm *model.Room) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE room SET",
-		"number = $1, pet_type = $2, hotel_id = $3",
-		"WHERE id = $4",
+		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3 WHERE id = $4",
 		rm.RoomNumber,
 		string(rm.PetType),
 		rm.Hotel.HotelID,

@@ -42,6 +42,16 @@ func TestRoom() *Room {
 	}
 }
 
+func TestEmployee() *Employee {
+	return &Employee{
+		EmployeeID: 1,
+		User:       *TestUser(),
+		Hotel:      *TestHotel(),
+		Position:   OwnerPosition,
+
+	}
+}
+
 func TestPet() *Pet {
 	return &Pet{
 		Name: "Name",
