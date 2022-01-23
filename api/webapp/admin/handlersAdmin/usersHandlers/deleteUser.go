@@ -18,6 +18,7 @@ func DeleteUser(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
+			http.Redirect(w, r, "/admin/home", http.StatusFound)
 			return
 		}
 		err = s.Open()

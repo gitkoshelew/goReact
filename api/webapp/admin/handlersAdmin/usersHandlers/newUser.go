@@ -24,14 +24,24 @@ func NewUser(s *store.Store) httprouter.Handle {
 		email := r.FormValue("Email")
 		password := r.FormValue("Password")
 		role := r.FormValue("Role")
-		verified, _ := strconv.ParseBool(r.FormValue("Verified"))
+		verified, err := strconv.ParseBool(r.FormValue("Verified"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
+			return
+		}
 		name := r.FormValue("Name")
 		surname := r.FormValue("Surname")
 		middleName := r.FormValue("MiddleName")
 		sex := r.FormValue("Sex")
 
 		layout := "2006-01-02"
-		dateOfBirth, _ := time.Parse(layout, r.FormValue("DateOfBirth"))
+		dateOfBirth, err := time.Parse(layout, r.FormValue("DateOfBirth"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
+			return
+		}
 		address := r.FormValue("Address")
 		phone := r.FormValue("Phone")
 		photo := r.FormValue("Photo")
@@ -50,6 +60,13 @@ func NewUser(s *store.Store) httprouter.Handle {
 			Photo:       photo,
 			Verified:    verified,
 			DateOfBirth: dateOfBirth,
+		}
+
+		err = u.Validate()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
+			return
 		}
 
 		err = u.WithEncryptedPassword()

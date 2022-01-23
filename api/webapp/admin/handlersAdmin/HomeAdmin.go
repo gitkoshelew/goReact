@@ -16,16 +16,17 @@ func HomeAdmin(s *store.Store) httprouter.Handle {
 
 		exist := session.IsExist(w, r)
 		if exist {
-			HomePage(w , s)
-			s.Logger.Errorf("Unauthorized")
+			HomePage(w, s)
+
 			return
 		}
+		s.Logger.Errorf("Unauthorized")
 		http.Redirect(w, r, "/admin/login", http.StatusFound)
 	}
 }
 
 // HomePage ...
-func HomePage(w http.ResponseWriter , s *store.Store) {
+func HomePage(w http.ResponseWriter, s *store.Store) {
 	files := []string{
 		"/api/webapp/admin/tamplates/homeAdmin.html",
 		"/api/webapp/admin/tamplates/base.html",
