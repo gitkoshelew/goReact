@@ -7,10 +7,33 @@ const { carousel, carouselBig } = s
 
 export type CarouselPropsType = {
   children: ReactChild | ReactChild[] | ReactChildren | ReactChildren[]
+  /**
+   *  2 breakpoints (1250, 768) with settings:
+   *
+   *  slidesToShow
+   *
+   *  slidesToScroll
+   *
+   *  infinite
+   *
+   *  dots
+   *
+   *  arrows
+   */
   responsiveArrForCarousel?: ResponsiveObject[]
   startSlideToShow: number
   startSlideScroll: number
+  /**
+   * The display content of the Carousel:
+   *
+   * smallWidth
+   *
+   * bigWidth
+   */
   type: string
+  /**
+   * Show arrows or not
+   */
   isWithArrows: boolean
 }
 export type SampleArrowPropsType = {
