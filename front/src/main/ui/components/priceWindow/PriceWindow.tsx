@@ -1,6 +1,9 @@
 import s from './PriceWindow.module.scss'
 
-type PriceWindowPropsType = {
+export type PriceWindowPropsType = {
+    /**
+     * Shows price per room
+     */
   price: number
 }
 
