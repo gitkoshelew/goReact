@@ -2,6 +2,9 @@ import { Alert, AlertTitle, Snackbar } from '@mui/material'
 import { useState } from 'react'
 
 export type LoginErrorMsgPropsType = {
+    /**
+     * Customize message
+     */
   ErrorMsg: string
 }
 
