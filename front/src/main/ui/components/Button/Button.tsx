@@ -5,11 +5,11 @@ const { uploadPetPhoto, uploadPetPhotoActive, orderBtn } = s
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   view: string
-  isActive?: boolean
+  disabled?: boolean
   onClick?: () => void
 }
 
-export const Button = ({ onClick, view, isActive, ...props }: ButtonProps) => {
+export const Button = ({ onClick, view, disabled, ...props }: ButtonProps) => {
   return (
     <div>
       {view === 'order' && (
@@ -18,7 +18,7 @@ export const Button = ({ onClick, view, isActive, ...props }: ButtonProps) => {
         </button>
       )}
       {view === 'upload' && (
-        <button type={'submit'} className={isActive ? uploadPetPhotoActive : uploadPetPhoto} {...props}>
+        <button type={'submit'} className={disabled ? uploadPetPhoto: uploadPetPhotoActive} {...props}>
           Confirm
         </button>
       )}
