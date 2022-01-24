@@ -96,7 +96,7 @@ export const Booking = () => {
         </div>
         <div className={uploadOrderedRoomsBlock}>
           {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
-          <Button view={'upload'} disabled={!isActiveBtn} isActive={isActiveBtn} />
+          <Button view={'upload'} disabled={!isActiveBtn} />
         </div>
       </div>
     </form>
