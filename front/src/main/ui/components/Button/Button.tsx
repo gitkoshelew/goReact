@@ -4,8 +4,21 @@ import { ButtonHTMLAttributes } from 'react'
 const { uploadPetPhoto, uploadPetPhotoActive, orderBtn } = s
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   The display content of the button:
+   *
+   order
+   *
+   upload
+   */
   view: string
+  /**
+   * Checks if the button should be disabled
+   */
   disabled?: boolean
+  /**
+   * Click handler
+   */
   onClick?: () => void
 }
 
