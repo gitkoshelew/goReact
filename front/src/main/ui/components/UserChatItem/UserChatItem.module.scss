@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+
+.userChatItem {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin: 15px 0;
+  background: $main-background-color;
+  text-decoration: none;
+}
+.userPhoto {
+  img {
+    height: 52px;
+    width: 52px;
+    border-radius: 100%;
+  }
+}
+.userDescriptions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .userName {
+    font-family: $main-fonts;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: $main-text-color;
+    @media (min-width: 575px) {
+      font-size: 22px;
+    }
+    @media (min-width: 767px) {
+      font-size: 22px;
+    }
+  }
+  .userRole {
+    font-family: $main-fonts;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    color: $secondary-text-color;
+    @media (min-width: 575px) {
+      font-size: 19px;
+    }
+    @media (min-width: 767px) {
+      font-size: 19px;
+    }
+  }
+}

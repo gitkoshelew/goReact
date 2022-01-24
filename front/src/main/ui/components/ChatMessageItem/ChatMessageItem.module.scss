@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.messageSender {
+  font-family: $main-fonts;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: $main-text-color;
+  @media (min-width: 575px) {
+    font-size: 22px;
+  }
+  @media (min-width: 767px) {
+    font-size: 22px;
+  }
+}
+.messageText {
+  font-family: $main-fonts;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: $secondary-text-color;
+  @media (min-width: 575px) {
+    font-size: 19px;
+  }
+  @media (min-width: 767px) {
+    font-size: 19px;
+  }
+}
