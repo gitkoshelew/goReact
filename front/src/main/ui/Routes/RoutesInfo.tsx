@@ -15,6 +15,8 @@ import { LogInResponse } from '../../dal/api_client/AuthService'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { RegistrationPage } from '../pages/Registration/RegistrationPage'
 import { RegisterPageLoadingStatus } from '../../bll/reducers/RegistrationPageReducer/registrationPage-reducer'
+import { Chat } from '../pages/Chat/Chat'
+import { Conversation } from '../components/Conversation/Conversation'
 
 type LoginWrapperType = {
   children: ReactJSXElement
@@ -36,6 +38,8 @@ export const PATH = {
   GALLERY: '/gallery',
   BASKET: '/basket',
   REGISTRATION: '/registration',
+  CHAT: '/chat/*',
+  CHAT_CONVERSATION: '/:userId',
 }
 
 export const RoutesInfo = () => {
@@ -77,6 +81,16 @@ export const RoutesInfo = () => {
         <Route path={PATH.BOOKING} element={<Booking />} />
         <Route path={PATH.SERVICE} element={<Service />} />
         <Route path={PATH.BASKET} element={<Basket />} />
+        <Route
+          path={PATH.CHAT}
+          element={
+            <Chat>
+              <Routes>
+                <Route path={PATH.CHAT_CONVERSATION} element={<Conversation />} />
+              </Routes>
+            </Chat>
+          }
+        />
 
         <Route path={'*'} element={<Error404 />} />
       </Routes>
