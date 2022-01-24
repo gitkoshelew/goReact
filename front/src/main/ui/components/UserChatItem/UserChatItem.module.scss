@@ -7,6 +7,10 @@
   margin: 15px 0;
   background: $main-background-color;
   text-decoration: none;
+  border-radius: 8px;
+  &.active {
+    background: #c5c5c5;
+  }
 }
 .userPhoto {
   img {
