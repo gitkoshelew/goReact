@@ -1,9 +1,9 @@
-package pet
+package room
 
 import (
 	"encoding/json"
-	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/server/handler/pagination"
 	"goReact/webapp/server/handler/response"
 	"net/http"
 	"strconv"
@@ -11,31 +11,27 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetUsersHandle returns all users
-func GetRoomsHandle(s *store.Store) httprouter.Handle {
+// GetUsersHandle returns all users with limit and offset
+func GetRoomsHandlePagination(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
-		offset, err := strconv.Atoi(ps.ByName("offset"))
+		page := &pagination.Page{}
+
+		var err error
+		page.PageNumber, err = strconv.Atoi(r.URL.Query().Get("offset"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("offset"))
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
+			s.Logger.Errorf("Bad Query. Err msg:%v: ", err)
+
 		}
 
-	
-
-		limit, err := strconv.Atoi(ps.ByName("limit"))
+		page.PageSize, err = strconv.Atoi(r.URL.Query().Get("pagesize"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("offset"))
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
+			s.Logger.Errorf("Bad Query. Err msg:%v: ", err)
 
-		fmt.Println(offset)
-		fmt.Println(limit)
+		}
 
 		err = s.Open()
 		if err != nil {
@@ -45,7 +41,7 @@ func GetRoomsHandle(s *store.Store) httprouter.Handle {
 
 		}
 
-		pets, err := s.Pet().GetAll()
+		rooms, err := s.Room().GetAllPagination(page)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Can't find user. Err msg: %v", err)
@@ -54,6 +50,6 @@ func GetRoomsHandle(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(pets)
+		json.NewEncoder(w).Encode(rooms)
 	}
 }
