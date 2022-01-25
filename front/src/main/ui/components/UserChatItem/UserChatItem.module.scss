@@ -24,31 +24,9 @@
   flex-direction: column;
   align-items: flex-start;
   .userName {
-    font-family: $main-fonts;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
-    color: $main-text-color;
-    @media (min-width: 575px) {
-      font-size: 22px;
-    }
-    @media (min-width: 767px) {
-      font-size: 22px;
-    }
+    @include font-setup(20px, 500);
   }
   .userRole {
-    font-family: $main-fonts;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 18px;
-    color: $secondary-text-color;
-    @media (min-width: 575px) {
-      font-size: 19px;
-    }
-    @media (min-width: 767px) {
-      font-size: 19px;
-    }
+    @include font-setup(16px, 500, $color: $secondary-text-color);
   }
 }
