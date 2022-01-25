@@ -108,6 +108,7 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.Room, er
 	rows, err := r.Store.Db.Query("SELECT * FROM ROOM OFFSET $1 LiMIT $2", p.Offset, p.PageSize)
 	if err != nil {
 		log.Print(err)
+		return nil , err
 	}
 	rooms := []model.Room{}
 

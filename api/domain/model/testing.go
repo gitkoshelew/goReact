@@ -1,6 +1,7 @@
 package model
 
 import (
+	"goReact/webapp/server/handler/pagination"
 	"time"
 )
 
@@ -60,5 +61,12 @@ func TestPet() *Pet {
 		Diesieses: "Disease",
 		Owner: *TestUser(),
 		PetPhotoURL: "/",
+	}
+}
+
+func TestPage() *pagination.Page{
+	return &pagination.Page{
+		PageNumber: 1,
+		PageSize: 10,
 	}
 }
