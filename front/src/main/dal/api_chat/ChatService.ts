@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { $api } from '../api_client/API'
-import { $apiChat } from './API'
+import { apiChat } from './API'
 
 export type ChatUser = {
   userId: number
@@ -18,8 +18,8 @@ export type ChatUser = {
 }
 export type ChatMessage = {
   id: string
-  senderId: number
-  receiverId: number
+  producerId: number
+  consumerId: number
   conversationId: number
   text: string
 }
@@ -39,15 +39,15 @@ export const ChatAPI = {
     return res
   },
   async fetchInitMessages(conversationId: number): Promise<AxiosResponse<FetchInitMessagesResponse>> {
-    const res = await $apiChat.get(`api/messages/${conversationId}`)
+    const res = await apiChat.get(`api/messages/${conversationId}`)
     return res
   },
-  async getConversation(firstUserId: number, secondUserId: number): Promise<AxiosResponse<GetConversationResponse>> {
-    const res = await $apiChat.get(`api/conversations/find/${firstUserId}/${secondUserId}`)
+  async getConversation(producerId: number, consumerId: number): Promise<AxiosResponse<GetConversationResponse>> {
+    const res = await apiChat.get(`api/conversations/find/${producerId}/${consumerId}`)
     return res
   },
-  async createConversation(senderId: number, receiverId: number): Promise<AxiosResponse<CreateConversationResponse>> {
-    const res = await $apiChat.post(`api/conversations/add`, { senderId, receiverId })
+  async createConversation(producerId: number, consumerId: number): Promise<AxiosResponse<CreateConversationResponse>> {
+    const res = await apiChat.post(`api/conversations/add`, { producerId, consumerId })
     return res
   },
 }

@@ -7,8 +7,8 @@ export const Message = sequelize.define("message", {
     primaryKey: true,
     defaultValue: DataTypes.UUIDV1,
   },
-  senderId: { type: DataTypes.INTEGER, allowNull: false },
-  receiverId: { type: DataTypes.INTEGER, allowNull: false },
+  producerId: { type: DataTypes.INTEGER, allowNull: false },
+  consumerId: { type: DataTypes.INTEGER, allowNull: false },
   conversationId: { type: DataTypes.INTEGER, allowNull: false },
   text: { type: DataTypes.STRING, allowNull: false },
 });

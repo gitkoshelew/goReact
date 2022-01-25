@@ -12,19 +12,19 @@ export const Conversation = () => {
   const dispatch = useAppDispatch()
   const messages = useSelector((state: AppRootState) => state.ChatPage.messages)
   const me = useSelector((state: AppRootState) => state.LoginPage.user)
-  const { userId: receiverId } = useParams()
+  const { userId: consumerId } = useParams()
 
   useEffect(() => {
-    if (me && receiverId) {
-      dispatch(getConversationRequest(me.userId, Number(receiverId)))
+    if (me && consumerId) {
+      dispatch(getConversationRequest(me.userId, Number(consumerId)))
     }
-  }, [receiverId])
+  }, [consumerId])
 
   return (
     <div className={conversation}>
       <div className={conversationHistory}>
         {messages.map((message) => (
-          <ChatMessageItem key={message.id} sender={message.senderId} text={message.text} />
+          <ChatMessageItem key={message.id} sender={message.producerId} text={message.text} />
         ))}
       </div>
       <div className={newMessageForm}>

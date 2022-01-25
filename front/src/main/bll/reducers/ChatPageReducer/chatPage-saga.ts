@@ -58,14 +58,14 @@ export function* getConversationSagaWorker(action: GetConversationRequestType) {
     yield put(fetchStart())
     const foundedConversationResponse: AxiosResponse<GetConversationResponse> = yield call(
       ChatAPI.getConversation,
-      action.firstUserId,
-      action.secondUserId
+      action.producerId,
+      action.consumerId
     )
     if (!foundedConversationResponse.data) {
       const createdConversationResponse: AxiosResponse<CreateConversationResponse> = yield call(
         ChatAPI.createConversation,
-        action.firstUserId,
-        action.secondUserId
+        action.producerId,
+        action.consumerId
       )
       yield put(setCurrentConversation({ conversationId: createdConversationResponse.data.id }))
       yield put(fetchInitMessagesSuccess({ initMessages: [] }))
@@ -85,10 +85,10 @@ export function* getConversationSagaWorker(action: GetConversationRequestType) {
   }
 }
 
-export const getConversationRequest = (firstUserId: number, secondUserId: number) => ({
+export const getConversationRequest = (producerId: number, consumerId: number) => ({
   type: 'CHAT_PAGE/GET_CONVERSATION_SAGA',
-  firstUserId,
-  secondUserId,
+  producerId,
+  consumerId,
 })
 
 type GetConversationRequestType = ReturnType<typeof getConversationRequest>
