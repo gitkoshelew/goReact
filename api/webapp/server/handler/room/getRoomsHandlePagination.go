@@ -11,7 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetUsersHandle returns all users with limit and offset
+// GetUsersHandle returns all rooms with limit and offset
 func GetRoomsHandlePagination(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
