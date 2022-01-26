@@ -1,4 +1,4 @@
-import { Message } from "../models/models";
+import { Message } from "../models/models.js";
 
 export const startSocket = (io) => {
   let connectedUsers = [];

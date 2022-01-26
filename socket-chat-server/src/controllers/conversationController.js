@@ -3,10 +3,10 @@ import { Op } from "sequelize";
 
 class ConversationController {
   async add(req, res) {
-    const { senderId, receiverId } = req.body;
+    const { producerId, consumerId } = req.body;
 
     const addedConversation = await Conversation.create({
-      members: [senderId, receiverId],
+      members: [producerId, consumerId],
     });
 
     return res.status(200).json(addedConversation);
@@ -23,10 +23,10 @@ class ConversationController {
   }
 
   async getByConversationsOfTwoUsers(req, res) {
-    const { firstUser, secondUser } = req.params;
+    const { producerId, consumerId } = req.params;
 
     const usersConversations = await Conversation.findOne({
-      where: { members: { [Op.contains]: [firstUser, secondUser] } },
+      where: { members: { [Op.contains]: [producerId, consumerId] } },
     });
 
     return res.status(200).json(usersConversations);

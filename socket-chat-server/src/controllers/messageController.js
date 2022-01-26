@@ -2,12 +2,12 @@ import { Message } from "../models/models.js";
 
 class MessageController {
   async add(req, res) {
-    const { senderId, receiverId, conversationId, text } = req.body;
+    const { producerId, consumerId, conversationId, text } = req.body;
     console.log(req.body);
 
     const addedMessage = await Message.create({
-      senderId,
-      receiverId,
+      producerId,
+      consumerId,
       conversationId,
       text,
     });

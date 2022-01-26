@@ -15,6 +15,12 @@ import {
 } from '../reducers/LoginPageReduser/loginPage-saga'
 import { RegisterPageReducer } from '../reducers/RegistrationPageReducer/registrationPage-reducer'
 import { RegisterPageSagaWorker } from '../reducers/RegistrationPageReducer/registrationPage-saga'
+import { ChatPageReducer } from '../reducers/ChatPageReducer/chatPage-reducer'
+import {
+  fetchInitMessagesSagaWorker,
+  fetchUsersSagaWorker,
+  getConversationSagaWorker,
+} from '../reducers/ChatPageReducer/chatPage-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -23,6 +29,7 @@ const rootReducer = combineReducers({
   BookingRoomPick: BookingRoomPickReducer,
   LoginPage: LoginPageReducer,
   RegisterPage: RegisterPageReducer,
+  ChatPage: ChatPageReducer,
 })
 
 export type RootReducer = typeof rootReducer
@@ -51,4 +58,7 @@ function* rootWatcher() {
   yield takeEvery('LOGIN_PAGE/LOGOUT_SAGA', LoginPageLogoutSagaWorker)
   yield takeEvery('LOGIN_PAGE/ME_SAGA', LoginPageMeRequestSagaWorker)
   yield takeEvery('REGISTER_PAGE/REGISTER_SAGA', RegisterPageSagaWorker)
+  yield takeEvery('CHAT_PAGE/FETCH_USERS_SAGA', fetchUsersSagaWorker)
+  yield takeEvery('CHAT_PAGE/FETCH_INIT_MESSAGES_SAGA', fetchInitMessagesSagaWorker)
+  yield takeEvery('CHAT_PAGE/GET_CONVERSATION_SAGA', getConversationSagaWorker)
 }
