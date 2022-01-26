@@ -38,6 +38,11 @@ func GetMail(config *webapp.Config) *Mail {
 	}
 }
 
+var (
+	// ErrInvalidMail ...
+	ErrInvalidMail = errors.New("invalid mail type")
+)
+
 // Auth ...
 func (m *Mail) Auth() smtp.Auth {
 	return smtp.PlainAuth("", m.From, m.Password, m.Source)
@@ -51,8 +56,8 @@ func (m *Mail) Create(mailType MailType, message string, to []string) (string, e
 		return "From: " + m.From + "\n" +
 				"To: " + to[0] + "\n" +
 				"Subject: Email confirmation\n\n" +
-				"Dear client! Thank you for choising our Hotel, we will look after your pets like our own!\n" +
-				"To complete your registration and activate your account, simply verify your email address by link below: \n" +
+				"Dear client! Thank you for choosing  our Hotel, we will look after your pets like they are our own!\n" +
+				"To complete your registration and activate your account, please click to the link below: \n" +
 				fmt.Sprintf("%s%s \n", os.Getenv("EMAIL_CONFITM_ENDPOINT"), message) +
 				"Link will be expire in 2 hours.",
 			nil
@@ -64,7 +69,7 @@ func (m *Mail) Create(mailType MailType, message string, to []string) (string, e
 				"Link will be expire in 1 hours.",
 			nil
 	default:
-		return "", errors.New("Ivalid mail type")
+		return "", ErrInvalidMail
 	}
 }
 

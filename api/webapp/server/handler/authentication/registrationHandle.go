@@ -9,10 +9,8 @@ import (
 	"goReact/webapp/server/handler/request"
 	"goReact/webapp/server/handler/response"
 	"net/http"
-	"os"
-	"time"
+	"strconv"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -26,6 +24,7 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
 		}
 
 		u := model.User{
@@ -43,15 +42,8 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 			Verified:    false,
 			DateOfBirth: req.DateOfBirth,
 		}
-		err := u.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
 
-		err = u.WithEncryptedPassword()
+		err := u.WithEncryptedPassword()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
@@ -75,11 +67,10 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 			return
 		}
 
-		epClaims := jwt.MapClaims{}
-		epClaims["user_id"] = u.UserID
-		epClaims["exp"] = time.Now().Add(time.Minute * 120).Unix()
-		at := jwt.NewWithClaims(jwt.SigningMethodHS256, epClaims)
-		endpoint, err := at.SignedString([]byte(os.Getenv("EMAIL_CONFIRM_SECRET")))
+		payload := make(map[string]string)
+		payload["user_id"] = strconv.Itoa(u.UserID)
+
+		endpoint, err := CreateCustomToken(payload, 120, EmailSecretKey)
 
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)

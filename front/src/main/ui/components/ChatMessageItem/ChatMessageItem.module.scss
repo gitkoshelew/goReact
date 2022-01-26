@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+
+.messageSender {
+  @include font-setup(18px, 500);
+  @media (min-width: 575px) {
+    font-size: 22px;
+  }
+  @media (min-width: 767px) {
+    font-size: 22px;
+  }
+}
+.messageText {
+  @include font-setup(16px, 500, $color: $secondary-text-color);
+  @media (min-width: 575px) {
+    font-size: 19px;
+  }
+  @media (min-width: 767px) {
+    font-size: 19px;
+  }
+}

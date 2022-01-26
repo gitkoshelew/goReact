@@ -7,15 +7,32 @@ import { takeEvery } from 'redux-saga/effects'
 import { BookingUploadPetImgSagaWorker } from '../reducers/BookingRegFormReducer/BookindRegForm-saga'
 import { BookingRoomPickReducer } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { BookingRoomPickSagaWorker } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
+import { LoginPageReducer } from '../reducers/LoginPageReduser/loginPage-reducer'
+import {
+  LoginPageLoginSagaWorker,
+  LoginPageLogoutSagaWorker,
+  LoginPageMeRequestSagaWorker,
+} from '../reducers/LoginPageReduser/loginPage-saga'
+import { RegisterPageReducer } from '../reducers/RegistrationPageReducer/registrationPage-reducer'
+import { RegisterPageSagaWorker } from '../reducers/RegistrationPageReducer/registrationPage-saga'
+import { ChatPageReducer } from '../reducers/ChatPageReducer/chatPage-reducer'
+import {
+  fetchInitMessagesSagaWorker,
+  fetchUsersSagaWorker,
+  getConversationSagaWorker,
+} from '../reducers/ChatPageReducer/chatPage-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
   BookingRegForm: BookingRegFormReducer,
   BookingRoomPick: BookingRoomPickReducer,
+  LoginPage: LoginPageReducer,
+  RegisterPage: RegisterPageReducer,
+  ChatPage: ChatPageReducer,
 })
 
-export type RootReducerType = typeof rootReducer
+export type RootReducer = typeof rootReducer
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -25,11 +42,11 @@ export const store = configureStore({
     }).prepend(sagaMiddleware),
 })
 
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootState = ReturnType<typeof rootReducer>
 
-export type AppDispatchType = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch
 
-export const useAppDispatch = () => useDispatch<AppDispatchType>()
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 //sagaWatcher
 sagaMiddleware.run(rootWatcher)
@@ -37,4 +54,11 @@ sagaMiddleware.run(rootWatcher)
 function* rootWatcher() {
   yield takeEvery('BOOKING_REG_FORM/BOOKING_PET_IMG_UPLOAD', BookingUploadPetImgSagaWorker)
   yield takeEvery('BOOKING_ROOM_PICK/NEW_IS_RENT_ROOMS_FOR_CALENDAR', BookingRoomPickSagaWorker)
+  yield takeEvery('LOGIN_PAGE/LOGIN_SAGA', LoginPageLoginSagaWorker)
+  yield takeEvery('LOGIN_PAGE/LOGOUT_SAGA', LoginPageLogoutSagaWorker)
+  yield takeEvery('LOGIN_PAGE/ME_SAGA', LoginPageMeRequestSagaWorker)
+  yield takeEvery('REGISTER_PAGE/REGISTER_SAGA', RegisterPageSagaWorker)
+  yield takeEvery('CHAT_PAGE/FETCH_USERS_SAGA', fetchUsersSagaWorker)
+  yield takeEvery('CHAT_PAGE/FETCH_INIT_MESSAGES_SAGA', fetchInitMessagesSagaWorker)
+  yield takeEvery('CHAT_PAGE/GET_CONVERSATION_SAGA', getConversationSagaWorker)
 }

@@ -17,7 +17,7 @@ var (
 // WithoutSpaces ...
 func WithoutSpaces(value interface{}) error {
 	if strings.ContainsAny(value.(string), " ") {
-		return errors.New("Field cannot contains spaces")
+		return errors.New("field cannot contains spaces")
 	}
 
 	return nil
@@ -33,14 +33,14 @@ func IsLetterHyphenSpaces(value interface{}) error {
 
 	err := is.UTFLetter.Validate(s)
 	if err != nil {
-		return errors.New("Only latin or cyrillic symblos, space and '-' symbol allowed")
+		return errors.New("only latin or cyrillic symblos, space and '-' symbol allowed")
 	}
 	if cyrillic.MatchString(s) && !latin.MatchString(s) {
 		return nil
 	} else if latin.MatchString(s) && !cyrillic.MatchString(s) {
 		return nil
 	}
-	return errors.New("Only latin or cyrillic symblos, space and '-' symbol allowed")
+	return errors.New("only latin or cyrillic symblos, space and '-' symbol allowed")
 }
 
 // IsPhone ...
@@ -50,7 +50,7 @@ func IsPhone(value interface{}) error {
 	if phone.MatchString(s) {
 		return nil
 	}
-	return errors.New("Invalid phone number format")
+	return errors.New("invalid phone number format")
 }
 
 // IsRole checks if string matchs to a Role types of User
@@ -62,7 +62,7 @@ func IsRole(value interface{}) error {
 	if s == ClientRole || s == EmployeeRole || s == AnonymousRole {
 		return nil
 	}
-	return errors.New("Allowed roles for user: 'client', 'employee', 'anonymous'")
+	return errors.New("allowed roles for user: 'client', 'employee', 'anonymous'")
 }
 
 // IsSex checks if string matchs to a sex types of User
@@ -73,5 +73,28 @@ func IsSex(value interface{}) error {
 	if s == SexMale || s == SexFemale {
 		return nil
 	}
-	return errors.New("Allowed genders: 'male', 'female'")
+	return errors.New("allowed genders: 'male', 'female'")
+}
+
+
+// IsPetType checks if string matchs to a Pet types of Pets
+// PetTypeCat = "cat"
+// PetTypeDog = "dog"
+func IsPetType(value interface{}) error {
+	s := value.(PetType)
+	if s == "cat" || s == "dog" {
+		return nil
+	}
+	return errors.New("allowed pet types: 'PetTypeCat', 'PetTypeDog'")
+}
+
+// IsPetType checks if string matchs to a Pet types of Pets
+// PetTypeCat = "cat"
+// PetTypeDog = "dog"
+func IsEmployeePosition(value interface{}) error {
+	s := value.(Position)
+	if s == ManagerPosition || s == EmployeePosition || s == OwnerPosition || s == AdminPosition {
+		return nil
+	}
+	return errors.New("allowed pet types: 'ManagerPosition', 'EmployeePosition' ,'OwnerPosition','AdminPosition'")
 }

@@ -3,7 +3,6 @@ package store
 import (
 	"errors"
 	"goReact/domain/model"
-	"log"
 )
 
 // UserRepository ...
@@ -14,24 +13,24 @@ type UserRepository struct {
 // Create user and save it to DB
 func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	if err := u.Validate(); err != nil {
-		r.Store.Logger.Errorf("User %v is invalid. Error msg: %s", u, err.Error())
 		return nil, err
 	}
 
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
-		r.Store.Logger.Errorf("Error while checking if email ia already in use. Err msg: %v", err)
 		return nil, err
 	}
 
 	if emailIsUsed {
-		r.Store.Logger.Errorf("Email %s already in use", u.Email)
 		return nil, errors.New("Email already in use")
 	}
 
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO users (email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id",
+		`INSERT INTO users 
+		(email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
+		RETURNING id`,
 		u.Email,
 		u.Password,
 		string(u.Role),
@@ -45,10 +44,8 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		u.Phone,
 		u.Photo,
 	).Scan(&u.UserID); err != nil {
-		r.Store.Logger.Errorf("Cant't insert into users table. Err msg: %v", err)
 		return nil, err
 	}
-	log.Print(u)
 	return u, nil
 }
 
@@ -56,7 +53,6 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't select form users table. Err msg: %v", err)
 		return nil, err
 	}
 	users := []model.User{}
@@ -79,7 +75,6 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Photo,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error while scanning rows. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -106,7 +101,6 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant't select form users table. Err msg: %v", err)
 		return nil, err
 	}
 	return user, nil
@@ -131,7 +125,6 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant't select form users table. Err msg: %v", err)
 		return nil, err
 	}
 	return user, nil
@@ -141,10 +134,16 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 func (r *UserRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM users WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't delete form users table. Err msg: %v", err)
 		return err
 	}
-	r.Store.Logger.Infof("User %d deleted. Rows affected: %d", id, result)
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected < 1 {
+		return errors.New("No rows affected")
+	}
 	return nil
 }
 
@@ -157,11 +156,11 @@ func (r *UserRepository) Update(u *model.User) error {
 	}
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE users SET "+
-			"email = $1, password = $2, role = $3, verified = $4, "+
-			"first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, "+
-			"address = $10, phone = $11, photo = $12 "+
-			"WHERE id = $13",
+		`UPDATE users SET 
+			email = $1, password = $2, role = $3, verified = $4, 
+			first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, 
+			address = $10, phone = $11, photo = $12 
+			WHERE id = $13`,
 		u.Email,
 		encryptedPassword,
 		string(u.Role),
@@ -187,16 +186,22 @@ func (r *UserRepository) Update(u *model.User) error {
 // VerifyEmail user from DB
 func (r *UserRepository) VerifyEmail(userID int) error {
 	result, err := r.Store.Db.Exec(
-		"UPDATE users SET "+
-			"verified = $1 WHERE id = $2",
+		"UPDATE users SET verified = $1 WHERE id = $2",
 		true,
 		userID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
 		return err
 	}
-	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return nil
+	}
+
+	if rowsAffected < 1 {
+		return errors.New("No rows affected")
+	}
 	return nil
 }
 

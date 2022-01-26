@@ -17,7 +17,7 @@
     white-space: nowrap;
     color: $main-text-color;
     text-decoration: none;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -34,7 +34,7 @@
   .oneLink {
     white-space: nowrap;
     text-decoration: none;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: $main-fonts;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;

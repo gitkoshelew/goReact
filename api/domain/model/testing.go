@@ -22,3 +22,43 @@ func TestUser() *User {
 	}
 
 }
+
+// Testing instance of hotel
+func TestHotel() *Hotel {
+	return &Hotel{
+		HotelID: 1,
+		Name:    "Name",
+		Address: "Minsk ul sovetskaya 18",
+	}
+}
+
+func TestRoom() *Room {
+	return &Room{
+		RoomID:       1,
+		RoomNumber:   1,
+		PetType:      PetTypeCat,
+		Hotel:        *TestHotel(),
+		RoomPhotoURL: "/photo/1",
+	}
+}
+
+func TestEmployee() *Employee {
+	return &Employee{
+		EmployeeID: 1,
+		User:       *TestUser(),
+		Hotel:      *TestHotel(),
+		Position:   OwnerPosition,
+
+	}
+}
+
+func TestPet() *Pet {
+	return &Pet{
+		Name: "Name",
+		Type: PetTypeCat,
+		Weight: 1,
+		Diesieses: "Disease",
+		Owner: *TestUser(),
+		PetPhotoURL: "/",
+	}
+}

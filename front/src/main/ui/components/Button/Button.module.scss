@@ -1,31 +1,5 @@
 @import '../../styles/variables';
 
-.loginBtn {
-  text-decoration: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 20px;
-  background: $secondary-background-color;
-  border-radius: 8px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
-  color: $main-text-color;
-}
-
-.buyBtn {
-  background: rgba(239, 239, 239, 0.15);
-  border: 1px solid #e8e8e8;
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: 8px 8px;
-  margin-right: 24px;
-}
-
 .uploadPetPhotoActive {
   background: $secondary-background-color;
   text-decoration: none;
