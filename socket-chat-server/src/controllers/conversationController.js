@@ -26,7 +26,9 @@ class ConversationController {
     const { producerId, consumerId } = req.params;
 
     const usersConversations = await Conversation.findOne({
-      where: { members: { [Op.contains]: [producerId, consumerId] } },
+      where: {
+        members: { [Op.contains]: [producerId, consumerId] },
+      },
     });
 
     return res.status(200).json(usersConversations);
