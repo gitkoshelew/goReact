@@ -81,7 +81,7 @@ func EncryptPassword(s string) (string, error) {
 	return string(b), nil
 }
 
-// CheckPasswordHash matches password with encrypted password<returns true/false
+// CheckPasswordHash if passwords are same err=nil
 func CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err

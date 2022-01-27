@@ -65,7 +65,8 @@ func (m *Mail) Create(mailType MailType, message string, to []string) (string, e
 		return "From: " + m.From + "\n" +
 				"To: " + to[0] + "\n" +
 				"Subject: Password reset\n\n" +
-				message,
+				fmt.Sprintf("%s%s \n", os.Getenv("RESTORE_PASSWORD_ENDPOINT"), message) +
+				"Link will be expire in 1 hours.",
 			nil
 	default:
 		return "", ErrInvalidMail
