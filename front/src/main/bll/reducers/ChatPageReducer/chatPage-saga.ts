@@ -1,10 +1,11 @@
-import { call, put } from 'redux-saga/effects'
+import { apply, call, put, select } from 'redux-saga/effects'
 import {
   fetchError,
   fetchInitMessagesSuccess,
   fetchStart,
   fetchUsersSuccess,
   setCurrentConversation,
+  setSocketChannel,
 } from './chatPage-reducer'
 import {
   ChatAPI,
@@ -14,6 +15,8 @@ import {
   GetConversationResponse,
 } from '../../../dal/api_chat/ChatService'
 import { AxiosResponse } from 'axios'
+import { Socket } from 'socket.io-client'
+import { AppRootState } from '../../store/store'
 
 export function* fetchUsersSagaWorker() {
   try {
@@ -23,6 +26,8 @@ export function* fetchUsersSagaWorker() {
   } catch (err) {
     if (err instanceof Error) {
       yield put(fetchError({ errorMsg: err.message }))
+    } else {
+      yield put(fetchError({ errorMsg: 'afsdfsd' }))
     }
   }
 }
@@ -92,3 +97,36 @@ export const getConversationRequest = (producerId: number, consumerId: number) =
 })
 
 type GetConversationRequestType = ReturnType<typeof getConversationRequest>
+
+export function* sendMessageSagaWorker(action: ReturnType<typeof addMessageRequest>) {
+  const { socket, message } = action.payload
+
+  yield apply(socket, socket.emit, ['USER_SEND_MESSAGE', message])
+}
+
+export const addMessageRequest = (socket: Socket, message: MessageRequest) => ({
+  type: 'CHAT_PAGE/USER_SEND_MESSAGE',
+  payload: {
+    socket,
+    message,
+  },
+})
+
+export type MessageRequest = {
+  producerId: number
+  consumerId: number
+  conversationId: number
+  text: string
+}
+
+export function* closeChannelSagaWorker() {
+  const socket: Socket = yield select((state: AppRootState) => state.ChatPage.socketChannel)
+  // if (socket) {
+  yield call([socket, socket.disconnect])
+  // }
+  yield put(setSocketChannel({ socketChannel: null }))
+}
+
+export const closeChannelRequest = () => ({
+  type: 'CHAT_PAGE/CLOSE_CHANNEL',
+})

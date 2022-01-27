@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FetchUsersResponse, ChatUser, ChatMessage } from '../../../dal/api_chat/ChatService'
+import { Socket } from 'socket.io-client'
 
 enum ChatPageLoadingStatuses {
   IDLE = 'IDLE',
@@ -14,6 +15,7 @@ const initialState: InitialStateChatPage = {
   users: [],
   messages: [],
   conversationId: null,
+  socketChannel: null,
 }
 
 const chatPageSlice = createSlice({
@@ -39,12 +41,26 @@ const chatPageSlice = createSlice({
       state.loadingStatus = ChatPageLoadingStatuses.SUCCESS
       state.conversationId = action.payload.conversationId
     },
+    setSocketChannel(state, action: PayloadAction<{ socketChannel: Socket | null }>) {
+      // @ts-ignore
+      state.socketChannel = action.payload.socketChannel
+    },
+    addMessage(state, action: PayloadAction<{ message: ChatMessage }>) {
+      state.messages.push(action.payload.message)
+    },
   },
 })
 
 export const ChatPageReducer = chatPageSlice.reducer
-export const { fetchStart, fetchUsersSuccess, fetchError, fetchInitMessagesSuccess, setCurrentConversation } =
-  chatPageSlice.actions
+export const {
+  fetchStart,
+  fetchUsersSuccess,
+  fetchError,
+  fetchInitMessagesSuccess,
+  setCurrentConversation,
+  addMessage,
+  setSocketChannel,
+} = chatPageSlice.actions
 
 //types
 
@@ -54,6 +70,7 @@ export type InitialStateChatPage = {
   users: ChatUser[]
   messages: ChatMessage[]
   conversationId: number | null
+  socketChannel: Socket | null
 }
 
 export type ChatPageLoadingStatus =
