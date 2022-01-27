@@ -5,11 +5,14 @@ import { AppRootState, useAppDispatch } from '../../../bll/store/store'
 import { fetchUsersRequest } from '../../../bll/reducers/ChatPageReducer/chatPage-saga'
 import { UserChatItem } from '../../components/UserChatItem/UserChatItem'
 import { MeRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
+import goBackIcon from '../../../../assets/img/chat/arrowBack.png'
+import { useNavigate } from 'react-router-dom'
 
-const { usersList, chat } = s
+const { usersList, chat, showConversationsButton, hide } = s
 
 export const Chat: FC = ({ children }) => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const me = useSelector((state: AppRootState) => state.LoginPage.user)
   const allUsers = useSelector((state: AppRootState) => state.ChatPage.users)
 
@@ -42,7 +45,10 @@ export const Chat: FC = ({ children }) => {
 
   return (
     <div className={chat}>
-      <div className={usersList}>{chatPartners}</div>
+      <div className={showConversationsButton} onClick={() => navigate('/chat')}>
+        <img src={goBackIcon} alt="Show conversations" />
+      </div>
+      <div className={`${usersList} ${children ? hide : ''}`}>{chatPartners}</div>
       {children}
     </div>
   )

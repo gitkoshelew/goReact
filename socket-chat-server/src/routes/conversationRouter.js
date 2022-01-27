@@ -6,7 +6,7 @@ const router = Router();
 router.post("/add", ConversationController.add);
 router.get("/:userId", ConversationController.getByConversationsByUserId);
 router.get(
-  "/find/:firstUser/:secondUser",
+  "/find/:producerId/:consumerId",
   ConversationController.getByConversationsOfTwoUsers
 );
 

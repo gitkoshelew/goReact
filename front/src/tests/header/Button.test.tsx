@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import { Button } from '../../main/ui/components/Button/Button'
 import { BasketButton } from '../../main/ui/components/Button/BasketButton/BasketBtn'
 import { LoginButton } from '../../main/ui/components/Button/LoginBtn/LoginBtn'
 

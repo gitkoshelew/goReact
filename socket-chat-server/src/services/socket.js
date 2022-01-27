@@ -3,9 +3,9 @@ import { Message } from "../models/models.js";
 export const startSocket = (io) => {
   let connectedUsers = [];
 
-  const addUser = (userId, socketId, receiverId) => {
-    !connectedUsers.some((user) => user.userId === userId) &&
-      connectedUsers.push({ userId, socketId, receiverId });
+  const addUser = (producerId, socketId, consumerId) => {
+    !connectedUsers.some((user) => user.producerId === producerId) &&
+      connectedUsers.push({ producerId, socketId, consumerId });
   };
   const removeUser = (socketId) => {
     connectedUsers = connectedUsers.filter(
@@ -13,26 +13,27 @@ export const startSocket = (io) => {
     );
   };
   const getUser = (userId) => {
-    return connectedUsers.find((user) => user.userId === userId);
+    return connectedUsers.find((user) => user.producerId === userId);
   };
 
   io.on("connection", (socket) => {
-    const { userId, receiverId } = socket.handshake.query;
-    addUser(userId, socket.id, receiverId);
+    console.log("Connected", socket.id);
+    const { producerId, consumerId } = socket.handshake.query;
+    addUser(producerId, socket.id, consumerId);
     console.log("Connected users", connectedUsers);
 
     socket.on(
       "USER_SEND_MESSAGE",
-      async ({ senderId, receiverId, conversationId, text }) => {
+      async ({ producerId, consumerId, conversationId, text }) => {
         const message = await Message.create({
-          senderId,
-          receiverId,
+          producerId,
+          consumerId,
           conversationId,
           text,
         });
-        const targetUser = getUser(receiverId);
+        const targetUser = getUser(String(consumerId));
         io.to(socket.id).emit("SERVER_SEND_MESSAGE", message);
-        if (targetUser && targetUser.receiverId === senderId) {
+        if (targetUser && targetUser.consumerId === String(producerId)) {
           io.to(targetUser.socketId).emit("SERVER_SEND_MESSAGE", message);
         }
       }
