@@ -17,10 +17,13 @@ import { RegisterPageReducer } from '../reducers/RegistrationPageReducer/registr
 import { RegisterPageSagaWorker } from '../reducers/RegistrationPageReducer/registrationPage-saga'
 import { ChatPageReducer } from '../reducers/ChatPageReducer/chatPage-reducer'
 import {
+  closeChannelSagaWorker,
   fetchInitMessagesSagaWorker,
   fetchUsersSagaWorker,
   getConversationSagaWorker,
+  sendMessageSagaWorker,
 } from '../reducers/ChatPageReducer/chatPage-saga'
+import { openChannelSagaWorker } from '../reducers/ChatPageReducer/socketChannel'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -61,4 +64,7 @@ function* rootWatcher() {
   yield takeEvery('CHAT_PAGE/FETCH_USERS_SAGA', fetchUsersSagaWorker)
   yield takeEvery('CHAT_PAGE/FETCH_INIT_MESSAGES_SAGA', fetchInitMessagesSagaWorker)
   yield takeEvery('CHAT_PAGE/GET_CONVERSATION_SAGA', getConversationSagaWorker)
+  yield takeEvery('CHAT_PAGE/OPEN_CHANNEL', openChannelSagaWorker)
+  yield takeEvery('CHAT_PAGE/CLOSE_CHANNEL', closeChannelSagaWorker)
+  yield takeEvery('CHAT_PAGE/USER_SEND_MESSAGE', sendMessageSagaWorker)
 }
