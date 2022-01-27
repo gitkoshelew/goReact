@@ -90,3 +90,22 @@ func TestRoomRepository_Update(t *testing.T) {
 		assert.NoError(t, err)
 	})
 }
+
+func TestRoomRepository_GetAllPagination(t *testing.T) {
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
+	t.Run("valid get all panigation", func(t *testing.T) {
+		p := model.TestPage()
+		r, err := s.Room().GetAllPagination(p)
+		assert.NoError(t, err)
+		assert.NotNil(t, r)
+	})
+	t.Run("invalid get all panigation", func(t *testing.T) {
+		p := model.TestPage()
+		p.PageNumber = -1
+		p.PageSize = -10
+		r, err := s.Room().GetAllPagination(p)
+		assert.Error(t, err)
+		assert.Nil(t, r)
+	})
+}
