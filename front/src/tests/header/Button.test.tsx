@@ -1,12 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { Button } from '../../main/ui/components/Button/Button'
+import { BasketButton } from '../../main/ui/components/Button/BasketButton/BasketBtn'
+import { LoginButton } from '../../main/ui/components/Button/LoginBtn/LoginBtn'
 
 describe('Button', () => {
   it('if transferred /login/ type should contain login div', () => {
     render(
       <BrowserRouter>
-        <Button type={'login'} />
+        <LoginButton />
       </BrowserRouter>
     )
     expect(screen.getByText(/login/i)).toBeInTheDocument()
@@ -14,7 +16,7 @@ describe('Button', () => {
   it('if transferred /buy/ type should contain img elem with alt=buyContainer', () => {
     render(
       <BrowserRouter>
-        <Button type={'buy'} />
+        <BasketButton />
       </BrowserRouter>
     )
 

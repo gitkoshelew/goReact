@@ -18,12 +18,24 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 
 		employees := []model.Employee{}
 
-		id, _ := strconv.Atoi(ps.ByName("id"))
+		id, err := strconv.Atoi(ps.ByName("id"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			return
+		}
 
-		s.Open()
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
+		}
+
 		employee, err := s.Employee().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Cant find employee. Err msg:%v.", err)
 			return
 		}
 
@@ -37,12 +49,14 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, employees)
 		if err != nil {
 			http.Error(w, err.Error(), 400)
+			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 	}

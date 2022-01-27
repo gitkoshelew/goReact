@@ -96,4 +96,3 @@ func TestRoom_Validate(t *testing.T) {
 		})
 	}
 }
-
