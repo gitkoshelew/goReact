@@ -121,12 +121,10 @@ export type MessageRequest = {
 
 export function* closeChannelSagaWorker() {
   const socket: Socket = yield select((state: AppRootState) => state.ChatPage.socketChannel)
-  // if (socket) {
   yield call([socket, socket.disconnect])
-  // }
   yield put(setSocketChannel({ socketChannel: null }))
 }
 
 export const closeChannelRequest = () => ({
-  type: 'CHAT_PAGE/CLOSE_CHANNEL',
-})
+  type: "CHAT_PAGE/CLOSE_CHANNEL"
+});
