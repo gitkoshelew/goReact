@@ -162,7 +162,7 @@ func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 }
 
 // CreateCustomToken ...
-func CreateCustomToken(payload map[string]string, expireTime time.Duration, secretKey string) (string, error) {
+func CreateCustomToken(payload map[string]interface{}, expireTime time.Duration, secretKey string) (string, error) {
 	if expireTime < 1 {
 		logger.Debugf("Bad request expire time: %v. Err msg: %v", expireTime, ErrBadRequest)
 		return "", fmt.Errorf("%v, expire time = %v", ErrBadRequest, expireTime)
@@ -177,7 +177,6 @@ func CreateCustomToken(payload map[string]string, expireTime time.Duration, secr
 	if len(payload) < 1 {
 		logger.Debugf("Bad request empty payload: %v. Err msg: %v", payload, ErrBadRequest)
 		return "", fmt.Errorf("%v, empty payload: %v", ErrBadRequest, payload)
-
 	}
 
 	claims := jwt.MapClaims{}

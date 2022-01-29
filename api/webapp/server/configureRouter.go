@@ -24,5 +24,4 @@ func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/api/user/:id", user.GetUserHandle(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/emailconfirm/:token", authentication.EmailConfirm(store.New(s.config)))
-
 }

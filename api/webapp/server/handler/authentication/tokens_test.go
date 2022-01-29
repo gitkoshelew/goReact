@@ -10,13 +10,13 @@ import (
 )
 
 func TestTokens_CreateCustomToken(t *testing.T) {
-	payload := make(map[string]string)
-	payload["user_id"] = "1"
+	payload := make(map[string]interface{})
+	payload["user_id"] = 1
 	expireTime := time.Duration(20)
 	secretKey := "secret"
 
 	t.Run("Valid", func(t *testing.T) {
-		payload["user_id"] = "1"
+		payload["user_id"] = 1
 		expireTime = time.Duration(20)
 		secretKey = "secret"
 		tk, err := authentication.CreateCustomToken(payload, expireTime, secretKey)
@@ -50,8 +50,8 @@ func TestTokens_CreateCustomToken(t *testing.T) {
 }
 
 func TestToken_ParseCustomToken(t *testing.T) {
-	payload := make(map[string]string)
-	payload["user_id"] = "1"
+	payload := make(map[string]interface{})
+	payload["user_id"] = 1
 	expireTime := time.Duration(20)
 	secretKey := "secret"
 	token := authentication.TestToken(payload, expireTime, secretKey)
