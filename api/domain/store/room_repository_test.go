@@ -47,7 +47,7 @@ func TestRoomRepository_FindByID(t *testing.T) {
 	t.Cleanup(teardown)
 
 	t.Run("invalid find id", func(t *testing.T) {
-		id := 2
+		id := -1
 
 		_, err := s.Room().FindByID(id)
 		assert.Error(t, err)
@@ -57,9 +57,17 @@ func TestRoomRepository_FindByID(t *testing.T) {
 		h, err := s.Hotel().Create(model.TestHotel())
 		r.Hotel = *h
 		_, err = s.Room().Create(r)
-		r, err = s.Room().FindByID(r.RoomID)
+		rDTO := model.RoomDTO{
+			RoomID:       r.RoomID,
+			RoomNumber:   r.RoomNumber,
+			PetType:      r.PetType,
+			HotelID:      r.Hotel.HotelID,
+			RoomPhotoURL: r.RoomPhotoURL,
+		}
+
+		room, err := s.Room().FindByID(rDTO.RoomID)
 		assert.NoError(t, err)
-		assert.NotNil(t, r)
+		assert.NotNil(t, room)
 	})
 }
 

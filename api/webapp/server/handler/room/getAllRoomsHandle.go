@@ -9,7 +9,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetUsersHandle returns all rooms
+// GetAllRoomsHandle returns all rooms
 func GetAllRoomsHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -19,7 +19,6 @@ func GetAllRoomsHandle(s *store.Store) httprouter.Handle {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-
 		}
 
 		rooms, err := s.Room().GetAll()

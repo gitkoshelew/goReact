@@ -1,4 +1,4 @@
-package restorePassword
+package restorepassword
 
 import (
 	"context"
@@ -14,7 +14,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// chekingLingForRestorePassword ...
+// СhekingLinkForRestorePassword ...
 func СhekingLinkForRestorePassword(s *store.Store, next http.HandlerFunc) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")

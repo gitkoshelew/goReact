@@ -110,7 +110,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"olga@gmail.com\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+							"raw": "{\r\n        \"email\": \"kazbeksungurov@gmail.com\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -267,6 +267,55 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Room",
+			"item": [
+				{
+					"name": "Get all rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/rooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"rooms"
+							]
+						},
+						"description": "Send a request to server to get all Rooms from DB.\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON massieve:\n\n\\[\n\n{\n\n\"roomId\": 1,\n\n\"roomNum\": 101,\n\n\"petType\": \"Cat\",\n\n\"hotelId\": 1,\n\n\"roomPhotoUrl\": \"roomPhotoUrl\"\n\n},\n\n....\n\n\\]"
+					},
+					"response": []
+				},
+				{
+					"name": "Get room by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/room/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"room",
+								"3"
+							]
+						},
+						"description": "Return roomfrom DB by roomID. ID need to be set in URL params api/room/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"roomId\": 1,\n\n\"roomNum\": 101,\n\n\"petType\": \"Cat\",\n\n\"hotelId\": 1,\n\n\"roomPhotoUrl\": \"roomPhotoUrl\"\n\n}"
+					},
+					"response": []
+				}
+			],
+			"description": "| **Field** | **type** | **JSON** |\n| --- | --- | --- |\n| RoomID | int | roomId |\n| RoomNumber | int | roomNum |\n| PetType | string | petType |\n| HotelID | int | hotelId |\n| RoomPhotoURL | string | roomPhotoUrl |"
 		}
 	]
 }
