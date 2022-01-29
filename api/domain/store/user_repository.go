@@ -215,6 +215,7 @@ func (r *UserRepository) EmailCheck(email string) *bool {
 	return &emailIsUsed
 }
 
+// PasswordChange ...
 func (r *UserRepository) PasswordChange(u *model.User) error {
 	encryptedPassword, err := model.EncryptPassword(u.Password)
 	if err != nil {
@@ -222,7 +223,7 @@ func (r *UserRepository) PasswordChange(u *model.User) error {
 		return err
 	}
 
-	result, err := r.Store.Db.Exec("UPDATE users SET password = $1 WHERE id = $2",encryptedPassword, u.UserID)
+	result, err := r.Store.Db.Exec("UPDATE users SET password = $1 WHERE id = $2", encryptedPassword, u.UserID)
 	if err != nil {
 		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
 		return err

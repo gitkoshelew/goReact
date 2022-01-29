@@ -75,7 +75,6 @@ func IsSex(value interface{}) error {
 	return errors.New("allowed genders: 'male', 'female'")
 }
 
-
 // IsPetType checks if string matchs to a Pet types of Pets
 // PetTypeCat = "cat"
 // PetTypeDog = "dog"
@@ -87,9 +86,7 @@ func IsPetType(value interface{}) error {
 	return errors.New("allowed pet types: 'PetTypeCat', 'PetTypeDog'")
 }
 
-// IsPetType checks if string matchs to a Pet types of Pets
-// PetTypeCat = "cat"
-// PetTypeDog = "dog"
+// IsEmployeePosition ...
 func IsEmployeePosition(value interface{}) error {
 	s := value.(Position)
 	if s == ManagerPosition || s == EmployeePosition || s == OwnerPosition || s == AdminPosition {

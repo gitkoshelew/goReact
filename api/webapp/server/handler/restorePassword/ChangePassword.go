@@ -1,4 +1,4 @@
-package restorePassword
+package restorepassword
 
 import (
 	"encoding/json"
@@ -11,14 +11,14 @@ import (
 	"net/http"
 )
 
-// New pass ...
+// ChangePassword ...
 func ChangePassword(s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		req := &request.Login{}
 
-		email , err:= middleware.ContextEmail(r.Context())
+		email, err := middleware.ContextEmail(r.Context())
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Cannot parse email: %v", err)
@@ -33,7 +33,7 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 			return
 		}
 
-		err= s.Open()
+		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg: %v", err)

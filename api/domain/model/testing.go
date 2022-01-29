@@ -24,7 +24,7 @@ func TestUser() *User {
 
 }
 
-// Testing instance of hotel
+// TestHotel instance of hotel
 func TestHotel() *Hotel {
 	return &Hotel{
 		HotelID: 1,
@@ -33,6 +33,7 @@ func TestHotel() *Hotel {
 	}
 }
 
+// TestRoom ...
 func TestRoom() *Room {
 	return &Room{
 		RoomID:       1,
@@ -43,30 +44,43 @@ func TestRoom() *Room {
 	}
 }
 
+// TestRoomDTO ...
+func TestRoomDTO() *RoomDTO {
+	return &RoomDTO{
+		RoomID:       1,
+		RoomNumber:   1,
+		PetType:      PetTypeCat,
+		HotelID:      TestHotel().HotelID,
+		RoomPhotoURL: "/photo/1",
+	}
+}
+
+// TestEmployee ...
 func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,
 		User:       *TestUser(),
 		Hotel:      *TestHotel(),
 		Position:   OwnerPosition,
-
 	}
 }
 
+// TestPet ...
 func TestPet() *Pet {
 	return &Pet{
-		Name: "Name",
-		Type: PetTypeCat,
-		Weight: 1,
-		Diesieses: "Disease",
-		Owner: *TestUser(),
+		Name:        "Name",
+		Type:        PetTypeCat,
+		Weight:      1,
+		Diesieses:   "Disease",
+		Owner:       *TestUser(),
 		PetPhotoURL: "/",
 	}
 }
 
-func TestPage() *pagination.Page{
+// TestPage ...
+func TestPage() *pagination.Page {
 	return &pagination.Page{
 		PageNumber: 1,
-		PageSize: 10,
+		PageSize:   10,
 	}
 }
