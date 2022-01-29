@@ -33,10 +33,7 @@ func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/api/rooms/", room.GetRoomsHandlePagination(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/emailconfirm/:token", authentication.EmailConfirm(store.New(s.config)))
-
 	s.router.Handle("POST", "/api/forgotpassword", restorePassword.ForgotPassword(store.New(s.config), s.Mail))
 	s.router.Handle("GET", "/api/emailrestore/:token", restorePassword.СhekingLinkForRestorePassword(store.New(s.config), restorePassword.ChangePassword(store.New(s.config))))
-	
-
 }
 

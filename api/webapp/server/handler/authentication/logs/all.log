@@ -268,3 +268,57 @@
 [37mDEBU[0m[2022-01-18T01:07:44+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642456064 user_id:1] 
 [37mDEBU[0m[2022-01-18T01:07:44+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 
 [37mDEBU[0m[2022-01-18T01:07:44+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:189 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1642616109 user_id:1] 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:189 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1642616109 user_id:1] 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:167 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request expire time: -20ns. Err msg: bad request 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:167 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request expire time: -20ns. Err msg: bad request 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:173 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request secret key:     . Err msg: bad request 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:173 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request secret key:     . Err msg: bad request 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:178 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request empty payload: map[]. Err msg: bad request 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:178 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request empty payload: map[]. Err msg: bad request 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642616109 user_id:1] 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642616109 user_id:1] 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: invalid character 'j' looking for beginning of value 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: invalid character 'j' looking for beginning of value 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: signature is invalid 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: signature is invalid 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642613709 user_id:1] 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642613709 user_id:1] 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 
+[37mDEBU[0m[2022-01-19T20:55:09+03:00]tokens.go:212 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:188 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1642783835 user_id:1] 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:188 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1642783835 user_id:1] 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:167 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request expire time: -20ns. Err msg: bad request 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:167 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request expire time: -20ns. Err msg: bad request 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:173 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request secret key:     . Err msg: bad request 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:173 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request secret key:     . Err msg: bad request 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:178 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request empty payload: map[]. Err msg: bad request 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:178 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request empty payload: map[]. Err msg: bad request 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642783835 user_id:1] 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642783835 user_id:1] 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: invalid character 'j' looking for beginning of value 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: invalid character 'j' looking for beginning of value 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: signature is invalid 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: signature is invalid 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642781435 user_id:1] 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1642781435 user_id:1] 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 
+[37mDEBU[0m[2022-01-21T19:30:35+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:188 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1643435058 user_id:1] 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:188 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1643435058 user_id:1] 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:167 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request expire time: -20ns. Err msg: bad request 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:167 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request expire time: -20ns. Err msg: bad request 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:173 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request secret key:     . Err msg: bad request 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:173 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request secret key:     . Err msg: bad request 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:178 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request empty payload: map[]. Err msg: bad request 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:178 goReact/webapp/server/handler/authentication.CreateCustomToken Bad request empty payload: map[]. Err msg: bad request 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1643435058 user_id:1] 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1643435058 user_id:1] 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: invalid character 'j' looking for beginning of value 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: invalid character 'j' looking for beginning of value 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: signature is invalid 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: signature is invalid 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1643432658 user_id:1] 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]testing.go:18 goReact/webapp/server/handler/authentication.TestToken JWT.MapClaims created: map[exp:1643432658 user_id:1] 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 
+[37mDEBU[0m[2022-01-29T08:24:18+03:00]tokens.go:211 goReact/webapp/server/handler/authentication.ParseCustomToken Error during token parsing. Err msg: Token is expired 

@@ -9,7 +9,6 @@ import (
 	"goReact/webapp/server/handler/request"
 	"goReact/webapp/server/handler/response"
 	"net/http"
-	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -67,8 +66,8 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 			return
 		}
 
-		payload := make(map[string]string)
-		payload["user_id"] = strconv.Itoa(u.UserID)
+		payload := make(map[string]interface{})
+		payload["user_id"] = u.UserID
 
 		endpoint, err := CreateCustomToken(payload, 120, EmailSecretKey)
 

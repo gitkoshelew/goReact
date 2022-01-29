@@ -19,7 +19,6 @@ func WithoutSpaces(value interface{}) error {
 	if strings.ContainsAny(value.(string), " ") {
 		return errors.New("field cannot contains spaces")
 	}
-
 	return nil
 }
 

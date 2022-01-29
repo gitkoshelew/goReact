@@ -7,7 +7,7 @@ import (
 )
 
 // TestToken ...
-func TestToken(payload map[string]string, expireTime time.Duration, secretKey string) string {
+func TestToken(payload map[string]interface{}, expireTime time.Duration, secretKey string) string {
 
 	claims := jwt.MapClaims{}
 	for key, element := range payload {
