@@ -1,6 +1,6 @@
 import s from './ServicesElement.module.scss'
 import { Case, flower, forkAndSpoon, swimmer } from '../../svgWrapper/HomeSvgWrapper'
-import { IsActiveServiceElementType } from '../../pages/Home/FourthPage/ServiceBlock/ServiceBlock'
+import { IsActiveServiceElementType } from '../../pages/Home/ServicesPage/ServiceBlock/ServiceBlock'
 
 type ServicesType = 'forkAndSpoon' | 'flower' | 'swimmer' | 'case'
 

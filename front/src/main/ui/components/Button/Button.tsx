@@ -1,38 +1,41 @@
 import s from './Button.module.scss'
-import buy from '../../../../assets/img/navBar/Buy.svg'
-import { NavLink } from 'react-router-dom'
+import { ButtonHTMLAttributes } from 'react'
 
-const { loginBtn, buyBtn, uploadPetPhoto, uploadPetPhotoActive, orderBtn } = s
+const { uploadPetPhoto, uploadPetPhotoActive, orderBtn } = s
 
-type BtnPropsType = {
-  type: string
-  isActive?: boolean
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   The display content of the button:
+   *
+   order
+   *
+   upload
+   */
+  view: string
+  /**
+   * Checks if the button should be disabled
+   */
+  disabled?: boolean
+  /**
+   * Click handler
+   */
   onClick?: () => void
 }
 
-export const Button = ({ onClick, type, isActive }: BtnPropsType) => {
+export const Button = ({ onClick, view, disabled, ...props }: ButtonProps) => {
   return (
     <div>
-      {type === 'login' && (
-        <NavLink className={loginBtn} to={'/login'}>
-          <div>login</div>
-        </NavLink>
-      )}
-      {type === 'buy' && (
-        <div className={buyBtn}>
-          <img src={buy} alt="buyContainer" />
-        </div>
-      )}
-      {type === 'order' && (
-        <button type={'button'} onClick={onClick} className={orderBtn}>
+      {view === 'order' && (
+        <button type={'button'} onClick={onClick} className={orderBtn} {...props}>
           order
         </button>
       )}
-      {type === 'upload' && (
-        <button type={'submit'} disabled={!isActive} className={isActive ? uploadPetPhotoActive : uploadPetPhoto}>
+      {view === 'upload' && (
+        <button type={'submit'} className={disabled ? uploadPetPhoto: uploadPetPhotoActive} {...props}>
           Confirm
         </button>
       )}
     </div>
   )
 }
+

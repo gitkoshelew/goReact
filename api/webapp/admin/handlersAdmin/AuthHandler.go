@@ -17,13 +17,21 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 		EmailForm := r.FormValue("email")
 		Password := r.FormValue("password")
 		s.Open()
-		user, _ := s.User().FindByEmail(EmailForm)
-		id := user.UserID
+		user, err := s.User().FindByEmail(EmailForm)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
+			http.Redirect(w, r, "/admin/login", http.StatusFound)
+			return
+		}
 
+		id := user.UserID
 		hashPassword := user.Password
 
 		isConfirmed := model.CheckPasswordHash(hashPassword, Password)
 		if isConfirmed != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
 			http.Redirect(w, r, "/admin/login", http.StatusFound)
 			return
 		}

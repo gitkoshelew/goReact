@@ -11,7 +11,7 @@ describe('BurgerMenu', () => {
         <BurgerMenu setIsBurgerCollapse={() => {}} isBurgerCollapse={true} />
       </BrowserRouter>
     )
-    expect(screen.getAllByRole('link')).toHaveLength(8)
+    expect(screen.getAllByRole('link')).toHaveLength(9)
   })
 
   it('BurgerMenu doesnt show any links with negative isBurgerCollapse', () => {
@@ -42,6 +42,6 @@ describe('BurgerMenu', () => {
     userEvent.click(burger)
 
     const afterClickLink = screen.queryAllByRole(/link/i)
-    expect(afterClickLink).toHaveLength(8)
+    expect(afterClickLink).toHaveLength(9)
   })
 })

@@ -20,7 +20,9 @@ export const BurgerMenu = ({ isBurgerCollapse, setIsBurgerCollapse }: BurgerMenu
       </div>
       {isBurgerCollapse && (
         <div onClick={setBurgerStatus} className={navLinksBurgerMenu}>
-          <NavLinksBurger navNames={['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Login', 'Basket']} />
+          <NavLinksBurger
+            navNames={['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Login', 'Basket', 'Chat']}
+          />
         </div>
       )}
     </div>

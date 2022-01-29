@@ -1,0 +1,49 @@
+@import '../../styles/variables';
+
+.chat * {
+  box-sizing: border-box;
+}
+
+.chat {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1400px;
+  @media (max-width: 842px) {
+    justify-content: center;
+  }
+}
+
+.usersList {
+  margin-right: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 542px;
+  overflow-y: scroll;
+  @media (max-width: 842px) {
+    display: none;
+  }
+}
+
+.showConversationsButton {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  padding: 5px;
+  transition: .2s ease-in;
+  @media (min-width: 842px) {
+    display: none;
+  }
+}
+
+.showConversationsButton img {
+  width: 32px;
+  height: 32px;
+}
+
+.showConversationsButton:hover {
+  cursor: pointer;
+  box-shadow: 0 0 20px 0 #0000003d;
+}

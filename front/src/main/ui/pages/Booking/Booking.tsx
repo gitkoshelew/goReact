@@ -5,7 +5,7 @@ import { BookingRegForm } from './BookingRegForm/BookingRegForm'
 import { BookingCalendar } from './BookingCalendar/BookingCalendar'
 import { BookingRoom } from './BookingRoom/BookingRoom'
 import { useSelector } from 'react-redux'
-import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
+import { AppRootState, useAppDispatch } from '../../../bll/store/store'
 import { Button } from '../../components/Button/Button'
 import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
@@ -53,7 +53,7 @@ export const Booking = () => {
     },
   })
 
-  const loadingStatus = useSelector((state: AppRootStateType) => state.BookingRoomPick.loadingStatus)
+  const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
 
   const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
   const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
@@ -63,10 +63,10 @@ export const Booking = () => {
     dispatch(BookingRoomPickSaga())
   }, [])
 
-  const progress = useSelector((state: AppRootStateType) => state.BookingRegForm.progress)
-  const actualDay = useSelector((state: AppRootStateType) => state.BookingRoomPick.actualDay)
-  const isRentArr = useSelector((state: AppRootStateType) => state.BookingRoomPick.isRent)
-  const orderedRoomBasket = useSelector((state: AppRootStateType) => state.BookingRoomPick.orderedRoomBasket)
+  const progress = useSelector((state: AppRootState) => state.BookingRegForm.progress)
+  const actualDay = useSelector((state: AppRootState) => state.BookingRoomPick.actualDay)
+  const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
+  const orderedRoomBasket = useSelector((state: AppRootState) => state.BookingRoomPick.orderedRoomBasket)
 
   const isActiveBtn = progress === 'uploaded' && orderedRoomBasket.length !== 0
 
@@ -96,7 +96,7 @@ export const Booking = () => {
         </div>
         <div className={uploadOrderedRoomsBlock}>
           {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
-          <Button type={'upload'} isActive={isActiveBtn} />
+          <Button view={'upload'} disabled={!isActiveBtn} />
         </div>
       </div>
     </form>

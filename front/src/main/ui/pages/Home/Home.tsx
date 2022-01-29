@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
-import { FirstPage } from './firstPage/FirstPage'
-import { SecondPage } from './SecondPage/SecondPage'
-import { ThirdPage } from './ThirdPage/ThirdPage'
-import { FourthPage } from './FourthPage/FourthPage'
-import { FifthPage } from './FifthPage/FifthPage'
-import { SixthPage } from './SixthPage/SixthPage'
-import { AppRootStateType, useAppDispatch } from '../../../bll/store/store'
+import { FirstPage } from './WelcomePage/FirstPage'
+import { SecondPage } from './CeoMsgPage/SecondPage'
+import { ThirdPage } from './FavoriteRoomsPage/ThirdPage'
+import { FourthPage } from './ServicesPage/FourthPage'
+import { FifthPage } from './PlacesNearbyPage/FifthPage'
+import { SixthPage } from './UsersFeedbackPage/SixthPage'
+import { AppRootState, useAppDispatch } from '../../../bll/store/store'
 import { MeRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
 import { useSelector } from 'react-redux'
 
 export const Home = () => {
   const dispatch = useAppDispatch()
-  const userProfile = useSelector((state: AppRootStateType) => state.LoginPage.user)
+  const userProfile = useSelector((state: AppRootState) => state.LoginPage.user)
 
   useEffect(() => {
     if ((userProfile === null && localStorage.getItem('token')) || localStorage.getItem('MockToken')) {

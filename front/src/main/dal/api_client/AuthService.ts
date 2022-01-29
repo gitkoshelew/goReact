@@ -5,6 +5,7 @@ import { userPhotoBoilerPlate } from '../../ui/svgWrapper/navBarSvgWrapper'
 import { isDev } from '../env/env'
 
 export type UserRequestData = { email: string; password: string }
+
 export type LogInResponse = {
   userId: number
   email: string
@@ -18,6 +19,25 @@ export type LogInResponse = {
   address: string
   phone: string
   photo: string
+}
+
+export type RegisterRequestUser = {
+  email: string
+  password: string
+  role: string
+  verified: boolean
+  name: string
+  sName: string
+  mName: string
+  sex: string
+  birthDate: string
+  address: string
+  phone: string
+  photo: string
+}
+
+export type RegisterResponseData = {
+  InfoMsg: string
 }
 
 export const AuthAPI = {
@@ -43,6 +63,10 @@ export const AuthAPI = {
     }
     const res = await $api.post('api/me')
     return photoFieldChecker(res)
+  },
+  async RegisterAPI(newUser: RegisterRequestUser): Promise<AxiosResponse<RegisterResponseData>> {
+    const res = await $api.post('api/registration', newUser)
+    return res
   },
 }
 

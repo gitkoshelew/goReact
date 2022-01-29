@@ -1,6 +1,7 @@
 package model
 
 import (
+	"goReact/webapp/server/handler/pagination"
 	"time"
 )
 
@@ -21,4 +22,51 @@ func TestUser() *User {
 		Photo:       "Photo",
 	}
 
+}
+
+// Testing instance of hotel
+func TestHotel() *Hotel {
+	return &Hotel{
+		HotelID: 1,
+		Name:    "Name",
+		Address: "Minsk ul sovetskaya 18",
+	}
+}
+
+func TestRoom() *Room {
+	return &Room{
+		RoomID:       1,
+		RoomNumber:   1,
+		PetType:      PetTypeCat,
+		Hotel:        *TestHotel(),
+		RoomPhotoURL: "/photo/1",
+	}
+}
+
+func TestEmployee() *Employee {
+	return &Employee{
+		EmployeeID: 1,
+		User:       *TestUser(),
+		Hotel:      *TestHotel(),
+		Position:   OwnerPosition,
+
+	}
+}
+
+func TestPet() *Pet {
+	return &Pet{
+		Name: "Name",
+		Type: PetTypeCat,
+		Weight: 1,
+		Diesieses: "Disease",
+		Owner: *TestUser(),
+		PetPhotoURL: "/",
+	}
+}
+
+func TestPage() *pagination.Page{
+	return &pagination.Page{
+		PageNumber: 1,
+		PageSize: 10,
+	}
 }

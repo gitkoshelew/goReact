@@ -27,23 +27,48 @@
       width: 25px;
       height: 25px;
       position: absolute;
-      top: 75px;
+      top: 20px;
       left: 230px;
       cursor: pointer;
     }
   }
-  .sendReqBtn {
-    width: 60px;
-    height: 30px;
-    border-radius: 5px;
-    background-color:$main-contrast-color ;
-    color:$main-background-color
-  }
-  .sendReqErrorBtn{
-    width: 60px;
-    height: 30px;
-    border-radius: 5px;
-    background-color:$secondary-text-color ;
-    color:$main-background-color
+  .loginBtnLinkBlock {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    :nth-child(1) {
+      margin: 0 60%;
+    }
+    .sendReqBtn {
+      flex: 0 1 auto;
+      position: relative;
+      left: -30%;
+      white-space: nowrap;
+      width: 60px;
+      height: 30px;
+      border-radius: 5px;
+      background-color: $main-contrast-color;
+      color: $main-background-color;
+    }
+    .sendReqErrorBtn {
+      flex: 0 1 auto;
+      position: relative;
+      left: -30%;
+      white-space: nowrap;
+      width: 60px;
+      height: 30px;
+      border-radius: 5px;
+      background-color: $secondary-text-color;
+      color: $main-background-color;
+    }
+    .signUpLink {
+      flex: 0 1 auto;
+      white-space: nowrap;
+      margin-left: -20%;
+      color: $main-contrast-color;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { MiniRoomElement } from '../../Home/ThirdPage/miniRoomBlock/MiniRoomElement/MiniRoomElement'
+import { MiniRoomElement } from '../../Home/FavoriteRoomsPage/miniRoomBlock/MiniRoomElement/MiniRoomElement'
 import s from './BookingRoom.module.scss'
 import { rented } from '../../../svgWrapper/BookingRoomSvgWrapper'
 import { Button } from '../../../components/Button/Button'
@@ -26,13 +26,20 @@ export const BookingRoom = (props: BookingRoomPropsTypes) => {
     dispatch(addOrderedRoom({ newOrderedRooms: { id: dayId, orderedRoomType: type } }))
   }
 
+  const onFirstRoomClickHandler = () => {
+      onOrderClickHandler('firstRoom')
+  }
+  const onSecondRoomClickHandler = () => {
+      onOrderClickHandler('secondRoom')
+  }
+
   return (
     <div className={roomBookingTitle}>
       <div className={oneBookRoom}>
         {firstRoom ? (
           <>
             <MiniRoomElement childrenNum={1} adultNum={1} squareNum={100} price={100} roomName={'First Room'} />
-            <Button type={'order'} onClick={() => onOrderClickHandler('firstRoom')} />
+            <Button view={'order'} onClick={onFirstRoomClickHandler} />
           </>
         ) : (
           <div className={rentedImg}>
@@ -44,7 +51,7 @@ export const BookingRoom = (props: BookingRoomPropsTypes) => {
         {secondRoom ? (
           <>
             <MiniRoomElement childrenNum={1} adultNum={1} squareNum={100} price={100} roomName={'Second Room'} />
-            <Button type={'order'} onClick={() => onOrderClickHandler('secondRoom')} />
+            <Button view={'order'} onClick={onSecondRoomClickHandler} />
           </>
         ) : (
           <div className={rentedImg}>
