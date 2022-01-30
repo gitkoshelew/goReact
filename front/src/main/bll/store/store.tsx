@@ -22,6 +22,7 @@ import {
   fetchUsersSagaWorker,
   getConversationSagaWorker,
   sendMessageSagaWorker,
+  setConversationOpenedSagaWorker,
 } from '../reducers/ChatPageReducer/chatPage-saga'
 import { openChannelSagaWorker } from '../reducers/ChatPageReducer/socketChannel'
 
@@ -67,4 +68,5 @@ function* rootWatcher() {
   yield takeEvery('CHAT_PAGE/OPEN_CHANNEL', openChannelSagaWorker)
   yield takeEvery('CHAT_PAGE/CLOSE_CHANNEL', closeChannelSagaWorker)
   yield takeEvery('CHAT_PAGE/USER_SEND_MESSAGE', sendMessageSagaWorker)
+  yield takeEvery('CHAT_PAGE/SET_CONVERSATION_OPENED', setConversationOpenedSagaWorker)
 }
