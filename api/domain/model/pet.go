@@ -15,6 +15,17 @@ type Pet struct {
 	PetPhotoURL string `json:"petPhotoUrl"`
 }
 
+// PetDTO struct
+type PetDTO struct {
+	PetID       int     `json:"petId"`
+	Name        string  `json:"name"`
+	Type        PetType `json:"petType"`
+	Weight      float32 `json:"weight"`
+	Diesieses   string  `json:"diesieses"`
+	OwnerID     int     `json:"userId"`
+	PetPhotoURL string  `json:"petPhotoUrl"`
+}
+
 // PetType ...
 type PetType string
 
