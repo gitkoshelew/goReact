@@ -104,3 +104,18 @@ func (r *EmployeeRepository) Update(e *model.Employee) error {
 	log.Printf("Employee updated, rows affectet: %d", result)
 	return nil
 }
+//FindByUserID find employee by user ID
+func (r *EmployeeRepository) FindByUserID(iserId int) (*model.Employee, error) {
+	employee := &model.Employee{}
+	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE user_id = $1", iserId).Scan(
+		&employee.EmployeeID,
+		&employee.UserID,
+		&employee.Hotel.HotelID,
+		&employee.Position,
+	); err != nil {
+		log.Printf(err.Error())
+		return nil, err
+	}
+	return employee, nil
+
+}
