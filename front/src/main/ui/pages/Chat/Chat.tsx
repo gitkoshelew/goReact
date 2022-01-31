@@ -47,12 +47,12 @@ export const Chat: FC = ({ children }) => {
   return (
     <div className={chat}>
       <div
-        className={`${showConversationsButton} ${!isConversationOpened && hiddenConversationButton}`}
+        className={`${showConversationsButton} ${!isConversationOpened ? hiddenConversationButton : ''}`}
         onClick={() => navigate('/chat')}
       >
         <img src={goBackIcon} alt="Show conversations" />
       </div>
-      <div className={`${usersList} ${isConversationOpened && hiddenUserList}`}>{chatPartners}</div>
+      <div className={`${usersList} ${isConversationOpened ? hiddenUserList : ''}`}>{chatPartners}</div>
       {children}
     </div>
   )
