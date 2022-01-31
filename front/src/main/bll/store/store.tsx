@@ -24,6 +24,8 @@ import {
   sendMessageSagaWorker,
 } from '../reducers/ChatPageReducer/chatPage-saga'
 import { openChannelSagaWorker } from '../reducers/ChatPageReducer/socketChannel'
+import { RoomPageSagaWorker } from "../reducers/RoomPageReducer/roomPage-saga";
+import { RoomPageReducer } from "../reducers/RoomPageReducer/roomPage-reducer";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -33,6 +35,7 @@ const rootReducer = combineReducers({
   LoginPage: LoginPageReducer,
   RegisterPage: RegisterPageReducer,
   ChatPage: ChatPageReducer,
+  RoomPage: RoomPageReducer
 })
 
 export type RootReducer = typeof rootReducer
@@ -67,4 +70,5 @@ function* rootWatcher() {
   yield takeEvery('CHAT_PAGE/OPEN_CHANNEL', openChannelSagaWorker)
   yield takeEvery('CHAT_PAGE/CLOSE_CHANNEL', closeChannelSagaWorker)
   yield takeEvery('CHAT_PAGE/USER_SEND_MESSAGE', sendMessageSagaWorker)
+  yield takeEvery('ROOM_PAGE/FETCH_ROOM_SAGA', RoomPageSagaWorker)
 }
