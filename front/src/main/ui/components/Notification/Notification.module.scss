@@ -1,0 +1,12 @@
+.notification {
+  display: block;
+  position: fixed;
+  top: 2%;
+  left: 83%;
+  min-width: 200px;
+  max-width: 300px;
+  word-break: break-word;
+}
+.hideNotification {
+  display: none;
+}

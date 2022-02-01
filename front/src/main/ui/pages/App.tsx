@@ -3,6 +3,7 @@ import './App.scss'
 import { NavBar } from './navBar/navBar'
 import { RoutesInfo } from '../Routes/RoutesInfo'
 import { Footer } from './footer/footer'
+import { Notification } from '../components/Notification/Notification'
 
 function App() {
   const [isBurgerCollapse, setIsBurgerCollapse] = useState(false)
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className={'app'}>
+      <Notification />
       <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
       {!isBurgerCollapse && (
         <div>
