@@ -55,4 +55,7 @@ export const RoomPageAPI = {
   getRoomById(roomId: number):Promise<AxiosResponse<FetchRoomResponse>> {
     return $api.get(`api/room/${roomId}`);
   },
+  getRooms(currentPage= 1, pageSize= 5):Promise<AxiosResponse<FetchRoomResponse>> {
+    return $api.get(`api/rooms/?offset=${currentPage}&pagesize=${pageSize}`)
+  },
 }
