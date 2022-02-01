@@ -5,8 +5,10 @@ import { FetchRoomResponse, RoomType } from "../../../dal/api_client/API";
 const initialState: InitialStateRoomPage = {
     loadingStatus: 'idle',
     errorMsg: '',
-    rooms: []
-
+    rooms: [],
+    pageSize: 5,
+    totalRoomsCount: 0,
+    currentPage: 2,
 }
 
 const roomPageSlice = createSlice({
@@ -25,13 +27,22 @@ const roomPageSlice = createSlice({
             state.loadingStatus = 'error'
             state.errorMsg = action.payload.errorMsg
         },
-
+        setTotalRoomsCount(state, action: PayloadAction<{ totalRoomsCount: number }>) {
+            state.loadingStatus = 'loading'
+            state.totalRoomsCount = action.payload.totalRoomsCount
+        },
+        setCurrentPage(state, action: PayloadAction<{ currentPage: number }>) {
+            state.loadingStatus = 'loading'
+            state.currentPage = action.payload.currentPage
+        },
     },
 })
 export const {
     fetchCurrentRoom,
     fetchCurrentRoomSuccess,
-    fetchCurrentRoomError
+    fetchCurrentRoomError,
+    setTotalRoomsCount,
+    setCurrentPage
 } = roomPageSlice.actions
 export const RoomPageReducer = roomPageSlice.reducer
 
@@ -41,6 +52,9 @@ export type InitialStateRoomPage = {
     loadingStatus: RoomPageLoadingStatus
     errorMsg: string,
     rooms: RoomType[],
+    pageSize: number,
+    totalRoomsCount: number,
+    currentPage: number,
 }
 
 export type RoomPageLoadingStatus = 'idle' | 'loading' | 'success' | 'error'
