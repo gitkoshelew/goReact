@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import { BookingRegFormReducer } from '../reducers/BookingRegFormReducer/BookingRegForm-reducer'
 import { useDispatch } from 'react-redux'
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, takeLatest } from 'redux-saga/effects'
 import { BookingUploadPetImgSagaWorker } from '../reducers/BookingRegFormReducer/BookindRegForm-saga'
 import { BookingRoomPickReducer } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { BookingRoomPickSagaWorker } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
@@ -25,6 +25,8 @@ import {
   setConversationOpenedSagaWorker,
 } from '../reducers/ChatPageReducer/chatPage-saga'
 import { openChannelSagaWorker } from '../reducers/ChatPageReducer/socketChannel'
+import { NotificationReducer } from '../reducers/NotificationReducer/notification-reducer'
+import { showNotificationSagaWorker } from '../reducers/NotificationReducer/notification-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -34,6 +36,7 @@ const rootReducer = combineReducers({
   LoginPage: LoginPageReducer,
   RegisterPage: RegisterPageReducer,
   ChatPage: ChatPageReducer,
+  Notification: NotificationReducer,
 })
 
 export type RootReducer = typeof rootReducer
@@ -69,4 +72,5 @@ function* rootWatcher() {
   yield takeEvery('CHAT_PAGE/CLOSE_CHANNEL', closeChannelSagaWorker)
   yield takeEvery('CHAT_PAGE/USER_SEND_MESSAGE', sendMessageSagaWorker)
   yield takeEvery('CHAT_PAGE/SET_CONVERSATION_OPENED', setConversationOpenedSagaWorker)
+  yield takeLatest('NOTIFICATION/SHOW_NOTIFICATION', showNotificationSagaWorker)
 }
