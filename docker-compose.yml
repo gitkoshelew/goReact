@@ -150,7 +150,8 @@ services:
         restart: always
 
     chat_server:
-        build: ./socket-chat-server
+        build:
+            context: ./socket-chat-server
         image: socket-chat-express
         container_name: socket-chat-express
         ports:
@@ -158,6 +159,7 @@ services:
         environment:
             DB_HOST: chat_db
             DB_PASSWORD: 123
+            RABBIT_HOST: amqp://guest:guest@rabbitmq:5672
         restart: always
         depends_on:
             - chat_db
