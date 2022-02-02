@@ -1,6 +1,6 @@
-import { Message } from "../models/models.js";
+import { Message } from "../../models/models.js";
 
-export const startSocket = (io) => {
+export const startChat = (io) => {
   let connectedUsers = [];
 
   const addUser = (producerId, socketId, consumerId) => {
