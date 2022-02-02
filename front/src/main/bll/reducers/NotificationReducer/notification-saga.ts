@@ -4,7 +4,7 @@ import { NotificationData, setNotificationData, toggleNotification } from './not
 export function* showNotificationSagaWorker(action: ReturnType<typeof showNotificationRequest>) {
   yield put(setNotificationData(action.data))
   yield put(toggleNotification({ isOpen: true }))
-  yield delay(2000)
+  yield delay(6000)
   yield put(toggleNotification({ isOpen: false }))
 }
 

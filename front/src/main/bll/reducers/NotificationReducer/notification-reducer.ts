@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: InitialStateNotification = {
-  isOpened: true,
+  isOpened: false,
   data: {
+    toUser: null,
     type: 'info',
     reason: '',
     description: '',
@@ -33,6 +34,7 @@ type InitialStateNotification = {
 }
 
 export type NotificationData = {
+  toUser: number | null
   type: NotificationType
   reason: string
   description: string
