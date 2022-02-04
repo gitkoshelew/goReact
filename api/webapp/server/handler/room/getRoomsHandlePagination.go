@@ -44,12 +44,21 @@ func GetRoomsHandlePagination(s *store.Store) httprouter.Handle {
 		rooms, err := s.Room().GetAllPagination(page)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Can't find user. Err msg: %v", err)
+			s.Logger.Errorf("Can't find rooms. Err msg: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
+		}
+
+		count , err := s.Room().GetTotalRows()
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Can't calculate rows. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(rooms)
+		json.NewEncoder(w).Encode(count)
 	}
 }
