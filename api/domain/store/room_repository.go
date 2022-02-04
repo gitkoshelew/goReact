@@ -102,22 +102,22 @@ func (r *RoomRepository) Update(rm *model.Room) error {
 
 // GetAllPagination returns all rooms with limit and offset (limit - max cout off rows on the page)
 //offset means which row are first
-func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.Room, error) {
+func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.RoomDTO, error) {
 	p.CalculateOffset()
 	rows, err := r.Store.Db.Query("SELECT * FROM ROOM OFFSET $1 LiMIT $2", p.Offset, p.PageSize)
 	if err != nil {
 		log.Print(err)
 		return nil, err
 	}
-	rooms := []model.Room{}
+	rooms := []model.RoomDTO{}
 
 	for rows.Next() {
-		room := model.Room{}
+		room := model.RoomDTO{}
 		err := rows.Scan(
 			&room.RoomID,
 			&room.RoomNumber,
 			&room.PetType,
-			&room.Hotel.HotelID,
+			&room.HotelID,
 		)
 		if err != nil {
 			log.Print(err)
@@ -125,6 +125,7 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.Room, er
 		}
 		rooms = append(rooms, room)
 	}
+
 	return &rooms, nil
 }
 
@@ -141,4 +142,17 @@ func (r *RoomRepository) RoomFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 		Hotel:        *hotel,
 		RoomPhotoURL: dto.RoomPhotoURL,
 	}, nil
+  
+func (r *RoomRepository) GetTotalRows() (map[string]int, error) {
+	var c int
+	err := r.Store.Db.QueryRow("SELECT COUNT(*) FROM ROOM").Scan(&c)
+	if err != nil {
+		log.Print(err.Error())
+		return nil, err
+	}
+
+	count := make(map[string]int)
+	count["Total rows"] = c
+
+	return count, nil
 }

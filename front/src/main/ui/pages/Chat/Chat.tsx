@@ -8,13 +8,14 @@ import { MeRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga
 import goBackIcon from '../../../../assets/img/chat/arrowBack.png'
 import { useNavigate } from 'react-router-dom'
 
-const { usersList, chat, showConversationsButton, hide } = s
+const { usersList, chat, showConversationsButton, hiddenUserList, hiddenConversationButton } = s
 
 export const Chat: FC = ({ children }) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const me = useSelector((state: AppRootState) => state.LoginPage.user)
   const allUsers = useSelector((state: AppRootState) => state.ChatPage.users)
+  const isConversationOpened = useSelector((state: AppRootState) => state.ChatPage.isConversationOpened)
 
   useEffect(() => {
     if ((me === null && localStorage.getItem('token')) || localStorage.getItem('MockToken')) {
@@ -45,10 +46,13 @@ export const Chat: FC = ({ children }) => {
 
   return (
     <div className={chat}>
-      <div className={showConversationsButton} onClick={() => navigate('/chat')}>
+      <div
+        className={`${showConversationsButton} ${!isConversationOpened ? hiddenConversationButton : ''}`}
+        onClick={() => navigate('/chat')}
+      >
         <img src={goBackIcon} alt="Show conversations" />
       </div>
-      <div className={`${usersList} ${children ? hide : ''}`}>{chatPartners}</div>
+      <div className={`${usersList} ${isConversationOpened ? hiddenUserList : ''}`}>{chatPartners}</div>
       {children}
     </div>
   )
