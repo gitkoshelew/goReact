@@ -84,3 +84,23 @@ func TestPage() *pagination.Page {
 		PageSize:   10,
 	}
 }
+
+func TestSeat() *Seat {
+	return &Seat{
+		Description: "Description of seat",
+		IsFree:      true,
+		Room:        *TestRoom(),
+	}
+}
+
+func TestBooking() *Booking {
+	return &Booking{
+		Seat: *TestSeat(),
+		Pet: *TestPet(),
+		Employee: *TestEmployee(),
+		Status: BookingStatusInProgress,
+		StartDate: time.Time{}.AddDate(2000, 2, 2),
+		EndDate: time.Time{}.AddDate(2000, 22, 2),
+		Notes: "Notes",
+	}
+}
