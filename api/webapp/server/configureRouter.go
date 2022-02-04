@@ -8,6 +8,7 @@ import (
 	"goReact/webapp/server/handler/pet"
 	restorepassword "goReact/webapp/server/handler/restorePassword"
 	"goReact/webapp/server/handler/room"
+	"goReact/webapp/server/handler/seat"
 	"goReact/webapp/server/handler/user"
 )
 
@@ -27,6 +28,9 @@ func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/api/user/:id", user.GetUserHandle(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/pets/", pet.GetPetsHandle(store.New(s.config)))
+
+	s.router.Handle("GET", "/api/seat/:id", seat.GetSeatHandle(store.New(s.config)))
+	s.router.Handle("GET", "/api/seats", seat.GetAllSeatsHandle(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/room/:id", room.GetRoomHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/rooms", room.GetAllRoomsHandle(store.New(s.config)))
