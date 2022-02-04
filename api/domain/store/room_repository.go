@@ -127,3 +127,18 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.Room, er
 	}
 	return &rooms, nil
 }
+
+// RoomFromDTO ...
+func (r *RoomRepository) RoomFromDTO(dto *model.RoomDTO) (*model.Room, error) {
+	hotel, err := r.Store.HotelRepository.FindByID(dto.HotelID)
+	if err != nil {
+		return nil, err
+	}
+	return &model.Room{
+		RoomID:       dto.RoomID,
+		RoomNumber:   dto.RoomNumber,
+		PetType:      dto.PetType,
+		Hotel:        *hotel,
+		RoomPhotoURL: dto.RoomPhotoURL,
+	}, nil
+}
