@@ -11,7 +11,7 @@ export function* RoomPageSagaWorker(action: RoomRequest) {
         yield put(fetchCurrentRoom)
         yield put(setCurrentPage({ currentPage: action.currentPage }))
         const { data } = yield call(RoomPageAPI.getRooms, action.currentPage, action.pageSize)
-        yield put(setTotalRoomsCount({ totalRoomsCount: data.count }))
+        yield put(setTotalRoomsCount({ totalRoomsCount: data.totalCount }))
         yield put(fetchCurrentRoomSuccess({ rooms: data.rooms }))
     } catch (err) {
         if (err instanceof Error) {
