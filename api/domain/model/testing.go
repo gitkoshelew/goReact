@@ -88,7 +88,8 @@ func TestPage() *pagination.Page {
 func TestSeat() *Seat {
 	return &Seat{
 		Description: "Description of seat",
-		IsFree:      true,
+		RentFrom:      time.Time{}.AddDate(2000, 2, 2),
+		RentTo: time.Time{}.AddDate(2001, 2, 2),
 		Room:        *TestRoom(),
 	}
 }

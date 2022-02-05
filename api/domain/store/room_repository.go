@@ -142,17 +142,16 @@ func (r *RoomRepository) RoomFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 		Hotel:        *hotel,
 		RoomPhotoURL: dto.RoomPhotoURL,
 	}, nil
-  
-func (r *RoomRepository) GetTotalRows() (map[string]int, error) {
+
+}
+
+func (r *RoomRepository) GetTotalRows() (int, error) {
 	var c int
 	err := r.Store.Db.QueryRow("SELECT COUNT(*) FROM ROOM").Scan(&c)
 	if err != nil {
 		log.Print(err.Error())
-		return nil, err
+		return 0, err
 	}
 
-	count := make(map[string]int)
-	count["Total rows"] = c
-
-	return count, nil
+	return c, nil
 }
