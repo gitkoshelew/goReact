@@ -10,7 +10,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { fetchRoomRequest } from "../../../bll/reducers/RoomPageReducer/roomPage-saga";
 import { Pagination } from "@mui/material";
 
-const { roomPage } = styles
+const { roomPage, pagination } = styles
 
 export const Room = () => {
     const [page, setPage] = useState(1)
@@ -18,26 +18,25 @@ export const Room = () => {
     const rooms = useSelector((state: AppRootState) => state.RoomPage.rooms)
     const totalRoomsCount = useSelector((state: AppRootState) => state.RoomPage.totalRoomsCount)
     const pageSize = useSelector((state: AppRootState) => state.RoomPage.pageSize)
-    const currentPage = useSelector((state: AppRootState) => state.RoomPage.currentPage)
 
-    useEffect(() => {
-        dispatch(fetchRoomRequest(currentPage, pageSize))
-    }, [])
+    const pagesCount = Math.ceil(totalRoomsCount / pageSize)
 
     const onPageChange = (e: ChangeEvent<unknown>, pageChange: number) => {
         setPage(pageChange)
     }
-    const fetchRoomRequestHandler = () => {
+    useEffect(() => {
         dispatch(fetchRoomRequest(page, pageSize))
-
-    }
+    }, [page])
 
     return (
         <>
-            <Pagination count={totalRoomsCount} size="small" onChange={onPageChange} onClick={fetchRoomRequestHandler}
-                        showFirstButton
-                        showLastButton
-                        sx={{ marginY: 3, marginX: "auto" }}/>
+            <div className={pagination}>
+                <Pagination count={pagesCount} size="small" onChange={onPageChange}
+                            showFirstButton
+                            showLastButton
+                            sx={{ marginY: 3, marginX: "auto" }}
+                            style={{ justifyContent: 'center' }}/>
+            </div>
             {
                 rooms.length === 0
                     ? (<span
