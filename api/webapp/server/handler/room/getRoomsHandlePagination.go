@@ -58,7 +58,7 @@ func GetRoomsHandlePagination(s *store.Store) httprouter.Handle {
 
 		res := make(map[string]interface{})
 		res["rooms"] = rooms
-		res["total count"] = count
+		res["totalCount"] = count
 
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(res)
