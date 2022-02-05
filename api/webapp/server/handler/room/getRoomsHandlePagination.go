@@ -2,7 +2,6 @@ package room
 
 import (
 	"encoding/json"
-	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/pagination"
 	"goReact/webapp/server/handler/response"
@@ -57,24 +56,11 @@ func GetRoomsHandlePagination(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		type resp struct {
-			rooms *[]model.RoomDTO
-			count map[string]int
-		}
-	
-
 		res := make(map[string]interface{})
 		res["rooms"] = rooms
-		res["count"] = count
-
-
-
+		res["total count"] = count
 
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(res)
-
-
-		//json.NewEncoder(w).Encode(count)
-		//json.NewEncoder(w).Encode(count)
 	}
 }

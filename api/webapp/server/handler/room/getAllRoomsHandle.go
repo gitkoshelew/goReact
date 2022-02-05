@@ -29,7 +29,7 @@ func GetAllRoomsHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		count , err := s.Room().GetTotalRows()
+		count, err := s.Room().GetTotalRows()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Can't calculate rows. Err msg: %v", err)
@@ -37,8 +37,11 @@ func GetAllRoomsHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		res := make(map[string]interface{})
+		res["rooms"] = rooms
+		res["total count"] = count
+
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(rooms)
-		json.NewEncoder(w).Encode(count)
+		json.NewEncoder(w).Encode(res)
 	}
 }
