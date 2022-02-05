@@ -1,4 +1,4 @@
-package room
+package seat
 
 import (
 	"encoding/json"
@@ -9,8 +9,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetAllRoomsHandle returns all rooms
-func GetAllRoomsHandle(s *store.Store) httprouter.Handle {
+// GetAllSeatsHandle ...
+func GetAllSeatsHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -21,27 +21,15 @@ func GetAllRoomsHandle(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 		}
 
-		rooms, err := s.Room().GetAll()
+		seats, err := s.Seat().GetAll()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Can't find rooms. Err msg: %v", err)
+			s.Logger.Errorf("Can't find seats. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-
-		count, err := s.Room().GetTotalRows()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Can't calculate rows. Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
-
-		res := make(map[string]interface{})
-		res["rooms"] = rooms
-		res["totalCount"] = count
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(res)
+		json.NewEncoder(w).Encode(seats)
 	}
 }

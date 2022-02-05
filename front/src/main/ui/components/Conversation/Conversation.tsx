@@ -8,6 +8,7 @@ import {
   addMessageRequest,
   closeChannelRequest,
   getConversationRequest,
+  setConversationOpenedRequest,
 } from '../../../bll/reducers/ChatPageReducer/chatPage-saga'
 import { openChannelRequest } from '../../../bll/reducers/ChatPageReducer/socketChannel'
 import { MeRequest } from '../../../bll/reducers/LoginPageReduser/loginPage-saga'
@@ -41,6 +42,14 @@ export const Conversation = () => {
       }
     }
   }, [consumerId, me])
+
+  useEffect(() => {
+    dispatch(setConversationOpenedRequest(true))
+
+    return () => {
+      dispatch(setConversationOpenedRequest(false))
+    }
+  }, [])
 
   const handleChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessageText(e.currentTarget.value)

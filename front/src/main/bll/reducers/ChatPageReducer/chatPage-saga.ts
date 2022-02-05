@@ -4,6 +4,7 @@ import {
   fetchInitMessagesSuccess,
   fetchStart,
   fetchUsersSuccess,
+  setConversationOpened,
   setCurrentConversation,
   setSocketChannel,
 } from './chatPage-reducer'
@@ -126,5 +127,17 @@ export function* closeChannelSagaWorker() {
 }
 
 export const closeChannelRequest = () => ({
-  type: "CHAT_PAGE/CLOSE_CHANNEL"
-});
+  type: 'CHAT_PAGE/CLOSE_CHANNEL',
+})
+
+export function* setConversationOpenedSagaWorker(action: ReturnType<typeof setConversationOpenedRequest>) {
+  const { isOpened } = action.payload
+  yield put(setConversationOpened({ isOpened }))
+}
+
+export const setConversationOpenedRequest = (isOpened: boolean) => ({
+  type: 'CHAT_PAGE/SET_CONVERSATION_OPENED',
+  payload: {
+    isOpened,
+  },
+})

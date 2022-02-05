@@ -1,47 +1,49 @@
-package room
+package seat
 
 import (
 	"encoding/json"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/response"
 	"net/http"
+	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetAllRoomsHandle returns all rooms
-func GetAllRoomsHandle(s *store.Store) httprouter.Handle {
+// GetSeatHandle ...
+func GetSeatHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
-		err := s.Open()
+		id, err := strconv.Atoi(ps.ByName("id"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
+		}
+
+		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-		}
-
-		rooms, err := s.Room().GetAll()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Can't find rooms. Err msg: %v", err)
+			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
-		count, err := s.Room().GetTotalRows()
+		seat, err := s.Seat().FindByID(id)
+
+		s.Logger.Debugf("Searching seat by id: %d", id)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Can't calculate rows. Err msg: %v", err)
+			s.Logger.Errorf("Cant find seat. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
-		res := make(map[string]interface{})
-		res["rooms"] = rooms
-		res["totalCount"] = count
+		s.Logger.Debugf("Seat: %v", seat)
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(res)
+		json.NewEncoder(w).Encode(seat)
 	}
 }

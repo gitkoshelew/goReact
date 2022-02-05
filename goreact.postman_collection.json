@@ -110,7 +110,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"email\": \"kazbeksungurov@gmail.com\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+							"raw": "{\r\n        \"email\": \"example@gmail.com\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -181,13 +181,17 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjlmOTIyNzgxLWQ3OTItNGI4OS04YTUyLTI1OTEyZDM1ZTlhNSIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTkyMTQ0MCwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.2Z9SDEPyoZ5cRj-KHzQ-JMo3vbY9jle15k0oIcfnAZ8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjUzNDRiZWU5LWVkYWMtNDk0MS05NDU0LWVhNzA4ZjJjYmI2NCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MjExNjM4OCwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.rwlB0F6moo7l6wB29WqE5RG0x3sqW8AhPJ8M4ED1_vI",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8080/api/me",
 							"protocol": "http",
@@ -243,7 +247,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cdCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjliNTYyZTAyLWM4YmMtNDBmNi04YWRhLTBjNmE0ZTVjNTkwMyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTgzODI0Mywicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Lt_dsynGjTPEPYu2GY9Yr1YQ3kqlga_0yVYAywSvdjs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjUzNDRiZWU5LWVkYWMtNDk0MS05NDU0LWVhNzA4ZjJjYmI2NCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MjExNjM4OCwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.rwlB0F6moo7l6wB29WqE5RG0x3sqW8AhPJ8M4ED1_vI",
 									"type": "string"
 								}
 							]
@@ -298,7 +302,69 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/room/3",
+							"raw": "http://localhost:1110/api/ping",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1110",
+							"path": [
+								"api",
+								"ping"
+							]
+						},
+						"description": "Return room from DB by roomID. ID need to be set in URL params api/room/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"roomId\": 1,\n\n\"roomNum\": 101,\n\n\"petType\": \"Cat\",\n\n\"hotelId\": 1,\n\n\"roomPhotoUrl\": \"roomPhotoUrl\"\n\n}"
+					},
+					"response": []
+				}
+			],
+			"description": "| **Field** | **type** | **JSON** |\n| --- | --- | --- |\n| RoomID | int | roomId |\n| RoomNumber | int | roomNum |\n| PetType | string | petType |\n| HotelID | int | hotelId |\n| RoomPhotoURL | string | roomPhotoUrl |"
+		},
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "Get all users Goreact",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjIwMDFhZGI0LWU3ZDMtNGQxZC1hZmYzLTRmMGRmZjA0MGQ3MSIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0Mzk5ODMzMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.EPljECVXC5SYfD8O18_HKVdbYtSC3nBm5rT9RbCXi0E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1110/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1110",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Seat",
+			"item": [
+				{
+					"name": "Get all seats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/seats",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -306,16 +372,37 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"room",
-								"3"
+								"seats"
 							]
 						},
-						"description": "Return roomfrom DB by roomID. ID need to be set in URL params api/room/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"roomId\": 1,\n\n\"roomNum\": 101,\n\n\"petType\": \"Cat\",\n\n\"hotelId\": 1,\n\n\"roomPhotoUrl\": \"roomPhotoUrl\"\n\n}"
+						"description": "Send a request to server to get all Seats from DB.\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON massieve:\n\n\\[\n\n{\n\n\"seatId\": 1,\n\n\"roomId\": 1,\n\n\"description\": \"some description\",\n\n\"rentFrom\": \"2022-02-10T00:00:00Z\",\n\n\"rentTo\": \"2022-02-15T00:00:00Z\"\n\n},\n\n....\n\n\\]"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/seat/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"seat",
+								"1"
+							]
+						},
+						"description": "Return seat from DB by seatD. ID need to be set in URL params api/seat/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"seatId\": 1,\n\n\"roomId\": 1,\n\n\"description\": \"some description\",\n\n\"rentFrom\": \"2022-02-10T00:00:00Z\",\n\n\"rentTo\": \"2022-02-15T00:00:00Z\"\n\n}"
 					},
 					"response": []
 				}
 			],
-			"description": "| **Field** | **type** | **JSON** |\n| --- | --- | --- |\n| RoomID | int | roomId |\n| RoomNumber | int | roomNum |\n| PetType | string | petType |\n| HotelID | int | hotelId |\n| RoomPhotoURL | string | roomPhotoUrl |"
+			"description": "| Field | type | JSON |\n| --- | --- | --- |\n| SeatID | int | seatId |\n| RoomID | int | roomId |\n| Description | string | description |\n| RentFrom | time.Time | rentFrom |\n| RentTo | time.Time | rentTo |"
 		}
 	]
 }
