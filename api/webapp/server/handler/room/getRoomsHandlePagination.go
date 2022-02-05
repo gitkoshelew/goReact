@@ -2,6 +2,7 @@ package room
 
 import (
 	"encoding/json"
+	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/pagination"
 	"goReact/webapp/server/handler/response"
@@ -48,8 +49,7 @@ func GetRoomsHandlePagination(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-
-		count , err := s.Room().GetTotalRows()
+		count, err := s.Room().GetTotalRows()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Can't calculate rows. Err msg: %v", err)
@@ -57,8 +57,24 @@ func GetRoomsHandlePagination(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		type resp struct {
+			rooms *[]model.RoomDTO
+			count map[string]int
+		}
+	
+
+		res := make(map[string]interface{})
+		res["rooms"] = rooms
+		res["count"] = count
+
+
+
+
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(rooms)
-		json.NewEncoder(w).Encode(count)
+		json.NewEncoder(w).Encode(res)
+
+
+		//json.NewEncoder(w).Encode(count)
+		//json.NewEncoder(w).Encode(count)
 	}
 }
