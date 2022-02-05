@@ -6,16 +6,17 @@ import Typography from '@mui/material/Typography';
 import styles from './Room.module.scss'
 import { useDispatch, useSelector } from "react-redux";
 import { AppRootState } from "../../../bll/store/store";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { fetchRoomRequest } from "../../../bll/reducers/RoomPageReducer/roomPage-saga";
+import { Pagination } from "@mui/material";
 
 const { roomPage } = styles
 
 export const Room = () => {
-    const pages = [1, 2, 3, 4, 5]
+    const [page, setPage] = useState(1)
     const dispatch = useDispatch();
     const rooms = useSelector((state: AppRootState) => state.RoomPage.rooms)
-    // const totalRoomsCount = useSelector((state: AppRootState) => state.RoomPage.totalRoomsCount)
+    const totalRoomsCount = useSelector((state: AppRootState) => state.RoomPage.totalRoomsCount)
     const pageSize = useSelector((state: AppRootState) => state.RoomPage.pageSize)
     const currentPage = useSelector((state: AppRootState) => state.RoomPage.currentPage)
 
@@ -23,17 +24,20 @@ export const Room = () => {
         dispatch(fetchRoomRequest(currentPage, pageSize))
     }, [])
 
+    const onPageChange = (e: ChangeEvent<unknown>, pageChange: number) => {
+        setPage(pageChange)
+    }
+    const fetchRoomRequestHandler = () => {
+        dispatch(fetchRoomRequest(page, pageSize))
+
+    }
 
     return (
         <>
-            <div className={styles.pages}>
-                {pages.map((page, index) => <span
-                        key={index}
-                        className={currentPage === page ? `${styles.currentPage}` : `${styles.page}`}
-                        onClick={() => dispatch(fetchRoomRequest(page, pageSize))}
-                    >{page}</span>
-                )}
-            </div>
+            <Pagination count={totalRoomsCount} size="small" onChange={onPageChange} onClick={fetchRoomRequestHandler}
+                        showFirstButton
+                        showLastButton
+                        sx={{ marginY: 3, marginX: "auto" }}/>
             {
                 rooms.length === 0
                     ? (<span
@@ -58,7 +62,6 @@ export const Room = () => {
                                                 </Typography>
                                             </CardContent>
                                             <CardActions style={{ justifyContent: 'center' }}>
-
                                                 <Button variant="contained" size="small" color={"success"}
                                                         onClick={() => {
                                                             alert('Booking!!')

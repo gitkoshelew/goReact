@@ -4,17 +4,15 @@ import {
     fetchCurrentRoomSuccess, setCurrentPage, setTotalRoomsCount
 } from './roomPage-reducer'
 
-import { AxiosResponse } from 'axios'
-
-import { FetchRoomResponse, RoomPageAPI } from "../../../dal/api_client/API";
+import { RoomPageAPI } from "../../../dal/api_client/API";
 
 export function* RoomPageSagaWorker(action: RoomRequest) {
     try {
-        yield put(setCurrentPage({ currentPage: action.currentPage }))
         yield put(fetchCurrentRoom)
-        const { data }: AxiosResponse<FetchRoomResponse> = yield call(RoomPageAPI.getRooms, action.currentPage, action.pageSize)
-        yield put(fetchCurrentRoomSuccess({ rooms: data }))
-        yield put(setTotalRoomsCount)
+        yield put(setCurrentPage({ currentPage: action.currentPage }))
+        const { data } = yield call(RoomPageAPI.getRooms, action.currentPage, action.pageSize)
+        yield put(setTotalRoomsCount({ totalRoomsCount: data.count }))
+        yield put(fetchCurrentRoomSuccess({ rooms: data.rooms }))
     } catch (err) {
         if (err instanceof Error) {
             yield put(fetchCurrentRoomError({ errorMsg: err.message }))

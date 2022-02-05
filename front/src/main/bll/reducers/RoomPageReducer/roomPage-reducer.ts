@@ -8,7 +8,7 @@ const initialState: InitialStateRoomPage = {
     rooms: [],
     pageSize: 5,
     totalRoomsCount: 0,
-    currentPage: 2,
+    currentPage: 1,
 }
 
 const roomPageSlice = createSlice({
