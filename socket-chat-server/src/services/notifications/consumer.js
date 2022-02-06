@@ -2,10 +2,10 @@ import amqp from "amqplib";
 
 const rabbitSettings = {
   protocol: "amqp",
-  hostname: "rabbitmq",
-  port: 5672,
-  username: "guest",
-  password: "guest",
+  hostname: process.env.RABBIT_HOST,
+  port: process.env.RABBIT_PORT,
+  username: process.env.RABBIT_USER,
+  password: process.env.RABBIT_PASSWORD,
   vhost: "/",
   authMechanism: ["PLAIN", "AMQPLAIN", "EXTERNAL"],
 };
@@ -17,6 +17,7 @@ export const startNotificationConsumer = async (io) => {
   try {
     // Не коннектится к шине, после этой строчки сразу падает в catch
     const connection = await amqp.connect(rabbitSettings);
+    
     console.log("Connection_____", connection);
 
     const channel = await connection.createChannel();

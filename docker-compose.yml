@@ -14,7 +14,7 @@ services:
             - POSTGRES_SSLMODE=${POSTGRES_SSLMODE}
         ports:
             - "8081:5432"
-        restart: always
+        restart: on-failure
         volumes:
             - database-data:/var/lib/postgresql/data/
         networks:
@@ -46,8 +46,6 @@ services:
     migrate:
         image: migrate/migrate
         restart: on-failure
-        networks:
-            - new
         volumes:
             - ./migrations:/migrations
 
@@ -63,12 +61,12 @@ services:
             - postgresql_database
         depends_on:
             - postgresql_database
+        networks:
+            - new
 
     test-migrate:
         image: migrate/migrate
         restart: on-failure
-        networks:
-            - new
         volumes:
             - ./migrations:/migrations
         command:
@@ -83,6 +81,8 @@ services:
             - test_database
         depends_on:
             - test_database
+        networks:
+            - new
 
     pgadmin:
         image: dpage/pgadmin4
@@ -147,7 +147,9 @@ services:
             POSTGRES_PASSWORD: 123
             POSTGRES_DB: socket_chat
             PGDATA: /var/lib/postgresql/data/pgdata
-        restart: always
+        restart: on-failure
+        networks:
+            - new
 
     chat_server:
         build:
@@ -160,9 +162,15 @@ services:
             DB_HOST: chat_db
             DB_PASSWORD: 123
             RABBIT_HOST: amqp://guest:guest@rabbitmq:5672
-        restart: always
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
         depends_on:
             - chat_db
+            - rabbitmq
+        networks:
+            - new
 
     chat_pgadmin:
         image: dpage/pgadmin4
@@ -172,6 +180,8 @@ services:
             PGADMIN_DEFAULT_PASSWORD: root
         ports:
             - "5051:80"
+        networks:
+            - new
 
 networks:
     new:
@@ -181,5 +191,3 @@ volumes:
     api: null
     database-data: null
     pgadmin: null
-    rabbitmq_data:
-        driver: local

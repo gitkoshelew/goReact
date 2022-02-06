@@ -4,9 +4,13 @@ WORKDIR /app
 
 COPY . /app
 
+RUN ls -la
+
 RUN npm install
 
-#make wait-for-postgres.sh executable
 RUN chmod +x wait-for-postgres.sh
+# RUN chmod +x wait-for-rabbit.sh
 
-CMD ["node", "index.js"]
+RUN ls -la
+
+CMD ./wait-for-it.sh rabbitmq:5672 --timeout=0 --strict -- node index.js
