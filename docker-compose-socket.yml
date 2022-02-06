@@ -36,6 +36,8 @@ services:
             POSTGRES_DB: socket_chat
             PGDATA: /var/lib/postgresql/data/pgdata
         restart: on-failure
+        networks:
+            - new
 
     chat_server:
         build:
