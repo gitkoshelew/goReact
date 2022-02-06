@@ -32,10 +32,10 @@ app.use("/api", router);
 
 const start = async () => {
   try {
-    await sequelize.authenticate();
-    await sequelize.sync();
+    // await sequelize.authenticate();
+    // await sequelize.sync();
 
-    startChat(io);
+    // startChat(io);
     await startNotificationConsumer(io);
 
     server.listen(PORT, () => console.log(`Server starts on port ${PORT}`));
