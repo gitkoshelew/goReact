@@ -61,10 +61,7 @@ export const Room = () => {
                                                 </Typography>
                                             </CardContent>
                                             <CardActions style={{ justifyContent: 'center' }}>
-                                                <Button variant="contained" size="small" color={"success"}
-                                                        onClick={() => {
-                                                            alert('Booking!!')
-                                                        }}>Booking</Button>
+                                                <Button variant="contained" size="small" color={"success"}>Booking</Button>
                                             </CardActions>
                                         </Card>
                                     </div>

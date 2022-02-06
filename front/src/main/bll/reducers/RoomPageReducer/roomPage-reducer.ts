@@ -1,9 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { FetchRoomResponse, RoomType } from "../../../dal/api_client/API";
 
+enum RoomPageLoadingStatuses {
+    IDLE = 'IDLE',
+    LOADING = 'LOADING',
+    SUCCESS = 'SUCCESS',
+    ERROR = 'ERROR',
+}
 
 const initialState: InitialStateRoomPage = {
-    loadingStatus: 'idle',
+    loadingStatus: RoomPageLoadingStatuses.IDLE,
     errorMsg: '',
     rooms: [],
     pageSize: 5,
@@ -16,23 +22,23 @@ const roomPageSlice = createSlice({
     initialState,
     reducers: {
         fetchCurrentRoom(state) {
-            state.loadingStatus = 'loading'
+            state.loadingStatus = RoomPageLoadingStatuses.LOADING
             state.errorMsg = ''
         },
         fetchCurrentRoomSuccess(state, action: PayloadAction<{ rooms: FetchRoomResponse }>) {
-            state.loadingStatus = 'success'
+            state.loadingStatus = RoomPageLoadingStatuses.SUCCESS
             state.rooms = action.payload.rooms
         },
         fetchCurrentRoomError(state, action: PayloadAction<{ errorMsg: string }>) {
-            state.loadingStatus = 'error'
+            state.loadingStatus = RoomPageLoadingStatuses.ERROR
             state.errorMsg = action.payload.errorMsg
         },
         setTotalRoomsCount(state, action: PayloadAction<{ totalRoomsCount: number }>) {
-            state.loadingStatus = 'loading'
+            state.loadingStatus = RoomPageLoadingStatuses.LOADING
             state.totalRoomsCount = action.payload.totalRoomsCount
         },
         setCurrentPage(state, action: PayloadAction<{ currentPage: number }>) {
-            state.loadingStatus = 'loading'
+            state.loadingStatus = RoomPageLoadingStatuses.LOADING
             state.currentPage = action.payload.currentPage
         },
     },
@@ -57,4 +63,8 @@ export type InitialStateRoomPage = {
     currentPage: number,
 }
 
-export type RoomPageLoadingStatus = 'idle' | 'loading' | 'success' | 'error'
+export type RoomPageLoadingStatus =
+    | RoomPageLoadingStatuses.IDLE
+    | RoomPageLoadingStatuses.LOADING
+    | RoomPageLoadingStatuses.SUCCESS
+    | RoomPageLoadingStatuses.ERROR
