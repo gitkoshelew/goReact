@@ -11,6 +11,4 @@ RUN npm install
 RUN chmod +x wait-for-postgres.sh
 # RUN chmod +x wait-for-rabbit.sh
 
-RUN ls -la
-
 CMD ./wait-for-it.sh rabbitmq:5672 --timeout=0 --strict -- node index.js

@@ -100,19 +100,18 @@ services:
             - new
 
     rabbitmq:
-        image: rabbitmq:3-management
+        build:
+            context: ./rabbit
+        container_name: rabbitmq
         ports:
-            - '4369:4369'
-            - '5551:5551'
-            - '5552:5552'
-            - '5675:5672'
-            - '25672:25672'
-            - '15672:15672'
+            - ${RABBIT_HTTP_EXTERNAL_PORT_V3}:15672
         environment:
-            - RABBITMQ_SECURE_PASSWORD=yes
-            - RABBITMQ_PASSWORD=my_password
+            - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+            - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBITMQ_CONFIG_FILE=/etc/rabbitmq.conf
         volumes:
-            - rabbitmq_data:/bitnami/rabbitmq/mnesia
+            - ./rabbit/rabbitmq.conf:/etc/rabbitmq.conf
+            - ./rabbit/definitions.json:/etc/rabbitmq/definitions.json
         networks:
             - new
 
@@ -159,9 +158,14 @@ services:
         ports:
             - "5001:5000"
         environment:
-            DB_HOST: chat_db
-            DB_PASSWORD: 123
-            RABBIT_HOST: amqp://guest:guest@rabbitmq:5672
+            - DB_HOST=chat_db
+            - DB_PASSWORD=123
+            - PORT=5000
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - NODE_ENV=development
         restart: on-failure
         links:
             - chat_db
