@@ -75,7 +75,21 @@
       }
     },
     {
-      "name": "NOTIFICATIONS_QUEUE",
+      "name": "NOTIFICATIONS_ERRORS_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "NOTIFICATIONS_WARNINGS_QUEUE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "NOTIFICATIONS_INFO_QUEUE",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
@@ -86,14 +100,14 @@
     {
       "name": "NOTIFICATIONS_EXCHANGE",
       "vhost": "/",
-      "type": "fanout",
+      "type": "direct",
       "durable": true,
       "auto_delete": false,
       "internal": false,
       "arguments": {}
     },
     {
-      "name": "GENERATED_QUEUE",
+      "name": "GENERATED_EXCHANGE",
       "vhost": "/",
       "type": "direct",
       "durable": true,
@@ -113,7 +127,7 @@
   ],
   "bindings": [
     {
-      "source": "GENERATED_QUEUE",
+      "source": "GENERATED_EXCHANGE",
       "vhost": "/",
       "destination": "GENERATED_QUEUE",
       "destination_type": "queue",
@@ -123,9 +137,25 @@
     {
       "source": "NOTIFICATIONS_EXCHANGE",
       "vhost": "/",
-      "destination": "NOTIFICATIONS_QUEUE",
+      "destination": "NOTIFICATIONS_ERRORS_QUEUE",
       "destination_type": "queue",
-      "routing_key": "booking_notification",
+      "routing_key": "notification_error",
+      "arguments": {}
+    },
+    {
+      "source": "NOTIFICATIONS_EXCHANGE",
+      "vhost": "/",
+      "destination": "NOTIFICATIONS_WARNINGS_QUEUE",
+      "destination_type": "queue",
+      "routing_key": "notification_warning",
+      "arguments": {}
+    },
+    {
+      "source": "NOTIFICATIONS_EXCHANGE",
+      "vhost": "/",
+      "destination": "NOTIFICATIONS_INFO_QUEUE",
+      "destination_type": "queue",
+      "routing_key": "notification_info",
       "arguments": {}
     },
     {
