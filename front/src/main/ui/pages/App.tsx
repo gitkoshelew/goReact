@@ -1,32 +1,33 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.scss'
 import { NavBar } from './navBar/navBar'
 import { RoutesInfo } from '../Routes/RoutesInfo'
 import { Footer } from './footer/footer'
 import { Notification } from '../components/Notification/Notification'
-import { io, Socket } from 'socket.io-client'
-import { useAppDispatch } from '../../bll/store/store'
-import { showNotificationRequest } from '../../bll/reducers/NotificationReducer/notification-saga'
+import { AppRootState, useAppDispatch } from '../../bll/store/store'
+import { closeNotificationChannelRequest } from '../../bll/reducers/NotificationReducer/notification-saga'
+import { openNotificationChannelRequest } from '../../bll/reducers/NotificationReducer/socketChannel'
+import { useSelector } from 'react-redux'
 
 function App() {
   const [isBurgerCollapse, setIsBurgerCollapse] = useState(false)
 
-  const socket = useRef<Socket | null>(null)
+  const clientId = useSelector((state: AppRootState) => state.LoginPage.user?.userId)
+  const notificationSocketChannel = useSelector((state: AppRootState) => state.Notification.socketChannel)
+
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    socket.current = io('ws://localhost:5001')
+    if (clientId) {
+      dispatch(openNotificationChannelRequest(clientId))
+    }
 
     return () => {
-      socket.current?.disconnect()
+      if (notificationSocketChannel) {
+        dispatch(closeNotificationChannelRequest())
+      }
     }
-  }, [])
-
-  useEffect(() => {
-    socket.current?.on('BROKER_RECEIVED_NOTIFICATION', (notification: string) => {
-      dispatch(showNotificationRequest(JSON.parse(notification)))
-    })
-  }, [])
+  }, [clientId])
 
   /*
                   *TODO:-routes system for faster navigation by application

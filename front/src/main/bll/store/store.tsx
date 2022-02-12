@@ -28,9 +28,13 @@ import { openChannelSagaWorker } from '../reducers/ChatPageReducer/socketChannel
 import { RoomPageSagaWorker } from '../reducers/RoomPageReducer/roomPage-saga'
 import { RoomPageReducer } from '../reducers/RoomPageReducer/roomPage-reducer'
 import { NotificationReducer } from '../reducers/NotificationReducer/notification-reducer'
-import { showNotificationSagaWorker } from '../reducers/NotificationReducer/notification-saga'
+import {
+  closeNotificationChannelSagaWorker,
+  showNotificationSagaWorker,
+} from '../reducers/NotificationReducer/notification-saga'
 import { SeatsReducer } from '../reducers/SeatsReducer/seats-reducer'
 import { fetchSeatsSagaWorker } from '../reducers/SeatsReducer/seats-saga'
+import { openNotificationChannelSagaWorker } from '../reducers/NotificationReducer/socketChannel'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -80,5 +84,7 @@ function* rootWatcher() {
   yield takeEvery('ROOM_PAGE/FETCH_ROOM_SAGA', RoomPageSagaWorker)
   yield takeEvery('CHAT_PAGE/SET_CONVERSATION_OPENED', setConversationOpenedSagaWorker)
   yield takeLatest('NOTIFICATION/SHOW_NOTIFICATION', showNotificationSagaWorker)
+  yield takeEvery('NOTIFICATION/OPEN_CHANNEL', openNotificationChannelSagaWorker)
+  yield takeEvery('NOTIFICATION/CLOSE_CHANNEL', closeNotificationChannelSagaWorker)
   yield takeEvery('SEATS/FETCH_SETS', fetchSeatsSagaWorker)
 }
