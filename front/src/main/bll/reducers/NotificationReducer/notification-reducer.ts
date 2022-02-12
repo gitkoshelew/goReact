@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Socket } from 'socket.io-client'
 
 const initialState: InitialStateNotification = {
+  socketChannel: null,
   isOpened: false,
   data: {
     toUser: null,
@@ -20,15 +22,20 @@ const notificationSlice = createSlice({
     setNotificationData(state, action: PayloadAction<NotificationData>) {
       state.data = action.payload
     },
+    setNotificationSocketChannel(state, action: PayloadAction<{ socketChannel: Socket | null }>) {
+      // @ts-ignore
+      state.socketChannel = action.payload.socketChannel
+    },
   },
 })
 
 export const NotificationReducer = notificationSlice.reducer
-export const { toggleNotification, setNotificationData } = notificationSlice.actions
+export const { toggleNotification, setNotificationData, setNotificationSocketChannel } = notificationSlice.actions
 
 //types
 
 type InitialStateNotification = {
+  socketChannel: Socket | null
   isOpened: boolean
   data: NotificationData
 }
