@@ -28,6 +28,9 @@ app.use(express.json());
 
 const PORT = process.env.CHAT_SERVER_PORT || 5000;
 
+app.get("/ping", (req, res) => {
+  res.send("Working!");
+});
 app.use("/api", router);
 
 const start = async () => {
