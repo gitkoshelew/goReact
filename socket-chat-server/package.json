@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "serve": "nodemon index.js"
+    "serve": "nodemon --experimental-json-modules index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.8.2",
     "nodemon": "^2.0.15"
   }
 }
