@@ -4,12 +4,8 @@ import { Socket } from 'socket.io-client'
 const initialState: InitialStateNotification = {
   socketChannel: null,
   isOpened: false,
-  data: {
-    toUser: null,
-    type: 'info',
-    reason: '',
-    description: '',
-  },
+  allNotifications: [],
+  currentNotification: null,
 }
 
 const notificationSlice = createSlice({
@@ -19,8 +15,14 @@ const notificationSlice = createSlice({
     toggleNotification(state, action: PayloadAction<{ isOpen: boolean }>) {
       state.isOpened = action.payload.isOpen
     },
-    setNotificationData(state, action: PayloadAction<NotificationData>) {
-      state.data = action.payload
+    addNotificationToQueue(state, action: PayloadAction<NotificationData>) {
+      state.allNotifications.push(action.payload)
+    },
+    removeNotificationFromQueue(state) {
+      state.allNotifications.shift()
+    },
+    setCurrentNotification(state, action: PayloadAction<NotificationData>) {
+      state.currentNotification = action.payload
     },
     setNotificationSocketChannel(state, action: PayloadAction<{ socketChannel: Socket | null }>) {
       // @ts-ignore
@@ -30,14 +32,21 @@ const notificationSlice = createSlice({
 })
 
 export const NotificationReducer = notificationSlice.reducer
-export const { toggleNotification, setNotificationData, setNotificationSocketChannel } = notificationSlice.actions
+export const {
+  toggleNotification,
+  addNotificationToQueue,
+  removeNotificationFromQueue,
+  setCurrentNotification,
+  setNotificationSocketChannel,
+} = notificationSlice.actions
 
 //types
 
 type InitialStateNotification = {
   socketChannel: Socket | null
   isOpened: boolean
-  data: NotificationData
+  allNotifications: NotificationData[]
+  currentNotification: NotificationData | null
 }
 
 export type NotificationData = {

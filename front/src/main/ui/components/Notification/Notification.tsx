@@ -8,14 +8,16 @@ const { notification, hideNotification } = s
 
 export const Notification = () => {
   const isNotificationOpened = useSelector((state: AppRootState) => state.Notification.isOpened)
-  const notificationData = useSelector((state: AppRootState) => state.Notification.data)
+  const currentNotification = useSelector((state: AppRootState) => state.Notification.currentNotification)
 
   return (
     <div className={`${notification} ${!isNotificationOpened ? hideNotification : ''}`}>
-      <Alert variant="filled" severity={notificationData.type}>
-        <AlertTitle>{notificationData.reason}</AlertTitle>
-        {notificationData.description}
-      </Alert>
+      {currentNotification && (
+        <Alert variant="filled" severity={currentNotification.type}>
+          <AlertTitle>{currentNotification.reason}</AlertTitle>
+          {currentNotification.description}
+        </Alert>
+      )}
     </div>
   )
 }

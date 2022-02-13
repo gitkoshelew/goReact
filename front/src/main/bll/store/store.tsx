@@ -29,7 +29,9 @@ import { RoomPageSagaWorker } from '../reducers/RoomPageReducer/roomPage-saga'
 import { RoomPageReducer } from '../reducers/RoomPageReducer/roomPage-reducer'
 import { NotificationReducer } from '../reducers/NotificationReducer/notification-reducer'
 import {
+  addNotificationToQueueSagaWorker,
   closeNotificationChannelSagaWorker,
+  removeNotificationFromQueueSagaWorker,
   showNotificationSagaWorker,
 } from '../reducers/NotificationReducer/notification-saga'
 import { SeatsReducer } from '../reducers/SeatsReducer/seats-reducer'
@@ -83,7 +85,9 @@ function* rootWatcher() {
   yield takeEvery('CHAT_PAGE/USER_SEND_MESSAGE', sendMessageSagaWorker)
   yield takeEvery('ROOM_PAGE/FETCH_ROOM_SAGA', RoomPageSagaWorker)
   yield takeEvery('CHAT_PAGE/SET_CONVERSATION_OPENED', setConversationOpenedSagaWorker)
+  yield takeEvery('NOTIFICATION/ADD_NOTIFICATION', addNotificationToQueueSagaWorker)
   yield takeLatest('NOTIFICATION/SHOW_NOTIFICATION', showNotificationSagaWorker)
+  yield takeEvery('NOTIFICATION/REMOVE_NOTIFICATION', removeNotificationFromQueueSagaWorker)
   yield takeEvery('NOTIFICATION/OPEN_CHANNEL', openNotificationChannelSagaWorker)
   yield takeEvery('NOTIFICATION/CLOSE_CHANNEL', closeNotificationChannelSagaWorker)
   yield takeEvery('SEATS/FETCH_SETS', fetchSeatsSagaWorker)

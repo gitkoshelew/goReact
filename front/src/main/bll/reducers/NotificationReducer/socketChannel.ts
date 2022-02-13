@@ -2,7 +2,7 @@ import { io, Socket } from 'socket.io-client'
 import { eventChannel } from 'redux-saga'
 import { call, put, take } from 'redux-saga/effects'
 import { NotificationData, setNotificationSocketChannel } from './notification-reducer'
-import { showNotificationRequest } from './notification-saga'
+import { addNotificationToQueueRequest } from './notification-saga'
 
 function createSocketConnections(clientId: number) {
   return io('ws://localhost:5000', { query: { clientId } })
@@ -32,7 +32,7 @@ export function* openNotificationChannelSagaWorker(action: ReturnType<typeof ope
   try {
     while (true) {
       const payload: NotificationData = yield take(eventProviderChannel)
-      yield put(showNotificationRequest(payload))
+      yield put(addNotificationToQueueRequest(payload))
     }
   } catch (err) {
     console.log(err)
