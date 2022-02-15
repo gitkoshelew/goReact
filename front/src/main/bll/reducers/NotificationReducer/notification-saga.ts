@@ -1,56 +1,38 @@
-import { apply, call, delay, put, select } from 'redux-saga/effects'
-import {
-  addNotificationToQueue,
-  NotificationData,
-  removeNotificationFromQueue,
-  setCurrentNotification,
-  setNotificationSocketChannel,
-  toggleNotification,
-} from './notification-reducer'
+import { apply, call, put, select } from 'redux-saga/effects'
+import { addNotification, removeNotification, setNotificationSocketChannel } from './notification-reducer'
 import { Socket } from 'socket.io-client'
 import { AppRootState } from '../../store/store'
+import { NotificationRaw } from './socketChannel'
 
-export function* addNotificationToQueueSagaWorker(action: ReturnType<typeof addNotificationToQueueRequest>) {
-  yield put(addNotificationToQueue(action.data))
-  yield put(showNotificationRequest())
+export function* addNotificationSagaWorker(action: ReturnType<typeof addNotificationRequest>) {
+  yield put(addNotification(action.notification))
 }
 
-export const addNotificationToQueueRequest = (notificationData: NotificationData) => ({
+export const addNotificationRequest = (notification: NotificationRaw) => ({
   type: 'NOTIFICATION/ADD_NOTIFICATION',
-  data: notificationData,
+  notification,
 })
 
-export function* removeNotificationFromQueueSagaWorker() {
-  yield put(removeNotificationFromQueue())
+export function* removeNotificationSagaWorker(action: ReturnType<typeof removeNotificationRequest>) {
+  yield put(removeNotification(action.notificationId))
 }
 
-export const removeNotificationFromQueueRequest = () => ({
+export const removeNotificationRequest = (notificationId: string) => ({
   type: 'NOTIFICATION/REMOVE_NOTIFICATION',
+  notificationId,
 })
 
-export function* showNotificationSagaWorker() {
-  const nextNotificationToShow: NotificationData = yield select(
-    (state: AppRootState) => state.Notification.allNotifications[0]
-  )
-  yield put(setCurrentNotification(nextNotificationToShow))
-  yield put(toggleNotification({ isOpen: true }))
-  yield delay(6000)
-  yield put(toggleNotification({ isOpen: false }))
-  yield put(confirmNotificationReceiptRequest())
-  yield put(removeNotificationFromQueueRequest())
-}
-
-export const showNotificationRequest = () => ({
-  type: 'NOTIFICATION/SHOW_NOTIFICATION',
-})
-
-export function* confirmNotificationReceiptSagaWorker() {
+export function* confirmNotificationSagaWorker(action: ReturnType<typeof confirmNotificationRequest>) {
   const socket: Socket = yield select((state: AppRootState) => state.Notification.socketChannel)
-  yield apply(socket, socket.emit, ['CLIENT_RECEIVED_NOTIFICATION'])
+  const notificationToConfirm: NotificationRaw = yield select((state: AppRootState) =>
+    state.Notification.notifications.find((notification) => notification.content.id === action.notificationId)
+  )
+  yield apply(socket, socket.emit, ['CLIENT_RECEIVED_NOTIFICATION', notificationToConfirm])
 }
 
-export const confirmNotificationReceiptRequest = () => ({
-  type: 'NOTIFICATION/CONFIRM_NOTIFICATION_RECEIPT',
+export const confirmNotificationRequest = (notificationId: string) => ({
+  type: 'NOTIFICATION/CONFIRM_NOTIFICATION',
+  notificationId,
 })
 
 export function* closeNotificationChannelSagaWorker() {

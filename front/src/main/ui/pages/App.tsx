@@ -14,6 +14,7 @@ function App() {
 
   const clientId = useSelector((state: AppRootState) => state.LoginPage.user?.userId)
   const notificationSocketChannel = useSelector((state: AppRootState) => state.Notification.socketChannel)
+  const notifications = useSelector((state: AppRootState) => state.Notification.notifications)
 
   const dispatch = useAppDispatch()
 
@@ -38,7 +39,17 @@ function App() {
 
   return (
     <div className={'app'}>
-      <Notification />
+      <div className={'notificationContainer'}>
+        {notifications.map((notification) => (
+          <Notification
+            key={notification.content.id}
+            id={notification.content.id}
+            type={notification.content.type}
+            reason={notification.content.reason}
+            description={notification.content.description}
+          />
+        ))}
+      </div>
       <NavBar setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
       {!isBurgerCollapse && (
         <div>

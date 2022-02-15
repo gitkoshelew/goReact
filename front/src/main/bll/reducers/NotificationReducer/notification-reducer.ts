@@ -1,28 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Socket } from 'socket.io-client'
+import { NotificationRaw } from './socketChannel'
 
 const initialState: InitialStateNotification = {
   socketChannel: null,
-  isOpened: false,
-  allNotifications: [],
-  currentNotification: null,
+  notifications: [],
 }
 
 const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    toggleNotification(state, action: PayloadAction<{ isOpen: boolean }>) {
-      state.isOpened = action.payload.isOpen
+    addNotification(state, action: PayloadAction<NotificationRaw>) {
+      state.notifications.push(action.payload)
     },
-    addNotificationToQueue(state, action: PayloadAction<NotificationData>) {
-      state.allNotifications.push(action.payload)
-    },
-    removeNotificationFromQueue(state) {
-      state.allNotifications.shift()
-    },
-    setCurrentNotification(state, action: PayloadAction<NotificationData>) {
-      state.currentNotification = action.payload
+    removeNotification(state, action: PayloadAction<string>) {
+      state.notifications = state.notifications.filter((notification) => notification.content.id !== action.payload)
     },
     setNotificationSocketChannel(state, action: PayloadAction<{ socketChannel: Socket | null }>) {
       // @ts-ignore
@@ -32,24 +25,17 @@ const notificationSlice = createSlice({
 })
 
 export const NotificationReducer = notificationSlice.reducer
-export const {
-  toggleNotification,
-  addNotificationToQueue,
-  removeNotificationFromQueue,
-  setCurrentNotification,
-  setNotificationSocketChannel,
-} = notificationSlice.actions
+export const { addNotification, removeNotification, setNotificationSocketChannel } = notificationSlice.actions
 
 //types
 
 type InitialStateNotification = {
   socketChannel: Socket | null
-  isOpened: boolean
-  allNotifications: NotificationData[]
-  currentNotification: NotificationData | null
+  notifications: NotificationRaw[]
 }
 
 export type NotificationData = {
+  id: string
   toUser: number | null
   type: NotificationType
   reason: string

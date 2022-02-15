@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import { BookingRegFormReducer } from '../reducers/BookingRegFormReducer/BookingRegForm-reducer'
 import { useDispatch } from 'react-redux'
-import { takeEvery, takeLatest } from 'redux-saga/effects'
+import { takeEvery } from 'redux-saga/effects'
 import { BookingUploadPetImgSagaWorker } from '../reducers/BookingRegFormReducer/BookindRegForm-saga'
 import { BookingRoomPickReducer } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
 import { BookingRoomPickSagaWorker } from '../reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
@@ -29,11 +29,10 @@ import { RoomPageSagaWorker } from '../reducers/RoomPageReducer/roomPage-saga'
 import { RoomPageReducer } from '../reducers/RoomPageReducer/roomPage-reducer'
 import { NotificationReducer } from '../reducers/NotificationReducer/notification-reducer'
 import {
-  addNotificationToQueueSagaWorker,
+  addNotificationSagaWorker,
   closeNotificationChannelSagaWorker,
-  confirmNotificationReceiptSagaWorker,
-  removeNotificationFromQueueSagaWorker,
-  showNotificationSagaWorker,
+  confirmNotificationSagaWorker,
+  removeNotificationSagaWorker,
 } from '../reducers/NotificationReducer/notification-saga'
 import { SeatsReducer } from '../reducers/SeatsReducer/seats-reducer'
 import { fetchSeatsSagaWorker } from '../reducers/SeatsReducer/seats-saga'
@@ -86,10 +85,9 @@ function* rootWatcher() {
   yield takeEvery('CHAT_PAGE/USER_SEND_MESSAGE', sendMessageSagaWorker)
   yield takeEvery('ROOM_PAGE/FETCH_ROOM_SAGA', RoomPageSagaWorker)
   yield takeEvery('CHAT_PAGE/SET_CONVERSATION_OPENED', setConversationOpenedSagaWorker)
-  yield takeEvery('NOTIFICATION/ADD_NOTIFICATION', addNotificationToQueueSagaWorker)
-  yield takeLatest('NOTIFICATION/SHOW_NOTIFICATION', showNotificationSagaWorker)
-  yield takeEvery('NOTIFICATION/REMOVE_NOTIFICATION', removeNotificationFromQueueSagaWorker)
-  yield takeEvery('NOTIFICATION/CONFIRM_NOTIFICATION_RECEIPT', confirmNotificationReceiptSagaWorker)
+  yield takeEvery('NOTIFICATION/ADD_NOTIFICATION', addNotificationSagaWorker)
+  yield takeEvery('NOTIFICATION/REMOVE_NOTIFICATION', removeNotificationSagaWorker)
+  yield takeEvery('NOTIFICATION/CONFIRM_NOTIFICATION', confirmNotificationSagaWorker)
   yield takeEvery('NOTIFICATION/OPEN_CHANNEL', openNotificationChannelSagaWorker)
   yield takeEvery('NOTIFICATION/CLOSE_CHANNEL', closeNotificationChannelSagaWorker)
   yield takeEvery('SEATS/FETCH_SETS', fetchSeatsSagaWorker)
