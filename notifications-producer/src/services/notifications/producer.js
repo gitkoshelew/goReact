@@ -30,29 +30,29 @@ export const startNotificationProducer = async () => {
     });
 
     const tomorrow = moment().add(1, "days").format("YYYY-MM-DD");
-    setInterval(async () => {
-      const usersForNotification = await sequelize.query(
-        `SELECT booking.pet_id, pet.user_id FROM booking INNER JOIN pet ON booking.pet_id = pet.id WHERE booking.start_date = '${tomorrow}'`,
-        {
-          type: QueryTypes.SELECT,
-        }
-      );
+    // setInterval(async () => {
+    const usersForNotification = await sequelize.query(
+      `SELECT booking.pet_id, pet.user_id FROM booking INNER JOIN pet ON booking.pet_id = pet.id WHERE booking.start_date = '${tomorrow}'`,
+      {
+        type: QueryTypes.SELECT,
+      }
+    );
 
-      usersForNotification.forEach((user) => {
-        const notification = {
-          toUser: user.user_id,
-          type: "warning",
-          reason: "You have book for tomorrow",
-          description:
-            "Dear customer! You have booked a room in our hotel tomorrow",
-        };
-        channel.publish(
-          NOTIFICATIONS_EXCHANGE,
-          "notification_warning",
-          Buffer.from(JSON.stringify(notification))
-        );
-      });
-    }, notificationHoursInterval * 3600000);
+    usersForNotification.forEach((user) => {
+      const notification = {
+        toUser: user.user_id,
+        type: "warning",
+        reason: "You have book for tomorrow",
+        description:
+          "Dear customer! You have booked a room in our hotel tomorrow",
+      };
+      channel.publish(
+        NOTIFICATIONS_EXCHANGE,
+        "notification_warning",
+        Buffer.from(JSON.stringify(notification))
+      );
+    });
+    // }, 7000);
   } catch (e) {
     console.log(e);
   }

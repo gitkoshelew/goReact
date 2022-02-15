@@ -1,4 +1,4 @@
-import { call, delay, put, select } from 'redux-saga/effects'
+import { apply, call, delay, put, select } from 'redux-saga/effects'
 import {
   addNotificationToQueue,
   NotificationData,
@@ -36,11 +36,21 @@ export function* showNotificationSagaWorker() {
   yield put(toggleNotification({ isOpen: true }))
   yield delay(6000)
   yield put(toggleNotification({ isOpen: false }))
+  yield put(confirmNotificationReceiptRequest())
   yield put(removeNotificationFromQueueRequest())
 }
 
 export const showNotificationRequest = () => ({
   type: 'NOTIFICATION/SHOW_NOTIFICATION',
+})
+
+export function* confirmNotificationReceiptSagaWorker() {
+  const socket: Socket = yield select((state: AppRootState) => state.Notification.socketChannel)
+  yield apply(socket, socket.emit, ['CLIENT_RECEIVED_NOTIFICATION'])
+}
+
+export const confirmNotificationReceiptRequest = () => ({
+  type: 'NOTIFICATION/CONFIRM_NOTIFICATION_RECEIPT',
 })
 
 export function* closeNotificationChannelSagaWorker() {

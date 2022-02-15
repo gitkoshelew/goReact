@@ -18,6 +18,7 @@ const NOTIFICATIONS_EXCHANGE = rabbitDefinitions.exchanges.find(
 ).name;
 
 const BROKER_RECEIVED_NOTIFICATION = "BROKER_RECEIVED_NOTIFICATION";
+const CLIENT_RECEIVED_NOTIFICATION = "CLIENT_RECEIVED_NOTIFICATION";
 
 export const startNotificationConsumer = async (io) => {
   try {
@@ -92,22 +93,21 @@ export const startNotificationConsumer = async (io) => {
        */
 
       bindings.forEach(async ({ destination }) => {
-        await channel.consume(
-          destination,
-          (notification) => {
-            const toUserId = String(
-              JSON.parse(notification.content.toString()).toUser
+        await channel.consume(destination, (notification) => {
+          const toUserId = String(
+            JSON.parse(notification.content.toString()).toUser
+          );
+          const targetUser = getUser(toUserId);
+          if (targetUser) {
+            io.to(targetUser).emit(
+              BROKER_RECEIVED_NOTIFICATION,
+              notification.content.toString()
             );
-            const targetUser = getUser(toUserId);
-            if (targetUser) {
-              io.to(targetUser).emit(
-                BROKER_RECEIVED_NOTIFICATION,
-                notification.content.toString()
-              );
-            }
-          },
-          { noAck: true }
-        );
+          }
+          socket.on(CLIENT_RECEIVED_NOTIFICATION, () => {
+            console.log(notification.fields.deliveryTag);
+          });
+        });
       });
 
       socket.on("disconnect", () => {

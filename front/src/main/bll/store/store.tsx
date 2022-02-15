@@ -31,6 +31,7 @@ import { NotificationReducer } from '../reducers/NotificationReducer/notificatio
 import {
   addNotificationToQueueSagaWorker,
   closeNotificationChannelSagaWorker,
+  confirmNotificationReceiptSagaWorker,
   removeNotificationFromQueueSagaWorker,
   showNotificationSagaWorker,
 } from '../reducers/NotificationReducer/notification-saga'
@@ -88,6 +89,7 @@ function* rootWatcher() {
   yield takeEvery('NOTIFICATION/ADD_NOTIFICATION', addNotificationToQueueSagaWorker)
   yield takeLatest('NOTIFICATION/SHOW_NOTIFICATION', showNotificationSagaWorker)
   yield takeEvery('NOTIFICATION/REMOVE_NOTIFICATION', removeNotificationFromQueueSagaWorker)
+  yield takeEvery('NOTIFICATION/CONFIRM_NOTIFICATION_RECEIPT', confirmNotificationReceiptSagaWorker)
   yield takeEvery('NOTIFICATION/OPEN_CHANNEL', openNotificationChannelSagaWorker)
   yield takeEvery('NOTIFICATION/CLOSE_CHANNEL', closeNotificationChannelSagaWorker)
   yield takeEvery('SEATS/FETCH_SETS', fetchSeatsSagaWorker)
