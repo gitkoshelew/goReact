@@ -14,7 +14,6 @@ export const Notification = ({ id, type, reason, description }: Omit<Notificatio
   const dispatch = useAppDispatch()
 
   const handleClose = () => {
-    console.log(id, description)
     dispatch(confirmNotificationRequest(id))
     dispatch(removeNotificationRequest(id))
   }

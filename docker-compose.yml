@@ -105,7 +105,6 @@ services:
         container_name: rabbitmq
         ports:
             - ${RABBIT_HTTP_EXTERNAL_PORT_V3}:15672
-            - "5673:5672"
         environment:
             - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
             - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
@@ -151,31 +150,59 @@ services:
         networks:
             - new
 
-#    chat_server:
-#        build:
-#            context: ./socket-chat-server
-#        image: socket-chat-express
-#        container_name: socket-chat-express
-#        ports:
-#            - "5001:5000"
-#        environment:
-#            - DB_HOST=chat_db
-#            - DB_PASSWORD=123
-#            - PORT=5000
-#            - RABBIT_HOST=rabbitmq
-#            - RABBIT_PORT=${RABBIT_TCP_PORT}
-#            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
-#            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
-#            - NODE_ENV=development
-#        restart: on-failure
-#        links:
-#            - chat_db
-#            - rabbitmq
-#        depends_on:
-#            - chat_db
-#            - rabbitmq
-#        networks:
-#            - new
+    chat_server:
+        build:
+            context: ./socket-chat-server
+        image: socket-chat-express
+        container_name: socket-chat-express
+        ports:
+            - "5001:5000"
+        environment:
+            - DB_HOST=chat_db
+            - DB_PASSWORD=123
+            - PORT=5000
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - NODE_ENV=development
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
+        depends_on:
+            - chat_db
+            - rabbitmq
+        networks:
+            - new
+
+    notification_producer:
+        build:
+            context: ./notifications-producer
+        image: notification-producer
+        container_name: notification-producer
+        ports:
+            - "5006:5005"
+        environment:
+            - PORT=5005
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - DB_HOST=${POSTGRES_HOST}
+            - DB_PORT=${POSTGRES_PORT}
+            - DB_NAME=${POSTGRES_DB}
+            - DB_USER=${POSTGRES_USER}
+            - DB_PASS=${POSTGRES_PASSWORD}
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
+        depends_on:
+            - chat_db
+            - rabbitmq
+        networks:
+            - new
 
     chat_pgadmin:
         image: dpage/pgadmin4

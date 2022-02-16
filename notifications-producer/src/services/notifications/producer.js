@@ -1,5 +1,5 @@
 import amqp from "amqplib";
-import rabbitDefinitions from "../../../../rabbit/definitions.json";
+import rabbitDefinitions from "../../../definitions.json" assert { type: "json" };
 import sequelize from "../../../db.js";
 import { QueryTypes } from "sequelize";
 import moment from "moment";
@@ -7,8 +7,8 @@ import { v1 } from "uuid";
 
 const rabbitSettings = {
   protocol: "amqp",
-  hostname: "localhost",
-  port: 5673,
+  hostname: process.env.RABBIT_HOST,
+  port: +process.env.RABBIT_PORT,
   username: process.env.RABBIT_USER,
   password: process.env.RABBIT_PASSWORD,
   vhost: "/",
@@ -19,7 +19,7 @@ const NOTIFICATIONS_EXCHANGE = rabbitDefinitions.exchanges.find(
   (exchange) => exchange.name === "NOTIFICATIONS_EXCHANGE"
 ).name;
 
-const notificationHoursInterval = 1;
+const hoursSearchInterval = 6;
 
 export const startNotificationProducer = async () => {
   try {
@@ -31,30 +31,30 @@ export const startNotificationProducer = async () => {
     });
 
     const tomorrow = moment().add(1, "days").format("YYYY-MM-DD");
-    // setInterval(async () => {
-    const usersForNotification = await sequelize.query(
-      `SELECT booking.pet_id, pet.user_id FROM booking INNER JOIN pet ON booking.pet_id = pet.id WHERE booking.start_date = '${tomorrow}'`,
-      {
-        type: QueryTypes.SELECT,
-      }
-    );
-
-    usersForNotification.forEach((user) => {
-      const notification = {
-        id: v1(),
-        toUser: user.user_id,
-        type: "warning",
-        reason: "You have book for tomorrow",
-        description:
-          "Dear customer! You have booked a room in our hotel tomorrow",
-      };
-      channel.publish(
-        NOTIFICATIONS_EXCHANGE,
-        "notification_warning",
-        Buffer.from(JSON.stringify(notification))
+    setInterval(async () => {
+      const usersForNotification = await sequelize.query(
+        `SELECT booking.pet_id, pet.user_id FROM booking INNER JOIN pet ON booking.pet_id = pet.id WHERE booking.start_date = '${tomorrow}'`,
+        {
+          type: QueryTypes.SELECT,
+        }
       );
-    });
-    // }, 7000);
+
+      usersForNotification.forEach((user) => {
+        const notification = {
+          id: v1(),
+          toUser: user.user_id,
+          type: "warning",
+          reason: "You have book for tomorrow",
+          description:
+            "Dear customer! You have booked a room in our hotel tomorrow",
+        };
+        channel.publish(
+          NOTIFICATIONS_EXCHANGE,
+          "notification_warning",
+          Buffer.from(JSON.stringify(notification))
+        );
+      });
+    }, 7000);
   } catch (e) {
     console.log(e);
   }

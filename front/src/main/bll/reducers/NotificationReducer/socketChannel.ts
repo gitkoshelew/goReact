@@ -11,7 +11,7 @@ export type NotificationRaw = {
 }
 
 function createSocketConnections(clientId: number) {
-  return io('ws://localhost:5000', { query: { clientId } })
+  return io('ws://localhost:5001', { query: { clientId } })
 }
 
 const createEventProviderChannel = (eventProvider: Socket) => {

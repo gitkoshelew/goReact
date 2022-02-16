@@ -1,12 +1,10 @@
 import amqp from "amqplib";
-import rabbitDefinitions from "../../../../rabbit/definitions.json";
+import rabbitDefinitions from "../../../definitions.json" assert { type: "json" };
 
 const rabbitSettings = {
   protocol: "amqp",
-  // hostname: process.env.RABBIT_HOST,
-  hostname: "localhost",
-  // port: process.env.RABBIT_PORT,
-  port: 5673,
+  hostname: process.env.RABBIT_HOST,
+  port: +process.env.RABBIT_PORT,
   username: process.env.RABBIT_USER,
   password: process.env.RABBIT_PASSWORD,
   vhost: "/",

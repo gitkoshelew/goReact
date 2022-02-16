@@ -16,7 +16,7 @@ app.use(
 );
 app.use(express.json());
 
-const PORT = 5005;
+const PORT = process.env.PORT || 5005;
 
 app.get("/ping", (req, res) => {
   res.send("Working!");
