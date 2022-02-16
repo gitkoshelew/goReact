@@ -3,6 +3,7 @@ import rabbitDefinitions from "../../../../rabbit/definitions.json";
 import sequelize from "../../../db.js";
 import { QueryTypes } from "sequelize";
 import moment from "moment";
+import { v1 } from "uuid";
 
 const rabbitSettings = {
   protocol: "amqp",
@@ -40,6 +41,7 @@ export const startNotificationProducer = async () => {
 
     usersForNotification.forEach((user) => {
       const notification = {
+        id: v1(),
         toUser: user.user_id,
         type: "warning",
         reason: "You have book for tomorrow",

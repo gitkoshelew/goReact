@@ -85,6 +85,7 @@ export const startNotificationConsumer = async (io) => {
       /**
        * Send a notification to consumer using the following template (JSON):
        {
+        "id": "sdgdgfdgfd", //UUID string
         "toUser": 2,
         "type": "warning", //must be "warning", "error", "info", "success"
         "reason": "Attention",
@@ -99,15 +100,19 @@ export const startNotificationConsumer = async (io) => {
           );
           const targetUser = getUser(toUserId);
           if (targetUser) {
+            const message = {
+              ...notification,
+              content: JSON.parse(notification.content.toString()),
+            };
             io.to(targetUser).emit(
               BROKER_RECEIVED_NOTIFICATION,
-              notification.content.toString()
+              JSON.stringify(message)
             );
           }
-          socket.on(CLIENT_RECEIVED_NOTIFICATION, () => {
-            console.log(notification.fields.deliveryTag);
-          });
         });
+      });
+      socket.on(CLIENT_RECEIVED_NOTIFICATION, (notification1) => {
+        channel.ack(notification1);
       });
 
       socket.on("disconnect", () => {
