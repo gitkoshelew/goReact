@@ -1,20 +1,28 @@
 import React from 'react'
 import s from './Notification.module.scss'
 import { Alert, AlertTitle } from '@mui/material'
-import { useSelector } from 'react-redux'
-import { AppRootState } from '../../../bll/store/store'
+import { useAppDispatch } from '../../../bll/store/store'
+import {
+  confirmNotificationRequest,
+  removeNotificationRequest,
+} from '../../../bll/reducers/NotificationReducer/notification-saga'
+import { NotificationData } from '../../../bll/reducers/NotificationReducer/notification-reducer'
 
-const { notification, hideNotification } = s
+const { notification } = s
 
-export const Notification = () => {
-  const isNotificationOpened = useSelector((state: AppRootState) => state.Notification.isOpened)
-  const notificationData = useSelector((state: AppRootState) => state.Notification.data)
+export const Notification = ({ id, type, reason, description }: Omit<NotificationData, 'toUser'>) => {
+  const dispatch = useAppDispatch()
+
+  const handleClose = () => {
+    dispatch(confirmNotificationRequest(id))
+    dispatch(removeNotificationRequest(id))
+  }
 
   return (
-    <div className={`${notification} ${!isNotificationOpened ? hideNotification : ''}`}>
-      <Alert variant="filled" severity={notificationData.type}>
-        <AlertTitle>{notificationData.reason}</AlertTitle>
-        {notificationData.description}
+    <div className={`${notification}`}>
+      <Alert variant="filled" severity={type} onClose={handleClose}>
+        <AlertTitle>{reason}</AlertTitle>
+        {description}
       </Alert>
     </div>
   )

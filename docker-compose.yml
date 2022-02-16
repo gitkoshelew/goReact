@@ -176,6 +176,34 @@ services:
         networks:
             - new
 
+    notification_producer:
+        build:
+            context: ./notifications-producer
+        image: notification-producer
+        container_name: notification-producer
+        ports:
+            - "5006:5005"
+        environment:
+            - PORT=5005
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - DB_HOST=${POSTGRES_HOST}
+            - DB_PORT=${POSTGRES_PORT}
+            - DB_NAME=${POSTGRES_DB}
+            - DB_USER=${POSTGRES_USER}
+            - DB_PASS=${POSTGRES_PASSWORD}
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
+        depends_on:
+            - chat_db
+            - rabbitmq
+        networks:
+            - new
+
     chat_pgadmin:
         image: dpage/pgadmin4
         container_name: socket-chat-pgadmin
