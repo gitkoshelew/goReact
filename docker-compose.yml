@@ -215,6 +215,49 @@ services:
         networks:
             - new
 
+    payment_db:
+        image: postgres:latest
+        container_name: payment-card-postgres
+        env_file:
+            - .env
+        environment:
+            POSTGRES_PASSWORD: 123456
+            POSTGRES_DB: nest-card-payment
+            PGDATA: /var/lib/postgresql/data/pgdata
+        ports:
+            - "5445:5432"
+        restart: on-failure
+        networks:
+            - new
+
+    payment_server:
+        image: payment-card-server
+        container_name: payment-card-server
+        build:
+            context: .
+        env_file:
+            - .env
+        ports:
+            - "5003:5002"
+        links:
+            - payment_db
+        depends_on:
+            - payment_db
+        restart: on-failure
+        networks:
+            - new
+
+    payment_pgadmin:
+        image: dpage/pgadmin4
+        container_name: payment-card-pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5051:80"
+        networks:
+            - new
+
 networks:
     new:
         driver: bridge
