@@ -218,8 +218,6 @@ services:
     payment_db:
         image: postgres:latest
         container_name: payment-card-postgres
-        env_file:
-            - .env
         environment:
             POSTGRES_PASSWORD: 123456
             POSTGRES_DB: nest-card-payment
@@ -234,9 +232,7 @@ services:
         image: payment-card-server
         container_name: payment-card-server
         build:
-            context: .
-        env_file:
-            - .env
+            context: ./nest-payment-server
         ports:
             - "5003:5002"
         links:
@@ -254,7 +250,7 @@ services:
             PGADMIN_DEFAULT_EMAIL: admin@admin.com
             PGADMIN_DEFAULT_PASSWORD: root
         ports:
-            - "5051:80"
+            - "5052:80"
         networks:
             - new
 
