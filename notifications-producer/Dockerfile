@@ -10,7 +10,7 @@ RUN npm install
 
 RUN apt update
 RUN apt install dos2unix
-
+RUN dos2unix wait-for-postgres.sh
 RUN chmod +x wait-for-postgres.sh
 # RUN chmod +x wait-for-rabbit.sh
 
