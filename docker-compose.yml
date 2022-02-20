@@ -233,8 +233,16 @@ services:
         container_name: payment-card-server
         build:
             context: ./nest-payment-server
+        command: npm run start:prod
         ports:
             - "5003:5002"
+        environment:
+            - PORT=5002
+            - POSTGRESS_NEST_HOST=${POSTGRESS_NEST_HOST}
+            - POSTGRES_NEST_PORT=${POSTGRES_NEST_PORT}
+            - POSTGRESS_NEST_USER=${POSTGRESS_NEST_USER}
+            - POSTGRES_NEST_DB=${POSTGRES_NEST_DB}
+            - POSTGRES_NEST_PASSWORD=${POSTGRES_NEST_PASSWORD}
         links:
             - payment_db
         depends_on:

@@ -8,8 +8,6 @@ RUN npm install
 
 COPY . .
 
-COPY ./dist ./dist
-
 RUN chmod +x wait-for-postgres.sh
 
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start"]
