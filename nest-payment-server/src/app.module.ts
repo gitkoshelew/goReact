@@ -6,9 +6,7 @@ import { CardsModel } from './cards/cards.model';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-    }),
+    ConfigModule.forRoot(),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRESS_NEST_HOST,
