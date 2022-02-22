@@ -4,10 +4,10 @@ import { ApiProperty } from '@nestjs/swagger';
 interface CardsCreationAttrs {
   firstName: string;
   lastName: string;
-  cardNumber: number;
+  cardNumber: string;
   company: string;
-  mm: number;
-  yy: number;
+  mm: string;
+  yy: string;
   cvv: string;
 }
 
@@ -33,30 +33,30 @@ export class CardsModel extends Model<CardsModel, CardsCreationAttrs> {
     allowNull: false,
   })
   lastName: string;
-  @ApiProperty({ example: 1234567891234567, description: 'CardNumber' })
+  @ApiProperty({ example: '1234567891234567', description: 'CardNumber' })
   @Column({
-    type: DataType.BIGINT,
+    type: DataType.STRING,
     allowNull: false,
   })
-  cardNumber: number;
+  cardNumber: string;
   @ApiProperty({ example: 'visa', description: 'Company' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   company: string;
-  @ApiProperty({ example: 12, description: 'MM' })
+  @ApiProperty({ example: '12', description: 'MM' })
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false,
   })
-  mm: number;
-  @ApiProperty({ example: 22, description: 'YY' })
+  mm: string;
+  @ApiProperty({ example: '22', description: 'YY' })
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false,
   })
-  yy: number;
+  yy: string;
   @ApiProperty({ example: '123', description: 'Cvv' })
   @Column({
     type: DataType.STRING,
