@@ -1,18 +1,30 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsString, Length } from 'class-validator';
 
 export class CreateCardDto {
   @ApiProperty({ example: 'Ivan', description: 'FirstName' })
+  @IsString({ message: 'Should be a string' })
   readonly firstName: string;
   @ApiProperty({ example: 'Ivanov', description: 'LastName' })
+  @IsString({ message: 'Should be a string' })
   readonly lastName: string;
-  @ApiProperty({ example: 1234567891234567, description: 'CardNumber' })
-  readonly cardNumber: number;
+  @ApiProperty({ example: '1234567891234567', description: 'CardNumber' })
+  @IsString({ message: 'Should be a string' })
+  @Length(16, 16, { message: 'Must contain exactly 16 characters' })
+  readonly cardNumber: string;
   @ApiProperty({ example: 'visa', description: 'Company' })
+  @IsString({ message: 'Should be a string' })
   readonly company: string;
-  @ApiProperty({ example: 12, description: 'MM' })
-  readonly mm: number;
-  @ApiProperty({ example: 22, description: 'YY' })
-  readonly yy: number;
+  @ApiProperty({ example: '12', description: 'MM' })
+  @IsString({ message: 'Should be a number' })
+  @Length(2, 2, { message: 'Must contain exactly 2 characters' })
+  readonly mm: string;
+  @ApiProperty({ example: '22', description: 'YY' })
+  @IsString({ message: 'Should be a number' })
+  @Length(2, 2, { message: 'Must contain exactly 2 characters' })
+  readonly yy: string;
   @ApiProperty({ example: '123', description: 'CVV' })
+  @IsString({ message: 'Should be a string' })
+  @Length(3, 3, { message: 'Must contain exactly 3 characters' })
   readonly cvv: string;
 }
