@@ -22,8 +22,21 @@ import {
   fetchUsersSagaWorker,
   getConversationSagaWorker,
   sendMessageSagaWorker,
+  setConversationOpenedSagaWorker,
 } from '../reducers/ChatPageReducer/chatPage-saga'
 import { openChannelSagaWorker } from '../reducers/ChatPageReducer/socketChannel'
+import { RoomPageSagaWorker } from '../reducers/RoomPageReducer/roomPage-saga'
+import { RoomPageReducer } from '../reducers/RoomPageReducer/roomPage-reducer'
+import { NotificationReducer } from '../reducers/NotificationReducer/notification-reducer'
+import {
+  addNotificationSagaWorker,
+  closeNotificationChannelSagaWorker,
+  confirmNotificationSagaWorker,
+  removeNotificationSagaWorker,
+} from '../reducers/NotificationReducer/notification-saga'
+import { SeatsReducer } from '../reducers/SeatsReducer/seats-reducer'
+import { fetchSeatsSagaWorker } from '../reducers/SeatsReducer/seats-saga'
+import { openNotificationChannelSagaWorker } from '../reducers/NotificationReducer/socketChannel'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -33,6 +46,9 @@ const rootReducer = combineReducers({
   LoginPage: LoginPageReducer,
   RegisterPage: RegisterPageReducer,
   ChatPage: ChatPageReducer,
+  RoomPage: RoomPageReducer,
+  Notification: NotificationReducer,
+  Seats: SeatsReducer,
 })
 
 export type RootReducer = typeof rootReducer
@@ -67,4 +83,12 @@ function* rootWatcher() {
   yield takeEvery('CHAT_PAGE/OPEN_CHANNEL', openChannelSagaWorker)
   yield takeEvery('CHAT_PAGE/CLOSE_CHANNEL', closeChannelSagaWorker)
   yield takeEvery('CHAT_PAGE/USER_SEND_MESSAGE', sendMessageSagaWorker)
+  yield takeEvery('ROOM_PAGE/FETCH_ROOM_SAGA', RoomPageSagaWorker)
+  yield takeEvery('CHAT_PAGE/SET_CONVERSATION_OPENED', setConversationOpenedSagaWorker)
+  yield takeEvery('NOTIFICATION/ADD_NOTIFICATION', addNotificationSagaWorker)
+  yield takeEvery('NOTIFICATION/REMOVE_NOTIFICATION', removeNotificationSagaWorker)
+  yield takeEvery('NOTIFICATION/CONFIRM_NOTIFICATION', confirmNotificationSagaWorker)
+  yield takeEvery('NOTIFICATION/OPEN_CHANNEL', openNotificationChannelSagaWorker)
+  yield takeEvery('NOTIFICATION/CLOSE_CHANNEL', closeNotificationChannelSagaWorker)
+  yield takeEvery('SEATS/FETCH_SETS', fetchSeatsSagaWorker)
 }

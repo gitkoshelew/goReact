@@ -32,7 +32,7 @@ export const PATH = {
   LOGIN: '/login',
   HOTELS: '/hotels',
   ABOUT_US: '/aboutus',
-  ROOM: '/rooms',
+  ROOM: '/room',
   SERVICE: '/service',
   BOOKING: '/booking',
   GALLERY: '/gallery',
