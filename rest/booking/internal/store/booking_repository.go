@@ -2,8 +2,6 @@ package store
 
 import (
 	"booking/domain/model"
-	"fmt"
-	"time"
 )
 
 // BookingRepository ...
@@ -97,52 +95,20 @@ func (r *BookingRepository) Delete(id int) error {
 
 // Update booking from DB
 func (r *BookingRepository) Update(b *model.Booking) error {
-	seatID := "seat_id"
-	if b.SeatID != 0 {
-		seatID = fmt.Sprintf("%d", b.SeatID)
-	}
-	petID := "pet_id"
-	if b.PetID != 0 {
-		petID = fmt.Sprintf("%d", b.PetID)
-	}
-	employeeID := "employee_id"
-	if b.EmployeeID != 0 {
-		employeeID = fmt.Sprintf("%d", b.EmployeeID)
-	}
-	status := "status"
-	if b.Status != "" {
-		status = fmt.Sprintf("'%s'", string(b.Status))
-	}
-	startDate := "start_date"
-	if b.StartDate != nil {
-		startDate = fmt.Sprintf("'%s'", b.StartDate.Format(time.RFC3339))
-	}
-	endDate := "end_date"
-	if b.EndDate != nil {
-		endDate = fmt.Sprintf("'%s'", b.EndDate.Format(time.RFC3339))
-	}
-	paid := "paid"
-	if b.Paid != nil {
-		paid = fmt.Sprintf("%v", *b.Paid)
-	}
-	notes := "notes"
-	if b.Notes != "" {
-		notes = fmt.Sprintf("'%s'", b.Notes)
-	}
-
 	result, err := r.Store.Db.Exec(
-		fmt.Sprintf(`UPDATE booking SET
-		seat_id = %s, pet_id = %s, employee_id = %s, status = %s, start_date = %s, end_date = %s, paid = %s, notes = %s
-		WHERE id = $1`,
-			seatID,
-			petID,
-			employeeID,
-			status,
-			startDate,
-			endDate,
-			paid,
-			notes,
-		), b.BookingID)
+		`UPDATE booking SET
+		seat_id = $1, pet_id = $2, employee_id = $3, status = $4, start_date = $5, end_date = $6, paid = $7, notes = $8
+		WHERE id = $9`,
+		b.SeatID,
+		b.PetID,
+		b.EmployeeID,
+		string(b.Status),
+		b.StartDate,
+		b.EndDate,
+		b.Paid,
+		b.Notes,
+		b.BookingID,
+	)
 	if err != nil {
 		r.Store.Logger.Errorf("Eror occured while updating booking. Err msg: %w", err)
 		return err
