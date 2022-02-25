@@ -44,6 +44,42 @@ var (
 	// "GET" to get one by id. Using querry params (/booking/:id)
 	// "DELETE" to delete by id. Using querry params (/booking/:id)
 	BookingUserService = New(fmt.Sprintf("http://%s:%s", os.Getenv("BOOKING_SERVER_DOCKER_HOST"), os.Getenv("BOOKING_SERVER_PORT")), "/booking")
+
+	// HotelGetAllHotelsService ...
+	HotelGetAllHotelsService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/hotels")
+	// HotelHotelService using methods:
+	// "POST" to create
+	// "PUT" to update
+	// "GET" to get one by id. Using querry params (/hotel/:id)
+	// "DELETE" to delete by id. Using querry params (/hotel/:id)
+	HotelHotelService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/hotel")
+
+	// HotelGetAllRoomsService ...
+	HotelGetAllRoomsService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/rooms")
+	// HotelRoomService using methods:
+	// "POST" to create
+	// "PUT" to update
+	// "GET" to get one by id. Using querry params (/room/:id)
+	// "DELETE" to delete by id. Using querry params (/room/:id)
+	HotelRoomService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/room")
+
+	// HotelGetAllSeatsService ...
+	HotelGetAllSeatsService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/seats")
+	// HotelSeatService using methods:
+	// "POST" to create
+	// "PUT" to update
+	// "GET" to get one by id. Using querry params (/room/:id)
+	// "DELETE" to delete by id. Using querry params (/room/:id)
+	HotelSeatService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/seat")
+
+	// HotelGetAllEmployeesService ...
+	HotelGetAllEmployeesService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/employees")
+	// HotelEmployeeService using methods:
+	// "POST" to create
+	// "PUT" to update
+	// "GET" to get one by id. Using querry params (/room/:id)
+	// "DELETE" to delete by id. Using querry params (/room/:id)
+	HotelEmployeeService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/employee")
 )
 
 // CtxKey ...
@@ -62,6 +98,10 @@ const (
 	BookingDeleteQuerryParamsCtxKey CtxKey = 5
 	// BookingGetQuerryParamsCtxKey ...
 	BookingGetQuerryParamsCtxKey CtxKey = 6
+	// BookingDeleteQuerryParamsCtxKey ...
+	HotelDeleteQuerryParamsCtxKey CtxKey = 7
+	// BookingGetQuerryParamsCtxKey ...
+	HotelGetQuerryParamsCtxKey CtxKey = 8
 )
 
 // Client ...
