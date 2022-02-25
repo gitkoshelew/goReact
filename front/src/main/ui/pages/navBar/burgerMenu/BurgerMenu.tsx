@@ -12,6 +12,7 @@ export const BurgerMenu = ({ isBurgerCollapse, setIsBurgerCollapse }: BurgerMenu
   const setBurgerStatus = () => {
     setIsBurgerCollapse(!isBurgerCollapse)
   }
+  const online = navigator.onLine;
 
   return (
     <div>
@@ -21,7 +22,7 @@ export const BurgerMenu = ({ isBurgerCollapse, setIsBurgerCollapse }: BurgerMenu
       {isBurgerCollapse && (
         <div onClick={setBurgerStatus} className={navLinksBurgerMenu}>
           <NavLinksBurger
-            navNames={['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Login', 'Basket', 'Chat']}
+            navNames={online? ['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Login', 'Basket', 'Chat'] : ['Home', 'About Us', 'Login', 'Basket']}
           />
         </div>
       )}
