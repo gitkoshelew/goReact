@@ -35,4 +35,5 @@ func (s *Server) ConfigureRouter() {
 	s.Router.Handle("DELETE", "/booking/:id", booking.DeleteBookingHandle(client.BookingUserService))
 	s.Router.Handle("PUT", "/booking", booking.UpdateBookingHandle(client.BookingUserService))
 	s.Router.Handle("POST", "/booking", booking.CreateBookingHandle(client.BookingUserService))
+
 }
