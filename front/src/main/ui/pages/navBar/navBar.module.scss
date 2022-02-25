@@ -12,6 +12,18 @@
     @media (min-width: 1144px) {
       width: 90%;
     }
+    .offlineMode {
+      color: red;
+      white-space: nowrap;
+      @media (min-width: 1144px) {
+        position: fixed;
+        top: 0;
+        margin-top: 5px;
+      }
+    }
+    .disableMode{
+      display: none;
+    }
     .contentContainer {
       height: 48px;
       display: flex;

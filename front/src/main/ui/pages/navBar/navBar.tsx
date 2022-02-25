@@ -21,6 +21,8 @@ const {
   btnBlock,
   commonNavBar,
   logoSelectContainer,
+  offlineMode,
+  disableMode,
 } = s
 
 type NavBarPropsType = {
@@ -32,6 +34,8 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
   const userLogin = useSelector((state: AppRootState) => state.LoginPage.user)
 
   const userView = userLogin ? <UserNavBarView user={userLogin} /> : <LoginButton />
+  const online = navigator.onLine;
+  const offlineMessage = `You're offline`
 
   return (
     <div className={headerContainer}>
@@ -45,13 +49,16 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
               <SelectUI />
             </div>
           </div>
+          <div className={online? disableMode : offlineMode}>
+            {offlineMessage}
+          </div>
           <div>
             <div className={burgerMenu}>
               <BurgerMenu setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
             </div>
             <div className={commonNavBar}>
               <div className={navLinksBlock}>
-                <NavLinks navNames={['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Chat']} />
+                <NavLinks navNames={online ? ['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Chat'] :['Home', 'About Us'] } />
               </div>
               <div className={btnBlock}>
                 <BasketButton />
