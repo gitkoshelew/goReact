@@ -246,6 +246,111 @@ services:
         depends_on:
             - bookingdb
 
+    hoteldatabase:
+        container_name: hoteldatabase
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${HOTEL_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${HOTEL_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${HOTEL_POSTGRES_DB}
+            - POSTGRES_HOST=${HOTEL_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${HOTEL_POSTGRES_SSLMODE}
+        ports:
+            - "8085:5432"
+        restart: always
+        volumes:
+            - database-data:/var/lib/postgresql/hotel/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    hoteldatabasetest:
+        container_name: hoteldatabasetest
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_HOTEL_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_HOTEL_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_HOTEL_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_HOTEL_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_HOTEL_POSTGRES_SSLMODE}
+        ports:
+            - "8086:5432"
+        restart: unless-stopped
+        volumes:
+            - database-test:/var/lib/test-date/hotel/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    hotel_migrate:
+        container_name: hotel_migrate
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./hotel/migrations:/hotel/migrations
+        command:
+            [
+                "-path",
+                "hotel/migrations",
+                "-database",
+                "postgres://user:userpass@hoteldatabase:5432/hoteldb?sslmode=disable",
+                "up"
+            ]
+        links:
+            - hoteldatabase
+        depends_on:
+            - hoteldatabase
+
+    test_hotel_migrate:
+        container_name: test_hotel_migrate
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./hotel/migrations:/hotel/migrations
+        command:
+            [
+                "-path",
+                "hotel/migrations",
+                "-database",
+                "postgres://user:userpass@hoteldatabasetest:5432/hoteldbtest?sslmode=disable",
+                "up"
+            ]
+        links:
+            - hoteldatabasetest
+        depends_on:
+            - hoteldatabasetest
+
+    hotelservice:
+        container_name: hotelservice
+        build:
+            dockerfile: dockerfile
+            context: ./hotel
+        ports:
+            - "1114:1114"
+        env_file:
+            - .env
+        environment:
+            - SERVER_HOST=0.0.0.0
+            - ENV=prod
+        tty: true
+        restart: on-failure
+        volumes:
+            - api:/hotel/
+        networks:
+            - new
+        depends_on:
+            - hoteldatabase  
+
     gateway_service:
         container_name: gateway_service
         build:

@@ -1,9 +1,9 @@
 package jwt
 
 import (
-	"booking/pkg/logging"
 	"errors"
 	"fmt"
+	"hotel/pkg/logging"
 	"log"
 	"net/http"
 	"os"
@@ -66,7 +66,6 @@ func CreateToken(userid uint64, role string) (*Token, error) {
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
 	token.AccessToken, err = at.SignedString([]byte(os.Getenv("ACCESS_SECRET")))
 	if err != nil {
-		logger.Errorf("Eror during createing tokens. Err msg: %w", err)
 		return nil, err
 	}
 
@@ -79,7 +78,6 @@ func CreateToken(userid uint64, role string) (*Token, error) {
 	rt := jwt.NewWithClaims(jwt.SigningMethodHS256, rtClaims)
 	token.RefreshToken, err = rt.SignedString([]byte(os.Getenv("REFRESH_SECRET")))
 	if err != nil {
-		logger.Errorf("Eror during createing tokens. Err msg: %w", err)
 		return nil, err
 	}
 	return token, nil
@@ -135,26 +133,22 @@ func IsValid(r *http.Request) error {
 func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 	token, err := VerifyToken(r)
 	if err != nil {
-		logger.Errorf("you are unauthorized. err: %w", err)
 		return nil, err
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if ok && token.Valid {
 		accessUUID, ok := claims["access_uuid"].(string)
 		if !ok {
-			logger.Errorf("you are unauthorized. err: %w", err)
 			return nil, err
 		}
 
 		userID, err := strconv.ParseUint(fmt.Sprintf("%.f", claims["user_id"]), 10, 64)
 		if err != nil {
-			logger.Errorf("you are unauthorized. err: %w", err)
 			return nil, err
 		}
 
 		role := fmt.Sprint(claims["role"])
 		if err != nil {
-			logger.Errorf("you are unauthorized. err: %w", err)
 			return nil, err
 		}
 
@@ -164,7 +158,6 @@ func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 			Role:       role,
 		}, nil
 	}
-	logger.Errorf("you are unauthorized. err: %w", err)
 	return nil, err
 }
 
