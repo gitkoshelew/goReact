@@ -1,8 +1,8 @@
 version: '3.9'
 
 services:
-    postgresql_database:
-        container_name: postgresql_database
+    postgresqldatabase:
+        container_name: postgresqldatabase
         image: postgres:latest
         env_file:
             - .env
@@ -54,13 +54,13 @@ services:
                 "-path",
                 "/migrations",
                 "-database",
-                "postgres://user:userpass@postgresql_database:5432/goreact?sslmode=disable",
+                "postgres://user:userpass@postgresqldatabase:5432/goreact?sslmode=disable",
                 "up"
             ]
         links:
-            - postgresql_database
+            - postgresqldatabase
         depends_on:
-            - postgresql_database
+            - postgresqldatabase
         networks:
             - new
 
@@ -121,7 +121,7 @@ services:
         ports:
             - 8080:8080
         depends_on:
-            - postgresql_database
+            - postgresqldatabase
         env_file:
             - .env
         environment:
