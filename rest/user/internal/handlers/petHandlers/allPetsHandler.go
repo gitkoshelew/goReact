@@ -2,7 +2,9 @@ package pethandlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"user/internal/apperror"
 	"user/internal/store"
 
 	"github.com/julienschmidt/httprouter"
@@ -16,13 +18,13 @@ func AllPetsHandler(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
 			return
 		}
 		pets, err := s.Pet().GetAll()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Can't find pets. Err msg: %v", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find pets", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find pets. Err msg: %v", err)))
 			return
 		}
 

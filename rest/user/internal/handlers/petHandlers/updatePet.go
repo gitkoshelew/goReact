@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"net/http"
 	"user/domain/model"
+	"user/internal/apperror"
 	"user/internal/store"
 	"user/pkg/response"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-// UpdatePet ...
+//UpdatePet
 func UpdatePet(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -27,15 +28,20 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
 		}
 
-		user, _ := s.User().FindByID(req.OwnerID)
+		user, err := s.User().FindByID(req.OwnerID)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find user.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find user. Err msg:%v.", err)))
+			return
+		}
 
 		p, err := s.Pet().FindPetID(req.PetID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find pet. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find pet.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find pet. Err msg:%v.", err)))
 			return
 		}
 
@@ -69,17 +75,17 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
 		}
 
 		err = s.Pet().Update(p)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't update user. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update pet.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update pet. Err msg:%v.", err)))
 			return
 		}
 
-		s.Logger.Info("Update pet with id = %d", p.PetID)
 		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update pet with id = %d", p.PetID)})
 	}
