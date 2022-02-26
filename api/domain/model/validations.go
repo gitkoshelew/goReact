@@ -94,3 +94,16 @@ func IsEmployeePosition(value interface{}) error {
 	}
 	return errors.New("allowed pet types: 'ManagerPosition', 'EmployeePosition' ,'OwnerPosition','AdminPosition'")
 }
+
+// IsPetType checks if string matchs to a BookingStatus
+// BookingStatusPending    BookingStatus = "pending"
+//	BookingStatusInProgress BookingStatus = "in-progress"
+//	BookingStatusCompleted  BookingStatus = "completed"
+//	BookingStatusCancelled  BookingStatus = "cancelled"
+func IsBookingStatus(value interface{}) error {
+	s := value.(BookingStatus)
+	if s == "pending" || s == "in-progress" || s == "completed" || s == "cancelled" {
+		return nil
+	}
+	return errors.New("allowed Booking Status: 'BookingStatusPending', 'BookingStatusInProgress' ,'BookingStatusCompleted','BookingStatusCancelled'")
+}

@@ -16,6 +16,7 @@ const initialState: InitialStateChatPage = {
   messages: [],
   conversationId: null,
   socketChannel: null,
+  isConversationOpened: false,
 }
 
 const chatPageSlice = createSlice({
@@ -48,6 +49,9 @@ const chatPageSlice = createSlice({
     addMessage(state, action: PayloadAction<{ message: ChatMessage }>) {
       state.messages.push(action.payload.message)
     },
+    setConversationOpened(state, action: PayloadAction<{ isOpened: boolean }>) {
+      state.isConversationOpened = action.payload.isOpened
+    },
   },
 })
 
@@ -60,6 +64,7 @@ export const {
   setCurrentConversation,
   addMessage,
   setSocketChannel,
+  setConversationOpened,
 } = chatPageSlice.actions
 
 //types
@@ -71,6 +76,7 @@ export type InitialStateChatPage = {
   messages: ChatMessage[]
   conversationId: number | null
   socketChannel: Socket | null
+  isConversationOpened: boolean
 }
 
 export type ChatPageLoadingStatus =

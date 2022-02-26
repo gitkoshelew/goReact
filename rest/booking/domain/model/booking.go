@@ -10,9 +10,9 @@ type Booking struct {
 	EmployeeID    int           `json:"employeeId"`
 	TransactionID string        `json:"transactionId"`
 	Status        BookingStatus `json:"status"`
-	StartDate     time.Time     `json:"start"`
-	EndDate       time.Time     `json:"end"`
-	Paid          bool          `json:"paid"`
+	StartDate     *time.Time    `json:"start"`
+	EndDate       *time.Time    `json:"end"`
+	Paid          *bool         `json:"paid"`
 	Notes         string        `json:"notes,omitempty"`
 }
 
