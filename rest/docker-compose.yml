@@ -370,6 +370,112 @@ services:
         networks:
             - new
 
+    admindatabase:
+        container_name: admindatabase
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${ADMIN_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${ADMIN_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${ADMIN_POSTGRES_DB}
+            - POSTGRES_HOST=${ADMIN_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${ADMIN_POSTGRES_SSLMODE}
+        ports:
+            - "8087:5432"
+        restart: always
+        volumes:
+            - database-data:/var/lib/postgresql/admin/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    admindatabasetest:
+        container_name: admindatabasetest
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_ADMIN_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_ADMIN_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_ADMIN_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_ADMIN_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_ADMIN_POSTGRES_SSLMODE}
+        ports:
+            - '8088:5432'
+        restart: unless-stopped
+        volumes:
+            - database-test:/var/lib/test-date/admin/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    admin_migrate:
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./migrations:/migrations
+
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@admindatabase:5432/admindb?sslmode=disable",
+                "up"
+            ]
+        links:
+            - admindatabase
+        depends_on:
+            - admindatabase
+
+    test_admin_migrate:
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./migrations:/migrations
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@admindatabasetest:5432/admindbtest?sslmode=disable",
+                "up"
+            ]
+        links:
+            - admindatabasetest
+        depends_on:
+            - admindatabasetest
+ 
+    microseviceadmin:
+        build:
+            dockerfile: dockerfile
+            context: ./api
+        ports:
+            - 6060:6060
+        depends_on:
+            - admindatabase
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${ADMIN_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${ADMIN_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${ADMIN_POSTGRES_DB}
+            - SERVER_HOST=0.0.0.0
+            - ENV=prod
+        tty: true
+        restart: on-failure
+        volumes:
+            - api:/api
+        networks:
+            - new
+            
 networks:
     new:
         driver: bridge
