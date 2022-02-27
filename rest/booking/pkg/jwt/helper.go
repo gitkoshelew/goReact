@@ -1,7 +1,7 @@
 package jwt
 
 import (
-	"authentication/pkg/logging"
+	"booking/pkg/logging"
 	"errors"
 	"fmt"
 	"log"
