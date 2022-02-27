@@ -3,6 +3,7 @@
 .headerContainer {
   border-bottom: 1px solid rgba(202, 202, 202, 0.5);
   width: 100%;
+
   .headerNavBar {
     width: 100%;
     margin: 0 auto;
@@ -12,6 +13,21 @@
     @media (min-width: 1144px) {
       width: 90%;
     }
+
+    .offlineMode {
+      color: $offline-text-color;
+      white-space: nowrap;
+      @media (min-width: 1144px) {
+        position: fixed;
+        top: 0;
+        margin-top: 5px;
+      }
+    }
+
+    .disableMode {
+      display: none;
+    }
+
     .contentContainer {
       height: 48px;
       display: flex;
@@ -21,12 +37,15 @@
       @media (min-width: 1144px) {
         justify-content: center;
       }
+
       .logoSelectContainer {
         display: flex;
         align-items: center;
+
         .logoContainer {
           position: relative;
           left: 20px;
+
           &:after {
             content: '';
             width: 80px;
@@ -38,6 +57,7 @@
             left: 20px;
             top: 20px;
           }
+
           @media (min-width: 1144px) {
             &:after {
               width: 50px;
@@ -46,19 +66,23 @@
             }
           }
         }
+
         .selectContainer {
           margin: 0 0 0 -20px;
         }
       }
+
       .commonNavBar {
         display: none;
         @media (min-width: 1144px) {
           display: flex;
           align-items: center;
         }
+
         .navLinksBlock {
           margin: 0 auto;
         }
+
         .btnBlock {
           display: flex;
           align-items: center;
