@@ -36,7 +36,6 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
 
   const userView = userLogin ? <UserNavBarView user={userLogin} /> : <LoginButton />
   const online = useNavigatorOnLine()
-  const offlineMessage = `You're offline`
 
   return (
     <div className={headerContainer}>
@@ -51,7 +50,7 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
             </div>
           </div>
           <div className={online? disableMode : offlineMode}>
-            {offlineMessage}
+            You're offline
           </div>
           <div>
             <div className={burgerMenu}>
