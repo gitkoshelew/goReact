@@ -418,12 +418,12 @@ services:
         networks:
             - new
         volumes:
-            - ./migrations:/migrations
+            - ./admin/migrations:/admin/migrations
 
         command:
             [
                 "-path",
-                "/migrations",
+                "admin/migrations",
                 "-database",
                 "postgres://user:userpass@admindatabase:5432/admindb?sslmode=disable",
                 "up"
@@ -439,11 +439,11 @@ services:
         networks:
             - new
         volumes:
-            - ./migrations:/migrations
+            - ./admin/migrations:/admin/migrations
         command:
             [
                 "-path",
-                "/migrations",
+                "admin/migrations",
                 "-database",
                 "postgres://user:userpass@admindatabasetest:5432/admindbtest?sslmode=disable",
                 "up"
@@ -456,7 +456,7 @@ services:
     microseviceadmin:
         build:
             dockerfile: dockerfile
-            context: ./api
+            context: ./admin/api
         ports:
             - 6060:6060
         depends_on:
@@ -472,7 +472,7 @@ services:
         tty: true
         restart: on-failure
         volumes:
-            - api:/api
+            - api:/admin/api
         networks:
             - new
             
