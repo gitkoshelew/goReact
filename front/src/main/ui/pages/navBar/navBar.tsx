@@ -9,6 +9,7 @@ import { AppRootState } from '../../../bll/store/store'
 import { UserNavBarView } from './UserView/userNavBarView'
 import { LoginButton } from '../../components/Button/LoginBtn/LoginBtn'
 import { BasketButton } from '../../components/Button/BasketButton/BasketBtn'
+import { useNavigatorOnLine } from "../../../../hooks";
 
 const {
   headerNavBar,
@@ -34,7 +35,7 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
   const userLogin = useSelector((state: AppRootState) => state.LoginPage.user)
 
   const userView = userLogin ? <UserNavBarView user={userLogin} /> : <LoginButton />
-  const online = navigator.onLine;
+  const online = useNavigatorOnLine()
   const offlineMessage = `You're offline`
 
   return (
