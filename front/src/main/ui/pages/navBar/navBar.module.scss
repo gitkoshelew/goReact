@@ -15,7 +15,7 @@
     }
 
     .offlineMode {
-      color: red;
+      color: $offline-text-color;
       white-space: nowrap;
       @media (min-width: 1144px) {
         position: fixed;
