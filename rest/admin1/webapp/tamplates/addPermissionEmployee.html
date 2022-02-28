@@ -1,0 +1,27 @@
+{{template "base" .}}
+
+{{define "title"}}Permissions{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Permissions</title>
+</head>
+
+<body>
+    <form action="/admin/set" method="POST">
+        <th>Select employee</th>
+        <input type="number" name="id" required><br><br>
+        <p><select size="20" multiple name="permissions">
+                {{range .}}
+                <option value={{.PermissionID}}>{{.Name}}</option>
+                {{end}}
+            </select></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+</body>
+{{end}}
