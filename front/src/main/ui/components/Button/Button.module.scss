@@ -32,7 +32,11 @@
   border-radius: 8px;
   border: 1px solid $main-contrast-color;
   cursor: no-drop;
-  margin: 40px;
+  margin: 272px 40px 40px 40px;
+  @media (min-width: 1144px) {
+    margin: 40px
+  }
+
 }
 
 .orderBtn {
