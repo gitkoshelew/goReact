@@ -456,7 +456,7 @@ services:
     microseviceadmin:
         build:
             dockerfile: dockerfile
-            context: ./admin/api
+            context: ./admin
         ports:
             - 6060:6060
         depends_on:
@@ -472,7 +472,7 @@ services:
         tty: true
         restart: on-failure
         volumes:
-            - api:/admin/api
+            - api:/admin
         networks:
             - new
             
