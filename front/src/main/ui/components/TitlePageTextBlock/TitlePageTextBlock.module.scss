@@ -2,17 +2,11 @@
 
 .TextBlockTitle {
   display: flex;
-  align-items: center;
+  justify-content: center;
   margin: 35px 0 10px 15px;
-  @media (min-width: 575px) {
-    margin: 35px 0 10px -40px;
-  }
-  @media (min-width: 767px) {
-    margin: 35px 125px 10px -40px;
-  }
+  
   @media (min-width: 1144px) {
     white-space: nowrap;
-    margin: 35px -35px 10px -40px;
   }
 
   .mainText {
@@ -21,10 +15,13 @@
     font-family: $main-fonts;
     font-style: normal;
     font-weight: 600;
-    font-size: 34px;
+    font-size: 29px;
     line-height: 33px;
     text-transform: uppercase;
     color: $main-text-color;
+    @media (min-width: 575px) {
+      font-size: 34px;
+    }
   }
 
   .linkText {
