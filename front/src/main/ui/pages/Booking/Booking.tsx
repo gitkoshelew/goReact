@@ -55,8 +55,8 @@ export const Booking = () => {
 
   const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
 
-  const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
-  const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
+  const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar/>
+  const correctView = loadingStatus === 'loading' ? <Preloader/> : ErrorView
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -79,10 +79,10 @@ export const Booking = () => {
     <div className="bookingContainer">
       <form onSubmit={formik.handleSubmit}>
         <div className={bookingPage}>
-          <TitlePageTextBlock mainTextMess={'Book room for pet'} isWithLink={false} />
+          <TitlePageTextBlock mainTextMess={'Book room for pet'} isWithLink={false}/>
           <div className={bookingProcess}>
             <div className={bookingForm}>
-              <BookingRegForm formik={formik} />
+              <BookingRegForm formik={formik}/>
             </div>
             <div className={bookingCalendar}>
               {correctView}
@@ -96,11 +96,12 @@ export const Booking = () => {
             </div>
           </div>
           <div className={uploadOrderedRoomsBlock}>
-            {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
-            <Button view={'upload'} disabled={!isActiveBtn} />
+            {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket}/>}
+            <Button view={'upload'} disabled={!isActiveBtn}/>
           </div>
         </div>
       </form>
     </div>
+
   )
 }
