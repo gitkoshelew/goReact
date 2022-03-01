@@ -62,6 +62,13 @@
           @media (min-width: 1144px) {
             flex-direction: row;
           }
+
+          & > span:nth-child(2) {
+            text-overflow: initial;
+            overflow: initial;
+            white-space: initial;
+            max-width: initial;
+          }
         }
       }
 
