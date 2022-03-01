@@ -1,9 +1,13 @@
 .uploadTablet {
   margin: 30px 0;
+
   .customTablet {
     border: dashed 2px #0f97aa;
+
     span {
-      margin: 0 3px;
+      @media (min-width: 1144px) {
+        margin: 0 3px;
+      }
     }
   }
 }
