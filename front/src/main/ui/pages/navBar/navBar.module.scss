@@ -18,7 +18,7 @@
       color: $offline-text-color;
       white-space: nowrap;
       @media (min-width: 1144px) {
-        position: fixed;
+        position: absolute;
         top: 0;
         margin-top: 5px;
       }
