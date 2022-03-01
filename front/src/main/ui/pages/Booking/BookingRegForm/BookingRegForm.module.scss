@@ -71,6 +71,9 @@
   height: 40px;
   border-radius: 5px;
   font-size: 22px;
+  @media (min-width: 1144px) {
+    min-width: 350px;
+  }
 }
 
 .uploadedImg {
