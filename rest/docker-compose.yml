@@ -349,7 +349,7 @@ services:
         networks:
             - new
         depends_on:
-            - hoteldatabase  
+            - hoteldatabase
 
     gateway_service:
         container_name: gateway_service
@@ -370,8 +370,8 @@ services:
         networks:
             - new
 
-    admindatabase:
-        container_name: admindatabase
+    admindb:
+        container_name: admindb
         image: postgres:latest
         env_file:
             - .env
@@ -391,8 +391,8 @@ services:
                 aliases:
                     - database
 
-    admindatabasetest:
-        container_name: admindatabasetest
+    admindbtest:
+        container_name: admindbtest
         image: postgres:latest
         env_file:
             - .env
@@ -413,6 +413,7 @@ services:
                     - database
 
     admin_migrate:
+        container_name: admin_migrate
         image: migrate/migrate
         restart: on-failure
         networks:
@@ -425,15 +426,16 @@ services:
                 "-path",
                 "admin/migrations",
                 "-database",
-                "postgres://user:userpass@admindatabase:5432/admindb?sslmode=disable",
+                "postgres://user:userpass@admindb:5432/admindb?sslmode=disable",
                 "up"
             ]
         links:
-            - admindatabase
+            - admindb
         depends_on:
-            - admindatabase
+            - admindb
 
     test_admin_migrate:
+        container_name: test_admin_migrate
         image: migrate/migrate
         restart: on-failure
         networks:
@@ -445,22 +447,23 @@ services:
                 "-path",
                 "admin/migrations",
                 "-database",
-                "postgres://user:userpass@admindatabasetest:5432/admindbtest?sslmode=disable",
+                "postgres://user:userpass@admindbtest:5432/admindbtest?sslmode=disable",
                 "up"
             ]
         links:
-            - admindatabasetest
+            - admindbtest
         depends_on:
-            - admindatabasetest
- 
-    microseviceadmin:
+            - admindbtest
+
+    adminservice:
+        container_name: adminservice
         build:
             dockerfile: dockerfile
             context: ./admin
         ports:
             - 6060:6060
         depends_on:
-            - admindatabase
+            - admindb
         env_file:
             - .env
         environment:
@@ -475,7 +478,7 @@ services:
             - api:/admin
         networks:
             - new
-            
+
 networks:
     new:
         driver: bridge
