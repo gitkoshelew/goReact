@@ -16,7 +16,7 @@ func LoginAdmin(s *store.Store) httprouter.Handle {
 
 		exist := session.IsExist(w, r)
 		if exist {
-			http.Redirect(w, r, "/admin/home", http.StatusFound)
+			http.Redirect(w, r, "/", http.StatusFound)
 			return
 		}
 

@@ -2,8 +2,8 @@ package auth
 
 import (
 	"admin/domain/model"
-	"admin/webapp/session"
 	"admin/domain/store"
+	"admin/webapp/session"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -56,7 +56,7 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 
 		session.AuthSession(w, r, employee, permissions)
 
-		http.Redirect(w, r, "/admin/home", http.StatusFound)
+		http.Redirect(w, r, "/", http.StatusFound)
 
 	}
 }

@@ -20,7 +20,7 @@ func (s *Server) configureRoutes() {
 	s.router.Handle("POST", "/admin/auth", auth.AuthAdmin(store.New(s.config)))
 	s.router.Handle("GET", "/admin/logout", auth.LogoutAdmin(store.New(s.config)))
 
-	s.router.Handle("GET", "/admin/home", auth.HomeAdmin(store.New(s.config)))
+	s.router.Handle("GET", "/", auth.HomeAdmin(store.New(s.config)))
 
 	s.router.Handle("GET", "/admin/homeusers", usershandlers.HomeUsersHandler(store.New(s.config)))
 	s.router.Handle("GET", "/admin/users", usershandlers.AllUsersHandler(store.New(s.config)))
