@@ -1,5 +1,6 @@
 import s from './BurgerMenu.module.scss'
 import { NavLinksBurger } from '../../../components/NavLinks/NavLinksBurger/NavLinksBurger'
+import { useNavigatorOnLine } from "../../../../../hooks";
 
 const { burgerMenu, navLinksBurgerMenu, burgerClose } = s
 
@@ -13,6 +14,8 @@ export const BurgerMenu = ({ isBurgerCollapse, setIsBurgerCollapse }: BurgerMenu
     setIsBurgerCollapse(!isBurgerCollapse)
   }
 
+  const online = useNavigatorOnLine();
+
   return (
     <div>
       <div data-testid="test" onClick={setBurgerStatus} className={isBurgerCollapse ? burgerClose : burgerMenu}>
@@ -21,7 +24,7 @@ export const BurgerMenu = ({ isBurgerCollapse, setIsBurgerCollapse }: BurgerMenu
       {isBurgerCollapse && (
         <div onClick={setBurgerStatus} className={navLinksBurgerMenu}>
           <NavLinksBurger
-            navNames={['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Login', 'Basket', 'Chat']}
+            navNames={online? ['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Login', 'Basket', 'Chat'] : ['Home', 'About Us', 'Login', 'Basket']}
           />
         </div>
       )}
