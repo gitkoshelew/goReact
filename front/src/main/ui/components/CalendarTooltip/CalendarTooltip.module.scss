@@ -1,12 +1,5 @@
 @import '../../styles/variables';
 
-.tooltipContainer {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-}
-
 .tooltipData {
   background-color: $secondary-background-color;
   width: 250px;
