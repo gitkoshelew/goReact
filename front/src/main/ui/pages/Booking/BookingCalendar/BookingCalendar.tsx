@@ -48,7 +48,6 @@ export const BookingCalendar = () => {
 
   return (
     <div className={s.calendarContainer}>
-      {tooltipVisible && <CalendarTooltip tooltipDate={tooltipDate} />}
       <Calendar
         tileContent={(props) => (
           <CalendarTooltipAnchor date={props.date} showTooltip={showTooltip} handleTooltipDate={handleTooltipDate} />
@@ -59,6 +58,7 @@ export const BookingCalendar = () => {
         defaultActiveStartDate={dateState}
         onChange={changeDate}
       />
+      {tooltipVisible && <CalendarTooltip tooltipDate={tooltipDate} />}
     </div>
   )
 }
