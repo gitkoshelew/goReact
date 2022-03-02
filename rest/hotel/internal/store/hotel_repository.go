@@ -13,11 +13,12 @@ type HotelRepository struct {
 // Create hotel and save it to DB
 func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO hotel (name, address) VALUES ($1, $2) RETURNING id", h.Name, h.Address).Scan(&h.HotelID); err != nil {
+		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id", h.Name, h.Address,
+		h.Coordinates).Scan(&h.HotelID); err != nil {
 		r.Store.Logger.Errorf("Can't create hotel. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Creat hotel with id = %d", h.HotelID)
+	r.Store.Logger.Info("Created hotel with id = %d", h.HotelID)
 	return h, nil
 }
 
@@ -35,6 +36,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 			&hotel.HotelID,
 			&hotel.Name,
 			&hotel.Address,
+			&hotel.Coordinates,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Can't find hotels. Err msg: %v", err)
@@ -47,13 +49,14 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 
 //FindByID searchs and returns hotel by ID
 func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
-	
+
 	hotel := &model.Hotel{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM hotel WHERE id = $1",
 		id).Scan(
 		&hotel.HotelID,
 		&hotel.Name,
 		&hotel.Address,
+		&hotel.Coordinates,
 	); err != nil {
 		r.Store.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
 		return nil, err
@@ -87,9 +90,10 @@ func (r *HotelRepository) Delete(id int) error {
 func (r *HotelRepository) Update(h *model.Hotel) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE hotel SET name = $1, address = $2 WHERE id = $3",
+		"UPDATE hotel SET name = $1, address = $2 , coordinates = $3 WHERE id = $43",
 		h.Name,
 		h.Address,
+		h.Coordinates,
 		h.HotelID,
 	)
 	if err != nil {

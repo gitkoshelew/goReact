@@ -23,7 +23,7 @@ func TestHotel_Validate(t *testing.T) {
 			name: "Invalid Name",
 			h: func() *model.Hotel {
 				h := model.TestHotel()
-				h.Name = "Name@123"
+				h.Name = ""
 				return h
 			},
 			isValid: false,

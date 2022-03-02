@@ -8,6 +8,7 @@ func TestHotel() *Hotel {
 		HotelID: 1,
 		Name:    "Name",
 		Address: "Minsk ul sovetskaya 18",
+		Coordinates: [2]float64 {53.89909164468815, 27.498996594142426},
 	}
 }
 

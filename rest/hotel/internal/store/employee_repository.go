@@ -21,7 +21,7 @@ func (r *EmployeeRepository) Create(e *model.Employee) (*model.Employee, error) 
 		r.Store.Logger.Errorf("Can't create employee. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Creat employee with id = %d", e.EmployeeID)
+	r.Store.Logger.Info("Created employee with id = %d", e.EmployeeID)
 	return e, nil
 }
 
