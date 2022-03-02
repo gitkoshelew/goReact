@@ -1,0 +1,28 @@
+{{template "base" .}}
+
+{{define "title"}}All employee{{end}}
+
+{{define "main"}}
+<header>
+    <h1><a>All employees </a></h1>
+</header>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>EmployeeID</th>
+        <th>UserID</th>
+        <th>HotelID</th>
+        <th>Position</th>
+        {{range . }}
+        <tr>
+            <td>{{.EmployeeID}}</td>
+            <td>{{.User.UserID}}</td>
+            <td>{{.Hotel.HotelID}}</td>
+            <td>{{.Position}}</td>
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}
