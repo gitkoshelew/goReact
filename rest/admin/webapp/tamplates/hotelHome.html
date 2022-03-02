@@ -46,12 +46,16 @@
     <div>
         <h2>Create hotel</h2>
         <form action="/admin/hotels/new" method="POST">
-            
+
             <th>Name</th>
-            <input type="text" name="Name">
+            <input type="text" name="Name required">
             <th>Address</th>
-            <input type="text" name="Address"><br><br>
+            <input type="text" name="Address" required><br><br>
+            <th>Coordinates</th>
+            <input type="number" step="0.000000000000001" name="Coordinates[0]" required> <input type="number" step="0.000000000000001"
+                name="Coordinates[1]" required><br><br>
             <button>New</button>
+
         </form>
     </div>
     {{end}}

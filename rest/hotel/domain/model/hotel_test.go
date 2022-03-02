@@ -46,6 +46,15 @@ func TestHotel_Validate(t *testing.T) {
 			},
 			isValid: false,
 		},
+		{
+			name: "Empty coordinates",
+			h: func() *model.Hotel {
+				h := model.TestHotel()
+				h.Coordinates = [2]float64{}
+				return h
+			},
+			isValid: false,
+		},
 	}
 
 	for _, tc := range testCases {
