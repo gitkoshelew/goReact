@@ -155,6 +155,7 @@ func (r *RoomRepository) RoomFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 
 }
 
+// GetTotalRows ...
 func (r *RoomRepository) GetTotalRows() (int, error) {
 	var c int
 	err := r.Store.Db.QueryRow("SELECT COUNT(*) FROM ROOM").Scan(&c)

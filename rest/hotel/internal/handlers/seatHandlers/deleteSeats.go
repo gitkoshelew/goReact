@@ -13,7 +13,7 @@ import (
 )
 
 // DeleteSeat ...
-func DeleteSeats(s *store.Store) httprouter.Handle {
+func DeleteSeat(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		id, err := strconv.Atoi(ps.ByName("id"))
@@ -32,6 +32,7 @@ func DeleteSeats(s *store.Store) httprouter.Handle {
 		}
 		err = s.Seat().Delete(id)
 		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't delete seat.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't delete seat. Err msg:%v.", err)))
 			return
 		}

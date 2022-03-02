@@ -33,7 +33,7 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 
 		room, err := s.Room().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find room. Err msg:%v.", err)))
 			return
 		}

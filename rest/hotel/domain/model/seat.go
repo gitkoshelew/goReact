@@ -6,6 +6,7 @@ import (
 	validation "github.com/go-ozzo/ozzo-validation"
 )
 
+// Seat ...
 type Seat struct {
 	SeatID      int `json:"seatId"`
 	Room        Room
@@ -30,7 +31,7 @@ func (s *Seat) Validate() error {
 		s,
 		validation.Field(&s.Description, validation.Required, validation.Length(1, 100)),
 		validation.Field(&s.RentFrom, validation.Required),
-		validation.Field(&s.RentTo, validation.Required ),
+		validation.Field(&s.RentTo, validation.Required),
 		validation.Field(&s.Room, validation.Required),
-		)
+	)
 }

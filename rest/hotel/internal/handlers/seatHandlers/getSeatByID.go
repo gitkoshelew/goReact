@@ -33,7 +33,7 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 
 		seat, err := s.Seat().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find seat.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find seat. Err msg:%v.", err)))
 			return
 		}

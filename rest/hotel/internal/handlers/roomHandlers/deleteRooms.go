@@ -13,8 +13,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// DeleteRooms ...
-func DeleteRooms(s *store.Store) httprouter.Handle {
+// DeleteRoom ...
+func DeleteRoom(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		id, err := strconv.Atoi(ps.ByName("id"))
@@ -33,6 +33,7 @@ func DeleteRooms(s *store.Store) httprouter.Handle {
 		}
 		err = s.Room().Delete(id)
 		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't delete room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't delete room. Err msg:%v.", err)))
 			return
 		}

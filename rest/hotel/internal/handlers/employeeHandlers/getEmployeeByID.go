@@ -33,7 +33,7 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 
 		employee, err := s.Employee().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find employee.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find employee. Err msg:%v.", err)))
 			return
 		}

@@ -33,6 +33,9 @@ func Get(ctx context.Context, c *client.Client, body io.Reader) (*response.Servi
 		}
 		return resp, nil
 	}
+	c.Base.Logger.Debugf("response: %v", resp.Error.ErrorCode)
+	c.Base.Logger.Debugf("response: %v", resp.Error.DeveloperMessage)
+	c.Base.Logger.Debugf("response: %v", resp.Error.Message)
 
 	return nil, apperror.APIError(resp.Error.ErrorCode, resp.Error.Message, resp.Error.DeveloperMessage)
 }

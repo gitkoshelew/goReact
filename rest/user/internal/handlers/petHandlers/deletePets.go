@@ -3,7 +3,6 @@ package pethandlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"user/internal/apperror"
@@ -14,7 +13,7 @@ import (
 )
 
 // DeletePet ...
-func DeletePets(s *store.Store) httprouter.Handle {
+func DeletePet(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		id, err := strconv.Atoi(ps.ByName("id"))
@@ -32,7 +31,7 @@ func DeletePets(s *store.Store) httprouter.Handle {
 		}
 		err = s.Pet().Delete(id)
 		if err != nil {
-			log.Print(err)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't delete pet.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't delete pet. Err msg:%v.", err)))
 			return
 		}

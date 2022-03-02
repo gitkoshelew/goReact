@@ -12,7 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-//UpdateHotel
+// UpdateHotel ...
 func UpdateHotel(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
@@ -33,7 +33,7 @@ func UpdateHotel(s *store.Store) httprouter.Handle {
 
 		h, err := s.Hotel().FindByID(req.HotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find hotel.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find hotel. Err msg:%v.", err)))
 			return
 		}
@@ -56,11 +56,11 @@ func UpdateHotel(s *store.Store) httprouter.Handle {
 
 		err = s.Hotel().Update(h)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update hotel.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update hotel. Err msg:%v.", err)))
 			return
 		}
-		
+
 		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update hotel with id = %d", h.HotelID)})
 

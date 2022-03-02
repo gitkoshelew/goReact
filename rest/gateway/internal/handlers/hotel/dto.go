@@ -2,7 +2,7 @@ package hotel
 
 import "time"
 
-// HotelDTO
+// HotelDTO ...
 type HotelDTO struct {
 	HotelID int    `json:"hotelId"`
 	Name    string `json:"nameId"`
@@ -12,14 +12,14 @@ type HotelDTO struct {
 // PetType ...
 type PetType string
 
-// PetType constants
-
 const (
+	// PetTypeCat ...
 	PetTypeCat PetType = "cat"
+	// PetTypeDog ...
 	PetTypeDog PetType = "dog"
 )
 
-//RoomDTO
+// RoomDTO ...
 type RoomDTO struct {
 	RoomID       int     `json:"roomId"`
 	RoomNumber   int     `json:"roomNum"`
@@ -28,7 +28,7 @@ type RoomDTO struct {
 	RoomPhotoURL string  `json:"roomPhotoUrl"`
 }
 
-// SeatDTO
+// SeatDTO ...
 type SeatDTO struct {
 	SeatID      int       `json:"seatId"`
 	RoomID      int       `json:"roomId"`
@@ -48,7 +48,7 @@ const (
 	AdminPosition    Position = "admin"
 )
 
-// EmployeeDTO
+// EmployeeDTO ...
 type EmployeeDTO struct {
 	EmployeeID int      `json:"employeeId"`
 	UserID     int      `json:"userId"`

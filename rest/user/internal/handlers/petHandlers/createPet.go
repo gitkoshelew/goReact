@@ -12,8 +12,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-//NewPet
-func NewPet(s *store.Store) httprouter.Handle {
+// CreatePet ...
+func CreatePet(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -33,7 +33,7 @@ func NewPet(s *store.Store) httprouter.Handle {
 
 		user, err := s.User().FindByID(req.OwnerID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Cant find user.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Cant find user. Err msg:%v.", err)))
 			return
 		}
@@ -50,7 +50,7 @@ func NewPet(s *store.Store) httprouter.Handle {
 
 		err = p.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
@@ -58,7 +58,7 @@ func NewPet(s *store.Store) httprouter.Handle {
 
 		_, err = s.Pet().Create(&p)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create pet.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create pet. Err msg:%v.", err)))
 			return
 		}

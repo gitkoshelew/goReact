@@ -12,7 +12,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func NewRoom(s *store.Store) httprouter.Handle {
+// CreateRoom ...
+func CreateRoom(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -33,7 +34,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 
 		hotel, err := s.Hotel().FindByID(req.HotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Cant find hotel.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Cant find hotel. Err msg:%v.", err)))
 			return
 		}
@@ -48,7 +49,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 
 		err = room.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
@@ -56,7 +57,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 
 		_, err = s.Room().Create(&room)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create room.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create room. Err msg:%v.", err)))
 			return
 		}

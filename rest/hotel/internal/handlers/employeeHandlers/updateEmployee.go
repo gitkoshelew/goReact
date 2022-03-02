@@ -12,6 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// UpdateEmployee ...
 func UpdateEmployee(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
@@ -32,14 +33,14 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 
 		hotel, err := s.Hotel().FindByID(req.HotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find hotel.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find hotel. Err msg:%v.", err)))
 			return
 		}
 
 		employeeDTO, err := s.Employee().FindByID(req.EmployeeID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find employee.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find employee. Err msg:%v.", err)))
 
 			return
@@ -47,7 +48,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 
 		employee, err := s.Employee().EmployeeFromDTO(employeeDTO)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert employee.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert employee. Err msg:%v.", err)))
 			return
 		}
@@ -67,7 +68,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 
 		err = employee.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
@@ -75,7 +76,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 
 		err = s.Employee().Update(employee)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update employee.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update employee. Err msg:%v.", err)))
 			return
 		}

@@ -246,8 +246,8 @@ services:
         depends_on:
             - bookingdb
 
-    hoteldatabase:
-        container_name: hoteldatabase
+    hoteldb:
+        container_name: hoteldb
         image: postgres:latest
         env_file:
             - .env
@@ -267,8 +267,8 @@ services:
                 aliases:
                     - database
 
-    hoteldatabasetest:
-        container_name: hoteldatabasetest
+    hoteldbtest:
+        container_name: hoteldbtest
         image: postgres:latest
         env_file:
             - .env
@@ -301,13 +301,13 @@ services:
                 "-path",
                 "hotel/migrations",
                 "-database",
-                "postgres://user:userpass@hoteldatabase:5432/hoteldb?sslmode=disable",
+                "postgres://user:userpass@hoteldb:5432/hoteldb?sslmode=disable",
                 "up"
             ]
         links:
-            - hoteldatabase
+            - hoteldb
         depends_on:
-            - hoteldatabase
+            - hoteldb
 
     test_hotel_migrate:
         container_name: test_hotel_migrate
@@ -322,13 +322,13 @@ services:
                 "-path",
                 "hotel/migrations",
                 "-database",
-                "postgres://user:userpass@hoteldatabasetest:5432/hoteldbtest?sslmode=disable",
+                "postgres://user:userpass@hoteldbtest:5432/hoteldbtest?sslmode=disable",
                 "up"
             ]
         links:
-            - hoteldatabasetest
+            - hoteldbtest
         depends_on:
-            - hoteldatabasetest
+            - hoteldbtest
 
     hotelservice:
         container_name: hotelservice
@@ -343,13 +343,13 @@ services:
             - SERVER_HOST=0.0.0.0
             - ENV=prod
         tty: true
-        restart: on-failure
+        restart: always
         volumes:
             - api:/hotel/
         networks:
             - new
         depends_on:
-            - hoteldatabase
+            - hoteldb
 
     gateway_service:
         container_name: gateway_service

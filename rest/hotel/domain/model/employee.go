@@ -2,6 +2,7 @@ package model
 
 import validation "github.com/go-ozzo/ozzo-validation"
 
+// Employee ...
 type Employee struct {
 	EmployeeID int `json:"employeeId"`
 	UserID     int `json:"userId"`
@@ -9,6 +10,7 @@ type Employee struct {
 	Position   Position `json:"position"`
 }
 
+// EmployeeDTO ...
 type EmployeeDTO struct {
 	EmployeeID int      `json:"employeeId"`
 	UserID     int      `json:"userId"`
@@ -27,6 +29,7 @@ const (
 	AdminPosition    Position = "admin"
 )
 
+// PositionString ...
 func (e Employee) PositionString() string {
 	switch e.Position {
 	case ManagerPosition:

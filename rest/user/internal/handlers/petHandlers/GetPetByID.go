@@ -33,7 +33,7 @@ func GetPetByID(s *store.Store) httprouter.Handle {
 
 		pet, err := s.Pet().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find pet.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find pet. Err msg:%v.", err)))
 			return
 		}

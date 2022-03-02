@@ -13,7 +13,7 @@ import (
 )
 
 // DeleteHotel ...
-func DeleteHotels(s *store.Store) httprouter.Handle {
+func DeleteHotel(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		id, err := strconv.Atoi(ps.ByName("id"))

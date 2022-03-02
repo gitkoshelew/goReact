@@ -12,7 +12,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func NewHotel(s *store.Store) httprouter.Handle {
+// CreateHotel ...
+func CreateHotel(s *store.Store) httprouter.Handle {
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -40,7 +41,7 @@ func NewHotel(s *store.Store) httprouter.Handle {
 
 		err = h.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
@@ -48,7 +49,7 @@ func NewHotel(s *store.Store) httprouter.Handle {
 
 		_, err = s.Hotel().Create(&h)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create hotel.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create Hotel. Err msg:%v.", err)))
 			return
 		}

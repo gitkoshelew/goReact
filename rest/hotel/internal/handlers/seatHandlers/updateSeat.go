@@ -12,6 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// UpdateSeat ...
 func UpdateSeat(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
@@ -32,21 +33,21 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 
 		roomDTO, err := s.Room().FindByID(req.RoomID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find room. Err msg:%v.", err)))
 			return
 		}
 
 		room, err := s.RoomRepository.RoomFromDTO(roomDTO)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert room. Err msg:%v.", err)))
 			return
 		}
 
 		SeatDTO, err := s.Seat().FindByID(req.SeatID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find seat.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find seat. Err msg:%v.", err)))
 
 			return
@@ -54,7 +55,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 
 		seat, err := s.Seat().SeatFromDTO(SeatDTO)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert seat.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert seat. Err msg:%v.", err)))
 			return
 		}
@@ -87,7 +88,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 
 		err = s.Seat().Update(seat)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update seat.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update seat. Err msg:%v.", err)))
 			return
 		}

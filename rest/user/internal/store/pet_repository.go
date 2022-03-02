@@ -2,6 +2,7 @@ package store
 
 import (
 	"errors"
+	"fmt"
 	"user/domain/model"
 )
 
@@ -55,8 +56,8 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 	return &pets, nil
 }
 
-//FindByID searchs and returns petDTO by ID
-func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
+// FindDTOByID searchs and returns petDTO by ID
+func (r *PetRepository) FindDTOByID(id int) (*model.PetDTO, error) {
 	pet := &model.PetDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
 		id).Scan(
@@ -73,8 +74,8 @@ func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 	return pet, nil
 }
 
-//FindByID searchs and returns pet by ID
-func (r *PetRepository) FindPetID(id int) (*model.Pet, error) {
+// FindByID searchs and returns pet by ID
+func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 	pet := &model.Pet{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
 		id).Scan(
@@ -131,4 +132,20 @@ func (r *PetRepository) Update(p *model.Pet) error {
 	}
 	r.Store.Logger.Info("Update pet with id = %d,rows affectet: %d ", p.PetID, result)
 	return nil
+}
+
+// IsPetValid ...
+func (r *PetRepository) IsPetValid(id int) (bool, error) {
+	var exist bool
+	err := r.Store.Db.QueryRow(`SELECT EXISTS (SELECT id FROM pet WHERE id = $1))`,
+		id).Scan(&exist)
+	if err != nil {
+		return false, err
+	}
+
+	if exist {
+		return true, nil
+	}
+
+	return false, fmt.Errorf("Pet with id = %d does not exist", id)
 }
