@@ -33,14 +33,16 @@ export const CalendarTooltip = React.memo(({ tooltipDate }: PropsType) => {
   }, [availableSeats])
 
   return (
-    <div className={s.tooltipData}>
-      <h3 className={s.tooltipTitle}>Available seats on {moment(tooltipDate).format('MM/DD/YY')}:</h3>
-      {availableSeatsInRoom.map((seat, index) => (
-        <p key={index} className={s.tooltipText}>
-          We have available seat in room <span className={s.tooltipTextMark}>№{seat.roomNum}</span> for your{' '}
-          <span className={s.tooltipTextMark}>{seat.petType}</span>
-        </p>
-      ))}
+    <div className={s.tooltipContainer}>
+      <div className={s.tooltipData}>
+        <h3 className={s.tooltipTitle}>Available seats on {moment(tooltipDate).format('MM/DD/YY')}:</h3>
+        {availableSeatsInRoom.map((seat, index) => (
+          <p key={index} className={s.tooltipText}>
+            We have available seat in room <span className={s.tooltipTextMark}>№{seat.roomNum}</span> for your{' '}
+            <span className={s.tooltipTextMark}>{seat.petType}</span>
+          </p>
+        ))}
+      </div>
     </div>
   )
 })

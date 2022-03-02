@@ -1,24 +1,32 @@
 @import '../../styles/variables';
 
-.tooltipData {
+.tooltipContainer {
   position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.tooltipData {
   background-color: $secondary-background-color;
-  top: 102%;
-  left: 9%;
   width: 250px;
   padding: 10px;
   word-break: break-word;
   border: 1px solid #CACACA;
   border-radius: 12px;
+  margin: 10px auto;
 }
+
 .tooltipData > * {
   margin-bottom: 20px;
   text-align: center;
   @include font-setup(16px, 500)
 }
+
 .tooltipTitle {
   font-weight: 700;
 }
+
 .tooltipTextMark {
   color: $main-contrast-color;
   font-weight: 700;
