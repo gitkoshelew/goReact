@@ -1,4 +1,4 @@
-package hotelhandlers
+package hotel
 
 import (
 	"encoding/json"
