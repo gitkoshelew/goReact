@@ -18,12 +18,12 @@ func TestHotel_Validate(t *testing.T) {
 			return model.TestHotel()
 		},
 		isValid: true,
-		},
+	},
 		{
 			name: "Invalid Name",
 			h: func() *model.Hotel {
 				h := model.TestHotel()
-				h.Name = "Name@123"
+				h.Name = ""
 				return h
 			},
 			isValid: false,
@@ -42,6 +42,15 @@ func TestHotel_Validate(t *testing.T) {
 			h: func() *model.Hotel {
 				h := model.TestHotel()
 				h.Address = ""
+				return h
+			},
+			isValid: false,
+		},
+		{
+			name: "Empty coordinates",
+			h: func() *model.Hotel {
+				h := model.TestHotel()
+				h.Coordinates = [2]float64{}
 				return h
 			},
 			isValid: false,

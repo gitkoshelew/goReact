@@ -24,12 +24,13 @@ func TestUser() *User {
 
 }
 
-// TestHotel instance of hotel
+// Testing instance of hotel
 func TestHotel() *Hotel {
 	return &Hotel{
-		HotelID: 1,
-		Name:    "Name",
-		Address: "Minsk ul sovetskaya 18",
+		HotelID:     1,
+		Name:        "Name",
+		Address:     "Minsk ul sovetskaya 18",
+		Coordinates: [2]float64{53.89909164468815, 27.498996594142426},
 	}
 }
 
@@ -88,20 +89,20 @@ func TestPage() *pagination.Page {
 func TestSeat() *Seat {
 	return &Seat{
 		Description: "Description of seat",
-		RentFrom:      time.Time{}.AddDate(2000, 2, 2),
-		RentTo: time.Time{}.AddDate(2001, 2, 2),
+		RentFrom:    time.Time{}.AddDate(2000, 2, 2),
+		RentTo:      time.Time{}.AddDate(2001, 2, 2),
 		Room:        *TestRoom(),
 	}
 }
 
 func TestBooking() *Booking {
 	return &Booking{
-		Seat: *TestSeat(),
-		Pet: *TestPet(),
-		Employee: *TestEmployee(),
-		Status: BookingStatusInProgress,
+		Seat:      *TestSeat(),
+		Pet:       *TestPet(),
+		Employee:  *TestEmployee(),
+		Status:    BookingStatusInProgress,
 		StartDate: time.Time{}.AddDate(2000, 2, 2),
-		EndDate: time.Time{}.AddDate(2000, 22, 2),
-		Notes: "Notes",
+		EndDate:   time.Time{}.AddDate(2000, 22, 2),
+		Notes:     "Notes",
 	}
 }
