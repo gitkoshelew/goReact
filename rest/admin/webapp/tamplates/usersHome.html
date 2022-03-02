@@ -1,0 +1,152 @@
+{{template "base" .}}
+
+{{define "title"}}Users{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+<body>
+
+    {{if .HasPermission "read_user"}}
+    <div>
+        <h2>Users</h2>
+        <form action="/admin/users">
+            <button>all users</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "read_user"}}
+    <div>
+        <form action="/admin/users/id/" method="GET">
+            <th>Get user by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Get</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "delete_user"}}
+    <div>
+        <form action="/admin/users/delete" method="POST">
+            <th>Delete user by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Delete</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+
+    {{if .HasPermission "read_user"}}
+    <div>
+        <p><a href="/admin/users/csv/" download>Download and Create allusers.csv</a>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "creat_user"}}
+    <div>
+        <h2>New user</h2>
+        <form action="/admin/users/new" method="POST">
+            <th>Email</th>
+            <input type="email" name="Email" required>
+            <th>Password</th>
+            <input type="password" name="Password" required><br><br>
+            <th>Role</th>
+            <input type="radio" name="Role" value="client" id="role1" required>
+            <label for="role1">Client</label>
+            <input type="radio" name="Role" value="employee" id="role2" required>
+            <label for="role2">Employee</label>
+            <input type="radio" name="Role" value="anonymous" id="role3" required>
+            <label for="role3">Anonymous</label><br><br>
+            <th>Verified</th>
+            <input type="radio" name="Verified" value="true" id="Verified1" required>
+            <label for="Verified1">true</label>
+            <input type="radio" name="Verified" value="false" id="Verified2" required>
+            <label for="Verified2">false</label><br><br>
+            <th>Name</th>
+            <input type="text" name="Name" required>
+            <th>Surname</th>
+            <input type="text" name="Surname" required>
+            <th>MiddleName</th>
+            <input type="text" name="MiddleName" required><br><br>
+            <th>Gender</th>
+            <input type="radio" name="Sex" value="male" id="gender1" required>
+            <label for="gender1">male</label>
+            <input type="radio" name="Sex" value="female" id="gender2" required>
+            <label for="gender2" required>female</label><br><br>
+            <th>DateOfBirth</th>
+            <input type="Date" name="DateOfBirth" required><br><br>
+            <th>Address</th>
+            <input type="text" name="Address" required><br><br>
+            <th>Phone 375-хх-ххх-хх-хх</th>
+            <input type="tel" name="Phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required><br><br>
+            <span class="validity"></span>
+            <th>Photo</th>
+            <input type="text" name="Photo">
+            <button>new</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "update_user"}}
+    <div>
+        <h2>Update user</h2>
+        <form action="/admin/users/update" method="POST">
+            <th>ID</th>
+            <input type="number" name="id" min="1" required>
+            <th>Email</th>
+            <input type="email" name="Email"><br><br>
+            <th>Role</th>
+            <input type="radio" name="Role" value="client" id="role1">
+            <label for="role1">Client</label>
+            <input type="radio" name="Role" value="employee" id="role2">
+            <label for="role2">Employee</label>
+            <input type="radio" name="Role" value="anonymous" id="role3">
+            <label for="role3">Anonymous</label><br><br>
+            <th>Verified</th>
+            <input type="radio" name="Verified" value="true" id="Verified1">
+            <label for="Verified1">true</label>
+            <input type="radio" name="Verified" value="false" id="Verified2">
+            <label for="Verified2">false</label><br><br>
+            <th>Name</th>
+            <input type="text" name="Name">
+            <th>Surname</th>
+            <input type="text" name="Surname">
+            <th>MiddleName</th>
+            <input type="text" name="MiddleName"><br><br>
+            <th>Gender</th>
+            <input type="radio" name="Sex" value="male" id="gender1">
+            <label for="gender1">male</label>
+            <input type="radio" name="Sex" value="female" id="gender2">
+            <label for="gender2" required>female</label><br><br>
+            <th>DateOfBirth</th>
+            <input type="Date" name="DateOfBirth"><br><br>
+            <th>Address</th>
+            <input type="text" name="Address"><br><br>
+            <th>Phone 375-хх-ххх-хх-хх</th>
+            <input type="tel" name="Phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"><br><br>
+            <span class="validity"></span>
+            <th>Photo</th>
+            <input type="text" name="Photo">
+            <button>update</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{end}}
