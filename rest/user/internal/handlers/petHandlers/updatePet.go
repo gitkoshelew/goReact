@@ -12,7 +12,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-//UpdatePet
+// UpdatePet ...
 func UpdatePet(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -33,14 +33,14 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 
 		user, err := s.User().FindByID(req.OwnerID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find user.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find user. Err msg:%v.", err)))
 			return
 		}
 
-		p, err := s.Pet().FindPetID(req.PetID)
+		p, err := s.Pet().FindByID(req.PetID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find pet.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find pet. Err msg:%v.", err)))
 			return
 		}
@@ -73,7 +73,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 
 		err = p.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
@@ -81,7 +81,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 
 		err = s.Pet().Update(p)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update pet.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update pet. Err msg:%v.", err)))
 			return
 		}

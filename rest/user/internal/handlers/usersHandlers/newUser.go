@@ -49,14 +49,14 @@ func NewUser(s *store.Store) httprouter.Handle {
 
 		err = u.WithEncryptedPassword()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Bad request.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Bad request. Err msg:%v.", err)))
 			return
 		}
 
 		err = u.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
@@ -64,7 +64,7 @@ func NewUser(s *store.Store) httprouter.Handle {
 
 		_, err = s.User().Create(&u)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create user.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create user. Err msg:%v.", err)))
 			return
 		}

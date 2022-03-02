@@ -12,7 +12,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func NewSeat(s *store.Store) httprouter.Handle {
+// CreateSeat ...
+func CreateSeat(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -24,8 +25,7 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		s.Logger.Info("req :" , req)
-		
+		s.Logger.Info("req :", req)
 
 		err := s.Open()
 		if err != nil {
@@ -40,7 +40,7 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(apperror.NewAppError("Cant find room.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Cant find room. Err msg:%v.", err)))
 			return
 		}
-		s.Logger.Info("roomDTO :" , roomDTO)
+		s.Logger.Info("roomDTO :", roomDTO)
 
 		room, err := s.Room().RoomFromDTO(roomDTO)
 		if err != nil {
@@ -48,7 +48,7 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find room. Err msg:%v.", err)))
 			return
 		}
-		s.Logger.Info("room :" , room)
+		s.Logger.Info("room :", room)
 
 		seat := model.Seat{
 			SeatID:      0,

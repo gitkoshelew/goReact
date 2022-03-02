@@ -11,8 +11,8 @@ func (s *Server) ConfigureRouter() {
 
 	s.Router.Handle("GET", "/pets", pethandlers.AllPetsHandler(store.New(s.Config)))
 	s.Router.Handle("GET", "/pet/:id", pethandlers.GetPetByID(store.New(s.Config)))
-	s.Router.Handle("DELETE", "/pet/:id", pethandlers.DeletePets(store.New(s.Config)))
-	s.Router.Handle("POST", "/pet", pethandlers.NewPet(store.New(s.Config)))
+	s.Router.Handle("DELETE", "/pet/:id", pethandlers.DeletePet(store.New(s.Config)))
+	s.Router.Handle("POST", "/pet", pethandlers.CreatePet(store.New(s.Config)))
 	s.Router.Handle("PUT", "/pet", pethandlers.UpdatePet(store.New(s.Config)))
 
 	s.Router.Handle("GET", "/users", usershandlers.AllUsersHandler(store.New(s.Config)))

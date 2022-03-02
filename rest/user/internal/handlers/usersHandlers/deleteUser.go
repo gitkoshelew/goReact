@@ -3,7 +3,6 @@ package usershandlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"user/internal/apperror"
@@ -33,7 +32,7 @@ func DeleteUser(s *store.Store) httprouter.Handle {
 		}
 		err = s.User().Delete(id)
 		if err != nil {
-			log.Print(err)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't delete user.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't delete user. Err msg:%v.", err)))
 			return
 		}

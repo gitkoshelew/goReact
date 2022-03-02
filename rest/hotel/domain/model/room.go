@@ -13,6 +13,7 @@ type Room struct {
 	RoomPhotoURL string `json:"roomPhotoUrl"`
 }
 
+// RoomDTO ...
 type RoomDTO struct {
 	RoomID       int     `json:"roomId"`
 	RoomNumber   int     `json:"roomNum"`

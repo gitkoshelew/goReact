@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-// Testing instance of hotel
+// TestHotel instance of hotel
 func TestHotel() *Hotel {
 	return &Hotel{
 		HotelID: 1,
@@ -11,6 +11,7 @@ func TestHotel() *Hotel {
 	}
 }
 
+// TestRoom ...
 func TestRoom() *Room {
 	return &Room{
 		RoomID:       1,
@@ -21,6 +22,7 @@ func TestRoom() *Room {
 	}
 }
 
+// TestSeat ...
 func TestSeat() *Seat {
 	return &Seat{
 		Description: "Description of seat",
@@ -30,11 +32,12 @@ func TestSeat() *Seat {
 	}
 }
 
+// TestEmployee ...
 func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,
-		UserID:   1,
-		Hotel:    *TestHotel(),
-		Position: OwnerPosition,
+		UserID:     1,
+		Hotel:      *TestHotel(),
+		Position:   OwnerPosition,
 	}
 }

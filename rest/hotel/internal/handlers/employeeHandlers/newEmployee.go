@@ -12,7 +12,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func NewEmployee(s *store.Store) httprouter.Handle {
+// CreateEmployee ...
+func CreateEmployee(s *store.Store) httprouter.Handle {
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
@@ -33,7 +34,7 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 		}
 		hotel, err := s.Hotel().FindByID(req.HotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Cant find hotel.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Cant find hotel. Err msg:%v.", err)))
 			return
 		}
@@ -47,7 +48,7 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 
 		err = e.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
@@ -55,7 +56,7 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 
 		_, err = s.Employee().Create(&e)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create employee.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create employee. Err msg:%v.", err)))
 			return
 		}

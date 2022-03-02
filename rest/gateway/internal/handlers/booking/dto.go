@@ -14,3 +14,10 @@ type bookingDTO struct {
 	Paid       bool      `json:"paid"`
 	Notes      string    `json:"notes,omitempty"`
 }
+
+// DataValidation checks Seat, pet and Employee ids
+type DataValidation struct {
+	SeatID     int `json:"seat"`
+	PetID      int `json:"pet"`
+	EmployeeID int `json:"employeeId"`
+}

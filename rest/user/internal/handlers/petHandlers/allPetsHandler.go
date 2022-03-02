@@ -23,7 +23,7 @@ func AllPetsHandler(s *store.Store) httprouter.Handle {
 		}
 		pets, err := s.Pet().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find pets", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find pets. Err msg: %v", err)))
 			return
 		}

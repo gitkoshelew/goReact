@@ -24,7 +24,7 @@ func AllRoomsHandler(s *store.Store) httprouter.Handle {
 		}
 		rooms, err := s.Room().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find rooms", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find rooms. Err msg: %v", err)))
 			return
 		}
