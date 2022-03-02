@@ -6,10 +6,10 @@ import (
 
 // Hotel struct
 type Hotel struct {
-	HotelID     int        `json:"hotelId"`
-	Name        string     `json:"nameId"`
-	Address     string     `json:"addressId"`
-	Coordinates [2]float64 `json:"coordinates"` // coordinates : lat , lon
+	HotelID     int    `json:"hotelId"`
+	Name        string `json:"nameId"`
+	Address     string `json:"addressId"`
+	Coordinates string `json:"coordinates"` // coordinates : lat , lon
 }
 
 // Validate ...
@@ -18,6 +18,6 @@ func (h *Hotel) Validate() error {
 		h,
 		validation.Field(&h.Name, validation.Required, validation.Length(1, 20)),
 		validation.Field(&h.Address, validation.Required, validation.Length(10, 40)),
-		validation.Field(&h.Coordinates, validation.Each(validation.Required)),
+		validation.Field(&h.Coordinates, validation.Required),
 	)
 }

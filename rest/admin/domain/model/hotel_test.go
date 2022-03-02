@@ -50,7 +50,7 @@ func TestHotel_Validate(t *testing.T) {
 			name: "Empty coordinates",
 			h: func() *model.Hotel {
 				h := model.TestHotel()
-				h.Coordinates = [2]float64{}
+				h.Coordinates = ""
 				return h
 			},
 			isValid: false,

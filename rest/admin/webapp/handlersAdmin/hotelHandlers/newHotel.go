@@ -5,7 +5,6 @@ import (
 	"admin/domain/store"
 	"admin/webapp/session"
 	"net/http"
-	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -36,24 +35,13 @@ func NewHotel(s *store.Store) httprouter.Handle {
 
 		address := r.FormValue("Address")
 
-		lat, err := strconv.ParseFloat(r.FormValue("Coordinates[0]"), 64)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
-			return
-		}
-		lon, err := strconv.ParseFloat(r.FormValue("Coordinates[1]"), 64)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
-			return
-		}
+		coordinates := r.FormValue("Coordinates[0]")
 
 		h := model.Hotel{
 			HotelID:     0,
 			Name:        name,
 			Address:     address,
-			Coordinates: [2]float64{lat, lon},
+			Coordinates: coordinates,
 		}
 		err = h.Validate()
 		if err != nil {

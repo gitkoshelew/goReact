@@ -4,9 +4,10 @@ import "time"
 
 // HotelDTO
 type HotelDTO struct {
-	HotelID int    `json:"hotelId"`
-	Name    string `json:"nameId"`
-	Address string `json:"addressId"`
+	HotelID     int    `json:"hotelId"`
+	Name        string `json:"nameId"`
+	Address     string `json:"addressId"`
+	Coordinates string `json:"coordinates"` // coordinates : lat , lon
 }
 
 // PetType ...
