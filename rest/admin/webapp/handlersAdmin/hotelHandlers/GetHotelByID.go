@@ -41,7 +41,7 @@ func GetHotelByID(s *store.Store) httprouter.Handle {
 		hotel, err := s.Hotel().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find hotel. Err msg:%v.", err)
 			return
 		}
 

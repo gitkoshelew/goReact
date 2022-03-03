@@ -42,7 +42,7 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 		user, err := s.User().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find user. Err msg:%v.", err)
 			return
 		}
 

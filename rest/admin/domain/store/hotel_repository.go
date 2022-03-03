@@ -57,7 +57,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.Address,
 		&hotel.Coordinates,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Can't find hotel. Err msg:%v.", err)
 		return nil, err
 	}
 	return hotel, nil

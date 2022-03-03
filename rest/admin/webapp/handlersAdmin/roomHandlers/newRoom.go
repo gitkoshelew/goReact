@@ -51,7 +51,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 		hotel, err := s.Hotel().FindByID(hotelID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find hotel. Err msg:%v.", err)
 			return
 		}
 		photo := r.FormValue("Photo")

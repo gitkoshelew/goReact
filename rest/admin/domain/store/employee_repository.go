@@ -57,7 +57,7 @@ func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
 		&employee.Hotel.HotelID,
 		&employee.Position,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Can't find employee. Err msg:%v.", err)
 		return nil, err
 	}
 	return employee, nil
@@ -116,7 +116,7 @@ func (r *EmployeeRepository) FindByUserID(userId int) (*model.Employee, error) {
 		&employee.Hotel.HotelID,
 		&employee.Position,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Can't find employee. Err msg:%v.", err)
 		return nil, err
 	}
 	return employee, nil

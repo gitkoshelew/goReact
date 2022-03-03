@@ -166,7 +166,7 @@ func (r *UserRepository) Delete(id int) error {
 func (r *UserRepository) Update(u *model.User) error {
 	encryptedPassword, err := model.EncryptPassword(u.Password)
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
+		r.Store.Logger.Errorf("Can't't encrypt password. Err msg: %v", err)
 		return err
 	}
 
@@ -191,7 +191,7 @@ func (r *UserRepository) Update(u *model.User) error {
 		u.UserID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
+		r.Store.Logger.Errorf("Can't't set into users table. Err msg: %v", err)
 		return err
 	}
 	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
@@ -206,13 +206,13 @@ func (r *UserRepository) VerifyEmail(userID int) error {
 		userID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't verify email. Err msg: %v", err)
+		r.Store.Logger.Errorf("Can't't verify email. Err msg: %v", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't verify email. Err msg: %v", err)
+		r.Store.Logger.Errorf("Can't't verify email. Err msg: %v", err)
 		return nil
 	}
 

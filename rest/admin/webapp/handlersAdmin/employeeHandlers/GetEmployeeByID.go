@@ -41,7 +41,7 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 		employee, err := s.Employee().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find employee. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find employee. Err msg:%v.", err)
 			return
 		}
 

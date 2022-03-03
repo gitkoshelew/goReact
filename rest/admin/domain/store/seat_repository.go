@@ -62,7 +62,7 @@ func (r *SeatRepository) FindByID(id int) (*model.Seat, error) {
 		&seat.RentFrom,
 		&seat.RentTo,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Can't find seat. Err msg:%v.", err)
 		return nil, err
 	}
 	return seat, nil

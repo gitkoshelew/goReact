@@ -44,7 +44,7 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		room, err := s.Room().FindByID(roomID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find hotel. Err msg:%v.", err)
 			return
 		}
 

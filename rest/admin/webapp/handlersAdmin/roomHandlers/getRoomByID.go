@@ -40,7 +40,7 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 		room, err := s.Room().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find pet. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find pet. Err msg:%v.", err)
 			return
 		}
 		rooms = append(rooms, *room)

@@ -41,7 +41,7 @@ func GetBookingByID(s *store.Store) httprouter.Handle {
 		booking, err := s.Booking().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find booking. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find booking. Err msg:%v.", err)
 			return
 		}
 		bookings = append(bookings, *booking)

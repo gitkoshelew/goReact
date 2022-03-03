@@ -27,6 +27,7 @@ func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 
 	return p, nil
 }
+
 // GetAll returns all pets
 func (r *PetRepository) GetAll() (*[]model.Pet, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM pet")
@@ -66,7 +67,7 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 		&pet.Diseases,
 		&pet.Owner.UserID,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Can't find pet. Err msg:%v.", err)
 		return nil, err
 	}
 	return pet, nil

@@ -42,7 +42,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		seat, err := s.Seat().FindByID(seatID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find seat. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find seat. Err msg:%v.", err)
 			return
 		}
 
@@ -55,7 +55,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		pet, err := s.Pet().FindByID(petID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find pet. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find pet. Err msg:%v.", err)
 			return
 		}
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
@@ -67,7 +67,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		employee, err := s.Employee().FindByID(employeeID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find employee. Err msg:%v.", err)
+			s.Logger.Errorf("Can't find employee. Err msg:%v.", err)
 			return
 		}
 		status := r.FormValue("Status")

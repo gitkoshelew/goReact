@@ -58,7 +58,7 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 		&room.PetType,
 		&room.Hotel.HotelID,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find room. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Can't find room. Err msg:%v.", err)
 		return nil, err
 	}
 	return room, nil
