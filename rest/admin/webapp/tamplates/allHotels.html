@@ -13,12 +13,14 @@
         <th>HotelID</th>
         <th>Name</th>
         <th>Address</th>
+        <td>Coordinates</td>
 
         {{range . }}
         <tr>
             <td>{{.HotelID}}</td>
             <td>{{.Name}}</td>
             <td>{{.Address}}</td>
+            <td>{{.Coordinates}}</td>
         </tr>
         {{end}}
 

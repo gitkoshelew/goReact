@@ -19,7 +19,7 @@ func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 		r.Store.Logger.Errorf("Can't create room. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Creat room with id = %d", rm.RoomID)
+	r.Store.Logger.Info("Created room with id = %d", rm.RoomID)
 	return rm, nil
 }
 

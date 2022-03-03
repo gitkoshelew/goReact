@@ -22,7 +22,7 @@ func (r *SeatRepository) Create(s *model.Seat) (*model.Seat, error) {
 		r.Store.Logger.Errorf("Can't create seat. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Creat seat with id = %d", s.SeatID)
+	r.Store.Logger.Info("Created seat with id = %d", s.SeatID)
 	return s, nil
 }
 

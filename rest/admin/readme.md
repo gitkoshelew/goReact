@@ -8,9 +8,9 @@
 `migrate -path ./migrations -database 'postgres://user:userpass@0.0.0.0:8081/adminDB?sslmode=disable' force 1 `
 
 4. add migr files
-`migrate create -ext sql -dir migrations -seq update_booking `
+`migrate create -ext sql -dir migrations -seq add_coordinates_hotel `
 
 5. Copy file from container:
 `docker cp microserviceadmin_microseviceadmin_1:api/pkg/csv/allusers.csv files`
 
-docker-compose -f docker-compose-socket.yml up -d microseviceadmin
+
