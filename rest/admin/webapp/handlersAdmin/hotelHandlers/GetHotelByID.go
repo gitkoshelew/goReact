@@ -50,7 +50,7 @@ func GetHotelByID(s *store.Store) httprouter.Handle {
 			"/rest-api/webapp/tamplates/base.html",
 		}
 
-	tmpl, err := template.ParseFiles(files...)
+		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			s.Logger.Errorf("Can not parse template: %v", err)

@@ -35,7 +35,7 @@ func NewHotel(s *store.Store) httprouter.Handle {
 
 		address := r.FormValue("Address")
 
-		coordinates := r.FormValue("Coordinates[0]")
+		coordinates := r.FormValue("Coordinates")
 
 		h := model.Hotel{
 			HotelID:     0,
