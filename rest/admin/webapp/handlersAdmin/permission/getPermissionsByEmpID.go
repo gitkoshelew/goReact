@@ -3,7 +3,6 @@ package permission
 import (
 	"admin/domain/store"
 	"admin/webapp/session"
-	"fmt"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -25,7 +24,6 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			return
 		}
 
@@ -38,13 +36,7 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 
 		per, err := s.Permissions().GetByEmployeeId(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Can't find permissions. Err msg: %v", err)
-			return
-		}
-		if len(*per) == 0 {
-			err := fmt.Errorf("no rows in result set")
-			http.Error(w, err.Error(), http.StatusNotFound)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Can't find permissions. Err msg: %v", err)
 			return
 		}
@@ -56,15 +48,15 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, per)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Can not execute template: %v", err)
 			return
 		}
 

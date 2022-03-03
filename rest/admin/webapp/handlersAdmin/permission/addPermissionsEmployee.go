@@ -30,19 +30,17 @@ func AddPermissionsEmployee(s *store.Store) httprouter.Handle {
 		perID, err := strconv.Atoi(r.FormValue("permissions"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("permissions"))
 			return
 		}
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			return
 		}
 		err = s.PermissionsEmployee().SetForEmployee(perID, id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Can't set permissions. Err msg: %v", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 

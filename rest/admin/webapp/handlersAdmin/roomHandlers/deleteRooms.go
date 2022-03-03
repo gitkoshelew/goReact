@@ -4,7 +4,6 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -38,16 +37,13 @@ func DeleteRooms(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			return
 		}
 		err = s.Room().Delete(id)
 		if err != nil {
-			log.Print(err)
-			s.Logger.Errorf("Can't delete room. Err msg:%v.", err)
+			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		s.Logger.Info("Delete room with id = %d", id)
 		http.Redirect(w, r, "/admin/homerooms", http.StatusFound)
 
 	}

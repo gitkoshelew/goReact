@@ -29,7 +29,7 @@ func NewHotel(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
 		name := r.FormValue("Name")
 
@@ -53,10 +53,9 @@ func NewHotel(s *store.Store) httprouter.Handle {
 		_, err = s.Hotel().Create(&h)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create hotel. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Creat hotel with id = %d", h.HotelID)
+		
 		http.Redirect(w, r, "/admin/homehotels/", http.StatusFound)
 	}
 
