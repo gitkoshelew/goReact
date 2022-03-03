@@ -3,7 +3,6 @@ package store
 import (
 	"admin/domain/model"
 	"errors"
-	"log"
 )
 
 // RoomRepository ...
@@ -16,9 +15,11 @@ func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO room (pet_type, number, hotel_id) VALUES ($1, $2, $3) RETURNING id",
 		string(rm.PetType), rm.RoomNumber, rm.Hotel.HotelID).Scan(&rm.RoomID); err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't create room. Err msg:%v.", err)
 		return nil, err
 	}
+	r.Store.Logger.Info("Created room with id = %d", rm.RoomID)
+
 	return rm, nil
 }
 
@@ -26,7 +27,7 @@ func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 func (r *RoomRepository) GetAll() (*[]model.Room, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM room")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find rooms. Err msg: %v", err)
 	}
 	rooms := []model.Room{}
 
@@ -39,7 +40,7 @@ func (r *RoomRepository) GetAll() (*[]model.Room, error) {
 			&room.Hotel.HotelID,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Can't find rooms. Err msg: %v", err)
 			continue
 		}
 		rooms = append(rooms, room)
@@ -57,7 +58,7 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 		&room.PetType,
 		&room.Hotel.HotelID,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant find room. Err msg:%v.", err)
 		return nil, err
 	}
 	return room, nil
@@ -67,18 +68,21 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 func (r *RoomRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM room WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't delete room. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete room. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("No rows affected")
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete room. Err msg:%v.", err)
+		return err
 	}
-	log.Printf("Room deleted, rows affectet: %d", result)
+	r.Store.Logger.Info("Room deleted, rows affectet: %d", result)
 	return nil
 }
 
@@ -93,9 +97,9 @@ func (r *RoomRepository) Update(rm *model.Room) error {
 		rm.RoomID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't update room. Err msg:%v.", err)
 		return err
 	}
-	log.Printf("Room updated, rows affectet: %d", result)
+	r.Store.Logger.Info("Update room with id = %d,rows affectet: %d ", rm.RoomID, result)
 	return nil
 }

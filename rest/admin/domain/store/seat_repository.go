@@ -2,7 +2,7 @@ package store
 
 import (
 	"admin/domain/model"
-	"log"
+	"errors"
 )
 
 // SeatRepository ...
@@ -19,7 +19,7 @@ func (r *SeatRepository) Create(s *model.Seat) (*model.Seat, error) {
 		s.RentTo,
 		s.Description,
 	).Scan(&s.SeatID); err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't create seat. Err msg:%v.", err)
 		return nil, err
 	}
 	return s, nil
@@ -29,7 +29,7 @@ func (r *SeatRepository) Create(s *model.Seat) (*model.Seat, error) {
 func (r *SeatRepository) GetAll() (*[]model.Seat, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM seat")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find seats. Err msg: %v", err)
 	}
 	seats := []model.Seat{}
 
@@ -43,7 +43,7 @@ func (r *SeatRepository) GetAll() (*[]model.Seat, error) {
 			&seat.RentTo,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Can't find seats. Err msg: %v", err)
 			continue
 		}
 		seats = append(seats, seat)
@@ -62,7 +62,7 @@ func (r *SeatRepository) FindByID(id int) (*model.Seat, error) {
 		&seat.RentFrom,
 		&seat.RentTo,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant find seat. Err msg:%v.", err)
 		return nil, err
 	}
 	return seat, nil
@@ -72,10 +72,21 @@ func (r *SeatRepository) FindByID(id int) (*model.Seat, error) {
 func (r *SeatRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM seat WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't delete seat. Err msg:%v.", err)
 		return err
 	}
-	log.Printf("Seat deleted, rows affectet: %d", result)
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Can't delete seat. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete seat. Err msg:%v.", err)
+		return err
+	}
+	r.Store.Logger.Info("Seat deleted, rows affectet: %d", result)
 	return nil
 }
 
@@ -93,9 +104,9 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 		s.SeatID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't update seat. Err msg:%v.", err)
 		return err
 	}
-	log.Printf("Seat updated, rows affectet: %d", result)
+	r.Store.Logger.Info("Update seat with id = %d,rows affectet: %d ", s.SeatID, result)
 	return nil
 }

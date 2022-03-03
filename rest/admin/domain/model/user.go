@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// User extends Account and has all Account fields
+// User struct
 type User struct {
 	UserID      int       `json:"userId" csv:"userId"`
 	Email       string    `json:"email" csv:"email"`

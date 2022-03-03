@@ -5,7 +5,7 @@ import (
 
 	validation "github.com/go-ozzo/ozzo-validation"
 )
-
+// Seat struct
 type Seat struct {
 	SeatID      int `json:"seatId"`
 	Room        Room
