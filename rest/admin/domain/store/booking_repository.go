@@ -23,7 +23,7 @@ func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
 		b.Notes,
 		b.Paid,
 	).Scan(&b.BookingID); err != nil {
-		r.Store.Logger.Errorf("Eror occured while creating booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Can't create booking. Err msg:%v.", err)
 		return nil, err
 	}
 	return b, nil
@@ -33,7 +33,7 @@ func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
 func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM booking")
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %w", err)
+		r.Store.Logger.Errorf("Can't find bookings. Err msg: %v", err)
 		return nil, err
 	}
 	bookings := []model.Booking{}
@@ -52,7 +52,7 @@ func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 			&booking.Paid,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %w", err)
+			r.Store.Logger.Errorf("Can't find bookings. Err msg: %v", err)
 			continue
 		}
 		bookings = append(bookings, booking)
@@ -75,7 +75,7 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 		&booking.Notes,
 		&booking.Paid,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror occured while searching booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Can't find bookings Err msg: %v", err)
 		return nil, err
 	}
 	return booking, nil
