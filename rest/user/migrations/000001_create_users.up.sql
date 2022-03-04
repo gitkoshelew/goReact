@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS USERS
     date_of_birth   DATE NOT NULL ,
     address         TEXT NOT NULL ,
     phone           CHARACTER VARYING(30) NOT NULL ,
-    password        TEXT ,
     role            user_type NOT NULL ,
     verified        BOOLEAN NOT NULL ,
     sex             sex NOT NULL,          

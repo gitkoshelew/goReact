@@ -14,7 +14,6 @@ require (
 
 require (
 	github.com/myesui/uuid v1.0.0 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
 	golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )

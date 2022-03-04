@@ -21,20 +21,20 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id")), fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))))
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
 			return
 		}
 		user, err := s.User().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
+			w.WriteHeader(http.StatusNotFound)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find employee.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find employee. Err msg:%v.", err)))
 			return
 		}
 

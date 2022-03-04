@@ -6,7 +6,6 @@ import "time"
 func TestUser() *User {
 	return &User{
 		Email:       "email@example.org",
-		Password:    "password",
 		Role:        EmployeeRole,
 		Verified:    true,
 		Name:        "Name",

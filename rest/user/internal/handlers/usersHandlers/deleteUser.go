@@ -3,9 +3,9 @@ package usershandlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
+	"user/internal/apperror"
 	"user/internal/store"
 	"user/pkg/response"
 
@@ -21,21 +21,22 @@ func DeleteUser(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id")), fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))))
 			return
 		}
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
 			return
 		}
 		err = s.User().Delete(id)
 		if err != nil {
-			log.Print(err)
-			s.Logger.Errorf("Can't delete user. Err msg:%v.", err)
+			w.WriteHeader(http.StatusNotFound)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't delete user.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't delete user. Err msg:%v.", err)))
 			return
 		}
-		s.Logger.Info("Delete user with id = %d", id)
+
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Delete user with id = %d", id)})
 

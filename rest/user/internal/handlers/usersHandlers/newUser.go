@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"user/domain/model"
+	"user/internal/apperror"
 	"user/internal/store"
 	"user/pkg/response"
 
@@ -24,10 +25,15 @@ func NewUser(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		err := s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
+		}
+
 		u := model.User{
 			UserID:      0,
 			Email:       req.Email,
-			Password:    req.Password,
 			Role:        model.Role(req.Role),
 			Name:        req.Name,
 			Surname:     req.Surname,
@@ -40,34 +46,21 @@ func NewUser(s *store.Store) httprouter.Handle {
 			DateOfBirth: req.DateOfBirth,
 		}
 
-		err := s.Open()
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
-		}
-
-		err = u.WithEncryptedPassword()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v.", err)
-			return
-		}
-
 		err = u.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
 		}
 
 		_, err = s.User().Create(&u)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create user. Err msg:%v.", err)
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create user.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create user. Err msg:%v.", err)))
 			return
 		}
 
-		s.Logger.Info("Creat user with id = %d", u.UserID)
 		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Creat user with id = %d", u.UserID)})
 	}

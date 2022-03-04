@@ -12,27 +12,25 @@ type UserRepository struct {
 
 // Create user and save it to DB
 func (r *UserRepository) Create(u *model.User) (*model.User, error) {
-	if err := u.Validate(); err != nil {
-		return nil, err
-	}
-
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
+		r.Store.Logger.Errorf("Can't create user. Err msg:%v.", err)
 		return nil, err
 	}
 
 	if emailIsUsed {
-		return nil, errors.New("email already in use")
+		err := errors.New("email already in use")
+		r.Store.Logger.Errorf("Can't create user. Err msg:%v.", err)
+		return nil, errors.New("err")
 	}
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
-		(email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) 
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
+		(email, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) 
 		RETURNING id`,
 		u.Email,
-		u.Password,
 		string(u.Role),
 		u.Verified,
 		u.Name,
@@ -44,8 +42,11 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		u.Phone,
 		u.Photo,
 	).Scan(&u.UserID); err != nil {
+		r.Store.Logger.Errorf("Can't create user. Err msg:%v.", err)
 		return nil, err
 	}
+
+	r.Store.Logger.Info("Creat user with id = %d", u.UserID)
 	return u, nil
 }
 
@@ -53,6 +54,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
+		r.Store.Logger.Errorf("Can't find users. Err msg: %v", err)
 		return nil, err
 	}
 	users := []model.User{}
@@ -68,13 +70,13 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.DateOfBirth,
 			&user.Address,
 			&user.Phone,
-			&user.Password,
 			&user.Role,
 			&user.Verified,
 			&user.Sex,
 			&user.Photo,
 		)
 		if err != nil {
+			r.Store.Logger.Errorf("Can't find users. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -95,12 +97,12 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.DateOfBirth,
 		&user.Address,
 		&user.Phone,
-		&user.Password,
 		&user.Role,
 		&user.Verified,
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
+		r.Store.Logger.Errorf("Cant find user. Err msg:%v.", err)
 		return nil, err
 	}
 	return user, nil
@@ -119,12 +121,12 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.DateOfBirth,
 		&user.Address,
 		&user.Phone,
-		&user.Password,
 		&user.Role,
 		&user.Verified,
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
+		r.Store.Logger.Errorf("Cant find user. Err msg:%v.", err)
 		return nil, err
 	}
 	return user, nil
@@ -134,35 +136,35 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 func (r *UserRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM users WHERE id = $1", id)
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("no rows affected")
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
+		return err
 	}
+
+	r.Store.Logger.Info("User deleted, rows affectet: %d", result)
 	return nil
 }
 
 // Update user from DB
 func (r *UserRepository) Update(u *model.User) error {
-	encryptedPassword, err := model.EncryptPassword(u.Password)
-	if err != nil {
-		r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
-		return err
-	}
 
 	result, err := r.Store.Db.Exec(
 		`UPDATE users SET 
-			email = $1, password = $2, role = $3, verified = $4, 
-			first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, 
-			address = $10, phone = $11, photo = $12 
-			WHERE id = $13`,
+			email = $1 role = $2, verified = $3, 
+			first_name = $4, surname = $5, middle_name = $6, sex = $7, date_of_birth = $8, 
+			address = $9, phone = $10, photo = $11 
+			WHERE id = $12`,
 		u.Email,
-		encryptedPassword,
 		string(u.Role),
 		u.Verified,
 		u.Name,
@@ -191,17 +193,22 @@ func (r *UserRepository) VerifyEmail(userID int) error {
 		userID,
 	)
 	if err != nil {
+		r.Store.Logger.Errorf("Cant't verify email. Err msg: %v", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Cant't verify email. Err msg: %v", err)
 		return nil
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("no rows affected")
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
+		return err
 	}
+
 	return nil
 }
 
@@ -213,21 +220,4 @@ func (r *UserRepository) EmailCheck(email string) *bool {
 		r.Store.Logger.Errorf("Error while checking if email ia already in use. Err msg: %v", err)
 	}
 	return &emailIsUsed
-}
-
-// PasswordChange ...
-func (r *UserRepository) PasswordChange(u *model.User) error {
-	encryptedPassword, err := model.EncryptPassword(u.Password)
-	if err != nil {
-		r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
-		return err
-	}
-
-	result, err := r.Store.Db.Exec("UPDATE users SET password = $1 WHERE id = $2", encryptedPassword, u.UserID)
-	if err != nil {
-		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
-		return err
-	}
-	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
-	return nil
 }

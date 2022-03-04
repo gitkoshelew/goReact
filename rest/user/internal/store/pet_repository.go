@@ -2,7 +2,7 @@ package store
 
 import (
 	"errors"
-	"log"
+	"fmt"
 	"user/domain/model"
 )
 
@@ -21,9 +21,11 @@ func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 		p.Diseases,
 		p.Owner.UserID,
 	).Scan(&p.PetID); err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't create pet. Err msg:%v.", err)
 		return nil, err
 	}
+	r.Store.Logger.Info("Creat pet with id = %d", p.PetID)
+
 	return p, nil
 }
 
@@ -31,7 +33,7 @@ func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM pet")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find pets. Err msg: %v", err)
 	}
 	pets := []model.PetDTO{}
 
@@ -46,7 +48,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 			&pet.OwnerID,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Can't find pets. Err msg: %v", err)
 			continue
 		}
 		pets = append(pets, pet)
@@ -54,8 +56,8 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 	return &pets, nil
 }
 
-//FindByID searchs and returns petDTO by ID
-func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
+// FindDTOByID searchs and returns petDTO by ID
+func (r *PetRepository) FindDTOByID(id int) (*model.PetDTO, error) {
 	pet := &model.PetDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
 		id).Scan(
@@ -66,14 +68,14 @@ func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 		&pet.Diseases,
 		&pet.OwnerID,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant find pet. Err msg:%v.", err)
 		return nil, err
 	}
 	return pet, nil
 }
 
-// FindPetID searchs and returns pet by ID
-func (r *PetRepository) FindPetID(id int) (*model.Pet, error) {
+// FindByID searchs and returns pet by ID
+func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 	pet := &model.Pet{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
 		id).Scan(
@@ -84,7 +86,7 @@ func (r *PetRepository) FindPetID(id int) (*model.Pet, error) {
 		&pet.Diseases,
 		&pet.Owner.UserID,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Cant find pet. Err msg:%v.", err)
 		return nil, err
 	}
 	return pet, nil
@@ -94,17 +96,21 @@ func (r *PetRepository) FindPetID(id int) (*model.Pet, error) {
 func (r *PetRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM pet WHERE id = $1", id)
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete pet. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete pet. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("no rows affected")
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete pet. Err msg:%v.", err)
+		return err
 	}
-	log.Printf("Pet deleted, rows affectet: %d", result)
+	r.Store.Logger.Info("Pet deleted, rows affectet: %d", result)
 	return nil
 }
 
@@ -121,9 +127,25 @@ func (r *PetRepository) Update(p *model.Pet) error {
 		p.PetID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't update pet. Err msg:%v.", err)
 		return err
 	}
-	log.Printf("Pet updated, rows affectet: %d", result)
+	r.Store.Logger.Info("Update pet with id = %d,rows affectet: %d ", p.PetID, result)
 	return nil
+}
+
+// IsPetValid ...
+func (r *PetRepository) IsPetValid(id int) (bool, error) {
+	var exist bool
+	err := r.Store.Db.QueryRow(`SELECT EXISTS (SELECT id FROM pet WHERE id = $1))`,
+		id).Scan(&exist)
+	if err != nil {
+		return false, err
+	}
+
+	if exist {
+		return true, nil
+	}
+
+	return false, fmt.Errorf("Pet with id = %d does not exist", id)
 }
