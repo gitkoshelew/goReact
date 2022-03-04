@@ -6,3 +6,5 @@ type Permission struct {
 	Name         string
 	Descriptoin  string
 }
+
+type PermissionName string
