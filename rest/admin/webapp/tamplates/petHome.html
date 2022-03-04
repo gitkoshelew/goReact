@@ -71,6 +71,33 @@
         </form>
     </div>
     {{end}}
+    <br><br>
+    {{if .HasPermission "update_pet"}}
+    <div>
+        <h2>Create pet</h2>
+        <form action="/admin/pets/update" method="POST">
+            <th>Get pet by id</th>
+            <input type="number" name="PetID" min="1" required><br><br>
+            <th>Name</th>
+            <input type="text" name="Name">
+            <th>Pet type</th>
+            <input type="radio" name="PetType" value="cat" id="PetType1">
+            <label for="PetType1">cat</label>
+            <input type="radio" name="PetType" value="dog" id="PetType2">
+            <label for="PetType2">dog</label>
+            <br><br>
+            <th>Weight </th>
+            <input type="number" name="Weight" min=0>
+            <th>Diseases</th>
+            <input type="text" name="Diseases">
+            <th>Owner id</th>
+            <input type="number" name="UserID" min=1>
+            <th>Photo URL</th>
+            <input type="text" name="Photo"><br><br>
+            <button>Update</button>
+        </form>
+    </div>
+    {{end}}
 
 </body>
 {{end}}

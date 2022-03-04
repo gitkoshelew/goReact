@@ -42,6 +42,7 @@ func (s *Server) configureRoutes() {
 	s.router.Handle("GET", "/admin/pets/id", pethandlers.GetPetByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/pets/delete", pethandlers.DeletePets(store.New(s.config)))
 	s.router.Handle("POST", "/admin/pets/new", pethandlers.NewPet(store.New(s.config)))
+	s.router.Handle("POST", "/admin/pets/update", pethandlers.UpdatePet(store.New(s.config)))
 
 	s.router.Handle("GET", "/admin/homerooms", roomhandlers.HomeRoomHandler(store.New(s.config)))
 	s.router.Handle("GET", "/admin/rooms", roomhandlers.AllRoomsHandler(store.New(s.config)))
