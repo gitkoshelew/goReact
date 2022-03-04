@@ -13,6 +13,8 @@
         <th>RoomNumber</th>
         <th>PetType</th>
         <th>Hotel</th>
+        <th>RoomPhotoURL</th>
+        
 
         {{range . }}
         <tr>
@@ -20,6 +22,7 @@
             <td>{{.RoomNumber}}</td>
             <td>{{.PetType}}</td>
             <td>{{.Hotel.HotelID}}</td>
+            <td>{{.RoomPhotoURL}}</td>
 
         </tr>
         {{end}}

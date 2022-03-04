@@ -94,9 +94,7 @@ func (r *SeatRepository) Delete(id int) error {
 func (r *SeatRepository) Update(s *model.Seat) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE seat SET",
-		"room_id = $1, rent_from = $2, rent_to = $3, description = $",
-		"WHERE id = $5",
+		"UPDATE seat SET room_id = $1, rent_from = $2, rent_to = $3, description = $4 WHERE id = $5",
 		s.Room.RoomID,
 		s.RentFrom,
 		s.RentTo,
