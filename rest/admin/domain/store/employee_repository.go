@@ -91,9 +91,7 @@ func (r *EmployeeRepository) Delete(id int) error {
 func (r *EmployeeRepository) Update(e *model.Employee) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE employee SET",
-		"user_id = $1, hotel_id = $2, position = $3",
-		"WHERE id = $4",
+		"UPDATE employee SET user_id = $1, hotel_id = $2, position = $3 WHERE id = $4",
 		e.UserID,
 		e.Hotel.HotelID,
 		e.Position,

@@ -62,7 +62,7 @@
     <br><br>
     {{if .HasPermission "update_hotel"}}
     <div>
-        <h2>Create hotel</h2>
+        <h2>Update hotel</h2>
         <form action="/admin/hotels/update" method="POST">
             <th>Hotel id</th>
             <input type="number" name="HotelID" min="1" required><br><br>
@@ -72,7 +72,7 @@
             <input type="text" name="Address"><br><br>
             <th>Coordinates(lat , lon)</th>
             <input type="string" name="Coordinates">
-            <button>New</button>
+            <button>Update</button>
 
         </form>
     </div>
