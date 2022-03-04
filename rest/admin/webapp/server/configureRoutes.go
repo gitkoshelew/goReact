@@ -35,6 +35,7 @@ func (s *Server) configureRoutes() {
 	s.router.Handle("GET", "/admin/hotels/id", hotelhandlers.GetHotelByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/hotels/delete", hotelhandlers.DeleteHotels(store.New(s.config)))
 	s.router.Handle("POST", "/admin/hotels/new", hotelhandlers.NewHotel(store.New(s.config)))
+	s.router.Handle("POST", "/admin/hotels/update", hotelhandlers.UpdateHotel(store.New(s.config)))
 
 	s.router.Handle("GET", "/admin/homepets", pethandlers.HomePetsHandler(store.New(s.config)))
 	s.router.Handle("GET", "/admin/pets", pethandlers.AllPetsHandler(store.New(s.config)))
@@ -66,6 +67,7 @@ func (s *Server) configureRoutes() {
 	s.router.Handle("GET", "/admin/employees/id", employeehandlers.GetEmployeeByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/employees/delete", employeehandlers.DeleteEmployee(store.New(s.config)))
 	s.router.Handle("POST", "/admin/employees/new", employeehandlers.NewEmployee(store.New(s.config)))
+	s.router.Handle("POST", "/admin/employees/update", employeehandlers.UpdateEmployee(store.New(s.config)))
 
 	s.router.Handle("GET", "/admin/permissions", permission.AllPermissons(store.New(s.config)))
 	s.router.Handle("GET", "/admin/permissionsemployee", permission.GetPerByEmplID(store.New(s.config)))
