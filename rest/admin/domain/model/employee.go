@@ -22,10 +22,6 @@ const (
 )
 
 
-func (e Employee)  PositionString() string{
-	return string(e.Position)
-}
-
 // Validate ...
 func (e *Employee) Validate() error {
 	return validation.ValidateStruct(

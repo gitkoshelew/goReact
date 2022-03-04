@@ -42,7 +42,3 @@ const (
 	DeleteSeat     PermissionName = "delete_seat"
 	UpdateSeat     PermissionName = "update_seat"
 )
-
-func (p PermissionName) PermissionNameToString() string {
-	return string(p)
-}
