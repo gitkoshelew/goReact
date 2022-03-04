@@ -50,7 +50,7 @@ func NewPet(s *store.Store) httprouter.Handle {
 
 		petType := r.FormValue("PetType")
 
-		weight, err := strconv.ParseFloat(r.FormValue("Weight"), 2)
+		weight, err := strconv.ParseFloat(r.FormValue("Weight"), 32)
 
 		diseases := r.FormValue("Diseases")
 
