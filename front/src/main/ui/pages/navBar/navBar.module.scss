@@ -1,3 +1,4 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .headerContainer {
@@ -10,14 +11,14 @@
     height: 80px;
     display: flex;
     align-items: center;
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       width: 90%;
     }
 
     .offlineMode {
       color: $offline-text-color;
       white-space: nowrap;
-      @media (min-width: 1144px) {
+      @media (min-width: bp.$lg) {
         position: absolute;
         top: 0;
         margin-top: 5px;
@@ -34,7 +35,7 @@
       align-items: center;
       justify-content: space-between;
       width: 95%;
-      @media (min-width: 1144px) {
+      @media (min-width: bp.$lg) {
         justify-content: center;
       }
 
@@ -58,7 +59,7 @@
             top: 20px;
           }
 
-          @media (min-width: 1144px) {
+          @media (min-width: bp.$lg) {
             &:after {
               width: 50px;
               top: 16px;
@@ -74,7 +75,7 @@
 
       .commonNavBar {
         display: none;
-        @media (min-width: 1144px) {
+        @media (min-width: bp.$lg) {
           display: flex;
           align-items: center;
         }
@@ -87,7 +88,7 @@
           display: flex;
           align-items: center;
           margin-left: 205px;
-          @media (min-width: 1144px) {
+          @media (min-width: bp.$lg) {
             margin: 0;
           }
         }
