@@ -62,6 +62,7 @@ func (s *Server) configureRoutes() {
 	s.router.Handle("GET", "/admin/seats/id", seathandlers.GetSeatByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/seats/delete", seathandlers.DeleteSeats(store.New(s.config)))
 	s.router.Handle("POST", "/admin/seats/new", seathandlers.NewSeat(store.New(s.config)))
+	s.router.Handle("POST", "/admin/seats/update", seathandlers.UpdateSeat(store.New(s.config)))
 
 	//Booking
 	s.router.Handle("GET", "/admin/homebookings", bookinghandlers.HomeBookingHandler(store.New(s.config)))

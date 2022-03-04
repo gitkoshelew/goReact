@@ -13,8 +13,8 @@ import (
 
 var permission_create model.Permission = model.Permission{
 	PermissionID: 0,
-	Name:         "delete_seats",
-	Descriptoin:  "ability to delete a seats"}
+	Name:         "creat_seats",
+	Descriptoin:  "ability to creat a seats"}
 
 // NewSeat ...
 func NewSeat(s *store.Store) httprouter.Handle {
@@ -33,6 +33,8 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
+
+		
 
 		roomID, err := strconv.Atoi(r.FormValue("RoomID"))
 		if err != nil {

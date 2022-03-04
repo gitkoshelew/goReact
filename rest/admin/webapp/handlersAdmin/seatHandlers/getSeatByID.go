@@ -22,17 +22,17 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
 		seats := []model.Seat{}
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
-			return
-		}
-
-		err = s.Open()
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 
