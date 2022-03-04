@@ -69,6 +69,32 @@
         </form>
     </div>
     {{end}}
+    <br><br>
+    {{if .HasPermission "update_employee"}}
+    <div>
+        <h2>Update employee </h2>
+        <form action="/admin/employees/new" method="POST">
+            <th>Employee id</th>
+            <input type="number" name="EmployeeID" min=1 required>
+            <th>User id</th>
+            <input type="number" name="UserID" min=1>
+            <th>Hotel id</th>
+            <input type="number" name="HotelID" min=1>
+            <br><br>
+            <th>Position</th>
+            <input type="radio" name="Position" value="manager" id="Position1">
+            <label for="Position1">ManagerPosition</label>
+            <input type="radio" name="Position" value="employee" id="Position2">
+            <label for="Position2" required>EmployeePosition</label>
+            <input type="radio" name="Position" value="owner" id="Position3">
+            <label for="Position3" required>OwnerPosition</label>
+            <input type="radio" name="Position" value="admin" id="Position4">
+            <label for="Position4" required>AdminPosition</label><br><br>
+
+            <button>Update</button>
+        </form>
+    </div>
+    {{end}}
 
 </body>
 {{end}}
