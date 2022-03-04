@@ -1,3 +1,4 @@
+@use '../../../../../styles/breakpoints' as bp;
 @import '../../../../../styles/variables';
 
 .oneElement {
@@ -8,13 +9,13 @@
   width: 300px;
   margin: 20px auto;
   border-radius: 10px;
-  @media (min-width: 575px) {
+  @media (min-width: bp.$sm) {
     width: 400px;
   }
-  @media (min-width: 767px) {
+  @media (min-width: bp.$md) {
     width: 550px;
   }
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     width: 100%;
   }
 
@@ -35,15 +36,15 @@
     letter-spacing: 0.01em;
     color: $main-text-color;
     margin-bottom: 10px;
-    @media (min-width: 575px) {
+    @media (min-width: bp.$sm) {
       width: 400px;
       height: 450px;
     }
-    @media (min-width: 767px) {
+    @media (min-width: bp.$md) {
       width: 550px;
       height: 600px;
     }
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       height: 680px;
       width: 580px;
     }
@@ -78,7 +79,7 @@
       font-size: 20px;
       line-height: 25px;
       color: $main-background-color;
-      @media (min-width: 767px) {
+      @media (min-width: bp.$md) {
         font-size: 24px;
       }
     }
@@ -111,22 +112,22 @@
     text-align: center;
     letter-spacing: 0.01em;
     color: $main-text-color;
-    @media (min-width: 575px) {
+    @media (min-width: bp.$sm) {
       width: 400px;
     }
-    @media (min-width: 767px) {
+    @media (min-width: bp.$md) {
       width: 550px;
       height: 350px;
     }
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       width: 300px;
       height: 300px;
     }
 
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       width: 500px;
     }
-    @media (min-width: 1350px) {
+    @media (min-width: bp.$xxl) {
       width: 630px;
     }
   }
@@ -148,7 +149,7 @@
     top: 11px;
   }
 
-  @media (min-width: 767px) {
+  @media (min-width: bp.$md) {
     &:after {
       left: 145px;
     }
@@ -161,7 +162,7 @@
     font-size: 20px;
     line-height: 25px;
     color: white;
-    @media (min-width: 767px) {
+    @media (min-width: bp.$md) {
       font-size: 24px;
     }
   }
