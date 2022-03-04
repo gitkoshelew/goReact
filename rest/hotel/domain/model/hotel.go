@@ -1,6 +1,8 @@
 package model
 
-import validation "github.com/go-ozzo/ozzo-validation"
+import (
+	validation "github.com/go-ozzo/ozzo-validation"
+)
 
 // Hotel struct
 type Hotel struct {

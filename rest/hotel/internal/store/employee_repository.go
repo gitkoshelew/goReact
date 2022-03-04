@@ -13,8 +13,21 @@ type EmployeeRepository struct {
 
 // Create employee and save it to DB
 func (r *EmployeeRepository) Create(e *model.Employee) (*model.Employee, error) {
-	if err := r.Store.Db.QueryRow("INSERT INTO employee (user_id, hotel_id, position) VALUES ($1, $2, $3) RETURNING id",
-		e.UserID,
+	if err := r.Store.Db.QueryRow(`INSERT INTO employee 
+	(email, verified, role, first_name, surname, middle_name, sex, 
+	date_of_birth, address, phone, photo, hotel_id, position) 
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id`,
+		e.Email,
+		e.Verified,
+		e.Role,
+		e.Name,
+		e.Surname,
+		e.MiddleName,
+		e.Sex,
+		e.DateOfBirth,
+		e.Address,
+		e.Phone,
+		e.Photo,
 		e.Hotel.HotelID,
 		e.Position,
 	).Scan(&e.EmployeeID); err != nil {
@@ -37,7 +50,17 @@ func (r *EmployeeRepository) GetAll() (*[]model.EmployeeDTO, error) {
 		employee := model.EmployeeDTO{}
 		err := rows.Scan(
 			&employee.EmployeeID,
-			&employee.UserID,
+			&employee.Email,
+			&employee.Verified,
+			&employee.Role,
+			&employee.Name,
+			&employee.Surname,
+			&employee.MiddleName,
+			&employee.Sex,
+			&employee.DateOfBirth,
+			&employee.Address,
+			&employee.Phone,
+			&employee.Photo,
 			&employee.HotelID,
 			&employee.Position,
 		)
@@ -55,7 +78,17 @@ func (r *EmployeeRepository) FindByID(id int) (*model.EmployeeDTO, error) {
 	employee := &model.EmployeeDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE id = $1", id).Scan(
 		&employee.EmployeeID,
-		&employee.UserID,
+		&employee.Email,
+		&employee.Verified,
+		&employee.Role,
+		&employee.Name,
+		&employee.Surname,
+		&employee.MiddleName,
+		&employee.Sex,
+		&employee.DateOfBirth,
+		&employee.Address,
+		&employee.Phone,
+		&employee.Photo,
 		&employee.HotelID,
 		&employee.Position,
 	); err != nil {
@@ -93,8 +126,32 @@ func (r *EmployeeRepository) Delete(id int) error {
 func (r *EmployeeRepository) Update(e *model.Employee) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE employee SET user_id = $1, hotel_id = $2, position = $3 WHERE id = $4",
-		e.UserID,
+		`UPDATE employee SET 
+		email = $1, 
+		verified = $2, 
+		role = $3, 
+		first_name = $4, 
+		surname = $5, 
+		middle_name = $6, 
+		sex = $7, 
+		date_of_birth = $8, 
+		address = $9, 
+		phone = $10, 
+		photo = $11, 
+		hotel_id = $12,
+		position = $13
+		WHERE id = $14`,
+		e.Email,
+		e.Verified,
+		e.Role,
+		e.Name,
+		e.Surname,
+		e.MiddleName,
+		e.Sex,
+		e.DateOfBirth,
+		e.Address,
+		e.Phone,
+		e.Photo,
 		e.Hotel.HotelID,
 		e.Position,
 		e.EmployeeID,
@@ -107,22 +164,6 @@ func (r *EmployeeRepository) Update(e *model.Employee) error {
 	return nil
 }
 
-//FindByUserID find employee by user ID
-func (r *EmployeeRepository) FindByUserID(userID int) (*model.EmployeeDTO, error) {
-	employee := &model.EmployeeDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE user_id = $1", userID).Scan(
-		&employee.EmployeeID,
-		&employee.UserID,
-		&employee.HotelID,
-		&employee.Position,
-	); err != nil {
-		r.Store.Logger.Errorf("Cant find employee. Err msg:%v.", err)
-		return nil, err
-	}
-	return employee, nil
-
-}
-
 // EmployeeFromDTO ...
 func (r *EmployeeRepository) EmployeeFromDTO(dto *model.EmployeeDTO) (*model.Employee, error) {
 	hotel, err := r.Store.Hotel().FindByID(dto.HotelID)
@@ -131,10 +172,20 @@ func (r *EmployeeRepository) EmployeeFromDTO(dto *model.EmployeeDTO) (*model.Emp
 		return nil, err
 	}
 	return &model.Employee{
-		EmployeeID: dto.EmployeeID,
-		UserID:     dto.UserID,
-		Hotel:      *hotel,
-		Position:   dto.Position,
+		EmployeeID:  dto.EmployeeID,
+		Email:       dto.Email,
+		Role:        model.Role(dto.Role),
+		Verified:    dto.Verified,
+		Name:        dto.Name,
+		Surname:     dto.Surname,
+		MiddleName:  dto.MiddleName,
+		Sex:         dto.Sex,
+		DateOfBirth: dto.DateOfBirth,
+		Address:     dto.Address,
+		Phone:       dto.Phone,
+		Photo:       dto.Photo,
+		Hotel:       *hotel,
+		Position:    model.Position(dto.Position),
 	}, nil
 
 }

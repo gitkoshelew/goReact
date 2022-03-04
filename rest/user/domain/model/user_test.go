@@ -39,24 +39,6 @@ func TestUser_Validate(t *testing.T) {
 			isValid: false,
 		},
 		{
-			name: "empty password",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.Password = ""
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "short password",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.Password = "1234"
-				return u
-			},
-			isValid: false,
-		},
-		{
 			name: "Invalid Name",
 			u: func() *model.User {
 				u := model.TestUser()
@@ -157,15 +139,6 @@ func TestUser_Validate(t *testing.T) {
 			}
 		})
 	}
-}
-
-func TestUser_NewUser(t *testing.T) {
-	u := model.TestUser()
-	u.UserID = 1
-	err := u.WithEncryptedPassword()
-
-	assert.NoError(t, err)
-	assert.NotNil(t, u)
 }
 
 func TestUser_EncryptPassword(t *testing.T) {

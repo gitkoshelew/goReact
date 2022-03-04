@@ -23,8 +23,6 @@ const (
 // IsValid checks if data exist, type in keys object that you need to check and it's ID in value
 // for keys use DataValidation constans
 func IsValid(body io.Reader, requiresValidation map[DataValidation]int, logger *logrus.Logger) error {
-	logger.Debugf("Starting to check data: %v", requiresValidation)
-
 	id, ok := requiresValidation[PetValidation]
 	if ok {
 		logger.Debugf("Checking pet with id = %d", id)

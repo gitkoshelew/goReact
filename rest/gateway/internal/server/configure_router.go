@@ -61,5 +61,4 @@ func (s *Server) ConfigureRouter() {
 	s.Router.Handle("DELETE", "/employee/:id", hotel.DeleteEmployeeHandle(client.HotelEmployeeService))
 	s.Router.Handle("PUT", "/employee", hotel.UpdateEmployeeHandle(client.HotelEmployeeService))
 	s.Router.Handle("POST", "/employee", hotel.CreateEmployeeHandle(client.HotelEmployeeService))
-
 }

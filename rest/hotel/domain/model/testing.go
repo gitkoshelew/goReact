@@ -36,7 +36,6 @@ func TestSeat() *Seat {
 func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,
-		UserID:     1,
 		Hotel:      *TestHotel(),
 		Position:   OwnerPosition,
 	}

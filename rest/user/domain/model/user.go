@@ -12,7 +12,6 @@ import (
 type User struct {
 	UserID      int       `json:"userId"`
 	Email       string    `json:"email"`
-	Password    string    `json:"-"`
 	Role        Role      `json:"role"`
 	Verified    bool      `json:"verified"`
 	Name        string    `json:"name"`
@@ -49,7 +48,6 @@ func (u *User) Validate() error {
 	return validation.ValidateStruct(
 		u,
 		validation.Field(&u.Email, validation.Required, is.Email),
-		validation.Field(&u.Password, validation.Required, validation.Length(5, 100)),
 		validation.Field(&u.Role, validation.Required, validation.By(IsRole)),
 		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
 		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
@@ -59,17 +57,6 @@ func (u *User) Validate() error {
 		validation.Field(&u.Address, validation.Required, validation.Length(10, 40)),
 		validation.Field(&u.Phone, validation.Required, validation.By(IsPhone)),
 	)
-}
-
-// WithEncryptedPassword creates User with encrypted password
-func (u *User) WithEncryptedPassword() error {
-	EncryptedPassword, err := EncryptPassword(u.Password)
-	if err != nil {
-		return err
-	}
-
-	u.Password = EncryptedPassword
-	return nil
 }
 
 // EncryptPassword ...

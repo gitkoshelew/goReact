@@ -40,10 +40,19 @@ func CreateEmployee(s *store.Store) httprouter.Handle {
 		}
 
 		e := model.Employee{
-			EmployeeID: 0,
-			UserID:     req.UserID,
-			Hotel:      *hotel,
-			Position:   model.Position(req.Position),
+			Email:       req.Email,
+			Role:        model.Role(req.Role),
+			Verified:    false,
+			Name:        req.Name,
+			Surname:     req.Surname,
+			MiddleName:  req.MiddleName,
+			Sex:         req.Sex,
+			DateOfBirth: req.DateOfBirth,
+			Address:     req.Address,
+			Phone:       req.Phone,
+			Photo:       req.Photo,
+			Hotel:       *hotel,
+			Position:    model.Position(req.Position),
 		}
 
 		err = e.Validate()

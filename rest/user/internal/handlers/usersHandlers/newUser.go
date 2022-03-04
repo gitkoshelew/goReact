@@ -34,7 +34,6 @@ func NewUser(s *store.Store) httprouter.Handle {
 		u := model.User{
 			UserID:      0,
 			Email:       req.Email,
-			Password:    req.Password,
 			Role:        model.Role(req.Role),
 			Name:        req.Name,
 			Surname:     req.Surname,
@@ -45,13 +44,6 @@ func NewUser(s *store.Store) httprouter.Handle {
 			Photo:       req.Photo,
 			Verified:    false,
 			DateOfBirth: req.DateOfBirth,
-		}
-
-		err = u.WithEncryptedPassword()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Bad request.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Bad request. Err msg:%v.", err)))
-			return
 		}
 
 		err = u.Validate()

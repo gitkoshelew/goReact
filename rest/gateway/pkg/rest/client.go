@@ -115,6 +115,7 @@ func (c *BaseClient) ReadResponse(resp *APIResponse, headersKeys []string) (*res
 	if err != nil {
 		c.Logger.Infof("no cookies in response")
 	}
+	c.Logger.Debugf("Response reading success")
 
 	return &response.Service{
 		Body:    tags,

@@ -59,11 +59,8 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 			}
 		}
 
-		if req.UserID != 0 {
-			employee.UserID = req.UserID
-		}
 		if req.Position != "" {
-			employee.Position = req.Position
+			employee.Position = model.Position(req.Position)
 		}
 
 		err = employee.Validate()

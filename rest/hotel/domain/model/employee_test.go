@@ -25,7 +25,7 @@ func TestEmployee_Validate(t *testing.T) {
 			e: func() *model.Employee {
 				userID := -1
 				e := model.TestEmployee()
-				e.UserID = userID
+				e.EmployeeID = userID
 				return e
 			},
 			isValid: false,

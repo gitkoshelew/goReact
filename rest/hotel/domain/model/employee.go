@@ -1,21 +1,45 @@
 package model
 
-import validation "github.com/go-ozzo/ozzo-validation"
+import (
+	"time"
+
+	validation "github.com/go-ozzo/ozzo-validation"
+)
 
 // Employee ...
 type Employee struct {
-	EmployeeID int `json:"employeeId"`
-	UserID     int `json:"userId"`
-	Hotel      Hotel
-	Position   Position `json:"position"`
+	EmployeeID  int       `json:"employeeId,omitempty"`
+	Email       string    `json:"email,omitempty"`
+	Role        Role      `json:"role,omitempty"`
+	Verified    bool      `json:"verified,omitempty"`
+	Name        string    `json:"name,omitempty"`
+	Surname     string    `json:"sName,omitempty"`
+	MiddleName  string    `json:"mName,omitempty"`
+	Sex         string    `json:"sex,omitempty"`
+	DateOfBirth time.Time `json:"birthDate,omitempty"`
+	Address     string    `json:"address,omitempty"`
+	Phone       string    `json:"phone,omitempty"`
+	Photo       string    `json:"photo,omitempty"`
+	Hotel       Hotel
+	Position    Position `json:"position"`
 }
 
 // EmployeeDTO ...
 type EmployeeDTO struct {
-	EmployeeID int      `json:"employeeId"`
-	UserID     int      `json:"userId"`
-	HotelID    int      `json:"hotelId"`
-	Position   Position `json:"position"`
+	EmployeeID  int       `json:"employeeId"`
+	Email       string    `json:"email,omitempty"`
+	Role        string    `json:"role,omitempty"`
+	Verified    bool      `json:"verified,omitempty"`
+	Name        string    `json:"name,omitempty"`
+	Surname     string    `json:"sName,omitempty"`
+	MiddleName  string    `json:"mName,omitempty"`
+	Sex         string    `json:"sex,omitempty"`
+	DateOfBirth time.Time `json:"birthDate,omitempty"`
+	Address     string    `json:"address,omitempty"`
+	Phone       string    `json:"phone,omitempty"`
+	Photo       string    `json:"photo,omitempty"`
+	HotelID     int       `json:"hotelId,omitempty"`
+	Position    string    `json:"position,omitempty"`
 }
 
 // Position ...
@@ -29,26 +53,18 @@ const (
 	AdminPosition    Position = "admin"
 )
 
-// PositionString ...
-func (e Employee) PositionString() string {
-	switch e.Position {
-	case ManagerPosition:
-		return "manager"
-	case EmployeePosition:
-		return "employee"
-	case OwnerPosition:
-		return "owner"
-	case AdminPosition:
-		return "admin"
-	}
-	return "unknown"
-}
+// Role ...
+type Role string
+
+// Role constants
+const (
+	ClientRole Role = "client"
+)
 
 // Validate ...
 func (e *Employee) Validate() error {
 	return validation.ValidateStruct(
 		e,
-		validation.Field(&e.UserID, validation.Required, validation.Min(1)),
 		validation.Field(&e.Hotel, validation.Required),
 		validation.Field(&e.Position, validation.Required, validation.By(IsEmployeePosition)),
 	)

@@ -1,4 +1,7 @@
 CREATE TYPE emp_position AS enum ('manager', 'employee','owner', 'admin');
+CREATE TYPE sex AS enum ('male', 'female');
+CREATE TYPE user_type AS enum ('client', 'employee', 'anonymous');
+
 
 CREATE TABLE IF NOT EXISTS HOTEL 
 (   id              serial PRIMARY key, 
@@ -22,7 +25,17 @@ CREATE TABLE IF NOT EXISTS SEAT
 
 CREATE TABLE IF NOT EXISTS EMPLOYEE 
 (   id          serial PRIMARY key ,
-    user_id     INTEGER NOT NULL UNIQUE,
-    hotel_id    INTEGER REFERENCES HOTEL(id) ON DELETE CASCADE ,
-    position    emp_position NOT NULL 
+    email           CHARACTER VARYING(30) ,
+    verified        BOOLEAN NOT NULL ,
+    role            user_type NOT NULL ,
+    first_name      CHARACTER VARYING(30) NOT NULL ,
+    surname         CHARACTER VARYING(30) NOT NULL ,
+    middle_name     CHARACTER VARYING(30) ,    
+    sex             sex NOT NULL, 
+    date_of_birth   DATE NOT NULL ,
+    address         TEXT NOT NULL ,
+    phone           CHARACTER VARYING(30) NOT NULL ,
+    photo           TEXT,
+    hotel_id        INTEGER REFERENCES HOTEL(id) ON DELETE CASCADE ,
+    position        emp_position NOT NULL 
 );
