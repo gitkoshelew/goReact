@@ -1,3 +1,4 @@
+@use '../../../styles/breakpoints' as bp;
 @import '../../../styles/variables';
 
 .fourthPage {
@@ -8,19 +9,16 @@
     height: 60px;
     margin-top: -30px;
     margin-bottom: 30px;
-    @media (min-width: 575px) {
+    @media (min-width: bp.$sm) {
       margin-left: 120px;
     }
-    @media (min-width: 1144px) {
-      padding: 10px 0 50px 0;
-    }
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       padding: 10px 0 50px 0;
     }
   }
 
   .serviceCarouselBlock {
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -38,17 +36,17 @@
         margin-top: 135px;
       }
 
-      @media (min-width: 767px) {
+      @media (min-width: bp.$md) {
         width: 95% !important;
       }
-      @media (min-width: 1144px) {
+      @media (min-width: bp.$lg) {
         height: 330px;
       }
-      @media (min-width: 1250px) {
+      @media (min-width: bp.$xl) {
         width: 500px !important;
         margin: 0 auto;
       }
-      @media (min-width: 1250px) {
+      @media (min-width: bp.$xl) {
         display: flex;
         align-items: center;
         justify-content: center;
