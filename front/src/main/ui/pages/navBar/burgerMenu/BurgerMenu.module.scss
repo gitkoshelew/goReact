@@ -1,3 +1,4 @@
+@use '../../../styles/breakpoints' as bp;
 @import '../../../styles/variables';
 
 .burgerMenu {
@@ -6,7 +7,7 @@
   width: 30px;
   height: 20px;
   z-index: $height-z-index-priority;
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     display: none;
   }
 
@@ -58,7 +59,7 @@
   width: 30px;
   height: 20px;
   z-index: $height-z-index-priority;
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     display: none;
   }
 
@@ -89,7 +90,7 @@
   }
 }
 
-@media (min-width: 1144px) {
+@media (min-width: bp.$lg) {
   .burgerClose,
   .burgerMenu {
     display: none;
