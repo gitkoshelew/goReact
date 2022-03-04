@@ -1,4 +1,4 @@
-package pethandlers
+package roomhandlers
 
 import (
 	"admin/domain/model"
@@ -12,11 +12,11 @@ import (
 
 var permission_update model.Permission = model.Permission{
 	PermissionID: 0,
-	Name:         "update_pet",
-	Descriptoin:  "ability to update a pet"}
+	Name:         "update_room",
+	Descriptoin:  "ability to update a rooms"}
 
-// UpdatePet ...
-func UpdatePet(s *store.Store) httprouter.Handle {
+// UpdateRoom ...
+func UpdateRoom(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
@@ -33,71 +33,61 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		petID, err := strconv.Atoi(r.FormValue("PetID"))
+		roomid, err := strconv.Atoi(r.FormValue("RoomID"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID"))
 			return
 		}
 
-		pet, err := s.Pet().FindByID(petID)
+		room, err := s.Room().FindByID(roomid)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		userID, err := strconv.Atoi(r.FormValue("UserID"))
+		roomNumber, err := strconv.Atoi(r.FormValue("RoomNumber"))
 		if err == nil {
-			if userID != 0 {
-				user, err := s.User().FindByID(userID)
-				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
-					return
-				}
-				pet.Owner = *user
+			if roomNumber != 0 {
+				room.RoomNumber = roomNumber
 			}
-		}
-
-		name := r.FormValue("Name")
-		if name != "" {
-			pet.Name = name
 		}
 
 		petType := r.FormValue("PetType")
 		if petType != "" {
-			pet.Type = model.PetType(petType)
+			room.PetType = model.PetType(petType)
+
 		}
 
-		weight, err := strconv.ParseFloat(r.FormValue("Weight"), 32)
+		hotelID, err := strconv.Atoi(r.FormValue("HotelID"))
 		if err == nil {
-			if weight != 0 {
-				pet.Weight = float32(weight)
+			if hotelID != 0 {
+				hotel, err := s.Hotel().FindByID(hotelID)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusBadRequest)
+					return
+				}
+				room.Hotel = *hotel
 			}
 		}
-
-		diseases := r.FormValue("Diseases")
-		if diseases != "" {
-			pet.Diseases = diseases
-		}
-
 		photo := r.FormValue("Photo")
-		if photo != "" {
-			pet.PetPhotoURL = photo
+		if petType != "" {
+			room.RoomPhotoURL = photo
 		}
 
-		err = pet.Validate()
+		err = room.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		err = s.Pet().Update(pet)
+		err = s.Room().Update(room)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		http.Redirect(w, r, "/admin/homepets/", http.StatusFound)
+		http.Redirect(w, r, "/admin/homerooms/", http.StatusFound)
 	}
 
 }
