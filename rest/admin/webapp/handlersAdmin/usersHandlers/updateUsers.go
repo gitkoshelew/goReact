@@ -38,12 +38,11 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
 		u, err := s.User().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -131,10 +130,8 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		err = s.User().Update(u)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't update user. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Update user with id = %d", u.UserID)
 		http.Redirect(w, r, "/admin/homeusers", http.StatusFound)
 
 	}

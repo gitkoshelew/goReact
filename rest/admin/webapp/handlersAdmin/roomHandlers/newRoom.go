@@ -30,7 +30,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
 
 		roomNumber, err := strconv.Atoi(r.FormValue("RoomNumber"))
@@ -50,8 +50,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 
 		hotel, err := s.Hotel().FindByID(hotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 		photo := r.FormValue("Photo")
@@ -74,10 +73,8 @@ func NewRoom(s *store.Store) httprouter.Handle {
 		_, err = s.Room().Create(&room)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create room. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Creat room with id = %d", room.RoomID)
 		http.Redirect(w, r, "/admin/homerooms/", http.StatusFound)
 	}
 

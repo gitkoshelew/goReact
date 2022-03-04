@@ -65,7 +65,7 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/admin/login", http.StatusFound)
 }
 
-// IsExist ...
+// IsExist check if session is exist
 func IsExist(w http.ResponseWriter, r *http.Request) bool {
 
 	session, err := sstore.PGStore.Get(r, "session-key")
@@ -114,6 +114,7 @@ func CheckRigths(w http.ResponseWriter, r *http.Request, name string) error {
 	return nil
 }
 
+//IsAdmin check if empolyee is admin
 func IsAdmin(w http.ResponseWriter, r *http.Request) error {
 
 	session, err := sstore.PGStore.Get(r, "session-key")

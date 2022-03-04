@@ -91,10 +91,8 @@ func NewUser(s *store.Store) httprouter.Handle {
 		_, err = s.User().Create(&u)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create user. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Creat user with id = %d", u.UserID)
 		http.Redirect(w, r, "/admin/homeusers/", http.StatusFound)
 
 	}

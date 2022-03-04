@@ -5,8 +5,8 @@ import validation "github.com/go-ozzo/ozzo-validation"
 // Hotel struct
 type Hotel struct {
 	HotelID     int    `json:"hotelId"`
-	Name        string `json:"nameId"`
-	Address     string `json:"addressId"`
+	Name        string `json:"name"`
+	Address     string `json:"address"`
 	Coordinates string `json:"coordinates"` // coordinates : lat , lon
 }
 

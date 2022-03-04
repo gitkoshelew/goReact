@@ -2,7 +2,7 @@ package store
 
 import (
 	"admin/domain/model"
-	"log"
+	"errors"
 )
 
 // ImageRepository ...
@@ -20,7 +20,7 @@ func (r *ImageRepository) Create(i *model.Image) (*model.Image, error) {
 		i.URL,
 		i.OwnerID,
 	).Scan(&i.ImageID); err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't create image. Err msg:%v.", err)
 		return nil, err
 	}
 	return i, nil
@@ -30,7 +30,7 @@ func (r *ImageRepository) Create(i *model.Image) (*model.Image, error) {
 func (r *ImageRepository) GetAll() (*[]model.Image, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM image")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find images. Err msg: %v", err)
 	}
 	images := []model.Image{}
 
@@ -43,7 +43,7 @@ func (r *ImageRepository) GetAll() (*[]model.Image, error) {
 			&image.OwnerID,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Can't find images. Err msg: %v", err)
 			continue
 		}
 		images = append(images, image)
@@ -61,7 +61,7 @@ func (r *ImageRepository) FindByID(id int) (*model.Image, error) {
 		&image.URL,
 		&image.OwnerID,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't find image. Err msg: %v", err)
 		return nil, err
 	}
 	return image, nil
@@ -71,10 +71,22 @@ func (r *ImageRepository) FindByID(id int) (*model.Image, error) {
 func (r *ImageRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM image WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't delete image. Err msg:%v.", err)
 		return err
 	}
-	log.Printf("Image deleted, rows affectet: %d", result)
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Can't delete image. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete image. Err msg:%v.", err)
+		return err
+	}
+
+	r.Store.Logger.Info("Image deleted, rows affectet: %d", result)
 	return nil
 }
 
@@ -91,9 +103,9 @@ func (r *ImageRepository) Update(i *model.Image) error {
 		i.ImageID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't update image. Err msg:%v.", err)
 		return err
 	}
-	log.Printf("Image updated, rows affectet: %d", result)
+	r.Store.Logger.Info("Image room with id = %d,rows affectet: %d ", i.ImageID, result)
 	return nil
 }

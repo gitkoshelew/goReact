@@ -30,7 +30,7 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
 		userID, err := strconv.Atoi(r.FormValue("UserID"))
 		if err != nil {
@@ -41,8 +41,7 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 
 		user, err := s.User().FindByID(userID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -55,8 +54,7 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 
 		hotel, err := s.Hotel().FindByID(hotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -79,10 +77,8 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 		_, err = s.Employee().Create(&e)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create employee. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Creat employee with id = %d", e.EmployeeID)
 		http.Redirect(w, r, "/admin/homeemployees/", http.StatusFound)
 	}
 

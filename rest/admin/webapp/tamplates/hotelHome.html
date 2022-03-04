@@ -48,12 +48,11 @@
         <form action="/admin/hotels/new" method="POST">
 
             <th>Name</th>
-            <input type="text" name="Name required">
+            <input type="text" name="Name" required>
             <th>Address</th>
             <input type="text" name="Address" required><br><br>
-            <th>Coordinates</th>
-            <input type="number" step="0.000000000000001" name="Coordinates[0]" required> <input type="number" step="0.000000000000001"
-                name="Coordinates[1]" required><br><br>
+            <th>Coordinates(lat , lon)</th>
+            <input type="string" step="0.000000000000001" name="Coordinates" required>
             <button>New</button>
 
         </form>

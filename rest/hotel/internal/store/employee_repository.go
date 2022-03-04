@@ -3,7 +3,6 @@ package store
 import (
 	"errors"
 	"hotel/domain/model"
-	"log"
 )
 
 // EmployeeRepository ...
@@ -85,7 +84,7 @@ func (r *EmployeeRepository) Delete(id int) error {
 		return err
 	}
 
-	log.Printf("Employee deleted, rows affectet: %d", result)
+	r.Store.Logger.Errorf("Employee deleted, rows affectet: %d", result)
 	return nil
 }
 

@@ -31,8 +31,9 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
+
 		seatID, err := strconv.Atoi(r.FormValue("SeatID"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -41,8 +42,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		}
 		seat, err := s.Seat().FindByID(seatID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find seat. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -54,8 +54,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		}
 		pet, err := s.Pet().FindByID(petID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find pet. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
@@ -66,8 +65,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		}
 		employee, err := s.Employee().FindByID(employeeID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find employee. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 		status := r.FormValue("Status")
@@ -75,13 +73,13 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		startDate, err := time.Parse(layout, r.FormValue("StartDate"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("StartDate"))
 			return
 		}
 		endDate, err := time.Parse(layout, r.FormValue("EndDate"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EndDate"))
 			return
 		}
 		notes := r.FormValue("Notes")
@@ -89,7 +87,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		paid, err := strconv.ParseBool(r.FormValue("Paid"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Paid"))
 			return
 		}
 
@@ -115,10 +113,8 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		_, err = s.Booking().Create(&b)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create booking. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Creat booking with id = %d", b.BookingID)
 		http.Redirect(w, r, "/admin/homebookings/", http.StatusFound)
 
 	}

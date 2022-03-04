@@ -38,12 +38,12 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
+
 		b, err := s.Booking().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -52,8 +52,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			if seatID != 0 {
 				seat, err := s.Seat().FindByID(seatID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusNotFound)
-					s.Logger.Errorf("Cant find seat. Err msg:%v.", err)
+					http.Error(w, err.Error(), http.StatusBadRequest)
 					return
 				}
 				b.Seat = *seat
@@ -66,8 +65,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			if petID != 0 {
 				pet, err := s.Pet().FindByID(petID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusNotFound)
-					s.Logger.Errorf("Cant find pet. Err msg:%v.", err)
+					http.Error(w, err.Error(), http.StatusBadRequest)
 					return
 				}
 				b.Pet = *pet
@@ -80,8 +78,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			if employeeID != 0 {
 				employee, err := s.Employee().FindByID(employeeID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusNotFound)
-					s.Logger.Errorf("Cant find employee. Err msg:%v.", err)
+					http.Error(w, err.Error(), http.StatusBadRequest)
 					return
 				}
 				b.Employee = *employee
@@ -140,19 +137,11 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v.", err)
-			return
-		}
-
 		err = s.Booking().Update(b)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't update booking. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Update user with id = %d", b.BookingID)
 		http.Redirect(w, r, "/admin/homebookings", http.StatusFound)
 
 	}

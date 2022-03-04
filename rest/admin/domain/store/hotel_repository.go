@@ -3,7 +3,6 @@ package store
 import (
 	"admin/domain/model"
 	"errors"
-	"log"
 )
 
 // HotelRepository ...
@@ -16,9 +15,10 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id", h.Name, h.Address,
 		h.Coordinates).Scan(&h.HotelID); err != nil {
-
+		r.Store.Logger.Errorf("Can't create hotel. Err msg:%v.", err)
 		return nil, err
 	}
+	r.Store.Logger.Info("Created hotel with id = %d", h.HotelID)
 	return h, nil
 }
 
@@ -26,7 +26,7 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM hotel")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find hotels. Err msg: %v", err)
 	}
 	hotels := []model.Hotel{}
 
@@ -39,7 +39,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 			&hotel.Coordinates,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Can't find hotels. Err msg: %v", err)
 			continue
 		}
 		hotels = append(hotels, hotel)
@@ -57,7 +57,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.Address,
 		&hotel.Coordinates,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't find hotel. Err msg:%v.", err)
 		return nil, err
 	}
 	return hotel, nil
@@ -67,17 +67,21 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 func (r *HotelRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM hotel WHERE id = $1", id)
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete hotel. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete hotel. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("no rows affected")
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete hotel. Err msg:%v.", err)
+		return err
 	}
-	log.Printf("Hotel deleted, rows affectet: %d", result)
+	r.Store.Logger.Info("Hotel deleted, rows affectet: %d", result)
 	return nil
 }
 
@@ -92,9 +96,9 @@ func (r *HotelRepository) Update(h *model.Hotel) error {
 		h.HotelID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Can't update hotel. Err msg:%v.", err)
 		return err
 	}
-	log.Printf("Hotel updated, rows affectet: %d", result)
+	r.Store.Logger.Info("Update hotel with id = %d,rows affectet: %d ", h.HotelID, result)
 	return nil
 }

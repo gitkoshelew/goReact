@@ -30,7 +30,7 @@ func NewPet(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
 
 		userID, err := strconv.Atoi(r.FormValue("UserID"))
@@ -42,8 +42,7 @@ func NewPet(s *store.Store) httprouter.Handle {
 
 		user, err := s.User().FindByID(userID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -77,10 +76,8 @@ func NewPet(s *store.Store) httprouter.Handle {
 		_, err = s.Pet().Create(&pet)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create pet. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Creat pet with id = %d", pet.PetID)
 		http.Redirect(w, r, "/admin/homepets/", http.StatusFound)
 	}
 

@@ -25,21 +25,19 @@ func PrintAllUsersCSV(s *store.Store, next http.Handler) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			return
 		}
 
 		users, err := s.User().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Can't find users. Err msg: %v", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 		name := "allusers.csv"
 
 		path, err := csv.MakeCSV(users, name)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("error writing record to csv:", err)
 			return
 		}

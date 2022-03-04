@@ -34,14 +34,12 @@ func GetHotelByID(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			return
 		}
 
 		hotel, err := s.Hotel().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -54,15 +52,15 @@ func GetHotelByID(s *store.Store) httprouter.Handle {
 
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			s.Logger.Errorf("Can not parse template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, hotels)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Can not execute template: %v", err)
 			return
 		}
 	}

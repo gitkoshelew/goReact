@@ -31,7 +31,7 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			return
 		}
 
 		roomID, err := strconv.Atoi(r.FormValue("RoomID"))
@@ -43,8 +43,8 @@ func NewSeat(s *store.Store) httprouter.Handle {
 
 		room, err := s.Room().FindByID(roomID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			s.Logger.Errorf("Can't find hotel. Err msg:%v.", err)
 			return
 		}
 
@@ -82,10 +82,8 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		_, err = s.Seat().Create(&seat)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't create seat. Err msg:%v.", err)
 			return
 		}
-		s.Logger.Info("Creat seat with id = %d", seat.SeatID)
 		http.Redirect(w, r, "/admin/homeseats/", http.StatusFound)
 
 	}

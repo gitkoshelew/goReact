@@ -3,7 +3,6 @@ package store
 import (
 	"admin/domain/model"
 	"errors"
-	"log"
 )
 
 // PermissionsRepository ...
@@ -18,7 +17,7 @@ func (r *PermissionsRepository) Create(p *model.Permission) (*model.Permission, 
 		p.Name,
 		p.Descriptoin,
 	).Scan(&p.PermissionID); err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't create permission. Err msg:%v.", err)
 		return nil, err
 	}
 	return p, nil
@@ -27,7 +26,7 @@ func (r *PermissionsRepository) Create(p *model.Permission) (*model.Permission, 
 func (r *PermissionsRepository) GetAll() (*[]model.Permission, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM PERMISSIONS")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find permissions. Err msg: %v", err)
 	}
 
 	permissoins := []model.Permission{}
@@ -40,7 +39,7 @@ func (r *PermissionsRepository) GetAll() (*[]model.Permission, error) {
 			&permissoin.Descriptoin,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Can't find permissions. Err msg: %v", err)
 			continue
 		}
 		permissoins = append(permissoins, permissoin)
@@ -56,7 +55,7 @@ func (r *PermissionsRepository) FindByID(id int) (*model.Permission, error) {
 		&permissoin.Name,
 		&permissoin.Descriptoin,
 	); err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find permissions. Err msg: %v", err)
 		return nil, err
 	}
 	return &permissoin, nil
@@ -65,19 +64,22 @@ func (r *PermissionsRepository) FindByID(id int) (*model.Permission, error) {
 func (r *PermissionsRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM PERMISSIONS WHERE id = $1", id)
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't delete permission. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Can't delete permission. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("No rows affected")
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Can't delete permission. Err msg:%v.", err)
+		return err
 	}
 
-	log.Printf("Permission deleted, rows affectet: %d", result)
+	r.Store.Logger.Info("Permission deleted, rows affectet: %d", result)
 	return nil
 }
 
@@ -85,7 +87,7 @@ func (r *PermissionsRepository) Delete(id int) error {
 func (r *PermissionsRepository) GetByEmployeeId(id int) (*[]model.Permission, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM PERMISSiONS WHERE id IN ( SELECT permissions_id FROM permissions_employees where employee_id = $1 )", id)
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Can't find permissions. Err msg: %v", err)
 	}
 
 	permissoins := []model.Permission{}
@@ -98,7 +100,7 @@ func (r *PermissionsRepository) GetByEmployeeId(id int) (*[]model.Permission, er
 			&permissoin.Descriptoin,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Can't find permissions. Err msg: %v", err)
 			continue
 		}
 		permissoins = append(permissoins, permissoin)
