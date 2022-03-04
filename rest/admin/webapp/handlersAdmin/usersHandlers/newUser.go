@@ -11,10 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_creat model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "creat_user",
-	Descriptoin:  "ability to creat a user"}
+var permission_creat model.Permission = model.Permission{Name: model.CreatUser}
 
 // NewUser ...
 func NewUser(s *store.Store) httprouter.Handle {

@@ -10,10 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_update model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "update_hotel",
-	Descriptoin:  "ability to update a hotel"}
+var permission_update model.Permission = model.Permission{Name: model.UpdateHotel}
 
 // UpdateHotel ...
 func UpdateHotel(s *store.Store) httprouter.Handle {
@@ -67,7 +64,7 @@ func UpdateHotel(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		 err = s.Hotel().Update(hotel)
+		err = s.Hotel().Update(hotel)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return

@@ -9,10 +9,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_create model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "create_hotel",
-	Descriptoin:  "ability to create a hotel"}
+var permission_create model.Permission = model.Permission{Name: model.CreatHotel}
 
 // NewHotel ...
 func NewHotel(s *store.Store) httprouter.Handle {
@@ -55,7 +52,7 @@ func NewHotel(s *store.Store) httprouter.Handle {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		
+
 		http.Redirect(w, r, "/admin/homehotels/", http.StatusFound)
 	}
 

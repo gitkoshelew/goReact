@@ -10,10 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_read model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "read_user",
-	Descriptoin:  "ability to read a user"}
+var permission_read model.Permission = model.Permission{Name: model.ReadUser}
 
 // AllUsersHandler ...
 func AllUsersHandler(s *store.Store) httprouter.Handle {

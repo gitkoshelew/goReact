@@ -10,10 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_delete model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "delete_rooms",
-	Descriptoin:  "ability to delete a rooms"}
+var permission_delete model.Permission = model.Permission{Name: model.DeleteRoom}
 
 // DeleteRooms ...
 func DeleteRooms(s *store.Store) httprouter.Handle {

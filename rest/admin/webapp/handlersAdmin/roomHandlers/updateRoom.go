@@ -10,10 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_update model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "update_room",
-	Descriptoin:  "ability to update a rooms"}
+var permission_update model.Permission = model.Permission{Name: model.UpdateRoom}
 
 // UpdateRoom ...
 func UpdateRoom(s *store.Store) httprouter.Handle {

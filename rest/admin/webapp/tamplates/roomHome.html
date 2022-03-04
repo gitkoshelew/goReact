@@ -13,7 +13,7 @@
 
 <body>
 
-    {{if .HasPermission "read_rooms"}}
+    {{if .HasPermission "read_room"}}
     <div>
         <h2>Rooms</h2>
         <form action="/admin/rooms">
@@ -24,7 +24,7 @@
 
     <br><br>
 
-    {{if .HasPermission "read_rooms"}}
+    {{if .HasPermission "read_room"}}
     <div>
         <form action="/admin/rooms/id" method="GET">
             <th>Get room by id</th>
@@ -36,7 +36,7 @@
 
     <br><br>
 
-    {{if .HasPermission "delete_rooms"}}
+    {{if .HasPermission "delete_room"}}
     <div>
         <form action="/admin/rooms/delete/" method="POST">
             <th>Delete room by id</th>
@@ -46,7 +46,7 @@
     </div>
     {{end}}
 
-    {{if .HasPermission "creat_rooms"}}
+    {{if .HasPermission "creat_room"}}
     <div>
         <h2>Create room</h2>
         <form action="/admin/rooms/new" method="POST">
@@ -67,7 +67,7 @@
     </div>
     {{end}}
     <br><br>
-    {{if .HasPermission "update_rooms"}}
+    {{if .HasPermission "update_room"}}
     <div>
         <h2>Update room</h2>
         <form action="/admin/rooms/update" method="POST">

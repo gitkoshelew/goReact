@@ -11,10 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_create model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "creat_seats",
-	Descriptoin:  "ability to creat a seats"}
+var permission_create model.Permission = model.Permission{Name: model.CreatSeat}
 
 // NewSeat ...
 func NewSeat(s *store.Store) httprouter.Handle {
@@ -33,8 +30,6 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-
-		
 
 		roomID, err := strconv.Atoi(r.FormValue("RoomID"))
 		if err != nil {
