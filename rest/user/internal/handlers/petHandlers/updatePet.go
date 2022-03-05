@@ -28,20 +28,21 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			return
 		}
 
 		user, err := s.User().FindByID(req.OwnerID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find user.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find user. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting user by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
 		p, err := s.Pet().FindByID(req.PetID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find pet.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find pet. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting pet by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
