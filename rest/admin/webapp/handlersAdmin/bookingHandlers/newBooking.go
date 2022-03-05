@@ -11,10 +11,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_create model.Permission = model.Permission{
-	PermissionID: 0,
-	Name:         "create_bookings",
-	Descriptoin:  "ability to create a booking"}
+var permission_create model.Permission = model.Permission{Name: model.CreatBooking}
+
 
 // NewBooking ...
 func NewBooking(s *store.Store) httprouter.Handle {

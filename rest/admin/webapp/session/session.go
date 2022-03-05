@@ -36,7 +36,7 @@ func AuthSession(w http.ResponseWriter, r *http.Request, employee *model.Employe
 	gob.Register(model.Employee{})
 	session.Values["Employee"] = employee
 	session.Values["EmployeeID"] = employee.EmployeeID
-	session.Values["EmployeePosition"] = employee.PositionString()
+	session.Values["EmployeePosition"] = string(employee.Position)
 
 	gob.Register([]model.Permission{})
 	session.Values["Permissions"] = permissions
@@ -80,7 +80,7 @@ func IsExist(w http.ResponseWriter, r *http.Request) bool {
 }
 
 //CheckRigths of employee and return err if not enough rights
-func CheckRigths(w http.ResponseWriter, r *http.Request, name string) error {
+func CheckRigths(w http.ResponseWriter, r *http.Request, name model.PermissionName) error {
 
 	session, err := sstore.PGStore.Get(r, "session-key")
 	if err != nil {
@@ -106,7 +106,8 @@ func CheckRigths(w http.ResponseWriter, r *http.Request, name string) error {
 
 	str := fmt.Sprintf("%v", permissions)
 
-	contain := strings.Contains(str, name)
+	//	contain := strings.Contains(str, name.PermissionNameToString())
+	contain := strings.Contains(str, string(name))
 	if !contain {
 		err = fmt.Errorf("not enough rights")
 		return err

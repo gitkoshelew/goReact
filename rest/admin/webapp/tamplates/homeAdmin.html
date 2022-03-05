@@ -33,7 +33,7 @@
     </div>
     {{end}}
 
-    {{if .HasPermission "read_bookings"}}
+    {{if .HasPermission "read_booking"}}
     <div>
         <h2>Bookings</h2>
         <form action="/admin/homebookings">
@@ -60,7 +60,7 @@
     </div>
     {{end}}
 
-    {{if .HasPermission "read_seats"}}
+    {{if .HasPermission "read_seat"}}
     <div>
         <h2>Seats</h2>
         <form action="/admin/homeseats">
@@ -69,7 +69,7 @@
     </div>
     {{end}}
 
-    {{if .HasPermission "read_rooms"}}
+    {{if .HasPermission "read_room"}}
     <div>
         <h2>Rooms</h2>
         <form action="/admin/homerooms">

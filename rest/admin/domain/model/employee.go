@@ -14,26 +14,13 @@ type Employee struct {
 type Position string
 
 // Position constants
-var (
+const (
 	ManagerPosition  Position = "manager"
 	EmployeePosition Position = "employee"
 	OwnerPosition    Position = "owner"
 	AdminPosition    Position = "admin"
 )
 
-func (e Employee) PositionString() string {
-	switch e.Position {
-	case ManagerPosition:
-		return "manager"
-	case EmployeePosition:
-		return "employee"
-	case OwnerPosition:
-		return "owner"
-	case AdminPosition:
-		return "admin"
-	}
-	return "unknown"
-}
 
 // Validate ...
 func (e *Employee) Validate() error {

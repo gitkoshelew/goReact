@@ -15,7 +15,7 @@
     </head>
 
 
-    {{if .HasPermission "read_bookings"}}
+    {{if .HasPermission "read_booking"}}
     <div>
         <h2>Bookings</h2>
         <form action="/admin/bookings">
@@ -26,7 +26,7 @@
 
     <br><br>
 
-    {{if .HasPermission "read_bookings"}}
+    {{if .HasPermission "read_booking"}}
     <form action="/admin/bookings/id" method="GET">
         <th>Get booking by id</th>
         <input type="number" name="id" min="1" required><br><br>
@@ -36,7 +36,7 @@
 
     <br><br>
 
-    {{if .HasPermission "delete_bookings"}}
+    {{if .HasPermission "delete_booking"}}
     <div>
         <form action="/admin/bookings/delete/" method="POST">
             <th>Delete booking by id</th>
@@ -46,7 +46,7 @@
     </div>
     {{end}}
 
-    {{if .HasPermission "creat_bookings"}}
+    {{if .HasPermission "creat_booking"}}
     <div>
         <h2>New booking</h2>
         <form action="/admin/bookings/new" method="POST">
@@ -83,7 +83,7 @@
     </div>
     {{end}}
     <br><br>
-    {{if .HasPermission "update_bookings"}}
+    {{if .HasPermission "update_booking"}}
     <div>
         <h2>Update booking</h2>
         <form action="/admin/bookings/update" method="POST">
