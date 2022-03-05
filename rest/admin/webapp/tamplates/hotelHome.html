@@ -52,8 +52,27 @@
             <th>Address</th>
             <input type="text" name="Address" required><br><br>
             <th>Coordinates(lat , lon)</th>
-            <input type="string" step="0.000000000000001" name="Coordinates" required>
+            <input type="string" name="Coordinates" required>
             <button>New</button>
+
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+    {{if .HasPermission "update_hotel"}}
+    <div>
+        <h2>Update hotel</h2>
+        <form action="/admin/hotels/update" method="POST">
+            <th>Hotel id</th>
+            <input type="number" name="HotelID" min="1" required><br><br>
+            <th>Name</th>
+            <input type="text" name="Name">
+            <th>Address</th>
+            <input type="text" name="Address"><br><br>
+            <th>Coordinates(lat , lon)</th>
+            <input type="string" name="Coordinates">
+            <button>Update</button>
 
         </form>
     </div>

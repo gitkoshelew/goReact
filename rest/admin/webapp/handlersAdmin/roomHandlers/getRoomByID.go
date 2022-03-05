@@ -23,16 +23,17 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 		}
 
 		rooms := []model.Room{}
-		id, err := strconv.Atoi(r.FormValue("id"))
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
-			return
-		}
 
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		id, err := strconv.Atoi(r.FormValue("id"))
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 

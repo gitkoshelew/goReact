@@ -10,13 +10,13 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_create model.Permission = model.Permission{
+var permission_update model.Permission = model.Permission{
 	PermissionID: 0,
-	Name:         "creat_pet",
-	Descriptoin:  "ability to create a pet"}
+	Name:         "update_pet",
+	Descriptoin:  "ability to update a pet"}
 
-// NewPet ...
-func NewPet(s *store.Store) httprouter.Handle {
+// UpdatePet ...
+func UpdatePet(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
@@ -33,37 +33,56 @@ func NewPet(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		userID, err := strconv.Atoi(r.FormValue("UserID"))
+		petID, err := strconv.Atoi(r.FormValue("PetID"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
 			return
 		}
 
-		user, err := s.User().FindByID(userID)
+		pet, err := s.Pet().FindByID(petID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
+		userID, err := strconv.Atoi(r.FormValue("UserID"))
+		if err == nil {
+			if userID != 0 {
+				user, err := s.User().FindByID(userID)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusBadRequest)
+					return
+				}
+				pet.Owner = *user
+			}
+		}
+
 		name := r.FormValue("Name")
+		if name != "" {
+			pet.Name = name
+		}
 
 		petType := r.FormValue("PetType")
+		if petType != "" {
+			pet.Type = model.PetType(petType)
+		}
 
 		weight, err := strconv.ParseFloat(r.FormValue("Weight"), 32)
+		if err == nil {
+			if weight != 0 {
+				pet.Weight = float32(weight)
+			}
+		}
 
 		diseases := r.FormValue("Diseases")
+		if diseases != "" {
+			pet.Diseases = diseases
+		}
 
 		photo := r.FormValue("Photo")
-
-		pet := model.Pet{
-			PetID:       0,
-			Name:        name,
-			Type:        model.PetType(petType),
-			Weight:      float32(weight),
-			Diseases:    diseases,
-			Owner:       *user,
-			PetPhotoURL: photo,
+		if photo != "" {
+			pet.PetPhotoURL = photo
 		}
 
 		err = pet.Validate()
@@ -73,7 +92,7 @@ func NewPet(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		_, err = s.Pet().Create(&pet)
+		err = s.Pet().Update(pet)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return

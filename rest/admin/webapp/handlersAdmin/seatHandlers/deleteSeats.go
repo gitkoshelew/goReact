@@ -27,16 +27,16 @@ func DeleteSeats(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			http.Redirect(w, r, "/admin/homeseats", http.StatusFound)
-			return
-		}
-		err = s.Open()
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 		err = s.Seat().Delete(id)

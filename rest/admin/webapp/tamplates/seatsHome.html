@@ -66,5 +66,25 @@
     </div>
     {{end}}
 
+    {{if .HasPermission "update_seats"}}
+    <div>
+        <h2>Update seat</h2>
+        <form action="/admin/seats/update" method="POST">
+            <th>Seat id</th>
+            <input type="number" name="SeatID" min="1" required><br><br>
+            <th>Room id</th>
+            <input type="number" name="RoomID" min=1>
+            <br><br>
+            <th>Description</th>
+            <input type="text" name="Description"><br><br>
+            <th>RentFrom</th>
+            <input type="Date" name="RentFrom"><br><br>
+            <th>RentTo</th>
+            <input type="Date" name="RentTo"><br><br>
+            <button>Update</button>
+        </form>
+    </div>
+    {{end}}
+
 </body>
 {{end}}

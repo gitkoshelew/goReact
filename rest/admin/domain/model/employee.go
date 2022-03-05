@@ -14,7 +14,7 @@ type Employee struct {
 type Position string
 
 // Position constants
-const (
+var (
 	ManagerPosition  Position = "manager"
 	EmployeePosition Position = "employee"
 	OwnerPosition    Position = "owner"

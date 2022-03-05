@@ -10,13 +10,13 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_create model.Permission = model.Permission{
+var permission_update model.Permission = model.Permission{
 	PermissionID: 0,
-	Name:         "create_employee",
-	Descriptoin:  "ability to create a employees"}
+	Name:         "update_employee",
+	Descriptoin:  "ability to update a employee"}
 
-// NewEmployee ...
-func NewEmployee(s *store.Store) httprouter.Handle {
+// UpdateEmployee ...
+func UpdateEmployee(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
@@ -32,49 +32,57 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		userID, err := strconv.Atoi(r.FormValue("UserID"))
+
+		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
 			return
 		}
 
-		user, err := s.User().FindByID(userID)
+		employee, err := s.Employee().FindByID(employeeID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
+		}
+
+		userID, err := strconv.Atoi(r.FormValue("UserID"))
+		if err == nil {
+			if userID != 0 {
+				user, err := s.User().FindByID(userID)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusBadRequest)
+					return
+				}
+				employee.User = *user
+			}
 		}
 
 		hotelID, err := strconv.Atoi(r.FormValue("HotelID"))
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID"))
-			return
-		}
-
-		hotel, err := s.Hotel().FindByID(hotelID)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
+		if err == nil {
+			if hotelID != 0 {
+				hotel, err := s.Hotel().FindByID(hotelID)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusBadRequest)
+					return
+				}
+				employee.Hotel = *hotel
+			}
 		}
 
 		position := r.FormValue("Position")
-
-		e := model.Employee{
-			EmployeeID: 0,
-			User:       *user,
-			Hotel:      *hotel,
-			Position:   model.Position(position),
+		if position != "" {
+			employee.Position = model.Position(position)
 		}
 
-		err = e.Validate()
+		err = employee.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		_, err = s.Employee().Create(&e)
+		err = s.Employee().Update(employee)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return

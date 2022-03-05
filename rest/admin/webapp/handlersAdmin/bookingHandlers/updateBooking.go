@@ -48,7 +48,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		}
 
 		seatID, err := strconv.Atoi(r.FormValue("SeatID"))
-		if err != nil {
+		if err == nil {
 			if seatID != 0 {
 				seat, err := s.Seat().FindByID(seatID)
 				if err != nil {
@@ -61,7 +61,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		}
 
 		petID, err := strconv.Atoi(r.FormValue("PetID"))
-		if err != nil {
+		if err == nil {
 			if petID != 0 {
 				pet, err := s.Pet().FindByID(petID)
 				if err != nil {
@@ -74,7 +74,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		}
 
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
-		if err != nil {
+		if err == nil {
 			if employeeID != 0 {
 				employee, err := s.Employee().FindByID(employeeID)
 				if err != nil {

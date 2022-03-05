@@ -1,4 +1,4 @@
-package employeehandlers
+package hotelhandlers
 
 import (
 	"admin/domain/model"
@@ -10,13 +10,13 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_create model.Permission = model.Permission{
+var permission_update model.Permission = model.Permission{
 	PermissionID: 0,
-	Name:         "create_employee",
-	Descriptoin:  "ability to create a employees"}
+	Name:         "update_hotel",
+	Descriptoin:  "ability to update a hotel"}
 
-// NewEmployee ...
-func NewEmployee(s *store.Store) httprouter.Handle {
+// UpdateHotel ...
+func UpdateHotel(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
@@ -32,23 +32,10 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		userID, err := strconv.Atoi(r.FormValue("UserID"))
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
-			return
-		}
-
-		user, err := s.User().FindByID(userID)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
 		hotelID, err := strconv.Atoi(r.FormValue("HotelID"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID"))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
 			return
 		}
 
@@ -58,28 +45,35 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		position := r.FormValue("Position")
-
-		e := model.Employee{
-			EmployeeID: 0,
-			User:       *user,
-			Hotel:      *hotel,
-			Position:   model.Position(position),
+		name := r.FormValue("Name")
+		if name != "" {
+			hotel.Name = name
 		}
 
-		err = e.Validate()
+		address := r.FormValue("Address")
+		if name != "" {
+			hotel.Address = address
+		}
+
+		coordinates := r.FormValue("Coordinates")
+		if name != "" {
+			hotel.Coordinates = coordinates
+		}
+
+		err = hotel.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		_, err = s.Employee().Create(&e)
+		 err = s.Hotel().Update(hotel)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		http.Redirect(w, r, "/admin/homeemployees/", http.StatusFound)
+
+		http.Redirect(w, r, "/admin/homehotels/", http.StatusFound)
 	}
 
 }
