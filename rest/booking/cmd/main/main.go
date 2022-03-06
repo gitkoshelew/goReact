@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	config := config.Get()
 	server := server.New(config)
 

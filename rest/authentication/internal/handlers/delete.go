@@ -1,9 +1,8 @@
 package handlers
 
 import (
-	"booking/internal/apperror"
-	"booking/internal/store"
-	"booking/pkg/response"
+	"authentication/internal/apperror"
+	"authentication/internal/store"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -20,8 +19,7 @@ func DeleteHandle(s *store.Store) httprouter.Handle {
 		id, err := strconv.Atoi(ps.ByName("id"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%w. Requests body: %s", err, ps.ByName("id"))
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %s", err, ps.ByName("id")), fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 
@@ -32,15 +30,14 @@ func DeleteHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err = s.Booking().Delete(id)
+		err = s.User().Delete(id)
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while deleting booking", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while deleting auth data", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Delete booking with id = %d", id)})
 
 	}
 }

@@ -60,3 +60,14 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	}
 	return u, nil
 }
+
+// Delete auth data from DB by ID
+func (r *UserRepository) Delete(id int) error {
+	result, err := r.Store.Db.Exec("DELETE FROM users WHERE id = $1", id)
+	if err != nil {
+		r.Store.Logger.Errorf("Eror occured while deleting auth data. Err msg: %w", err)
+		return err
+	}
+	r.Store.Logger.Errorf("Auth data was deleted, rows affectet: %d", result)
+	return nil
+}

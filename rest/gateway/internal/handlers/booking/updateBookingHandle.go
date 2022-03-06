@@ -36,7 +36,7 @@ func UpdateBookingHandle(service *client.Client) httprouter.Handle {
 			utils.SeatValidation:     req.SeatID,
 		}
 
-		err := utils.IsValid(bytes.NewReader(rBody), dataValidation, service.Base.Logger.Logger)
+		err := utils.IsValid(bytes.NewReader(rBody), true, dataValidation, service.Base.Logger.Logger)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(err)

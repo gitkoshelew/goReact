@@ -35,7 +35,7 @@ func CreateEmployee(s *store.Store) httprouter.Handle {
 		hotel, err := s.Hotel().FindByID(req.HotelID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Cant find hotel.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Cant find hotel. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Cant find hotel.", fmt.Sprintf("%d", http.StatusNotFound), fmt.Sprintf("Cant find hotel. Err msg:%v.", err)))
 			return
 		}
 

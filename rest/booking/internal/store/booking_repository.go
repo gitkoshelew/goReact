@@ -13,6 +13,9 @@ type BookingRepository struct {
 
 // Create booking and save it to DB
 func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
+
+	// validate ??
+
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO booking
 		(seat_id, pet_id, employee_id, status, start_date, end_date, paid, notes)
@@ -91,12 +94,28 @@ func (r *BookingRepository) Delete(id int) error {
 		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg: %w", err)
 		return err
 	}
-	r.Store.Logger.Errorf("Booking deleted, rows affectet: %d", result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		err := fmt.Errorf("there is no booking with id %d", id)
+		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg:%v.", err)
+		return err
+	}
+
+	r.Store.Logger.Errorf("Booking was deleted successfully, rows affectet: %d", result)
 	return nil
 }
 
 // Update booking from DB
 func (r *BookingRepository) Update(b *model.Booking) error {
+
+	// validate ??
+
 	seatID := "seat_id"
 	if b.SeatID != 0 {
 		seatID = fmt.Sprintf("%d", b.SeatID)

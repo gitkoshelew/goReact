@@ -2,6 +2,7 @@ package auth
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"gateway/internal/client"
@@ -15,6 +16,10 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+type authDataID struct {
+	ID int `json:"authDataId,omitempty"`
+}
+
 // RegistrationHandle ...
 func RegistrationHandle(service *client.Client) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -22,14 +27,14 @@ func RegistrationHandle(service *client.Client) httprouter.Handle {
 
 		rBody, _ := ioutil.ReadAll(r.Body)
 
-		_, err := auth.Registration(r.Context(), service, bytes.NewReader(rBody))
+		authRegistrationService, err := auth.Registration(r.Context(), service, bytes.NewReader(rBody))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(err)
 			return
 		}
 
-		user := &UserDTO{}
+		user := &AuthData{}
 		if err := json.NewDecoder(bytes.NewReader(rBody)).Decode(user); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			service.Base.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %w", r.Body, err)
@@ -38,10 +43,18 @@ func RegistrationHandle(service *client.Client) httprouter.Handle {
 		}
 		user.Verified = false
 
+		var authData *authDataID
+		if err := json.Unmarshal(authRegistrationService.Body, &authData); err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(err)
+			return
+		}
+
 		switch user.Role {
 		case "client":
 			_, err := customer.Create(r.Context(), client.CustomerUserService, bytes.NewReader(rBody))
 			if err != nil {
+				auth.Delete(context.WithValue(r.Context(), client.AuthDeleteQuerryParamsCtxKey, fmt.Sprint(authData.ID)), client.AuthDataDeleteService, bytes.NewReader(rBody))
 				w.WriteHeader(http.StatusBadRequest)
 				json.NewEncoder(w).Encode(err)
 				return
@@ -49,6 +62,7 @@ func RegistrationHandle(service *client.Client) httprouter.Handle {
 		case "employee":
 			_, err := hotel.Create(r.Context(), client.HotelEmployeeService, bytes.NewReader(rBody))
 			if err != nil {
+				auth.Delete(context.WithValue(r.Context(), client.AuthDeleteQuerryParamsCtxKey, fmt.Sprint(authData.ID)), client.AuthDataDeleteService, bytes.NewReader(rBody))
 				w.WriteHeader(http.StatusBadRequest)
 				json.NewEncoder(w).Encode(err)
 				return

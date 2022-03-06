@@ -11,7 +11,6 @@ import (
 
 // IsLoggedIn ...
 func IsLoggedIn(next httprouter.Handle) httprouter.Handle {
-
 	return httprouter.Handle(func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 		_, err := jwthelper.ExtractTokenMetadata(r)

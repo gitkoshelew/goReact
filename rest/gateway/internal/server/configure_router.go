@@ -16,6 +16,7 @@ func (s *Server) ConfigureRouter() {
 	s.Router.Handle("POST", "/logout", auth.LogoutHandle(client.AuthLogoutService))
 	s.Router.Handle("POST", "/registration", auth.RegistrationHandle(client.AuthRegistrationService))
 	s.Router.Handle("POST", "/refresh", auth.RefreshHandle(client.AuthRefreshService))
+	s.Router.Handle("DELETE", "/authdata/:id", auth.DeleteAuthDataHandle(client.AuthDataDeleteService))
 
 	// Customer service handlers
 	s.Router.Handle("GET", "/users", customer.GetAllUsersHandle(client.CustomerGetAllUsersService))

@@ -24,9 +24,9 @@ func CreateBookingHandle(service *client.Client) httprouter.Handle {
 
 		req := &DataValidation{}
 		if err := json.NewDecoder(bytes.NewReader(rBody)).Decode(req); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			w.WriteHeader(http.StatusBadRequest)
 			service.Base.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %w", bytes.NewReader(rBody), err)
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", bytes.NewReader(rBody)), fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", bytes.NewReader(rBody)), fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
@@ -36,7 +36,7 @@ func CreateBookingHandle(service *client.Client) httprouter.Handle {
 			utils.SeatValidation:     req.SeatID,
 		}
 
-		err := utils.IsValid(bytes.NewReader(rBody), dataValidation, service.Base.Logger.Logger)
+		err := utils.IsValid(bytes.NewReader(rBody), false, dataValidation, service.Base.Logger.Logger)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(err)
