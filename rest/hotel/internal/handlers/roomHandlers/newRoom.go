@@ -35,7 +35,8 @@ func CreateRoom(s *store.Store) httprouter.Handle {
 		hotel, err := s.Hotel().FindByID(req.HotelID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting hotel by id.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting hotel by id.",
+				fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v.", err)))
 			return
 		}
 
@@ -58,11 +59,11 @@ func CreateRoom(s *store.Store) httprouter.Handle {
 		_, err = s.Room().Create(&room)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create room.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create room. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating room.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while updating room. Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Creat room with id = %d", room.RoomID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created room with id = %d", room.RoomID)})
 	}
 }

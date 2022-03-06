@@ -45,7 +45,7 @@ func CreateSeat(s *store.Store) httprouter.Handle {
 		room, err := s.Room().RoomFromDTO(roomDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find room. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting room by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting room by id. Err msg:%v.", err)))
 			return
 		}
 		s.Logger.Info("room :", room)

@@ -41,7 +41,7 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 		roomDTO, err := s.Room().FindByID(req.RoomID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find room. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting room by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting room by id. Err msg:%v.", err)))
 			return
 		}
 
