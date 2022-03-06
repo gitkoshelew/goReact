@@ -15,7 +15,7 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id", h.Name, h.Address,
 		h.Coordinates).Scan(&h.HotelID); err != nil {
-		r.Store.Logger.Errorf("Can't create hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while creating hotel. Err msg:%v.", err)
 		return nil, err
 	}
 	r.Store.Logger.Info("Created hotel with id = %d", h.HotelID)
@@ -26,7 +26,7 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM hotel")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find hotels. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while getting all hotels. Err msg: %v", err)
 	}
 	hotels := []model.Hotel{}
 
@@ -39,7 +39,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 			&hotel.Coordinates,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find hotels. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occured while getting all hotels. Err msg: %v", err)
 			continue
 		}
 		hotels = append(hotels, hotel)
@@ -58,7 +58,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.Address,
 		&hotel.Coordinates,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while getting hotel by id. Err msg:%v.", err)
 		return nil, err
 	}
 	return hotel, nil
@@ -68,18 +68,18 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 func (r *HotelRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM hotel WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't delete hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
 		return err
 	}
 	r.Store.Logger.Info("Hotel deleted, rows affectet: %d", result)
@@ -97,9 +97,9 @@ func (r *HotelRepository) Update(h *model.Hotel) error {
 		h.HotelID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't update hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Update hotel with id = %d,rows affectet: %d ", h.HotelID, result)
+	r.Store.Logger.Info("Updated hotel with id = %d,rows affectet: %d ", h.HotelID, result)
 	return nil
 }

@@ -27,28 +27,30 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
 		roomDTO, err := s.Room().FindByID(req.RoomID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find room. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting room by id.",
+				fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting room by id. Err msg:%v.", err)))
 			return
 		}
 
 		room, err := s.RoomRepository.RoomFromDTO(roomDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert room. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring roomDTO.", fmt.Sprintf("%d", http.StatusInternalServerError),
+				fmt.Sprintf("Error occured while convetring roomDTO. Err msg:%v.", err)))
 			return
 		}
 
 		SeatDTO, err := s.Seat().FindByID(req.SeatID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find seat.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find seat. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting seat by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting seat by id. Err msg:%v.", err)))
 
 			return
 		}
@@ -56,7 +58,8 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 		seat, err := s.Seat().SeatFromDTO(SeatDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert seat.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert seat. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring seatDTO.", fmt.Sprintf("%d", http.StatusInternalServerError),
+				fmt.Sprintf("Error occured while convetring seatDTO. Err msg:%v.", err)))
 			return
 		}
 
@@ -89,12 +92,13 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 		err = s.Seat().Update(seat)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update seat.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update seat. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating seat.", fmt.Sprintf("%d", http.StatusBadRequest),
+				fmt.Sprintf("Error occured while updating seat. Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update seat with id = %d", seat.SeatID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated seat with id = %d", seat.SeatID)})
 
 	}
 }

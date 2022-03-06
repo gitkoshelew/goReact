@@ -18,13 +18,13 @@ func AllSeatsHandler(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 		seats, err := s.Seat().GetAll()
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find seats", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find seats. Err msg: %v", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting all seats", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting all seats. Err msg: %v", err)))
 			return
 		}
 
