@@ -86,7 +86,7 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update room with id = %d", room.RoomID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated room with id = %d", room.RoomID)})
 
 	}
 }
