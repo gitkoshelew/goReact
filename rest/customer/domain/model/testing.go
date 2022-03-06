@@ -5,6 +5,7 @@ import "time"
 // TestUser ...
 func TestUser() *User {
 	return &User{
+		UserID: 1,
 		Email:       "email@example.org",
 		Password:    "password",
 		Role:        EmployeeRole,
@@ -24,6 +25,7 @@ func TestUser() *User {
 // TestPet ...
 func TestPet() *Pet {
 	return &Pet{
+		PetID: 1,
 		Name:        "Name",
 		Type:        PetTypeCat,
 		Weight:      1,

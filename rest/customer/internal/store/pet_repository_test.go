@@ -54,7 +54,8 @@ func TestPetRepository_FindByID(t *testing.T) {
 		p := model.TestPet()
 		p.Owner = *u
 		p, err = s.Pet().Create(p)
-		p, err = s.Pet().FindByID(p.PetID)
+		petDto, err := s.Pet().FindByID(p.PetID)
+		p , err = s.Pet().PetFromDTO(petDto)
 		assert.NoError(t, err)
 		assert.NotNil(t, p)
 	})

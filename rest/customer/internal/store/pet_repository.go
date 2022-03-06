@@ -78,8 +78,8 @@ func (r *PetRepository) FindDTOByID(id int) (*model.PetDTO, error) {
 }
 
 // FindByID searchs and returns pet by ID
-func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
-	pet := &model.Pet{}
+func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
+	pet := &model.PetDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
 		id).Scan(
 		&pet.PetID,
@@ -87,7 +87,7 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 		&pet.Type,
 		&pet.Weight,
 		&pet.Diseases,
-		&pet.Owner.UserID,
+		&pet.OwnerID,
 		&pet.PetPhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg:%v.", err)
@@ -153,4 +153,23 @@ func (r *PetRepository) IsPetValid(id int) (bool, error) {
 	}
 
 	return false, fmt.Errorf("Pet with id = %d does not exist", id)
+}
+
+// PetFromDTO ...
+func (r *PetRepository) PetFromDTO(dto *model.PetDTO) (*model.Pet, error) {
+	user, err := r.Store.User().FindByID(dto.OwnerID)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while convetring petDTO. Err msg: %v", err)
+		return nil, err
+	}
+
+	return &model.Pet{
+		PetID:       dto.PetID,
+		Name:        dto.Name,
+		Type:        dto.Type,
+		Weight:      dto.Weight,
+		Diseases:    dto.Diseases,
+		Owner:       *user,
+		PetPhotoURL: dto.PetPhotoURL,
+	}, nil
 }

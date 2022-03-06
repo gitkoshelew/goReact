@@ -39,10 +39,16 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		p, err := s.Pet().FindByID(req.PetID)
+		petDTO, err := s.Pet().FindByID(req.PetID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting pet by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			return
+		}
+		p, err := s.Pet().PetFromDTO(petDTO)
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring petDTO", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
