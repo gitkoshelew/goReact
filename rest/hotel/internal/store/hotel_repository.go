@@ -26,7 +26,7 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM hotel")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find hotels. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while getting hotel by ids. Err msg: %v", err)
 	}
 	hotels := []model.Hotel{}
 
@@ -39,7 +39,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 			&hotel.Coordinates,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find hotels. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occured while getting hotel by ids. Err msg: %v", err)
 			continue
 		}
 		hotels = append(hotels, hotel)
@@ -58,7 +58,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.Address,
 		&hotel.Coordinates,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while getting hotel by id. Err msg:%v.", err)
 		return nil, err
 	}
 	return hotel, nil

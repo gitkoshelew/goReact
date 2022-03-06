@@ -18,14 +18,14 @@ func AllHotelsHandler(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
 		hotels, err := s.Hotel().GetAll()
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find hotels", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find hotels. Err msg: %v", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting hotel by ids", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting hotel by ids. Err msg: %v", err)))
 			return
 		}
 

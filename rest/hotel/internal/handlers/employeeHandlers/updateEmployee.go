@@ -27,21 +27,21 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
 		hotel, err := s.Hotel().FindByID(req.HotelID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find hotel.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find hotel. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting hotel by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v.", err)))
 			return
 		}
 
 		employeeDTO, err := s.Employee().FindByID(req.EmployeeID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find employee.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find employee. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting employee by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting employee by id. Err msg:%v.", err)))
 
 			return
 		}
@@ -49,7 +49,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 		employee, err := s.Employee().EmployeeFromDTO(employeeDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert employee.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert employee. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while converting employeeDTO.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while converting employeeDTO. Err msg:%v.", err)))
 			return
 		}
 
@@ -77,12 +77,12 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 		err = s.Employee().Update(employee)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update employee.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update employee. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating employee.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while updating employee. Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update employee with id = %d", employee.EmployeeID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated employee with id = %d", employee.EmployeeID)})
 
 	}
 }
