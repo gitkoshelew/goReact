@@ -14,12 +14,13 @@ type PetRepository struct {
 // Create pet and save it to DB
 func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO pet (name, type, weight, diseases, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id",
+		"INSERT INTO pet (name, type, weight, diseases, user_id , photo) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
 		p.Name,
 		string(p.Type),
 		p.Weight,
 		p.Diseases,
 		p.Owner.UserID,
+		p.PetPhotoURL,
 	).Scan(&p.PetID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating pet. Err msg:%v.", err)
 		return nil, err
@@ -46,6 +47,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 			&pet.Weight,
 			&pet.Diseases,
 			&pet.OwnerID,
+			&pet.PetPhotoURL,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all pets. Err msg: %v", err)
@@ -67,6 +69,7 @@ func (r *PetRepository) FindDTOByID(id int) (*model.PetDTO, error) {
 		&pet.Weight,
 		&pet.Diseases,
 		&pet.OwnerID,
+		&pet.PetPhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg:%v.", err)
 		return nil, err
@@ -85,6 +88,7 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 		&pet.Weight,
 		&pet.Diseases,
 		&pet.Owner.UserID,
+		&pet.PetPhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg:%v.", err)
 		return nil, err
@@ -118,12 +122,13 @@ func (r *PetRepository) Delete(id int) error {
 func (r *PetRepository) Update(p *model.Pet) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 WHERE id = $6",
+		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 , user_id = $6 WHERE id = $7",
 		p.Name,
 		string(p.Type),
 		p.Weight,
 		p.Diseases,
 		p.Owner.UserID,
+		p.PetPhotoURL,
 		p.PetID,
 	)
 	if err != nil {
