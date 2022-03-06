@@ -1,3 +1,4 @@
+@use '../../../../styles/breakpoints' as bp;
 @import '../../../../styles/variables';
 
 .scrollBlock {
@@ -10,11 +11,11 @@
   @media (min-width: 700px) {
     display: flex;
   }
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     left: -550px;
   }
 
-  @media (min-width: 1350px) {
+  @media (min-width: bp.$xxl) {
     left: -650px;
   }
 

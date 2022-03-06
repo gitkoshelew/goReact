@@ -1,3 +1,4 @@
+@use '../../../styles/breakpoints' as bp;
 @import '../../../styles/variables';
 
 .bookingForm {
@@ -32,7 +33,7 @@
 
       &:nth-child(n) {
         margin: 10px 0;
-        @media (min-width: 1144px) {
+        @media (min-width: bp.$lg) {
           margin: 10px 20px;
         }
 
@@ -50,7 +51,7 @@
       font-size: 19px;
       text-transform: uppercase;
       color: #000000;
-      @media (min-width: 575px) {
+      @media (min-width: bp.$sm) {
         font-size: 22px;
       }
 
@@ -75,7 +76,7 @@
   height: 40px;
   border-radius: 5px;
   font-size: 22px;
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     min-width: 350px;
   }
 }
@@ -102,12 +103,12 @@
   font-size: 22px;
   border: 3px solid red;
   outline: none !important;
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     width: 350px;
   }
 
   &:nth-child(n) {
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       margin: 20px 20px;
     }
   }

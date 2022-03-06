@@ -1,3 +1,4 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .uploadPetPhotoActive {
@@ -34,7 +35,7 @@
   border: 1px solid $main-contrast-color;
   cursor: no-drop;
   margin: 40px;
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     margin: 40px
   }
 

@@ -1,11 +1,12 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .TextBlockTitle {
   display: flex;
   justify-content: center;
   margin: 35px 0 10px 15px;
-  
-  @media (min-width: 1144px) {
+
+  @media (min-width: bp.$lg) {
     white-space: nowrap;
   }
 
@@ -19,7 +20,7 @@
     line-height: 33px;
     text-transform: uppercase;
     color: $main-text-color;
-    @media (min-width: 575px) {
+    @media (min-width: bp.$sm) {
       font-size: 34px;
     }
   }
@@ -35,7 +36,7 @@
     line-height: 24px;
     color: $main-contrast-color;
     margin-right: 10px;
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       display: block;
       top: -30px;
       left: -113px;

@@ -1,3 +1,5 @@
+@use './src/main/ui/styles/breakpoints' as bp;
+
 .miniRoom {
   display: flex;
   flex-direction: column;
@@ -6,13 +8,13 @@
   .oneRoomTop {
     display: flex;
     flex-direction: column;
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       flex-direction: row;
       :first-child div {
         margin-right: 70px;
       }
     }
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       :first-child div {
         margin-right: 20px;
       }
@@ -22,13 +24,13 @@
   .oneRoomBottom {
     display: flex;
     flex-direction: column;
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       flex-direction: row;
       :first-child div {
         margin-right: 70px;
       }
     }
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       :first-child div {
         margin-right: 20px;
       }

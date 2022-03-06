@@ -1,3 +1,4 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .navLinkTitle {
@@ -9,7 +10,7 @@
     margin-right: 3px;
   }
 
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     margin: 0 8vw;
   }
 

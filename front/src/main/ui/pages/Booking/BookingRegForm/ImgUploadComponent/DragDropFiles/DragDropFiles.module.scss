@@ -1,3 +1,5 @@
+@use './src/main/ui/styles/breakpoints' as bp;
+
 .dragDropFilesContainer {
   .customTablet {
     border: dashed 2px #0f97aa;
@@ -5,7 +7,7 @@
 
     div {
       flex-direction: column;
-      @media (min-width: 1144px) {
+      @media (min-width: bp.$lg) {
         flex-direction: row;
       }
 
@@ -18,7 +20,7 @@
     }
 
     span {
-      @media (min-width: 1144px) {
+      @media (min-width: bp.$lg) {
         margin: 0 3px;
       }
     }

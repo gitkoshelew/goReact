@@ -1,4 +1,6 @@
-@media (min-width: 1144px) {
+@use '../../../../styles/breakpoints' as bp;
+
+@media (min-width: bp.$lg) {
   .ceoMessSignature {
     position: relative;
     top: 120px;

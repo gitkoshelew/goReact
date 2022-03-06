@@ -1,21 +1,23 @@
+@use './src/main/ui/styles/breakpoints' as bp;
+
 .serviceBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     flex-direction: row;
     justify-content: center;
   }
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     flex-direction: column;
   }
 
   .toRows {
-    @media (min-width: 767px) {
+    @media (min-width: bp.$md) {
       display: flex;
     }
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       flex-direction: column;
     }
   }

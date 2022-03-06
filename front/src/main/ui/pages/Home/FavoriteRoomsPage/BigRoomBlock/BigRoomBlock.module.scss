@@ -1,3 +1,4 @@
+@use '../../../../styles/breakpoints' as bp;
 @import '../../../../styles/variables';
 
 .bigRoomBlock {
@@ -17,24 +18,24 @@
   text-align: center;
   letter-spacing: 0.01em;
   color: $main-text-color;
-  @media (min-width: 575px) {
+  @media (min-width: bp.$sm) {
     height: 400px;
     width: 400px;
   }
-  @media (min-width: 767px) {
+  @media (min-width: bp.$md) {
     height: 550px;
     width: 550px;
   }
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     width: 970px;
   }
 
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     width: 500px;
     height: 630px;
     margin-right: 30px;
   }
-  @media (min-width: 1350px) {
+  @media (min-width: bp.$xxl) {
     width: 590px;
   }
 
@@ -55,14 +56,14 @@
     position: absolute;
     top: 215px;
     left: 10px;
-    @media (min-width: 575px) {
+    @media (min-width: bp.$sm) {
       top: 315px;
     }
-    @media (min-width: 767px) {
+    @media (min-width: bp.$md) {
       top: 460px;
       left: 20px;
     }
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       top: 530px;
       left: 15px;
     }
