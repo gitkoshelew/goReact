@@ -28,20 +28,21 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't open DB. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			return
 		}
 
 		user, err := s.User().FindByID(req.OwnerID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find user.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find user. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting user by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
 		p, err := s.Pet().FindByID(req.PetID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find pet.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find pet. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting pet by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
@@ -82,11 +83,12 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		err = s.Pet().Update(p)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update pet.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update pet. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating pet.", fmt.Sprintf("%d", http.StatusBadRequest),
+			 fmt.Sprintf("Can't update pet. Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update pet with id = %d", p.PetID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated pet with id = %d", p.PetID)})
 	}
 }
