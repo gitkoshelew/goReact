@@ -6,7 +6,7 @@ COPY . /app
 
 RUN ls -la
 
-RUN npm install
+RUN npm ci
 
 RUN apt update
 RUN apt install dos2unix
