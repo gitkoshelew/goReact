@@ -50,12 +50,12 @@ func CreateHotel(s *store.Store) httprouter.Handle {
 		_, err = s.Hotel().Create(&h)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create hotel.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create Hotel. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating hotel.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while creating hotel. Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Creat hotel with id = %d", h.HotelID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created hotel with id = %d", h.HotelID)})
 	}
 
 }
