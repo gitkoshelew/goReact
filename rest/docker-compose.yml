@@ -78,11 +78,11 @@ services:
         depends_on:
             - authdb
 
-    userservice:
-        container_name: userservice
+    customerservice:
+        container_name: customerservice
         build:
             dockerfile: dockerfile
-            context: ./user
+            context: ./customer
         ports:
             - "1112:1112"
         env_file:
@@ -97,19 +97,19 @@ services:
         networks:
             - new
         depends_on:
-            - userdb
+            - customerdb
 
-    userdb:
-        container_name: userdb
+    customerdb:
+        container_name: customerdb
         image: postgres:latest
         env_file:
             - .env
         environment:
-            - POSTGRES_USER=${USER_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${USER_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${USER_POSTGRES_DB}
-            - POSTGRES_HOST=${USER_POSTGRES_HOST}
-            - POSTGRES_SSLMODE=${USER_POSTGRES_SSLMODE}
+            - POSTGRES_USER=${CUSTOMER_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${CUSTOMER_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${CUSTOMER_POSTGRES_DB}
+            - POSTGRES_HOST=${CUSTOMER_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${CUSTOMER_POSTGRES_SSLMODE}
         ports:
             - "8082:5432"
         restart: always
@@ -120,38 +120,38 @@ services:
                 aliases:
                     - database
 
-    user_migrate:
-        container_name: user_migrate
+    customer_migrate:
+        container_name: customer_migrate
         image: migrate/migrate
         restart: on-failure
         networks:
             - new
         volumes:
-            - ./user/migrations:/user/migrations
+            - ./customer/migrations:/customer/migrations
         command:
             [
                 "-path",
-                "user/migrations",
+                "customer/migrations",
                 "-database",
-                "postgres://user:userpass@userdb:5432/userdb?sslmode=disable",
+                "postgres://user:userpass@customerdb:5432/customerdb?sslmode=disable",
                 "up"
             ]
         links:
-            - userdb
+            - customerdb
         depends_on:
-            - userdb
+            - customerdb
 
-    userdbtest:
-        container_name: userdbtest
+    customerdbtest:
+        container_name: customerdbtest
         image: postgres:latest
         env_file:
             - .env
         environment:
-            - POSTGRES_USER=${TEST_USER_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${TEST_USER_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${TEST_USER_POSTGRES_DB}
-            - POSTGRES_HOST=${TEST_USER_POSTGRES_HOST}
-            - POSTGRES_SSLMODE=${TEST_USER_POSTGRES_SSLMODE}
+            - POSTGRES_USER=${TEST_CUSTOMER_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_CUSTOMER_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_CUSTOMER_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_CUSTOMER_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_CUSTOMER_POSTGRES_SSLMODE}
         ports:
             - "8083:5432"
         restart: unless-stopped
@@ -162,26 +162,26 @@ services:
                 aliases:
                     - database
 
-    test_user_migrate:
-        container_name: test_user_migrate
+    test_customer_migrate:
+        container_name: test_customer_migrate
         image: migrate/migrate
         restart: on-failure
         networks:
             - new
         volumes:
-            - ./user/migrations:/user/migrations
+            - ./customer/migrations:/customer/migrations
         command:
             [
                 "-path",
-                "user/migrations",
+                "customer/migrations",
                 "-database",
-                "postgres://user:userpass@userdbtest:5432/userdbtest?sslmode=disable",
+                "postgres://user:userpass@customerdbtest:5432/customerdbtest?sslmode=disable",
                 "up"
             ]
         links:
-            - userdbtest
+            - customerdbtest
         depends_on:
-            - userdbtest
+            - customerdbtest
 
     bookingservice:
         container_name: bookingservice
