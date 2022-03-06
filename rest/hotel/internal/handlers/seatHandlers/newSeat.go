@@ -37,7 +37,8 @@ func CreateSeat(s *store.Store) httprouter.Handle {
 		roomDTO, err := s.Room().FindByID(req.RoomID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Cant find room.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Cant find room. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting seat by id.", fmt.Sprintf("%d", http.StatusBadRequest),
+				fmt.Sprintf("Error occured while getting seat by id. Err msg:%v.", err)))
 			return
 		}
 		s.Logger.Info("roomDTO :", roomDTO)
@@ -45,7 +46,7 @@ func CreateSeat(s *store.Store) httprouter.Handle {
 		room, err := s.Room().RoomFromDTO(roomDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting room by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting room by id. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring roomDTO.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while convetring roomDTO. Err msg:%v.", err)))
 			return
 		}
 		s.Logger.Info("room :", room)
@@ -62,18 +63,20 @@ func CreateSeat(s *store.Store) httprouter.Handle {
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest),
+				fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
 		}
 
 		_, err = s.Seat().Create(&seat)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create seat.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create seat. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating seat .", fmt.Sprintf("%d", http.StatusBadRequest),
+				fmt.Sprintf("Error occured while creating seat . Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Creat seat with id = %d", seat.SeatID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created seat with id = %d", seat.SeatID)})
 	}
 }

@@ -19,7 +19,7 @@ func (r *SeatRepository) Create(s *model.Seat) (*model.Seat, error) {
 		s.RentTo,
 		s.Description,
 	).Scan(&s.SeatID); err != nil {
-		r.Store.Logger.Errorf("Can't create seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while creating seat. Err msg:%v.", err)
 		return nil, err
 	}
 	r.Store.Logger.Info("Created seat with id = %d", s.SeatID)
@@ -30,7 +30,7 @@ func (r *SeatRepository) Create(s *model.Seat) (*model.Seat, error) {
 func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM seat")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find seats. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
 	}
 	seats := []model.SeatDTO{}
 
@@ -44,7 +44,7 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 			&seat.RentTo,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find seats. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
 			continue
 		}
 		seats = append(seats, seat)
@@ -63,7 +63,7 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 		&seatDTO.RentFrom,
 		&seatDTO.RentTo,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg:%v.", err)
 		return nil, err
 	}
 	return seatDTO, nil
@@ -73,18 +73,18 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 func (r *SeatRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM seat WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't delete seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg:%v.", err)
 		return err
 	}
 	r.Store.Logger.Info("Seat deleted, rows affectet: %d", result)
@@ -103,10 +103,10 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 		s.SeatID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't update seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating seat. Err msg:%v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Update seat with id = %d,rows affectet: %d ", s.SeatID, result)
+	r.Store.Logger.Info("Updated seat with id = %d,rows affectet: %d ", s.SeatID, result)
 	return nil
 }
 
@@ -114,13 +114,13 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 func (r *SeatRepository) SeatFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 	roomDTO, err := r.Store.Room().FindByID(dto.RoomID)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't convert seatDTO. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while convetring roomDTO. Err msg: %v", err)
 		return nil, err
 	}
 
 	room, err := r.Store.Room().RoomFromDTO(roomDTO)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't convert seatDTO. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while convetring roomDTO. Err msg: %v", err)
 		return nil, err
 	}
 
