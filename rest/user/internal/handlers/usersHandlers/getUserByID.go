@@ -21,7 +21,8 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id")), fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))))
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id")),
+				fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))))
 			return
 		}
 
@@ -33,8 +34,8 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 		}
 		user, err := s.User().FindByID(id)
 		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find employee.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find employee. Err msg:%v.", err)))
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting user by id", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 

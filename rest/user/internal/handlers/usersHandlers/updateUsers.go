@@ -27,13 +27,14 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", r.Body), fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			return
 		}
 
 		u, err := s.User().FindByID(req.UserID)
 		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find user.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find user. Err msg:%v.", err)))
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting user by id", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
@@ -88,12 +89,12 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		err = s.User().Update(u)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update user.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update user. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating user.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while updating user. Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update user with id = %d", u.UserID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated user with id = %d", u.UserID)})
 
 	}
 }

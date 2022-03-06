@@ -83,11 +83,12 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		err = s.Pet().Update(p)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't update pet.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't update pet. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating pet.", fmt.Sprintf("%d", http.StatusBadRequest),
+			 fmt.Sprintf("Can't update pet. Err msg:%v.", err)))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Update pet with id = %d", p.PetID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated pet with id = %d", p.PetID)})
 	}
 }

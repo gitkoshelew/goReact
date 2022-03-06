@@ -21,7 +21,8 @@ func CreatePet(s *store.Store) httprouter.Handle {
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %w", r.Body, err)
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", r.Body), fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", r.Body),
+				fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
 
@@ -29,6 +30,7 @@ func CreatePet(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			return
 		}
 
 		user, err := s.User().FindByID(req.OwnerID)
@@ -59,7 +61,7 @@ func CreatePet(s *store.Store) httprouter.Handle {
 		_, err = s.Pet().Create(&p)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating pet", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating pet", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 

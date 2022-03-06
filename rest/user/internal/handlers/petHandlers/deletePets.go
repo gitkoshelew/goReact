@@ -20,7 +20,8 @@ func DeletePet(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id")), fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))))
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id")),
+				fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))))
 			return
 		}
 		err = s.Open()
@@ -32,8 +33,8 @@ func DeletePet(s *store.Store) httprouter.Handle {
 
 		err = s.Pet().Delete(id)
 		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while deleting pet ", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while deleting pet ", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 		w.WriteHeader(http.StatusOK)

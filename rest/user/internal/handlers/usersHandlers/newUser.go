@@ -28,7 +28,8 @@ func NewUser(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", r.Body), fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			return
 		}
 
 		u := model.User{
@@ -65,11 +66,11 @@ func NewUser(s *store.Store) httprouter.Handle {
 		_, err = s.User().Create(&u)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't create user.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Can't create user. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating user", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Creat user with id = %d", u.UserID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created user with id = %d", u.UserID)})
 	}
 }
