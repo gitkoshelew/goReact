@@ -38,6 +38,8 @@ func (r *RoomRepository) GetAll() (*[]model.Room, error) {
 			&room.RoomNumber,
 			&room.PetType,
 			&room.Hotel.HotelID,
+			&room.RoomPhotoURL,
+
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Can't find rooms. Err msg: %v", err)

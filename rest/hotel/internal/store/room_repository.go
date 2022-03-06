@@ -14,8 +14,11 @@ type RoomRepository struct {
 // Create room and save it to DB
 func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room (pet_type, number, hotel_id) VALUES ($1, $2, $3) RETURNING id",
-		string(rm.PetType), rm.RoomNumber, rm.Hotel.HotelID).Scan(&rm.RoomID); err != nil {
+		"INSERT INTO room (pet_type, number, hotel_id , photo) VALUES ($1, $2, $3, $4) RETURNING id",
+		string(rm.PetType),
+		rm.RoomNumber,
+		rm.Hotel.HotelID,
+		rm.RoomPhotoURL).Scan(&rm.RoomID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating room. Err msg:%v.", err)
 		return nil, err
 	}
@@ -38,6 +41,7 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 			&room.RoomNumber,
 			&room.PetType,
 			&room.HotelID,
+			&room.RoomPhotoURL,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
@@ -57,6 +61,7 @@ func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 		&room.RoomNumber,
 		&room.PetType,
 		&room.HotelID,
+		&room.RoomPhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg:%v.", err)
 		return nil, err
@@ -90,10 +95,11 @@ func (r *RoomRepository) Delete(id int) error {
 func (r *RoomRepository) Update(rm *model.Room) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3 WHERE id = $4",
+		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photo = $4 WHERE id = $5",
 		rm.RoomNumber,
 		string(rm.PetType),
 		rm.Hotel.HotelID,
+		rm.RoomPhotoURL,
 		rm.RoomID,
 	)
 	if err != nil {
@@ -122,6 +128,7 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.RoomDTO,
 			&room.RoomNumber,
 			&room.PetType,
 			&room.HotelID,
+			&room.RoomPhotoURL,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
