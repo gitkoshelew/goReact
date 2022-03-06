@@ -20,21 +20,21 @@ var (
 	AuthRefreshService = New(fmt.Sprintf("http://%s:%s", os.Getenv("AUTH_SERVER_DOCKER_HOST"), os.Getenv("AUTH_SERVER_PORT")), "/refresh")
 
 	// CustomerGetAllUsersService ...
-	CustomerGetAllUsersService = New(fmt.Sprintf("http://%s:%s", os.Getenv("USER_SERVER_DOCKER_HOST"), os.Getenv("USER_SERVER_PORT")), "/users")
+	CustomerGetAllUsersService = New(fmt.Sprintf("http://%s:%s", os.Getenv("CUSTOMER_SERVER_DOCKER_HOST"), os.Getenv("CUSTOMER_SERVER_PORT")), "/users")
 	// CustomerUserService using methods:
 	// "POST" to create
 	// "PUT" to update
 	// "GET" to get one by id. Using querry params (/user/:id)
 	// "DELETE" to delete by id. Using querry params (/user/:id)
-	CustomerUserService = New(fmt.Sprintf("http://%s:%s", os.Getenv("USER_SERVER_DOCKER_HOST"), os.Getenv("USER_SERVER_PORT")), "/user")
+	CustomerUserService = New(fmt.Sprintf("http://%s:%s", os.Getenv("CUSTOMER_SERVER_DOCKER_HOST"), os.Getenv("CUSTOMER_SERVER_PORT")), "/user")
 	// CustomerGetAllPetsService ...
-	CustomerGetAllPetsService = New(fmt.Sprintf("http://%s:%s", os.Getenv("USER_SERVER_DOCKER_HOST"), os.Getenv("USER_SERVER_PORT")), "/pets")
+	CustomerGetAllPetsService = New(fmt.Sprintf("http://%s:%s", os.Getenv("CUSTOMER_SERVER_DOCKER_HOST"), os.Getenv("CUSTOMER_SERVER_PORT")), "/pets")
 	// CustomerPetService using methods:
 	// "POST" to create
 	// "PUT" to update
 	// "GET" to get one by id. Using querry params (/user/:id)
 	// "DELETE" to delete by id. Using querry params (/user/:id)
-	CustomerPetService = New(fmt.Sprintf("http://%s:%s", os.Getenv("USER_SERVER_DOCKER_HOST"), os.Getenv("USER_SERVER_PORT")), "/pet")
+	CustomerPetService = New(fmt.Sprintf("http://%s:%s", os.Getenv("CUSTOMER_SERVER_DOCKER_HOST"), os.Getenv("CUSTOMER_SERVER_PORT")), "/pet")
 
 	// BookingGetAllUsersService ...
 	BookingGetAllUsersService = New(fmt.Sprintf("http://%s:%s", os.Getenv("BOOKING_SERVER_DOCKER_HOST"), os.Getenv("BOOKING_SERVER_PORT")), "/bookings")
