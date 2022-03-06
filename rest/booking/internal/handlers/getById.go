@@ -19,7 +19,8 @@ func GetByIDHandle(s *store.Store) httprouter.Handle {
 		id, err := strconv.Atoi(ps.ByName("id"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
+			s.Logger.Errorf("Bad request. Err msg:%w. Requests body: %s", err, ps.ByName("id"))
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Bad request. Err msg:%v. Requests body: %s", err, ps.ByName("id")), fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
@@ -32,8 +33,8 @@ func GetByIDHandle(s *store.Store) httprouter.Handle {
 
 		booking, err := s.Booking().FindByID(id)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting booking by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting booking by id", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 

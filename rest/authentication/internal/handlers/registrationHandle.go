@@ -4,13 +4,16 @@ import (
 	"authentication/domain/model"
 	"authentication/internal/apperror"
 	"authentication/internal/store"
-	"authentication/pkg/response"
 	"encoding/json"
 	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 )
+
+type authDataID struct {
+	ID int `json:"authDataId,omitempty"`
+}
 
 // RegistrationHandle ...
 func RegistrationHandle(s *store.Store) httprouter.Handle {
@@ -39,14 +42,17 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		_, err = s.User().Create(req)
+		user, err := s.User().Create(req)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Cant create user", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
+		authData := authDataID{
+			ID: user.UserID,
+		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", req.UserID)})
+		json.NewEncoder(w).Encode(authData)
 	}
 }

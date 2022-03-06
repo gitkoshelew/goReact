@@ -27,15 +27,6 @@ const (
 	AnonymousRole Role = "anonymous"
 )
 
-// Sex ...
-type Sex string
-
-// Sex constants
-const (
-	SexMale   Sex = "male"
-	SexFemale Sex = "female"
-)
-
 var (
 	logger = logging.GetLogger()
 )

@@ -25,7 +25,7 @@ func AllEmployeeHandler(s *store.Store) httprouter.Handle {
 		employees, err := s.Employee().GetAll()
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Can't find employees", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't find employees. Err msg: %v", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("error occured while getting all employees", fmt.Sprintf("%d", http.StatusNotFound), fmt.Sprintf("error occured while getting all employees. Err msg: %v", err)))
 			return
 		}
 

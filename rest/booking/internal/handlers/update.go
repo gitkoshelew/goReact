@@ -20,8 +20,8 @@ func UpdateHandle(s *store.Store) httprouter.Handle {
 		req := &model.Booking{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %w", r.Body, err)
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", r.Body), fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			s.Logger.Errorf("Error occured while JSON request decoding. Request body: %v, Err msg: %w", r.Body, err)
+			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Error occured while JSON request decoding. Request body: %v", r.Body), fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
@@ -31,6 +31,8 @@ func UpdateHandle(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
+
+		// validate ?
 
 		err = s.Booking().Update(req)
 		if err != nil {
