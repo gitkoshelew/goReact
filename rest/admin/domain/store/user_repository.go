@@ -13,7 +13,7 @@ type UserRepository struct {
 // Create user and save it to DB
 func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	if err := u.Validate(); err != nil {
-		r.Store.Logger.Errorf("Can't create user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while creating user. Err msg:%v.", err)
 		return nil, err
 	}
 
@@ -25,7 +25,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 
 	if emailIsUsed {
 		err := errors.New("email already in use")
-		r.Store.Logger.Errorf("Can't create user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while creating user. Err msg:%v.", err)
 		return nil, err
 	}
 
@@ -47,7 +47,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		u.Phone,
 		u.Photo,
 	).Scan(&u.UserID); err != nil {
-		r.Store.Logger.Errorf("Can't create user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while creating user. Err msg:%v.", err)
 		return nil, err
 	}
 	r.Store.Logger.Info("Created user with id = %d", u.UserID)
@@ -58,7 +58,7 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find users. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting all users. Err msg: %v", err)
 		return nil, err
 	}
 	users := []model.User{}
@@ -81,7 +81,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Photo,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find users. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occurred while getting all users. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -108,7 +108,7 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Can't find user. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting user by email. Err msg: %v", err)
 		return nil, err
 	}
 	return user, nil
@@ -133,7 +133,7 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Can't find user. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting user by id. Err msg: %v", err)
 		return nil, err
 	}
 	return user, nil
@@ -143,18 +143,18 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 func (r *UserRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM users WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting user. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting user. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting user. Err msg:%v.", err)
 		return err
 	}
 
@@ -166,7 +166,7 @@ func (r *UserRepository) Delete(id int) error {
 func (r *UserRepository) Update(u *model.User) error {
 	encryptedPassword, err := model.EncryptPassword(u.Password)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't't encrypt password. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while encrypting password. Err msg: %v", err)
 		return err
 	}
 
@@ -191,7 +191,7 @@ func (r *UserRepository) Update(u *model.User) error {
 		u.UserID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't't set into users table. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while updating user. Err msg: %v", err)
 		return err
 	}
 	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
@@ -206,19 +206,19 @@ func (r *UserRepository) VerifyEmail(userID int) error {
 		userID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't't verify email. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while verifying email. Err msg: %v", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't't verify email. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while verifying email. Err msg: %v", err)
 		return nil
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't delete user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while verifying email. Err msg: %v", err)
 		return err
 	}
 
