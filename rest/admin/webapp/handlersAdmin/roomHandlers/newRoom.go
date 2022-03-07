@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -32,7 +33,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 
 		roomNumber, err := strconv.Atoi(r.FormValue("RoomNumber"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomNumber")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomNumber"))
 			return
 		}
@@ -40,14 +41,14 @@ func NewRoom(s *store.Store) httprouter.Handle {
 
 		hotelID, err := strconv.Atoi(r.FormValue("HotelID"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID"))
 			return
 		}
 
 		hotel, err := s.Hotel().FindByID(hotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		photo := r.FormValue("Photo")
@@ -69,7 +70,7 @@ func NewRoom(s *store.Store) httprouter.Handle {
 
 		_, err = s.Room().Create(&room)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while creating room. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homerooms/", http.StatusFound)

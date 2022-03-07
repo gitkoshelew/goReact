@@ -3,6 +3,7 @@ package permission
 import (
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"text/template"
 
@@ -27,7 +28,7 @@ func ShowAllPermissions(s *store.Store) httprouter.Handle {
 		}
 		per, err := s.Permissions().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all permissions. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 

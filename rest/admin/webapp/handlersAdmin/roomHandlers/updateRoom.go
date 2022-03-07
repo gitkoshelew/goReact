@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -32,10 +33,11 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 
 		roomid, err := strconv.Atoi(r.FormValue("RoomID"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID"))
 			return
 		}
+		
 
 		room, err := s.Room().FindByID(roomid)
 		if err != nil {
@@ -61,7 +63,7 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 			if hotelID != 0 {
 				hotel, err := s.Hotel().FindByID(hotelID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				room.Hotel = *hotel
@@ -81,7 +83,7 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 
 		err = s.Room().Update(room)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while updating room. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homerooms/", http.StatusFound)

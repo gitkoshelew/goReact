@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -49,7 +50,7 @@ func NewHotel(s *store.Store) httprouter.Handle {
 
 		_, err = s.Hotel().Create(&h)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while creating hotel. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 

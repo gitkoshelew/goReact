@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"text/template"
 
@@ -30,7 +31,7 @@ func AllEmployeeHandler(s *store.Store) httprouter.Handle {
 
 		employees, err := s.Employee().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all employees. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 

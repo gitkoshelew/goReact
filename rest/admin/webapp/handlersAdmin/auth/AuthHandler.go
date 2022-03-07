@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -19,8 +20,8 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 		s.Open()
 		user, err := s.User().FindByEmail(EmailForm)
 		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while checking users email or password. Err msg:%v. ", err), http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while checking users email or password. Err msg: %s", err.Error())
-			http.Error(w, "Error occured while checking users email or password", 400)
 			return
 		}
 
@@ -29,8 +30,8 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 
 		err = model.CheckPasswordHash(hashPassword, Password)
 		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while checking users email or password. Err msg:%v. ", err), http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while checking users email or password. Err msg: %s", err.Error())
-			http.Error(w, "Error occured while checking users email or password", 400)
 			return
 		}
 
@@ -42,13 +43,13 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 
 		employee, err := s.Employee().FindByUserID(userID)
 		if err != nil {
-			http.Error(w, "Error occured while getting employee", http.StatusBadRequest)
+			http.Error(w, "Error occured while getting employee", http.StatusInternalServerError)
 			return
 		}
 
 		permissions, err := s.Permissions().GetByEmployeeId(employee.EmployeeID)
 		if err != nil {
-			http.Error(w, "Error occured while getting permossions", http.StatusBadRequest)
+			http.Error(w, "Error occured while getting permossions", http.StatusInternalServerError)
 			return
 		}
 

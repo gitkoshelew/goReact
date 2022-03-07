@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 
 	"net/http"
 	"strconv"
@@ -28,7 +29,7 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
@@ -40,7 +41,7 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 		}
 		user, err := s.User().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 

@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"text/template"
 
@@ -30,7 +31,7 @@ func AllHotelsHandler(s *store.Store) httprouter.Handle {
 		}
 		hotels, err := s.Hotel().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all hotels. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 

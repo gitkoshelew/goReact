@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -31,27 +32,27 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 		}
 		userID, err := strconv.Atoi(r.FormValue("UserID"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
 			return
 		}
 
 		user, err := s.User().FindByID(userID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while finding user by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
 		hotelID, err := strconv.Atoi(r.FormValue("HotelID"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID"))
 			return
 		}
 
 		hotel, err := s.Hotel().FindByID(hotelID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while finding hotel by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
@@ -73,7 +74,7 @@ func NewEmployee(s *store.Store) httprouter.Handle {
 
 		_, err = s.Employee().Create(&e)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while creating employee. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeemployees/", http.StatusFound)

@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"text/template"
 
@@ -30,7 +31,7 @@ func AllPetsHandler(s *store.Store) httprouter.Handle {
 		}
 		pets, err := s.Pet().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all pets. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 

@@ -6,6 +6,7 @@ import (
 	"admin/webapp/middlewear"
 	"admin/webapp/session"
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -30,15 +31,15 @@ func PrintAllUsersCSV(s *store.Store, next http.Handler) httprouter.Handle {
 
 		users, err := s.User().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all users. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 		name := "allusers.csv"
 
 		path, err := csv.MakeCSV(users, name)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while recording to csv:", err)
+			http.Error(w, fmt.Sprintf("Error occured while recording to csv. Err msg:%v. ", err), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while recording to csv. Err msg:%v.", err)
 			return
 		}
 

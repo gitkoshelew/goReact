@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -39,7 +40,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 
 		pet, err := s.Pet().FindByID(petID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting pet by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
@@ -48,7 +49,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 			if userID != 0 {
 				user, err := s.User().FindByID(userID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				pet.Owner = *user
@@ -68,7 +69,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		weight, err := strconv.ParseFloat(r.FormValue("Weight"), 32)
 		if err == nil {
 			if weight != 0 {
-				pet.Weight = float32(weight)
+				pet.Weight = weight
 			}
 		}
 
@@ -91,7 +92,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 
 		err = s.Pet().Update(pet)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while updating pet. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homepets/", http.StatusFound)

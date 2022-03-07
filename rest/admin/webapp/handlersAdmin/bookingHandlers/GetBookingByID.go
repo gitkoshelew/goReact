@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -26,7 +27,7 @@ func GetBookingByID(s *store.Store) httprouter.Handle {
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
@@ -39,7 +40,7 @@ func GetBookingByID(s *store.Store) httprouter.Handle {
 
 		booking, err := s.Booking().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting booking by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		bookings = append(bookings, *booking)

@@ -3,6 +3,7 @@ package permission
 import (
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -29,15 +30,15 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 
 		per, err := s.Permissions().GetByEmployeeId(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't find permissions. Err msg: %v", err)
+			http.Error(w, fmt.Sprintf("Error occured while getting permission by employee id. Err msg:%v. ", err), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while getting permission by employee id. Err msg: %v", err)
 			return
 		}
 

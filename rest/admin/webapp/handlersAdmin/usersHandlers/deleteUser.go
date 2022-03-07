@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -26,9 +27,8 @@ func DeleteUser(s *store.Store) httprouter.Handle {
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
-			http.Redirect(w, r, "/admin/homeusers", http.StatusFound)
 			return
 		}
 		err = s.Open()
@@ -38,7 +38,7 @@ func DeleteUser(s *store.Store) httprouter.Handle {
 		}
 		err = s.User().Delete(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while deleting users. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeusers", http.StatusFound)

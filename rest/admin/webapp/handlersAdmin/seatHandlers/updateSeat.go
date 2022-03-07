@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -33,14 +34,14 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 
 		seatid, err := strconv.Atoi(r.FormValue("SeatID"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("SeatID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("SeatID"))
 			return
 		}
 
 		seat, err := s.Seat().FindByID(seatid)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting seat by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
@@ -49,7 +50,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 			if roomID != 0 {
 				room, err := s.Room().FindByID(roomID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while getting room by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				seat.Room = *room
@@ -66,7 +67,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 		if rentFrom != "" {
 			rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
 			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
 				return
 			}
@@ -77,8 +78,8 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 		if rentTo != "" {
 			rentTo, err := time.Parse(layout, r.FormValue("RentTo"))
 			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
-				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo")), http.StatusBadRequest)
+				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 				return
 			}
 			seat.RentTo = rentTo
@@ -93,7 +94,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 
 		err = s.Seat().Update(seat)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while updating seat. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeseats/", http.StatusFound)
