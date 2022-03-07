@@ -18,14 +18,14 @@ func DownloadFileHandler(s *store.Store) http.HandlerFunc {
 		path, err := middlewear.CtxFile(r.Context())
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Cannot parse file: %v", err)
+			s.Logger.Errorf("Error occured while parsing file: %v", err)
 			return
 		}
 
 		file, err := os.Open(path)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Cannot parse file: %v", err)
+			s.Logger.Errorf("Error occured while parsing file: %v", err)
 			return
 		}
 
@@ -40,7 +40,7 @@ func DownloadFileHandler(s *store.Store) http.HandlerFunc {
 		_, err = io.Copy(w, file)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Cannot send file: %v", err)
+			s.Logger.Errorf("Error occured while sending file: %v", err)
 			return
 		}
 

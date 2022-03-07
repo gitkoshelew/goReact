@@ -34,13 +34,13 @@ func (s *Server) Start() error {
 
 	err := session.OpenSessionStore(s.config)
 	if err != nil {
-		s.logger.Errorf("Error while open sessions store. ERR MSG: %s", err.Error())
+		s.logger.Errorf("Error occurred while opening sessions store. ERR MSG: %s", err.Error())
 		return err
 	}
 	s.logger.Info("Session store started successfully")
 
 	if err := s.configureStore(); err != nil {
-		s.logger.Errorf("Error while configure store. ERR MSG: %s", err.Error())
+		s.logger.Errorf("Error occurred while configuring store. ERR MSG: %s", err.Error())
 		return err
 	}
 	s.logger.Info("Store started successfully")
