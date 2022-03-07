@@ -19,13 +19,13 @@ func NewHotel(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_create.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		name := r.FormValue("Name")

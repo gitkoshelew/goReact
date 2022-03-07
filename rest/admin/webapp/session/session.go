@@ -106,7 +106,6 @@ func CheckRigths(w http.ResponseWriter, r *http.Request, name model.PermissionNa
 
 	str := fmt.Sprintf("%v", permissions)
 
-	//	contain := strings.Contains(str, name.PermissionNameToString())
 	contain := strings.Contains(str, string(name))
 	if !contain {
 		err = fmt.Errorf("not enough rights")

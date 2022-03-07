@@ -22,7 +22,7 @@ func AllPermissionsEmployees(s *store.Store) httprouter.Handle {
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		per, err := s.PermissionsEmployee().GetAll()
@@ -39,14 +39,14 @@ func AllPermissionsEmployees(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, per)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not execute template: %v", err)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
 			return
 		}
 

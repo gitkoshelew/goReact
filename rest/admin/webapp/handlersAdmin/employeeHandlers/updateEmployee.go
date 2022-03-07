@@ -17,22 +17,22 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permission_create.Name)
+		err := session.CheckRigths(w, r, permission_update.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
 			return
 		}

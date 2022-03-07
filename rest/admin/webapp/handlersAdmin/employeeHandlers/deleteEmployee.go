@@ -20,25 +20,25 @@ func DeleteEmployee(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_delete.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			http.Redirect(w, r, "/admin/homeemployees", http.StatusFound)
 			return
 		}
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		err = s.Employee().Delete(id)
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeemployees", http.StatusFound)

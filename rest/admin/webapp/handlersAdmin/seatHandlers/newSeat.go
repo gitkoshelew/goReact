@@ -21,19 +21,19 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_create.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		roomID, err := strconv.Atoi(r.FormValue("RoomID"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID"))
 			return
 		}
@@ -41,7 +41,6 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		room, err := s.Room().FindByID(roomID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Can't find hotel. Err msg:%v.", err)
 			return
 		}
 
@@ -50,14 +49,14 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		layout := "2006-01-02"
 		rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
 			return
 		}
 
 		rentTo, err := time.Parse(layout, r.FormValue("RentTo"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 			return
 		}

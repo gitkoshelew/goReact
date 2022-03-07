@@ -23,13 +23,13 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
@@ -49,14 +49,14 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, per)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not execute template: %v", err)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
 			return
 		}
 

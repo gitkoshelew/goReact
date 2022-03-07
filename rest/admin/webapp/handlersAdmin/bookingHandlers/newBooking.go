@@ -13,7 +13,6 @@ import (
 
 var permission_create model.Permission = model.Permission{Name: model.CreatBooking}
 
-
 // NewBooking ...
 func NewBooking(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -22,20 +21,20 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_create.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		seatID, err := strconv.Atoi(r.FormValue("SeatID"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("SeatID"))
 			return
 		}
 		seat, err := s.Seat().FindByID(seatID)
@@ -47,7 +46,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		petID, err := strconv.Atoi(r.FormValue("PetID"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("PetID"))
 			return
 		}
 		pet, err := s.Pet().FindByID(petID)
@@ -57,8 +56,8 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		}
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EmployeeID"))
 			return
 		}
 		employee, err := s.Employee().FindByID(employeeID)
@@ -70,13 +69,13 @@ func NewBooking(s *store.Store) httprouter.Handle {
 		layout := "2006-01-02"
 		startDate, err := time.Parse(layout, r.FormValue("StartDate"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("StartDate"))
 			return
 		}
 		endDate, err := time.Parse(layout, r.FormValue("EndDate"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EndDate"))
 			return
 		}
@@ -84,7 +83,7 @@ func NewBooking(s *store.Store) httprouter.Handle {
 
 		paid, err := strconv.ParseBool(r.FormValue("Paid"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Paid"))
 			return
 		}
