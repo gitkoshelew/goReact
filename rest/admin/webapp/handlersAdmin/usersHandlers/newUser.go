@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -27,15 +28,16 @@ func NewUser(s *store.Store) httprouter.Handle {
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
+
 		email := r.FormValue("Email")
 		password := r.FormValue("Password")
 		role := r.FormValue("Role")
 		verified, err := strconv.ParseBool(r.FormValue("Verified"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
 			return
 		}
@@ -47,7 +49,7 @@ func NewUser(s *store.Store) httprouter.Handle {
 		layout := "2006-01-02"
 		dateOfBirth, err := time.Parse(layout, r.FormValue("DateOfBirth"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
 			return
 		}
@@ -87,7 +89,7 @@ func NewUser(s *store.Store) httprouter.Handle {
 
 		_, err = s.User().Create(&u)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while creating user. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeusers/", http.StatusFound)

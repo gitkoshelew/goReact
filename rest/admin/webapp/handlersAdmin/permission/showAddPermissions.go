@@ -3,6 +3,7 @@ package permission
 import (
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"text/template"
 
@@ -22,12 +23,12 @@ func ShowAllPermissions(s *store.Store) httprouter.Handle {
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		per, err := s.Permissions().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all permissions. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 
@@ -39,14 +40,14 @@ func ShowAllPermissions(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, per)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not execute template: %v", err)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
 			return
 		}
 

@@ -6,6 +6,7 @@ import (
 	"admin/webapp/middlewear"
 	"admin/webapp/session"
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -18,27 +19,27 @@ func PrintAllUsersCSV(s *store.Store, next http.Handler) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_read.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		users, err := s.User().GetAll()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all users. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 		name := "allusers.csv"
 
 		path, err := csv.MakeCSV(users, name)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("error writing record to csv:", err)
+			http.Error(w, fmt.Sprintf("Error occured while recording to csv. Err msg:%v. ", err), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while recording to csv. Err msg:%v.", err)
 			return
 		}
 

@@ -90,7 +90,7 @@ func CheckRigths(w http.ResponseWriter, r *http.Request, name model.PermissionNa
 
 	position, ok := session.Values["EmployeePosition"]
 	if !ok {
-		err = fmt.Errorf("no permissions in session")
+		err = fmt.Errorf("error occurred while getting permissions")
 		return err
 	}
 
@@ -100,40 +100,16 @@ func CheckRigths(w http.ResponseWriter, r *http.Request, name model.PermissionNa
 
 	permissions, ok := session.Values["Permissions"]
 	if !ok {
-		err = fmt.Errorf("no permissions in session")
+		err = fmt.Errorf("error occurred while getting permissions")
 		return err
 	}
 
 	str := fmt.Sprintf("%v", permissions)
 
-	//	contain := strings.Contains(str, name.PermissionNameToString())
 	contain := strings.Contains(str, string(name))
 	if !contain {
-		err = fmt.Errorf("not enough rights")
+		err = fmt.Errorf("аccess is denied")
 		return err
 	}
-	return nil
-}
-
-//IsAdmin check if empolyee is admin
-func IsAdmin(w http.ResponseWriter, r *http.Request) error {
-
-	session, err := sstore.PGStore.Get(r, "session-key")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return err
-	}
-
-	position, ok := session.Values["EmployeePosition"]
-	if !ok {
-		err = fmt.Errorf("no permissions in session")
-		return err
-	}
-
-	if position.(string) != "admin" {
-		err = fmt.Errorf("you are not admin")
-		return err
-	}
-
 	return nil
 }

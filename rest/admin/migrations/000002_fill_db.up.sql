@@ -14,9 +14,9 @@ INSERT INTO HOTEL (name, address) VALUES
 ('PetsHotel3','ul. Ilimskaya 33');
 
 INSERT INTO ROOM (pet_type, number, hotel_id) VALUES 
-('Cat', 101, 1),
-('Dog', 202, 2),
-('Cat', 303, 3);
+('cat', 101, 1),
+('dog', 202, 2),
+('cat', 303, 3);
 
 INSERT INTO SEAT (room_id, is_free, description) VALUES 
 (1, false, 'VIP seat'),

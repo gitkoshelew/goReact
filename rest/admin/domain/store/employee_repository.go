@@ -17,7 +17,7 @@ func (r *EmployeeRepository) Create(e *model.Employee) (*model.Employee, error) 
 		e.Hotel.HotelID,
 		e.Position,
 	).Scan(&e.EmployeeID); err != nil {
-		r.Store.Logger.Errorf("Can't create employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while creating employee. Err msg:%v.", err)
 		return nil, err
 	}
 	return e, nil
@@ -27,7 +27,7 @@ func (r *EmployeeRepository) Create(e *model.Employee) (*model.Employee, error) 
 func (r *EmployeeRepository) GetAll() (*[]model.Employee, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM employee")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find employees. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting all employees. Err msg: %v", err)
 	}
 	employees := []model.Employee{}
 
@@ -40,7 +40,7 @@ func (r *EmployeeRepository) GetAll() (*[]model.Employee, error) {
 			&employee.Position,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find employees. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occurred while getting all employees. Err msg: %v", err)
 			continue
 		}
 		employees = append(employees, employee)
@@ -57,7 +57,7 @@ func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
 		&employee.Hotel.HotelID,
 		&employee.Position,
 	); err != nil {
-		r.Store.Logger.Errorf("Can't find employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while getting employee by id. Err msg:%v.", err)
 		return nil, err
 	}
 	return employee, nil
@@ -67,19 +67,19 @@ func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
 func (r *EmployeeRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM employee WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting employee. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting employee. Err msg:%v.", err)
 
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't delete employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting employee. Err msg:%v.", err)
 		return err
 	}
 
@@ -98,7 +98,7 @@ func (r *EmployeeRepository) Update(e *model.Employee) error {
 		e.EmployeeID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't update employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while updating employee. Err msg:%v.", err)
 		return err
 	}
 	r.Store.Logger.Info("Update employee with id = %d,rows affectet: %d ", e.EmployeeID, result)
@@ -114,7 +114,7 @@ func (r *EmployeeRepository) FindByUserID(userId int) (*model.Employee, error) {
 		&employee.Hotel.HotelID,
 		&employee.Position,
 	); err != nil {
-		r.Store.Logger.Errorf("Can't find employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while getting employee by user ID. Err msg:%v.", err)
 		return nil, err
 	}
 	return employee, nil

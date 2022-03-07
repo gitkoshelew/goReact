@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 	"text/template"
@@ -18,7 +19,7 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_read.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
@@ -26,20 +27,20 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 
 		room, err := s.Room().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting room by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		rooms = append(rooms, *room)
@@ -52,14 +53,14 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, rooms)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			s.Logger.Errorf("Can not execute template: %v", err)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
 			return
 		}
 	}
