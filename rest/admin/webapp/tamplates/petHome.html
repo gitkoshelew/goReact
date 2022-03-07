@@ -69,9 +69,11 @@
             <input type="text" name="Photo"><br><br>
             <button>New</button>
         </form>
-    </div>
+    </div>    
     {{end}}
+    
     <br><br>
+
     {{if .HasPermission "update_pet"}}
     <div>
         <h2>Update pet</h2>

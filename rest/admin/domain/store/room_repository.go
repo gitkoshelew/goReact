@@ -13,13 +13,15 @@ type RoomRepository struct {
 // Create room and save it to DB
 func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room (pet_type, number, hotel_id) VALUES ($1, $2, $3) RETURNING id",
-		string(rm.PetType), rm.RoomNumber, rm.Hotel.HotelID).Scan(&rm.RoomID); err != nil {
-		r.Store.Logger.Errorf("Error occurred while creating room. Err msg:%v.", err)
+		"INSERT INTO room (pet_type, number, hotel_id , photo) VALUES ($1, $2, $3, $4) RETURNING id",
+		string(rm.PetType),
+		rm.RoomNumber,
+		rm.Hotel.HotelID,
+		rm.RoomPhotoURL).Scan(&rm.RoomID); err != nil {
+		r.Store.Logger.Errorf("Error occured while creating room. Err msg:%v.", err)
 		return nil, err
 	}
 	r.Store.Logger.Info("Created room with id = %d", rm.RoomID)
-
 	return rm, nil
 }
 
@@ -58,6 +60,7 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 		&room.RoomNumber,
 		&room.PetType,
 		&room.Hotel.HotelID,
+		&room.RoomPhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occurred while getting room by id. Err msg:%v.", err)
 		return nil, err
@@ -91,16 +94,17 @@ func (r *RoomRepository) Delete(id int) error {
 func (r *RoomRepository) Update(rm *model.Room) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3 WHERE id = $4",
+		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photo = $4 WHERE id = $5",
 		rm.RoomNumber,
 		string(rm.PetType),
 		rm.Hotel.HotelID,
+		rm.RoomPhotoURL,
 		rm.RoomID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occurred while updating room. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating room. Err msg:%v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Update room with id = %d,rows affectet: %d ", rm.RoomID, result)
+	r.Store.Logger.Info("Updated room with id = %d,rows affectet: %d ", rm.RoomID, result)
 	return nil
 }

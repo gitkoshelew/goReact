@@ -68,7 +68,7 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 			}
 		}
 		photo := r.FormValue("Photo")
-		if petType != "" {
+		if photo != "" {
 			room.RoomPhotoURL = photo
 		}
 
