@@ -29,7 +29,7 @@ func UpdateBookingHandle(service *client.Client) httprouter.Handle {
 			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", bytes.NewReader(rBody)), fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
-
+		
 		var dataValidation = map[utils.DataValidation]int{
 			utils.PetValidation:      req.PetID,
 			utils.EmployeeValidation: req.EmployeeID,

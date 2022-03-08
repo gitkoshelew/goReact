@@ -8,14 +8,15 @@ import (
 
 // Booking struct
 type Booking struct {
-	BookingID int           `json:"bookingId"`
-	Seat      Seat          `json:"seat"`
-	Pet       Pet           `json:"pet"`
-	Employee  Employee      `json:"employeeId"`
-	Status    BookingStatus `json:"status"`
-	StartDate time.Time     `json:"start"`
-	EndDate   time.Time     `json:"end"`
-	Notes     string        `json:"notes"`
+	BookingID  int           `json:"bookingId"`
+	SeatID     int           `json:"seat"`
+	PetID      int           `json:"pet"`
+	EmployeeID int           `json:"employeeId"`
+	Status     BookingStatus `json:"status"`
+	StartDate  *time.Time    `json:"start"`
+	EndDate    *time.Time    `json:"end"`
+	Paid       *bool         `json:"paid"`
+	Notes      string        `json:"notes,omitempty"`
 }
 
 // BookingStatus ...
