@@ -47,7 +47,7 @@ func (s *Server) Start() error {
 
 	s.logger.Infof("Server starts at %s ...", s.config.ServerInfo())
 	CORS := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3001", "http://react-ngnix-app:3001"},
 		AllowedMethods: []string{
 			http.MethodHead,
 			http.MethodGet,
