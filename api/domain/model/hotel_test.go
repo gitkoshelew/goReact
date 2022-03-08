@@ -18,7 +18,7 @@ func TestHotel_Validate(t *testing.T) {
 			return model.TestHotel()
 		},
 		isValid: true,
-		},
+	},
 		{
 			name: "Invalid Name",
 			h: func() *model.Hotel {

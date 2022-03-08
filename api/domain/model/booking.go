@@ -2,6 +2,8 @@ package model
 
 import (
 	"time"
+
+	validation "github.com/go-ozzo/ozzo-validation"
 )
 
 // Booking struct
@@ -26,3 +28,14 @@ var (
 	BookingStatusCompleted  BookingStatus = "completed"
 	BookingStatusCancelled  BookingStatus = "cancelled"
 )
+
+func (b *Booking) Validate() error {
+	return validation.ValidateStruct(
+		b,
+		validation.Field(&b.Seat, validation.Required),
+		validation.Field(&b.Pet, validation.Required),
+		validation.Field(&b.Employee, validation.Required),
+		validation.Field(&b.StartDate, validation.Required),
+		validation.Field(&b.EndDate, validation.Required),
+	)
+}
