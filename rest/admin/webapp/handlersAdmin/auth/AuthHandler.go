@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -19,8 +20,8 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 		s.Open()
 		user, err := s.User().FindByEmail(EmailForm)
 		if err != nil {
-			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
-			http.Error(w, "Eror during checking users email or password", 400)
+			http.Error(w, fmt.Sprintf("Error occured while checking users email or password. Err msg:%v. ", err), http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while checking users email or password. Err msg: %s", err.Error())
 			return
 		}
 
@@ -29,26 +30,26 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 
 		err = model.CheckPasswordHash(hashPassword, Password)
 		if err != nil {
-			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
-			http.Error(w, "Eror during checking users email or password", 400)
+			http.Error(w, fmt.Sprintf("Error occured while checking users email or password. Err msg:%v. ", err), http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while checking users email or password. Err msg: %s", err.Error())
 			return
 		}
 
 		if user.Role != "employee" {
-			http.Error(w, "You are not employee", http.StatusForbidden)
-			s.Logger.Errorf("You are not employee")
+			http.Error(w, "Access is denied", http.StatusForbidden)
+			s.Logger.Errorf("Access is denied")
 			return
 		}
 
 		employee, err := s.Employee().FindByUserID(userID)
 		if err != nil {
-			http.Error(w, "No such employee", http.StatusBadRequest)
+			http.Error(w, "Error occured while getting employee", http.StatusInternalServerError)
 			return
 		}
 
 		permissions, err := s.Permissions().GetByEmployeeId(employee.EmployeeID)
 		if err != nil {
-			http.Error(w, "No such permossions", http.StatusBadRequest)
+			http.Error(w, "Error occured while getting permossions", http.StatusInternalServerError)
 			return
 		}
 

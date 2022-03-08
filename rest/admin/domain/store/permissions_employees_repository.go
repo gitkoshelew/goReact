@@ -13,7 +13,7 @@ type PermissionsEmployeeRepository struct {
 func (r *PermissionsEmployeeRepository) GetAll() (*[]model.Permissions_employees, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM permissions_employees")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find Permissions for employees. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting all permissions for employees. Err msg: %v", err)
 	}
 
 	permissions_employees := []model.Permissions_employees{}
@@ -25,7 +25,7 @@ func (r *PermissionsEmployeeRepository) GetAll() (*[]model.Permissions_employees
 			&permission_employees.Employee.EmployeeID,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find permissions_employees. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occurred while getting all permissions for employees. Err msg: %v", err)
 			continue
 		}
 		permissions_employees = append(permissions_employees, permission_employees)
@@ -43,13 +43,13 @@ func (r *PermissionsEmployeeRepository) SetForEmployee(PermissionID int, employe
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't set Permissions for employees. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while setting permissions for employees. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't set Permissions for employees. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while setting permissions for employees. Err msg:%v.", err)
 		return err
 	}
 

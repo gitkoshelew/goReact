@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -17,29 +18,29 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permission_create.Name)
+		err := session.CheckRigths(w, r, permission_update.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("UserID"))
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EmployeeID")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EmployeeID"))
 			return
 		}
 
 		employee, err := s.Employee().FindByID(employeeID)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting employee by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
@@ -48,7 +49,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 			if userID != 0 {
 				user, err := s.User().FindByID(userID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				employee.User = *user
@@ -60,7 +61,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 			if hotelID != 0 {
 				hotel, err := s.Hotel().FindByID(hotelID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				employee.Hotel = *hotel
@@ -81,7 +82,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 
 		err = s.Employee().Update(employee)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while updating employee. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeemployees/", http.StatusFound)

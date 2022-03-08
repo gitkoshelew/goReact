@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -21,26 +22,26 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_update.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		id, err := strconv.Atoi(r.FormValue("BookingID"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("BookingID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("BookingID"))
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		b, err := s.Booking().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while finding booking by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
@@ -49,7 +50,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			if seatID != 0 {
 				seat, err := s.Seat().FindByID(seatID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while finding seat by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				b.Seat = *seat
@@ -62,7 +63,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			if petID != 0 {
 				pet, err := s.Pet().FindByID(petID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while finding pet by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				b.Pet = *pet
@@ -75,7 +76,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			if employeeID != 0 {
 				employee, err := s.Employee().FindByID(employeeID)
 				if err != nil {
-					http.Error(w, err.Error(), http.StatusBadRequest)
+					http.Error(w, fmt.Sprintf("Error occured while finding employee by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return
 				}
 				b.Employee = *employee
@@ -93,7 +94,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		if startDate != "" {
 			startDate, err := time.Parse(layout, r.FormValue("StartDate"))
 			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("StartDate")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("StartDate"))
 				return
 			}
@@ -104,7 +105,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		if endDate != "" {
 			endDate, err := time.Parse(layout, r.FormValue("EndDate"))
 			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EndDate")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EndDate"))
 				return
 			}
@@ -120,8 +121,8 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		if paid != "" {
 			paid, err := strconv.ParseBool(paid)
 			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
-				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("paid")), http.StatusBadRequest)
+				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Paid"))
 				return
 			}
 			b.Paid = paid
@@ -136,7 +137,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 
 		err = s.Booking().Update(b)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while updating booking. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 		http.Redirect(w, r, "/admin/homebookings", http.StatusFound)

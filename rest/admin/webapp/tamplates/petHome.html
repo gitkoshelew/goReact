@@ -60,7 +60,7 @@
             <label for="PetType2">dog</label>
             <br><br>
             <th>Weight </th>
-            <input type="number" name="Weight" min=0 required>
+            <input type="number" name="Weight" min=0 step="any" required>
             <th>Diseases</th>
             <input type="text" name="Diseases">
             <th>Owner id</th>
@@ -69,9 +69,11 @@
             <input type="text" name="Photo"><br><br>
             <button>New</button>
         </form>
-    </div>
+    </div>    
     {{end}}
+    
     <br><br>
+
     {{if .HasPermission "update_pet"}}
     <div>
         <h2>Update pet</h2>
@@ -87,7 +89,7 @@
             <label for="PetType2">dog</label>
             <br><br>
             <th>Weight </th>
-            <input type="number" name="Weight" min=0>
+            <input type="number" name="Weight" min=0 step="any">
             <th>Diseases</th>
             <input type="text" name="Diseases">
             <th>Owner id</th>

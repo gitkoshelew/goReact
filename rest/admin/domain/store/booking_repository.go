@@ -23,7 +23,7 @@ func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
 		b.Notes,
 		b.Paid,
 	).Scan(&b.BookingID); err != nil {
-		r.Store.Logger.Errorf("Can't create booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while creating booking. Err msg:%v.", err)
 		return nil, err
 	}
 	return b, nil
@@ -33,7 +33,7 @@ func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
 func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM booking")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find bookings. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting all bookings. Err msg: %v", err)
 		return nil, err
 	}
 	bookings := []model.Booking{}
@@ -52,7 +52,7 @@ func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 			&booking.Paid,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find bookings. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occurred while getting all bookings. Err msg: %v", err)
 			continue
 		}
 		bookings = append(bookings, booking)
@@ -75,7 +75,7 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 		&booking.Notes,
 		&booking.Paid,
 	); err != nil {
-		r.Store.Logger.Errorf("Can't find bookings Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting booking by id. Err msg: %v", err)
 		return nil, err
 	}
 	return booking, nil
@@ -85,18 +85,18 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 func (r *BookingRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM booking WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Error occurred while deleting booking. Err msg: %w", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting booking. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't delete booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting booking. Err msg:%v.", err)
 		return err
 	}
 	r.Store.Logger.Errorf("Booking deleted, rows affectet: %d", result)
@@ -119,7 +119,7 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 		b.BookingID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't update booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while updating booking. Err msg:%v.", err)
 		return err
 	}
 	r.Store.Logger.Errorf("Booking updated, rows affectet: %d", result)

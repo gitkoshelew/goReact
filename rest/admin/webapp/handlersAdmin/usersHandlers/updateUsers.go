@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -21,20 +22,20 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_update.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		u, err := s.User().FindByID(id)
@@ -52,7 +53,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		if verified != "" {
 			verified, err := strconv.ParseBool(verified)
 			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
 				return
 			}
@@ -89,7 +90,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		if dateOfBirth != "" {
 			dateOfBirth, err := time.Parse(layout, r.FormValue("DateOfBirth"))
 			if err != nil {
-				w.WriteHeader(http.StatusBadRequest)
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
 				return
 			}
@@ -126,7 +127,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 
 		err = s.User().Update(u)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while updating user. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeusers", http.StatusFound)

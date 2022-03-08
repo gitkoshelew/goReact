@@ -13,17 +13,18 @@ type PetRepository struct {
 // Create pet and save it to DB
 func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO pet (name, type, weight, diseases, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING id",
+		"INSERT INTO pet (name, type, weight, diseases, user_id , photo) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
 		p.Name,
 		string(p.Type),
 		p.Weight,
 		p.Diseases,
 		p.Owner.UserID,
+		p.PetPhotoURL,
 	).Scan(&p.PetID); err != nil {
-		r.Store.Logger.Errorf("Can't create pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while creating pet. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Creat pet with id = %d", p.PetID)
+	r.Store.Logger.Info("Created pet with id = %d", p.PetID)
 
 	return p, nil
 }
@@ -32,7 +33,7 @@ func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 func (r *PetRepository) GetAll() (*[]model.Pet, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM pet")
 	if err != nil {
-		r.Store.Logger.Errorf("Can't find pets. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occurred while getting all pets. Err msg: %v", err)
 	}
 	pets := []model.Pet{}
 
@@ -45,9 +46,10 @@ func (r *PetRepository) GetAll() (*[]model.Pet, error) {
 			&pet.Weight,
 			&pet.Diseases,
 			&pet.Owner.UserID,
+			&pet.PetPhotoURL,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Can't find pets. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occurred while getting all pets. Err msg: %v", err)
 			continue
 		}
 		pets = append(pets, pet)
@@ -66,8 +68,9 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 		&pet.Weight,
 		&pet.Diseases,
 		&pet.Owner.UserID,
+		&pet.PetPhotoURL,
 	); err != nil {
-		r.Store.Logger.Errorf("Can't find pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while getting pet by id. Err msg:%v.", err)
 		return nil, err
 	}
 	return pet, nil
@@ -77,18 +80,18 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 func (r *PetRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM pet WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting pet. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Can't delete pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting pet. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Can't delete pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting pet. Err msg:%v.", err)
 		return err
 	}
 	r.Store.Logger.Info("Pet deleted, rows affectet: %d", result)
@@ -99,16 +102,17 @@ func (r *PetRepository) Delete(id int) error {
 func (r *PetRepository) Update(p *model.Pet) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 WHERE id = $6",
+		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 , user_id = $6 WHERE id = $7",
 		p.Name,
 		string(p.Type),
 		p.Weight,
 		p.Diseases,
 		p.Owner.UserID,
+		p.PetPhotoURL,
 		p.PetID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Can't update pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating pet. Err msg:%v.", err)
 		return err
 	}
 	r.Store.Logger.Info("Updated pet with id = %d,rows affectet: %d ", p.PetID, result)

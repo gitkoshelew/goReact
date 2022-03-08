@@ -4,6 +4,7 @@ import (
 	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -19,13 +20,13 @@ func NewHotel(s *store.Store) httprouter.Handle {
 		err := session.CheckRigths(w, r, permission_create.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
-			s.Logger.Errorf("Bad request. Err msg:%v. ", err)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		name := r.FormValue("Name")
@@ -49,7 +50,7 @@ func NewHotel(s *store.Store) httprouter.Handle {
 
 		_, err = s.Hotel().Create(&h)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while creating hotel. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 
