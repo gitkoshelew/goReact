@@ -24,7 +24,7 @@ func TestPetRepository_Create(t *testing.T) {
 func TestPetRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
-	t.Run("invalid Delete id", func(t *testing.T) {		
+	t.Run("invalid Delete id", func(t *testing.T) {
 		id := 2
 		err := s.Pet().Delete(id)
 		assert.Error(t, err)
@@ -70,7 +70,7 @@ func TestPetRepository_GetAll(t *testing.T) {
 	})
 }
 
-func TestPetRepository_Update(t *testing.T){
+func TestPetRepository_Update(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 	t.Run("valid update", func(t *testing.T) {

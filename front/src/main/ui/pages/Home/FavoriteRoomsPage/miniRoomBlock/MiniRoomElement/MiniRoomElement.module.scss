@@ -1,3 +1,4 @@
+@use '../../../../../styles/breakpoints' as bp;
 @import '../../../../../styles/variables';
 
 .oneRoom {
@@ -17,19 +18,19 @@
   text-align: center;
   letter-spacing: 0.01em;
   color: $main-text-color;
-  @media (min-width: 575px) {
+  @media (min-width: bp.$sm) {
     width: 400px;
     height: 400px;
   }
-  @media (min-width: 767px) {
+  @media (min-width: bp.$md) {
     width: 550px;
     height: 550px;
   }
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     width: 450px;
     height: 300px;
   }
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     width: 300px;
     height: 300px;
   }
@@ -47,17 +48,17 @@
     position: absolute;
     top: 215px;
     left: 10px;
-    @media (min-width: 575px) {
+    @media (min-width: bp.$sm) {
       top: 315px;
     }
-    @media (min-width: 767px) {
+    @media (min-width: bp.$md) {
       top: 460px;
       left: 20px;
     }
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       top: 210px;
     }
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       top: 210px;
       left: 15px;
     }
@@ -67,12 +68,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    @media (min-width: 1144px) {
+    @media (min-width: bp.$lg) {
       top: -250px;
       left: 0;
       z-index: $middle-z-index-priority;
     }
-    @media (min-width: 1250px) {
+    @media (min-width: bp.$xl) {
       top: -325px;
     }
   }

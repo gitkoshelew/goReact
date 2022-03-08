@@ -1,3 +1,4 @@
+@use '../../../styles/breakpoints' as bp;
 @import '../../../styles/variables';
 
 .sixthPage {
@@ -5,15 +6,15 @@
   flex-direction: column;
   align-items: center;
   background: $main-background-color;
-  @media (min-width: 575px) {
+  @media (min-width: bp.$sm) {
     white-space: nowrap;
   }
-  @media (min-width: 767px) {
-    margin: 0 10px -30px 180px;
-  }
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     margin: 0 165px -30px 180px;
     padding: 10px 0;
     background: white;
+  }
+  @media (min-width: bp.$xl) {
+    margin: 0;
   }
 }

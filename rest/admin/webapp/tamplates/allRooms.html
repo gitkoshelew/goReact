@@ -1,0 +1,33 @@
+{{template "base" .}}
+
+{{define "title"}}All rooms{{end}}
+
+{{define "main"}}
+<header>
+    <h1><a>All rooms </a></h1>
+</header>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>RoomID</th>
+        <th>RoomNumber</th>
+        <th>PetType</th>
+        <th>Hotel</th>
+        <th>RoomPhotoURL</th>
+        
+
+        {{range . }}
+        <tr>
+            <td>{{.RoomID}}</td>
+            <td>{{.RoomNumber}}</td>
+            <td>{{.PetType}}</td>
+            <td>{{.Hotel.HotelID}}</td>
+            <td>{{.RoomPhotoURL}}</td>
+
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}

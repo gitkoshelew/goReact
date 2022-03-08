@@ -1,0 +1,3 @@
+ALTER TABLE EMPLOYEE
+ALTER COLUMN position type TEXT;
+DROP TYPE IF EXISTS employee_position CASCADE;

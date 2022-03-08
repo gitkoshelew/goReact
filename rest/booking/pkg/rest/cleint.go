@@ -1,9 +1,9 @@
 package rest
 
 import (
+	"booking/pkg/logging"
 	"errors"
 	"fmt"
-	"gateway/pkg/logging"
 	"net/http"
 	"net/url"
 	"path"

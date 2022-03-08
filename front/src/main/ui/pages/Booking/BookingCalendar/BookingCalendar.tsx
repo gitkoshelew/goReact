@@ -1,10 +1,14 @@
-import React, { SetStateAction, useCallback, useState } from 'react'
+import React, { SetStateAction, useCallback, useEffect, useState } from 'react'
 import Calendar, { CalendarTileProperties } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
+import s from './BookingCalendar.module.scss'
 import moment, { MomentInput } from 'moment'
 import { useSelector } from 'react-redux'
 import { AppRootState, useAppDispatch } from '../../../../bll/store/store'
 import { changeActualDay } from '../../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-reducer'
+import { CalendarTooltipAnchor } from '../../../components/CalendarTooltip/CalendarTooltipAnchor'
+import { CalendarTooltip } from '../../../components/CalendarTooltip/CalendarTooltip'
+import { fetchSeatsRequest } from '../../../../bll/reducers/SeatsReducer/seats-saga'
 
 export const BookingCalendar = () => {
   const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
@@ -12,6 +16,19 @@ export const BookingCalendar = () => {
   const dispatch = useAppDispatch()
 
   const [dateState, setDateState] = useState<Date>(new Date())
+  const [tooltipVisible, setTooltipVisible] = useState<boolean>(false)
+  const [tooltipDate, setTooltipDate] = useState<Date | null>(null)
+
+  useEffect(() => {
+    dispatch(fetchSeatsRequest())
+  }, [])
+
+  const showTooltip = useCallback((isVisible: boolean) => {
+    setTooltipVisible(isVisible)
+  }, [])
+  const handleTooltipDate = useCallback((date: Date | null) => {
+    setTooltipDate(date)
+  }, [])
 
   const changeDate = useCallback(
     (e: MomentInput & SetStateAction<Date>) => {
@@ -30,13 +47,18 @@ export const BookingCalendar = () => {
   }
 
   return (
-    <>
+    <div className={s.calendarContainer}>
       <Calendar
+        tileContent={(props) => (
+          <CalendarTooltipAnchor date={props.date} showTooltip={showTooltip} handleTooltipDate={handleTooltipDate} />
+        )}
+        tileClassName={s.calendarCell}
         tileDisabled={searchInRentArr}
         minDate={new Date()}
         defaultActiveStartDate={dateState}
         onChange={changeDate}
       />
-    </>
+      {tooltipVisible && <CalendarTooltip tooltipDate={tooltipDate} />}
+    </div>
   )
 }

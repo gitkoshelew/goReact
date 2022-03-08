@@ -1,3 +1,4 @@
+@use '../../../styles/breakpoints' as bp;
 @import '../../../styles/variables';
 
 .subscribeField {
@@ -5,6 +6,7 @@
   margin-left: 155px;
   position: relative;
   display: none;
+
   &:after {
     content: '';
     width: 60px;
@@ -15,10 +17,12 @@
     left: 0;
     top: 76px;
   }
-  @media (min-width: 1250px) {
+
+  @media (min-width: bp.$xl) {
     display: flex;
     margin-left: 95px;
   }
+
   .linksTitle {
     font-family: $main-fonts;
     font-style: normal;

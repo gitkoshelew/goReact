@@ -117,3 +117,13 @@ func TestRoomRepository_GetAllPagination(t *testing.T) {
 		assert.Nil(t, r)
 	})
 }
+
+func TestRoomRepository_GetTotalRows(t *testing.T) {
+	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
+	t.Cleanup(teardown)
+	t.Run("valid get total rows", func(t *testing.T) {
+		r, err := s.Room().GetTotalRows()
+		assert.NoError(t, err)
+		assert.NotNil(t, r)
+	})
+}

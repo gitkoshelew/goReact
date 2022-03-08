@@ -1,8 +1,16 @@
 import bookingOrderDay from '../mockData/BookingMockData'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 export type IsRent = { id: string; firstRoom: boolean; secondRoom: boolean }
 
+export type RoomType = {
+  roomId: number,
+  roomNum: number,
+  petType: string,
+  hotelId: number,
+  roomPhotoUrl: string
+}
+export type FetchRoomResponse = RoomType[]
 export const API_URL = process.env.REACT_APP_API_LINK
 
 export const $api = axios.create({
@@ -37,5 +45,17 @@ $api.interceptors.response.use(
 export const BookingPageAPI = {
   getCalendarData(): Promise<IsRent[]> {
     return Promise.resolve(bookingOrderDay.bookingRoomPageMockData.calendarData).then((res) => res)
+  },
+}
+
+export const RoomPageAPI = {
+  getAllRooms(): Promise<AxiosResponse<FetchRoomResponse>>  {
+    return $api.get('api/rooms');
+  },
+  getRoomById(roomId: number):Promise<AxiosResponse<FetchRoomResponse>> {
+    return $api.get(`api/room/${roomId}`);
+  },
+  getRooms(currentPage= 1, pageSize= 5):Promise<AxiosResponse<FetchRoomResponse>> {
+    return $api.get(`api/rooms/?offset=${currentPage}&pagesize=${pageSize}`)
   },
 }

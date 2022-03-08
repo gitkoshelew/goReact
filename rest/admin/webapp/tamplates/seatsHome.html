@@ -1,0 +1,90 @@
+{{template "base" .}}
+
+{{define "title"}}seats{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+<body>
+
+    {{if .HasPermission "read_seat"}}
+    <div>
+        <h2>Seats</h2>
+        <form action="/admin/seats">
+            <button>all seats</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "read_seat"}}
+    <div>
+        <form action="/admin/seats/id" method="GET">
+            <th>Get seat by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Get</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "delete_seat"}}
+    <div>
+        <form action="/admin/seats/delete/" method="POST">
+            <th>Delete seat by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Delete</button>
+        </form>
+    </div>
+    {{end}}
+
+
+    {{if .HasPermission "create_seat"}}
+    <div>
+        <h2>Create seat</h2>
+        <form action="/admin/seats/new" method="POST">
+            <th>Room id</th>
+            <input type="number" name="RoomID" min=1 required>
+            <br><br>
+            <th>Description</th>
+            <input type="text" name="Description"><br><br>
+            <th>RentFrom</th>
+            <input type="Date" name="RentFrom"><br><br>
+            <th>RentTo</th>
+            <input type="Date" name="RentTo"><br><br>
+            <button>New</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "update_seat"}}
+    <div>
+        <h2>Update seat</h2>
+        <form action="/admin/seats/update" method="POST">
+            <th>Seat id</th>
+            <input type="number" name="SeatID" min="1" required><br><br>
+            <th>Room id</th>
+            <input type="number" name="RoomID" min=1>
+            <br><br>
+            <th>Description</th>
+            <input type="text" name="Description"><br><br>
+            <th>RentFrom</th>
+            <input type="Date" name="RentFrom"><br><br>
+            <th>RentTo</th>
+            <input type="Date" name="RentTo"><br><br>
+            <button>Update</button>
+        </form>
+    </div>
+    {{end}}
+
+</body>
+{{end}}

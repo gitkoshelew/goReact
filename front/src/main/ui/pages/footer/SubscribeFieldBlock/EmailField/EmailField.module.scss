@@ -1,9 +1,10 @@
+@use '../../../../styles/breakpoints' as bp;
 @import '../../../../styles/variables';
 
 .formWrapper {
   width: 450px;
   margin: 0 auto 50px auto;
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     input {
       width: 290px;
     }
@@ -11,7 +12,7 @@
       left: -20px;
     }
   }
-  @media (min-width: 1350px) {
+  @media (min-width: bp.$xxl) {
     input {
       width: 310px;
     }

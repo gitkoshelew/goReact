@@ -22,6 +22,8 @@
   margin-bottom: 10px;
   height: 542px;
   overflow-y: scroll;
+}
+.hiddenUserList {
   @media (max-width: 842px) {
     display: none;
   }
@@ -36,6 +38,9 @@
   @media (min-width: 842px) {
     display: none;
   }
+}
+.hiddenConversationButton {
+  display: none;
 }
 
 .showConversationsButton img {

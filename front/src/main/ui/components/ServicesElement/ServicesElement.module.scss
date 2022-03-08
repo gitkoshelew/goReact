@@ -1,3 +1,4 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .oneElement {
@@ -11,10 +12,10 @@
   padding: 10px;
   margin: -30px auto 35px auto;
   cursor: pointer;
-  @media (min-width: 767px) {
+  @media (min-width: bp.$md) {
     margin: -30px 20px 35px 0;
   }
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     margin: 0 20px 25px 0;
   }
 }
@@ -30,10 +31,10 @@
   padding: 10px;
   margin: -30px auto 35px auto;
   cursor: pointer;
-  @media (min-width: 767px) {
+  @media (min-width: bp.$md) {
     margin: -30px 20px 35px 0;
   }
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     margin: 0 20px 25px 0;
   }
 }

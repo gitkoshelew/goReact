@@ -76,29 +76,31 @@ export const Booking = () => {
   }, [actualDay, isRentArr])
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className={bookingPage}>
-        <TitlePageTextBlock mainTextMess={'Book room for pet'} isWithLink={false} />
-        <div className={bookingProcess}>
-          <div className={bookingForm}>
-            <BookingRegForm formik={formik} />
+    <div className="bookingContainer">
+      <form onSubmit={formik.handleSubmit}>
+        <div className={bookingPage}>
+          <TitlePageTextBlock mainTextMess={'Book room for pet'} isWithLink={false} />
+          <div className={bookingProcess}>
+            <div className={bookingForm}>
+              <BookingRegForm formik={formik} />
+            </div>
+            <div className={bookingCalendar}>
+              {correctView}
+              {roomIndicate && (
+                <BookingRoom
+                  dayId={roomIndicate.id}
+                  firstRoom={roomIndicate.firstRoom}
+                  secondRoom={roomIndicate.secondRoom}
+                />
+              )}
+            </div>
           </div>
-          <div className={bookingCalendar}>
-            {correctView}
-            {roomIndicate && (
-              <BookingRoom
-                dayId={roomIndicate.id}
-                firstRoom={roomIndicate.firstRoom}
-                secondRoom={roomIndicate.secondRoom}
-              />
-            )}
+          <div className={uploadOrderedRoomsBlock}>
+            {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
+            <Button view={'upload'} disabled={!isActiveBtn} />
           </div>
         </div>
-        <div className={uploadOrderedRoomsBlock}>
-          {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
-          <Button view={'upload'} disabled={!isActiveBtn} />
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
