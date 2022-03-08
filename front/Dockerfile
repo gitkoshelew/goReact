@@ -1,4 +1,4 @@
-FROM node:16.14.0
+FROM node:16.14 as build
 
 WORKDIR /app
 
@@ -10,4 +10,12 @@ COPY . .
 
 RUN npm run build
 
-CMD ["npm", "start"]
+#NGINX Web Server
+
+FROM nginx:1.12-alpine as prod
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;" ]
