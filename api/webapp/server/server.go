@@ -14,7 +14,7 @@ import (
 // Server ...
 type Server struct {
 	config *webapp.Config
-	logger *logging.Logger
+	Logger *logging.Logger
 	router *httprouter.Router
 	Store  *store.Store
 	Mail   *service.Mail
@@ -24,7 +24,7 @@ type Server struct {
 func New(config *webapp.Config) *Server {
 	return &Server{
 		config: config,
-		logger: logging.GetLogger(),
+		Logger: logging.GetLogger(),
 		router: httprouter.New(),
 		Mail:   service.GetMail(config),
 	}
@@ -34,18 +34,18 @@ func New(config *webapp.Config) *Server {
 func (s *Server) Start() error {
 
 	s.configureRouter()
-	s.logger.Info("Router started successfully")
+	s.Logger.Info("Router started successfully")
 
 	s.configureRoutesAdmin()
-	s.logger.Info("Admin router started successfully")
+	s.Logger.Info("Admin router started successfully")
 
 	if err := s.configureStore(); err != nil {
-		s.logger.Errorf("Error while configure store. ERR MSG: %s", err.Error())
+		s.Logger.Errorf("Error while configure store. ERR MSG: %s", err.Error())
 		return err
 	}
-	s.logger.Info("Store started successfully")
+	s.Logger.Info("Store started successfully")
 
-	s.logger.Infof("Server starts at %s ...", s.config.ServerInfo())
+	s.Logger.Infof("Server starts at %s ...", s.config.ServerInfo())
 	CORS := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3001", "http://react-ngnix-app:3001"},
 		AllowedMethods: []string{

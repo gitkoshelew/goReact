@@ -7,7 +7,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
 func TestUser_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
@@ -17,7 +16,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "valid",
 			u: func() *model.User {
-				return model.TestUser()
+				return model.TestUser().ModelFromDTO()
 			},
 			isValid: true,
 		},
@@ -26,7 +25,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Email = ""
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -35,7 +34,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Email = "invalid"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -44,7 +43,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Password = ""
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -53,7 +52,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Password = "1234"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -62,7 +61,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Name = "Name@123"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -71,7 +70,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Name = ""
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -80,7 +79,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Surname = "Surname-Фамилия"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -89,7 +88,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Surname = ""
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -98,7 +97,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.MiddleName = "MiddleName %?№"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -107,7 +106,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.MiddleName = ""
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -116,7 +115,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Role = "Invalid"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -125,7 +124,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Sex = "Invalid"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -134,7 +133,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Phone = "Invalid"
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -143,7 +142,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Phone = ""
-				return u
+				return u.ModelFromDTO()
 			},
 			isValid: false,
 		},
@@ -163,7 +162,7 @@ func TestUser_Validate(t *testing.T) {
 func TestUser_NewUser(t *testing.T) {
 	u := model.TestUser()
 	u.UserID = 1
-	err := u.WithEncryptedPassword()
+	err := u.ModelFromDTO().WithEncryptedPassword()
 
 	assert.NoError(t, err)
 	assert.NotNil(t, u)

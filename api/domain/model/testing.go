@@ -6,16 +6,16 @@ import (
 )
 
 // TestUser ...
-func TestUser() *User {
-	return &User{
+func TestUser() *UserDTO {
+	return &UserDTO{
 		Email:       "email@example.org",
 		Password:    "password",
-		Role:        ClientRole,
+		Role:        "client",
 		Verified:    true,
 		Name:        "Name",
 		Surname:     "Surname",
 		MiddleName:  "MiddleName",
-		Sex:         SexMale,
+		Sex:         "male",
 		DateOfBirth: time.Time{}.AddDate(2000, 2, 2),
 		Address:     "Minsk Pr. Nezavisimosti 22-222",
 		Phone:       "+375-29-154-89-33",
@@ -60,7 +60,7 @@ func TestRoomDTO() *RoomDTO {
 func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,
-		User:       *TestUser(),
+		User:       *TestUser().ModelFromDTO(),
 		Hotel:      *TestHotel(),
 		Position:   OwnerPosition,
 	}
@@ -73,7 +73,7 @@ func TestPet() *Pet {
 		Type:        PetTypeCat,
 		Weight:      1,
 		Diesieses:   "Disease",
-		Owner:       *TestUser(),
+		Owner:       *TestUser().ModelFromDTO(),
 		PetPhotoURL: "/",
 	}
 }
