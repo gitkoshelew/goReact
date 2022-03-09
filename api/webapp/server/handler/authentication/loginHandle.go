@@ -2,7 +2,6 @@ package authentication
 
 import (
 	"encoding/json"
-	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/request"
 	"goReact/webapp/server/handler/response"
@@ -25,22 +24,19 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 		user, err := s.User().FindByEmail(req.Email)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
-		err = model.CheckPasswordHash(user.Password, req.Password)
+		err = s.CheckPasswordHash(user.Password, req.Password)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
@@ -48,7 +44,6 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 		tk, err := CreateToken(uint64(user.UserID), string(user.Role))
 		if err != nil {
 			w.WriteHeader(http.StatusUnprocessableEntity)
-			s.Logger.Errorf("Eror during createing tokens. Err msg: %s", err.Error())
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}

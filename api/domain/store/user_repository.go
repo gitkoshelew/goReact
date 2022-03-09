@@ -3,6 +3,8 @@ package store
 import (
 	"errors"
 	"goReact/domain/model"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 // UserRepository ...
@@ -10,21 +12,32 @@ type UserRepository struct {
 	Store *Store
 }
 
+var (
+	// ErrEmailIsUsed ...
+	ErrEmailIsUsed = errors.New("Email already in use")
+)
+
 // Create user and save it to DB
-func (r *UserRepository) Create(u *model.User) (*model.User, error) {
-	if err := u.Validate(); err != nil {
+func (r *UserRepository) Create(u *model.UserDTO) (*model.UserDTO, error) {
+
+	if err := u.ModelFromDTO().Validate(); err != nil {
+		r.Store.Logger.Errorf("Error occured while validating user. Err msg: %w", err)
 		return nil, err
 	}
 
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
+		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %w", err)
 		return nil, err
 	}
 
 	if emailIsUsed {
-		return nil, errors.New("Email already in use")
+		r.Store.Logger.Error(ErrEmailIsUsed)
+		return nil, ErrEmailIsUsed
 	}
+
+	r.Store.EncryptPassword(&u.Password)
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
@@ -33,17 +46,18 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		RETURNING id`,
 		u.Email,
 		u.Password,
-		string(u.Role),
+		u.Role,
 		u.Verified,
 		u.Name,
 		u.Surname,
 		u.MiddleName,
-		string(u.Sex),
+		u.Sex,
 		u.DateOfBirth,
 		u.Address,
 		u.Phone,
 		u.Photo,
 	).Scan(&u.UserID); err != nil {
+		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %w", err)
 		return nil, err
 	}
 	return u, nil
@@ -101,6 +115,7 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
+		r.Store.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
 		return nil, err
 	}
 	return user, nil
@@ -125,6 +140,7 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
+		r.Store.Logger.Errorf("Cant find user. Err msg:%v.", err)
 		return nil, err
 	}
 	return user, nil
@@ -232,4 +248,11 @@ func (r *UserRepository) PasswordChange(u *model.User) error {
 	}
 	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
 	return nil
+}
+
+// CheckPasswordHash if passwords are same err=nil
+func (r *UserRepository) CheckPasswordHash(hash, password string) error {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	r.Store.Logger.Infof("Eror during checking users email or password. Err msg: %s", err.Error())
+	return err
 }

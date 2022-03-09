@@ -25,6 +25,23 @@ type User struct {
 	Photo       string    `json:"photo"`
 }
 
+// UserDTO ...
+type UserDTO struct {
+	UserID      int       `json:"userId"`
+	Email       string    `json:"email"`
+	Password    string    `json:"password"`
+	Role        string    `json:"role"`
+	Verified    bool      `json:"verified"`
+	Name        string    `json:"name"`
+	Surname     string    `json:"sName"`
+	MiddleName  string    `json:"mName"`
+	Sex         string    `json:"sex"`
+	DateOfBirth time.Time `json:"birthDate"`
+	Address     string    `json:"address"`
+	Phone       string    `json:"phone"`
+	Photo       string    `json:"photo"`
+}
+
 // Role ...
 type Role string
 
@@ -35,6 +52,20 @@ const (
 	AnonymousRole Role = "anonymous"
 )
 
+// StrToRole ...
+func StrToRole(s *string) Role {
+	switch *s {
+	case "client":
+		return ClientRole
+	case "employee":
+		return EmployeeRole
+	case "anonymous":
+		return AnonymousRole
+	default:
+		return ""
+	}
+}
+
 // Sex ...
 type Sex string
 
@@ -43,6 +74,18 @@ const (
 	SexMale   Sex = "male"
 	SexFemale Sex = "female"
 )
+
+// StrToSex ...
+func StrToSex(s *string) Sex {
+	switch *s {
+	case "male":
+		return SexMale
+	case "female":
+		return SexFemale
+	default:
+		return ""
+	}
+}
 
 // Validate ...
 func (u *User) Validate() error {
@@ -85,4 +128,23 @@ func EncryptPassword(s string) (string, error) {
 func CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err
+}
+
+// ModelFromDTO ...
+func (uDTO *UserDTO) ModelFromDTO() *User {
+	return &User{
+		UserID:      uDTO.UserID,
+		Email:       uDTO.Email,
+		Password:    uDTO.Password,
+		Role:        StrToRole(&uDTO.Role),
+		Verified:    uDTO.Verified,
+		Name:        uDTO.Name,
+		Surname:     uDTO.Surname,
+		MiddleName:  uDTO.MiddleName,
+		Sex:         StrToSex(&uDTO.Sex),
+		DateOfBirth: uDTO.DateOfBirth,
+		Address:     uDTO.Address,
+		Phone:       uDTO.Phone,
+		Photo:       uDTO.Phone,
+	}
 }

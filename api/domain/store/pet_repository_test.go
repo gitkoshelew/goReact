@@ -14,7 +14,7 @@ func TestPetRepository_Create(t *testing.T) {
 	t.Run("valid", func(t *testing.T) {
 		u, err := s.User().Create(model.TestUser())
 		p := model.TestPet()
-		p.Owner = *u
+		p.Owner = *u.ModelFromDTO()
 		p, err = s.Pet().Create(p)
 		assert.NoError(t, err)
 		assert.NotNil(t, p)
@@ -24,7 +24,7 @@ func TestPetRepository_Create(t *testing.T) {
 func TestPetRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
-	t.Run("invalid Delete id", func(t *testing.T) {		
+	t.Run("invalid Delete id", func(t *testing.T) {
 		id := 2
 		err := s.Pet().Delete(id)
 		assert.Error(t, err)
@@ -33,7 +33,7 @@ func TestPetRepository_Delete(t *testing.T) {
 	t.Run("valid Delete id", func(t *testing.T) {
 		u, err := s.User().Create(model.TestUser())
 		p := model.TestPet()
-		p.Owner = *u
+		p.Owner = *u.ModelFromDTO()
 		p, err = s.Pet().Create(p)
 		err = s.Pet().Delete(p.PetID)
 		assert.NoError(t, err)
@@ -52,7 +52,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 		u, err := s.User().Create(model.TestUser())
 
 		p := model.TestPet()
-		p.Owner = *u
+		p.Owner = *u.ModelFromDTO()
 		p, err = s.Pet().Create(p)
 		p, err = s.Pet().FindByID(p.PetID)
 		assert.NoError(t, err)
@@ -70,13 +70,13 @@ func TestPetRepository_GetAll(t *testing.T) {
 	})
 }
 
-func TestPetRepository_Update(t *testing.T){
+func TestPetRepository_Update(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 	t.Run("valid update", func(t *testing.T) {
 		u, err := s.User().Create(model.TestUser())
 		p := model.TestPet()
-		p.Owner = *u
+		p.Owner = *u.ModelFromDTO()
 		p, err = s.Pet().Create(p)
 
 		p.Name = "Sharik"

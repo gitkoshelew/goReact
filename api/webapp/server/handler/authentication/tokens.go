@@ -66,6 +66,7 @@ func CreateToken(userid uint64, role string) (*Token, error) {
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
 	token.AccessToken, err = at.SignedString([]byte(os.Getenv("ACCESS_SECRET")))
 	if err != nil {
+		logger.Errorf("Eror ocuured while createing tokens. Err msg: %s", err.Error())
 		return nil, err
 	}
 
@@ -78,6 +79,7 @@ func CreateToken(userid uint64, role string) (*Token, error) {
 	rt := jwt.NewWithClaims(jwt.SigningMethodHS256, rtClaims)
 	token.RefreshToken, err = rt.SignedString([]byte(os.Getenv("REFRESH_SECRET")))
 	if err != nil {
+		logger.Errorf("Eror ocuured while createing tokens. Err msg: %s", err.Error())
 		return nil, err
 	}
 	return token, nil
@@ -133,22 +135,26 @@ func IsValid(r *http.Request) error {
 func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 	token, err := VerifyToken(r)
 	if err != nil {
+		logger.Errorf("Error occured while token verifying. Msg: %v", err)
 		return nil, err
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if ok && token.Valid {
 		accessUUID, ok := claims["access_uuid"].(string)
 		if !ok {
+			logger.Errorf("Error occured while token extracting. Msg: %v", err)
 			return nil, err
 		}
 
 		userID, err := strconv.ParseUint(fmt.Sprintf("%.f", claims["user_id"]), 10, 64)
 		if err != nil {
+			logger.Errorf("Error occured while token extracting - parsing user id. Msg: %v", err)
 			return nil, err
 		}
 
 		role := fmt.Sprint(claims["role"])
 		if err != nil {
+			logger.Errorf("Error occured while token creating - parsing user role. Msg: %v", err)
 			return nil, err
 		}
 
@@ -164,18 +170,18 @@ func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 // CreateCustomToken ...
 func CreateCustomToken(payload map[string]interface{}, expireTime time.Duration, secretKey string) (string, error) {
 	if expireTime < 1 {
-		logger.Debugf("Bad request expire time: %v. Err msg: %v", expireTime, ErrBadRequest)
+		logger.Errorf("Bad request expire time: %v. Err msg: %v", expireTime, ErrBadRequest)
 		return "", fmt.Errorf("%v, expire time = %v", ErrBadRequest, expireTime)
 	}
 
 	checkSecret := strings.ReplaceAll(secretKey, " ", "")
 	if checkSecret == "" {
-		logger.Debugf("Bad request secret key: %v. Err msg: %v", secretKey, ErrBadRequest)
+		logger.Errorf("Bad request secret key: %v. Err msg: %v", secretKey, ErrBadRequest)
 		return "", fmt.Errorf("%v, secret key: %v", ErrBadRequest, secretKey)
 	}
 
 	if len(payload) < 1 {
-		logger.Debugf("Bad request empty payload: %v. Err msg: %v", payload, ErrBadRequest)
+		logger.Errorf("Bad request empty payload: %v. Err msg: %v", payload, ErrBadRequest)
 		return "", fmt.Errorf("%v, empty payload: %v", ErrBadRequest, payload)
 	}
 
@@ -191,7 +197,7 @@ func CreateCustomToken(payload map[string]interface{}, expireTime time.Duration,
 	token, err := tk.SignedString([]byte(secretKey))
 
 	if err != nil {
-		logger.Debugf("Error during complete signed token creating. Err msg: %v", err)
+		logger.Errorf("Error during complete signed token creating. Err msg: %v", err)
 		return "", err
 	}
 	return token, nil

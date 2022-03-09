@@ -46,36 +46,21 @@ func NewUser(s *store.Store) httprouter.Handle {
 		phone := r.FormValue("Phone")
 		photo := r.FormValue("Photo")
 
-		u := model.User{
+		u := model.UserDTO{
 			UserID:      0,
 			Email:       email,
 			Password:    password,
-			Role:        model.Role(role),
+			Role:        role,
 			Name:        name,
 			Surname:     surname,
 			MiddleName:  middleName,
-			Sex:         model.Sex(sex),
+			Sex:         sex,
 			Address:     address,
 			Phone:       phone,
 			Photo:       photo,
 			Verified:    verified,
 			DateOfBirth: dateOfBirth,
 		}
-
-		err = u.Validate()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			return
-		}
-
-		err = u.WithEncryptedPassword()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v.", err)
-			return
-		}
-
 		_, err = s.User().Create(&u)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)

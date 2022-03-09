@@ -34,6 +34,7 @@ func (s *Server) configureRouter() {
 
 	s.router.Handle("GET", "/api/room/:id", room.GetRoomHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/rooms", room.GetAllRoomsHandle(store.New(s.config)))
+
 	//localhost:8080/api/rooms/?offset=2&pagesize=2
 	s.router.Handle("GET", "/api/rooms/", room.GetRoomsHandlePagination(store.New(s.config)))
 
