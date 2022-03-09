@@ -208,19 +208,19 @@ func ParseCustomToken(tokenStr, secretKey string) (jwt.MapClaims, error) {
 			return []byte(secretKey), nil
 		})
 	if err != nil {
-		logger.Debugf("Error during token parsing. Err msg: %v", err)
+		logger.Debugf("Error occured while token parsing. Err msg: %v", err)
 		return nil, err
 	}
 
 	_, ok := token.Claims.(jwt.Claims)
 	if !ok && !token.Valid {
-		logger.Debugf("Error during jwt.Claims creating. Err msg: %v", err)
+		logger.Debugf("Error occured while jwt.Claims creating. Err msg: %v", err)
 		return nil, err
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok && !token.Valid {
-		logger.Debugf("Error during jwt.MapClaims creating. Err msg: %v", err)
+		logger.Debugf("Error occured while jwt.MapClaims creating. Err msg: %v", err)
 		return nil, err
 	}
 

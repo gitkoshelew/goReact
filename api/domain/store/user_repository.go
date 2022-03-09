@@ -191,16 +191,18 @@ func (r *UserRepository) VerifyEmail(userID int) error {
 		userID,
 	)
 	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
 		return nil
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("No rows affected")
+		r.Store.Logger.Errorf("No rows was affected, possible reason: no user with such ID. Err msg:%v.", err)
 	}
 	return nil
 }
