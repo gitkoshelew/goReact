@@ -1,0 +1,105 @@
+{{template "base" .}}
+
+{{define "title"}}pets{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+<body>
+
+    {{if .HasPermission "read_pet"}}
+    <div>
+        <h2>Pets</h2>
+        <form action="/admin/pets">
+            <button>all pets</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "read_pet"}}
+    <div>
+        <form action="/admin/pets/id" method="GET">
+            <th>Get pet by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Get</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "delete_pet"}}
+    <div>
+        <form action="/admin/pets/delete/" method="POST">
+            <th>Delete pet by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Delete</button>
+        </form>
+    </div>
+    {{end}}
+
+
+    {{if .HasPermission "create_pet"}}
+    <div>
+        <h2>Create pet</h2>
+        <form action="/admin/pets/new" method="POST">
+            <th>Name</th>
+            <input type="text" name="Name" required>
+            <th>Pet type</th>
+            <input type="radio" name="PetType" value="cat" id="PetType1" required>
+            <label for="PetType1">cat</label>
+            <input type="radio" name="PetType" value="dog" id="PetType2" required>
+            <label for="PetType2">dog</label>
+            <br><br>
+            <th>Weight </th>
+            <input type="number" name="Weight" min=0 step="any" required>
+            <th>Diseases</th>
+            <input type="text" name="Diseases">
+            <th>Owner id</th>
+            <input type="number" name="UserID" min=1 required>
+            <th>Photo URL</th>
+            <input type="text" name="Photo"><br><br>
+            <button>New</button>
+        </form>
+    </div>    
+    {{end}}
+    
+    <br><br>
+
+    {{if .HasPermission "update_pet"}}
+    <div>
+        <h2>Update pet</h2>
+        <form action="/admin/pets/update" method="POST">
+            <th>Get pet by id</th>
+            <input type="number" name="PetID" min="1" required><br><br>
+            <th>Name</th>
+            <input type="text" name="Name">
+            <th>Pet type</th>
+            <input type="radio" name="PetType" value="cat" id="PetType1">
+            <label for="PetType1">cat</label>
+            <input type="radio" name="PetType" value="dog" id="PetType2">
+            <label for="PetType2">dog</label>
+            <br><br>
+            <th>Weight </th>
+            <input type="number" name="Weight" min=0 step="any">
+            <th>Diseases</th>
+            <input type="text" name="Diseases">
+            <th>Owner id</th>
+            <input type="number" name="UserID" min=1>
+            <th>Photo URL</th>
+            <input type="text" name="Photo"><br><br>
+            <button>Update</button>
+        </form>
+    </div>
+    {{end}}
+
+</body>
+{{end}}

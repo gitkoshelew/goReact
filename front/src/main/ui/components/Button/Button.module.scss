@@ -1,3 +1,4 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .uploadPetPhotoActive {
@@ -14,6 +15,7 @@
   font-size: 23px;
   font-weight: 300;
   margin: 30px;
+
   &:hover {
     background: aquamarine;
   }
@@ -33,6 +35,10 @@
   border: 1px solid $main-contrast-color;
   cursor: no-drop;
   margin: 40px;
+  @media (min-width: bp.$lg) {
+    margin: 40px
+  }
+
 }
 
 .orderBtn {

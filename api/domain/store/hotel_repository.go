@@ -14,7 +14,8 @@ type HotelRepository struct {
 // Create hotel and save it to DB
 func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO hotel (name, address) VALUES ($1, $2) RETURNING id", h.Name, h.Address).Scan(&h.HotelID); err != nil {
+		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id", h.Name, h.Address,
+		h.Coordinates).Scan(&h.HotelID); err != nil {
 
 		return nil, err
 	}
@@ -35,6 +36,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 			&hotel.HotelID,
 			&hotel.Name,
 			&hotel.Address,
+			&hotel.Coordinates,
 		)
 		if err != nil {
 			log.Print(err)
@@ -53,6 +55,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.HotelID,
 		&hotel.Name,
 		&hotel.Address,
+		&hotel.Coordinates,
 	); err != nil {
 		log.Printf(err.Error())
 		return nil, err
@@ -79,13 +82,14 @@ func (r *HotelRepository) Delete(id int) error {
 }
 
 // Update hotel from DB
-func (r *HotelRepository) Update(e *model.Hotel) error {
+func (r *HotelRepository) Update(h *model.Hotel) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE hotel SET name = $1, address = $2 WHERE id = $3",
-		e.Name,
-		e.Address,
-		e.HotelID,
+		"UPDATE hotel SET name = $1, address = $2 , coordinates = $3 WHERE id = $43",
+		h.Name,
+		h.Address,
+		h.Coordinates,
+		h.HotelID,
 	)
 	if err != nil {
 		log.Printf(err.Error())

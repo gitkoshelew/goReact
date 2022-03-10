@@ -1,35 +1,37 @@
 version: "3.9"
 
+# docker-compose -f docker-compose-dev.yml up --build
+
 services:
-    
+
     postgresql_database:
         image: postgres:latest
         environment:
             - POSTGRES_USER=${POSTGRES_USER}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
             - POSTGRES_DB=${POSTGRES_DB}
-        ports: 
+        ports:
             - "${POSTGRES_PORT}:5432"
         restart: always
         volumes:
-            - ./init.sql:/docker-entrypoint-initdb.d/init.sql 
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
             - database-data:/var/lib/postgresql/data/
         networks:
             - app_net
 
     pgadmin:
         image: dpage/pgadmin4
-        environment: 
+        environment:
             - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
             - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
         ports:
             - "${PGADMIN_PORT}:80"
         restart: always
-        volumes: 
+        volumes:
             - pgadmin:/root/.pgadmin
         networks:
             - app_net
-   
+
     rabbitmq:
         image: rabbitmq:3-management
         ports:
@@ -43,6 +45,53 @@ services:
             - RABBITMQ_PASSWORD=my_password
         volumes:
             - rabbitmq_data:/bitnami/rabbitmq/mnesia
+        networks:
+            - app_net
+
+    payment_db:
+        image: postgres:latest
+        container_name: payment-card-postgres
+        environment:
+            POSTGRES_PASSWORD: 123456
+            POSTGRES_DB: nest-card-payment
+            PGDATA: /var/lib/postgresql/data/pgdata
+        ports:
+            - "5445:5432"
+        restart: on-failure
+        networks:
+            - app_net
+
+    payment_server:
+        image: payment-card-server
+        container_name: payment-card-server
+        build:
+            context: ./nest-payment-server
+        command: npm run start:dev
+        ports:
+            - "5003:5002"
+        environment:
+            - PORT=5002
+            - POSTGRESS_NEST_HOST=${POSTGRESS_NEST_HOST}
+            - POSTGRES_NEST_PORT=${POSTGRES_NEST_PORT}
+            - POSTGRESS_NEST_USER=${POSTGRESS_NEST_USER}
+            - POSTGRES_NEST_DB=${POSTGRES_NEST_DB}
+            - POSTGRES_NEST_PASSWORD=${POSTGRES_NEST_PASSWORD}
+        links:
+            - payment_db
+        depends_on:
+            - payment_db
+        restart: on-failure
+        networks:
+            - app_net
+
+    payment_pgadmin:
+        image: dpage/pgadmin4
+        container_name: payment-card-pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5052:80"
         networks:
             - app_net
 networks:

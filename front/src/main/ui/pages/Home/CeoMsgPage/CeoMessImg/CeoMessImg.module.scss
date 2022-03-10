@@ -1,3 +1,4 @@
+@use '../../../../styles/breakpoints' as bp;
 @import '../../../../styles/variables';
 
 .ceoMessImg {
@@ -20,7 +21,7 @@
     height: 400px;
     width: 490px;
   }
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     position: relative;
     top: -40px;
   }

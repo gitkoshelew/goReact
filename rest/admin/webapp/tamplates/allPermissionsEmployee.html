@@ -1,0 +1,25 @@
+{{template "base" .}}
+
+{{define "title"}}All Permissions{{end}}
+
+{{define "main"}}
+<header>
+    <h1><a>All Permissions </a></h1>
+</header>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>PermissionID</th>
+        <th>EmployeeID</th>
+
+        {{range . }}
+        <tr>
+            <td>{{.Permissions.PermissionID}}</td>
+            <td>{{.Employee.EmployeeID}}</td>
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}

@@ -3,6 +3,7 @@ package server
 import (
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/authentication"
+	"goReact/webapp/server/handler/hotel"
 	"goReact/webapp/server/handler/middleware"
 	"goReact/webapp/server/handler/pet"
 	restorepassword "goReact/webapp/server/handler/restorePassword"
@@ -28,6 +29,9 @@ func (s *Server) configureRouter() {
 
 	s.router.Handle("GET", "/api/seat/:id", seat.GetSeatHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/seats", seat.GetAllSeatsHandle(store.New(s.config)))
+
+	s.router.Handle("GET", "/api/hotel/:id", hotel.GetHotelByID(store.New(s.config)))
+	s.router.Handle("GET", "/api/hotels", hotel.AllHotelsHandler(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/room/:id", room.GetRoomHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/rooms", room.GetAllRoomsHandle(store.New(s.config)))

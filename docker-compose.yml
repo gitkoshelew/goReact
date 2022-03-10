@@ -14,7 +14,7 @@ services:
             - POSTGRES_SSLMODE=${POSTGRES_SSLMODE}
         ports:
             - "8081:5432"
-        restart: always
+        restart: on-failure
         volumes:
             - database-data:/var/lib/postgresql/data/
         networks:
@@ -46,8 +46,6 @@ services:
     migrate:
         image: migrate/migrate
         restart: on-failure
-        networks:
-            - new
         volumes:
             - ./migrations:/migrations
 
@@ -63,12 +61,12 @@ services:
             - postgresqldatabase
         depends_on:
             - postgresqldatabase
+        networks:
+            - new
 
     test-migrate:
         image: migrate/migrate
         restart: on-failure
-        networks:
-            - new
         volumes:
             - ./migrations:/migrations
         command:
@@ -83,6 +81,8 @@ services:
             - test_database
         depends_on:
             - test_database
+        networks:
+            - new
 
     pgadmin:
         image: dpage/pgadmin4
@@ -100,19 +100,18 @@ services:
             - new
 
     rabbitmq:
-        image: rabbitmq:3-management
+        build:
+            context: ./rabbit
+        container_name: rabbitmq
         ports:
-            - '4369:4369'
-            - '5551:5551'
-            - '5552:5552'
-            - '5675:5672'
-            - '25672:25672'
-            - '15672:15672'
+            - ${RABBIT_HTTP_EXTERNAL_PORT_V3}:15672
         environment:
-            - RABBITMQ_SECURE_PASSWORD=yes
-            - RABBITMQ_PASSWORD=my_password
+            - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+            - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBITMQ_CONFIG_FILE=/etc/rabbitmq.conf
         volumes:
-            - rabbitmq_data:/bitnami/rabbitmq/mnesia
+            - ./rabbit/rabbitmq.conf:/etc/rabbitmq.conf
+            - ./rabbit/definitions.json:/etc/rabbitmq/definitions.json
         networks:
             - new
 
@@ -147,20 +146,63 @@ services:
             POSTGRES_PASSWORD: 123
             POSTGRES_DB: socket_chat
             PGDATA: /var/lib/postgresql/data/pgdata
-        restart: always
+        restart: on-failure
+        networks:
+            - new
 
     chat_server:
-        build: ./socket-chat-server
+        build:
+            context: ./socket-chat-server
         image: socket-chat-express
         container_name: socket-chat-express
         ports:
             - "5001:5000"
         environment:
-            DB_HOST: chat_db
-            DB_PASSWORD: 123
-        restart: always
+            - DB_HOST=chat_db
+            - DB_PASSWORD=123
+            - PORT=5000
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - NODE_ENV=development
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
         depends_on:
             - chat_db
+            - rabbitmq
+        networks:
+            - new
+
+    notification_producer:
+        build:
+            context: ./notifications-producer
+        image: notification-producer
+        container_name: notification-producer
+        ports:
+            - "5006:5005"
+        environment:
+            - PORT=5005
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - DB_HOST=${POSTGRES_HOST}
+            - DB_PORT=${POSTGRES_PORT}
+            - DB_NAME=${POSTGRES_DB}
+            - DB_USER=${POSTGRES_USER}
+            - DB_PASS=${POSTGRES_PASSWORD}
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
+        depends_on:
+            - chat_db
+            - rabbitmq
+        networks:
+            - new
 
     chat_pgadmin:
         image: dpage/pgadmin4
@@ -170,6 +212,55 @@ services:
             PGADMIN_DEFAULT_PASSWORD: root
         ports:
             - "5051:80"
+        networks:
+            - new
+
+    payment_db:
+        image: postgres:latest
+        container_name: payment-card-postgres
+        environment:
+            POSTGRES_PASSWORD: 123456
+            POSTGRES_DB: nest-card-payment
+            PGDATA: /var/lib/postgresql/data/pgdata
+        ports:
+            - "5445:5432"
+        restart: on-failure
+        networks:
+            - new
+
+    payment_server:
+        image: payment-card-server
+        container_name: payment-card-server
+        build:
+            context: ./nest-payment-server
+        command: npm run start:prod
+        ports:
+            - "5003:5002"
+        environment:
+            - PORT=5002
+            - POSTGRESS_NEST_HOST=${POSTGRESS_NEST_HOST}
+            - POSTGRES_NEST_PORT=${POSTGRES_NEST_PORT}
+            - POSTGRESS_NEST_USER=${POSTGRESS_NEST_USER}
+            - POSTGRES_NEST_DB=${POSTGRES_NEST_DB}
+            - POSTGRES_NEST_PASSWORD=${POSTGRES_NEST_PASSWORD}
+        links:
+            - payment_db
+        depends_on:
+            - payment_db
+        restart: on-failure
+        networks:
+            - new
+
+    payment_pgadmin:
+        image: dpage/pgadmin4
+        container_name: payment-card-pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5052:80"
+        networks:
+            - new
 
 networks:
     new:
@@ -179,5 +270,3 @@ volumes:
     api: null
     database-data: null
     pgadmin: null
-    rabbitmq_data:
-        driver: local

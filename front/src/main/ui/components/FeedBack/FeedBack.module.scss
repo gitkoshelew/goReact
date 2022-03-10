@@ -1,3 +1,4 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .feedBack {
@@ -11,10 +12,10 @@
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
   padding: 15px;
-  @media (min-width: 575px) {
+  @media (min-width: bp.$sm) {
     height: 165px;
   }
-  @media (min-width: 767px) {
+  @media (min-width: bp.$md) {
     height: 210px;
     width: 88%;
   }
@@ -43,14 +44,14 @@
         height: 52px;
         border-radius: 100%;
         margin-left: -10px;
-        @media (min-width: 455px) {
+        @media (min-width: bp.$xs) {
           margin-left: 10px;
         }
-        @media (min-width: 575px) {
+        @media (min-width: bp.$sm) {
           width: 62px;
           height: 62px;
         }
-        @media (min-width: 767px) {
+        @media (min-width: bp.$md) {
           width: 62px;
           height: 62px;
         }
@@ -68,11 +69,11 @@
           font-size: 18px;
           line-height: 20px;
           color: $main-text-color;
-          @media (min-width: 575px) {
+          @media (min-width: bp.$sm) {
             font-size: 22px;
           }
 
-          @media (min-width: 767px) {
+          @media (min-width: bp.$md) {
             font-size: 22px;
           }
         }
@@ -84,10 +85,10 @@
           font-size: 16px;
           line-height: 18px;
           color: $secondary-text-color;
-          @media (min-width: 575px) {
+          @media (min-width: bp.$sm) {
             font-size: 19px;
           }
-          @media (min-width: 767px) {
+          @media (min-width: bp.$md) {
             font-size: 19px;
           }
         }

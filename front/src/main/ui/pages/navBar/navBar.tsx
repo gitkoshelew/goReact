@@ -9,6 +9,7 @@ import { AppRootState } from '../../../bll/store/store'
 import { UserNavBarView } from './UserView/userNavBarView'
 import { LoginButton } from '../../components/Button/LoginBtn/LoginBtn'
 import { BasketButton } from '../../components/Button/BasketButton/BasketBtn'
+import { useNavigatorOnLine } from "../../../../hooks";
 
 const {
   headerNavBar,
@@ -21,6 +22,8 @@ const {
   btnBlock,
   commonNavBar,
   logoSelectContainer,
+  offlineMode,
+  disableMode,
 } = s
 
 type NavBarPropsType = {
@@ -32,6 +35,7 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
   const userLogin = useSelector((state: AppRootState) => state.LoginPage.user)
 
   const userView = userLogin ? <UserNavBarView user={userLogin} /> : <LoginButton />
+  const online = useNavigatorOnLine()
 
   return (
     <div className={headerContainer}>
@@ -45,13 +49,16 @@ export const NavBar = ({ isBurgerCollapse, setIsBurgerCollapse }: NavBarPropsTyp
               <SelectUI />
             </div>
           </div>
+          <div className={online? disableMode : offlineMode}>
+            You're offline
+          </div>
           <div>
             <div className={burgerMenu}>
               <BurgerMenu setIsBurgerCollapse={setIsBurgerCollapse} isBurgerCollapse={isBurgerCollapse} />
             </div>
             <div className={commonNavBar}>
               <div className={navLinksBlock}>
-                <NavLinks navNames={['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Chat']} />
+                <NavLinks navNames={online ? ['Home', 'About Us', 'Room', 'Service', 'Booking', 'Gallery', 'Chat'] :['Home', 'About Us'] } />
               </div>
               <div className={btnBlock}>
                 <BasketButton />

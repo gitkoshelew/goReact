@@ -1,3 +1,4 @@
+@use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
 .tabletTitle {
@@ -13,11 +14,11 @@
   @media (min-width: 1023px) {
     margin: 0 auto;
   }
-  @media (min-width: 1144px) {
+  @media (min-width: bp.$lg) {
     margin: -140px 484px 0 0;
     width: 565px;
   }
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     margin: -140px 470px 0 0;
     width: 620px;
   }

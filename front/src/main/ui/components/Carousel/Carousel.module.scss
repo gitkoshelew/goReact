@@ -1,8 +1,10 @@
+@use './src/main/ui/styles/breakpoints' as bp;
+
 .carousel {
   width: 90%;
   height: 300px;
   margin: 0 auto;
-  @media (min-width: 1250px) {
+  @media (min-width: bp.$xl) {
     width: 500px;
     margin: 0;
     position: relative;
@@ -10,6 +12,7 @@
     top: -30px;
   }
 }
+
 .carouselBig {
   width: 90%;
   height: 300px;
