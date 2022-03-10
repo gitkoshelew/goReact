@@ -17,7 +17,12 @@ func TestEmployeeRepository_Create(t *testing.T) {
 		h, _ := s.Hotel().Create(model.TestHotel())
 		e.User = *u.ModelFromDTO()
 		e.Hotel = *h
-		e, err := s.Employee().Create(e)
+		e, err := s.Employee().Create(&model.EmployeeDTO{
+			EmployeeID: e.EmployeeID,
+			UserID:     e.User.UserID,
+			HotelID:    e.Hotel.HotelID,
+			Position:   string(e.Position),
+		})
 		assert.NoError(t, err)
 		assert.NotNil(t, e)
 	})
@@ -38,7 +43,12 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 		h, _ := s.Hotel().Create(model.TestHotel())
 		e.User = *u.ModelFromDTO()
 		e.Hotel = *h
-		e, _ = s.Employee().Create(e)
+		e, _ = s.Employee().Create(&model.EmployeeDTO{
+			EmployeeID: e.EmployeeID,
+			UserID:     e.User.UserID,
+			HotelID:    e.Hotel.HotelID,
+			Position:   string(e.Position),
+		})
 		err := s.Employee().Delete(e.EmployeeID)
 		assert.NoError(t, err)
 	})
@@ -58,7 +68,12 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 		h, _ := s.Hotel().Create(model.TestHotel())
 		e.User = *u.ModelFromDTO()
 		e.Hotel = *h
-		e, _ = s.Employee().Create(e)
+		e, _ = s.Employee().Create(&model.EmployeeDTO{
+			EmployeeID: e.EmployeeID,
+			UserID:     e.User.UserID,
+			HotelID:    e.Hotel.HotelID,
+			Position:   string(e.Position),
+		})
 		eDTO, err := s.Employee().FindByID(e.EmployeeID)
 		e, err = s.EmployeeRepository.ModelFromDTO(eDTO)
 		assert.NoError(t, err)
@@ -90,7 +105,12 @@ func TestEmployeeRepository_FindByUserID(t *testing.T) {
 		h, _ := s.Hotel().Create(model.TestHotel())
 		e.User = *u.ModelFromDTO()
 		e.Hotel = *h
-		e, _ = s.Employee().Create(e)
+		e, _ = s.Employee().Create(&model.EmployeeDTO{
+			EmployeeID: e.EmployeeID,
+			UserID:     e.User.UserID,
+			HotelID:    e.Hotel.HotelID,
+			Position:   string(e.Position),
+		})
 		eDTO, err := s.Employee().FindByID(e.EmployeeID)
 		e, err = s.EmployeeRepository.ModelFromDTO(eDTO)
 		assert.NoError(t, err)
