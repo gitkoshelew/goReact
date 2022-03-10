@@ -262,6 +262,21 @@ services:
         networks:
             - new
 
+    react-nginx-app:
+        stdin_open: true
+        build:
+            context: ./front
+            dockerfile: Dockerfile
+        ports:
+            - "3001:80"
+        environment:
+            - REACT_APP_ENABLE_MOCKS=${REACT_APP_ENABLE_MOCKS}
+            - REACT_APP_API_LINK=${REACT_APP_API_LINK}
+            - REACT_APP_API_CHAT_LINK=${REACT_APP_API_CHAT_LINK}
+        restart: on-failure
+        networks:
+            - new
+
 networks:
     new:
         driver: bridge
