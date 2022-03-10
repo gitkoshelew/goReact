@@ -132,7 +132,6 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 	if b.Notes != "" {
 		notes = fmt.Sprintf("'%s'", b.Notes)
 	}
-
 	transactionID := "transactionId"
 	if b.TransactionID != 0 {
 		transactionID = fmt.Sprintf("%d", b.TransactionID)

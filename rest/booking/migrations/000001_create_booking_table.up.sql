@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS BOOKING
     seat_id          INTEGER NOT NULL,
     pet_id           INTEGER NOT NULL,
     employee_id      INTEGER NOT NULL,
+    transactionId    INTEGER,
     status           BookingStatus NOT NULL,
     start_date       DATE NOT NULL,
     end_date         DATE NOT NULL,

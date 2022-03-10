@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"context"
-	"fmt"
+	"errors"
 )
 
 // CtxKey ...
@@ -10,16 +10,20 @@ type CtxKey int8
 
 // CtxKeys
 const (
-	CtxKeyUser  CtxKey = iota
-	CtxKeyEmail CtxKey = iota
+	CtxKeyUser  CtxKey = 1
+	CtxKeyEmail CtxKey = 2
+)
+
+var (
+	// ErrEmptyEmail ...
+	ErrEmptyEmail = errors.New("email is empty")
 )
 
 // ContextEmail ...
 func ContextEmail(ctx context.Context) (string, error) {
-	email := ctx.Value(CtxKeyEmail)
+	email := ctx.Value(CtxKeyEmail).(string)
 	if email == "" {
-
-		return "", fmt.Errorf("email is empty")
+		return "", ErrEmptyEmail
 	}
-	return email.(string), nil
+	return email, nil
 }

@@ -15,11 +15,12 @@ type BookingRepository struct {
 func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO booking
-		(seat_id, pet_id, employee_id, status, start_date, end_date, paid, notes)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+		(seat_id, pet_id, employee_id, transactionId, status, start_date, end_date, paid, notes)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, &9) RETURNING id`,
 		b.SeatID,
 		b.PetID,
 		b.EmployeeID,
+		b.TransactionID,
 		string(b.Status),
 		b.StartDate,
 		b.EndDate,
@@ -48,6 +49,7 @@ func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 			&booking.SeatID,
 			&booking.PetID,
 			&booking.EmployeeID,
+			&booking.TransactionID,
 			&booking.Status,
 			&booking.StartDate,
 			&booking.EndDate,
@@ -72,6 +74,7 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 		&booking.SeatID,
 		&booking.PetID,
 		&booking.EmployeeID,
+		&booking.TransactionID,
 		&booking.Status,
 		&booking.StartDate,
 		&booking.EndDate,
@@ -109,6 +112,10 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 	if b.EmployeeID != 0 {
 		employeeID = fmt.Sprintf("%d", b.EmployeeID)
 	}
+	transactionID := "transactionId"
+	if b.TransactionID != 0 {
+		transactionID = fmt.Sprintf("%d", b.TransactionID)
+	}
 	status := "status"
 	if b.Status != "" {
 		status = fmt.Sprintf("'%s'", string(b.Status))
@@ -132,11 +139,12 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 
 	result, err := r.Store.Db.Exec(
 		fmt.Sprintf(`UPDATE booking SET
-		seat_id = %s, pet_id = %s, employee_id = %s, status = %s, start_date = %s, end_date = %s, paid = %s, notes = %s
+		seat_id = %s, pet_id = %s, employee_id = %s, transactionId = %s, status = %s, start_date = %s, end_date = %s, paid = %s, notes = %s
 		WHERE id = $1`,
 			seatID,
 			petID,
 			employeeID,
+			transactionID,
 			status,
 			startDate,
 			endDate,

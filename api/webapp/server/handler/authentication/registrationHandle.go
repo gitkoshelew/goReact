@@ -28,7 +28,6 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
@@ -36,7 +35,6 @@ func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
 		_, err = s.User().Create(user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Cant create user. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
