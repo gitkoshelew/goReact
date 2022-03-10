@@ -8,7 +8,7 @@ type Booking struct {
 	SeatID        int           `json:"seat"`
 	PetID         int           `json:"pet"`
 	EmployeeID    int           `json:"employeeId"`
-	TransactionID string        `json:"transactionId"`
+	TransactionID int           `json:"transactionId"`
 	Status        BookingStatus `json:"status"`
 	StartDate     *time.Time    `json:"start"`
 	EndDate       *time.Time    `json:"end"`

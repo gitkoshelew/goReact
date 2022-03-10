@@ -2,7 +2,6 @@ package server
 
 import (
 	"goReact/domain/store"
-	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/authentication"
 	"goReact/webapp/server/handler/middleware"
 	"goReact/webapp/server/handler/pet"
@@ -13,8 +12,6 @@ import (
 )
 
 func (s *Server) configureRouter() {
-
-	s.router.Handle("GET", "/", handler.HandleHomePage())
 
 	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(authentication.LoginHandle(store.New(s.config))))
 
