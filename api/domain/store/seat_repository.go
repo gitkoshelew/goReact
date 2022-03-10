@@ -122,7 +122,7 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 		return nil, err
 	}
 
-	room, err := r.Store.RoomRepository.RoomFromDTO(roomDTO)
+	room, err := r.Store.RoomRepository.ModelFromDTO(roomDTO)
 	if err != nil {
 		return nil, err
 	}

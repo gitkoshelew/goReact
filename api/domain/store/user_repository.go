@@ -171,7 +171,7 @@ func (r *UserRepository) Update(u *model.User) error {
 		return err
 	}
 
-	result, err := r.Store.Db.Exec(
+	_, err = r.Store.Db.Exec(
 		`UPDATE users SET 
 			email = $1, password = $2, role = $3, verified = $4, 
 			first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, 
@@ -195,7 +195,7 @@ func (r *UserRepository) Update(u *model.User) error {
 		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
 		return err
 	}
-	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
+
 	return nil
 }
 

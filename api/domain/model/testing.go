@@ -50,7 +50,7 @@ func TestRoomDTO() *RoomDTO {
 	return &RoomDTO{
 		RoomID:       1,
 		RoomNumber:   1,
-		PetType:      PetTypeCat,
+		PetType:      "cat",
 		HotelID:      TestHotel().HotelID,
 		RoomPhotoURL: "/photo/1",
 	}
