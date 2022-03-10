@@ -22,16 +22,16 @@ type Booking struct {
 
 // BookingDTO struct
 type BookingDTO struct {
-	BookingID     int           `json:"bookingId"`
-	SeatID        int           `json:"seat"`
-	PetID         int           `json:"pet"`
-	EmployeeID    int           `json:"employeeId"`
-	Status        BookingStatus `json:"status"`
-	StartDate     *time.Time    `json:"start"`
-	EndDate       *time.Time    `json:"end"`
-	Notes         string        `json:"notes,omitempty"`
-	TransactionID int           `json:"transactionId"`
-	Paid          *bool         `json:"paid"`
+	BookingID     int        `json:"bookingId"`
+	SeatID        int        `json:"seat"`
+	PetID         int        `json:"pet"`
+	EmployeeID    int        `json:"employeeId"`
+	Status        string     `json:"status"`
+	StartDate     *time.Time `json:"start"`
+	EndDate       *time.Time `json:"end"`
+	Notes         string     `json:"notes,omitempty"`
+	TransactionID int        `json:"transactionId"`
+	Paid          *bool      `json:"paid"`
 }
 
 // BookingStatus ...
