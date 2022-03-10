@@ -59,7 +59,8 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 		e.User = *u.ModelFromDTO()
 		e.Hotel = *h
 		e, _ = s.Employee().Create(e)
-		e, err := s.Employee().FindByID(e.EmployeeID)
+		eDTO, err := s.Employee().FindByID(e.EmployeeID)
+		e, err = s.EmployeeRepository.ModelFromDTO(eDTO)
 		assert.NoError(t, err)
 		assert.NotNil(t, e)
 	})
@@ -90,7 +91,8 @@ func TestEmployeeRepository_FindByUserID(t *testing.T) {
 		e.User = *u.ModelFromDTO()
 		e.Hotel = *h
 		e, _ = s.Employee().Create(e)
-		e, err := s.Employee().FindByUserID(e.UserID)
+		eDTO, err := s.Employee().FindByID(e.EmployeeID)
+		e, err = s.EmployeeRepository.ModelFromDTO(eDTO)
 		assert.NoError(t, err)
 		assert.NotNil(t, e)
 	})

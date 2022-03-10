@@ -32,7 +32,13 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		employee, err := s.Employee().FindByID(id)
+		employeeDTO, err := s.Employee().FindByID(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			s.Logger.Errorf("Cant find employee. Err msg:%v.", err)
+			return
+		}
+		employee, err := s.Employee().ModelFromDTO(employeeDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			s.Logger.Errorf("Cant find employee. Err msg:%v.", err)

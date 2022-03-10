@@ -52,20 +52,6 @@ const (
 	AnonymousRole Role = "anonymous"
 )
 
-// StrToRole ...
-func StrToRole(s *string) Role {
-	switch *s {
-	case "client":
-		return ClientRole
-	case "employee":
-		return EmployeeRole
-	case "anonymous":
-		return AnonymousRole
-	default:
-		return ""
-	}
-}
-
 // Sex ...
 type Sex string
 
@@ -74,18 +60,6 @@ const (
 	SexMale   Sex = "male"
 	SexFemale Sex = "female"
 )
-
-// StrToSex ...
-func StrToSex(s *string) Sex {
-	switch *s {
-	case "male":
-		return SexMale
-	case "female":
-		return SexFemale
-	default:
-		return ""
-	}
-}
 
 // Validate ...
 func (u *User) Validate() error {
@@ -136,12 +110,12 @@ func (uDTO *UserDTO) ModelFromDTO() *User {
 		UserID:      uDTO.UserID,
 		Email:       uDTO.Email,
 		Password:    uDTO.Password,
-		Role:        StrToRole(&uDTO.Role),
+		Role:        Role(uDTO.Role),
 		Verified:    uDTO.Verified,
 		Name:        uDTO.Name,
 		Surname:     uDTO.Surname,
 		MiddleName:  uDTO.MiddleName,
-		Sex:         StrToSex(&uDTO.Sex),
+		Sex:         Sex(uDTO.Sex),
 		DateOfBirth: uDTO.DateOfBirth,
 		Address:     uDTO.Address,
 		Phone:       uDTO.Phone,
