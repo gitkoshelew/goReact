@@ -15,11 +15,11 @@ type Room struct {
 
 // RoomDTO struct
 type RoomDTO struct {
-	RoomID       int     `json:"roomId"`
-	RoomNumber   int     `json:"roomNum"`
-	PetType      PetType `json:"petType"`
-	HotelID      int     `json:"hotelId"`
-	RoomPhotoURL string  `json:"roomPhotoUrl"`
+	RoomID       int    `json:"roomId"`
+	RoomNumber   int    `json:"roomNum"`
+	PetType      string `json:"petType"`
+	HotelID      int    `json:"hotelId"`
+	RoomPhotoURL string `json:"roomPhotoUrl"`
 }
 
 // Validate ...

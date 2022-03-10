@@ -159,7 +159,6 @@ func (r *RoomRepository) RoomFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 		Hotel:        *hotel,
 		RoomPhotoURL: dto.RoomPhotoURL,
 	}, nil
-
 }
 
 // GetTotalRows ...

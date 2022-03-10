@@ -13,21 +13,30 @@ type RoomRepository struct {
 }
 
 // Create room and save it to DB
-func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
+func (r *RoomRepository) Create(rDTO *model.RoomDTO) (*model.Room, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room (pet_type, number, hotel_id) VALUES ($1, $2, $3) RETURNING id",
-		string(rm.PetType), rm.RoomNumber, rm.Hotel.HotelID).Scan(&rm.RoomID); err != nil {
-		log.Print(err)
+		"INSERT INTO room (pet_type, number, hotel_id , photo) VALUES ($1, $2, $3, $4) RETURNING id",
+		rDTO.PetType,
+		rDTO.RoomNumber,
+		rDTO.HotelID,
+		rDTO.RoomPhotoURL,
+	).Scan(&rDTO.RoomID); err != nil {
+		r.Store.Logger.Errorf("Error occured while creating room. Err msg: %w.", err)
 		return nil, err
 	}
-	return rm, nil
+
+	room, err := r.ModelFromDTO(rDTO)
+	if err != nil {
+		return nil, err
+	}
+	return room, nil
 }
 
 // GetAll returns all rooms
 func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM room")
 	if err != nil {
-		log.Print(err)
+		r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %w", err)
 	}
 	rooms := []model.RoomDTO{}
 
@@ -38,9 +47,10 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 			&room.RoomNumber,
 			&room.PetType,
 			&room.HotelID,
+			&room.RoomPhotoURL,
 		)
 		if err != nil {
-			log.Print(err)
+			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %w", err)
 			continue
 		}
 		rooms = append(rooms, room)
@@ -57,7 +67,9 @@ func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 		&room.RoomNumber,
 		&room.PetType,
 		&room.HotelID,
+		&room.RoomPhotoURL,
 	); err != nil {
+		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg: %w.", err)
 		return nil, err
 	}
 	return room, nil
@@ -67,36 +79,39 @@ func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 func (r *RoomRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM room WHERE id = $1", id)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %w.", err)
 		return err
 	}
+
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %w.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("No rows affected")
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %w.", err)
+		return err
 	}
-	log.Printf("Room deleted, rows affectet: %d", result)
+
 	return nil
 }
 
 // Update room from DB
-func (r *RoomRepository) Update(rm *model.Room) error {
-
-	result, err := r.Store.Db.Exec(
-		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3 WHERE id = $4",
+func (r *RoomRepository) Update(rm *model.RoomDTO) error {
+	_, err := r.Store.Db.Exec(
+		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photo = $4 WHERE id = $5",
 		rm.RoomNumber,
-		string(rm.PetType),
-		rm.Hotel.HotelID,
-		rm.RoomID,
-	)
+		rm.PetType,
+		rm.HotelID,
+		rm.RoomPhotoURL,
+		rm.RoomID)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Error occured while updating room. Err msg: %w.", err)
 		return err
 	}
-	log.Printf("Room updated, rows affectet: %d", result)
+
 	return nil
 }
 
@@ -129,20 +144,20 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.RoomDTO,
 	return &rooms, nil
 }
 
-// RoomFromDTO ...
-func (r *RoomRepository) RoomFromDTO(dto *model.RoomDTO) (*model.Room, error) {
-	hotel, err := r.Store.HotelRepository.FindByID(dto.HotelID)
+// ModelFromDTO ...
+func (r *RoomRepository) ModelFromDTO(dto *model.RoomDTO) (*model.Room, error) {
+	hotel, err := r.Store.Hotel().FindByID(dto.HotelID)
 	if err != nil {
 		return nil, err
 	}
+
 	return &model.Room{
 		RoomID:       dto.RoomID,
 		RoomNumber:   dto.RoomNumber,
-		PetType:      dto.PetType,
+		PetType:      model.PetType(dto.PetType),
 		Hotel:        *hotel,
 		RoomPhotoURL: dto.RoomPhotoURL,
 	}, nil
-
 }
 
 // GetTotalRows ...
