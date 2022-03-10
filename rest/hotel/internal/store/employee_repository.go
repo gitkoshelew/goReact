@@ -135,5 +135,4 @@ func (r *EmployeeRepository) EmployeeFromDTO(dto *model.EmployeeDTO) (*model.Emp
 		Hotel:      *hotel,
 		Position:   dto.Position,
 	}, nil
-
 }

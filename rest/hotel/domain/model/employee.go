@@ -29,21 +29,6 @@ const (
 	AdminPosition    Position = "admin"
 )
 
-// PositionString ...
-func (e Employee) PositionString() string {
-	switch e.Position {
-	case ManagerPosition:
-		return "manager"
-	case EmployeePosition:
-		return "employee"
-	case OwnerPosition:
-		return "owner"
-	case AdminPosition:
-		return "admin"
-	}
-	return "unknown"
-}
-
 // Validate ...
 func (e *Employee) Validate() error {
 	return validation.ValidateStruct(

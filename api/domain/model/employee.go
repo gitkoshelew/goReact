@@ -1,6 +1,8 @@
 package model
 
-import validation "github.com/go-ozzo/ozzo-validation"
+import (
+	validation "github.com/go-ozzo/ozzo-validation"
+)
 
 // Employee extends User and has all User fields
 type Employee struct {
@@ -8,6 +10,14 @@ type Employee struct {
 	User
 	Hotel    Hotel
 	Position Position `json:"position"`
+}
+
+// EmployeeDTO ...
+type EmployeeDTO struct {
+	EmployeeID int      `json:"employeeId"`
+	UserID     int      `json:"userId"`
+	HotelID    int      `json:"hotelId"`
+	Position   Position `json:"position"`
 }
 
 // Position ...
