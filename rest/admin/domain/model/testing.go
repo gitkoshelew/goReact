@@ -23,7 +23,7 @@ func TestUser() *User {
 
 }
 
-// Testing instance of hotel
+// TestHotel instance of hotel
 func TestHotel() *Hotel {
 	return &Hotel{
 		HotelID:     1,
@@ -33,7 +33,7 @@ func TestHotel() *Hotel {
 	}
 }
 
-// Testing instance of room
+// TestRoom instance of room
 func TestRoom() *Room {
 	return &Room{
 		RoomID:       1,
@@ -44,7 +44,7 @@ func TestRoom() *Room {
 	}
 }
 
-// Testing instance of employee
+// TestEmployee instance of employee
 func TestEmployee() *Employee {
 	return &Employee{
 		User:     *TestUser(),
@@ -53,7 +53,7 @@ func TestEmployee() *Employee {
 	}
 }
 
-// Testing instance of pet
+// TestPet instance of pet
 func TestPet() *Pet {
 	return &Pet{
 		Name:        "Name",
@@ -65,7 +65,7 @@ func TestPet() *Pet {
 	}
 }
 
-// Testing instance of seat
+// TestSeat instance of seat
 func TestSeat() *Seat {
 	return &Seat{
 		Description: "Description of seat",
@@ -75,7 +75,7 @@ func TestSeat() *Seat {
 	}
 }
 
-// Testing instance of booking
+// TestBooking instance of booking
 func TestBooking() *Booking {
 	return &Booking{
 		Seat:      *TestSeat(),

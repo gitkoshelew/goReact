@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Config ...
 type Config struct {
 	Server struct {
 		Host     string

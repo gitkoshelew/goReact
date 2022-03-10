@@ -10,7 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// AllPermissonHandler ...
+// ShowAllPermissions ...
 func ShowAllPermissions(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)

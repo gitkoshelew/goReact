@@ -58,7 +58,7 @@ func (s *Store) Close() {
 	s.Db.Close()
 }
 
-// SessionRepository ...
+// Session ...
 func (s *Store) Session() *SessionRepository {
 	if s.SessionRepository != nil {
 		return s.SessionRepository
@@ -152,7 +152,7 @@ func (s *Store) Booking() *BookingRepository {
 	return s.BookingRepository
 }
 
-// Permossins ...
+// Permissions ...
 func (s *Store) Permissions() *PermissionsRepository {
 	if s.PermissionsRepository != nil {
 		return s.PermissionsRepository
@@ -163,6 +163,7 @@ func (s *Store) Permissions() *PermissionsRepository {
 	return s.PermissionsRepository
 }
 
+// PermissionsEmployee ...
 func (s *Store) PermissionsEmployee() *PermissionsEmployeeRepository {
 	if s.PermissionsEmployeeRepository != nil {
 		return s.PermissionsEmployeeRepository

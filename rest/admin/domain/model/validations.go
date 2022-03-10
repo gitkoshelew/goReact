@@ -100,7 +100,7 @@ func IsEmployeePosition(value interface{}) error {
 	return errors.New("allowed Employee Position: 'ManagerPosition', 'EmployeePosition' ,'OwnerPosition','AdminPosition'")
 }
 
-// IsPetType checks if string matchs to a BookingStatus
+// IsBookingStatus checks if string matchs to a BookingStatus
 // BookingStatusPending    BookingStatus = "pending"
 //	BookingStatusInProgress BookingStatus = "in-progress"
 //	BookingStatusCompleted  BookingStatus = "completed"

@@ -10,27 +10,28 @@ type PermissionsEmployeeRepository struct {
 	Store *Store
 }
 
-func (r *PermissionsEmployeeRepository) GetAll() (*[]model.Permissions_employees, error) {
+// GetAll ...
+func (r *PermissionsEmployeeRepository) GetAll() (*[]model.PermissionsEmployees, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM permissions_employees")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occurred while getting all permissions for employees. Err msg: %v", err)
 	}
 
-	permissions_employees := []model.Permissions_employees{}
+	permissionsEmployees := []model.PermissionsEmployees{}
 
 	for rows.Next() {
-		permission_employees := model.Permissions_employees{}
+		permissionEmployees := model.PermissionsEmployees{}
 		err := rows.Scan(
-			&permission_employees.Permissions.PermissionID,
-			&permission_employees.Employee.EmployeeID,
+			&permissionEmployees.Permissions.PermissionID,
+			&permissionEmployees.Employee.EmployeeID,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occurred while getting all permissions for employees. Err msg: %v", err)
 			continue
 		}
-		permissions_employees = append(permissions_employees, permission_employees)
+		permissionsEmployees = append(permissionsEmployees, permissionEmployees)
 	}
-	return &permissions_employees, nil
+	return &permissionsEmployees, nil
 }
 
 //SetForEmployee set permissions for employee

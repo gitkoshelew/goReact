@@ -106,9 +106,9 @@ func (r *EmployeeRepository) Update(e *model.Employee) error {
 }
 
 //FindByUserID find employee by user ID
-func (r *EmployeeRepository) FindByUserID(userId int) (*model.Employee, error) {
+func (r *EmployeeRepository) FindByUserID(userID int) (*model.Employee, error) {
 	employee := &model.Employee{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE user_id = $1", userId).Scan(
+	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE user_id = $1", userID).Scan(
 		&employee.EmployeeID,
 		&employee.UserID,
 		&employee.Hotel.HotelID,

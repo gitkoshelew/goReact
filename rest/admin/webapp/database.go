@@ -5,11 +5,13 @@ import (
 	"log"
 )
 
+// DataBase ...
 type DataBase struct {
 	dataBase *sql.DB
 	config   *Config
 }
 
+// NewDataBase ...
 func NewDataBase(config *Config) *DataBase {
 	dataBase, err := ConnectDb(config)
 	if err != nil {
@@ -22,6 +24,7 @@ func NewDataBase(config *Config) *DataBase {
 	}
 }
 
+// ConnectDb ...
 func ConnectDb(config *Config) (*sql.DB, error) {
 	dataSourceName := config.PgDataSource()
 

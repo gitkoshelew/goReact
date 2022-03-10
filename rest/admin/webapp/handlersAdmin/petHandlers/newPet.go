@@ -11,14 +11,14 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_create model.Permission = model.Permission{Name: model.CreatPet}
+var permissionCreate model.Permission = model.Permission{Name: model.CreatPet}
 
 // NewPet ...
 func NewPet(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permission_create.Name)
+		err := session.CheckRigths(w, r, permissionCreate.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)

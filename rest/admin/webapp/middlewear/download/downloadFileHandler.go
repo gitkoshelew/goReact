@@ -10,11 +10,12 @@ import (
 	"strings"
 )
 
+// DownloadFileHandler ...
 func DownloadFileHandler(s *store.Store) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		session.CheckSession(w, r)
-	
+
 		path, err := middlewear.CtxFile(r.Context())
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)

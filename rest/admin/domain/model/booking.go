@@ -30,6 +30,7 @@ var (
 	BookingStatusCancelled  BookingStatus = "cancelled"
 )
 
+// Validate ...
 func (b *Booking) Validate() error {
 	return validation.ValidateStruct(
 		b,

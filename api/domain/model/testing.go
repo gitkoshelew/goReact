@@ -24,7 +24,7 @@ func TestUser() *UserDTO {
 
 }
 
-// Testing instance of hotel
+// TestHotel instance of hotel
 func TestHotel() *Hotel {
 	return &Hotel{
 		HotelID:     1,
@@ -86,6 +86,7 @@ func TestPage() *pagination.Page {
 	}
 }
 
+// TestSeat ...
 func TestSeat() *Seat {
 	return &Seat{
 		Description: "Description of seat",
@@ -95,14 +96,17 @@ func TestSeat() *Seat {
 	}
 }
 
+// TestBooking ...
 func TestBooking() *Booking {
+	a := time.Time{}.AddDate(2000, 2, 2)
+	b := time.Time{}.AddDate(2000, 22, 2)
 	return &Booking{
 		Seat:      *TestSeat(),
 		Pet:       *TestPet(),
 		Employee:  *TestEmployee(),
 		Status:    BookingStatusInProgress,
-		StartDate: time.Time{}.AddDate(2000, 2, 2),
-		EndDate:   time.Time{}.AddDate(2000, 22, 2),
+		StartDate: &a,
+		EndDate:   &b,
 		Notes:     "Notes",
 	}
 }

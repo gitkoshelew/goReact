@@ -16,7 +16,7 @@ import (
 func GetSeatByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permission_delete.Name)
+		err := session.CheckRigths(w, r, permissionDelete.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)

@@ -11,7 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// Get all permissions that the employee has...
+// GetPerByEmplID all permissions that the employee has...
 func GetPerByEmplID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
@@ -35,7 +35,7 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		per, err := s.Permissions().GetByEmployeeId(id)
+		per, err := s.Permissions().GetEmployeeByID(id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting permission by employee id. Err msg:%v. ", err), http.StatusInternalServerError)
 			s.Logger.Errorf("Error occured while getting permission by employee id. Err msg: %v", err)

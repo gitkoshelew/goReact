@@ -7,7 +7,7 @@ type Permission struct {
 	Descriptoin  string
 }
 
-//PermissionName
+// PermissionName ...
 type PermissionName string
 
 //Permission name constant. Each model must have 4 permissions (СRUD),

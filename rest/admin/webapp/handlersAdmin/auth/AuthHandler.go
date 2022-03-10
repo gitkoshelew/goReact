@@ -12,7 +12,6 @@ import (
 
 // AuthAdmin ...
 func AuthAdmin(s *store.Store) httprouter.Handle {
-
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		EmailForm := r.FormValue("email")
@@ -47,7 +46,7 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		permissions, err := s.Permissions().GetByEmployeeId(employee.EmployeeID)
+		permissions, err := s.Permissions().GetEmployeeByID(employee.EmployeeID)
 		if err != nil {
 			http.Error(w, "Error occured while getting permossions", http.StatusInternalServerError)
 			return
