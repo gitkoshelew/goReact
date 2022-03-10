@@ -11,13 +11,13 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_read model.Permission = model.Permission{Name: model.UpdateSeat}
+var permissionRead model.Permission = model.Permission{Name: model.UpdateSeat}
 
 // AllSeatsHandler ...
 func AllSeatsHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permission_read.Name)
+		err := session.CheckRigths(w, r, permissionRead.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)

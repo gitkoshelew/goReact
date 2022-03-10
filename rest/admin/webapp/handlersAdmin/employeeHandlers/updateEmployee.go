@@ -11,14 +11,14 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permission_update model.Permission = model.Permission{Name: model.UpdateBooking}
+var permissionUpdate model.Permission = model.Permission{Name: model.UpdateBooking}
 
 // UpdateEmployee ...
 func UpdateEmployee(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permission_update.Name)
+		err := session.CheckRigths(w, r, permissionUpdate.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)

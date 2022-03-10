@@ -23,6 +23,7 @@ func (r *PermissionsRepository) Create(p *model.Permission) (*model.Permission, 
 	return p, nil
 }
 
+// GetAll ...
 func (r *PermissionsRepository) GetAll() (*[]model.Permission, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM PERMISSIONS")
 	if err != nil {
@@ -47,6 +48,7 @@ func (r *PermissionsRepository) GetAll() (*[]model.Permission, error) {
 	return &permissoins, nil
 }
 
+// FindByID ...
 func (r *PermissionsRepository) FindByID(id int) (*model.Permission, error) {
 
 	permissoin := model.Permission{}
@@ -61,6 +63,7 @@ func (r *PermissionsRepository) FindByID(id int) (*model.Permission, error) {
 	return &permissoin, nil
 }
 
+// Delete ...
 func (r *PermissionsRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM PERMISSIONS WHERE id = $1", id)
 	if err != nil {
@@ -83,8 +86,8 @@ func (r *PermissionsRepository) Delete(id int) error {
 	return nil
 }
 
-// GetByEmployeeId return []permissions that the employee has
-func (r *PermissionsRepository) GetByEmployeeId(id int) (*[]model.Permission, error) {
+// GetEmployeeByID return []permissions that the employee has
+func (r *PermissionsRepository) GetEmployeeByID(id int) (*[]model.Permission, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM PERMISSiONS WHERE id IN ( SELECT permissions_id FROM permissions_employees where employee_id = $1 )", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occurred while getting permissions. Err msg: %v", err)

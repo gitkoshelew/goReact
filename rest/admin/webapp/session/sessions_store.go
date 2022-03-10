@@ -10,6 +10,7 @@ import (
 	"github.com/antonlindstrom/pgstore"
 )
 
+// SessionStore ...
 type SessionStore struct {
 	DB      *sql.DB
 	PGStore *pgstore.PGStore
@@ -17,6 +18,7 @@ type SessionStore struct {
 
 var sstore SessionStore
 
+// OpenSessionStore ...
 func OpenSessionStore(c *webapp.Config) error {
 	defer sstore.PGStore.StopCleanup(sstore.PGStore.Cleanup(time.Minute * 5))
 

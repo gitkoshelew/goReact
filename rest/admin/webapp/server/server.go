@@ -10,6 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// Server ...
 type Server struct {
 	config *webapp.Config
 	logger *logger.Logger

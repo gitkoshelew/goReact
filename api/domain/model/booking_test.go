@@ -57,9 +57,9 @@ func TestBooking_Validate(t *testing.T) {
 		{
 			name: "valid EndDate",
 			b: func() *model.Booking {
-
+				a := time.Time{}.AddDate(2000, 2, 2)
 				b := model.TestBooking()
-				b.EndDate = time.Time{}.AddDate(2000, 2, 2)
+				b.EndDate = &a
 				return b
 			},
 			isValid: true,

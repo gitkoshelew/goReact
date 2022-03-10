@@ -24,6 +24,7 @@ const (
 	PetTypeDog PetType = "dog"
 )
 
+// Validate ...
 func (p *Pet) Validate() error {
 	return validation.ValidateStruct(
 		p,

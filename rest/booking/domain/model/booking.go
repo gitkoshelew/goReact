@@ -13,7 +13,7 @@ type Booking struct {
 	StartDate     *time.Time    `json:"start"`
 	EndDate       *time.Time    `json:"end"`
 	Paid          *bool         `json:"paid"`
-	Notes         string        `json:"notes,omitempty"
+	Notes         string        `json:"notes,omitempty"`
 }
 
 // BookingStatus ...
