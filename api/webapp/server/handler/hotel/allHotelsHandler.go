@@ -2,6 +2,7 @@ package hotel
 
 import (
 	"encoding/json"
+	"fmt"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/response"
 	"net/http"
@@ -17,20 +18,17 @@ func AllHotelsHandler(s *store.Store) httprouter.Handle {
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while opening DB. Err msg: %v", err)})
 		}
 
 		hotels, err := s.Hotel().GetAll()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Can't find hotels. Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting all hotels. Err msg: %v", err)})
 			return
 		}
 
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(hotels)
-
 	}
 }
