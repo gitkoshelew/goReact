@@ -26,7 +26,6 @@ type SeatDTO struct {
 
 // Validate ...
 func (s *Seat) Validate() error {
-
 	return validation.ValidateStruct(
 		s,
 		validation.Field(&s.Description, validation.Required, validation.Length(1, 100)),

@@ -14,10 +14,10 @@ type Employee struct {
 
 // EmployeeDTO ...
 type EmployeeDTO struct {
-	EmployeeID int      `json:"employeeId"`
-	UserID     int      `json:"userId"`
-	HotelID    int      `json:"hotelId"`
-	Position   Position `json:"position"`
+	EmployeeID int    `json:"employeeId"`
+	UserID     int    `json:"userId"`
+	HotelID    int    `json:"hotelId"`
+	Position   string `json:"position"`
 }
 
 // Position ...

@@ -22,7 +22,6 @@ func (r *SeatRepository) Create(s *model.Seat) (*model.Seat, error) {
 		r.Store.Logger.Errorf("Error occured while creating seat. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Created seat with id = %d", s.SeatID)
 	return s, nil
 }
 
@@ -93,7 +92,6 @@ func (r *SeatRepository) Delete(id int) error {
 
 // Update seat from DB
 func (r *SeatRepository) Update(s *model.Seat) error {
-
 	result, err := r.Store.Db.Exec(
 		"UPDATE seat SET room_id = $1, rent_from = $2, rent_to = $3, description = $4 WHERE id = $5",
 		s.Room.RoomID,

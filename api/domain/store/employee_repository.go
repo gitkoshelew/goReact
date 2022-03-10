@@ -12,17 +12,22 @@ type EmployeeRepository struct {
 }
 
 // Create employee and save it to DB
-func (r *EmployeeRepository) Create(e *model.Employee) (*model.Employee, error) {
+func (r *EmployeeRepository) Create(e *model.EmployeeDTO) (*model.Employee, error) {
 	if err := r.Store.Db.QueryRow("INSERT INTO employee (user_id, hotel_id, position) VALUES ($1, $2, $3) RETURNING id",
 		e.UserID,
-		e.Hotel.HotelID,
+		e.HotelID,
 		e.Position,
 	).Scan(&e.EmployeeID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating employee. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Created employee with id = %d", e.EmployeeID)
-	return e, nil
+
+	employee, err := r.ModelFromDTO(e)
+	if err != nil {
+		return nil, err
+	}
+
+	return employee, nil
 }
 
 // GetAll returns all employees
@@ -128,13 +133,11 @@ func (r *EmployeeRepository) FindByUserID(userID int) (*model.EmployeeDTO, error
 func (r *EmployeeRepository) ModelFromDTO(dto *model.EmployeeDTO) (*model.Employee, error) {
 	hotel, err := r.Store.Hotel().FindByID(dto.HotelID)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while user searching. Err msg: %v", err)
 		return nil, err
 	}
 
 	user, err := r.Store.User().FindByID(dto.UserID)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while user searching. Err msg: %v", err)
 		return nil, err
 	}
 
@@ -142,6 +145,6 @@ func (r *EmployeeRepository) ModelFromDTO(dto *model.EmployeeDTO) (*model.Employ
 		EmployeeID: dto.EmployeeID,
 		User:       *user,
 		Hotel:      *hotel,
-		Position:   dto.Position,
+		Position:   model.Position(dto.Position),
 	}, nil
 }
