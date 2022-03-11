@@ -15,7 +15,7 @@ func TestEmployeeRepository_Create(t *testing.T) {
 		e := model.TestEmployee()
 		u, _ := s.User().Create(model.TestUser())
 		h, _ := s.Hotel().Create(model.TestHotel())
-		e.User = *u.ModelFromDTO()
+		e.User = *u
 		e.Hotel = *h
 		e, err := s.Employee().Create(&model.EmployeeDTO{
 			EmployeeID: e.EmployeeID,
@@ -41,7 +41,7 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 		e := model.TestEmployee()
 		u, _ := s.User().Create(model.TestUser())
 		h, _ := s.Hotel().Create(model.TestHotel())
-		e.User = *u.ModelFromDTO()
+		e.User = *u
 		e.Hotel = *h
 		e, _ = s.Employee().Create(&model.EmployeeDTO{
 			EmployeeID: e.EmployeeID,
@@ -66,7 +66,7 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 		e := model.TestEmployee()
 		u, _ := s.User().Create(model.TestUser())
 		h, _ := s.Hotel().Create(model.TestHotel())
-		e.User = *u.ModelFromDTO()
+		e.User = *u
 		e.Hotel = *h
 		e, _ = s.Employee().Create(&model.EmployeeDTO{
 			EmployeeID: e.EmployeeID,
@@ -74,8 +74,7 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 			HotelID:    e.Hotel.HotelID,
 			Position:   string(e.Position),
 		})
-		eDTO, err := s.Employee().FindByID(e.EmployeeID)
-		e, err = s.EmployeeRepository.ModelFromDTO(eDTO)
+		e, err := s.Employee().FindByID(e.EmployeeID)
 		assert.NoError(t, err)
 		assert.NotNil(t, e)
 	})
@@ -103,7 +102,7 @@ func TestEmployeeRepository_FindByUserID(t *testing.T) {
 		e := model.TestEmployee()
 		u, _ := s.User().Create(model.TestUser())
 		h, _ := s.Hotel().Create(model.TestHotel())
-		e.User = *u.ModelFromDTO()
+		e.User = *u
 		e.Hotel = *h
 		e, _ = s.Employee().Create(&model.EmployeeDTO{
 			EmployeeID: e.EmployeeID,
@@ -111,8 +110,7 @@ func TestEmployeeRepository_FindByUserID(t *testing.T) {
 			HotelID:    e.Hotel.HotelID,
 			Position:   string(e.Position),
 		})
-		eDTO, err := s.Employee().FindByID(e.EmployeeID)
-		e, err = s.EmployeeRepository.ModelFromDTO(eDTO)
+		e, err := s.Employee().FindByID(e.EmployeeID)
 		assert.NoError(t, err)
 		assert.NotNil(t, e)
 	})

@@ -1,9 +1,7 @@
 package store
 
 import (
-	"errors"
 	"goReact/domain/model"
-	"log"
 )
 
 // EmployeeRepository ...
@@ -26,6 +24,8 @@ func (r *EmployeeRepository) Create(e *model.EmployeeDTO) (*model.Employee, erro
 	if err != nil {
 		return nil, err
 	}
+
+	r.Store.Logger.Infof("Employee with id %d was created.", e.EmployeeID)
 
 	return employee, nil
 }
@@ -56,17 +56,23 @@ func (r *EmployeeRepository) GetAll() (*[]model.EmployeeDTO, error) {
 }
 
 // FindByID searchs and returns employee by ID
-func (r *EmployeeRepository) FindByID(id int) (*model.EmployeeDTO, error) {
-	employee := &model.EmployeeDTO{}
+func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
+	employeeDTO := &model.EmployeeDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE id = $1", id).Scan(
-		&employee.EmployeeID,
-		&employee.UserID,
-		&employee.HotelID,
-		&employee.Position,
+		&employeeDTO.EmployeeID,
+		&employeeDTO.UserID,
+		&employeeDTO.HotelID,
+		&employeeDTO.Position,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting employee by id. Err msg:%v.", err)
 		return nil, err
 	}
+
+	employee, err := r.ModelFromDTO(employeeDTO)
+	if err != nil {
+		return nil, err
+	}
+
 	return employee, nil
 }
 
@@ -77,26 +83,24 @@ func (r *EmployeeRepository) Delete(id int) error {
 		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg:%v.", err)
 		return err
 	}
+
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg:%v.", err)
-
 		return err
 	}
 
 	if rowsAffected < 1 {
-		err := errors.New("no rows affected")
 		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg:%v.", err)
-		return err
+		return ErrNoRowsAffected
 	}
 
-	r.Store.Logger.Errorf("Employee deleted, rows affectet: %d", result)
+	r.Store.Logger.Infof("Employee with id %d was deleted", id)
 	return nil
 }
 
 // Update employee from DB
 func (r *EmployeeRepository) Update(e *model.EmployeeDTO) error {
-
 	result, err := r.Store.Db.Exec(
 		"UPDATE employee SET",
 		"user_id = $1, hotel_id = $2, position = $3",
@@ -107,25 +111,43 @@ func (r *EmployeeRepository) Update(e *model.EmployeeDTO) error {
 		e.EmployeeID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Erorr occured while updating booking. Err msg: %w", err)
 		return err
 	}
-	log.Printf("Employee updated, rows affectet: %d", result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating employee. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating employee. Err msg:%v.", err)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Employee with id %d was updated, rows affectet: %d", e.EmployeeID)
 	return nil
 }
 
 //FindByUserID find employee by user ID
-func (r *EmployeeRepository) FindByUserID(userID int) (*model.EmployeeDTO, error) {
-	employee := &model.EmployeeDTO{}
+func (r *EmployeeRepository) FindByUserID(userID int) (*model.Employee, error) {
+	employeeDTO := &model.EmployeeDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE user_id = $1", userID).Scan(
-		&employee.EmployeeID,
-		&employee.UserID,
-		&employee.HotelID,
-		&employee.Position,
+		&employeeDTO.EmployeeID,
+		&employeeDTO.UserID,
+		&employeeDTO.HotelID,
+		&employeeDTO.Position,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting employee by id. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while searching employee by user id. Err msg:%v.", err)
 		return nil, err
 	}
+
+	employee, err := r.ModelFromDTO(employeeDTO)
+	if err != nil {
+		return nil, err
+	}
+
 	return employee, nil
 }
 

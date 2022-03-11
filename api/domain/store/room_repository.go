@@ -1,7 +1,6 @@
 package store
 
 import (
-	"errors"
 	"goReact/domain/model"
 	"goReact/webapp/server/handler/pagination"
 	"log"
@@ -29,6 +28,9 @@ func (r *RoomRepository) Create(rDTO *model.RoomDTO) (*model.Room, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	r.Store.Logger.Infof("Room with id %d was created.", room.RoomID)
+
 	return room, nil
 }
 
@@ -59,19 +61,25 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 }
 
 //FindByID searchs and returns room by ID
-func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
-	room := &model.RoomDTO{}
+func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
+	roomDTO := &model.RoomDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM room WHERE id = $1",
 		id).Scan(
-		&room.RoomID,
-		&room.RoomNumber,
-		&room.PetType,
-		&room.HotelID,
-		&room.RoomPhotoURL,
+		&roomDTO.RoomID,
+		&roomDTO.RoomNumber,
+		&roomDTO.PetType,
+		&roomDTO.HotelID,
+		&roomDTO.RoomPhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg: %w.", err)
 		return nil, err
 	}
+
+	room, err := r.ModelFromDTO(roomDTO)
+	if err != nil {
+		return nil, err
+	}
+
 	return room, nil
 }
 
@@ -90,17 +98,17 @@ func (r *RoomRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		err := errors.New("no rows affected")
 		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %w.", err)
-		return err
+		return ErrNoRowsAffected
 	}
 
+	r.Store.Logger.Infof("Room with id %d was deleted", id)
 	return nil
 }
 
 // Update room from DB
 func (r *RoomRepository) Update(rm *model.RoomDTO) error {
-	_, err := r.Store.Db.Exec(
+	result, err := r.Store.Db.Exec(
 		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photo = $4 WHERE id = $5",
 		rm.RoomNumber,
 		rm.PetType,
@@ -112,6 +120,18 @@ func (r *RoomRepository) Update(rm *model.RoomDTO) error {
 		return err
 	}
 
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating room. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating room. Err msg:%v.", err)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Room with id %d was updated", rm.RoomID)
 	return nil
 }
 
@@ -144,6 +164,18 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.RoomDTO,
 	return &rooms, nil
 }
 
+// GetTotalRows ...
+func (r *RoomRepository) GetTotalRows() (int, error) {
+	var c int
+	err := r.Store.Db.QueryRow("SELECT COUNT(*) FROM ROOM").Scan(&c)
+	if err != nil {
+		log.Print(err.Error())
+		return 0, err
+	}
+
+	return c, nil
+}
+
 // ModelFromDTO ...
 func (r *RoomRepository) ModelFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 	hotel, err := r.Store.Hotel().FindByID(dto.HotelID)
@@ -158,16 +190,4 @@ func (r *RoomRepository) ModelFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 		Hotel:        *hotel,
 		RoomPhotoURL: dto.RoomPhotoURL,
 	}, nil
-}
-
-// GetTotalRows ...
-func (r *RoomRepository) GetTotalRows() (int, error) {
-	var c int
-	err := r.Store.Db.QueryRow("SELECT COUNT(*) FROM ROOM").Scan(&c)
-	if err != nil {
-		log.Print(err.Error())
-		return 0, err
-	}
-
-	return c, nil
 }

@@ -2,10 +2,15 @@ package store
 
 import (
 	"database/sql"
+	"errors"
 	"goReact/webapp"
 	"goReact/webapp/server/logging"
 
 	_ "github.com/lib/pq" // ...
+)
+
+var (
+	ErrNoRowsAffected = errors.New("No rows affected")
 )
 
 // Store ...
@@ -19,7 +24,6 @@ type Store struct {
 	SeatRepository     *SeatRepository
 	PetRepository      *PetRepository
 	BookingRepository  *BookingRepository
-	ImageRepository    *ImageRepository
 	Logger             *logging.Logger
 }
 
@@ -134,15 +138,4 @@ func (s *Store) Booking() *BookingRepository {
 		Store: s,
 	}
 	return s.BookingRepository
-}
-
-// Image ...
-func (s *Store) Image() *ImageRepository {
-	if s.ImageRepository != nil {
-		return s.ImageRepository
-	}
-	s.ImageRepository = &ImageRepository{
-		Store: s,
-	}
-	return s.ImageRepository
 }

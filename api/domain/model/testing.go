@@ -69,12 +69,12 @@ func TestEmployee() *Employee {
 // TestPet ...
 func TestPet() *Pet {
 	return &Pet{
-		Name:        "Name",
-		Type:        PetTypeCat,
-		Weight:      1,
-		Diesieses:   "Disease",
-		Owner:       *TestUser().ModelFromDTO(),
-		PetPhotoURL: "/",
+		Name:      "Name",
+		Type:      PetTypeCat,
+		Weight:    1,
+		Diesieses: "Disease",
+		Owner:     *TestUser().ModelFromDTO(),
+		PhotoURL:  "/",
 	}
 }
 

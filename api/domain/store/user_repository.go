@@ -18,7 +18,7 @@ var (
 )
 
 // Create user and save it to DB
-func (r *UserRepository) Create(u *model.UserDTO) (*model.UserDTO, error) {
+func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 
 	if err := u.ModelFromDTO().Validate(); err != nil {
 		r.Store.Logger.Errorf("Error occured while validating user. Err msg: %w", err)
@@ -60,13 +60,18 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.UserDTO, error) {
 		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %w", err)
 		return nil, err
 	}
-	return u, nil
+
+	r.Store.Logger.Infof("User with id %d was created.", u.UserID)
+
+	return u.ModelFromDTO(), nil
 }
 
 // GetAll returns all users
 func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
+		r.Store.Logger.Errorf("Eror occured while getting all users. Err msg: %w", err)
+
 		return nil, err
 	}
 	users := []model.User{}
@@ -89,6 +94,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Photo,
 		)
 		if err != nil {
+			r.Store.Logger.Debugf("Eror occured while getting all bookings. Err msg: %w", err)
 			continue
 		}
 		users = append(users, user)
@@ -98,7 +104,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 
 // FindByEmail searchs and returns user by email
 func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
-	user := &model.User{}
+	user := &model.UserDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE email = $1",
 		email).Scan(
 		&user.UserID,
@@ -115,15 +121,15 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror during checking users email or password. Err msg: %s", err.Error())
+		r.Store.Logger.Errorf("Eror occure while searching user by email. Err msg: %w", err)
 		return nil, err
 	}
-	return user, nil
+	return user.ModelFromDTO(), nil
 }
 
 // FindByID searchs and returns user by ID
 func (r *UserRepository) FindByID(id int) (*model.User, error) {
-	user := &model.User{}
+	user := &model.UserDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE id = $1",
 		id).Scan(
 		&user.UserID,
@@ -140,38 +146,43 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Cant find user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Eror occure while searching user by id. Err msg: %w", err)
 		return nil, err
 	}
-	return user, nil
+	return user.ModelFromDTO(), nil
 }
 
 // Delete user from DB by ID
 func (r *UserRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM users WHERE id = $1", id)
 	if err != nil {
+		r.Store.Logger.Errorf("Error occured while deleting user. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
+		r.Store.Logger.Errorf("Error occured while deleting user. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		return errors.New("No rows affected")
+		r.Store.Logger.Errorf("Error occured while deleting user. Err msg:%v.", err)
+		return ErrNoRowsAffected
 	}
+
+	r.Store.Logger.Infof("User with id %d was deleted", id)
 	return nil
 }
 
 // Update user from DB
-func (r *UserRepository) Update(u *model.User) error {
+func (r *UserRepository) Update(u *model.UserDTO) error {
 	encryptedPassword, err := model.EncryptPassword(u.Password)
 	if err != nil {
 		r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
 		return err
 	}
 
-	_, err = r.Store.Db.Exec(
+	result, err := r.Store.Db.Exec(
 		`UPDATE users SET 
 			email = $1, password = $2, role = $3, verified = $4, 
 			first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, 
@@ -179,12 +190,12 @@ func (r *UserRepository) Update(u *model.User) error {
 			WHERE id = $13`,
 		u.Email,
 		encryptedPassword,
-		string(u.Role),
+		u.Role,
 		u.Verified,
 		u.Name,
 		u.Surname,
 		u.MiddleName,
-		string(u.Sex),
+		u.Sex,
 		u.DateOfBirth,
 		u.Address,
 		u.Phone,
@@ -192,9 +203,22 @@ func (r *UserRepository) Update(u *model.User) error {
 		u.UserID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
+		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %w", err)
 		return err
 	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("User with id %d was updated", u.UserID)
 
 	return nil
 }
@@ -207,18 +231,19 @@ func (r *UserRepository) VerifyEmail(userID int) error {
 		userID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while verifying user. Err msg:%v.", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while verifying user. Err msg:%v.", err)
 		return nil
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("No rows was affected, possible reason: no user with such ID. Err msg:%v.", err)
+		r.Store.Logger.Errorf("No rows was affected, possible reason: no user with such ID")
+		return ErrNoRowsAffected
 	}
 	return nil
 }
@@ -228,7 +253,7 @@ func (r *UserRepository) EmailCheck(email string) *bool {
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", email).Scan(&emailIsUsed)
 	if err != nil {
-		r.Store.Logger.Errorf("Error while checking if email ia already in use. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while email checking. Err msg: %v", err)
 	}
 	return &emailIsUsed
 }

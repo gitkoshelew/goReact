@@ -1,7 +1,6 @@
 package store
 
 import (
-	"errors"
 	"goReact/domain/model"
 )
 
@@ -28,6 +27,8 @@ func (r *SeatRepository) Create(s *model.SeatDTO) (*model.Seat, error) {
 		r.Store.Logger.Errorf("Error occured while creating seat. Err msg:%v.", err)
 		return nil, err
 	}
+
+	r.Store.Logger.Infof("Seat with id %d was created.", s.SeatID)
 
 	return seat, nil
 }
@@ -59,7 +60,7 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 }
 
 //FindByID searchs and returns seat by ID
-func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
+func (r *SeatRepository) FindByID(id int) (*model.Seat, error) {
 	seatDTO := &model.SeatDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM seat WHERE id = $1",
 		id).Scan(
@@ -72,7 +73,13 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg:%v.", err)
 		return nil, err
 	}
-	return seatDTO, nil
+
+	seat, err := r.ModelFromDTO(seatDTO)
+	if err != nil {
+		return nil, err
+	}
+
+	return seat, nil
 }
 
 // Delete seat from DB by ID
@@ -89,11 +96,11 @@ func (r *SeatRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		err := errors.New("no rows affected")
 		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg:%v.", err)
-		return err
+		return ErrNoRowsAffected
 	}
-	r.Store.Logger.Info("Seat deleted, rows affectet: %d", result)
+
+	r.Store.Logger.Infof("Seat with id %d was deleted", id)
 	return nil
 }
 
@@ -111,18 +118,26 @@ func (r *SeatRepository) Update(s *model.SeatDTO) error {
 		r.Store.Logger.Errorf("Error occured while updating seat. Err msg:%v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Updated seat with id = %d,rows affectet: %d ", s.SeatID, result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating seat. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating seat. Err msg:%v.", err)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Seat with id %d was updated", s.SeatID)
+
 	return nil
 }
 
 // ModelFromDTO ...
 func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
-	roomDTO, err := r.Store.RoomRepository.FindByID(dto.RoomID)
-	if err != nil {
-		return nil, err
-	}
-
-	room, err := r.Store.RoomRepository.ModelFromDTO(roomDTO)
+	room, err := r.Store.RoomRepository.FindByID(dto.RoomID)
 	if err != nil {
 		return nil, err
 	}
