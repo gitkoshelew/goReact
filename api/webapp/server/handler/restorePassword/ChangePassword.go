@@ -21,39 +21,37 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 		email, err := middleware.ContextEmail(r.Context())
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Cannot parse email: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			s.Logger.Errorf("Cannot parse email: %w", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Cannot parse email: %v", err)})
 			return
 		}
 
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %v", r.Body, err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			s.Logger.Errorf("Eror during JSON request decoding. Err msg: %w", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Cannot parse email: %v", err)})
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Cannot open DB: Err msg: %v", err)})
 			return
 		}
 
 		user, err := s.User().FindByEmail(email)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while searching user: %v", err)})
 			return
 		}
 
 		err = model.CheckPasswordHash(user.Password, req.Password)
 		if err == nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Password cannot be the same")
-			json.NewEncoder(w).Encode(response.Error{Messsage: "Password cannot be the same"})
+			s.Logger.Errorf("Error occured while searching user")
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while searching user: %v", err)})
 			return
 		}
 
@@ -62,8 +60,7 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 		err = s.User().PasswordChange(user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Cant update password. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while searching user: %v", err)})
 			return
 		}
 
