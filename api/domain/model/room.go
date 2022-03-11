@@ -10,7 +10,7 @@ type Room struct {
 	RoomNumber int     `json:"roomNum"`
 	PetType    PetType `json:"petType"`
 	Hotel      Hotel
-	PhotoURL   string `json:"photoUrl"`
+	PhotoURL   string `json:"photoUrl,omitempty"`
 }
 
 // RoomDTO struct
@@ -19,7 +19,7 @@ type RoomDTO struct {
 	RoomNumber int    `json:"roomNum"`
 	PetType    string `json:"petType"`
 	HotelID    int    `json:"hotelId"`
-	PhotoURL   string `json:"photoUrl"`
+	PhotoURL   string `json:"photoUrl,omitempty"`
 }
 
 // Validate ...
