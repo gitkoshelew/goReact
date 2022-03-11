@@ -24,7 +24,7 @@ func TestRoom_Validate(t *testing.T) {
 			name: "0 or less room number",
 			r: func() *model.Room {
 				r := model.TestRoom()
-				r.RoomNumber = -5 
+				r.RoomNumber = -5
 				return r
 			},
 			isValid: false,
@@ -70,7 +70,7 @@ func TestRoom_Validate(t *testing.T) {
 			name: "Empty RoomPhotoURL",
 			r: func() *model.Room {
 				r := model.TestRoom()
-				r.RoomPhotoURL = ""
+				r.PhotoURL = ""
 				return r
 			},
 			isValid: false,
@@ -79,7 +79,7 @@ func TestRoom_Validate(t *testing.T) {
 			name: "Invalid RoomPhotoURL",
 			r: func() *model.Room {
 				r := model.TestRoom()
-				r.RoomPhotoURL = "/"
+				r.PhotoURL = "/"
 				return r
 			},
 			isValid: false,

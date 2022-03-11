@@ -37,22 +37,22 @@ func TestHotel() *Hotel {
 // TestRoom ...
 func TestRoom() *Room {
 	return &Room{
-		RoomID:       1,
-		RoomNumber:   1,
-		PetType:      PetTypeCat,
-		Hotel:        *TestHotel(),
-		RoomPhotoURL: "/photo/1",
+		RoomID:     1,
+		RoomNumber: 1,
+		PetType:    PetTypeCat,
+		Hotel:      *TestHotel(),
+		PhotoURL:   "/photo/1",
 	}
 }
 
 // TestRoomDTO ...
 func TestRoomDTO() *RoomDTO {
 	return &RoomDTO{
-		RoomID:       1,
-		RoomNumber:   1,
-		PetType:      "cat",
-		HotelID:      TestHotel().HotelID,
-		RoomPhotoURL: "/photo/1",
+		RoomID:     1,
+		RoomNumber: 1,
+		PetType:    "cat",
+		HotelID:    TestHotel().HotelID,
+		PhotoURL:   "/photo/1",
 	}
 }
 

@@ -16,11 +16,11 @@ func TestRoomRepository_Create(t *testing.T) {
 		h, err := s.Hotel().Create(model.TestHotel())
 		r.Hotel = *h
 		r, err = s.Room().Create(&model.RoomDTO{
-			RoomID:       r.RoomID,
-			RoomNumber:   r.RoomNumber,
-			PetType:      string(r.PetType),
-			HotelID:      r.Hotel.HotelID,
-			RoomPhotoURL: r.RoomPhotoURL,
+			RoomID:     r.RoomID,
+			RoomNumber: r.RoomNumber,
+			PetType:    string(r.PetType),
+			HotelID:    r.Hotel.HotelID,
+			PhotoURL:   r.PhotoURL,
 		})
 		assert.NoError(t, err)
 		assert.NotNil(t, r)
@@ -43,11 +43,11 @@ func TestRoomRepository_Delete(t *testing.T) {
 		h, err := s.Hotel().Create(model.TestHotel())
 		r.Hotel = *h
 		_, err = s.Room().Create(&model.RoomDTO{
-			RoomID:       r.RoomID,
-			RoomNumber:   r.RoomNumber,
-			PetType:      string(r.PetType),
-			HotelID:      r.Hotel.HotelID,
-			RoomPhotoURL: r.RoomPhotoURL,
+			RoomID:     r.RoomID,
+			RoomNumber: r.RoomNumber,
+			PetType:    string(r.PetType),
+			HotelID:    r.Hotel.HotelID,
+			PhotoURL:   r.PhotoURL,
 		})
 		err = s.Room().Delete(r.RoomID)
 		assert.NoError(t, err)
@@ -69,11 +69,11 @@ func TestRoomRepository_FindByID(t *testing.T) {
 		h, err := s.Hotel().Create(model.TestHotel())
 		r.Hotel = *h
 		rm, err := s.Room().Create(&model.RoomDTO{
-			RoomID:       r.RoomID,
-			RoomNumber:   r.RoomNumber,
-			PetType:      string(r.PetType),
-			HotelID:      r.Hotel.HotelID,
-			RoomPhotoURL: r.RoomPhotoURL,
+			RoomID:     r.RoomID,
+			RoomNumber: r.RoomNumber,
+			PetType:    string(r.PetType),
+			HotelID:    r.Hotel.HotelID,
+			PhotoURL:   r.PhotoURL,
 		})
 
 		room, err := s.Room().FindByID(rm.RoomID)
@@ -100,23 +100,23 @@ func TestRoomRepository_Update(t *testing.T) {
 		h, err := s.Hotel().Create(model.TestHotel())
 		r.Hotel = *h
 		r, err = s.Room().Create(&model.RoomDTO{
-			RoomID:       r.RoomID,
-			RoomNumber:   r.RoomNumber,
-			PetType:      string(r.PetType),
-			HotelID:      r.Hotel.HotelID,
-			RoomPhotoURL: r.RoomPhotoURL,
+			RoomID:     r.RoomID,
+			RoomNumber: r.RoomNumber,
+			PetType:    string(r.PetType),
+			HotelID:    r.Hotel.HotelID,
+			PhotoURL:   r.PhotoURL,
 		})
 
 		r.RoomNumber = 2222
 		r.PetType = "dog"
-		r.RoomPhotoURL = "//photo//2"
+		r.PhotoURL = "//photo//2"
 
 		err = s.Room().Update(&model.RoomDTO{
-			RoomID:       r.RoomID,
-			RoomNumber:   r.RoomNumber,
-			PetType:      string(r.PetType),
-			HotelID:      r.Hotel.HotelID,
-			RoomPhotoURL: r.RoomPhotoURL,
+			RoomID:     r.RoomID,
+			RoomNumber: r.RoomNumber,
+			PetType:    string(r.PetType),
+			HotelID:    r.Hotel.HotelID,
+			PhotoURL:   r.PhotoURL,
 		})
 		assert.NoError(t, err)
 	})

@@ -18,7 +18,7 @@ func (r *RoomRepository) Create(rDTO *model.RoomDTO) (*model.Room, error) {
 		rDTO.PetType,
 		rDTO.RoomNumber,
 		rDTO.HotelID,
-		rDTO.RoomPhotoURL,
+		rDTO.PhotoURL,
 	).Scan(&rDTO.RoomID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating room. Err msg: %w.", err)
 		return nil, err
@@ -49,7 +49,7 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 			&room.RoomNumber,
 			&room.PetType,
 			&room.HotelID,
-			&room.RoomPhotoURL,
+			&room.PhotoURL,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %w", err)
@@ -69,7 +69,7 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 		&roomDTO.RoomNumber,
 		&roomDTO.PetType,
 		&roomDTO.HotelID,
-		&roomDTO.RoomPhotoURL,
+		&roomDTO.PhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg: %w.", err)
 		return nil, err
@@ -113,7 +113,7 @@ func (r *RoomRepository) Update(rm *model.RoomDTO) error {
 		rm.RoomNumber,
 		rm.PetType,
 		rm.HotelID,
-		rm.RoomPhotoURL,
+		rm.PhotoURL,
 		rm.RoomID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating room. Err msg: %w.", err)
@@ -184,10 +184,10 @@ func (r *RoomRepository) ModelFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 	}
 
 	return &model.Room{
-		RoomID:       dto.RoomID,
-		RoomNumber:   dto.RoomNumber,
-		PetType:      model.PetType(dto.PetType),
-		Hotel:        *hotel,
-		RoomPhotoURL: dto.RoomPhotoURL,
+		RoomID:     dto.RoomID,
+		RoomNumber: dto.RoomNumber,
+		PetType:    model.PetType(dto.PetType),
+		Hotel:      *hotel,
+		PhotoURL:   dto.PhotoURL,
 	}, nil
 }
