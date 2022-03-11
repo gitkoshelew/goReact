@@ -2,6 +2,7 @@ package user
 
 import (
 	"encoding/json"
+	"fmt"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler/response"
 	"net/http"
@@ -19,7 +20,7 @@ func GetUserHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while parsing id: %v", err)})
 			return
 		}
 
@@ -27,7 +28,7 @@ func GetUserHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while opening DB: %v", err)})
 			return
 		}
 
@@ -35,7 +36,7 @@ func GetUserHandle(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while searching user: %v", err)})
 			return
 		}
 

@@ -16,7 +16,7 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 
-		seats := []model.SeatDTO{}
+		seats := []model.Seat{}
 		id, err := strconv.Atoi(ps.ByName("id"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)

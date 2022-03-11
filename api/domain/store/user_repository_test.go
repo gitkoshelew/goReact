@@ -45,7 +45,7 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 	})
 
 	u := model.TestUser()
-	u, _ = s.User().Create(u)
+	s.User().Create(u)
 
 	t.Run("valid email", func(t *testing.T) {
 		u, err := s.User().FindByEmail(u.Email)
@@ -58,7 +58,7 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 func TestUserRepository_FindByID(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
-            
+
 	t.Run("Invalid ID", func(t *testing.T) {
 		u, err := s.User().FindByID(-1)
 		assert.Error(t, err)
@@ -67,7 +67,7 @@ func TestUserRepository_FindByID(t *testing.T) {
 	})
 
 	u := model.TestUser()
-	u, _ = s.User().Create(u)
+	s.User().Create(u)
 
 	t.Run("Valid ID", func(t *testing.T) {
 		u, err := s.User().FindByID(u.UserID)

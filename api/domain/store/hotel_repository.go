@@ -1,7 +1,6 @@
 package store
 
 import (
-	"errors"
 	"goReact/domain/model"
 )
 
@@ -13,11 +12,15 @@ type HotelRepository struct {
 // Create hotel and save it to DB
 func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id", h.Name, h.Address,
-		h.Coordinates).Scan(&h.HotelID); err != nil {
+		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id",
+		h.Name,
+		h.Address,
+		h.Coordinates,
+	).Scan(&h.HotelID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating hotel. Err msg:%v.", err)
 		return nil, err
 	}
+
 	r.Store.Logger.Info("Created hotel with id = %d", h.HotelID)
 	return h, nil
 }
@@ -49,7 +52,6 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 
 //FindByID searchs and returns hotel by ID
 func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
-
 	hotel := &model.Hotel{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM hotel WHERE id = $1",
 		id).Scan(
@@ -58,7 +60,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.Address,
 		&hotel.Coordinates,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting hotel by id. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while searching hotel by id. Err msg:%v.", err)
 		return nil, err
 	}
 	return hotel, nil
@@ -78,11 +80,10 @@ func (r *HotelRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		err := errors.New("no rows affected")
 		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
-		return err
+		return ErrNoRowsAffected
 	}
-	r.Store.Logger.Info("Hotel deleted, rows affectet: %d", result)
+	r.Store.Logger.Info("Hotel with id %d was deleted.", id)
 	return nil
 }
 
@@ -99,6 +100,18 @@ func (r *HotelRepository) Update(h *model.Hotel) error {
 		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Updated hotel with id = %d,rows affectet: %d ", h.HotelID, result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Info("Hotel with id = %d was updated", h.HotelID)
 	return nil
 }
