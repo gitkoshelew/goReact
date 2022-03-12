@@ -153,6 +153,7 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.RoomDTO,
 			&room.RoomNumber,
 			&room.PetType,
 			&room.HotelID,
+			&room.PhotoURL,
 		)
 		if err != nil {
 			log.Print(err)
