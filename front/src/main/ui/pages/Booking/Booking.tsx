@@ -68,7 +68,7 @@ export const Booking = () => {
 
     if (!values.yy) {
       errors.yy = 'Required field'
-    } else if (!/(\d{4})$/i.test(values.yy)) {
+    } else if (!/^20(2[2-9]|[2-9][0-9])$/i.test(values.yy)) {
       errors.yy = 'Invalid year'
     }
 
