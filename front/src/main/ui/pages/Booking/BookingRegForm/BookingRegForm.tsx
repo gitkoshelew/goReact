@@ -128,6 +128,47 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
             {formik.errors.cardNumber && formik.touched.cardNumber ? (
               <div className={errorMsg}>{formik.errors.cardNumber}</div>
             ) : null}
+
+            <div className={formik.errors.company && formik.touched.company ? errorInputInfo : inputInfo}>
+              Company:
+              <input
+                className={formik.errors.company && formik.touched.company ? errorInputInfoInput : inputInfoInput}
+                id={'company'}
+                onBlur={formik.handleBlur}
+                value={formik.values.company}
+                onChange={formik.handleChange}
+                type="text"
+              />
+            </div>
+            {formik.errors.company && formik.touched.company ? (
+              <div className={errorMsg}>{formik.errors.company}</div>
+            ) : null}
+
+            <div className={formik.errors.mm && formik.touched.mm ? errorInputInfo : inputInfo}>
+              Month:
+              <input
+                className={formik.errors.mm && formik.touched.mm ? errorInputInfoInput : inputInfoInput}
+                id={'mm'}
+                onBlur={formik.handleBlur}
+                value={formik.values.mm}
+                onChange={formik.handleChange}
+                type="text"
+              />
+            </div>
+            {formik.errors.mm && formik.touched.mm ? <div className={errorMsg}>{formik.errors.mm}</div> : null}
+
+            <div className={formik.errors.yy && formik.touched.yy ? errorInputInfo : inputInfo}>
+              Year:
+              <input
+                className={formik.errors.yy && formik.touched.yy ? errorInputInfoInput : inputInfoInput}
+                id={'yy'}
+                onBlur={formik.handleBlur}
+                value={formik.values.yy}
+                onChange={formik.handleChange}
+                type="text"
+              />
+            </div>
+            {formik.errors.yy && formik.touched.yy ? <div className={errorMsg}>{formik.errors.yy}</div> : null}
           </>
         )}
       </div>
