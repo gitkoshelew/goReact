@@ -169,6 +169,19 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
               />
             </div>
             {formik.errors.yy && formik.touched.yy ? <div className={errorMsg}>{formik.errors.yy}</div> : null}
+
+            <div className={formik.errors.cvv && formik.touched.cvv ? errorInputInfo : inputInfo}>
+              Cvv:
+              <input
+                className={formik.errors.cvv && formik.touched.cvv ? errorInputInfoInput : inputInfoInput}
+                id={'cvv'}
+                onBlur={formik.handleBlur}
+                value={formik.values.cvv}
+                onChange={formik.handleChange}
+                type="text"
+              />
+            </div>
+            {formik.errors.cvv && formik.touched.cvv ? <div className={errorMsg}>{formik.errors.cvv}</div> : null}
           </>
         )}
       </div>
