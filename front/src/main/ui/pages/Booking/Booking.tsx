@@ -18,6 +18,11 @@ type FormValues = {
   firstName: string
   lastName: string
   email: string
+  cardNumber: string
+  company: string
+  mm: string
+  yy: string
+  cvv: string
 }
 
 export const Booking = () => {
@@ -38,6 +43,40 @@ export const Booking = () => {
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
     }
+
+    if (!values.cardNumber) {
+      errors.cardNumber = 'Required field'
+    } else if (
+      !/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/i.test(
+        values.cardNumber
+      )
+    ) {
+      errors.cardNumber = 'Invalid card number'
+    }
+
+    if (!values.company) {
+      errors.company = 'Required field'
+    } else if (values.company.length > 15) {
+      errors.company = 'Invalid company name'
+    }
+
+    if (!values.mm) {
+      errors.mm = 'Required field'
+    } else if (!/(0[1-9]|1[012])$/i.test(values.mm)) {
+      errors.mm = 'Invalid month'
+    }
+
+    if (!values.yy) {
+      errors.yy = 'Required field'
+    } else if (!/(\d{4})$/i.test(values.yy)) {
+      errors.yy = 'Invalid year'
+    }
+
+    if (!values.cvv) {
+      errors.cvv = 'Required field'
+    } else if (!/(\d{3})$/i.test(values.cvv)) {
+      errors.cvv = 'Invalid cvv'
+    }
     return errors
   }
 
@@ -46,6 +85,11 @@ export const Booking = () => {
       firstName: '',
       lastName: '',
       email: '',
+      cardNumber: '',
+      company: '',
+      mm: '',
+      yy: '',
+      cvv: '',
     },
     validate,
     onSubmit: (values) => {
