@@ -34,18 +34,18 @@ func (r *SeatRepository) Create(s *model.SeatDTO) (*model.Seat, error) {
 }
 
 // GetAll returns all seats
-func (r *SeatRepository) GetAll() (*[]model.Seat, error) {
+func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM seat")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
 	}
-	seats := []model.Seat{}
+	seats := []model.SeatDTO{}
 
 	for rows.Next() {
-		seat := model.Seat{}
+		seat := model.SeatDTO{}
 		err := rows.Scan(
 			&seat.SeatID,
-			&seat.Room.RoomID,
+			&seat.RoomID,
 			&seat.Description,
 			&seat.RentFrom,
 			&seat.RentTo,

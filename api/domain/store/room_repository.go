@@ -35,20 +35,20 @@ func (r *RoomRepository) Create(rDTO *model.RoomDTO) (*model.Room, error) {
 }
 
 // GetAll returns all rooms
-func (r *RoomRepository) GetAll() (*[]model.Room, error) {
+func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM room")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %w", err)
 	}
-	rooms := []model.Room{}
+	rooms := []model.RoomDTO{}
 
 	for rows.Next() {
-		room := model.Room{}
+		room := model.RoomDTO{}
 		err := rows.Scan(
 			&room.RoomID,
 			&room.RoomNumber,
 			&room.PetType,
-			&room.Hotel.HotelID,
+			&room.HotelID,
 			&room.PhotoURL,
 		)
 		if err != nil {
