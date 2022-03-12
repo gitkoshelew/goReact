@@ -68,13 +68,13 @@ export const Booking = () => {
 
     if (!values.yy) {
       errors.yy = 'Required field'
-    } else if (!/^20(2[2-9]|[2-9][0-9])$/i.test(values.yy)) {
+    } else if (!/^20(2[2-9]|[3-9][0-9])$/i.test(values.yy)) {
       errors.yy = 'Invalid year'
     }
 
     if (!values.cvv) {
       errors.cvv = 'Required field'
-    } else if (!/(\d{3})$/i.test(values.cvv)) {
+    } else if (!/^(\d{3})$/i.test(values.cvv)) {
       errors.cvv = 'Invalid cvv'
     }
     return errors
