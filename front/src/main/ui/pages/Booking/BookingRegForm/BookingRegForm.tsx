@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { AppRootState } from '../../../../bll/store/store'
 import Preloader from '../../../components/preloader/preloader'
 import { FormikValues } from 'formik/dist/types'
+import { Checkbox, FormControlLabel } from '@mui/material'
 
 const {
   bookingForm,
@@ -26,6 +27,12 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
   const progress = useSelector((state: AppRootState) => state.BookingRegForm.progress)
   const photoUrl = useSelector((state: AppRootState) => state.BookingRegForm.photoUrl)
   const errorMSG = useSelector((state: AppRootState) => state.BookingRegForm.errorMSG)
+
+  const [checked, setChecked] = React.useState(false)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked)
+  }
 
   const actualContent = () => {
     switch (progress) {
@@ -101,6 +108,28 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
         </div>
         {formik.errors.email && formik.touched.email ? <div className={errorMsg}>{formik.errors.email}</div> : null}
         <div className={inputInfo}>{actualContent()}</div>
+        <div>
+          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange} />} label="Online payment" />
+        </div>
+
+        {checked && (
+          <>
+            <div className={formik.errors.cardNumber && formik.touched.cardNumber ? errorInputInfo : inputInfo}>
+              Card number:
+              <input
+                className={formik.errors.cardNumber && formik.touched.cardNumber ? errorInputInfoInput : inputInfoInput}
+                id={'cardNumber'}
+                onBlur={formik.handleBlur}
+                value={formik.values.cardNumber}
+                onChange={formik.handleChange}
+                type="text"
+              />
+            </div>
+            {formik.errors.cardNumber && formik.touched.cardNumber ? (
+              <div className={errorMsg}>{formik.errors.cardNumber}</div>
+            ) : null}
+          </>
+        )}
       </div>
     </div>
   )
