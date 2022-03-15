@@ -6,24 +6,17 @@ import (
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/service"
+	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/response"
 	"net/http"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 // RegistrationHandle ...
-func RegistrationHandle(s *store.Store, m *service.Mail) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func RegistrationHandle(s *store.Store, m *service.Mail) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		user := &model.UserDTO{}
-		if err := json.NewDecoder(r.Body).Decode(user); err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
+		user := r.Context().Value(handler.CtxKeyUserValidation).(*model.UserDTO)
 
 		err := s.Open()
 		if err != nil {

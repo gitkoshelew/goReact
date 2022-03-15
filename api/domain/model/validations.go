@@ -77,7 +77,7 @@ func IsPhone(value interface{}) error {
 // AnonymousRole  = "anonymous"
 // if Role with be nil - wont return error
 func IsRole(value interface{}) error {
-	s := value.(Role)
+	s := Role(value.(string))
 	if s == ClientRole || s == EmployeeRole || s == AnonymousRole || s == "" {
 		return nil
 	}
@@ -88,7 +88,7 @@ func IsRole(value interface{}) error {
 // Male    = "male"
 // Female  = "female"
 func IsSex(value interface{}) error {
-	s := value.(Sex)
+	s := Sex(value.(string))
 	if s == SexMale || s == SexFemale {
 		return nil
 	}
@@ -99,7 +99,7 @@ func IsSex(value interface{}) error {
 // PetTypeCat = "cat"
 // PetTypeDog = "dog"
 func IsPetType(value interface{}) error {
-	s := value.(PetType)
+	s := PetType(value.(string))
 	if s == PetTypeCat || s == PetTypeDog {
 		return nil
 	}
@@ -108,7 +108,7 @@ func IsPetType(value interface{}) error {
 
 // IsEmployeePosition ...
 func IsEmployeePosition(value interface{}) error {
-	s := value.(Position)
+	s := Position(value.(string))
 	if s == ManagerPosition || s == EmployeePosition || s == OwnerPosition || s == AdminPosition {
 		return nil
 	}
@@ -121,7 +121,7 @@ func IsEmployeePosition(value interface{}) error {
 // BookingStatusCompleted  BookingStatus = "completed"
 // BookingStatusCancelled  BookingStatus = "cancelled"
 func IsBookingStatus(value interface{}) error {
-	s := value.(BookingStatus)
+	s := BookingStatus(value.(string))
 	if s == BookingStatusPending || s == BookingStatusInProgress || s == BookingStatusCompleted || s == BookingStatusCancelled {
 		return nil
 	}

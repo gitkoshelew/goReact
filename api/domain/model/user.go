@@ -62,7 +62,7 @@ const (
 )
 
 // Validate ...
-func (u *User) Validate() error {
+func (u *UserDTO) Validate() error {
 	return validation.ValidateStruct(
 		u,
 		validation.Field(&u.Email, validation.Required, is.Email, validation.By(IsSQL)),
@@ -96,20 +96,20 @@ func CheckPasswordHash(hash, password string) error {
 }
 
 // ModelFromDTO ...
-func (uDTO *UserDTO) ModelFromDTO() *User {
+func (u *UserDTO) ModelFromDTO() *User {
 	return &User{
-		UserID:      uDTO.UserID,
-		Email:       uDTO.Email,
-		Password:    uDTO.Password,
-		Role:        Role(uDTO.Role),
-		Verified:    uDTO.Verified,
-		Name:        uDTO.Name,
-		Surname:     uDTO.Surname,
-		MiddleName:  uDTO.MiddleName,
-		Sex:         Sex(uDTO.Sex),
-		DateOfBirth: uDTO.DateOfBirth,
-		Address:     uDTO.Address,
-		Phone:       uDTO.Phone,
-		Photo:       uDTO.Photo,
+		UserID:      u.UserID,
+		Email:       u.Email,
+		Password:    u.Password,
+		Role:        Role(u.Role),
+		Verified:    u.Verified,
+		Name:        u.Name,
+		Surname:     u.Surname,
+		MiddleName:  u.MiddleName,
+		Sex:         Sex(u.Sex),
+		DateOfBirth: u.DateOfBirth,
+		Address:     u.Address,
+		Phone:       u.Phone,
+		Photo:       u.Photo,
 	}
 }

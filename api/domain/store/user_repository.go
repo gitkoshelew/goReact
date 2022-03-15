@@ -21,11 +21,6 @@ var (
 // Create user and save it to DB
 func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 
-	if err := u.ModelFromDTO().Validate(); err != nil {
-		r.Store.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
-		return nil, err
-	}
-
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
