@@ -25,7 +25,7 @@ func RegistrationHandle(s *store.Store, m *service.Mail) http.HandlerFunc {
 			return
 		}
 
-		_, err = s.User().Create(user)
+		u, err := s.User().Create(user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
@@ -33,7 +33,7 @@ func RegistrationHandle(s *store.Store, m *service.Mail) http.HandlerFunc {
 		}
 
 		payload := map[string]interface{}{
-			"user_id": user.UserID,
+			"user_id": u.UserID,
 		}
 
 		endpoint, err := CreateCustomToken(payload, 120, EmailSecretKey)
@@ -45,6 +45,6 @@ func RegistrationHandle(s *store.Store, m *service.Mail) http.HandlerFunc {
 
 		w.WriteHeader(http.StatusCreated)
 		m.Send(service.EmailConfirmation, endpoint, []string{user.Email})
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", user.UserID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", u.UserID)})
 	}
 }

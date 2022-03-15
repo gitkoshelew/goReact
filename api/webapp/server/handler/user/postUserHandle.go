@@ -25,7 +25,7 @@ func PostUserHandle(s *store.Store) http.HandlerFunc {
 			return
 		}
 
-		_, err = s.User().Create(user)
+		u, err := s.User().Create(user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while creating user: %v", err)})
@@ -33,6 +33,6 @@ func PostUserHandle(s *store.Store) http.HandlerFunc {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", user.UserID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", u.UserID)})
 	}
 }
