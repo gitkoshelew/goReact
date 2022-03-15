@@ -6,7 +6,7 @@ import { AppRootState } from '../../../../bll/store/store'
 import Preloader from '../../../components/preloader/preloader'
 import { FormikValues } from 'formik/dist/types'
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
-import { mastercard, visa } from '../../../svgWrapper/BookingRoomSvgWrapper'
+import { americanExpress, mastercard, visa } from '../../../svgWrapper/BookingRoomSvgWrapper'
 
 const {
   bookingForm,
@@ -32,7 +32,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
 
   const [checked, setChecked] = React.useState(false)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked)
   }
 
@@ -111,29 +111,48 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
         {formik.errors.email && formik.touched.email ? <div className={errorMsg}>{formik.errors.email}</div> : null}
         <div className={inputInfo}>{actualContent()}</div>
         <div>
-          <FormControlLabel control={<Checkbox checked={checked} onChange={handleChange} />} label="Online payment" />
+          <FormControlLabel
+            control={<Checkbox checked={checked} onChange={handleChangeCheckbox} />}
+            label="Online payment"
+          />
         </div>
 
         {checked && (
           <>
-            <FormControl>
-              <RadioGroup row>
-                <FormControlLabel
-                  value="mastercard"
-                  control={<Radio />}
-                  label={<img src={mastercard} alt="mastercard" className={cardCompanyImages} />}
-                  labelPlacement="top"
-                />
-                <FormControlLabel
-                  value="visa"
-                  control={<Radio />}
-                  label={<img src={visa} alt="visa" className={cardCompanyImages} />}
-                  labelPlacement="top"
-                />
-                <FormControlLabel value="top" control={<Radio />} label="Top" labelPlacement="top" />
-                <FormControlLabel value="top" control={<Radio />} label="Top" labelPlacement="top" />
-              </RadioGroup>
-            </FormControl>
+            <div className={formik.errors.company && formik.touched.company ? errorInputInfo : inputInfo}>
+              <FormControl>
+                <RadioGroup row value={formik.values.company} onChange={formik.handleChange}>
+                  <FormControlLabel
+                    id={'mastercard'}
+                    value={'mastercard'}
+                    control={<Radio />}
+                    label={<img src={mastercard} alt={'mastercard'} className={cardCompanyImages} />}
+                    labelPlacement={'top'}
+                    name={'company'}
+                  />
+                  <FormControlLabel
+                    id={'visa'}
+                    value={'visa'}
+                    control={<Radio />}
+                    label={<img src={visa} alt={'visa'} className={cardCompanyImages} />}
+                    labelPlacement={'top'}
+                    name={'company'}
+                  />
+                  <FormControlLabel
+                    id={'americanExpress'}
+                    value={'americanExpress'}
+                    control={<Radio />}
+                    label={<img src={americanExpress} alt={'americanExpress'} className={cardCompanyImages} />}
+                    labelPlacement={'top'}
+                    name={'company'}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+            {formik.errors.company && formik.touched.company ? (
+              <div className={errorMsg}>{formik.errors.company}</div>
+            ) : null}
+
             <div className={formik.errors.cardNumber && formik.touched.cardNumber ? errorInputInfo : inputInfo}>
               Card number:
               <input
@@ -147,21 +166,6 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
             </div>
             {formik.errors.cardNumber && formik.touched.cardNumber ? (
               <div className={errorMsg}>{formik.errors.cardNumber}</div>
-            ) : null}
-
-            <div className={formik.errors.company && formik.touched.company ? errorInputInfo : inputInfo}>
-              Company:
-              <input
-                className={formik.errors.company && formik.touched.company ? errorInputInfoInput : inputInfoInput}
-                id={'company'}
-                onBlur={formik.handleBlur}
-                value={formik.values.company}
-                onChange={formik.handleChange}
-                type="text"
-              />
-            </div>
-            {formik.errors.company && formik.touched.company ? (
-              <div className={errorMsg}>{formik.errors.company}</div>
             ) : null}
 
             <div className={formik.errors.mm && formik.touched.mm ? errorInputInfo : inputInfo}>
