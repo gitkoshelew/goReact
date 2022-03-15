@@ -30,8 +30,8 @@ type UserDTO struct {
 	UserID      int       `json:"userId"`
 	Email       string    `json:"email"`
 	Password    string    `json:"password"`
-	Role        string    `json:"role"`
-	Verified    bool      `json:"verified"`
+	Role        string    `json:"role,omitempty"`
+	Verified    bool      `json:"verified,omitempty"`
 	Name        string    `json:"name"`
 	Surname     string    `json:"sName"`
 	MiddleName  string    `json:"mName"`
@@ -65,16 +65,18 @@ const (
 func (u *User) Validate() error {
 	return validation.ValidateStruct(
 		u,
-		validation.Field(&u.Email, validation.Required, is.Email),
-		validation.Field(&u.Password, validation.Required, validation.Length(5, 100)),
-		validation.Field(&u.Role, validation.Required, validation.By(IsRole)),
-		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
-		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
-		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
+		validation.Field(&u.Email, validation.Required, is.Email, validation.By(IsSQL)),
+		validation.Field(&u.Password, validation.Required, validation.Length(5, 100), validation.By(IsSQL)),
+		validation.Field(&u.Role, validation.By(IsRole)),
+		validation.Field(&u.Verified),
+		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
+		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
+		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
 		validation.Field(&u.Sex, validation.Required, validation.By(IsSex)),
-		validation.Field(&u.DateOfBirth, validation.Required),
-		validation.Field(&u.Address, validation.Required, validation.Length(10, 40)),
-		validation.Field(&u.Phone, validation.Required, validation.By(IsPhone)),
+		validation.Field(&u.DateOfBirth, validation.Required, validation.By(IsValidBirthDate)),
+		validation.Field(&u.Address, validation.Required, validation.Length(10, 40), validation.By(IsSQL)),
+		validation.Field(&u.Phone, validation.Required, validation.By(IsPhone), validation.By(IsSQL)),
+		validation.Field(&u.Photo, validation.By(IsSQL)),
 	)
 }
 
@@ -119,6 +121,6 @@ func (uDTO *UserDTO) ModelFromDTO() *User {
 		DateOfBirth: uDTO.DateOfBirth,
 		Address:     uDTO.Address,
 		Phone:       uDTO.Phone,
-		Photo:       uDTO.Phone,
+		Photo:       uDTO.Photo,
 	}
 }

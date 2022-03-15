@@ -135,7 +135,7 @@ func IsValid(r *http.Request) error {
 func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 	token, err := VerifyToken(r)
 	if err != nil {
-		logger.Errorf("Error occured while token verifying. Msg: %v", err)
+		logger.Debugf("Token is expired. Msg: %v", err)
 		return nil, err
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)

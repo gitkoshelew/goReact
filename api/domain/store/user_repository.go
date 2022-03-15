@@ -3,6 +3,7 @@ package store
 import (
 	"errors"
 	"goReact/domain/model"
+	"strings"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -46,11 +47,11 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 		RETURNING id`,
 		u.Email,
 		u.Password,
-		u.Role,
-		u.Verified,
-		u.Name,
-		u.Surname,
-		u.MiddleName,
+		string(model.AnonymousRole),
+		false,
+		strings.Title(strings.ToLower(u.Name)),
+		strings.Title(strings.ToLower(u.Surname)),
+		strings.Title(strings.ToLower(u.MiddleName)),
 		u.Sex,
 		u.DateOfBirth,
 		u.Address,
@@ -192,9 +193,9 @@ func (r *UserRepository) Update(u *model.UserDTO) error {
 		encryptedPassword,
 		u.Role,
 		u.Verified,
-		u.Name,
-		u.Surname,
-		u.MiddleName,
+		strings.Title(strings.ToLower(u.Name)),
+		strings.Title(strings.ToLower(u.Surname)),
+		strings.Title(strings.ToLower(u.MiddleName)),
 		u.Sex,
 		u.DateOfBirth,
 		u.Address,
@@ -226,8 +227,9 @@ func (r *UserRepository) Update(u *model.UserDTO) error {
 // VerifyEmail user from DB
 func (r *UserRepository) VerifyEmail(userID int) error {
 	result, err := r.Store.Db.Exec(
-		"UPDATE users SET verified = $1 WHERE id = $2",
+		"UPDATE users SET verified = $1, role = $2  WHERE id = $3",
 		true,
+		string(model.ClientRole),
 		userID,
 	)
 	if err != nil {

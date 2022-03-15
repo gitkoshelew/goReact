@@ -5,8 +5,11 @@ import "golang.org/x/crypto/bcrypt"
 // CheckPasswordHash if passwords are same err=nil
 func (s *Store) CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	s.Logger.Errorf("Eror occured while checking users email or password. Err msg: %w", err)
-	return err
+	if err != nil {
+		s.Logger.Errorf("Eror occured while checking users email or password. Err msg: %w", err)
+		return err
+	}
+	return nil
 }
 
 // EncryptPassword ...
