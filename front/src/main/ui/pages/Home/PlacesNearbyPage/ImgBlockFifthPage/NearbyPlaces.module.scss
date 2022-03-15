@@ -1,0 +1,19 @@
+@use './src/main/ui/styles/breakpoints' as bp;
+
+.nearbyPlaces {
+  @media (min-width: bp.$lg) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .secondaryNearby {
+    @media (min-width: bp.$lg) {
+      margin-left: 10.5vw;
+      margin-right: 20px;
+    }
+
+    @media (min-width: bp.$xl) {
+      margin-left: 3vw;
+    }
+  }
+}

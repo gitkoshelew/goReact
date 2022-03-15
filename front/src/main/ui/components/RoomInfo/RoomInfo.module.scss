@@ -1,0 +1,55 @@
+@use '../../styles/breakpoints' as bp;
+@import '../../styles/variables';
+
+.roomInfo {
+  width: 270px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  display: flex;
+  position: absolute;
+  top: 255px;
+  left: 5px;
+  padding: 0 10px;
+  @media (min-width: bp.$sm) {
+    top: 350px;
+  }
+  @media (min-width: bp.$md) {
+    top: 500px;
+    left: 20px;
+    width: 320px;
+  }
+  @media (min-width: bp.$xl) {
+    top: 575px;
+    width: 260px;
+    left: 10px;
+  }
+}
+
+.roomInfoElement {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+  font-family: $main-fonts;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11.4px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: $main-background-color;
+
+  img {
+    margin-right: 8px;
+  }
+
+  @media (min-width: bp.$md) {
+    margin-right: 30px;
+    font-size: 16.4px;
+  }
+  @media (min-width: bp.$xl) {
+    font-size: 11.4px;
+    margin-right: 24px !important;
+  }
+}

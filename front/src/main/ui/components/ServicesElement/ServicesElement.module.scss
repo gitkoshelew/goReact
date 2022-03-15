@@ -1,0 +1,66 @@
+@use '../../styles/breakpoints' as bp;
+@import '../../styles/variables';
+
+.oneElement {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  background: #ffffff;
+  box-shadow: 10px 30px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+  margin: -30px auto 35px auto;
+  cursor: pointer;
+  @media (min-width: bp.$md) {
+    margin: -30px 20px 35px 0;
+  }
+  @media (min-width: bp.$xl) {
+    margin: 0 20px 25px 0;
+  }
+}
+
+.oneElementActive {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  background: #c4c4c4;
+  box-shadow: 10px 30px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+  margin: -30px auto 35px auto;
+  cursor: pointer;
+  @media (min-width: bp.$md) {
+    margin: -30px 20px 35px 0;
+  }
+  @media (min-width: bp.$xl) {
+    margin: 0 20px 25px 0;
+  }
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+
+  .mainText {
+    font-family: $main-fonts;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $main-text-color;
+  }
+
+  .secondaryText {
+    font-family: $main-fonts;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: $secondary-text-color;
+  }
+}

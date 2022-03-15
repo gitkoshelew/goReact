@@ -1,0 +1,26 @@
+@import '../../styles/variables';
+
+.messageItem {
+  display: flex;
+  flex-direction: column;
+  background: #f9f9f9;
+  align-items: flex-start;
+  box-shadow: 0 0 20px 0 #0000003d;
+  padding: 10px;
+  margin: 11px;
+  border-radius: 5px;
+  min-width: 100px;
+  max-width: 300px;
+}
+.myMessageItem {
+  align-self: flex-end;
+  background: $main-contrast-color;
+}
+.messageSender {
+  @include font-setup(18px, 700);
+
+}
+.messageText {
+  word-break: break-word;
+  @include font-setup(16px, 500, $color: $main-text-color);
+}

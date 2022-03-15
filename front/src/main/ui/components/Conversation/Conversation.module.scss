@@ -1,0 +1,44 @@
+@import '../../styles/variables';
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 10px;
+}
+.conversationHistory {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 360px;
+  margin: 10px;
+  box-shadow: inset 0 0 5px 0 #0000004d;
+  overflow-y: scroll;
+}
+.newMessageForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.newMessageField {
+  @include font-setup(16px, 400);
+  width: 97%;
+  height: 89px;
+  padding: 10px 12px;
+  border: 1px solid rgba(202, 202, 202, 0.6);
+  border-radius: 4px;
+  resize: none;
+}
+.sendMessageButton {
+  @include font-setup(14px, 400, $color: $main-background-color);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 51px;
+  padding: 16px 10px;
+  margin: 10px;
+  text-transform: uppercase;
+  background: $main-contrast-color;
+  border-radius: 6px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}

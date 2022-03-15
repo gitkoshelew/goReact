@@ -1,0 +1,30 @@
+{{template "base" .}}
+
+{{define "title"}}All seats{{end}}
+
+{{define "main"}}
+<header>
+    <h1><a>All seats </a></h1>
+</header>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>SeatID</th>
+        <th>RoomID</th>
+        <th>IsFree</th>
+        <th>Description</th>
+
+        {{range . }}
+        <tr>
+            <td>{{.SeatID}}</td>
+            <td>{{.Room.RoomID}}</td>
+            <td>{{.IsFree}}</td>
+            <td>{{.Description}}</td>
+
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}

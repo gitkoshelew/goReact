@@ -1,0 +1,145 @@
+@use '../../../styles/breakpoints' as bp;
+@import '../../../styles/variables';
+
+.firstPageTitle {
+  width: 100%;
+  margin: 0 auto 20px auto;
+  position: relative;
+
+  .textBlock {
+    @media (min-width: bp.$lg) {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .informText {
+      @media (min-width: bp.$lg) {
+        position: relative;
+        top: 220px;
+        @media (min-width: bp.$xl) {
+          left: 40px;
+        }
+        @media (min-width: bp.$xxl) {
+          left: 120px;
+        }
+      }
+
+      .firstPageLinkText {
+        width: 121px;
+        height: 22px;
+        font-family: $main-fonts;
+        color: $main-contrast-color;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 15px;
+        line-height: 22px;
+        margin: 25px 0 0 25px;
+        @media (min-width: bp.$lg) {
+          margin: 0;
+          position: relative;
+          top: -90px;
+          left: 5px;
+        }
+      }
+
+      .firstPageMainText {
+        line-height: 35px;
+        width: 80%;
+        height: 106px;
+        margin: 40px auto 0 auto;
+        font-family: $main-fonts;
+        font-weight: 600;
+        font-size: 35px;
+        color: $main-text-color;
+        z-index: $low-z-index-priority;
+        @media (min-width: bp.$lg) {
+          margin: 0;
+        }
+      }
+
+      .secondaryText {
+        margin: 25px auto 0 auto;
+        width: 80%;
+        height: 66px;
+        font-family: $main-fonts;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        color: $secondary-text-color;
+        @media (min-width: 600px) {
+          font-size: 18px;
+          margin: -5px auto -20px auto;
+        }
+        @media (min-width: bp.$lg) {
+          margin: 0;
+        }
+      }
+    }
+
+    .photoTabletBlock {
+      @media (min-width: bp.$lg) {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        height: 500px;
+      }
+
+      .photoBlock {
+        margin: 60px auto 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 300px;
+        background: #c4c4c4;
+        border-radius: 10px;
+        left: 653px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 40px;
+        line-height: 47px;
+        text-align: center;
+        letter-spacing: 0.01em;
+        color: $main-text-color;
+        @media (min-width: 1023px) {
+          margin: 60px auto 40px auto;
+          height: 400px;
+        }
+        @media (min-width: bp.$lg) {
+          position: relative;
+          left: 275px;
+          top: -140px;
+          height: 600px;
+          width: 500px;
+          margin: 0;
+        }
+        @media (min-width: bp.$xl) {
+          height: 755px;
+          top: -195px;
+          left: 310px;
+          border-radius: 0 0 0 30px;
+        }
+      }
+
+      .homeTablet {
+        margin-top: 54px;
+        display: none;
+        @media (min-width: 1023px) {
+          margin-top: 54px;
+          display: initial;
+        }
+        @media (min-width: bp.$lg) {
+          position: absolute;
+          top: 560px;
+        }
+      }
+    }
+
+    .homeSmallTablet {
+      @media (min-width: 1023px) {
+        display: none;
+      }
+    }
+  }
+}

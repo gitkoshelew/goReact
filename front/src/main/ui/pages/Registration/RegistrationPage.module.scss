@@ -1,0 +1,84 @@
+@import '../../styles/variables';
+
+.RegistrationForm {
+  width: 500px;
+  background: $main-background-color;
+  border: 4px groove $main-contrast-color;
+  margin: 50px auto;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 0;
+
+  .RegistrationTitle {
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: $main-text-color;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .passwordField {
+    position: relative;
+    .passwordRenderEye {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 35px;
+      left: 230px;
+      cursor: pointer;
+    }
+  }
+  .registerRadioGroup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .sexRadioGroup {
+      display: flex;
+    }
+  }
+
+  .loginBtnLinkBlock {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    :nth-child(1) {
+      margin: 0 60%;
+    }
+    .sendReqBtn {
+      flex: 0 1 auto;
+      position: relative;
+      left: -30%;
+      white-space: nowrap;
+      width: 60px;
+      height: 30px;
+      border-radius: 5px;
+      background-color: $main-contrast-color;
+      color: $main-background-color;
+    }
+    .sendReqErrorBtn {
+      flex: 0 1 auto;
+      position: relative;
+      left: -30%;
+      white-space: nowrap;
+      width: 60px;
+      height: 30px;
+      border-radius: 5px;
+      background-color: $secondary-text-color;
+      color: $main-background-color;
+    }
+    .backLink {
+      flex: 0 1 auto;
+      white-space: nowrap;
+      margin-left: -20%;
+      color: $main-contrast-color;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
