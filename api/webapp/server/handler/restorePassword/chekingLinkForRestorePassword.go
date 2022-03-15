@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"goReact/domain/store"
-	"goReact/webapp/server/handler/middleware"
+	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/response"
 	"net/http"
 	"os"
@@ -58,6 +58,6 @@ func СhekingLinkForRestorePassword(s *store.Store, next http.HandlerFunc) httpr
 
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response.Info{Messsage: "Link is confirmed"})
-		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), middleware.CtxKeyEmail, email)))
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CtxKeyEmail, email)))
 	}
 }

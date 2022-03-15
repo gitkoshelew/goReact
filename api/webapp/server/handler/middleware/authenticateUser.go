@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"goReact/domain/store"
+	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/authentication"
 	"goReact/webapp/server/handler/response"
 	"net/http"
@@ -34,7 +35,7 @@ func AuthenticateUser(next http.Handler, s *store.Store) http.HandlerFunc {
 			return
 		}
 
-		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), CtxKeyUser, user)))
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CtxKeyUser, user)))
 	})
 
 }

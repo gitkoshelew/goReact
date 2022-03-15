@@ -21,11 +21,6 @@ var (
 // Create user and save it to DB
 func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 
-	if err := u.ModelFromDTO().Validate(); err != nil {
-		r.Store.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
-		return nil, err
-	}
-
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
@@ -40,31 +35,33 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 
 	r.Store.EncryptPassword(&u.Password)
 
+	user := u.ModelFromDTO()
+
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
 		(email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) 
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
 		RETURNING id`,
-		u.Email,
-		u.Password,
+		user.Email,
+		user.Password,
 		string(model.AnonymousRole),
 		false,
-		strings.Title(strings.ToLower(u.Name)),
-		strings.Title(strings.ToLower(u.Surname)),
-		strings.Title(strings.ToLower(u.MiddleName)),
-		u.Sex,
-		u.DateOfBirth,
-		u.Address,
-		u.Phone,
-		u.Photo,
-	).Scan(&u.UserID); err != nil {
+		strings.Title(strings.ToLower(user.Name)),
+		strings.Title(strings.ToLower(user.Surname)),
+		strings.Title(strings.ToLower(user.MiddleName)),
+		string(user.Sex),
+		user.DateOfBirth,
+		user.Address,
+		user.Phone,
+		user.Photo,
+	).Scan(&user.UserID); err != nil {
 		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %v", err)
 		return nil, err
 	}
 
-	r.Store.Logger.Infof("User with id %d was created.", u.UserID)
+	r.Store.Logger.Infof("User with id %d was created.", user.UserID)
 
-	return u.ModelFromDTO(), nil
+	return user, nil
 }
 
 // GetAll returns all users

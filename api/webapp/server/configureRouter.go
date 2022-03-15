@@ -16,13 +16,13 @@ func (s *Server) configureRouter() {
 
 	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(authentication.LoginHandle(store.New(s.config))))
 
-	s.router.Handle("POST", "/api/registration", authentication.RegistrationHandle(store.New(s.config), s.Mail))
+	s.router.Handle("POST", "/api/registration", middleware.ValidateUser(authentication.RegistrationHandle(store.New(s.config), s.Mail), store.New(s.config)))
 	s.router.Handle("POST", "/api/logout", authentication.LogoutHandle(store.New(s.config)))
 	s.router.Handle("POST", "/api/refresh", authentication.RefreshHandle(store.New(s.config)))
 	s.router.Handle("POST", "/api/me", authentication.MeHandle(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/users", user.GetUsersHandle(store.New(s.config)))
-	s.router.Handle("POST", "/api/user", user.PostUserHandle(store.New(s.config)))
+	s.router.Handle("POST", "/api/user", middleware.ValidateUser(user.PostUserHandle(store.New(s.config)), store.New(s.config)))
 	s.router.Handle("GET", "/api/user/:id", user.GetUserHandle(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/pets/", pet.GetPetsHandle(store.New(s.config)))

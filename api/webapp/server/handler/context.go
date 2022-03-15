@@ -1,4 +1,4 @@
-package middleware
+package handler
 
 import (
 	"context"
@@ -10,8 +10,9 @@ type CtxKey int8
 
 // CtxKeys
 const (
-	CtxKeyUser  CtxKey = 1
-	CtxKeyEmail CtxKey = 2
+	CtxKeyUser           CtxKey = 1
+	CtxKeyUserValidation CtxKey = 2
+	CtxKeyEmail          CtxKey = 3
 )
 
 var (

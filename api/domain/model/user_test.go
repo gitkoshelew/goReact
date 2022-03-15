@@ -10,166 +10,166 @@ import (
 func TestUser_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		u       func() *model.User
+		u       func() *model.UserDTO
 		isValid bool
 	}{
 		{
 			name: "valid",
-			u: func() *model.User {
-				return model.TestUser().ModelFromDTO()
+			u: func() *model.UserDTO {
+				return model.TestUser()
 			},
 			isValid: true,
 		},
 		{
 			name: "empty email",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Email = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "invalid email",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Email = "invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "empty password",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Password = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "short password",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Password = "1234"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Invalid Name",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Name = "Name@123"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Name",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Name = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Invalid Surname",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Surname = "Surname-Фамилия"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Surname",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Surname = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Invalid MiddleName",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.MiddleName = "MiddleName %?№"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty MiddleName",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.MiddleName = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Invalid Role",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Role = "Invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Role",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Role = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: true,
 		},
 		{
 			name: "Invalid Sex",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Sex = "Invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Sex",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Sex = "Invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Invalid Phone",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Phone = "Invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Phone",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Phone = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Photo",
-			u: func() *model.User {
+			u: func() *model.UserDTO {
 				u := model.TestUser()
 				u.Photo = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: true,
 		},

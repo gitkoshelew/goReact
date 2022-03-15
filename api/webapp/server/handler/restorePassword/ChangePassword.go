@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/handler/middleware"
+	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/request"
 	"goReact/webapp/server/handler/response"
 	"net/http"
@@ -18,7 +18,7 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 
 		req := &request.Login{}
 
-		email, err := middleware.ContextEmail(r.Context())
+		email, err := handler.ContextEmail(r.Context())
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Cannot parse email: %w", err)
