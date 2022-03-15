@@ -4,5 +4,6 @@ import error from '../../../assets/img/bookingRoom/error.png'
 import deleteIcon from '../../../assets/img/bookingRoom/delete.png'
 import mastercard from '../../../assets/img/bookingRoom/mastercard.png'
 import visa from '../../../assets/img/bookingRoom/visa.png'
+import americanExpress from '../../../assets/img/bookingRoom/americanExpress.png'
 
-export { rented, success, error, deleteIcon, mastercard, visa }
+export { rented, success, error, deleteIcon, mastercard, visa, americanExpress }
