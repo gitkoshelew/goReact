@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux'
 import { AppRootState } from '../../../../bll/store/store'
 import Preloader from '../../../components/preloader/preloader'
 import { FormikValues } from 'formik/dist/types'
-import { Checkbox, FormControlLabel } from '@mui/material'
+import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
+import { mastercard, visa } from '../../../svgWrapper/BookingRoomSvgWrapper'
 
 const {
   bookingForm,
@@ -17,6 +18,7 @@ const {
   errorMsg,
   errorInputInfo,
   errorInputInfoInput,
+  cardCompanyImages,
 } = s
 
 type BookingRegFormType = {
@@ -114,6 +116,24 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
 
         {checked && (
           <>
+            <FormControl>
+              <RadioGroup row>
+                <FormControlLabel
+                  value="mastercard"
+                  control={<Radio />}
+                  label={<img src={mastercard} alt="mastercard" className={cardCompanyImages} />}
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="visa"
+                  control={<Radio />}
+                  label={<img src={visa} alt="visa" className={cardCompanyImages} />}
+                  labelPlacement="top"
+                />
+                <FormControlLabel value="top" control={<Radio />} label="Top" labelPlacement="top" />
+                <FormControlLabel value="top" control={<Radio />} label="Top" labelPlacement="top" />
+              </RadioGroup>
+            </FormControl>
             <div className={formik.errors.cardNumber && formik.touched.cardNumber ? errorInputInfo : inputInfo}>
               Card number:
               <input
