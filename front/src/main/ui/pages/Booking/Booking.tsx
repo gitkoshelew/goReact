@@ -56,8 +56,6 @@ export const Booking = () => {
 
     if (!values.company) {
       errors.company = 'Required field'
-    } else if (values.company.length > 15) {
-      errors.company = 'Invalid company name'
     }
 
     if (!values.mm) {
@@ -112,7 +110,7 @@ export const Booking = () => {
   const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
   const orderedRoomBasket = useSelector((state: AppRootState) => state.BookingRoomPick.orderedRoomBasket)
 
-  const isActiveBtn = progress === 'uploaded' && orderedRoomBasket.length !== 0
+  const isActiveBtn = progress === 'uploaded'
 
   const roomIndicate = useMemo(() => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
