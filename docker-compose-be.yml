@@ -1,0 +1,131 @@
+version: '3.9'
+
+services:
+  postgresqldatabase:
+    container_name: postgresqldatabase
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_SSLMODE=${POSTGRES_SSLMODE}
+    ports:
+      - "8081:5432"
+    restart: on-failure
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    networks:
+      new:
+        aliases:
+          - database
+
+  test_database:
+    container_name: test_database
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${TEST_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${TEST_POSTGRES_DB}
+      - POSTGRES_HOST=${TEST_POSTGRES_HOST}
+      - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
+    ports:
+      - '6543:5432'
+    restart: unless-stopped
+    volumes:
+      - test-database:/var/lib/test-data/data/
+    networks:
+      new:
+        aliases:
+          - database
+
+  migrate:
+    image: migrate/migrate
+    restart: on-failure
+    volumes:
+      - ./migrations:/migrations
+
+    command:
+      [
+        "-path",
+        "/migrations",
+        "-database",
+        "postgres://user:userpass@postgresqldatabase:5432/goreact?sslmode=disable",
+        "up"
+      ]
+    links:
+      - postgresqldatabase
+    depends_on:
+      - postgresqldatabase
+    networks:
+      - new
+
+  test-migrate:
+    image: migrate/migrate
+    restart: on-failure
+    volumes:
+      - ./migrations:/migrations
+    command:
+      [
+        "-path",
+        "/migrations",
+        "-database",
+        "postgres://user:userpass@test_database:5432/test_goreact?sslmode=disable",
+        "up"
+      ]
+    links:
+      - test_database
+    depends_on:
+      - test_database
+    networks:
+      - new
+
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - .env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+    volumes:
+      - pgadmin:/root/.pgadmin
+    networks:
+      - new
+
+  goreact:
+    build:
+      context: ./api
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresqldatabase
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - SERVER_HOST=0.0.0.0
+      - ENV=prod
+    tty: true
+    restart: on-failure
+    volumes:
+      - api:/api
+    networks:
+      - new
+
+networks:
+  new:
+    driver: bridge
+volumes:
+  test-database: null
+  api: null
+  database-data: null
+  pgadmin: null

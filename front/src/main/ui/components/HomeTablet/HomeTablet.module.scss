@@ -1,0 +1,25 @@
+@use '../../styles/breakpoints' as bp;
+@import '../../styles/variables';
+
+.tabletTitle {
+  background: #ffffff;
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.06);
+  border-radius: 0 20px;
+  width: 929px;
+  height: 134px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: $low-z-index-priority;
+  @media (min-width: 1023px) {
+    margin: 0 auto;
+  }
+  @media (min-width: bp.$lg) {
+    margin: -140px 484px 0 0;
+    width: 565px;
+  }
+  @media (min-width: bp.$xl) {
+    margin: -140px 470px 0 0;
+    width: 620px;
+  }
+}
