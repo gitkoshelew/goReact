@@ -20,7 +20,7 @@ func (r *RoomRepository) Create(rDTO *model.RoomDTO) (*model.Room, error) {
 		rDTO.HotelID,
 		rDTO.PhotoURL,
 	).Scan(&rDTO.RoomID); err != nil {
-		r.Store.Logger.Errorf("Error occured while creating room. Err msg: %w.", err)
+		r.Store.Logger.Errorf("Error occured while creating room. Err msg: %v.", err)
 		return nil, err
 	}
 
@@ -38,7 +38,7 @@ func (r *RoomRepository) Create(rDTO *model.RoomDTO) (*model.Room, error) {
 func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM room")
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %w", err)
+		r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
 	}
 	rooms := []model.RoomDTO{}
 
@@ -52,7 +52,7 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 			&room.PhotoURL,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %w", err)
+			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
 			continue
 		}
 		rooms = append(rooms, room)
@@ -71,7 +71,7 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 		&roomDTO.HotelID,
 		&roomDTO.PhotoURL,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg: %w.", err)
+		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg: %v.", err)
 		return nil, err
 	}
 
@@ -87,18 +87,18 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 func (r *RoomRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM room WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %w.", err)
+		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %v.", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %w.", err)
+		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %w.", err)
+		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %v.", err)
 		return ErrNoRowsAffected
 	}
 
@@ -116,7 +116,7 @@ func (r *RoomRepository) Update(rm *model.RoomDTO) error {
 		rm.PhotoURL,
 		rm.RoomID)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating room. Err msg: %w.", err)
+		r.Store.Logger.Errorf("Error occured while updating room. Err msg: %v.", err)
 		return err
 	}
 

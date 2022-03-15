@@ -192,3 +192,101 @@
 [36mINFO[0m[2022-01-17T14:48:11+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634909968 0} 
 [36mINFO[0m[2022-01-17T14:48:11+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634909968 1} 
 [36mINFO[0m[2022-01-17T14:48:11+03:00]user_repository.go:194 goReact/domain/store.(*UserRepository).VerifyEmail User updated, rows affectet: {824634909968 1} 
+[36mINFO[0m[2022-03-15T14:21:21+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-03-15T14:21:21+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[31mERRO[0m[2022-03-15T14:23:20+03:00]user_repository.go:170 goReact/domain/store.(*UserRepository).Delete Error occured while deleting user. Err msg:<nil>. 
+[31mERRO[0m[2022-03-15T14:23:20+03:00]user_repository.go:170 goReact/domain/store.(*UserRepository).Delete Error occured while deleting user. Err msg:<nil>. 
+[36mINFO[0m[2022-03-15T14:23:20+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-15T14:23:20+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-15T14:23:20+03:00]user_repository.go:174 goReact/domain/store.(*UserRepository).Delete User with id 8 was deleted                   
+[36mINFO[0m[2022-03-15T14:23:20+03:00]user_repository.go:174 goReact/domain/store.(*UserRepository).Delete User with id 8 was deleted                   
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[31mERRO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:94 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: <nil>. 
+[31mERRO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:94 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: <nil>. 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:98 goReact/domain/store.(*EmployeeRepository).Delete Employee with id 5 was deleted               
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:98 goReact/domain/store.(*EmployeeRepository).Delete Employee with id 5 was deleted               
+[31mERRO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:67 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:67 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[31mERRO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:67 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:67 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-15T14:23:30+03:00]employee_repository.go:28 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:86 goReact/domain/store.(*HotelRepository).Delete Hotel with id 2 was deleted.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:86 goReact/domain/store.(*HotelRepository).Delete Hotel with id 2 was deleted.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:86 goReact/domain/store.(*HotelRepository).Delete Hotel with id 9 was deleted.                 
+[36mINFO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:86 goReact/domain/store.(*HotelRepository).Delete Hotel with id 9 was deleted.                 
+[31mERRO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:63 goReact/domain/store.(*HotelRepository).FindByID Error occured while searching hotel by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-15T14:23:30+03:00]hotel_repository.go:63 goReact/domain/store.(*HotelRepository).FindByID Error occured while searching hotel by id. Err msg:sql: no rows in result set. 
+[36mINFO[0m[2022-03-15T14:23:31+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-15T14:23:31+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-15T14:23:31+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-15T14:23:31+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-15T14:23:31+03:00]hotel_repository.go:115 goReact/domain/store.(*HotelRepository).Update Hotel with id = 11 was updated               
+[36mINFO[0m[2022-03-15T14:23:31+03:00]hotel_repository.go:115 goReact/domain/store.(*HotelRepository).Update Hotel with id = 11 was updated               
+[36mINFO[0m[2022-03-15T14:23:31+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[36mINFO[0m[2022-03-15T14:23:31+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[31mERRO[0m[2022-03-15T14:23:31+03:00]pet_repository.go:23 goReact/domain/store.(*PetRepository).Create Error occured while creating pet. Err msg:pq: column "weight" of relation "pet" does not exist. 
+[31mERRO[0m[2022-03-15T14:23:31+03:00]pet_repository.go:23 goReact/domain/store.(*PetRepository).Create Error occured while creating pet. Err msg:pq: column "weight" of relation "pet" does not exist. 
+[36mINFO[0m[2022-03-15T14:23:31+03:00]pet_repository.go:107 goReact/domain/store.(*PetRepository).Delete Pet deleted, rows affectet: {824637120944 1} 
+[36mINFO[0m[2022-03-15T14:23:31+03:00]pet_repository.go:107 goReact/domain/store.(*PetRepository).Delete Pet deleted, rows affectet: {824637120944 1} 
+[36mINFO[0m[2022-03-15T14:23:31+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[36mINFO[0m[2022-03-15T14:23:31+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[31mERRO[0m[2022-03-15T14:23:31+03:00]pet_repository.go:23 goReact/domain/store.(*PetRepository).Create Error occured while creating pet. Err msg:pq: column "weight" of relation "pet" does not exist. 
+[31mERRO[0m[2022-03-15T14:23:31+03:00]pet_repository.go:23 goReact/domain/store.(*PetRepository).Create Error occured while creating pet. Err msg:pq: column "weight" of relation "pet" does not exist. 
+[31mERRO[0m[2022-03-15T14:24:09+03:00]user_repository.go:125 goReact/domain/store.(*UserRepository).FindByEmail Eror occure while searching user by email. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-15T14:24:09+03:00]user_repository.go:125 goReact/domain/store.(*UserRepository).FindByEmail Eror occure while searching user by email. Err msg: sql: no rows in result set 
+[36mINFO[0m[2022-03-15T14:24:09+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[36mINFO[0m[2022-03-15T14:24:09+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[31mERRO[0m[2022-03-15T14:24:38+03:00]user_repository.go:150 goReact/domain/store.(*UserRepository).FindByID Eror occure while searching user by id. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-15T14:24:38+03:00]user_repository.go:150 goReact/domain/store.(*UserRepository).FindByID Eror occure while searching user by id. Err msg: sql: no rows in result set 
+[36mINFO[0m[2022-03-15T14:24:38+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[36mINFO[0m[2022-03-15T14:24:38+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[31mERRO[0m[2022-03-15T14:24:48+03:00]user_repository.go:247 goReact/domain/store.(*UserRepository).VerifyEmail No rows was affected, possible reason: no user with such ID 
+[31mERRO[0m[2022-03-15T14:24:48+03:00]user_repository.go:247 goReact/domain/store.(*UserRepository).VerifyEmail No rows was affected, possible reason: no user with such ID 
+[36mINFO[0m[2022-03-15T14:24:48+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 17 was created.                 
+[36mINFO[0m[2022-03-15T14:24:48+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 17 was created.                 
+[36mINFO[0m[2022-03-15T14:25:01+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 18 was created.                 
+[36mINFO[0m[2022-03-15T14:25:01+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 18 was created.                 
+[31mERRO[0m[2022-03-15T14:25:01+03:00]user_repository.go:170 goReact/domain/store.(*UserRepository).Delete Error occured while deleting user. Err msg:<nil>. 
+[31mERRO[0m[2022-03-15T14:25:01+03:00]user_repository.go:170 goReact/domain/store.(*UserRepository).Delete Error occured while deleting user. Err msg:<nil>. 
+[36mINFO[0m[2022-03-15T14:25:01+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 19 was created.                 
+[36mINFO[0m[2022-03-15T14:25:01+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 19 was created.                 
+[36mINFO[0m[2022-03-15T14:25:01+03:00]user_repository.go:174 goReact/domain/store.(*UserRepository).Delete User with id 19 was deleted                  
+[36mINFO[0m[2022-03-15T14:25:01+03:00]user_repository.go:174 goReact/domain/store.(*UserRepository).Delete User with id 19 was deleted                  
+[31mERRO[0m[2022-03-15T14:25:02+03:00]user_repository.go:125 goReact/domain/store.(*UserRepository).FindByEmail Eror occure while searching user by email. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-15T14:25:02+03:00]user_repository.go:125 goReact/domain/store.(*UserRepository).FindByEmail Eror occure while searching user by email. Err msg: sql: no rows in result set 
+[36mINFO[0m[2022-03-15T14:25:02+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 20 was created.                 
+[36mINFO[0m[2022-03-15T14:25:02+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 20 was created.                 
+[31mERRO[0m[2022-03-15T14:25:02+03:00]user_repository.go:150 goReact/domain/store.(*UserRepository).FindByID Eror occure while searching user by id. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-15T14:25:02+03:00]user_repository.go:150 goReact/domain/store.(*UserRepository).FindByID Eror occure while searching user by id. Err msg: sql: no rows in result set 
+[36mINFO[0m[2022-03-15T14:25:02+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 21 was created.                 
+[36mINFO[0m[2022-03-15T14:25:02+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 21 was created.                 
+[31mERRO[0m[2022-03-15T14:25:02+03:00]user_repository.go:247 goReact/domain/store.(*UserRepository).VerifyEmail No rows was affected, possible reason: no user with such ID 
+[31mERRO[0m[2022-03-15T14:25:02+03:00]user_repository.go:247 goReact/domain/store.(*UserRepository).VerifyEmail No rows was affected, possible reason: no user with such ID 
+[36mINFO[0m[2022-03-15T14:25:02+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 22 was created.                 
+[36mINFO[0m[2022-03-15T14:25:02+03:00]user_repository.go:65 goReact/domain/store.(*UserRepository).Create User with id 22 was created.                 

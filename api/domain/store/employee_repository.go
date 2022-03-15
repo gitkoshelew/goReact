@@ -64,7 +64,7 @@ func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
 		&employeeDTO.HotelID,
 		&employeeDTO.Position,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting employee by id. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while getting employee by id. Err msg: %v.", err)
 		return nil, err
 	}
 
@@ -80,18 +80,18 @@ func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
 func (r *EmployeeRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM employee WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg: %v.", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg: %v.", err)
 		return ErrNoRowsAffected
 	}
 
@@ -111,22 +111,22 @@ func (r *EmployeeRepository) Update(e *model.EmployeeDTO) error {
 		e.EmployeeID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Erorr occured while updating booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Erorr occured while updating booking. Err msg: %v", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating employee. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating employee. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating employee. Err msg: %v.", err)
 		return ErrNoRowsAffected
 	}
 
-	r.Store.Logger.Infof("Employee with id %d was updated, rows affectet: %d", e.EmployeeID)
+	r.Store.Logger.Infof("Employee with id %d was updated", e.EmployeeID)
 	return nil
 }
 
@@ -139,7 +139,7 @@ func (r *EmployeeRepository) FindByUserID(userID int) (*model.Employee, error) {
 		&employeeDTO.HotelID,
 		&employeeDTO.Position,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while searching employee by user id. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while searching employee by user id. Err msg: %v.", err)
 		return nil, err
 	}
 

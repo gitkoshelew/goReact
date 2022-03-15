@@ -22,14 +22,14 @@ var (
 func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 
 	if err := u.ModelFromDTO().Validate(); err != nil {
-		r.Store.Logger.Errorf("Error occured while validating user. Err msg: %w", err)
+		r.Store.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
 		return nil, err
 	}
 
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %w", err)
+		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %v", err)
 		return nil, err
 	}
 
@@ -58,7 +58,7 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 		u.Phone,
 		u.Photo,
 	).Scan(&u.UserID); err != nil {
-		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %w", err)
+		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %v", err)
 		return nil, err
 	}
 
@@ -71,7 +71,7 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while getting all users. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while getting all users. Err msg: %v", err)
 
 		return nil, err
 	}
@@ -95,7 +95,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Photo,
 		)
 		if err != nil {
-			r.Store.Logger.Debugf("Eror occured while getting all bookings. Err msg: %w", err)
+			r.Store.Logger.Debugf("Eror occured while getting all bookings. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -122,7 +122,7 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror occure while searching user by email. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occure while searching user by email. Err msg: %v", err)
 		return nil, err
 	}
 	return user.ModelFromDTO(), nil
@@ -147,7 +147,7 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror occure while searching user by id. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occure while searching user by id. Err msg: %v", err)
 		return nil, err
 	}
 	return user.ModelFromDTO(), nil
@@ -204,7 +204,7 @@ func (r *UserRepository) Update(u *model.UserDTO) error {
 		u.UserID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %w", err)
+		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %v", err)
 		return err
 	}
 

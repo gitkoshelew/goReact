@@ -120,7 +120,25 @@ func TestUser_Validate(t *testing.T) {
 			isValid: false,
 		},
 		{
+			name: "Empty Role",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Role = ""
+				return u.ModelFromDTO()
+			},
+			isValid: true,
+		},
+		{
 			name: "Invalid Sex",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Sex = "Invalid"
+				return u.ModelFromDTO()
+			},
+			isValid: false,
+		},
+		{
+			name: "Empty Sex",
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Sex = "Invalid"
@@ -145,6 +163,15 @@ func TestUser_Validate(t *testing.T) {
 				return u.ModelFromDTO()
 			},
 			isValid: false,
+		},
+		{
+			name: "Empty Photo",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Photo = ""
+				return u.ModelFromDTO()
+			},
+			isValid: true,
 		},
 	}
 
