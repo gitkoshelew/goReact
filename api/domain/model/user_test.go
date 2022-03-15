@@ -159,15 +159,6 @@ func TestUser_Validate(t *testing.T) {
 	}
 }
 
-func TestUser_NewUser(t *testing.T) {
-	u := model.TestUser()
-	u.UserID = 1
-	err := u.ModelFromDTO().WithEncryptedPassword()
-
-	assert.NoError(t, err)
-	assert.NotNil(t, u)
-}
-
 func TestUser_EncryptPassword(t *testing.T) {
 	password := "password"
 

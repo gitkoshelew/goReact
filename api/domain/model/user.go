@@ -80,17 +80,6 @@ func (u *User) Validate() error {
 	)
 }
 
-// WithEncryptedPassword creates User with encrypted password
-func (u *User) WithEncryptedPassword() error {
-	EncryptedPassword, err := EncryptPassword(u.Password)
-	if err != nil {
-		return err
-	}
-
-	u.Password = EncryptedPassword
-	return nil
-}
-
 // EncryptPassword ...
 func EncryptPassword(s string) (string, error) {
 	b, err := bcrypt.GenerateFromPassword([]byte(s), bcrypt.MinCost)
