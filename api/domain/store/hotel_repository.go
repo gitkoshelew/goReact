@@ -2,6 +2,8 @@ package store
 
 import (
 	"goReact/domain/model"
+
+	"github.com/lib/pq"
 )
 
 // HotelRepository ...
@@ -15,8 +17,7 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id",
 		h.Name,
 		h.Address,
-		h.Coordinates,
-	).Scan(&h.HotelID); err != nil {
+		pq.Array(h.Coordinates)).Scan(&h.HotelID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating hotel. Err msg:%v.", err)
 		return nil, err
 	}
@@ -39,7 +40,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 			&hotel.HotelID,
 			&hotel.Name,
 			&hotel.Address,
-			&hotel.Coordinates,
+			pq.Array(&hotel.Coordinates),
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all hotels. Err msg: %v", err)
@@ -58,7 +59,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.HotelID,
 		&hotel.Name,
 		&hotel.Address,
-		&hotel.Coordinates,
+		pq.Array(&hotel.Coordinates),
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while searching hotel by id. Err msg:%v.", err)
 		return nil, err
@@ -93,7 +94,7 @@ func (r *HotelRepository) Update(h *model.Hotel) error {
 		"UPDATE hotel SET name = $1, address = $2 , coordinates = $3 WHERE id = $4",
 		h.Name,
 		h.Address,
-		h.Coordinates,
+		pq.Array(h.Coordinates),
 		h.HotelID,
 	)
 	if err != nil {
