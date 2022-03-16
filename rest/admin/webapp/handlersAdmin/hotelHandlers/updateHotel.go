@@ -49,12 +49,12 @@ func UpdateHotel(s *store.Store) httprouter.Handle {
 		}
 
 		address := r.FormValue("Address")
-		if name != "" {
+		if address != "" {
 			hotel.Address = address
 		}
 
-		coordinates := r.FormValue("Coordinates")
-		if name != "" {
+		coordinates := []string{r.FormValue("Lat"), r.FormValue("Lon")}
+		if coordinates != nil{
 			hotel.Coordinates = coordinates
 		}
 
