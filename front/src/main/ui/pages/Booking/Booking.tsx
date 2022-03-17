@@ -26,6 +26,13 @@ type FormValues = {
 }
 
 export const Booking = () => {
+  const checked = useSelector((state: AppRootState) => state.BookingRegForm.checkedOnlinePayment)
+  useEffect(() => {
+    if (!checked) {
+      formik.resetForm()
+    }
+  }, [checked])
+
   const validate = (values: FormValues) => {
     const errors: FormikErrors<FormValues> = {}
     if (!values.firstName) {
@@ -44,9 +51,10 @@ export const Booking = () => {
       errors.email = 'Invalid email address'
     }
 
-    if (!values.cardNumber) {
+    if (checked && !values.cardNumber) {
       errors.cardNumber = 'Required field'
     } else if (
+      checked &&
       !/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/i.test(
         values.cardNumber
       )
@@ -54,25 +62,25 @@ export const Booking = () => {
       errors.cardNumber = 'Invalid card number'
     }
 
-    if (!values.company) {
+    if (checked && !values.company) {
       errors.company = 'Required field'
     }
 
-    if (!values.mm) {
+    if (checked && !values.mm) {
       errors.mm = 'Required field'
-    } else if (!/(0[1-9]|1[012])$/i.test(values.mm)) {
+    } else if (checked && !/(0[1-9]|1[012])$/i.test(values.mm)) {
       errors.mm = 'Invalid month'
     }
 
-    if (!values.yy) {
+    if (checked && !values.yy) {
       errors.yy = 'Required field'
-    } else if (!/^20(2[2-9]|[3-9][0-9])$/i.test(values.yy)) {
+    } else if (checked && !/^20(2[2-9]|[3-9][0-9])$/i.test(values.yy)) {
       errors.yy = 'Invalid year'
     }
 
-    if (!values.cvv) {
+    if (checked && !values.cvv) {
       errors.cvv = 'Required field'
-    } else if (!/^(\d{3})$/i.test(values.cvv)) {
+    } else if (checked && !/^(\d{3})$/i.test(values.cvv)) {
       errors.cvv = 'Invalid cvv'
     }
     return errors
@@ -94,7 +102,6 @@ export const Booking = () => {
       alert(JSON.stringify(values, null, 2))
     },
   })
-
   const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
 
   const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
