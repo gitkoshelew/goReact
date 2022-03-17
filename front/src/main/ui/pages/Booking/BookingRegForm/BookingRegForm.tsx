@@ -1,12 +1,13 @@
 import React from 'react'
 import s from './BookingRegForm.module.scss'
 import { ImgUpload } from './ImgUploadComponent/ImgUpload'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppRootState } from '../../../../bll/store/store'
 import Preloader from '../../../components/preloader/preloader'
 import { FormikValues } from 'formik/dist/types'
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 import { americanExpress, mastercard, visa } from '../../../svgWrapper/BookingRoomSvgWrapper'
+import { changeCheckedOnlinePayment } from '../../../../bll/reducers/BookingRegFormReducer/BookingRegForm-reducer'
 
 const {
   bookingForm,
@@ -30,11 +31,12 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
   const photoUrl = useSelector((state: AppRootState) => state.BookingRegForm.photoUrl)
   const errorMSG = useSelector((state: AppRootState) => state.BookingRegForm.errorMSG)
 
-  const [checked, setChecked] = React.useState(false)
+  const dispatch = useDispatch()
 
   const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
+    dispatch(changeCheckedOnlinePayment({ checkedOnlinePayment: event.target.checked }))
   }
+  const checked = useSelector((state: AppRootState) => state.BookingRegForm.checkedOnlinePayment)
 
   const actualContent = () => {
     switch (progress) {
@@ -202,7 +204,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
                 onBlur={formik.handleBlur}
                 value={formik.values.cvv}
                 onChange={formik.handleChange}
-                type="text"
+                type="password"
               />
             </div>
             {formik.errors.cvv && formik.touched.cvv ? <div className={errorMsg}>{formik.errors.cvv}</div> : null}

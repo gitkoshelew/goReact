@@ -4,6 +4,7 @@ const initialState: InitialStateType = {
   progress: 'getUpload',
   photoUrl: null,
   errorMSG: '',
+  checkedOnlinePayment: false,
 }
 
 const BookingRegFormSlice = createSlice({
@@ -19,11 +20,15 @@ const BookingRegFormSlice = createSlice({
     changeErrorMSG(state, action: PayloadAction<{ newErrorMsg: string }>) {
       state.errorMSG = action.payload.newErrorMsg
     },
+    changeCheckedOnlinePayment(state, action: PayloadAction<{ checkedOnlinePayment: boolean }>) {
+      state.checkedOnlinePayment = action.payload.checkedOnlinePayment
+    },
   },
 })
 
 export const BookingRegFormReducer = BookingRegFormSlice.reducer
-export const { changePhotoUrl, changeProgressStatus, changeErrorMSG } = BookingRegFormSlice.actions
+export const { changePhotoUrl, changeProgressStatus, changeErrorMSG, changeCheckedOnlinePayment } =
+  BookingRegFormSlice.actions
 
 //types
 
@@ -33,4 +38,5 @@ export type InitialStateType = {
   progress: ProgressType
   photoUrl: null | string
   errorMSG: string
+  checkedOnlinePayment: boolean
 }
