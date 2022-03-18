@@ -91,10 +91,10 @@ INSERT INTO CLIENT (user_id) VALUES
 (2),
 (3);
 
-INSERT INTO PET (name , type, weignt, dieses, client_id) VALUES 
-('Murzik','cat',5 ,'no dieses' ,1),
-('Barbos','dog',5 ,'1 dieses' ,2),
-('Aliy','dog',5 ,'2 dieses' ,3);
+INSERT INTO PET (name , type, weight, dieses, client_id) VALUES 
+('Murzik','cat',5 ,'no diseases' ,1),
+('Barbos','dog',5 ,'1 diseas' ,2),
+('Aliy','dog',5 ,'2 diseases' ,3);
 
 INSERT INTO EMPLOYEE (user_id, hotel_id, position, role) VALUES 
 (4 , 1, 'Position 1', 'role 1' ),

@@ -10,9 +10,10 @@ type CtxKey int8
 
 // CtxKeys
 const (
-	CtxKeyUser           CtxKey = 1
-	CtxKeyUserValidation CtxKey = 2
-	CtxKeyEmail          CtxKey = 3
+	CtxKeyUser              CtxKey = 1
+	CtxKeyUserValidation    CtxKey = 2
+	CtxKeyEmail             CtxKey = 3
+	CtxKeyBookingValidation CtxKey = 4
 )
 
 var (

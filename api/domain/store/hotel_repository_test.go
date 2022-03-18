@@ -22,7 +22,7 @@ func TestHotelRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 	t.Run("invalid id delete", func(t *testing.T) {
-		id := 2
+		id := 0
 		err := s.Hotel().Delete(id)
 		assert.Error(t, err)
 	})
@@ -65,8 +65,9 @@ func TestHotelRepository_Update(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 	t.Run("valid update", func(t *testing.T) {
-		h, err := s.Hotel().Create(model.TestHotel())
-		
+		h := model.TestHotel()
+		_, err := s.Hotel().Create(h)
+
 		h.Name = "Minsk"
 		h.Address = "Minsk"
 

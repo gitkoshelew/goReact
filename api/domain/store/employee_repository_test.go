@@ -13,18 +13,18 @@ func TestEmployeeRepository_Create(t *testing.T) {
 	t.Cleanup(teardown)
 	t.Run("valid", func(t *testing.T) {
 		e := model.TestEmployee()
-		u, _ := s.User().Create(model.TestUser())
-		h, _ := s.Hotel().Create(model.TestHotel())
+		u := model.TestUser()
+		h := model.TestHotel()
 		e.User = *u
 		e.Hotel = *h
-		e, err := s.Employee().Create(&model.EmployeeDTO{
+		id, err := s.Employee().Create(&model.Employee{
 			EmployeeID: e.EmployeeID,
-			UserID:     e.User.UserID,
-			HotelID:    e.Hotel.HotelID,
-			Position:   string(e.Position),
+			User:       *u,
+			Hotel:      *h,
+			Position:   e.Position,
 		})
 		assert.NoError(t, err)
-		assert.NotNil(t, e)
+		assert.NotNil(t, id)
 	})
 }
 
@@ -39,17 +39,17 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 	})
 	t.Run("valid", func(t *testing.T) {
 		e := model.TestEmployee()
-		u, _ := s.User().Create(model.TestUser())
-		h, _ := s.Hotel().Create(model.TestHotel())
+		u := model.TestUser()
+		h := model.TestHotel()
 		e.User = *u
 		e.Hotel = *h
-		e, _ = s.Employee().Create(&model.EmployeeDTO{
+		id, _ := s.Employee().Create(&model.Employee{
 			EmployeeID: e.EmployeeID,
-			UserID:     e.User.UserID,
-			HotelID:    e.Hotel.HotelID,
-			Position:   string(e.Position),
+			User:       *u,
+			Hotel:      *h,
+			Position:   e.Position,
 		})
-		err := s.Employee().Delete(e.EmployeeID)
+		err := s.Employee().Delete(*id)
 		assert.NoError(t, err)
 	})
 }
@@ -64,19 +64,19 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 	})
 	t.Run("valid", func(t *testing.T) {
 		e := model.TestEmployee()
-		u, _ := s.User().Create(model.TestUser())
-		h, _ := s.Hotel().Create(model.TestHotel())
+		u := model.TestUser()
+		h := model.TestHotel()
 		e.User = *u
 		e.Hotel = *h
-		e, _ = s.Employee().Create(&model.EmployeeDTO{
+		id, _ := s.Employee().Create(&model.Employee{
 			EmployeeID: e.EmployeeID,
-			UserID:     e.User.UserID,
-			HotelID:    e.Hotel.HotelID,
-			Position:   string(e.Position),
+			User:       *u,
+			Hotel:      *h,
+			Position:   e.Position,
 		})
-		e, err := s.Employee().FindByID(e.EmployeeID)
+		eDTO, err := s.Employee().FindByID(*id)
 		assert.NoError(t, err)
-		assert.NotNil(t, e)
+		assert.NotNil(t, eDTO)
 	})
 }
 
@@ -100,18 +100,18 @@ func TestEmployeeRepository_FindByUserID(t *testing.T) {
 	})
 	t.Run("valid", func(t *testing.T) {
 		e := model.TestEmployee()
-		u, _ := s.User().Create(model.TestUser())
-		h, _ := s.Hotel().Create(model.TestHotel())
+		u := model.TestUser()
+		h := model.TestHotel()
 		e.User = *u
 		e.Hotel = *h
-		e, _ = s.Employee().Create(&model.EmployeeDTO{
+		id, _ := s.Employee().Create(&model.Employee{
 			EmployeeID: e.EmployeeID,
-			UserID:     e.User.UserID,
-			HotelID:    e.Hotel.HotelID,
-			Position:   string(e.Position),
+			User:       *u,
+			Hotel:      *h,
+			Position:   e.Position,
 		})
-		e, err := s.Employee().FindByID(e.EmployeeID)
+		eDTO, err := s.Employee().FindByID(*id)
 		assert.NoError(t, err)
-		assert.NotNil(t, e)
+		assert.NotNil(t, eDTO)
 	})
 }

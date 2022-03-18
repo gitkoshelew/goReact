@@ -26,7 +26,17 @@ func ValidateUser(next http.Handler, s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err := userDTO.Validate()
+		err := s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			s.Logger.Errorf("Can't open DB. Err msg: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while opening DB: %v", err)})
+			return
+		}
+
+		user := s.User().ModelFromDTO(userDTO)
+
+		err = user.Validate()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while validating user. Err msg: %v", err)

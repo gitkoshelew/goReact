@@ -39,6 +39,10 @@ var (
 	ErrInvalidAlphabet = errors.New("only latin or cyrillic symblos allowed")
 	// ErrInvalidSymbol ...
 	ErrInvalidSymbol = errors.New("invalid symbol used. Only space and '-' symbols allowed")
+	// ErrInvalidStartDate ...
+	ErrInvalidStartDate = errors.New("invalid start date. Start date cannot be before today")
+	// ErrInvalidEndDate ...
+	ErrInvalidEndDate = errors.New("invalid end date. End date cannot be before today")
 )
 
 // IsLetterHyphenSpaces checks if string contains only letter(from simillar alphabet(latin or cyrillic)), hyphen or spaces
@@ -77,7 +81,7 @@ func IsPhone(value interface{}) error {
 // AnonymousRole  = "anonymous"
 // if Role with be nil - wont return error
 func IsRole(value interface{}) error {
-	s := Role(value.(string))
+	s := value.(Role)
 	if s == ClientRole || s == EmployeeRole || s == AnonymousRole || s == "" {
 		return nil
 	}
@@ -88,7 +92,7 @@ func IsRole(value interface{}) error {
 // Male    = "male"
 // Female  = "female"
 func IsSex(value interface{}) error {
-	s := Sex(value.(string))
+	s := value.(Sex)
 	if s == SexMale || s == SexFemale {
 		return nil
 	}
@@ -99,7 +103,7 @@ func IsSex(value interface{}) error {
 // PetTypeCat = "cat"
 // PetTypeDog = "dog"
 func IsPetType(value interface{}) error {
-	s := PetType(value.(string))
+	s := value.(PetType)
 	if s == PetTypeCat || s == PetTypeDog {
 		return nil
 	}
@@ -144,6 +148,28 @@ func IsSQL(value interface{}) error {
 	s := value.(string)
 	if noSQL.MatchString(strings.ToUpper(s)) {
 		return ErrContainsSQL
+	}
+	return nil
+}
+
+// IsValidStartDate ...
+func IsValidStartDate(value interface{}) error {
+	t := time.Now()
+	d := value.(*time.Time)
+	err := validation.Validate(d.Format(time.RFC3339), validation.Date(time.RFC3339).Min(t.AddDate(0, 0, -1)))
+	if err != nil {
+		return ErrInvalidStartDate
+	}
+	return nil
+}
+
+// IsValidEndDate ...
+func IsValidEndDate(value interface{}) error {
+	t := time.Now()
+	d := value.(*time.Time)
+	err := validation.Validate(d.Format(time.RFC3339), validation.Date(time.RFC3339).Min(t))
+	if err != nil {
+		return ErrInvalidEndDate
 	}
 	return nil
 }

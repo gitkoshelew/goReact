@@ -10,7 +10,7 @@ type HotelRepository struct {
 }
 
 // Create hotel and save it to DB
-func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
+func (r *HotelRepository) Create(h *model.Hotel) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id",
 		h.Name,
@@ -22,7 +22,7 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 	}
 
 	r.Store.Logger.Infof("Created hotel with id = %d", h.HotelID)
-	return h, nil
+	return &h.HotelID, nil
 }
 
 // GetAll returns all hotels

@@ -46,15 +46,17 @@ var (
 )
 
 // Validate ...
-func (b *Booking) Validate() error {
+func (b *BookingDTO) Validate() error {
 	return validation.ValidateStruct(
 		b,
-		validation.Field(&b.Seat, validation.Required),
-		validation.Field(&b.Pet, validation.Required),
-		validation.Field(&b.Employee, validation.Required),
+		validation.Field(&b.SeatID, validation.Required),
+		validation.Field(&b.PetID, validation.Required),
+		validation.Field(&b.EmployeeID, validation.Required),
 		validation.Field(&b.Status, validation.Required, validation.By(IsBookingStatus)),
-		validation.Field(&b.StartDate, validation.Required),
-		validation.Field(&b.EndDate, validation.Required),
+		validation.Field(&b.StartDate, validation.Required, validation.By(IsValidStartDate)),
+		validation.Field(&b.EndDate, validation.Required, validation.By(IsValidEndDate)),
+		validation.Field(&b.Notes, validation.By(IsSQL)),
+		validation.Field(&b.TransactionID, validation.NotNil),
 		validation.Field(&b.Paid, validation.NotNil),
 	)
 }

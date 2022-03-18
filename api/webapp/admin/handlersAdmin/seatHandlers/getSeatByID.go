@@ -31,10 +31,16 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		seat, err := s.Seat().FindByID(id)
+		seatDTO, err := s.Seat().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			s.Logger.Errorf("Cant find seat. Err msg:%v.", err)
+			return
+		}
+
+		seat, err := s.Seat().ModelFromDTO(seatDTO)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
 

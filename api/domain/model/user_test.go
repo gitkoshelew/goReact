@@ -10,19 +10,19 @@ import (
 func TestUser_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		u       func() *model.UserDTO
+		u       func() *model.User
 		isValid bool
 	}{
 		{
 			name: "valid",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				return model.TestUser()
 			},
 			isValid: true,
 		},
 		{
 			name: "empty email",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Email = ""
 				return u
@@ -31,7 +31,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "invalid email",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Email = "invalid"
 				return u
@@ -40,7 +40,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "empty password",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Password = ""
 				return u
@@ -49,7 +49,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "short password",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Password = "1234"
 				return u
@@ -58,7 +58,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Name",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Name = "Name@123"
 				return u
@@ -67,7 +67,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Name",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Name = ""
 				return u
@@ -76,7 +76,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Surname",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Surname = "Surname-Фамилия"
 				return u
@@ -85,7 +85,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Surname",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Surname = ""
 				return u
@@ -94,7 +94,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid MiddleName",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.MiddleName = "MiddleName %?№"
 				return u
@@ -103,7 +103,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty MiddleName",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.MiddleName = ""
 				return u
@@ -112,7 +112,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Role",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Role = "Invalid"
 				return u
@@ -121,7 +121,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Role",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Role = ""
 				return u
@@ -130,7 +130,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Sex",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Sex = "Invalid"
 				return u
@@ -139,7 +139,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Sex",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Sex = "Invalid"
 				return u
@@ -148,7 +148,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Phone",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Phone = "Invalid"
 				return u
@@ -157,7 +157,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Phone",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Phone = ""
 				return u
@@ -166,7 +166,7 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Photo",
-			u: func() *model.UserDTO {
+			u: func() *model.User {
 				u := model.TestUser()
 				u.Photo = ""
 				return u

@@ -10,24 +10,19 @@ type EmployeeRepository struct {
 }
 
 // Create employee and save it to DB
-func (r *EmployeeRepository) Create(e *model.EmployeeDTO) (*model.Employee, error) {
+func (r *EmployeeRepository) Create(e *model.Employee) (*int, error) {
 	if err := r.Store.Db.QueryRow("INSERT INTO employee (user_id, hotel_id, position) VALUES ($1, $2, $3) RETURNING id",
 		e.UserID,
-		e.HotelID,
+		e.Hotel.HotelID,
 		e.Position,
 	).Scan(&e.EmployeeID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating employee. Err msg:%v.", err)
 		return nil, err
 	}
 
-	employee, err := r.ModelFromDTO(e)
-	if err != nil {
-		return nil, err
-	}
-
 	r.Store.Logger.Infof("Employee with id %d was created.", e.EmployeeID)
 
-	return employee, nil
+	return &e.EmployeeID, nil
 }
 
 // GetAll returns all employees
@@ -56,7 +51,7 @@ func (r *EmployeeRepository) GetAll() (*[]model.EmployeeDTO, error) {
 }
 
 // FindByID searchs and returns employee by ID
-func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
+func (r *EmployeeRepository) FindByID(id int) (*model.EmployeeDTO, error) {
 	employeeDTO := &model.EmployeeDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE id = $1", id).Scan(
 		&employeeDTO.EmployeeID,
@@ -68,12 +63,7 @@ func (r *EmployeeRepository) FindByID(id int) (*model.Employee, error) {
 		return nil, err
 	}
 
-	employee, err := r.ModelFromDTO(employeeDTO)
-	if err != nil {
-		return nil, err
-	}
-
-	return employee, nil
+	return employeeDTO, nil
 }
 
 // Delete employee from DB by ID
@@ -158,14 +148,15 @@ func (r *EmployeeRepository) ModelFromDTO(dto *model.EmployeeDTO) (*model.Employ
 		return nil, err
 	}
 
-	user, err := r.Store.User().FindByID(dto.UserID)
+	userDTO, err := r.Store.User().FindByID(dto.UserID)
 	if err != nil {
 		return nil, err
 	}
+	u := r.Store.User().ModelFromDTO(userDTO)
 
 	return &model.Employee{
 		EmployeeID: dto.EmployeeID,
-		User:       *user,
+		User:       *u,
 		Hotel:      *hotel,
 		Position:   model.Position(dto.Position),
 	}, nil

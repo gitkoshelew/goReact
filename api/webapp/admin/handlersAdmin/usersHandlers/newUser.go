@@ -46,15 +46,15 @@ func NewUser(s *store.Store) httprouter.Handle {
 		phone := r.FormValue("Phone")
 		photo := r.FormValue("Photo")
 
-		u := model.UserDTO{
+		u := model.User{
 			UserID:      0,
 			Email:       email,
 			Password:    password,
-			Role:        role,
+			Role:        model.Role(role),
 			Name:        name,
 			Surname:     surname,
 			MiddleName:  middleName,
-			Sex:         sex,
+			Sex:         model.Sex(sex),
 			Address:     address,
 			Phone:       phone,
 			Photo:       photo,
