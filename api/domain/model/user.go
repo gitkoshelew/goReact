@@ -80,17 +80,6 @@ func (u *User) Validate() error {
 	)
 }
 
-// WithEncryptedPassword creates User with encrypted password
-func (u *User) WithEncryptedPassword() error {
-	EncryptedPassword, err := EncryptPassword(u.Password)
-	if err != nil {
-		return err
-	}
-
-	u.Password = EncryptedPassword
-	return nil
-}
-
 // EncryptPassword ...
 func EncryptPassword(s string) (string, error) {
 	b, err := bcrypt.GenerateFromPassword([]byte(s), bcrypt.MinCost)
@@ -104,23 +93,4 @@ func EncryptPassword(s string) (string, error) {
 func CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err
-}
-
-// ModelFromDTO ...
-func (uDTO *UserDTO) ModelFromDTO() *User {
-	return &User{
-		UserID:      uDTO.UserID,
-		Email:       uDTO.Email,
-		Password:    uDTO.Password,
-		Role:        Role(uDTO.Role),
-		Verified:    uDTO.Verified,
-		Name:        uDTO.Name,
-		Surname:     uDTO.Surname,
-		MiddleName:  uDTO.MiddleName,
-		Sex:         Sex(uDTO.Sex),
-		DateOfBirth: uDTO.DateOfBirth,
-		Address:     uDTO.Address,
-		Phone:       uDTO.Phone,
-		Photo:       uDTO.Photo,
-	}
 }

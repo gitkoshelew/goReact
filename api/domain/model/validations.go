@@ -39,6 +39,10 @@ var (
 	ErrInvalidAlphabet = errors.New("only latin or cyrillic symblos allowed")
 	// ErrInvalidSymbol ...
 	ErrInvalidSymbol = errors.New("invalid symbol used. Only space and '-' symbols allowed")
+	// ErrInvalidStartDate ...
+	ErrInvalidStartDate = errors.New("invalid start date. Start date cannot be before today")
+	// ErrInvalidEndDate ...
+	ErrInvalidEndDate = errors.New("invalid end date. End date cannot be before today")
 )
 
 // IsLetterHyphenSpaces checks if string contains only letter(from simillar alphabet(latin or cyrillic)), hyphen or spaces
@@ -108,7 +112,7 @@ func IsPetType(value interface{}) error {
 
 // IsEmployeePosition ...
 func IsEmployeePosition(value interface{}) error {
-	s := value.(Position)
+	s := Position(value.(string))
 	if s == ManagerPosition || s == EmployeePosition || s == OwnerPosition || s == AdminPosition {
 		return nil
 	}
@@ -121,7 +125,7 @@ func IsEmployeePosition(value interface{}) error {
 // BookingStatusCompleted  BookingStatus = "completed"
 // BookingStatusCancelled  BookingStatus = "cancelled"
 func IsBookingStatus(value interface{}) error {
-	s := value.(BookingStatus)
+	s := BookingStatus(value.(string))
 	if s == BookingStatusPending || s == BookingStatusInProgress || s == BookingStatusCompleted || s == BookingStatusCancelled {
 		return nil
 	}
@@ -144,6 +148,28 @@ func IsSQL(value interface{}) error {
 	s := value.(string)
 	if noSQL.MatchString(strings.ToUpper(s)) {
 		return ErrContainsSQL
+	}
+	return nil
+}
+
+// IsValidStartDate ...
+func IsValidStartDate(value interface{}) error {
+	t := time.Now()
+	d := value.(*time.Time)
+	err := validation.Validate(d.Format(time.RFC3339), validation.Date(time.RFC3339).Min(t.AddDate(0, 0, -1)))
+	if err != nil {
+		return ErrInvalidStartDate
+	}
+	return nil
+}
+
+// IsValidEndDate ...
+func IsValidEndDate(value interface{}) error {
+	t := time.Now()
+	d := value.(*time.Time)
+	err := validation.Validate(d.Format(time.RFC3339), validation.Date(time.RFC3339).Min(t))
+	if err != nil {
+		return ErrInvalidEndDate
 	}
 	return nil
 }

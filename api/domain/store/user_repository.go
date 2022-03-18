@@ -19,17 +19,12 @@ var (
 )
 
 // Create user and save it to DB
-func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
-
-	if err := u.ModelFromDTO().Validate(); err != nil {
-		r.Store.Logger.Errorf("Error occured while validating user. Err msg: %w", err)
-		return nil, err
-	}
+func (r *UserRepository) Create(user *model.User) (*int, error) {
 
 	var emailIsUsed bool
-	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
+	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", user.Email).Scan(&emailIsUsed)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %w", err)
+		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %v", err)
 		return nil, err
 	}
 
@@ -38,40 +33,40 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 		return nil, ErrEmailIsUsed
 	}
 
-	r.Store.EncryptPassword(&u.Password)
+	r.Store.EncryptPassword(&user.Password)
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
 		(email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) 
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
 		RETURNING id`,
-		u.Email,
-		u.Password,
+		user.Email,
+		user.Password,
 		string(model.AnonymousRole),
 		false,
-		strings.Title(strings.ToLower(u.Name)),
-		strings.Title(strings.ToLower(u.Surname)),
-		strings.Title(strings.ToLower(u.MiddleName)),
-		u.Sex,
-		u.DateOfBirth,
-		u.Address,
-		u.Phone,
-		u.Photo,
-	).Scan(&u.UserID); err != nil {
-		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %w", err)
+		strings.Title(strings.ToLower(user.Name)),
+		strings.Title(strings.ToLower(user.Surname)),
+		strings.Title(strings.ToLower(user.MiddleName)),
+		string(user.Sex),
+		user.DateOfBirth,
+		user.Address,
+		user.Phone,
+		user.Photo,
+	).Scan(&user.UserID); err != nil {
+		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %v", err)
 		return nil, err
 	}
 
-	r.Store.Logger.Infof("User with id %d was created.", u.UserID)
+	r.Store.Logger.Infof("User with id %d was created.", user.UserID)
 
-	return u.ModelFromDTO(), nil
+	return &user.UserID, nil
 }
 
 // GetAll returns all users
 func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while getting all users. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while getting all users. Err msg: %v", err)
 
 		return nil, err
 	}
@@ -95,7 +90,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Photo,
 		)
 		if err != nil {
-			r.Store.Logger.Debugf("Eror occured while getting all bookings. Err msg: %w", err)
+			r.Store.Logger.Debugf("Eror occured while getting all bookings. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -104,7 +99,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 }
 
 // FindByEmail searchs and returns user by email
-func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
+func (r *UserRepository) FindByEmail(email string) (*model.UserDTO, error) {
 	user := &model.UserDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE email = $1",
 		email).Scan(
@@ -122,14 +117,14 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror occure while searching user by email. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occure while searching user by email. Err msg: %v", err)
 		return nil, err
 	}
-	return user.ModelFromDTO(), nil
+	return user, nil
 }
 
 // FindByID searchs and returns user by ID
-func (r *UserRepository) FindByID(id int) (*model.User, error) {
+func (r *UserRepository) FindByID(id int) (*model.UserDTO, error) {
 	user := &model.UserDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE id = $1",
 		id).Scan(
@@ -147,10 +142,10 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		&user.Sex,
 		&user.Photo,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror occure while searching user by id. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occure while searching user by id. Err msg: %v", err)
 		return nil, err
 	}
-	return user.ModelFromDTO(), nil
+	return user, nil
 }
 
 // Delete user from DB by ID
@@ -204,7 +199,7 @@ func (r *UserRepository) Update(u *model.UserDTO) error {
 		u.UserID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %w", err)
+		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %v", err)
 		return err
 	}
 
@@ -282,4 +277,23 @@ func (r *UserRepository) CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	r.Store.Logger.Infof("Eror during checking users email or password. Err msg: %s", err.Error())
 	return err
+}
+
+// ModelFromDTO ...
+func (r *UserRepository) ModelFromDTO(u *model.UserDTO) *model.User {
+	return &model.User{
+		UserID:      u.UserID,
+		Email:       u.Email,
+		Password:    u.Password,
+		Role:        model.Role(u.Role),
+		Verified:    u.Verified,
+		Name:        u.Name,
+		Surname:     u.Surname,
+		MiddleName:  u.MiddleName,
+		Sex:         model.Sex(u.Sex),
+		DateOfBirth: u.DateOfBirth,
+		Address:     u.Address,
+		Phone:       u.Phone,
+		Photo:       u.Photo,
+	}
 }
