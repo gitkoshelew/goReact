@@ -29,7 +29,18 @@ export const Booking = () => {
   const checked = useSelector((state: AppRootState) => state.BookingRegForm.checkedOnlinePayment)
   useEffect(() => {
     if (!checked) {
-      formik.resetForm()
+      formik.resetForm({
+        values: {
+          firstName: formik.values.firstName,
+          lastName: formik.values.lastName,
+          email: formik.values.email,
+          cardNumber: '',
+          company: '',
+          mm: '',
+          yy: '',
+          cvv: '',
+        },
+      })
     }
   }, [checked])
 
@@ -100,6 +111,7 @@ export const Booking = () => {
     validate,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
+      // formik.resetForm()
     },
   })
   const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
