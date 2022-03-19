@@ -16,7 +16,7 @@ func (r *PetRepository) Create(p *model.PetDTO) (*model.Pet, error) {
 		p.Name,
 		p.Type,
 		p.Weight,
-		p.Diesieses,
+		p.Diseases,
 		p.OwnerID,
 		p.PhotoURL,
 	).Scan(&p.PetID); err != nil {
@@ -49,7 +49,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 			&pet.Name,
 			&pet.Type,
 			&pet.Weight,
-			&pet.Diesieses,
+			&pet.Diseases,
 			&pet.OwnerID,
 			&pet.PhotoURL,
 		)
@@ -71,7 +71,7 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 		&petDTO.Name,
 		&petDTO.Type,
 		&petDTO.Weight,
-		&petDTO.Diesieses,
+		&petDTO.Diseases,
 		&petDTO.OwnerID,
 		&petDTO.PhotoURL,
 	); err != nil {
@@ -109,14 +109,14 @@ func (r *PetRepository) Delete(id int) error {
 }
 
 // Update pet from DB
-func (r *PetRepository) Update(p *model.PetDTO) error {
+func (r *PetRepository) Update(p *model.Pet) error {
 	result, err := r.Store.Db.Exec(
 		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 , user_id = $6 WHERE id = $7",
 		p.Name,
 		string(p.Type),
 		p.Weight,
-		p.Diesieses,
-		p.OwnerID,
+		p.Diseases,
+		p.Owner,
 		p.PhotoURL,
 		p.PetID,
 	)
@@ -148,12 +148,12 @@ func (r *PetRepository) ModelFromDTO(dto *model.PetDTO) (*model.Pet, error) {
 	}
 
 	return &model.Pet{
-		PetID:     dto.PetID,
-		Name:      dto.Name,
-		Type:      model.PetType(dto.Type),
-		Weight:    dto.Weight,
-		Diesieses: dto.Diesieses,
-		Owner:     *user,
-		PhotoURL:  dto.PhotoURL,
+		PetID:    dto.PetID,
+		Name:     dto.Name,
+		Type:     model.PetType(dto.Type),
+		Weight:   dto.Weight,
+		Diseases: dto.Diseases,
+		Owner:    *user,
+		PhotoURL: dto.PhotoURL,
 	}, nil
 }

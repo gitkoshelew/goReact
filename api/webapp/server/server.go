@@ -4,6 +4,7 @@ import (
 	"goReact/domain/store"
 	"goReact/service"
 	"goReact/webapp"
+	"goReact/webapp/admin/session"
 	"goReact/webapp/server/logging"
 	"net/http"
 
@@ -38,6 +39,12 @@ func (s *Server) Start() error {
 
 	s.configureRoutesAdmin()
 	s.Logger.Info("Admin router started successfully")
+	err := session.OpenSessionStore(s.config)
+	if err != nil {
+		s.Logger.Errorf("Error occurred while opening sessions store. ERR MSG: %s", err.Error())
+		return err
+	}
+	s.Logger.Info("Session store started successfully")
 
 	if err := s.configureStore(); err != nil {
 		s.Logger.Errorf("Error while configure store. ERR MSG: %s", err.Error())

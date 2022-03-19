@@ -16,6 +16,8 @@
         <th>Weight</th>
         <th>Diesieses</th>
         <th>ClientID</th>
+        <th>PetPhotoURL</th>
+        
 
         {{range . }}
         <tr>
@@ -25,6 +27,7 @@
             <td>{{.Weight}}</td>
             <td>{{.Diseases}}</td>
             <td>{{.Owner.UserID}}</td>
+            <td>{{.PetPhotoURL}}</td>
         </tr>
         {{end}}
 

@@ -175,7 +175,7 @@ func (r *UserRepository) Delete(id int) error {
 }
 
 // Update user from DB
-func (r *UserRepository) Update(u *model.UserDTO) error {
+func (r *UserRepository) Update(u *model.User) error {
 	encryptedPassword, err := model.EncryptPassword(u.Password)
 	if err != nil {
 		r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)

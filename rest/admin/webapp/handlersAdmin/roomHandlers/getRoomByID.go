@@ -46,8 +46,8 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 		rooms = append(rooms, *room)
 
 		files := []string{
-			"/rest-api/webapp/tamplates/allRooms.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/allRooms.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 
 		tmpl, err := template.ParseFiles(files...)

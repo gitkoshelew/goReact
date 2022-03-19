@@ -54,7 +54,7 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 
 		session.AuthSession(w, r, employee, permissions)
 
-		http.Redirect(w, r, "/", http.StatusFound)
+		http.Redirect(w, r, "/admin/home", http.StatusFound)
 
 	}
 }

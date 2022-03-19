@@ -100,13 +100,13 @@ func (r *EmployeeRepository) Delete(id int) error {
 }
 
 // Update employee from DB
-func (r *EmployeeRepository) Update(e *model.EmployeeDTO) error {
+func (r *EmployeeRepository) Update(e *model.Employee) error {
 	result, err := r.Store.Db.Exec(
 		"UPDATE employee SET",
 		"user_id = $1, hotel_id = $2, position = $3",
 		"WHERE id = $4",
 		e.UserID,
-		e.HotelID,
+		e.Hotel.HotelID,
 		e.Position,
 		e.EmployeeID,
 	)

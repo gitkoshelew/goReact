@@ -105,10 +105,10 @@ func (r *SeatRepository) Delete(id int) error {
 }
 
 // Update seat from DB
-func (r *SeatRepository) Update(s *model.SeatDTO) error {
+func (r *SeatRepository) Update(s *model.Seat) error {
 	result, err := r.Store.Db.Exec(
 		"UPDATE seat SET room_id = $1, rent_from = $2, rent_to = $3, description = $4 WHERE id = $5",
-		s.RoomID,
+		s.Room,
 		s.RentFrom,
 		s.RentTo,
 		s.Description,

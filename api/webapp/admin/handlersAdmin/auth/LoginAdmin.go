@@ -1,11 +1,10 @@
-package handlersadmin
+package auth
 
 import (
-	"html/template"
-	"net/http"
-
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
+	"html/template"
+	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -24,16 +23,17 @@ func LoginAdmin(s *store.Store) httprouter.Handle {
 			"/api/webapp/admin/tamplates/loginAdmin.html",
 			"/api/webapp/admin/tamplates/base.html",
 		}
+
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
 			return
 		}
 		err = tmpl.Execute(w, nil)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
 			return
 		}
 	}

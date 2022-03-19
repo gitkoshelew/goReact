@@ -111,11 +111,11 @@ func TestRoomRepository_Update(t *testing.T) {
 		r.PetType = "dog"
 		r.PhotoURL = "//photo//2"
 
-		err = s.Room().Update(&model.RoomDTO{
+		err = s.Room().Update(&model.Room{
 			RoomID:     r.RoomID,
 			RoomNumber: r.RoomNumber,
-			PetType:    string(r.PetType),
-			HotelID:    r.Hotel.HotelID,
+			PetType:    r.PetType,
+			Hotel:    r.Hotel,
 			PhotoURL:   r.PhotoURL,
 		})
 		assert.NoError(t, err)

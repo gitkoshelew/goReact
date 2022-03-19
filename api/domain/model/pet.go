@@ -9,8 +9,8 @@ type Pet struct {
 	PetID     int     `json:"petId"`
 	Name      string  `json:"name"`
 	Type      PetType `json:"petType"`
-	Weight    float32 `json:"weight"`
-	Diesieses string  `json:"diesieses"`
+	Weight    float64 `json:"weight"`
+	Diseases string  `json:"diseases"`
 	Owner     User
 	PhotoURL  string `json:"photoUrl"`
 }
@@ -20,8 +20,8 @@ type PetDTO struct {
 	PetID     int     `json:"petId"`
 	Name      string  `json:"name"`
 	Type      string  `json:"petType"`
-	Weight    float32 `json:"weight"`
-	Diesieses string  `json:"diesieses"`
+	Weight    float64 `json:"weight"`
+	Diseases  string  `json:"diesieses"`
 	OwnerID   int     `json:"userId"`
 	PhotoURL  string  `json:"photoUrl"`
 }

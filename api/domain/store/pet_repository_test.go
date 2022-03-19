@@ -20,7 +20,7 @@ func TestPetRepository_Create(t *testing.T) {
 			Name:      p.Name,
 			Type:      string(p.Type),
 			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
+			Diseases: p.Diseases,
 			OwnerID:   p.Owner.UserID,
 			PhotoURL:  p.PhotoURL,
 		})
@@ -47,7 +47,7 @@ func TestPetRepository_Delete(t *testing.T) {
 			Name:      p.Name,
 			Type:      string(p.Type),
 			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
+			Diseases: p.Diseases,
 			OwnerID:   p.Owner.UserID,
 			PhotoURL:  p.PhotoURL,
 		})
@@ -74,7 +74,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 			Name:      p.Name,
 			Type:      string(p.Type),
 			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
+			Diseases: p.Diseases,
 			OwnerID:   p.Owner.UserID,
 			PhotoURL:  p.PhotoURL,
 		})
@@ -106,7 +106,7 @@ func TestPetRepository_Update(t *testing.T) {
 			Name:      p.Name,
 			Type:      string(p.Type),
 			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
+			Diseases: p.Diseases,
 			OwnerID:   p.Owner.UserID,
 			PhotoURL:  p.PhotoURL,
 		})
@@ -114,16 +114,16 @@ func TestPetRepository_Update(t *testing.T) {
 		p.Name = "Sharik"
 		p.Type = "dog"
 		p.Weight = 2
-		p.Diesieses = "Izjoga"
+		p.Diseases = "Izjoga"
 		p.PhotoURL = "/1/2/jpg"
 
-		err = s.Pet().Update(&model.PetDTO{
+		err = s.Pet().Update(&model.Pet{
 			PetID:     p.PetID,
 			Name:      p.Name,
-			Type:      string(p.Type),
+			Type:      p.Type,
 			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			OwnerID:   p.Owner.UserID,
+			Diseases: p.Diseases,
+			Owner:   p.Owner,
 			PhotoURL:  p.PhotoURL,
 		})
 		assert.NoError(t, err)

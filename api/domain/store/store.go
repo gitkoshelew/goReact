@@ -15,16 +15,19 @@ var (
 
 // Store ...
 type Store struct {
-	Config             *webapp.Config
-	Db                 *sql.DB
-	UserRepository     *UserRepository
-	EmployeeRepository *EmployeeRepository
-	HotelRepository    *HotelRepository
-	RoomRepository     *RoomRepository
-	SeatRepository     *SeatRepository
-	PetRepository      *PetRepository
-	BookingRepository  *BookingRepository
-	Logger             *logging.Logger
+	Config                        *webapp.Config
+	Db                            *sql.DB
+	UserRepository                *UserRepository
+	EmployeeRepository            *EmployeeRepository
+	HotelRepository               *HotelRepository
+	RoomRepository                *RoomRepository
+	SeatRepository                *SeatRepository
+	PetRepository                 *PetRepository
+	BookingRepository             *BookingRepository
+	PermissionsRepository         *PermissionsRepository
+	PermissionsEmployeeRepository *PermissionsEmployeeRepository
+	SessionRepository             *SessionRepository
+	Logger                        *logging.Logger
 }
 
 // New ...
@@ -138,4 +141,39 @@ func (s *Store) Booking() *BookingRepository {
 		Store: s,
 	}
 	return s.BookingRepository
+}
+
+// Session for admin part
+func (s *Store) Session() *SessionRepository {
+	if s.SessionRepository != nil {
+		return s.SessionRepository
+	}
+
+	s.SessionRepository = &SessionRepository{
+		Store: s,
+	}
+
+	return s.SessionRepository
+}
+
+// Permissions for admin part
+func (s *Store) Permissions() *PermissionsRepository {
+	if s.PermissionsRepository != nil {
+		return s.PermissionsRepository
+	}
+	s.PermissionsRepository = &PermissionsRepository{
+		Store: s,
+	}
+	return s.PermissionsRepository
+}
+
+// PermissionsEmployee for admin part
+func (s *Store) PermissionsEmployee() *PermissionsEmployeeRepository {
+	if s.PermissionsEmployeeRepository != nil {
+		return s.PermissionsEmployeeRepository
+	}
+	s.PermissionsEmployeeRepository = &PermissionsEmployeeRepository{
+		Store: s,
+	}
+	return s.PermissionsEmployeeRepository
 }

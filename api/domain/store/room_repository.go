@@ -107,12 +107,12 @@ func (r *RoomRepository) Delete(id int) error {
 }
 
 // Update room from DB
-func (r *RoomRepository) Update(rm *model.RoomDTO) error {
+func (r *RoomRepository) Update(rm *model.Room) error {
 	result, err := r.Store.Db.Exec(
 		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photo = $4 WHERE id = $5",
 		rm.RoomNumber,
 		rm.PetType,
-		rm.HotelID,
+		rm.Hotel,
 		rm.PhotoURL,
 		rm.RoomID)
 	if err != nil {

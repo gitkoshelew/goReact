@@ -6,134 +6,98 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-
-
 <body>
-    <h2>Users</h2>
-    <form action="/admin/users">
-        <button>all users</button>
-    </form>
-</body>
-<form action="/admin/users/id/" method="GET">
-    <th>Get user by id</th>
-    <input type="number" name="id" required><br><br>
-    <button>Get</button>
-</form>
 
-</body>
-<form action="/admin/users/delete/" method="POST">
-    <th>Delete user by id</th>
-    <input type="number" name="id" required><br><br>
-    <button>Delete</button>
-</form>
 
-<body>
-    <h2>Hotels</h2>
-    <form action="/admin/hotels">
-        <button>all hotels</button>
-    </form>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
 
-<body>
-    <h2>Pets</h2>
-    <form action="/admin/pets">
-        <button>all pets</button>
-    </form>
 
-    <body>
-        <h2>Rooms</h2>
-        <form action="/admin/rooms">
-            <button>all rooms</button>
-        </form>
-    </body>
-
-    <body>
-        <h2>Employees</h2>
-        <form action="/admin/employees">
-            <button>all employees</button>
-        </form>
-    </body>
-
-    <body>
-        <h2>Bookings</h2>
-        <form action="/admin/bookings">
-            <button>all bookings</button>
-        </form>
-    </body>
-
-    <body>
-        <h2>New user</h2>
-        <form action="/admin/user/new" method="POST">
-            <th>Email</th>
-            <input type="email" name="Email" required>
-            <th>Password</th>
-            <input type="password" name="Password" required><br><br>
-            <th>Role</th>
-            <input type="radio" name="Role" value="client" id="role1" required>
-            <label for="role1">Client</label>
-            <input type="radio" name="Role" value="employee" id="role2" required>
-            <label for="role2">Employee</label>
-            <input type="radio" name="Role" value="anonymous" id="role3" required>
-            <label for="role3">Anonymous</label><br><br>
-            <th>Verified</th>
-            <input type="radio" name="Verified" value="true" id="Verified1" required>
-            <label for="Verified1">true</label>
-            <input type="radio" name="Verified" value="false" id="Verified2" required>
-            <label for="Verified2">false</label><br><br>
-            <th>Name</th>
-            <input type="text" name="Name" required>
-            <th>Surname</th>
-            <input type="text" name="Surname" required>
-            <th>MiddleName</th>
-            <input type="text" name="MiddleName" required><br><br>
-            <th>Gender</th>
-            <input type="radio" name="Sex" value="male" id="gender1" required>
-            <label for="gender1">male</label>
-            <input type="radio" name="Sex" value="female" id="gender2" required>
-            <label for="gender2" required>female</label><br><br>
-            <th>DateOfBirth</th>
-            <input type="Date" name="DateOfBirth" required><br><br>
-            <th>Address</th>
-            <input type="text" name="Address" required><br><br>
-            <th>Phone 375-хх-ххх-хх-хх</th>
-            <input type="tel" name="Phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required><br><br>
-            <span class="validity"></span>
-            <th>Photo</th>
-            <input type="text" name="Photo">
-            <button>new</button>
-        </form>
-    </body>
-
-    <body>
+    {{if .HasPermission "read_user"}}
+    <div>
         <h2>Users</h2>
-        <form action="/user/update" method="POST">
-            <th>ID</th>
-            <input type="number" name="Id">
-            <th>Имя</th>
-            <input type="text" name="First_name">
-            <th>Фамилия</th>
-            <input type="text" name="Surname"><br><br>
-            <th>Отчество</th>
-            <input type="text" name="Middle_name">
-            <th>Телефон</th>
-            <input type="text" name="Phone"><br><br>
-            <th>Группа</th>
-            <input type="number" name="Group_id"><br><br>
-            <button>update</button>
+        <form action="/admin/homeusers">
+            <button>users</button>
         </form>
-    </body>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_hotel"}}
+    <div>
+        <h2>Hotels</h2>
+        <form action="/admin/homehotels">
+            <button>hotels</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_booking"}}
+    <div>
+        <h2>Bookings</h2>
+        <form action="/admin/homebookings">
+            <button>bookings</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_employee"}}
+    <div>
+        <h2>Employees</h2>
+        <form action="/admin/homeemployees">
+            <button>employees</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_pet"}}
+    <div>
+        <h2>Pets</h2>
+        <form action="/admin/homepets">
+            <button>pets</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_seat"}}
+    <div>
+        <h2>Seats</h2>
+        <form action="/admin/homeseats">
+            <button>seats</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_room"}}
+    <div>
+        <h2>Rooms</h2>
+        <form action="/admin/homerooms">
+            <button>rooms</button>
+        </form>
+    </div>
+    {{end}}
+
+
+    {{if .HasPermission "admin"}}
+    <div>
+        <h2>Permissions</h2>
+        <form action="/admin/homepermissions">
+            <button>permissions</button>
+        </form>
+    </div>
+    {{end}}
+
+    <div>
+        <h2>Logout</h2>
+        <form action="/admin/logout">
+            <button>Logout</button>
+        </form>
+    </div>
+
+</body>
 
 </html>
 
-<body>
-    <h2>Logout</h2>
-    <form action="/admin/logout">
-        <button>Logout</button>
-    </form>
-</body>
 
 {{end}}

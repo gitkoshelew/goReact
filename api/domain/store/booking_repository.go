@@ -61,8 +61,8 @@ func (r *BookingRepository) GetAll() (*[]model.BookingDTO, error) {
 			&booking.StartDate,
 			&booking.EndDate,
 			&booking.Notes,
-			&booking.Paid,
 			&booking.TransactionID,
+			&booking.Paid,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %w", err)
@@ -86,8 +86,8 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 		&bookingDTO.StartDate,
 		&bookingDTO.EndDate,
 		&bookingDTO.Notes,
-		&bookingDTO.Paid,
 		&bookingDTO.TransactionID,
+		&bookingDTO.Paid,
 	); err != nil {
 		r.Store.Logger.Errorf("Eror occured while searching booking. Err msg: %w", err)
 		return nil, err

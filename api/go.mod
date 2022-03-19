@@ -15,6 +15,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
@@ -22,7 +23,9 @@ require (
 )
 
 require (
+	github.com/antonlindstrom/pgstore v0.0.0-20200229204646-b08ebf1105e0
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
+	github.com/gocarina/gocsv v0.0.0-20220310154401-d4df709ca055
 	github.com/gorilla/sessions v1.2.1
 	github.com/rs/cors v1.8.2
 	github.com/sirupsen/logrus v1.8.1
