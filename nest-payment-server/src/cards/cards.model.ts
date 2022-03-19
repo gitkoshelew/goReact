@@ -4,6 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 interface CardsCreationAttrs {
   firstName: string;
   lastName: string;
+  email: string;
   cardNumber: string;
   company: string;
   mm: string;
@@ -33,6 +34,12 @@ export class CardsModel extends Model<CardsModel, CardsCreationAttrs> {
     allowNull: false,
   })
   lastName: string;
+  @ApiProperty({ example: 'ivanov@mail.ru', description: 'Email' })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  email: string;
   @ApiProperty({ example: '1234567891234567', description: 'CardNumber' })
   @Column({
     type: DataType.STRING,
