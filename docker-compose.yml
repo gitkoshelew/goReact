@@ -22,8 +22,8 @@ services:
                 aliases:
                     - database
 
-    test_database:
-        container_name: test_database
+    testdatabase:
+        container_name: testdatabase
         image: postgres:latest
         env_file:
             - .env
@@ -74,13 +74,13 @@ services:
                 "-path",
                 "/migrations",
                 "-database",
-                "postgres://user:userpass@test_database:5432/test_goreact?sslmode=disable",
+                "postgres://user:userpass@testdatabase:5432/test_goreact?sslmode=disable",
                 "up"
             ]
         links:
-            - test_database
+            - testdatabase
         depends_on:
-            - test_database
+            - testdatabase
         networks:
             - new
 

@@ -8,6 +8,7 @@ import (
 // TestUser ...
 func TestUser() *User {
 	return &User{
+		UserID:      1,
 		Email:       "email@example.org",
 		Password:    "password",
 		Role:        "client",
@@ -69,6 +70,7 @@ func TestEmployee() *Employee {
 // TestPet ...
 func TestPet() *Pet {
 	return &Pet{
+		PetID:     1,
 		Name:      "Name",
 		Type:      PetTypeCat,
 		Weight:    1,
@@ -89,6 +91,7 @@ func TestPage() *pagination.Page {
 // TestSeat ...
 func TestSeat() *Seat {
 	return &Seat{
+		SeatID:      1,
 		Description: "Description of seat",
 		RentFrom:    time.Time{}.AddDate(2000, 2, 2),
 		RentTo:      time.Time{}.AddDate(2001, 2, 2),
@@ -96,16 +99,34 @@ func TestSeat() *Seat {
 	}
 }
 
-// TestBooking ...
-func TestBooking() *BookingDTO {
-	a := time.Time{}.AddDate(2000, 2, 2)
-	b := time.Time{}.AddDate(2000, 22, 2)
+// TestBookingDTO ...
+func TestBookingDTO() *BookingDTO {
+	a := time.Now().AddDate(0, 0, 1)
+	b := time.Now().AddDate(0, 0, 10)
 	paid := true
 	return &BookingDTO{
-		SeatID:        *&TestSeat().SeatID,
-		PetID:         *&TestPet().PetID,
-		EmployeeID:    *&TestEmployee().EmployeeID,
+		SeatID:        TestSeat().SeatID,
+		PetID:         TestPet().PetID,
+		EmployeeID:    TestEmployee().EmployeeID,
 		Status:        string(BookingStatusInProgress),
+		StartDate:     &a,
+		EndDate:       &b,
+		Notes:         "Notes",
+		TransactionID: 1,
+		Paid:          &paid,
+	}
+}
+
+// TestBooking ...
+func TestBooking() *Booking {
+	a := time.Now().AddDate(0, 0, 1)
+	b := time.Now().AddDate(0, 0, 10)
+	paid := true
+	return &Booking{
+		Seat:          *TestSeat(),
+		Pet:           *TestPet(),
+		Employee:      *TestEmployee(),
+		Status:        BookingStatusInProgress,
 		StartDate:     &a,
 		EndDate:       &b,
 		Notes:         "Notes",
