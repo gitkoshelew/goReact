@@ -8,11 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var (
-	testStore, teardown = store.TestStore(&testing.T{}, host, dbName, user, password, port, sslMode)
-)
-
 func TestBookingRepository_Create(t *testing.T) {
+	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
@@ -63,6 +60,7 @@ func TestBookingRepository_Create(t *testing.T) {
 }
 
 func TestBookingRepository_GetAll(t *testing.T) {
+	teardown()
 	defer teardown()
 	store.FillDB(t, testStore)
 
@@ -108,6 +106,7 @@ func TestBookingRepository_GetAll(t *testing.T) {
 }
 
 func TestBookingRepository_FindByID(t *testing.T) {
+	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
@@ -160,6 +159,7 @@ func TestBookingRepository_FindByID(t *testing.T) {
 }
 
 func TestBookingRepository_Delete(t *testing.T) {
+	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
@@ -193,7 +193,7 @@ func TestBookingRepository_Delete(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return 1
+				return id.Booking
 			},
 			isValid: false,
 		},
@@ -214,6 +214,7 @@ func TestBookingRepository_Delete(t *testing.T) {
 }
 
 func TestBookingRepository_Update(t *testing.T) {
+	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
@@ -256,8 +257,14 @@ func TestBookingRepository_Update(t *testing.T) {
 			name: "DB closed",
 			model: func() *model.Booking {
 				testStore.Close()
-				b := model.TestBooking()
-				return b
+
+				booking := model.TestBooking()
+				booking.Employee.EmployeeID = id.Employee
+				booking.Pet.PetID = id.Pet
+				booking.Seat.SeatID = id.Seat
+				booking.BookingID = id.Booking
+
+				return booking
 			},
 			isValid: false,
 		},
@@ -278,6 +285,7 @@ func TestBookingRepository_Update(t *testing.T) {
 }
 
 func TestBookingRepository_ModelFromDTO(t *testing.T) {
+	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 

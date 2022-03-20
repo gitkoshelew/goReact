@@ -67,6 +67,16 @@ func TestEmployee() *Employee {
 	}
 }
 
+// TestEmployeeDTO ...
+func TestEmployeeDTO() *EmployeeDTO {
+	return &EmployeeDTO{
+		EmployeeID: 1,
+		UserID:     1,
+		HotelID:    1,
+		Position:   string(OwnerPosition),
+	}
+}
+
 // TestPet ...
 func TestPet() *Pet {
 	return &Pet{

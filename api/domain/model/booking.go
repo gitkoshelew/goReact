@@ -49,7 +49,6 @@ var (
 func (b *BookingDTO) Validate() error {
 	return validation.ValidateStruct(
 		b,
-		validation.Field(&b.SeatID, validation.Required, validation.By(IsValidID)),
 		validation.Field(&b.PetID, validation.Required, validation.By(IsValidID)),
 		validation.Field(&b.EmployeeID, validation.Required, validation.By(IsValidID)),
 		validation.Field(&b.Status, validation.Required, validation.By(IsBookingStatus)),

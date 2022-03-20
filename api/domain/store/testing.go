@@ -35,6 +35,7 @@ func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string)
 	if err := s.Open(); err != nil {
 		t.Fatal(err)
 	}
+
 	return s, func() {
 		s.Open()
 		_, err := s.Db.Exec("TRUNCATE users, hotel, employee, room, seat, pet, booking CASCADE")

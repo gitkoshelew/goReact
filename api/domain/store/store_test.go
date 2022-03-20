@@ -8,12 +8,13 @@ import (
 )
 
 var (
-	host     = "localhost"
-	dbName   = "test_goreact"
-	user     = "user"
-	password = "userpass"
-	port     = "6543"
-	sslMode  = "disable"
+	host                = "localhost"
+	dbName              = "test_goreact"
+	user                = "user"
+	password            = "userpass"
+	port                = "6543"
+	sslMode             = "disable"
+	testStore, teardown = store.TestStore(&testing.T{}, host, dbName, user, password, port, sslMode)
 )
 
 func TestStore_Open(t *testing.T) {
