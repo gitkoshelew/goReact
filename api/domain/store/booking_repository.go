@@ -12,7 +12,7 @@ type BookingRepository struct {
 }
 
 // Create booking and save it to DB
-func (r *BookingRepository) Create(booking *model.Booking) (*model.Booking, error) {
+func (r *BookingRepository) Create(booking *model.Booking) (*int, error) {
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO booking
@@ -34,7 +34,7 @@ func (r *BookingRepository) Create(booking *model.Booking) (*model.Booking, erro
 
 	r.Store.Logger.Infof("Booking with id %d was created.", booking.BookingID)
 
-	return booking, nil
+	return &booking.BookingID, nil
 }
 
 // GetAll returns all bookings
@@ -70,7 +70,7 @@ func (r *BookingRepository) GetAll() (*[]model.BookingDTO, error) {
 }
 
 //FindByID searchs and returns booking by ID
-func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
+func (r *BookingRepository) FindByID(id int) (*model.BookingDTO, error) {
 	bookingDTO := &model.BookingDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM booking WHERE id = $1",
 		id).Scan(
@@ -89,12 +89,7 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 		return nil, err
 	}
 
-	booking, err := r.ModelFromDTO(bookingDTO)
-	if err != nil {
-		return nil, err
-	}
-
-	return booking, nil
+	return bookingDTO, nil
 }
 
 // Delete booking from DB by ID
@@ -112,7 +107,7 @@ func (r *BookingRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg: %v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg: %v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 
@@ -185,7 +180,7 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating booking. Err msg: %v.", err)
+		r.Store.Logger.Errorf("Error occured while updating booking. Err msg: %v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 

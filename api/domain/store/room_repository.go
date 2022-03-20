@@ -58,7 +58,6 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 //FindByID searchs and returns room by ID
 func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 	roomDTO := &model.RoomDTO{}
-	r.Store.Logger.Infof("ID -------------------- %d.", id)
 	if err := r.Store.Db.QueryRow("SELECT * FROM room WHERE id = $1",
 		id).Scan(
 		&roomDTO.RoomID,

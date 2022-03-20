@@ -32,12 +32,19 @@ func GetBookingByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		booking, err := s.Booking().FindByID(id)
+		bookingDTO, err := s.Booking().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			s.Logger.Errorf("Cant find booking. Err msg:%v.", err)
 			return
 		}
+
+		booking, err := s.Booking().ModelFromDTO(bookingDTO)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
 		bookings = append(bookings, *booking)
 
 		files := []string{
