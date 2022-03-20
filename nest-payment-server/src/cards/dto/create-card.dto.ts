@@ -23,9 +23,9 @@ export class CreateCardDto {
   @IsString({ message: 'Should be a number' })
   @Length(2, 2, { message: 'Must contain exactly 2 characters' })
   readonly mm: string;
-  @ApiProperty({ example: '22', description: 'YY' })
+  @ApiProperty({ example: '2022', description: 'YY' })
   @IsString({ message: 'Should be a number' })
-  @Length(2, 2, { message: 'Must contain exactly 2 characters' })
+  @Length(4, 4, { message: 'Must contain exactly 4 characters' })
   readonly yy: string;
   @ApiProperty({ example: '123', description: 'CVV' })
   @IsString({ message: 'Should be a string' })

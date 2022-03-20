@@ -58,7 +58,7 @@ export class CardsModel extends Model<CardsModel, CardsCreationAttrs> {
     allowNull: false,
   })
   mm: string;
-  @ApiProperty({ example: '22', description: 'YY' })
+  @ApiProperty({ example: '2022', description: 'YY' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
