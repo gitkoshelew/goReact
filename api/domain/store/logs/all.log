@@ -4426,3 +4426,649 @@
 [36mINFO[0m[2022-03-20T17:47:05+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 5 was created.               
 [31mERRO[0m[2022-03-20T17:47:05+03:00]booking_repository.go:31 goReact/domain/store.(*BookingRepository).Create Eror occured while creating booking. Err msg: sql: database is closed 
 [31mERRO[0m[2022-03-20T17:47:05+03:00]booking_repository.go:31 goReact/domain/store.(*BookingRepository).Create Eror occured while creating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T20:24:16+03:00]user_repository.go:32 goReact/domain/store.(*UserRepository).Create Email already in use                         
+[31mERRO[0m[2022-03-20T20:24:16+03:00]user_repository.go:32 goReact/domain/store.(*UserRepository).Create Email already in use                         
+[36mINFO[0m[2022-03-20T20:24:36+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-20T20:24:36+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-20T20:24:36+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-20T20:24:36+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-20T20:24:36+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-20T20:24:36+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 6 was created.               
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 6 was created.               
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 7 was created.               
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 7 was created.               
+[31mERRO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:31 goReact/domain/store.(*BookingRepository).Create Eror occured while creating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:31 goReact/domain/store.(*BookingRepository).Create Eror occured while creating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-20T20:24:36+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-20T20:24:36+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[36mINFO[0m[2022-03-20T20:24:36+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[36mINFO[0m[2022-03-20T20:24:36+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 63 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 63 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 6 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 6 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 6 was created.                   
+[36mINFO[0m[2022-03-20T20:24:36+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 6 was created.                   
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 8 was created.               
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 8 was created.               
+[31mERRO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:44 goReact/domain/store.(*BookingRepository).GetAll Eror occured while getting all bookings. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:44 goReact/domain/store.(*BookingRepository).GetAll Eror occured while getting all bookings. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-20T20:24:36+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-20T20:24:36+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-20T20:24:36+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-20T20:24:36+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 64 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 64 was created.                 
+[36mINFO[0m[2022-03-20T20:24:36+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 7 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 7 was created.                  
+[36mINFO[0m[2022-03-20T20:24:36+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 7 was created.                   
+[36mINFO[0m[2022-03-20T20:24:36+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 7 was created.                   
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 9 was created.               
+[36mINFO[0m[2022-03-20T20:24:36+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 9 was created.               
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-20T20:24:37+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 8 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 8 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 65 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 65 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 8 was created.                  
+[36mINFO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 8 was created.                  
+[36mINFO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 8 was created.                   
+[36mINFO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 8 was created.                   
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 10 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 10 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 11 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 11 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:114 goReact/domain/store.(*BookingRepository).Delete Booking with id 11 was deleted               
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:114 goReact/domain/store.(*BookingRepository).Delete Booking with id 11 was deleted               
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:110 goReact/domain/store.(*BookingRepository).Delete Error occured while deleting booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:110 goReact/domain/store.(*BookingRepository).Delete Error occured while deleting booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:99 goReact/domain/store.(*BookingRepository).Delete Eror occured while deleting booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:99 goReact/domain/store.(*BookingRepository).Delete Eror occured while deleting booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-20T20:24:37+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 9 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 9 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 66 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 66 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 9 was created.                  
+[36mINFO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 9 was created.                  
+[36mINFO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 9 was created.                   
+[36mINFO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 9 was created.                   
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 12 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 12 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:187 goReact/domain/store.(*BookingRepository).Update Booking with id 12 was updated               
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:187 goReact/domain/store.(*BookingRepository).Update Booking with id 12 was updated               
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:183 goReact/domain/store.(*BookingRepository).Update Error occured while updating booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:183 goReact/domain/store.(*BookingRepository).Update Error occured while updating booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:172 goReact/domain/store.(*BookingRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:172 goReact/domain/store.(*BookingRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-20T20:24:37+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 10 was created.             
+[36mINFO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:23 goReact/domain/store.(*EmployeeRepository).Create Employee with id 10 was created.             
+[36mINFO[0m[2022-03-20T20:24:37+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 67 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 67 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 10 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 10 was created.                 
+[36mINFO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 10 was created.                  
+[36mINFO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 10 was created.                  
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 13 was created.              
+[36mINFO[0m[2022-03-20T20:24:37+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 13 was created.              
+[31mERRO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:73 goReact/domain/store.(*PetRepository).FindByID Error occured while getting pet by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]pet_repository.go:73 goReact/domain/store.(*PetRepository).FindByID Error occured while getting pet by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:62 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]employee_repository.go:62 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: database is closed. 
+[31mERRO[0m[2022-03-20T20:24:37+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: database is closed. 
+[36mINFO[0m[2022-03-20T20:44:39+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[36mINFO[0m[2022-03-20T20:44:39+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[36mINFO[0m[2022-03-20T20:44:39+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-20T20:44:39+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 11 was created.             
+[36mINFO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 11 was created.             
+[36mINFO[0m[2022-03-20T20:44:39+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 68 was created.                 
+[36mINFO[0m[2022-03-20T20:44:39+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 68 was created.                 
+[36mINFO[0m[2022-03-20T20:44:39+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 11 was created.                 
+[36mINFO[0m[2022-03-20T20:44:39+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 11 was created.                 
+[36mINFO[0m[2022-03-20T20:44:39+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 11 was created.                  
+[36mINFO[0m[2022-03-20T20:44:39+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 11 was created.                  
+[36mINFO[0m[2022-03-20T20:44:39+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 14 was created.              
+[36mINFO[0m[2022-03-20T20:44:39+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 14 was created.              
+[31mERRO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T20:44:39+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T21:48:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[36mINFO[0m[2022-03-20T21:48:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[36mINFO[0m[2022-03-20T21:48:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 12                   
+[36mINFO[0m[2022-03-20T21:48:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 12                   
+[36mINFO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 12 was created.             
+[36mINFO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 12 was created.             
+[36mINFO[0m[2022-03-20T21:48:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 69 was created.                 
+[36mINFO[0m[2022-03-20T21:48:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 69 was created.                 
+[36mINFO[0m[2022-03-20T21:48:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 12 was created.                 
+[36mINFO[0m[2022-03-20T21:48:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 12 was created.                 
+[36mINFO[0m[2022-03-20T21:48:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 12 was created.                  
+[36mINFO[0m[2022-03-20T21:48:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 12 was created.                  
+[36mINFO[0m[2022-03-20T21:48:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 15 was created.              
+[36mINFO[0m[2022-03-20T21:48:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 15 was created.              
+[31mERRO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: pq: syntax error at or near "," 
+[31mERRO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T21:48:18+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T21:48:32+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[36mINFO[0m[2022-03-20T21:48:32+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[36mINFO[0m[2022-03-20T21:48:32+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 13                   
+[36mINFO[0m[2022-03-20T21:48:32+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 13                   
+[36mINFO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 13 was created.             
+[36mINFO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 13 was created.             
+[36mINFO[0m[2022-03-20T21:48:32+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 70 was created.                 
+[36mINFO[0m[2022-03-20T21:48:32+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 70 was created.                 
+[36mINFO[0m[2022-03-20T21:48:32+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 13 was created.                 
+[36mINFO[0m[2022-03-20T21:48:32+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 13 was created.                 
+[36mINFO[0m[2022-03-20T21:48:32+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 13 was created.                  
+[36mINFO[0m[2022-03-20T21:48:32+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 13 was created.                  
+[36mINFO[0m[2022-03-20T21:48:32+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 16 was created.              
+[36mINFO[0m[2022-03-20T21:48:32+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 16 was created.              
+[36mINFO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:132 goReact/domain/store.(*EmployeeRepository).Update Employee with id 13 was updated              
+[36mINFO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:132 goReact/domain/store.(*EmployeeRepository).Update Employee with id 13 was updated              
+[31mERRO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:128 goReact/domain/store.(*EmployeeRepository).Update Error occured while updating employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:128 goReact/domain/store.(*EmployeeRepository).Update Error occured while updating employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T21:48:32+03:00]employee_repository.go:117 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T21:53:58+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 17 was created.                 
+[36mINFO[0m[2022-03-20T21:53:58+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 17 was created.                 
+[36mINFO[0m[2022-03-20T21:53:58+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 14                   
+[36mINFO[0m[2022-03-20T21:53:58+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 14                   
+[36mINFO[0m[2022-03-20T21:53:58+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 14 was created.             
+[36mINFO[0m[2022-03-20T21:53:58+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 14 was created.             
+[36mINFO[0m[2022-03-20T21:53:58+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 71 was created.                 
+[36mINFO[0m[2022-03-20T21:53:58+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 71 was created.                 
+[36mINFO[0m[2022-03-20T21:53:58+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 14 was created.                 
+[36mINFO[0m[2022-03-20T21:53:58+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 14 was created.                 
+[36mINFO[0m[2022-03-20T21:53:58+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 14 was created.                  
+[36mINFO[0m[2022-03-20T21:53:58+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 14 was created.                  
+[36mINFO[0m[2022-03-20T21:53:58+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 17 was created.              
+[36mINFO[0m[2022-03-20T21:53:58+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 17 was created.              
+[36mINFO[0m[2022-03-20T21:53:58+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 15 was created.             
+[36mINFO[0m[2022-03-20T21:53:58+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 15 was created.             
+[31mERRO[0m[2022-03-20T21:53:58+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:53:58+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:53:59+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:53:59+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:53:59+03:00]employee_repository.go:74 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T21:53:59+03:00]employee_repository.go:74 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T21:54:33+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 18 was created.                 
+[36mINFO[0m[2022-03-20T21:54:33+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 18 was created.                 
+[36mINFO[0m[2022-03-20T21:54:33+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 15                   
+[36mINFO[0m[2022-03-20T21:54:33+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 15                   
+[36mINFO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 16 was created.             
+[36mINFO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 16 was created.             
+[36mINFO[0m[2022-03-20T21:54:33+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 72 was created.                 
+[36mINFO[0m[2022-03-20T21:54:33+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 72 was created.                 
+[36mINFO[0m[2022-03-20T21:54:33+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 15 was created.                 
+[36mINFO[0m[2022-03-20T21:54:33+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 15 was created.                 
+[36mINFO[0m[2022-03-20T21:54:33+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 15 was created.                  
+[36mINFO[0m[2022-03-20T21:54:33+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 15 was created.                  
+[36mINFO[0m[2022-03-20T21:54:33+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 18 was created.              
+[36mINFO[0m[2022-03-20T21:54:33+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 18 was created.              
+[36mINFO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 17 was created.             
+[36mINFO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 17 was created.             
+[31mERRO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:74 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T21:54:33+03:00]employee_repository.go:74 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T21:55:24+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 19 was created.                 
+[36mINFO[0m[2022-03-20T21:55:24+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 19 was created.                 
+[36mINFO[0m[2022-03-20T21:55:24+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 16                   
+[36mINFO[0m[2022-03-20T21:55:24+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 16                   
+[36mINFO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 18 was created.             
+[36mINFO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 18 was created.             
+[36mINFO[0m[2022-03-20T21:55:25+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 73 was created.                 
+[36mINFO[0m[2022-03-20T21:55:25+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 73 was created.                 
+[36mINFO[0m[2022-03-20T21:55:25+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 16 was created.                 
+[36mINFO[0m[2022-03-20T21:55:25+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 16 was created.                 
+[36mINFO[0m[2022-03-20T21:55:25+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 16 was created.                  
+[36mINFO[0m[2022-03-20T21:55:25+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 16 was created.                  
+[36mINFO[0m[2022-03-20T21:55:25+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 19 was created.              
+[36mINFO[0m[2022-03-20T21:55:25+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 19 was created.              
+[36mINFO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 19 was created.             
+[36mINFO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 19 was created.             
+[36mINFO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:89 goReact/domain/store.(*EmployeeRepository).Delete Employee with id 19 was deleted              
+[36mINFO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:89 goReact/domain/store.(*EmployeeRepository).Delete Employee with id 19 was deleted              
+[31mERRO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:85 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:74 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T21:55:25+03:00]employee_repository.go:74 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T21:57:12+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 20 was created.                 
+[36mINFO[0m[2022-03-20T21:57:12+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 20 was created.                 
+[36mINFO[0m[2022-03-20T21:57:13+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 17                   
+[36mINFO[0m[2022-03-20T21:57:13+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 17                   
+[36mINFO[0m[2022-03-20T21:57:13+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 20 was created.             
+[36mINFO[0m[2022-03-20T21:57:13+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 20 was created.             
+[36mINFO[0m[2022-03-20T21:57:13+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 74 was created.                 
+[36mINFO[0m[2022-03-20T21:57:13+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 74 was created.                 
+[36mINFO[0m[2022-03-20T21:57:13+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 17 was created.                 
+[36mINFO[0m[2022-03-20T21:57:13+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 17 was created.                 
+[36mINFO[0m[2022-03-20T21:57:13+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 17 was created.                  
+[36mINFO[0m[2022-03-20T21:57:13+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 17 was created.                  
+[36mINFO[0m[2022-03-20T21:57:13+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 20 was created.              
+[36mINFO[0m[2022-03-20T21:57:13+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 20 was created.              
+[31mERRO[0m[2022-03-20T21:57:13+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T21:57:13+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T21:57:13+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T21:57:13+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T21:58:52+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 21 was created.                 
+[36mINFO[0m[2022-03-20T21:58:52+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 21 was created.                 
+[36mINFO[0m[2022-03-20T21:58:52+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 18                   
+[36mINFO[0m[2022-03-20T21:58:52+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 18                   
+[36mINFO[0m[2022-03-20T21:58:52+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 21 was created.             
+[36mINFO[0m[2022-03-20T21:58:52+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 21 was created.             
+[36mINFO[0m[2022-03-20T21:58:52+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 75 was created.                 
+[36mINFO[0m[2022-03-20T21:58:52+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 75 was created.                 
+[36mINFO[0m[2022-03-20T21:58:52+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 18 was created.                 
+[36mINFO[0m[2022-03-20T21:58:52+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 18 was created.                 
+[36mINFO[0m[2022-03-20T21:58:52+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 18 was created.                  
+[36mINFO[0m[2022-03-20T21:58:52+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 18 was created.                  
+[36mINFO[0m[2022-03-20T21:58:52+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 21 was created.              
+[36mINFO[0m[2022-03-20T21:58:52+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 21 was created.              
+[31mERRO[0m[2022-03-20T21:58:52+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T21:58:52+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T21:58:52+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T21:58:52+03:00]employee_repository.go:145 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 22 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 22 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 19                   
+[36mINFO[0m[2022-03-20T21:59:25+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 19                   
+[36mINFO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 22 was created.             
+[36mINFO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 22 was created.             
+[36mINFO[0m[2022-03-20T21:59:25+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 76 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 76 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 19 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 19 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 19 was created.                  
+[36mINFO[0m[2022-03-20T21:59:25+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 19 was created.                  
+[36mINFO[0m[2022-03-20T21:59:25+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 22 was created.              
+[36mINFO[0m[2022-03-20T21:59:25+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 22 was created.              
+[36mINFO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 23 was created.             
+[36mINFO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 23 was created.             
+[31mERRO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:20 goReact/domain/store.(*EmployeeRepository).Create Error occured while creating employee. Err msg:sql: database is closed. 
+[31mERRO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:20 goReact/domain/store.(*EmployeeRepository).Create Error occured while creating employee. Err msg:sql: database is closed. 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 23 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 23 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 20                   
+[36mINFO[0m[2022-03-20T21:59:25+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 20                   
+[36mINFO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 24 was created.             
+[36mINFO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 24 was created.             
+[36mINFO[0m[2022-03-20T21:59:25+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 77 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 77 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 20 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 20 was created.                 
+[36mINFO[0m[2022-03-20T21:59:25+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 20 was created.                  
+[36mINFO[0m[2022-03-20T21:59:25+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 20 was created.                  
+[36mINFO[0m[2022-03-20T21:59:25+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 23 was created.              
+[36mINFO[0m[2022-03-20T21:59:25+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 23 was created.              
+[31mERRO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T21:59:25+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:01:38+03:00]user_repository.go:32 goReact/domain/store.(*UserRepository).Create Email already in use                         
+[31mERRO[0m[2022-03-20T22:01:38+03:00]user_repository.go:32 goReact/domain/store.(*UserRepository).Create Email already in use                         
+[36mINFO[0m[2022-03-20T22:01:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 24 was created.                 
+[36mINFO[0m[2022-03-20T22:01:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 24 was created.                 
+[36mINFO[0m[2022-03-20T22:01:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 21                   
+[36mINFO[0m[2022-03-20T22:01:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 21                   
+[36mINFO[0m[2022-03-20T22:01:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 25 was created.             
+[36mINFO[0m[2022-03-20T22:01:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 25 was created.             
+[36mINFO[0m[2022-03-20T22:01:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 78 was created.                 
+[36mINFO[0m[2022-03-20T22:01:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 78 was created.                 
+[36mINFO[0m[2022-03-20T22:01:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 21 was created.                 
+[36mINFO[0m[2022-03-20T22:01:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 21 was created.                 
+[36mINFO[0m[2022-03-20T22:01:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 21 was created.                  
+[36mINFO[0m[2022-03-20T22:01:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 21 was created.                  
+[36mINFO[0m[2022-03-20T22:01:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 24 was created.              
+[36mINFO[0m[2022-03-20T22:01:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 24 was created.              
+[31mERRO[0m[2022-03-20T22:01:47+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:01:47+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 25 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 25 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 22                   
+[36mINFO[0m[2022-03-20T22:03:17+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 22                   
+[36mINFO[0m[2022-03-20T22:03:17+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 26 was created.             
+[36mINFO[0m[2022-03-20T22:03:17+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 26 was created.             
+[36mINFO[0m[2022-03-20T22:03:17+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 79 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 79 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 22 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 22 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 22 was created.                  
+[36mINFO[0m[2022-03-20T22:03:17+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 22 was created.                  
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 25 was created.              
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 25 was created.              
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 26 was created.              
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 26 was created.              
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:31 goReact/domain/store.(*BookingRepository).Create Eror occured while creating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:31 goReact/domain/store.(*BookingRepository).Create Eror occured while creating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 26 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 26 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 23                   
+[36mINFO[0m[2022-03-20T22:03:17+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 23                   
+[36mINFO[0m[2022-03-20T22:03:17+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 27 was created.             
+[36mINFO[0m[2022-03-20T22:03:17+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 27 was created.             
+[36mINFO[0m[2022-03-20T22:03:17+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 80 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 80 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 23 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 23 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 23 was created.                  
+[36mINFO[0m[2022-03-20T22:03:17+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 23 was created.                  
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 27 was created.              
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 27 was created.              
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:44 goReact/domain/store.(*BookingRepository).GetAll Eror occured while getting all bookings. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:44 goReact/domain/store.(*BookingRepository).GetAll Eror occured while getting all bookings. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 27 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 27 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 24                   
+[36mINFO[0m[2022-03-20T22:03:17+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 24                   
+[36mINFO[0m[2022-03-20T22:03:17+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 28 was created.             
+[36mINFO[0m[2022-03-20T22:03:17+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 28 was created.             
+[36mINFO[0m[2022-03-20T22:03:17+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 81 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 81 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 24 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 24 was created.                 
+[36mINFO[0m[2022-03-20T22:03:17+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 24 was created.                  
+[36mINFO[0m[2022-03-20T22:03:17+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 24 was created.                  
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 28 was created.              
+[36mINFO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 28 was created.              
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:03:17+03:00]booking_repository.go:88 goReact/domain/store.(*BookingRepository).FindByID Eror occured while searching booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 28 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 28 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 25                   
+[36mINFO[0m[2022-03-20T22:03:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 25                   
+[36mINFO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 29 was created.             
+[36mINFO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 29 was created.             
+[36mINFO[0m[2022-03-20T22:03:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 82 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 82 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 25 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 25 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 25 was created.                  
+[36mINFO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 25 was created.                  
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 29 was created.              
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 29 was created.              
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 30 was created.              
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 30 was created.              
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:114 goReact/domain/store.(*BookingRepository).Delete Booking with id 30 was deleted               
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:114 goReact/domain/store.(*BookingRepository).Delete Booking with id 30 was deleted               
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:110 goReact/domain/store.(*BookingRepository).Delete Error occured while deleting booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:110 goReact/domain/store.(*BookingRepository).Delete Error occured while deleting booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:99 goReact/domain/store.(*BookingRepository).Delete Eror occured while deleting booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:99 goReact/domain/store.(*BookingRepository).Delete Eror occured while deleting booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 29 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 29 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 26                   
+[36mINFO[0m[2022-03-20T22:03:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 26                   
+[36mINFO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 30 was created.             
+[36mINFO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 30 was created.             
+[36mINFO[0m[2022-03-20T22:03:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 83 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 83 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 26 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 26 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 26 was created.                  
+[36mINFO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 26 was created.                  
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 31 was created.              
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 31 was created.              
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:187 goReact/domain/store.(*BookingRepository).Update Booking with id 31 was updated               
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:187 goReact/domain/store.(*BookingRepository).Update Booking with id 31 was updated               
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:183 goReact/domain/store.(*BookingRepository).Update Error occured while updating booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:183 goReact/domain/store.(*BookingRepository).Update Error occured while updating booking. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:172 goReact/domain/store.(*BookingRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:172 goReact/domain/store.(*BookingRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 30 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 30 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 27                   
+[36mINFO[0m[2022-03-20T22:03:18+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 27                   
+[36mINFO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 31 was created.             
+[36mINFO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 31 was created.             
+[36mINFO[0m[2022-03-20T22:03:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 84 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 84 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 27 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 27 was created.                 
+[36mINFO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 27 was created.                  
+[36mINFO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 27 was created.                  
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 32 was created.              
+[36mINFO[0m[2022-03-20T22:03:18+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 32 was created.              
+[31mERRO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:73 goReact/domain/store.(*PetRepository).FindByID Error occured while getting pet by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]pet_repository.go:73 goReact/domain/store.(*PetRepository).FindByID Error occured while getting pet by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:63 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]employee_repository.go:63 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: database is closed. 
+[31mERRO[0m[2022-03-20T22:03:18+03:00]seat_repository.go:67 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg:sql: database is closed. 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 31 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 31 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 28                   
+[36mINFO[0m[2022-03-20T22:03:27+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 28                   
+[36mINFO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 32 was created.             
+[36mINFO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 32 was created.             
+[36mINFO[0m[2022-03-20T22:03:27+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 85 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 85 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 28 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 28 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 28 was created.                  
+[36mINFO[0m[2022-03-20T22:03:27+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 28 was created.                  
+[36mINFO[0m[2022-03-20T22:03:27+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 33 was created.              
+[36mINFO[0m[2022-03-20T22:03:27+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 33 was created.              
+[36mINFO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 33 was created.             
+[36mINFO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 33 was created.             
+[31mERRO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:20 goReact/domain/store.(*EmployeeRepository).Create Error occured while creating employee. Err msg:sql: database is closed. 
+[31mERRO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:20 goReact/domain/store.(*EmployeeRepository).Create Error occured while creating employee. Err msg:sql: database is closed. 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 32 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 32 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 29                   
+[36mINFO[0m[2022-03-20T22:03:27+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 29                   
+[36mINFO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 34 was created.             
+[36mINFO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 34 was created.             
+[36mINFO[0m[2022-03-20T22:03:27+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 86 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 86 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 29 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 29 was created.                 
+[36mINFO[0m[2022-03-20T22:03:27+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 29 was created.                  
+[36mINFO[0m[2022-03-20T22:03:27+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 29 was created.                  
+[36mINFO[0m[2022-03-20T22:03:27+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 34 was created.              
+[36mINFO[0m[2022-03-20T22:03:27+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 34 was created.              
+[31mERRO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:03:27+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:04:06+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 33 was created.                 
+[36mINFO[0m[2022-03-20T22:04:06+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 33 was created.                 
+[36mINFO[0m[2022-03-20T22:04:06+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 30                   
+[36mINFO[0m[2022-03-20T22:04:06+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 30                   
+[36mINFO[0m[2022-03-20T22:04:06+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 35 was created.             
+[36mINFO[0m[2022-03-20T22:04:06+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 35 was created.             
+[36mINFO[0m[2022-03-20T22:04:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 87 was created.                 
+[36mINFO[0m[2022-03-20T22:04:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 87 was created.                 
+[36mINFO[0m[2022-03-20T22:04:07+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 30 was created.                 
+[36mINFO[0m[2022-03-20T22:04:07+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 30 was created.                 
+[36mINFO[0m[2022-03-20T22:04:07+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 30 was created.                  
+[36mINFO[0m[2022-03-20T22:04:07+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 30 was created.                  
+[36mINFO[0m[2022-03-20T22:04:07+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 35 was created.              
+[36mINFO[0m[2022-03-20T22:04:07+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 35 was created.              
+[31mERRO[0m[2022-03-20T22:04:07+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:04:07+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:05:40+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 34 was created.                 
+[36mINFO[0m[2022-03-20T22:05:40+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 34 was created.                 
+[36mINFO[0m[2022-03-20T22:05:40+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 31                   
+[36mINFO[0m[2022-03-20T22:05:40+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 31                   
+[36mINFO[0m[2022-03-20T22:05:40+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 36 was created.             
+[36mINFO[0m[2022-03-20T22:05:40+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 36 was created.             
+[36mINFO[0m[2022-03-20T22:05:40+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 88 was created.                 
+[36mINFO[0m[2022-03-20T22:05:40+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 88 was created.                 
+[36mINFO[0m[2022-03-20T22:05:40+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 31 was created.                 
+[36mINFO[0m[2022-03-20T22:05:40+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 31 was created.                 
+[36mINFO[0m[2022-03-20T22:05:40+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 31 was created.                  
+[36mINFO[0m[2022-03-20T22:05:40+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 31 was created.                  
+[36mINFO[0m[2022-03-20T22:05:40+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 36 was created.              
+[36mINFO[0m[2022-03-20T22:05:40+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 36 was created.              
+[31mERRO[0m[2022-03-20T22:05:40+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:05:40+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 35 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 35 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 32                   
+[36mINFO[0m[2022-03-20T22:05:46+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 32                   
+[36mINFO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 37 was created.             
+[36mINFO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 37 was created.             
+[36mINFO[0m[2022-03-20T22:05:46+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 89 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 89 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 32 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 32 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 32 was created.                  
+[36mINFO[0m[2022-03-20T22:05:46+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 32 was created.                  
+[36mINFO[0m[2022-03-20T22:05:46+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 37 was created.              
+[36mINFO[0m[2022-03-20T22:05:46+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 37 was created.              
+[36mINFO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 38 was created.             
+[36mINFO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 38 was created.             
+[31mERRO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:20 goReact/domain/store.(*EmployeeRepository).Create Error occured while creating employee. Err msg:sql: database is closed. 
+[31mERRO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:20 goReact/domain/store.(*EmployeeRepository).Create Error occured while creating employee. Err msg:sql: database is closed. 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 36 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 36 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 33                   
+[36mINFO[0m[2022-03-20T22:05:46+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 33                   
+[36mINFO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 39 was created.             
+[36mINFO[0m[2022-03-20T22:05:46+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 39 was created.             
+[36mINFO[0m[2022-03-20T22:05:46+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 90 was created.                 
+[36mINFO[0m[2022-03-20T22:05:46+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 90 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 33 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 33 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 33 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 33 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 38 was created.              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 38 was created.              
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:33 goReact/domain/store.(*EmployeeRepository).GetAll Error occured while getting all employees. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 37 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 37 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 34                   
+[36mINFO[0m[2022-03-20T22:05:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 34                   
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 40 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 40 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 91 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 91 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 34 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 34 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 34 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 34 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 39 was created.              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 39 was created.              
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:64 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:64 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:64 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:64 goReact/domain/store.(*EmployeeRepository).FindByID Error occured while getting employee by id. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 38 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 38 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 35                   
+[36mINFO[0m[2022-03-20T22:05:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 35                   
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 41 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 41 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 92 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 92 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 35 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 35 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 35 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 35 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 40 was created.              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 40 was created.              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 42 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 42 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:90 goReact/domain/store.(*EmployeeRepository).Delete Employee with id 42 was deleted              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:90 goReact/domain/store.(*EmployeeRepository).Delete Employee with id 42 was deleted              
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:86 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:86 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:75 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:75 goReact/domain/store.(*EmployeeRepository).Delete Error occured while deleting employee. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 39 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 39 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 36                   
+[36mINFO[0m[2022-03-20T22:05:47+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 36                   
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 43 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 43 was created.             
+[36mINFO[0m[2022-03-20T22:05:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 93 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 93 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 36 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 36 was created.                 
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 36 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 36 was created.                  
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 41 was created.              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 41 was created.              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:133 goReact/domain/store.(*EmployeeRepository).Update Employee with id 43 was updated              
+[36mINFO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:133 goReact/domain/store.(*EmployeeRepository).Update Employee with id 43 was updated              
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:129 goReact/domain/store.(*EmployeeRepository).Update Error occured while updating employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:129 goReact/domain/store.(*EmployeeRepository).Update Error occured while updating employee. Err msg: No rows affected. 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:118 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-20T22:05:47+03:00]employee_repository.go:118 goReact/domain/store.(*EmployeeRepository).Update Erorr occured while updating booking. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 40 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 40 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 37                   
+[36mINFO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 37                   
+[36mINFO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 44 was created.             
+[36mINFO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 44 was created.             
+[36mINFO[0m[2022-03-20T22:05:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 94 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 94 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 37 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 37 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 37 was created.                  
+[36mINFO[0m[2022-03-20T22:05:48+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 37 was created.                  
+[36mINFO[0m[2022-03-20T22:05:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 42 was created.              
+[36mINFO[0m[2022-03-20T22:05:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 42 was created.              
+[31mERRO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:146 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:146 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:146 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: database is closed. 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:146 goReact/domain/store.(*EmployeeRepository).FindByUserID Error occured while searching employee by user id. Err msg: sql: database is closed. 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 41 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]user_repository.go:60 goReact/domain/store.(*UserRepository).Create User with id 41 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 38                   
+[36mINFO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:24 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 38                   
+[36mINFO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 45 was created.             
+[36mINFO[0m[2022-03-20T22:05:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 45 was created.             
+[36mINFO[0m[2022-03-20T22:05:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 95 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 95 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 38 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]seat_repository.go:25 goReact/domain/store.(*SeatRepository).Create Seat with id 38 was created.                 
+[36mINFO[0m[2022-03-20T22:05:48+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 38 was created.                  
+[36mINFO[0m[2022-03-20T22:05:48+03:00]pet_repository.go:27 goReact/domain/store.(*PetRepository).Create Pet with id 38 was created.                  
+[36mINFO[0m[2022-03-20T22:05:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 43 was created.              
+[36mINFO[0m[2022-03-20T22:05:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 43 was created.              
+[31mERRO[0m[2022-03-20T22:05:48+03:00]user_repository.go:145 goReact/domain/store.(*UserRepository).FindByID Eror occure while searching user by id. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]user_repository.go:145 goReact/domain/store.(*UserRepository).FindByID Eror occure while searching user by id. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:63 goReact/domain/store.(*HotelRepository).FindByID Error occured while searching hotel by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:63 goReact/domain/store.(*HotelRepository).FindByID Error occured while searching hotel by id. Err msg:sql: no rows in result set. 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:63 goReact/domain/store.(*HotelRepository).FindByID Error occured while searching hotel by id. Err msg:sql: database is closed. 
+[31mERRO[0m[2022-03-20T22:05:48+03:00]hotel_repository.go:63 goReact/domain/store.(*HotelRepository).FindByID Error occured while searching hotel by id. Err msg:sql: database is closed. 

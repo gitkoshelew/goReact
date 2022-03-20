@@ -1,6 +1,7 @@
 package store
 
 import (
+	"fmt"
 	"goReact/domain/model"
 )
 
@@ -30,6 +31,7 @@ func (r *EmployeeRepository) GetAll() (*[]model.EmployeeDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM employee")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all employees. Err msg: %v", err)
+		return nil, err
 	}
 	employees := []model.EmployeeDTO{}
 
@@ -81,7 +83,7 @@ func (r *EmployeeRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg: %v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg: %v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 
@@ -90,16 +92,28 @@ func (r *EmployeeRepository) Delete(id int) error {
 }
 
 // Update employee from DB
-func (r *EmployeeRepository) Update(e *model.EmployeeDTO) error {
-	result, err := r.Store.Db.Exec(
-		"UPDATE employee SET",
-		"user_id = $1, hotel_id = $2, position = $3",
-		"WHERE id = $4",
-		e.UserID,
-		e.HotelID,
-		e.Position,
-		e.EmployeeID,
-	)
+func (r *EmployeeRepository) Update(e *model.Employee) error {
+	userID := "user_id"
+	if e.UserID != 0 {
+		userID = fmt.Sprintf("%d", e.UserID)
+	}
+	hotelID := " hotel_id"
+	if e.Hotel.HotelID != 0 {
+		hotelID = fmt.Sprintf("%d", e.Hotel.HotelID)
+	}
+	position := "position"
+	if e.Position != "" {
+		position = fmt.Sprintf("'%s'", string(e.Position))
+	}
+
+	result, err := r.Store.Db.Exec(fmt.Sprintf(
+		`UPDATE employee SET
+		user_id = %s, hotel_id = %s, position = %s
+		WHERE id = $1`,
+		userID,
+		hotelID,
+		position,
+	), e.EmployeeID)
 	if err != nil {
 		r.Store.Logger.Errorf("Erorr occured while updating booking. Err msg: %v", err)
 		return err
@@ -112,7 +126,7 @@ func (r *EmployeeRepository) Update(e *model.EmployeeDTO) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating employee. Err msg: %v.", err)
+		r.Store.Logger.Errorf("Error occured while updating employee. Err msg: %v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 
