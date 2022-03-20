@@ -6,6 +6,10 @@ import { ValidationPipe } from './pipes/validation.pipe';
 async function bootstrap() {
   const PORT = process.env.NEST_SERVER_PORT || 5002;
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    credentials: true,
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
+  });
   const config = new DocumentBuilder()
     .setTitle('Backend')
     .setDescription('Documentation REST API')
