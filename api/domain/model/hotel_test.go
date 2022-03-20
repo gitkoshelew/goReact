@@ -12,48 +12,13 @@ func TestHotel_Validate(t *testing.T) {
 		name    string
 		h       func() *model.Hotel
 		isValid bool
-	}{{
-		name: "valid",
-		h: func() *model.Hotel {
-			return model.TestHotel()
-		},
-		isValid: true,
-	},
+	}{
 		{
-			name: "Invalid Name",
+			name: "valid",
 			h: func() *model.Hotel {
-				h := model.TestHotel()
-				h.Name = ""
-				return h
+				return model.TestHotel()
 			},
-			isValid: false,
-		},
-		{
-			name: "Empty Name",
-			h: func() *model.Hotel {
-				h := model.TestHotel()
-				h.Name = ""
-				return h
-			},
-			isValid: false,
-		},
-		{
-			name: "Empty Address",
-			h: func() *model.Hotel {
-				h := model.TestHotel()
-				h.Address = ""
-				return h
-			},
-			isValid: false,
-		},
-		{
-			name: "Empty coordinates",
-			h: func() *model.Hotel {
-				h := model.TestHotel()
-				h.Coordinates = ""
-				return h
-			},
-			isValid: false,
+			isValid: true,
 		},
 	}
 
