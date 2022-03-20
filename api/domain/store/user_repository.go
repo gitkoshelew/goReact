@@ -19,10 +19,10 @@ var (
 )
 
 // Create user and save it to DB
-func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
+func (r *UserRepository) Create(user *model.User) (*int, error) {
 
 	var emailIsUsed bool
-	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
+	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", user.Email).Scan(&emailIsUsed)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %v", err)
 		return nil, err
@@ -33,9 +33,7 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 		return nil, ErrEmailIsUsed
 	}
 
-	r.Store.EncryptPassword(&u.Password)
-
-	user := u.ModelFromDTO()
+	r.Store.EncryptPassword(&user.Password)
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
@@ -61,7 +59,7 @@ func (r *UserRepository) Create(u *model.UserDTO) (*model.User, error) {
 
 	r.Store.Logger.Infof("User with id %d was created.", user.UserID)
 
-	return user, nil
+	return &user.UserID, nil
 }
 
 // GetAll returns all users
@@ -101,7 +99,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 }
 
 // FindByEmail searchs and returns user by email
-func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
+func (r *UserRepository) FindByEmail(email string) (*model.UserDTO, error) {
 	user := &model.UserDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE email = $1",
 		email).Scan(
@@ -122,11 +120,11 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		r.Store.Logger.Errorf("Eror occure while searching user by email. Err msg: %v", err)
 		return nil, err
 	}
-	return user.ModelFromDTO(), nil
+	return user, nil
 }
 
 // FindByID searchs and returns user by ID
-func (r *UserRepository) FindByID(id int) (*model.User, error) {
+func (r *UserRepository) FindByID(id int) (*model.UserDTO, error) {
 	user := &model.UserDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE id = $1",
 		id).Scan(
@@ -147,7 +145,7 @@ func (r *UserRepository) FindByID(id int) (*model.User, error) {
 		r.Store.Logger.Errorf("Eror occure while searching user by id. Err msg: %v", err)
 		return nil, err
 	}
-	return user.ModelFromDTO(), nil
+	return user, nil
 }
 
 // Delete user from DB by ID
@@ -279,4 +277,23 @@ func (r *UserRepository) CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	r.Store.Logger.Infof("Eror during checking users email or password. Err msg: %s", err.Error())
 	return err
+}
+
+// ModelFromDTO ...
+func (r *UserRepository) ModelFromDTO(u *model.UserDTO) *model.User {
+	return &model.User{
+		UserID:      u.UserID,
+		Email:       u.Email,
+		Password:    u.Password,
+		Role:        model.Role(u.Role),
+		Verified:    u.Verified,
+		Name:        u.Name,
+		Surname:     u.Surname,
+		MiddleName:  u.MiddleName,
+		Sex:         model.Sex(u.Sex),
+		DateOfBirth: u.DateOfBirth,
+		Address:     u.Address,
+		Phone:       u.Phone,
+		Photo:       u.Photo,
+	}
 }

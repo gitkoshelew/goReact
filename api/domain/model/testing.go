@@ -6,8 +6,9 @@ import (
 )
 
 // TestUser ...
-func TestUser() *UserDTO {
-	return &UserDTO{
+func TestUser() *User {
+	return &User{
+		UserID:      1,
 		Email:       "email@example.org",
 		Password:    "password",
 		Role:        "client",
@@ -60,7 +61,7 @@ func TestRoomDTO() *RoomDTO {
 func TestEmployee() *Employee {
 	return &Employee{
 		EmployeeID: 1,
-		User:       *TestUser().ModelFromDTO(),
+		User:       *TestUser(),
 		Hotel:      *TestHotel(),
 		Position:   OwnerPosition,
 	}
@@ -69,11 +70,12 @@ func TestEmployee() *Employee {
 // TestPet ...
 func TestPet() *Pet {
 	return &Pet{
+		PetID:     1,
 		Name:      "Name",
 		Type:      PetTypeCat,
 		Weight:    1,
 		Diesieses: "Disease",
-		Owner:     *TestUser().ModelFromDTO(),
+		Owner:     *TestUser(),
 		PhotoURL:  "/",
 	}
 }
@@ -89,6 +91,7 @@ func TestPage() *pagination.Page {
 // TestSeat ...
 func TestSeat() *Seat {
 	return &Seat{
+		SeatID:      1,
 		Description: "Description of seat",
 		RentFrom:    time.Time{}.AddDate(2000, 2, 2),
 		RentTo:      time.Time{}.AddDate(2001, 2, 2),
@@ -96,17 +99,38 @@ func TestSeat() *Seat {
 	}
 }
 
+// TestBookingDTO ...
+func TestBookingDTO() *BookingDTO {
+	a := time.Now().AddDate(0, 0, 1)
+	b := time.Now().AddDate(0, 0, 10)
+	paid := true
+	return &BookingDTO{
+		SeatID:        TestSeat().SeatID,
+		PetID:         TestPet().PetID,
+		EmployeeID:    TestEmployee().EmployeeID,
+		Status:        string(BookingStatusInProgress),
+		StartDate:     &a,
+		EndDate:       &b,
+		Notes:         "Notes",
+		TransactionID: 1,
+		Paid:          &paid,
+	}
+}
+
 // TestBooking ...
 func TestBooking() *Booking {
-	a := time.Time{}.AddDate(2000, 2, 2)
-	b := time.Time{}.AddDate(2000, 22, 2)
+	a := time.Now().AddDate(0, 0, 1)
+	b := time.Now().AddDate(0, 0, 10)
+	paid := true
 	return &Booking{
-		Seat:      *TestSeat(),
-		Pet:       *TestPet(),
-		Employee:  *TestEmployee(),
-		Status:    BookingStatusInProgress,
-		StartDate: &a,
-		EndDate:   &b,
-		Notes:     "Notes",
+		Seat:          *TestSeat(),
+		Pet:           *TestPet(),
+		Employee:      *TestEmployee(),
+		Status:        BookingStatusInProgress,
+		StartDate:     &a,
+		EndDate:       &b,
+		Notes:         "Notes",
+		TransactionID: 1,
+		Paid:          &paid,
 	}
 }

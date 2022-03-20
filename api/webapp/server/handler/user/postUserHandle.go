@@ -24,8 +24,9 @@ func PostUserHandle(s *store.Store) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while opening DB: %v", err)})
 			return
 		}
+		u := s.User().ModelFromDTO(user)
 
-		u, err := s.User().Create(user)
+		_, err = s.User().Create(u)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while creating user: %v", err)})

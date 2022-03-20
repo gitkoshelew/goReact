@@ -12,26 +12,21 @@ type RoomRepository struct {
 }
 
 // Create room and save it to DB
-func (r *RoomRepository) Create(rDTO *model.RoomDTO) (*model.Room, error) {
+func (r *RoomRepository) Create(room *model.Room) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room (pet_type, number, hotel_id , photo) VALUES ($1, $2, $3, $4) RETURNING id",
-		rDTO.PetType,
-		rDTO.RoomNumber,
-		rDTO.HotelID,
-		rDTO.PhotoURL,
-	).Scan(&rDTO.RoomID); err != nil {
+		"INSERT INTO room (pet_type, number, hotel_id , photoUrl) VALUES ($1, $2, $3, $4) RETURNING id",
+		room.PetType,
+		room.RoomNumber,
+		room.Hotel.HotelID,
+		room.PhotoURL,
+	).Scan(&room.RoomID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating room. Err msg: %v.", err)
-		return nil, err
-	}
-
-	room, err := r.ModelFromDTO(rDTO)
-	if err != nil {
 		return nil, err
 	}
 
 	r.Store.Logger.Infof("Room with id %d was created.", room.RoomID)
 
-	return room, nil
+	return &room.RoomID, nil
 }
 
 // GetAll returns all rooms
@@ -61,7 +56,7 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 }
 
 //FindByID searchs and returns room by ID
-func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
+func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 	roomDTO := &model.RoomDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM room WHERE id = $1",
 		id).Scan(
@@ -75,12 +70,7 @@ func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
 		return nil, err
 	}
 
-	room, err := r.ModelFromDTO(roomDTO)
-	if err != nil {
-		return nil, err
-	}
-
-	return room, nil
+	return roomDTO, nil
 }
 
 // Delete room from DB by ID
@@ -109,7 +99,7 @@ func (r *RoomRepository) Delete(id int) error {
 // Update room from DB
 func (r *RoomRepository) Update(rm *model.RoomDTO) error {
 	result, err := r.Store.Db.Exec(
-		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photo = $4 WHERE id = $5",
+		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photoUrl = $4 WHERE id = $5",
 		rm.RoomNumber,
 		rm.PetType,
 		rm.HotelID,

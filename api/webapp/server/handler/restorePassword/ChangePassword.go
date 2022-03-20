@@ -57,7 +57,9 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 
 		user.Password = req.Password
 
-		err = s.User().PasswordChange(user)
+		u := s.User().ModelFromDTO(user)
+
+		err = s.User().PasswordChange(u)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while searching user: %v", err)})
@@ -65,6 +67,6 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Password changed for user= %d", user.UserID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Password changed for user= %d", u.UserID)})
 	}
 }

@@ -100,10 +100,10 @@ func TestUserRepository_VerifyEmail(t *testing.T) {
 	})
 
 	u := model.TestUser()
-	user, _ := s.User().Create(u)
+	id, _ := s.User().Create(u)
 
 	t.Run("Valid", func(t *testing.T) {
-		err := s.User().VerifyEmail(user.UserID)
+		err := s.User().VerifyEmail(*id)
 		assert.NoError(t, err)
 	})
 

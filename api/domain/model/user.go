@@ -62,7 +62,7 @@ const (
 )
 
 // Validate ...
-func (u *UserDTO) Validate() error {
+func (u *User) Validate() error {
 	return validation.ValidateStruct(
 		u,
 		validation.Field(&u.Email, validation.Required, is.Email, validation.By(IsSQL)),
@@ -71,11 +71,11 @@ func (u *UserDTO) Validate() error {
 		validation.Field(&u.Verified),
 		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
 		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
-		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
+		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(0, 30), validation.By(IsSQL)),
 		validation.Field(&u.Sex, validation.Required, validation.By(IsSex)),
 		validation.Field(&u.DateOfBirth, validation.Required, validation.By(IsValidBirthDate)),
-		validation.Field(&u.Address, validation.Required, validation.Length(10, 40), validation.By(IsSQL)),
-		validation.Field(&u.Phone, validation.Required, validation.By(IsPhone), validation.By(IsSQL)),
+		validation.Field(&u.Address, validation.Required, validation.By(IsSQL), validation.Length(10, 40)),
+		validation.Field(&u.Phone, validation.Required, validation.By(IsPhone)),
 		validation.Field(&u.Photo, validation.By(IsSQL)),
 	)
 }
@@ -93,23 +93,4 @@ func EncryptPassword(s string) (string, error) {
 func CheckPasswordHash(hash, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err
-}
-
-// ModelFromDTO ...
-func (u *UserDTO) ModelFromDTO() *User {
-	return &User{
-		UserID:      u.UserID,
-		Email:       u.Email,
-		Password:    u.Password,
-		Role:        Role(u.Role),
-		Verified:    u.Verified,
-		Name:        u.Name,
-		Surname:     u.Surname,
-		MiddleName:  u.MiddleName,
-		Sex:         Sex(u.Sex),
-		DateOfBirth: u.DateOfBirth,
-		Address:     u.Address,
-		Phone:       u.Phone,
-		Photo:       u.Photo,
-	}
 }

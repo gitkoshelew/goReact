@@ -25,7 +25,7 @@ func TestEmployee_Validate(t *testing.T) {
 			e: func() *model.Employee {
 				u := model.TestUser()
 				e := model.TestEmployee()
-				e.User = *u.ModelFromDTO()
+				e.User = *u
 				return e
 			},
 			isValid: true,

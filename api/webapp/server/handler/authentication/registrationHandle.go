@@ -25,7 +25,9 @@ func RegistrationHandle(s *store.Store, m *service.Mail) http.HandlerFunc {
 			return
 		}
 
-		u, err := s.User().Create(user)
+		u := s.User().ModelFromDTO(user)
+
+		_, err = s.User().Create(u)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})

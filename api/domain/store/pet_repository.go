@@ -10,28 +10,23 @@ type PetRepository struct {
 }
 
 // Create pet and save it to DB
-func (r *PetRepository) Create(p *model.PetDTO) (*model.Pet, error) {
+func (r *PetRepository) Create(p *model.Pet) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO pet (name, type, weight, diseases, user_id , photo) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
+		"INSERT INTO pet (name, type, weight, diseases, user_id , photoURL) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
 		p.Name,
 		p.Type,
 		p.Weight,
 		p.Diesieses,
-		p.OwnerID,
+		p.Owner.UserID,
 		p.PhotoURL,
 	).Scan(&p.PetID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating pet. Err msg:%v.", err)
 		return nil, err
 	}
 
-	pet, err := r.ModelFromDTO(p)
-	if err != nil {
-		return nil, err
-	}
-
 	r.Store.Logger.Infof("Pet with id %d was created.", p.PetID)
 
-	return pet, nil
+	return &p.PetID, nil
 }
 
 // GetAll returns all pets
@@ -63,7 +58,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 }
 
 // FindByID searchs and returns petDTO by ID
-func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
+func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 	petDTO := &model.PetDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
 		id).Scan(
@@ -79,12 +74,7 @@ func (r *PetRepository) FindByID(id int) (*model.Pet, error) {
 		return nil, err
 	}
 
-	pet, err := r.ModelFromDTO(petDTO)
-	if err != nil {
-		return nil, err
-	}
-
-	return pet, nil
+	return petDTO, nil
 }
 
 // Delete pet from DB by ID
@@ -111,7 +101,7 @@ func (r *PetRepository) Delete(id int) error {
 // Update pet from DB
 func (r *PetRepository) Update(p *model.PetDTO) error {
 	result, err := r.Store.Db.Exec(
-		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 , user_id = $6 WHERE id = $7",
+		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 , photoURL = $6 WHERE id = $7",
 		p.Name,
 		string(p.Type),
 		p.Weight,
@@ -142,10 +132,11 @@ func (r *PetRepository) Update(p *model.PetDTO) error {
 
 // ModelFromDTO ...
 func (r *PetRepository) ModelFromDTO(dto *model.PetDTO) (*model.Pet, error) {
-	user, err := r.Store.User().FindByID(dto.OwnerID)
+	userDTO, err := r.Store.User().FindByID(dto.OwnerID)
 	if err != nil {
 		return nil, err
 	}
+	u := r.Store.User().ModelFromDTO(userDTO)
 
 	return &model.Pet{
 		PetID:     dto.PetID,
@@ -153,7 +144,7 @@ func (r *PetRepository) ModelFromDTO(dto *model.PetDTO) (*model.Pet, error) {
 		Type:      model.PetType(dto.Type),
 		Weight:    dto.Weight,
 		Diesieses: dto.Diesieses,
-		Owner:     *user,
+		Owner:     *u,
 		PhotoURL:  dto.PhotoURL,
 	}, nil
 }
