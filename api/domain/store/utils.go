@@ -1,6 +1,10 @@
 package store
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"strings"
+
+	"golang.org/x/crypto/bcrypt"
+)
 
 // CheckPasswordHash if passwords are same err=nil
 func (s *Store) CheckPasswordHash(hash, password string) error {
@@ -21,4 +25,11 @@ func (s *Store) EncryptPassword(passwod *string) error {
 	}
 	*passwod = string(b)
 	return nil
+}
+
+// StringOfArrayFromJSONToPSQL ...
+func StringOfArrayFromJSONToPSQL(str *string) {
+	*str = strings.Replace(*str, "[", "{", -1)
+	*str = strings.Replace(*str, "]", "}", -1)
+	*str = strings.Replace(*str, " ", ", ", -1)
 }
