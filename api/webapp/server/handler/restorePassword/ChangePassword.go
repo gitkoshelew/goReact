@@ -57,7 +57,12 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 
 		user.Password = req.Password
 
-		u := s.User().ModelFromDTO(user)
+		u, err := s.User().ModelFromDTO(user)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while making user model from DTO. Err msg:%v.", err)
+			return
+		}
 
 		err = s.User().PasswordChange(u)
 		if err != nil {

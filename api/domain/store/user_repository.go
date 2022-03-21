@@ -69,7 +69,6 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM users")
 	if err != nil {
 		r.Store.Logger.Errorf("Eror occured while getting all users. Err msg: %v", err)
-
 		return nil, err
 	}
 	users := []model.User{}
@@ -164,7 +163,7 @@ func (r *UserRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting user. Err msg:%v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 
@@ -260,7 +259,7 @@ func (r *UserRepository) Update(u *model.User) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 
@@ -289,20 +288,21 @@ func (r *UserRepository) VerifyEmail(userID int) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("No rows was affected, possible reason: no user with such ID")
+		r.Store.Logger.Errorf("No rows was affected, possible reason: no user with such ID, err msg: %v", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 	return nil
 }
 
 // EmailCheck check if email exists in DB
-func (r *UserRepository) EmailCheck(email string) *bool {
+func (r *UserRepository) EmailCheck(email string) (*bool, error) {
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", email).Scan(&emailIsUsed)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while email checking. Err msg: %v", err)
+		return &emailIsUsed, err
 	}
-	return &emailIsUsed
+	return &emailIsUsed, nil
 }
 
 // PasswordChange ...
@@ -318,6 +318,18 @@ func (r *UserRepository) PasswordChange(u *model.User) error {
 		r.Store.Logger.Errorf("Cant't set into users table. Err msg: %v", err)
 		return err
 	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while verifying user. Err msg:%v.", err)
+		return nil
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("No rows was affected, possible reason: no user with such ID, err msg: %v", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
 	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
 	return nil
 }
@@ -330,20 +342,20 @@ func (r *UserRepository) CheckPasswordHash(hash, password string) error {
 }
 
 // ModelFromDTO ...
-func (r *UserRepository) ModelFromDTO(u *model.UserDTO) *model.User {
+func (r *UserRepository) ModelFromDTO(u *model.UserDTO) (*model.User, error) {
 	return &model.User{
 		UserID:      u.UserID,
 		Email:       u.Email,
 		Password:    u.Password,
 		Role:        model.Role(u.Role),
-		Verified:    &u.Verified,
+		Verified:    u.Verified,
 		Name:        u.Name,
 		Surname:     u.Surname,
 		MiddleName:  u.MiddleName,
 		Sex:         model.Sex(u.Sex),
-		DateOfBirth: &u.DateOfBirth,
+		DateOfBirth: u.DateOfBirth,
 		Address:     u.Address,
 		Phone:       u.Phone,
 		Photo:       u.Photo,
-	}
+	}, nil
 }

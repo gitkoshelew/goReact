@@ -27,19 +27,19 @@ type User struct {
 
 // UserDTO ...
 type UserDTO struct {
-	UserID      int       `json:"userId"`
-	Email       string    `json:"email"`
-	Password    string    `json:"password"`
-	Role        string    `json:"role,omitempty"`
-	Verified    bool      `json:"verified,omitempty"`
-	Name        string    `json:"name"`
-	Surname     string    `json:"sName"`
-	MiddleName  string    `json:"mName"`
-	Sex         string    `json:"sex"`
-	DateOfBirth time.Time `json:"birthDate"`
-	Address     string    `json:"address"`
-	Phone       string    `json:"phone"`
-	Photo       string    `json:"photo"`
+	UserID      int        `json:"userId"`
+	Email       string     `json:"email"`
+	Password    string     `json:"password"`
+	Role        string     `json:"role,omitempty"`
+	Verified    *bool      `json:"verified,omitempty"`
+	Name        string     `json:"name"`
+	Surname     string     `json:"sName"`
+	MiddleName  string     `json:"mName"`
+	Sex         string     `json:"sex"`
+	DateOfBirth *time.Time `json:"birthDate"`
+	Address     string     `json:"address"`
+	Phone       string     `json:"phone"`
+	Photo       string     `json:"photo"`
 }
 
 // Role ...
@@ -62,7 +62,7 @@ const (
 )
 
 // Validate ...
-func (u *User) Validate() error {
+func (u *UserDTO) Validate() error {
 	return validation.ValidateStruct(
 		u,
 		validation.Field(&u.Email, validation.Required, is.Email, validation.By(IsSQL)),

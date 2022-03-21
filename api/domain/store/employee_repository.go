@@ -166,7 +166,10 @@ func (r *EmployeeRepository) ModelFromDTO(dto *model.EmployeeDTO) (*model.Employ
 	if err != nil {
 		return nil, err
 	}
-	u := r.Store.User().ModelFromDTO(userDTO)
+	u, err := r.Store.User().ModelFromDTO(userDTO)
+	if err != nil {
+		return nil, err
+	}
 
 	return &model.Employee{
 		EmployeeID: dto.EmployeeID,
