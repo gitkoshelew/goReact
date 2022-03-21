@@ -3,6 +3,7 @@ package model_test
 import (
 	"goReact/domain/model"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -39,6 +40,15 @@ func TestUser_Validate(t *testing.T) {
 			isValid: false,
 		},
 		{
+			name: "SQL email",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Email = "Sel--%^3 /** ecT"
+				return u
+			},
+			isValid: false,
+		},
+		{
 			name: "empty password",
 			u: func() *model.User {
 				u := model.TestUser()
@@ -57,55 +67,19 @@ func TestUser_Validate(t *testing.T) {
 			isValid: false,
 		},
 		{
-			name: "Invalid Name",
+			name: "long password",
 			u: func() *model.User {
 				u := model.TestUser()
-				u.Name = "Name@123"
+				u.Password = "1234567891012345678910123456789101234567891012345678910123456789101234567891012345678910123456789101234567891012345678910"
 				return u
 			},
 			isValid: false,
 		},
 		{
-			name: "Empty Name",
+			name: "sql password",
 			u: func() *model.User {
 				u := model.TestUser()
-				u.Name = ""
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "Invalid Surname",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.Surname = "Surname-Фамилия"
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "Empty Surname",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.Surname = ""
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "Invalid MiddleName",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.MiddleName = "MiddleName %?№"
-				return u
-			},
-			isValid: false,
-		},
-		{
-			name: "Empty MiddleName",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.MiddleName = ""
+				u.Password = "ALt  9*/123#@! eR"
 				return u
 			},
 			isValid: false,
@@ -129,6 +103,141 @@ func TestUser_Validate(t *testing.T) {
 			isValid: true,
 		},
 		{
+			name: "SQL Role",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Role = "ALt  --__- eR"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Invalid Name",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Name = "Name@123"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Empty Name",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Name = ""
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "SQL Name",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Name = "AlT*&^er"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Short Name",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Name = "a"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Long Name",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Name = "adsadasdasdasdasdsadasdaSDadADSdasasdasdsadaddadas"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Invalid Surname",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Surname = "Surname-Фамилия"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Empty Surname",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Surname = ""
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "SQL Surname",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Surname = "AlT*&^er"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Short Surname",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Surname = "a"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Long Surname",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Surname = "adsadasdasdasdasdsadasdaSDadADSdasasdasdsadaddadas"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Invalid MiddleName",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.MiddleName = "MiddleName %?№"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Empty MiddleName",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.MiddleName = ""
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "SQL MiddleName",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.MiddleName = "AlT*&^er"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Long MiddleName",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.MiddleName = "adsadasdasdasdasdsadasdaSDadADSdasasdasdsadaddadas"
+				return u
+			},
+			isValid: false,
+		},
+		{
 			name: "Invalid Sex",
 			u: func() *model.User {
 				u := model.TestUser()
@@ -142,6 +251,60 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Sex = "Invalid"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Under age 18 DateOfBirth",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.DateOfBirth = time.Now()
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Above age 100 DateOfBirth",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.DateOfBirth = time.Now().AddDate(-100, 0, -1)
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Empty Address",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Address = ""
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Short Address",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Address = "asd"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Long Address",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Address = "asdasdasdsadasdas sdad asdasdas dasdasd asdasd asdas dsa dasd"
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "SQL Address",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Address = "AL*6789 _-=--t=@#!#er"
 				return u
 			},
 			isValid: false,
@@ -172,6 +335,15 @@ func TestUser_Validate(t *testing.T) {
 				return u
 			},
 			isValid: true,
+		},
+		{
+			name: "SQL Photo",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Photo = "AlTE@##4r"
+				return u
+			},
+			isValid: false,
 		},
 	}
 

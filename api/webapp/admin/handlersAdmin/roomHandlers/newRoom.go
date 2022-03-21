@@ -46,14 +46,9 @@ func NewRoom(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		/*hotel, err := s.Hotel().FindByID(hotelID)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v. ", err), http.StatusBadRequest)
-			return
-		}*/
 		photo := r.FormValue("Photo")
 
-		room := model.RoomDTO{
+		roomDTO := model.RoomDTO{
 			RoomID:     0,
 			RoomNumber: roomNumber,
 			PetType:    petType,
@@ -61,14 +56,20 @@ func NewRoom(s *store.Store) httprouter.Handle {
 			PhotoURL:   photo,
 		}
 
-		/*err = room.Validate()
+		err = roomDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
-		}*/
+		}
 
-		_, err = s.Room().Create(&room)
+		room, err := s.Room().ModelFromDTO(&roomDTO)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
+			return
+		}
+
+		_, err = s.Room().Create(room)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating room. Err msg:%v. ", err), http.StatusBadRequest)
 			return

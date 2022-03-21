@@ -12,10 +12,11 @@ import (
 
 var (
 	// regex
-	latin    = regexp.MustCompile(`\p{Latin}`)
-	cyrillic = regexp.MustCompile(`[\p{Cyrillic}]`)
-	phone    = regexp.MustCompile(`^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$`)
-	noSQL    = regexp.MustCompile(`\b(ALTER|CREATE|DELETE|DROP|EXEC(UTE){0,1}|INSERT( +INTO){0,1}|MERGE|SELECT|UPDATE|UNION( +ALL){0,1})\b`)
+	latin       = regexp.MustCompile(`\p{Latin}`)
+	cyrillic    = regexp.MustCompile(`[\p{Cyrillic}]`)
+	phone       = regexp.MustCompile(`^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$`)
+	noSQL       = regexp.MustCompile(`\b(ALTER|CREATE|DELETE|DROP|EXEC(UTE){0,1}|INSERT( +INTO){0,1}|MERGE|SELECT|UPDATE|UNION( +ALL){0,1})\b`)
+	onlyLetters = regexp.MustCompile("[^a-zA-Zа-яА-Я]+")
 
 	// errors
 
@@ -43,6 +44,8 @@ var (
 	ErrInvalidStartDate = errors.New("invalid start date. Start date cannot be before today")
 	// ErrInvalidEndDate ...
 	ErrInvalidEndDate = errors.New("invalid end date. End date cannot be before today")
+	// ErrInvalidID ...
+	ErrInvalidID = errors.New("invalid input: id")
 )
 
 // IsLetterHyphenSpaces checks if string contains only letter(from simillar alphabet(latin or cyrillic)), hyphen or spaces
@@ -103,7 +106,7 @@ func IsSex(value interface{}) error {
 // PetTypeCat = "cat"
 // PetTypeDog = "dog"
 func IsPetType(value interface{}) error {
-	s := value.(PetType)
+	s := PetType(value.(string))
 	if s == PetTypeCat || s == PetTypeDog {
 		return nil
 	}
@@ -146,7 +149,14 @@ func IsValidBirthDate(value interface{}) error {
 // IsSQL ...
 func IsSQL(value interface{}) error {
 	s := value.(string)
+
 	if noSQL.MatchString(strings.ToUpper(s)) {
+		return ErrContainsSQL
+	}
+
+	str := onlyLetters.ReplaceAllString(s, "")
+
+	if noSQL.MatchString(strings.ToUpper(str)) {
 		return ErrContainsSQL
 	}
 	return nil
@@ -170,6 +180,15 @@ func IsValidEndDate(value interface{}) error {
 	err := validation.Validate(d.Format(time.RFC3339), validation.Date(time.RFC3339).Min(t))
 	if err != nil {
 		return ErrInvalidEndDate
+	}
+	return nil
+}
+
+// IsValidID ...
+func IsValidID(value interface{}) error {
+	id := value.(int)
+	if id < 1 {
+		return ErrInvalidID
 	}
 	return nil
 }

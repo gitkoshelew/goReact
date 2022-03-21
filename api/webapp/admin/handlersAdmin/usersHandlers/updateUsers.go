@@ -38,7 +38,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		u, err := s.User().FindByID(id)
+		userDTO, err := s.User().FindByID(id)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
@@ -46,7 +46,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 
 		email := r.FormValue("Email")
 		if email != "" {
-			u.Email = email
+			userDTO.Email = email
 		}
 
 		verified := r.FormValue("Verified")
@@ -57,32 +57,32 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
 				return
 			}
-			u.Verified = verified
+			userDTO.Verified = verified
 		}
 
 		role := r.FormValue("Role")
 		if role != "" {
-			u.Role = model.Role(role)
+			userDTO.Role = role
 		}
 
 		name := r.FormValue("Name")
 		if name != "" {
-			u.Name = name
+			userDTO.Name = name
 		}
 
 		surname := r.FormValue("Surname")
 		if surname != "" {
-			u.Surname = surname
+			userDTO.Surname = surname
 		}
 
 		middleName := r.FormValue("MiddleName")
 		if surname != "" {
-			u.MiddleName = middleName
+			userDTO.MiddleName = middleName
 		}
 
 		sex := r.FormValue("Sex")
 		if sex != "" {
-			u.Sex = model.Sex(sex)
+			userDTO.Sex = sex
 		}
 
 		layout := "2006-01-02"
@@ -94,38 +94,39 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
 				return
 			}
-			u.DateOfBirth = dateOfBirth
+			userDTO.DateOfBirth = dateOfBirth
 		}
 
 		address := r.FormValue("Address")
 		if address != "" {
-			u.Address = address
+			userDTO.Address = address
 		}
 
 		phone := r.FormValue("Phone")
 		if phone != "" {
-			u.Phone = phone
+			userDTO.Phone = phone
 		}
 
 		photo := r.FormValue("Photo")
 		if photo != "" {
-			u.Photo = photo
+			userDTO.Photo = photo
 		}
 
-		err = u.Validate()
+		/*err = u.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
-		}
+		}*/
 
+		user := s.User().ModelFromDTO(userDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v.", err)
 			return
 		}
 
-		err = s.User().Update(u)
+		err = s.User().Update(user)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while updating user. Err msg:%v. ", err), http.StatusInternalServerError)
 			return

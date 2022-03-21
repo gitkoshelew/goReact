@@ -61,22 +61,26 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 			return
 		}
-		seat := model.SeatDTO{
+		seatDTO := model.SeatDTO{
 			SeatID:      0,
-			RoomID:        roomID,
+			RoomID:      roomID,
 			Description: description,
-			RentFrom:    rentFrom,
-			RentTo:      rentTo,
+			RentFrom:    &rentFrom,
+			RentTo:      &rentTo,
 		}
 
-		/*err = seat.Validate()
+		err = seatDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
-		}*/
-
-		_, err = s.Seat().Create(&seat)
+		}
+		seat, err := s.Seat().ModelFromDTO(&seatDTO)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
+			return
+		}
+		_, err = s.Seat().Create(seat)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating seat. Err msg:%v. ", err), http.StatusBadRequest)
 			return

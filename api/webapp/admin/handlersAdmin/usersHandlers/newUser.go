@@ -57,15 +57,15 @@ func NewUser(s *store.Store) httprouter.Handle {
 		phone := r.FormValue("Phone")
 		photo := r.FormValue("Photo")
 
-		u := model.User{
+		userDTO := model.UserDTO{
 			UserID:      0,
 			Email:       email,
 			Password:    password,
-			Role:        model.Role(role),
+			Role:        role,
 			Name:        name,
 			Surname:     surname,
 			MiddleName:  middleName,
-			Sex:         model.Sex(sex),
+			Sex:         sex,
 			Address:     address,
 			Phone:       phone,
 			Photo:       photo,
@@ -73,21 +73,21 @@ func NewUser(s *store.Store) httprouter.Handle {
 			DateOfBirth: dateOfBirth,
 		}
 
-		/*err = u.Validate()
+		/*err = userDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}*/
 
-	/*	err = u.WithEncryptedPassword()
+		user := s.User().ModelFromDTO(&userDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v.", err)
 			return
-		}*/
+		}
 
-		_, err = s.User().Create(&u)
+		_, err = s.User().Create(user)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating user. Err msg:%v. ", err), http.StatusInternalServerError)
 			return

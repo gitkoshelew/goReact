@@ -1,6 +1,7 @@
 package store
 
 import (
+	"fmt"
 	"goReact/domain/model"
 )
 
@@ -34,6 +35,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM pet")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all pets. Err msg: %v", err)
+		return nil, err
 	}
 	pets := []model.PetDTO{}
 
@@ -91,7 +93,7 @@ func (r *PetRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg:%v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 	r.Store.Logger.Infof("Pet deleted, rows affectet: %d", result)
@@ -100,16 +102,42 @@ func (r *PetRepository) Delete(id int) error {
 
 // Update pet from DB
 func (r *PetRepository) Update(p *model.Pet) error {
-	result, err := r.Store.Db.Exec(
-		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 , photoURL = $6 WHERE id = $7",
-		p.Name,
-		string(p.Type),
-		p.Weight,
-		p.Diseases,
-		p.Owner,
-		p.PhotoURL,
-		p.PetID,
-	)
+	name := "name"
+	if p.Name != "" {
+		name = fmt.Sprintf("'%s'", p.Name)
+	}
+	petType := "type"
+	if p.Type != "" {
+		petType = fmt.Sprintf("'%s'", string(p.Type))
+	}
+	weight := "weight"
+	if p.Weight != 0 {
+		weight = fmt.Sprintf("%v", p.Weight)
+	}
+	diseases := "diseases"
+	if p.Diseases != "" {
+		diseases = fmt.Sprintf("'%s'", p.Diseases)
+	}
+	ownerID := "user_id"
+	if p.Owner.UserID != 0 {
+		ownerID = fmt.Sprintf("%d", p.Owner.UserID)
+	}
+	photoURL := "photoURL"
+	if p.PhotoURL != "" {
+		photoURL = fmt.Sprintf("'%s'", p.PhotoURL)
+	}
+
+	result, err := r.Store.Db.Exec(fmt.Sprintf(
+		`UPDATE pet SET 
+		name = %s, type = %s, weight = %s, diseases = %s, user_id = %s , photoURL = %s 
+		WHERE id = $1`,
+		name,
+		petType,
+		weight,
+		diseases,
+		ownerID,
+		photoURL,
+	), p.PetID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating pet. Err msg:%v.", err)
 		return err
@@ -122,7 +150,7 @@ func (r *PetRepository) Update(p *model.Pet) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating pet. Err msg:%v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 
@@ -139,12 +167,12 @@ func (r *PetRepository) ModelFromDTO(dto *model.PetDTO) (*model.Pet, error) {
 	u := r.Store.User().ModelFromDTO(userDTO)
 
 	return &model.Pet{
-		PetID:     dto.PetID,
-		Name:      dto.Name,
-		Type:      model.PetType(dto.Type),
-		Weight:    dto.Weight,
+		PetID:    dto.PetID,
+		Name:     dto.Name,
+		Type:     model.PetType(dto.Type),
+		Weight:   dto.Weight,
 		Diseases: dto.Diseases,
-		Owner:     *u,
-		PhotoURL:  dto.PhotoURL,
+		Owner:    *u,
+		PhotoURL: dto.PhotoURL,
 	}, nil
 }

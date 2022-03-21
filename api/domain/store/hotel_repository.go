@@ -1,6 +1,7 @@
 package store
 
 import (
+	"fmt"
 	"goReact/domain/model"
 
 	"github.com/lib/pq"
@@ -17,7 +18,8 @@ func (r *HotelRepository) Create(h *model.Hotel) (*int, error) {
 		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id",
 		h.Name,
 		h.Address,
-		pq.Array(h.Coordinates)).Scan(&h.HotelID); err != nil {
+		pq.Array(h.Coordinates),
+	).Scan(&h.HotelID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating hotel. Err msg:%v.", err)
 		return nil, err
 	}
@@ -31,6 +33,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM hotel")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all hotels. Err msg: %v", err)
+		return nil, err
 	}
 	hotels := []model.Hotel{}
 
@@ -81,7 +84,7 @@ func (r *HotelRepository) Delete(id int) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 	r.Store.Logger.Infof("Hotel with id %d was deleted.", id)
@@ -90,12 +93,28 @@ func (r *HotelRepository) Delete(id int) error {
 
 // Update hotel from DB
 func (r *HotelRepository) Update(h *model.Hotel) error {
+	name := "name"
+	if h.Name != "" {
+		name = fmt.Sprintf("'%s'", h.Name)
+	}
+	address := "address"
+	if h.Address != "" {
+		address = fmt.Sprintf("'%s'", h.Address)
+	}
+	coordinates := "coordinates"
+	if h.Coordinates != nil {
+		coordinates = fmt.Sprintf("'%v'", h.Coordinates)
+		StringOfArrayFromJSONToPSQL(&coordinates)
+	}
+
 	result, err := r.Store.Db.Exec(
-		"UPDATE hotel SET name = $1, address = $2 , coordinates = $3 WHERE id = $4",
-		h.Name,
-		h.Address,
-		pq.Array(h.Coordinates),
-		h.HotelID,
+		fmt.Sprintf(`UPDATE hotel SET 
+		name = %s, address = %s , coordinates = %s 
+		WHERE id = $1`,
+			name,
+			address,
+			coordinates,
+		), h.HotelID,
 	)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
@@ -109,7 +128,7 @@ func (r *HotelRepository) Update(h *model.Hotel) error {
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 

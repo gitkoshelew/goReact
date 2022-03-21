@@ -35,9 +35,8 @@ const (
 func (e *EmployeeDTO) Validate() error {
 	return validation.ValidateStruct(
 		e,
-		validation.Field(&e.EmployeeID, validation.Required),
-		validation.Field(&e.UserID, validation.Required),
-		validation.Field(&e.HotelID, validation.Required),
+		validation.Field(&e.UserID, validation.Required, validation.By(IsValidID)),
+		validation.Field(&e.HotelID, validation.Required, validation.By(IsValidID)),
 		validation.Field(&e.Position, validation.Required, validation.By(IsEmployeePosition)),
 	)
 }
