@@ -90,6 +90,19 @@ func TestPet() *Pet {
 	}
 }
 
+// TestPetDTO ...
+func TestPetDTO() *PetDTO {
+	return &PetDTO{
+		PetID:    1,
+		Name:     "Name",
+		Type:     string(PetTypeCat),
+		Weight:   1,
+		Diseases: "Diseases",
+		OwnerID:  1,
+		PhotoURL: "/",
+	}
+}
+
 // TestPage ...
 func TestPage() *pagination.Page {
 	return &pagination.Page{

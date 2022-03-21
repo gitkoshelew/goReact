@@ -106,7 +106,7 @@ func IsSex(value interface{}) error {
 // PetTypeCat = "cat"
 // PetTypeDog = "dog"
 func IsPetType(value interface{}) error {
-	s := value.(PetType)
+	s := PetType(value.(string))
 	if s == PetTypeCat || s == PetTypeDog {
 		return nil
 	}
