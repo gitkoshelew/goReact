@@ -16,13 +16,13 @@ func TestPetRepository_Create(t *testing.T) {
 		p := model.TestPet()
 		p.Owner = *u
 		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
+			PetID:    p.PetID,
+			Name:     p.Name,
+			Type:     p.Type,
+			Weight:   p.Weight,
+			Diseases: p.Diseases,
+			Owner:    *u,
+			PhotoURL: p.PhotoURL,
 		})
 		assert.NoError(t, err)
 		assert.NotNil(t, id)
@@ -43,13 +43,13 @@ func TestPetRepository_Delete(t *testing.T) {
 		p := model.TestPet()
 		p.Owner = *u
 		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
+			PetID:    p.PetID,
+			Name:     p.Name,
+			Type:     p.Type,
+			Weight:   p.Weight,
+			Diseases: p.Diseases,
+			Owner:    *u,
+			PhotoURL: p.PhotoURL,
 		})
 		err = s.Pet().Delete(*id)
 		assert.NoError(t, err)
@@ -70,13 +70,13 @@ func TestPetRepository_FindByID(t *testing.T) {
 		p := model.TestPet()
 		p.Owner = *u
 		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
+			PetID:    p.PetID,
+			Name:     p.Name,
+			Type:     p.Type,
+			Weight:   p.Weight,
+			Diseases: p.Diseases,
+			Owner:    *u,
+			PhotoURL: p.PhotoURL,
 		})
 		pDTO, err := s.Pet().FindByID(*id)
 		assert.NoError(t, err)
@@ -102,30 +102,30 @@ func TestPetRepository_Update(t *testing.T) {
 		p := model.TestPet()
 		p.Owner = *u
 		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
+			PetID:    p.PetID,
+			Name:     p.Name,
+			Type:     p.Type,
+			Weight:   p.Weight,
+			Diseases: p.Diseases,
+			Owner:    *u,
+			PhotoURL: p.PhotoURL,
 		})
 
 		p.PetID = *id
 		p.Name = "Sharik"
 		p.Type = "dog"
 		p.Weight = 2
-		p.Diesieses = "Izjoga"
+		p.Diseases = "Нет"
 		p.PhotoURL = "/1/2/jpg"
 
 		err = s.Pet().Update(&model.PetDTO{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      string(p.Type),
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			OwnerID:   p.Owner.UserID,
-			PhotoURL:  p.PhotoURL,
+			PetID:    p.PetID,
+			Name:     p.Name,
+			Type:     string(p.Type),
+			Weight:   p.Weight,
+			Diseases: p.Diseases,
+			OwnerID:  p.Owner.UserID,
+			PhotoURL: p.PhotoURL,
 		})
 		assert.NoError(t, err)
 	})

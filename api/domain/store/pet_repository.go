@@ -16,7 +16,7 @@ func (r *PetRepository) Create(p *model.Pet) (*int, error) {
 		p.Name,
 		p.Type,
 		p.Weight,
-		p.Diesieses,
+		p.Diseases,
 		p.Owner.UserID,
 		p.PhotoURL,
 	).Scan(&p.PetID); err != nil {
@@ -44,7 +44,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 			&pet.Name,
 			&pet.Type,
 			&pet.Weight,
-			&pet.Diesieses,
+			&pet.Diseases,
 			&pet.OwnerID,
 			&pet.PhotoURL,
 		)
@@ -66,7 +66,7 @@ func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 		&petDTO.Name,
 		&petDTO.Type,
 		&petDTO.Weight,
-		&petDTO.Diesieses,
+		&petDTO.Diseases,
 		&petDTO.OwnerID,
 		&petDTO.PhotoURL,
 	); err != nil {
@@ -105,7 +105,7 @@ func (r *PetRepository) Update(p *model.PetDTO) error {
 		p.Name,
 		string(p.Type),
 		p.Weight,
-		p.Diesieses,
+		p.Diseases,
 		p.OwnerID,
 		p.PhotoURL,
 		p.PetID,
@@ -139,12 +139,12 @@ func (r *PetRepository) ModelFromDTO(dto *model.PetDTO) (*model.Pet, error) {
 	u := r.Store.User().ModelFromDTO(userDTO)
 
 	return &model.Pet{
-		PetID:     dto.PetID,
-		Name:      dto.Name,
-		Type:      model.PetType(dto.Type),
-		Weight:    dto.Weight,
-		Diesieses: dto.Diesieses,
-		Owner:     *u,
-		PhotoURL:  dto.PhotoURL,
+		PetID:    dto.PetID,
+		Name:     dto.Name,
+		Type:     model.PetType(dto.Type),
+		Weight:   dto.Weight,
+		Diseases: dto.Diseases,
+		Owner:    *u,
+		PhotoURL: dto.PhotoURL,
 	}, nil
 }
