@@ -17,9 +17,10 @@ export const BookingPageAPI = {
   getAllBookingPayment(): Promise<AxiosResponse<FetchBookingPaymentResponse>> {
     return apiBookingPayment.get('api/cards')
   },
-  async createBookingPayment(newCard: BookingPaymentFormType): Promise<AxiosResponse<FetchBookingPaymentResponse>> {
-    const res = await apiBookingPayment.post('api/cards', newCard)
-    console.log(res)
+  async createBookingPayment(
+    newPaymentCard: BookingPaymentFormType
+  ): Promise<AxiosResponse<FetchBookingPaymentResponse>> {
+    const res = await apiBookingPayment.post('api/cards', newPaymentCard)
     return res
   },
 }
