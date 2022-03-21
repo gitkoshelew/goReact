@@ -80,13 +80,26 @@ func TestEmployeeDTO() *EmployeeDTO {
 // TestPet ...
 func TestPet() *Pet {
 	return &Pet{
-		PetID:     1,
-		Name:      "Name",
-		Type:      PetTypeCat,
-		Weight:    1,
-		Diesieses: "Disease",
-		Owner:     *TestUser(),
-		PhotoURL:  "/",
+		PetID:    1,
+		Name:     "Name",
+		Type:     PetTypeCat,
+		Weight:   1,
+		Diseases: "Diseases",
+		Owner:    *TestUser(),
+		PhotoURL: "/",
+	}
+}
+
+// TestPetDTO ...
+func TestPetDTO() *PetDTO {
+	return &PetDTO{
+		PetID:    1,
+		Name:     "Name",
+		Type:     string(PetTypeCat),
+		Weight:   1,
+		Diseases: "Diseases",
+		OwnerID:  1,
+		PhotoURL: "/",
 	}
 }
 

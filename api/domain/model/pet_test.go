@@ -10,20 +10,20 @@ import (
 func TestPet_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		u       func() *model.Pet
+		u       func() *model.PetDTO
 		isValid bool
 	}{
 		{
 			name: "valid",
-			u: func() *model.Pet {
-				return model.TestPet()
+			u: func() *model.PetDTO {
+				return model.TestPetDTO()
 			},
 			isValid: true,
 		},
 		{
 			name: "Invalid Name",
-			u: func() *model.Pet {
-				p := model.TestPet()
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
 				p.Name = "Name@123"
 				return p
 			},
@@ -31,8 +31,8 @@ func TestPet_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Name",
-			u: func() *model.Pet {
-				p := model.TestPet()
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
 				p.Name = ""
 				return p
 			},
@@ -40,48 +40,66 @@ func TestPet_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Type",
-			u: func() *model.Pet {
-				p := model.TestPet()
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
 				p.Type = "Invalid"
 				return p
 			},
 			isValid: false,
 		},
 		{
-			name: "Valid Type",
-			u: func() *model.Pet {
-				p := model.TestPet()
-				p.Type = "cat"
-				return p
-			},
-			isValid: true,
-		},
-		{
-			name: "Invalid Weight",
-			u: func() *model.Pet {
-				p := model.TestPet()
+			name: "Big Weight",
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
 				p.Weight = 999
 				return p
 			},
 			isValid: false,
-		},		
+		},
 		{
-			name: "Invalid Weight",
-			u: func() *model.Pet {
-				p := model.TestPet()
-				p.Weight = 0
+			name: "Small Weight",
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
+				p.Weight = 0.001
 				return p
 			},
 			isValid: false,
-		},				
+		},
 		{
-			name: "Valid Weight",
-			u: func() *model.Pet {
-				p := model.TestPet()
-				p.Weight = 2
+			name: "SQL Diseases",
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
+				p.Diseases = "AL (&-Te R"
 				return p
 			},
-			isValid: true,
+			isValid: false,
+		},
+		{
+			name: "Empty OwnerID",
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
+				p.OwnerID = 0
+				return p
+			},
+			isValid: false,
+		},
+		{
+			name: "invalid OwnerID",
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
+				p.OwnerID = -1
+				return p
+			},
+			isValid: false,
+		},
+		{
+			name: "SQL PhotoURL",
+			u: func() *model.PetDTO {
+				p := model.TestPetDTO()
+				p.PhotoURL = "AL (&-Te R"
+				return p
+			},
+			isValid: false,
 		},
 	}
 
@@ -94,10 +112,4 @@ func TestPet_Validate(t *testing.T) {
 			}
 		})
 	}
-}
-
-func TestPet_NewPet(t *testing.T) {
-	p := model.TestPet()
-	p.PetID = 1
-	assert.NotNil(t, p)
 }

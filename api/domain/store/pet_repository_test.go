@@ -9,124 +9,327 @@ import (
 )
 
 func TestPetRepository_Create(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("valid", func(t *testing.T) {
-		u := model.TestUser()
-		p := model.TestPet()
-		p.Owner = *u
-		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		model   func() *model.Pet
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.Pet {
+				testStore.Open()
+
+				pet := model.TestPet()
+				pet.Owner.UserID = id.User
+
+				return pet
+			},
+			isValid: true,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.Pet {
+				testStore.Close()
+				return model.TestPet()
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Pet().Create(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Pet().Create(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
 		})
-		assert.NoError(t, err)
-		assert.NotNil(t, id)
-	})
-}
-
-func TestPetRepository_Delete(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("invalid Delete id", func(t *testing.T) {
-		id := 0
-		err := s.Pet().Delete(id)
-		assert.Error(t, err)
-	})
-
-	t.Run("valid Delete id", func(t *testing.T) {
-		u := model.TestUser()
-		p := model.TestPet()
-		p.Owner = *u
-		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
-		})
-		err = s.Pet().Delete(*id)
-		assert.NoError(t, err)
-	})
-}
-
-func TestPetRepository_FindByID(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("invalid find by id", func(t *testing.T) {
-		id := 2
-		_, err := s.Pet().FindByID(id)
-		assert.Error(t, err)
-	})
-	t.Run("valid find by id", func(t *testing.T) {
-		u := model.TestUser()
-
-		p := model.TestPet()
-		p.Owner = *u
-		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
-		})
-		pDTO, err := s.Pet().FindByID(*id)
-		assert.NoError(t, err)
-		assert.NotNil(t, pDTO)
-	})
+	}
 }
 
 func TestPetRepository_GetAll(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("Get all valid", func(t *testing.T) {
-		p, err := s.Pet().GetAll()
-		assert.NoError(t, err)
-		assert.NotNil(t, p)
-	})
+	teardown()
+	defer teardown()
+	store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		s       func() *store.Store
+		isValid bool
+	}{
+		{
+			name: "valid",
+			s: func() *store.Store {
+				testStore.Open()
+				return testStore
+			},
+			isValid: true,
+		},
+		{
+			name: "DB closed",
+			s: func() *store.Store {
+				st := testStore
+				st.Close()
+				return st
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := tc.s().Pet().GetAll()
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := tc.s().Pet().GetAll()
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
+}
+
+func TestPetRepository_FindByID(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		id      func() int
+		isValid bool
+	}{
+		{
+			name: "valid",
+			id: func() int {
+				testStore.Open()
+				return id.Pet
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid ID",
+			id: func() int {
+				testStore.Open()
+				return 0
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			id: func() int {
+				testStore.Close()
+				return id.Pet
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Pet().FindByID(tc.id())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Pet().FindByID(tc.id())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
+}
+
+func TestPetRepository_Delete(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		id      func() int
+		isValid bool
+	}{
+		{
+			name: "valid",
+			id: func() int {
+				testStore.Open()
+				pet := model.TestPet()
+				pet.Owner.UserID = id.User
+				id, _ := testStore.Pet().Create(pet)
+				return *id
+			},
+			isValid: true,
+		},
+		{
+			name: "Invalid ID",
+			id: func() int {
+				testStore.Open()
+				return 0
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			id: func() int {
+				testStore.Close()
+				return id.Pet
+			},
+			isValid: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				err := testStore.Pet().Delete(tc.id())
+				assert.NoError(t, err)
+				testStore.Close()
+			} else {
+				err := testStore.Pet().Delete(tc.id())
+				testStore.Close()
+				assert.Error(t, err)
+			}
+		})
+	}
 }
 
 func TestPetRepository_Update(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("valid update", func(t *testing.T) {
-		u := model.TestUser()
-		p := model.TestPet()
-		p.Owner = *u
-		id, err := s.Pet().Create(&model.Pet{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      p.Type,
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			Owner:     *u,
-			PhotoURL:  p.PhotoURL,
-		})
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
 
-		p.PetID = *id
-		p.Name = "Sharik"
-		p.Type = "dog"
-		p.Weight = 2
-		p.Diesieses = "Izjoga"
-		p.PhotoURL = "/1/2/jpg"
+	testCases := []struct {
+		name    string
+		model   func() *model.Pet
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.Pet {
+				testStore.Open()
 
-		err = s.Pet().Update(&model.PetDTO{
-			PetID:     p.PetID,
-			Name:      p.Name,
-			Type:      string(p.Type),
-			Weight:    p.Weight,
-			Diesieses: p.Diesieses,
-			OwnerID:   p.Owner.UserID,
-			PhotoURL:  p.PhotoURL,
+				pet := model.TestPet()
+				pet.PetID = id.Pet
+				pet.Owner.UserID = id.Employee
+
+				return pet
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid ID",
+			model: func() *model.Pet {
+				testStore.Open()
+
+				pet := model.TestPet()
+				pet.PetID = 0
+				pet.Owner.UserID = id.Employee
+
+				return pet
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.Pet {
+				testStore.Close()
+
+				pet := model.TestPet()
+				pet.PetID = id.Pet
+				pet.Owner.UserID = id.Employee
+				return pet
+			},
+			isValid: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				err := testStore.Pet().Update(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+			} else {
+				err := testStore.Pet().Update(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+			}
 		})
-		assert.NoError(t, err)
-	})
+	}
+}
+
+func TestPetRepository_ModelFromDTO(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		model   func() *model.PetDTO
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.PetDTO {
+				testStore.Open()
+
+				pet := model.TestPetDTO()
+				pet.OwnerID = id.User
+
+				return pet
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid OwnerId",
+			model: func() *model.PetDTO {
+				testStore.Open()
+
+				pet := model.TestPetDTO()
+				pet.OwnerID = 0
+
+				return pet
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.PetDTO {
+				testStore.Close()
+				p := model.TestPetDTO()
+				return p
+			},
+			isValid: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Pet().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Pet().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
 }
