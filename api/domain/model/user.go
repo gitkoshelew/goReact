@@ -10,19 +10,19 @@ import (
 
 // User extends Account and has all Account fields
 type User struct {
-	UserID      int       `json:"userId"`
-	Email       string    `json:"email"`
-	Password    string    `json:"-"`
-	Role        Role      `json:"role"`
-	Verified    bool      `json:"verified"`
-	Name        string    `json:"name"`
-	Surname     string    `json:"sName"`
-	MiddleName  string    `json:"mName"`
-	Sex         Sex       `json:"sex"`
-	DateOfBirth time.Time `json:"birthDate"`
-	Address     string    `json:"address"`
-	Phone       string    `json:"phone"`
-	Photo       string    `json:"photo"`
+	UserID      int        `json:"userId"`
+	Email       string     `json:"email"`
+	Password    string     `json:"-"`
+	Role        Role       `json:"role"`
+	Verified    *bool      `json:"verified"`
+	Name        string     `json:"name"`
+	Surname     string     `json:"sName"`
+	MiddleName  string     `json:"mName"`
+	Sex         Sex        `json:"sex"`
+	DateOfBirth *time.Time `json:"birthDate"`
+	Address     string     `json:"address"`
+	Phone       string     `json:"phone"`
+	Photo       string     `json:"photo"`
 }
 
 // UserDTO ...

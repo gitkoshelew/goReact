@@ -259,7 +259,8 @@ func TestUser_Validate(t *testing.T) {
 			name: "Under age 18 DateOfBirth",
 			u: func() *model.User {
 				u := model.TestUser()
-				u.DateOfBirth = time.Now()
+				dateOfBirth := time.Now()
+				u.DateOfBirth = &dateOfBirth
 				return u
 			},
 			isValid: false,
@@ -268,7 +269,8 @@ func TestUser_Validate(t *testing.T) {
 			name: "Above age 100 DateOfBirth",
 			u: func() *model.User {
 				u := model.TestUser()
-				u.DateOfBirth = time.Now().AddDate(-100, 0, -1)
+				dateOfBirth := time.Now().AddDate(-100, 0, -1)
+				u.DateOfBirth = &dateOfBirth
 				return u
 			},
 			isValid: false,

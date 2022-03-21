@@ -1,7 +1,9 @@
 package store
 
 import (
+	"fmt"
 	"goReact/domain/model"
+	"time"
 )
 
 // SeatRepository ...
@@ -18,7 +20,7 @@ func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 		s.RentTo,
 		s.Description,
 	).Scan(&s.SeatID); err != nil {
-		r.Store.Logger.Errorf("Error occured while creating seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while creating seat. Err msg: %v.", err)
 		return nil, err
 	}
 
@@ -32,6 +34,7 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM seat")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
+		return nil, err
 	}
 	seats := []model.SeatDTO{}
 
@@ -64,7 +67,7 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 		&seatDTO.RentFrom,
 		&seatDTO.RentTo,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg: %v.", err)
 		return nil, err
 	}
 
@@ -75,17 +78,17 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 func (r *SeatRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM seat WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg: %v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg: %v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 
@@ -94,28 +97,46 @@ func (r *SeatRepository) Delete(id int) error {
 }
 
 // Update seat from DB
-func (r *SeatRepository) Update(s *model.SeatDTO) error {
-	result, err := r.Store.Db.Exec(
-		"UPDATE seat SET room_id = $1, rent_from = $2, rent_to = $3, description = $4 WHERE id = $5",
-		s.RoomID,
-		s.RentFrom,
-		s.RentTo,
-		s.Description,
-		s.SeatID,
-	)
+func (r *SeatRepository) Update(s *model.Seat) error {
+	roomID := "room_id"
+	if s.Room.RoomID != 0 {
+		roomID = fmt.Sprintf("%d", s.Room.RoomID)
+	}
+	rentFrom := "rent_from"
+	if s.RentFrom != nil {
+		rentFrom = fmt.Sprintf("'%s'", s.RentFrom.Format(time.RFC3339))
+	}
+	rentTo := "rent_to"
+	if s.RentTo != nil {
+		rentTo = fmt.Sprintf("'%s'", s.RentTo.Format(time.RFC3339))
+	}
+	description := "description"
+	if s.Description != "" {
+		description = fmt.Sprintf("'%s'", s.Description)
+	}
+
+	result, err := r.Store.Db.Exec(fmt.Sprintf(
+		`UPDATE seat SET 
+		room_id = %s, rent_from = %s, rent_to = %s, description = %s 
+		WHERE id = $1`,
+		roomID,
+		rentFrom,
+		rentTo,
+		description,
+	), s.SeatID)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating seat. Err msg: %v.", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating seat. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating seat. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating seat. Err msg: %v.", ErrNoRowsAffected)
 		return ErrNoRowsAffected
 	}
 

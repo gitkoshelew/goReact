@@ -58,8 +58,8 @@ func NewUser(s *store.Store) httprouter.Handle {
 			Address:     address,
 			Phone:       phone,
 			Photo:       photo,
-			Verified:    verified,
-			DateOfBirth: dateOfBirth,
+			Verified:    &verified,
+			DateOfBirth: &dateOfBirth,
 		}
 		_, err = s.User().Create(&u)
 		if err != nil {

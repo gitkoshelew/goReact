@@ -2,8 +2,10 @@ package store
 
 import (
 	"errors"
+	"fmt"
 	"goReact/domain/model"
 	"strings"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -171,33 +173,81 @@ func (r *UserRepository) Delete(id int) error {
 }
 
 // Update user from DB
-func (r *UserRepository) Update(u *model.UserDTO) error {
-	encryptedPassword, err := model.EncryptPassword(u.Password)
-	if err != nil {
-		r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
-		return err
+func (r *UserRepository) Update(u *model.User) error {
+
+	password := "password"
+	if u.Password != "" {
+		encryptedPassword, err := model.EncryptPassword(u.Password)
+		if err != nil {
+			r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
+			return err
+		}
+		password = fmt.Sprintf("'%s'", encryptedPassword)
+	}
+	email := "email"
+	if u.Email != "" {
+		email = fmt.Sprintf("'%s'", u.Email)
+	}
+	role := "role"
+	if u.Role != "" {
+		role = fmt.Sprintf("'%s'", string(u.Role))
+	}
+	verified := "verified"
+	if u.Verified != nil {
+		verified = fmt.Sprintf("%v", *u.Verified)
+	}
+	name := "first_name"
+	if u.Name != "" {
+		name = fmt.Sprintf("'%s'", u.Name)
+	}
+	surname := "surname"
+	if u.Surname != "" {
+		surname = fmt.Sprintf("'%s'", u.Surname)
+	}
+	middlename := "middle_name"
+	if u.MiddleName != "" {
+		middlename = fmt.Sprintf("'%s'", u.MiddleName)
+	}
+	sex := "sex"
+	if u.Sex != "" {
+		sex = fmt.Sprintf("'%s'", string(u.Sex))
+	}
+	dateOfBirth := "date_of_birth"
+	if u.DateOfBirth != nil {
+		dateOfBirth = fmt.Sprintf("'%s'", u.DateOfBirth.Format(time.RFC3339))
+	}
+	address := "address"
+	if u.Address != "" {
+		address = fmt.Sprintf("'%s'", u.Address)
+	}
+	phone := "phone"
+	if u.Phone != "" {
+		phone = fmt.Sprintf("'%s'", u.Phone)
+	}
+	photo := "photo"
+	if u.Photo != "" {
+		photo = fmt.Sprintf("'%s'", u.Photo)
 	}
 
-	result, err := r.Store.Db.Exec(
+	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE users SET 
-			email = $1, password = $2, role = $3, verified = $4, 
-			first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, 
-			address = $10, phone = $11, photo = $12 
-			WHERE id = $13`,
-		u.Email,
-		encryptedPassword,
-		u.Role,
-		u.Verified,
-		strings.Title(strings.ToLower(u.Name)),
-		strings.Title(strings.ToLower(u.Surname)),
-		strings.Title(strings.ToLower(u.MiddleName)),
-		u.Sex,
-		u.DateOfBirth,
-		u.Address,
-		u.Phone,
-		u.Photo,
-		u.UserID,
-	)
+			email = %s, password = %s, role = %s, verified = %s, 
+			first_name = %s, surname = %s, middle_name = %s, sex = %s, date_of_birth = %s, 
+			address = %s, phone = %s, photo = %s 
+			WHERE id = $1`,
+		email,
+		password,
+		role,
+		verified,
+		strings.Title(strings.ToLower(name)),
+		strings.Title(strings.ToLower(surname)),
+		strings.Title(strings.ToLower(middlename)),
+		sex,
+		dateOfBirth,
+		address,
+		phone,
+		photo,
+	), u.UserID)
 	if err != nil {
 		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %v", err)
 		return err
@@ -286,12 +336,12 @@ func (r *UserRepository) ModelFromDTO(u *model.UserDTO) *model.User {
 		Email:       u.Email,
 		Password:    u.Password,
 		Role:        model.Role(u.Role),
-		Verified:    u.Verified,
+		Verified:    &u.Verified,
 		Name:        u.Name,
 		Surname:     u.Surname,
 		MiddleName:  u.MiddleName,
 		Sex:         model.Sex(u.Sex),
-		DateOfBirth: u.DateOfBirth,
+		DateOfBirth: &u.DateOfBirth,
 		Address:     u.Address,
 		Phone:       u.Phone,
 		Photo:       u.Photo,
