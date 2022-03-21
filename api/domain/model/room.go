@@ -23,12 +23,12 @@ type RoomDTO struct {
 }
 
 // Validate ...
-func (r *Room) Validate() error {
+func (r *RoomDTO) Validate() error {
 	return validation.ValidateStruct(
 		r,
-		validation.Field(&r.RoomNumber, validation.Required, validation.Min(1), validation.Max(999999999999)),
+		validation.Field(&r.RoomNumber, validation.Required, validation.Min(1), validation.Max(999)),
 		validation.Field(&r.PetType, validation.Required, validation.By(IsPetType)),
-		validation.Field(&r.Hotel, validation.Required),
-		validation.Field(&r.PhotoURL, validation.Required, validation.Length(2, 40)),
+		validation.Field(&r.HotelID, validation.Required, validation.By(IsValidID)),
+		validation.Field(&r.PhotoURL, validation.By(IsSQL)),
 	)
 }
