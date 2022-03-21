@@ -34,9 +34,7 @@ func ValidateUser(next http.Handler, s *store.Store) httprouter.Handle {
 			return
 		}
 
-		user := s.User().ModelFromDTO(userDTO)
-
-		err = user.Validate()
+		err = userDTO.Validate()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
