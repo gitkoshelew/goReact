@@ -7,17 +7,19 @@ import (
 
 // TestUser ...
 func TestUser() *User {
+	verified := true
+	dateOfBirth := time.Time{}.AddDate(2000, 2, 2)
 	return &User{
 		UserID:      1,
 		Email:       "email@example.org",
 		Password:    "password",
 		Role:        "client",
-		Verified:    true,
+		Verified:    &verified,
 		Name:        "Name",
 		Surname:     "Surname",
 		MiddleName:  "MiddleName",
 		Sex:         "male",
-		DateOfBirth: time.Time{}.AddDate(2000, 2, 2),
+		DateOfBirth: &dateOfBirth,
 		Address:     "Minsk Pr. Nezavisimosti 22-222",
 		Phone:       "+375-29-154-89-33",
 		Photo:       "Photo",
@@ -121,6 +123,19 @@ func TestSeat() *Seat {
 		RentFrom:    &rentFrom,
 		RentTo:      &rentTo,
 		Room:        *TestRoom(),
+	}
+}
+
+// TestSeatDTO ...
+func TestSeatDTO() *SeatDTO {
+	rentFrom := time.Now().AddDate(0, 0, 1)
+	rentTo := time.Now().AddDate(0, 0, 10)
+	return &SeatDTO{
+		SeatID:      1,
+		Description: "Description of seat",
+		RentFrom:    &rentFrom,
+		RentTo:      &rentTo,
+		RoomID:      1,
 	}
 }
 
