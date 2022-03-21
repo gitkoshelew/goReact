@@ -11,26 +11,26 @@ import (
 func TestBooking_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		b       func() *model.Booking
+		b       func() *model.BookingDTO
 		isValid bool
 	}{
 		{
 			name: "valid",
-			b: func() *model.Booking {
+			b: func() *model.BookingDTO {
 				return model.TestBooking()
 			},
 			isValid: true,
 		},
 		{
 			name: "valid seat",
-			b: func() *model.Booking {
+			b: func() *model.BookingDTO {
 				b := model.TestBooking()
 				s := model.TestSeat()
 				p := model.TestPet()
 				e := model.TestEmployee()
-				b.Seat = *s
-				b.Pet = *p
-				b.Employee = *e
+				b.SeatID = s.SeatID
+				b.PetID = p.PetID
+				b.EmployeeID = e.EmployeeID
 
 				return b
 			},
@@ -38,16 +38,16 @@ func TestBooking_Validate(t *testing.T) {
 		},
 		{
 			name: "valid status",
-			b: func() *model.Booking {
+			b: func() *model.BookingDTO {
 				b := model.TestBooking()
-				b.Status = model.BookingStatusCancelled
+				b.Status = string(model.BookingStatusCancelled)
 				return b
 			},
 			isValid: true,
 		},
 		{
 			name: "invalid position",
-			b: func() *model.Booking {
+			b: func() *model.BookingDTO {
 				b := model.TestBooking()
 				b.Status = "st"
 				return b
@@ -56,7 +56,7 @@ func TestBooking_Validate(t *testing.T) {
 		},
 		{
 			name: "valid EndDate",
-			b: func() *model.Booking {
+			b: func() *model.BookingDTO {
 				a := time.Time{}.AddDate(2000, 2, 2)
 				b := model.TestBooking()
 				b.EndDate = &a

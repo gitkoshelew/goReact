@@ -12,20 +12,20 @@ func TestPetRepository_Create(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 	t.Run("valid", func(t *testing.T) {
-		u, err := s.User().Create(model.TestUser())
+		u := model.TestUser()
 		p := model.TestPet()
 		p.Owner = *u
-		p, err = s.Pet().Create(&model.PetDTO{
+		id, err := s.Pet().Create(&model.Pet{
 			PetID:     p.PetID,
 			Name:      p.Name,
-			Type:      string(p.Type),
+			Type:      p.Type,
 			Weight:    p.Weight,
 			Diseases: p.Diseases,
-			OwnerID:   p.Owner.UserID,
+			Owner:     *u,
 			PhotoURL:  p.PhotoURL,
 		})
 		assert.NoError(t, err)
-		assert.NotNil(t, p)
+		assert.NotNil(t, id)
 	})
 }
 
@@ -33,25 +33,25 @@ func TestPetRepository_Delete(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 	t.Run("invalid Delete id", func(t *testing.T) {
-		id := 2
+		id := 0
 		err := s.Pet().Delete(id)
 		assert.Error(t, err)
 	})
 
 	t.Run("valid Delete id", func(t *testing.T) {
-		u, err := s.User().Create(model.TestUser())
+		u := model.TestUser()
 		p := model.TestPet()
 		p.Owner = *u
-		p, err = s.Pet().Create(&model.PetDTO{
+		id, err := s.Pet().Create(&model.Pet{
 			PetID:     p.PetID,
 			Name:      p.Name,
-			Type:      string(p.Type),
+			Type:      p.Type,
 			Weight:    p.Weight,
 			Diseases: p.Diseases,
-			OwnerID:   p.Owner.UserID,
+			Owner:     *u,
 			PhotoURL:  p.PhotoURL,
 		})
-		err = s.Pet().Delete(p.PetID)
+		err = s.Pet().Delete(*id)
 		assert.NoError(t, err)
 	})
 }
@@ -65,22 +65,22 @@ func TestPetRepository_FindByID(t *testing.T) {
 		assert.Error(t, err)
 	})
 	t.Run("valid find by id", func(t *testing.T) {
-		u, err := s.User().Create(model.TestUser())
+		u := model.TestUser()
 
 		p := model.TestPet()
 		p.Owner = *u
-		p, err = s.Pet().Create(&model.PetDTO{
+		id, err := s.Pet().Create(&model.Pet{
 			PetID:     p.PetID,
 			Name:      p.Name,
-			Type:      string(p.Type),
+			Type:      p.Type,
 			Weight:    p.Weight,
 			Diseases: p.Diseases,
-			OwnerID:   p.Owner.UserID,
+			Owner:     *u,
 			PhotoURL:  p.PhotoURL,
 		})
-		p, err = s.Pet().FindByID(p.PetID)
+		pDTO, err := s.Pet().FindByID(*id)
 		assert.NoError(t, err)
-		assert.NotNil(t, p)
+		assert.NotNil(t, pDTO)
 	})
 }
 
@@ -98,19 +98,20 @@ func TestPetRepository_Update(t *testing.T) {
 	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
 	t.Cleanup(teardown)
 	t.Run("valid update", func(t *testing.T) {
-		u, err := s.User().Create(model.TestUser())
+		u := model.TestUser()
 		p := model.TestPet()
 		p.Owner = *u
-		p, err = s.Pet().Create(&model.PetDTO{
+		id, err := s.Pet().Create(&model.Pet{
 			PetID:     p.PetID,
 			Name:      p.Name,
-			Type:      string(p.Type),
+			Type:      p.Type,
 			Weight:    p.Weight,
 			Diseases: p.Diseases,
-			OwnerID:   p.Owner.UserID,
+			Owner:     *u,
 			PhotoURL:  p.PhotoURL,
 		})
 
+		p.PetID = *id
 		p.Name = "Sharik"
 		p.Type = "dog"
 		p.Weight = 2

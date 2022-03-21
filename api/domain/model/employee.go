@@ -32,12 +32,12 @@ const (
 )
 
 // Validate ...
-func (e *Employee) Validate() error {
+func (e *EmployeeDTO) Validate() error {
 	return validation.ValidateStruct(
 		e,
 		validation.Field(&e.EmployeeID, validation.Required),
-		validation.Field(&e.User, validation.Required),
-		validation.Field(&e.Hotel, validation.Required),
+		validation.Field(&e.UserID, validation.Required),
+		validation.Field(&e.HotelID, validation.Required),
 		validation.Field(&e.Position, validation.Required, validation.By(IsEmployeePosition)),
 	)
 }

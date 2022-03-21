@@ -12,31 +12,27 @@ type BookingRepository struct {
 }
 
 // Create booking and save it to DB
-func (r *BookingRepository) Create(b *model.BookingDTO) (*model.Booking, error) {
+func (r *BookingRepository) Create(booking *model.Booking) (*model.Booking, error) {
+
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO booking
 		(seat_id, pet_id, employee_id, status, start_date, end_date, paid, notes, transactionId)
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
-		b.SeatID,
-		b.PetID,
-		b.EmployeeID,
-		string(b.Status),
-		b.StartDate,
-		b.EndDate,
-		b.Paid,
-		b.Notes,
-		b.TransactionID,
-	).Scan(&b.BookingID); err != nil {
-		r.Store.Logger.Errorf("Eror occured while creating booking. Err msg: %w", err)
+		booking.Seat.SeatID,
+		booking.Pet.PetID,
+		booking.Employee.EmployeeID,
+		string(booking.Status),
+		booking.StartDate,
+		booking.EndDate,
+		booking.Paid,
+		booking.Notes,
+		booking.TransactionID,
+	).Scan(&booking.BookingID); err != nil {
+		r.Store.Logger.Errorf("Eror occured while creating booking. Err msg: %v", err)
 		return nil, err
 	}
 
-	booking, err := r.ModelFromDTO(b)
-	if err != nil {
-		return nil, err
-	}
-
-	r.Store.Logger.Infof("Booking with id %d was created.", b.BookingID)
+	r.Store.Logger.Infof("Booking with id %d was created.", booking.BookingID)
 
 	return booking, nil
 }
@@ -45,32 +41,32 @@ func (r *BookingRepository) Create(b *model.BookingDTO) (*model.Booking, error) 
 func (r *BookingRepository) GetAll() (*[]model.BookingDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM booking")
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %v", err)
 		return nil, err
 	}
-	bookings := []model.BookingDTO{}
+	bookingsDTO := []model.BookingDTO{}
 
 	for rows.Next() {
-		booking := model.BookingDTO{}
+		bookingDTO := model.BookingDTO{}
 		err := rows.Scan(
-			&booking.BookingID,
-			&booking.SeatID,
-			&booking.PetID,
-			&booking.EmployeeID,
-			&booking.Status,
-			&booking.StartDate,
-			&booking.EndDate,
-			&booking.Notes,
-			&booking.TransactionID,
-			&booking.Paid,
+			&bookingDTO.BookingID,
+			&bookingDTO.SeatID,
+			&bookingDTO.PetID,
+			&bookingDTO.EmployeeID,
+			&bookingDTO.Status,
+			&bookingDTO.StartDate,
+			&bookingDTO.EndDate,
+			&bookingDTO.Notes,
+			&bookingDTO.TransactionID,
+			&bookingDTO.Paid,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %w", err)
+			r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %v", err)
 			continue
 		}
-		bookings = append(bookings, booking)
+		bookingsDTO = append(bookingsDTO, bookingDTO)
 	}
-	return &bookings, nil
+	return &bookingsDTO, nil
 }
 
 //FindByID searchs and returns booking by ID
@@ -89,7 +85,7 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 		&bookingDTO.TransactionID,
 		&bookingDTO.Paid,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror occured while searching booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while searching booking. Err msg: %v", err)
 		return nil, err
 	}
 
@@ -105,18 +101,18 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 func (r *BookingRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM booking WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg: %v", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg: %v.", err)
 		return ErrNoRowsAffected
 	}
 
@@ -178,18 +174,18 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 			transactionID,
 		), b.BookingID)
 	if err != nil {
-		r.Store.Logger.Errorf("Erorr occured while updating booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Erorr occured while updating booking. Err msg: %v", err)
 		return err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating booking. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating booking. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating booking. Err msg: %v.", err)
 		return ErrNoRowsAffected
 	}
 
@@ -199,15 +195,28 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 
 // ModelFromDTO ...
 func (r *BookingRepository) ModelFromDTO(dto *model.BookingDTO) (*model.Booking, error) {
-	seat, err := r.Store.Seat().FindByID(dto.SeatID)
+	seatDTO, err := r.Store.Seat().FindByID(dto.SeatID)
 	if err != nil {
 		return nil, err
 	}
-	pet, err := r.Store.Pet().FindByID(dto.PetID)
+	seat, err := r.Store.Seat().ModelFromDTO(seatDTO)
 	if err != nil {
 		return nil, err
 	}
-	employee, err := r.Store.Employee().FindByID(dto.EmployeeID)
+	petDTO, err := r.Store.Pet().FindByID(dto.PetID)
+	if err != nil {
+		return nil, err
+	}
+	pet, err := r.Store.Pet().ModelFromDTO(petDTO)
+	if err != nil {
+		return nil, err
+	}
+
+	employeeDTO, err := r.Store.Employee().FindByID(dto.EmployeeID)
+	if err != nil {
+		return nil, err
+	}
+	employee, err := r.Store.Employee().ModelFromDTO(employeeDTO)
 	if err != nil {
 		return nil, err
 	}

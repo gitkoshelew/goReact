@@ -44,8 +44,9 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 			http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
+		u := s.User().ModelFromDTO(user)
 
-		users = append(users, *user)
+		users = append(users, *u)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allUsers.html",

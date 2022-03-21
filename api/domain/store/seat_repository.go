@@ -10,10 +10,10 @@ type SeatRepository struct {
 }
 
 // Create seat and save it to DB
-func (r *SeatRepository) Create(s *model.SeatDTO) (*model.Seat, error) {
+func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO seat (room_id, rent_from, rent_to, description) VALUES ($1, $2, $3, $4) RETURNING id",
-		s.RoomID,
+		s.Room.RoomID,
 		s.RentFrom,
 		s.RentTo,
 		s.Description,
@@ -22,15 +22,9 @@ func (r *SeatRepository) Create(s *model.SeatDTO) (*model.Seat, error) {
 		return nil, err
 	}
 
-	seat, err := r.ModelFromDTO(s)
-	if err != nil {
-		r.Store.Logger.Errorf("Error occured while creating seat. Err msg:%v.", err)
-		return nil, err
-	}
-
 	r.Store.Logger.Infof("Seat with id %d was created.", s.SeatID)
 
-	return seat, nil
+	return &s.SeatID, nil
 }
 
 // GetAll returns all seats
@@ -60,7 +54,7 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 }
 
 //FindByID searchs and returns seat by ID
-func (r *SeatRepository) FindByID(id int) (*model.Seat, error) {
+func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 	seatDTO := &model.SeatDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM seat WHERE id = $1",
 		id).Scan(
@@ -74,12 +68,7 @@ func (r *SeatRepository) FindByID(id int) (*model.Seat, error) {
 		return nil, err
 	}
 
-	seat, err := r.ModelFromDTO(seatDTO)
-	if err != nil {
-		return nil, err
-	}
-
-	return seat, nil
+	return seatDTO, nil
 }
 
 // Delete seat from DB by ID
@@ -137,7 +126,11 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 
 // ModelFromDTO ...
 func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
-	room, err := r.Store.RoomRepository.FindByID(dto.RoomID)
+	roomDTO, err := r.Store.Room().FindByID(dto.RoomID)
+	if err != nil {
+		return nil, err
+	}
+	room, err := r.Store.Room().ModelFromDTO(roomDTO)
 	if err != nil {
 		return nil, err
 	}

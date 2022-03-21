@@ -12,7 +12,7 @@ type HotelRepository struct {
 }
 
 // Create hotel and save it to DB
-func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
+func (r *HotelRepository) Create(h *model.Hotel) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id",
 		h.Name,
@@ -22,8 +22,8 @@ func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
 		return nil, err
 	}
 
-	r.Store.Logger.Info("Created hotel with id = %d", h.HotelID)
-	return h, nil
+	r.Store.Logger.Infof("Created hotel with id = %d", h.HotelID)
+	return &h.HotelID, nil
 }
 
 // GetAll returns all hotels
@@ -84,7 +84,7 @@ func (r *HotelRepository) Delete(id int) error {
 		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
 		return ErrNoRowsAffected
 	}
-	r.Store.Logger.Info("Hotel with id %d was deleted.", id)
+	r.Store.Logger.Infof("Hotel with id %d was deleted.", id)
 	return nil
 }
 
@@ -113,6 +113,6 @@ func (r *HotelRepository) Update(h *model.Hotel) error {
 		return ErrNoRowsAffected
 	}
 
-	r.Store.Logger.Info("Hotel with id = %d was updated", h.HotelID)
+	r.Store.Logger.Infof("Hotel with id = %d was updated", h.HotelID)
 	return nil
 }

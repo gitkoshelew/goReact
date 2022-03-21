@@ -10,6 +10,7 @@ import (
 )
 
 var (
+	// ErrNoRowsAffected ...
 	ErrNoRowsAffected = errors.New("No rows affected")
 )
 

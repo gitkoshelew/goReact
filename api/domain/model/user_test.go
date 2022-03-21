@@ -16,7 +16,7 @@ func TestUser_Validate(t *testing.T) {
 		{
 			name: "valid",
 			u: func() *model.User {
-				return model.TestUser().ModelFromDTO()
+				return model.TestUser()
 			},
 			isValid: true,
 		},
@@ -25,7 +25,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Email = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -34,7 +34,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Email = "invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -43,7 +43,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Password = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -52,7 +52,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Password = "1234"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -61,7 +61,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Name = "Name@123"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -70,7 +70,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Name = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -79,7 +79,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Surname = "Surname-Фамилия"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -88,7 +88,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Surname = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -97,7 +97,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.MiddleName = "MiddleName %?№"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -106,7 +106,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.MiddleName = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -115,16 +115,34 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Role = "Invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
+		},
+		{
+			name: "Empty Role",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Role = ""
+				return u
+			},
+			isValid: true,
 		},
 		{
 			name: "Invalid Sex",
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Sex = "Invalid"
-				return u.ModelFromDTO()
+				return u
+			},
+			isValid: false,
+		},
+		{
+			name: "Empty Sex",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Sex = "Invalid"
+				return u
 			},
 			isValid: false,
 		},
@@ -133,7 +151,7 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Phone = "Invalid"
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
 		},
@@ -142,9 +160,18 @@ func TestUser_Validate(t *testing.T) {
 			u: func() *model.User {
 				u := model.TestUser()
 				u.Phone = ""
-				return u.ModelFromDTO()
+				return u
 			},
 			isValid: false,
+		},
+		{
+			name: "Empty Photo",
+			u: func() *model.User {
+				u := model.TestUser()
+				u.Photo = ""
+				return u
+			},
+			isValid: true,
 		},
 	}
 
@@ -157,15 +184,6 @@ func TestUser_Validate(t *testing.T) {
 			}
 		})
 	}
-}
-
-func TestUser_NewUser(t *testing.T) {
-	u := model.TestUser()
-	u.UserID = 1
-	err := u.ModelFromDTO().WithEncryptedPassword()
-
-	assert.NoError(t, err)
-	assert.NotNil(t, u)
 }
 
 func TestUser_EncryptPassword(t *testing.T) {

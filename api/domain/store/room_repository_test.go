@@ -13,19 +13,18 @@ func TestRoomRepository_Create(t *testing.T) {
 	t.Cleanup(teardown)
 	t.Run("valid", func(t *testing.T) {
 		r := model.TestRoom()
-		h, err := s.Hotel().Create(model.TestHotel())
+		h := model.TestHotel()
 		r.Hotel = *h
-		r, err = s.Room().Create(&model.RoomDTO{
+		id, err := s.Room().Create(&model.Room{
 			RoomID:     r.RoomID,
 			RoomNumber: r.RoomNumber,
-			PetType:    string(r.PetType),
-			HotelID:    r.Hotel.HotelID,
+			PetType:    r.PetType,
+			Hotel:      *h,
 			PhotoURL:   r.PhotoURL,
 		})
 		assert.NoError(t, err)
-		assert.NotNil(t, r)
+		assert.NotNil(t, id)
 	})
-
 }
 
 func TestRoomRepository_Delete(t *testing.T) {
@@ -40,16 +39,16 @@ func TestRoomRepository_Delete(t *testing.T) {
 	})
 	t.Run("valid delete id", func(t *testing.T) {
 		r := model.TestRoom()
-		h, err := s.Hotel().Create(model.TestHotel())
+		h := model.TestHotel()
 		r.Hotel = *h
-		_, err = s.Room().Create(&model.RoomDTO{
+		id, err := s.Room().Create(&model.Room{
 			RoomID:     r.RoomID,
 			RoomNumber: r.RoomNumber,
-			PetType:    string(r.PetType),
-			HotelID:    r.Hotel.HotelID,
+			PetType:    r.PetType,
+			Hotel:      *h,
 			PhotoURL:   r.PhotoURL,
 		})
-		err = s.Room().Delete(r.RoomID)
+		err = s.Room().Delete(*id)
 		assert.NoError(t, err)
 	})
 }
@@ -66,17 +65,17 @@ func TestRoomRepository_FindByID(t *testing.T) {
 	})
 	t.Run("valid find id", func(t *testing.T) {
 		r := model.TestRoom()
-		h, err := s.Hotel().Create(model.TestHotel())
+		h := model.TestHotel()
 		r.Hotel = *h
-		rm, err := s.Room().Create(&model.RoomDTO{
+		id, err := s.Room().Create(&model.Room{
 			RoomID:     r.RoomID,
 			RoomNumber: r.RoomNumber,
-			PetType:    string(r.PetType),
-			HotelID:    r.Hotel.HotelID,
+			PetType:    r.PetType,
+			Hotel:      *h,
 			PhotoURL:   r.PhotoURL,
 		})
 
-		room, err := s.Room().FindByID(rm.RoomID)
+		room, err := s.Room().FindByID(*id)
 		assert.NoError(t, err)
 		assert.NotNil(t, room)
 	})
@@ -97,16 +96,17 @@ func TestRoomRepository_Update(t *testing.T) {
 	t.Cleanup(teardown)
 	t.Run("valid update", func(t *testing.T) {
 		r := model.TestRoom()
-		h, err := s.Hotel().Create(model.TestHotel())
+		h := model.TestHotel()
 		r.Hotel = *h
-		r, err = s.Room().Create(&model.RoomDTO{
+		id, err := s.Room().Create(&model.Room{
 			RoomID:     r.RoomID,
 			RoomNumber: r.RoomNumber,
-			PetType:    string(r.PetType),
-			HotelID:    r.Hotel.HotelID,
+			PetType:    r.PetType,
+			Hotel:      *h,
 			PhotoURL:   r.PhotoURL,
 		})
 
+		r.RoomID = *id
 		r.RoomNumber = 2222
 		r.PetType = "dog"
 		r.PhotoURL = "//photo//2"

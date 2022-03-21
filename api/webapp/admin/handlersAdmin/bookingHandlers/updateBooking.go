@@ -1,10 +1,10 @@
 package bookinghandlers
 
 import (
+	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -74,7 +74,12 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
 		if err == nil {
 			if employeeID != 0 {
-				employee, err := s.Employee().FindByID(employeeID)
+				employeeDTO, err := s.Employee().FindByID(employeeID)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Error occured while finding employee by id. Err msg:%v. ", err), http.StatusBadRequest)
+					return
+				}
+				employee, err := s.Employee().ModelFromDTO(employeeDTO)
 				if err != nil {
 					http.Error(w, fmt.Sprintf("Error occured while finding employee by id. Err msg:%v. ", err), http.StatusBadRequest)
 					return

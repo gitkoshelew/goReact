@@ -38,11 +38,6 @@ func NewBooking(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("SeatID"))
 			return
 		}
-		/*seat, err := s.Seat().FindByID(seatID)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			*return
-		}*/
 
 		petID, err := strconv.Atoi(r.FormValue("PetID"))
 		if err != nil {
@@ -50,22 +45,14 @@ func NewBooking(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("PetID"))
 			return
 		}
-		/*pet, err := s.Pet().FindByID(petID)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}*/
+
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EmployeeID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EmployeeID"))
 			return
 		}
-		/*employee, err := s.Employee().FindByID(employeeID)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while getting employee by id. Err msg:%v. ", err), http.StatusBadRequest)
-			return
-		}*/
+
 		status := r.FormValue("Status")
 		layout := "2006-01-02"
 		startDate, err := time.Parse(layout, r.FormValue("StartDate"))
@@ -89,26 +76,31 @@ func NewBooking(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		b := model.BookingDTO{
-			BookingID: 0,
-			SeatID:      seatID,
-			PetID:       petID,
-			EmployeeID:  employeeID,
-			Status:    status,
-			StartDate: &startDate,
-			EndDate:   &endDate,
-			Notes:     notes,
-			Paid:      &paid,
+		bookingDTO := model.BookingDTO{
+			BookingID:  0,
+			SeatID:     seatID,
+			PetID:      petID,
+			EmployeeID: employeeID,
+			Status:     status,
+			StartDate:  &startDate,
+			EndDate:    &endDate,
+			Notes:      notes,
+			Paid:       &paid,
 		}
 
-		/*err = b.Validate()
+		err = bookingDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
-		}*/
+		}
 
-		_, err = s.Booking().Create(&b)
+		booking, err := s.Booking().ModelFromDTO(&bookingDTO)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		_, err = s.Booking().Create(booking)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating booking. Err msg:%v. ", err), http.StatusBadRequest)
 			return

@@ -38,11 +38,18 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		room, err := s.Room().FindByID(id)
+		roomDTO, err := s.Room().FindByID(id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting room by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
+
+		room, err := s.Room().ModelFromDTO(roomDTO)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
 		rooms = append(rooms, *room)
 
 		files := []string{
