@@ -47,6 +47,9 @@ func UpdateHotel(s *store.Store) httprouter.Handle {
 			h.Address = req.Address
 		}
 
+		if req.Coordinates != nil {
+			h.Coordinates = req.Coordinates
+		}
 		err = h.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)

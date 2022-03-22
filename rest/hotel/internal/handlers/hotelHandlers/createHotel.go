@@ -37,6 +37,7 @@ func CreateHotel(s *store.Store) httprouter.Handle {
 			HotelID: 0,
 			Name:    req.Name,
 			Address: req.Address,
+			Coordinates: req.Coordinates,
 		}
 
 		err = h.Validate()
