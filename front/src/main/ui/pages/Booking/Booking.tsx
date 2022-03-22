@@ -28,7 +28,7 @@ type FormValues = {
 }
 
 export const Booking = () => {
-  const [modalActive, setModalActive] = useState(true)
+  const [modalActive, setModalActive] = useState(false)
 
   const dispatch = useAppDispatch()
   const checked = useSelector((state: AppRootState) => state.BookingRegForm.checkedOnlinePayment)
