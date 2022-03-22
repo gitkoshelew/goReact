@@ -39,7 +39,13 @@ func GetPetByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		pets = append(pets, *pet)
+		p, err := s.Pet().ModelFromDTO(pet)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		pets = append(pets, *p)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allPets.html",

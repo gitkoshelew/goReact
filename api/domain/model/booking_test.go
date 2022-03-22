@@ -11,58 +11,133 @@ import (
 func TestBooking_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		b       func() *model.Booking
+		b       func() *model.BookingDTO
 		isValid bool
 	}{
 		{
 			name: "valid",
-			b: func() *model.Booking {
-				return model.TestBooking()
+			b: func() *model.BookingDTO {
+				return model.TestBookingDTO()
 			},
 			isValid: true,
 		},
 		{
-			name: "valid seat",
-			b: func() *model.Booking {
-				b := model.TestBooking()
-				s := model.TestSeat()
-				p := model.TestPet()
-				e := model.TestEmployee()
-				b.Seat = *s
-				b.Pet = *p
-				b.Employee = *e
-
+			name: "invalid seatID",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.SeatID = 0
 				return b
 			},
-			isValid: true,
+			isValid: false,
+		}, {
+			name: "invalid EmployeeID",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.EmployeeID = 0
+				return b
+			},
+			isValid: false,
 		},
 		{
-			name: "valid status",
-			b: func() *model.Booking {
-				b := model.TestBooking()
-				b.Status = model.BookingStatusCancelled
+			name: "invalid PetID",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.PetID = 0
 				return b
 			},
-			isValid: true,
+			isValid: false,
 		},
 		{
 			name: "invalid position",
-			b: func() *model.Booking {
-				b := model.TestBooking()
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
 				b.Status = "st"
 				return b
 			},
 			isValid: false,
 		},
 		{
-			name: "valid EndDate",
-			b: func() *model.Booking {
-				a := time.Time{}.AddDate(2000, 2, 2)
-				b := model.TestBooking()
-				b.EndDate = &a
+			name: "invalid status",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.Status = "invalid status"
 				return b
 			},
-			isValid: true,
+			isValid: false,
+		},
+		{
+			name: "Empty status",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.Status = ""
+				return b
+			},
+			isValid: false,
+		},
+		{
+			name: "invalid EndDate",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				endDate := time.Now().AddDate(0, 0, -10)
+				b.EndDate = &endDate
+				return b
+			},
+			isValid: false,
+		},
+		{
+			name: "invalid StartDate",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				startDate := time.Now().AddDate(0, 0, -10)
+				b.StartDate = &startDate
+				return b
+			},
+			isValid: false,
+		},
+		{
+			name: "Nil StartDate",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.StartDate = nil
+				return b
+			},
+			isValid: false,
+		},
+		{
+			name: "Nil EndDate",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.EndDate = nil
+				return b
+			},
+			isValid: false,
+		},
+		{
+			name: "SQL notes",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.Notes = "alTe&5 *&2 99*6 &89 --) R"
+				return b
+			},
+			isValid: false,
+		},
+		{
+			name: "Nil paid",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.Paid = nil
+				return b
+			},
+			isValid: false,
+		},
+		{
+			name: "Invalid transactionID",
+			b: func() *model.BookingDTO {
+				b := model.TestBookingDTO()
+				b.TransactionID = 0
+				return b
+			},
+			isValid: false,
 		},
 	}
 

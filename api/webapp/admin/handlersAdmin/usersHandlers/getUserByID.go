@@ -40,8 +40,14 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Cant find user. Err msg:%v.", err)
 			return
 		}
+		u, err := s.User().ModelFromDTO(user)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while making user model from DTO. Err msg:%v.", err)
+			return
+		}
 
-		users = append(users, *user)
+		users = append(users, *u)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allUsers.html",

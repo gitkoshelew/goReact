@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/handler/middleware"
+	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/request"
 	"goReact/webapp/server/handler/response"
 	"net/http"
@@ -18,7 +18,7 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 
 		req := &request.Login{}
 
-		email, err := middleware.ContextEmail(r.Context())
+		email, err := handler.ContextEmail(r.Context())
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Cannot parse email: %w", err)
@@ -57,7 +57,14 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 
 		user.Password = req.Password
 
-		err = s.User().PasswordChange(user)
+		u, err := s.User().ModelFromDTO(user)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while making user model from DTO. Err msg:%v.", err)
+			return
+		}
+
+		err = s.User().PasswordChange(u)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while searching user: %v", err)})
@@ -65,6 +72,6 @@ func ChangePassword(s *store.Store) http.HandlerFunc {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Password changed for user= %d", user.UserID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Password changed for user= %d", u.UserID)})
 	}
 }

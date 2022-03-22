@@ -8,33 +8,35 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPetRepository_Create(t *testing.T) {
+func TestBookingRepository_Create(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Pet
+		model   func() *model.Booking
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Pet {
+			model: func() *model.Booking {
 				testStore.Open()
 
-				pet := model.TestPet()
-				pet.Owner.UserID = id.User
+				booking := model.TestBooking()
+				booking.Employee.EmployeeID = id.Employee
+				booking.Pet.PetID = id.Pet
+				booking.Seat.SeatID = id.Seat
 
-				return pet
+				return booking
 			},
 			isValid: true,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.Pet {
+			model: func() *model.Booking {
 				testStore.Close()
-				return model.TestPet()
+				return model.TestBooking()
 			},
 			isValid: false,
 		},
@@ -43,12 +45,12 @@ func TestPetRepository_Create(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Pet().Create(tc.model())
+				result, err := testStore.Booking().Create(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Pet().Create(tc.model())
+				result, err := testStore.Booking().Create(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -57,7 +59,7 @@ func TestPetRepository_Create(t *testing.T) {
 	}
 }
 
-func TestPetRepository_GetAll(t *testing.T) {
+func TestBookingRepository_GetAll(t *testing.T) {
 	teardown()
 	defer teardown()
 	store.FillDB(t, testStore)
@@ -89,12 +91,12 @@ func TestPetRepository_GetAll(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := tc.s().Pet().GetAll()
+				result, err := tc.s().Booking().GetAll()
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := tc.s().Pet().GetAll()
+				result, err := tc.s().Booking().GetAll()
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -103,7 +105,7 @@ func TestPetRepository_GetAll(t *testing.T) {
 	}
 }
 
-func TestPetRepository_FindByID(t *testing.T) {
+func TestBookingRepository_FindByID(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -117,7 +119,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-				return id.Pet
+				return id.Booking
 			},
 			isValid: true,
 		},
@@ -133,7 +135,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Pet
+				return id.Booking
 			},
 			isValid: false,
 		},
@@ -142,12 +144,12 @@ func TestPetRepository_FindByID(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Pet().FindByID(tc.id())
+				result, err := testStore.Booking().FindByID(tc.id())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Pet().FindByID(tc.id())
+				result, err := testStore.Booking().FindByID(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -156,7 +158,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 	}
 }
 
-func TestPetRepository_Delete(t *testing.T) {
+func TestBookingRepository_Delete(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -170,9 +172,11 @@ func TestPetRepository_Delete(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-				pet := model.TestPet()
-				pet.Owner.UserID = id.User
-				id, _ := testStore.Pet().Create(pet)
+				booking := model.TestBooking()
+				booking.Employee.EmployeeID = id.Employee
+				booking.Pet.PetID = id.Pet
+				booking.Seat.SeatID = id.Seat
+				id, _ := testStore.Booking().Create(booking)
 				return *id
 			},
 			isValid: true,
@@ -189,7 +193,7 @@ func TestPetRepository_Delete(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Pet
+				return id.Booking
 			},
 			isValid: false,
 		},
@@ -197,11 +201,11 @@ func TestPetRepository_Delete(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Pet().Delete(tc.id())
+				err := testStore.Booking().Delete(tc.id())
 				assert.NoError(t, err)
 				testStore.Close()
 			} else {
-				err := testStore.Pet().Delete(tc.id())
+				err := testStore.Booking().Delete(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 			}
@@ -209,51 +213,58 @@ func TestPetRepository_Delete(t *testing.T) {
 	}
 }
 
-func TestPetRepository_Update(t *testing.T) {
+func TestBookingRepository_Update(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Pet
+		model   func() *model.Booking
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Pet {
+			model: func() *model.Booking {
 				testStore.Open()
 
-				pet := model.TestPet()
-				pet.PetID = id.Pet
-				pet.Owner.UserID = id.Employee
+				booking := model.TestBooking()
+				booking.Employee.EmployeeID = id.Employee
+				booking.Pet.PetID = id.Pet
+				booking.Seat.SeatID = id.Seat
+				booking.BookingID = id.Booking
 
-				return pet
+				return booking
 			},
 			isValid: true,
 		},
 		{
 			name: "invalid ID",
-			model: func() *model.Pet {
+			model: func() *model.Booking {
 				testStore.Open()
 
-				pet := model.TestPet()
-				pet.PetID = 0
-				pet.Owner.UserID = id.Employee
+				booking := model.TestBooking()
+				booking.Employee.EmployeeID = id.Employee
+				booking.Pet.PetID = id.Pet
+				booking.Seat.SeatID = id.Seat
+				booking.BookingID = 0
 
-				return pet
+				return booking
 			},
 			isValid: false,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.Pet {
+			model: func() *model.Booking {
 				testStore.Close()
 
-				pet := model.TestPet()
-				pet.PetID = id.Pet
-				pet.Owner.UserID = id.Employee
-				return pet
+				booking := model.TestBooking()
+				booking.Employee.EmployeeID = id.Employee
+				booking.Pet.PetID = id.Pet
+				booking.Seat.SeatID = id.Seat
+				booking.BookingID = id.Booking
+
+				return booking
 			},
 			isValid: false,
 		},
@@ -261,11 +272,11 @@ func TestPetRepository_Update(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Pet().Update(tc.model())
+				err := testStore.Booking().Update(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 			} else {
-				err := testStore.Pet().Update(tc.model())
+				err := testStore.Booking().Update(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 			}
@@ -273,46 +284,78 @@ func TestPetRepository_Update(t *testing.T) {
 	}
 }
 
-func TestPetRepository_ModelFromDTO(t *testing.T) {
+func TestBookingRepository_ModelFromDTO(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.PetDTO
+		model   func() *model.BookingDTO
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.PetDTO {
+			model: func() *model.BookingDTO {
 				testStore.Open()
 
-				pet := model.TestPetDTO()
-				pet.OwnerID = id.User
+				booking := model.TestBookingDTO()
+				booking.PetID = id.Pet
+				booking.EmployeeID = id.Employee
+				booking.SeatID = id.Seat
 
-				return pet
+				return booking
 			},
 			isValid: true,
 		},
 		{
-			name: "invalid OwnerId",
-			model: func() *model.PetDTO {
+			name: "Invalid PetID",
+			model: func() *model.BookingDTO {
 				testStore.Open()
 
-				pet := model.TestPetDTO()
-				pet.OwnerID = 0
+				booking := model.TestBookingDTO()
+				booking.PetID = 0
+				booking.EmployeeID = id.Employee
+				booking.SeatID = id.Seat
 
-				return pet
+				return booking
+			},
+			isValid: false,
+		},
+		{
+			name: "Invalid SeatID",
+			model: func() *model.BookingDTO {
+				testStore.Open()
+
+				booking := model.TestBookingDTO()
+				booking.PetID = id.Pet
+				booking.EmployeeID = id.Employee
+				booking.SeatID = 0
+
+				return booking
+			},
+			isValid: false,
+		},
+		{
+			name: "Invalid EmployeeID",
+			model: func() *model.BookingDTO {
+				testStore.Open()
+
+				booking := model.TestBookingDTO()
+				booking.PetID = id.Pet
+				booking.EmployeeID = 0
+				booking.SeatID = id.Seat
+
+				return booking
 			},
 			isValid: false,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.PetDTO {
+			model: func() *model.BookingDTO {
 				testStore.Close()
-				p := model.TestPetDTO()
-				return p
+				b := model.TestBookingDTO()
+				return b
 			},
 			isValid: false,
 		},
@@ -320,12 +363,12 @@ func TestPetRepository_ModelFromDTO(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Pet().ModelFromDTO(tc.model())
+				result, err := testStore.Booking().ModelFromDTO(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Pet().ModelFromDTO(tc.model())
+				result, err := testStore.Booking().ModelFromDTO(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)

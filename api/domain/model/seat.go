@@ -10,27 +10,27 @@ import (
 type Seat struct {
 	SeatID      int `json:"seatId"`
 	Room        Room
-	Description string    `json:"description,omitempty"`
-	RentFrom    time.Time `json:"rentFrom"`
-	RentTo      time.Time `json:"rentTo"`
+	Description string     `json:"description,omitempty"`
+	RentFrom    *time.Time `json:"rentFrom,omitempty"`
+	RentTo      *time.Time `json:"rentTo,omitempty"`
 }
 
 // SeatDTO struct
 type SeatDTO struct {
-	SeatID      int       `json:"seatId"`
-	RoomID      int       `json:"roomId"`
-	Description string    `json:"description,omitempty"`
-	RentFrom    time.Time `json:"rentFrom"`
-	RentTo      time.Time `json:"rentTo"`
+	SeatID      int        `json:"seatId"`
+	RoomID      int        `json:"roomId"`
+	Description string     `json:"description,omitempty"`
+	RentFrom    *time.Time `json:"rentFrom,omitempty"`
+	RentTo      *time.Time `json:"rentTo,omitempty"`
 }
 
 // Validate ...
-func (s *Seat) Validate() error {
+func (s *SeatDTO) Validate() error {
 	return validation.ValidateStruct(
 		s,
-		validation.Field(&s.Description, validation.Required, validation.Length(1, 100)),
-		validation.Field(&s.RentFrom, validation.Required),
-		validation.Field(&s.RentTo, validation.Required),
-		validation.Field(&s.Room, validation.Required),
+		validation.Field(&s.RoomID, validation.Required, validation.By(IsValidID)),
+		validation.Field(&s.Description, validation.By(IsSQL)),
+		validation.Field(&s.RentFrom, validation.NotNil, validation.By(IsValidStartDate)),
+		validation.Field(&s.RentTo, validation.NotNil, validation.By(IsValidEndDate)),
 	)
 }
