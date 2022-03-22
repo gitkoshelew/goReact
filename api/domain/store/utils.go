@@ -17,13 +17,13 @@ func (s *Store) CheckPasswordHash(hash, password string) error {
 }
 
 // EncryptPassword ...
-func (s *Store) EncryptPassword(passwod *string) error {
-	b, err := bcrypt.GenerateFromPassword([]byte(*passwod), bcrypt.MinCost)
+func (s *Store) EncryptPassword(password *string) error {
+	b, err := bcrypt.GenerateFromPassword([]byte(*password), bcrypt.MinCost)
 	if err != nil {
 		s.Logger.Errorf("Eror occured while password encrypting. Err msg: %v", err)
 		return err
 	}
-	*passwod = string(b)
+	*password = string(b)
 	return nil
 }
 

@@ -76,16 +76,24 @@ func NewBooking(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		transactionID, err := strconv.Atoi(r.FormValue("TransactionID"))
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("TransactionID")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("TransactionID"))
+			return
+		}
+
 		bookingDTO := model.BookingDTO{
-			BookingID:  0,
-			SeatID:     seatID,
-			PetID:      petID,
-			EmployeeID: employeeID,
-			Status:     status,
-			StartDate:  &startDate,
-			EndDate:    &endDate,
-			Notes:      notes,
-			Paid:       &paid,
+			BookingID:     0,
+			SeatID:        seatID,
+			PetID:         petID,
+			EmployeeID:    employeeID,
+			Status:        status,
+			StartDate:     &startDate,
+			EndDate:       &endDate,
+			Notes:         notes,
+			Paid:          &paid,
+			TransactionID: transactionID,
 		}
 
 		err = bookingDTO.Validate()

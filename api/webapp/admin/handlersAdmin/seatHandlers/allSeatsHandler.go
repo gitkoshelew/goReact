@@ -11,7 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permissionRead model.Permission = model.Permission{Name: model.UpdateSeat}
+var permissionRead model.Permission = model.Permission{Name: model.ReadSeat}
 
 // AllSeatsHandler ...
 func AllSeatsHandler(s *store.Store) httprouter.Handle {

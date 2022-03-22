@@ -23,7 +23,7 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		rooms := []model.Room{}
+		rooms := []model.RoomDTO{}
 
 		err = s.Open()
 		if err != nil {
@@ -44,13 +44,7 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		room, err := s.Room().ModelFromDTO(roomDTO)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		rooms = append(rooms, *room)
+		rooms = append(rooms, *roomDTO)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allRooms.html",

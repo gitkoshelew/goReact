@@ -113,6 +113,13 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			bookingDTO.Paid = &paid
 		}
 
+		transactionID, err := strconv.Atoi(r.FormValue("TransactionID"))
+		if err == nil {
+			if employeeID != 0 {
+				bookingDTO.TransactionID = transactionID
+			}
+		}
+
 		err = bookingDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)

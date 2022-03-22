@@ -23,7 +23,7 @@ func GetBookingByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		bookings := []model.Booking{}
+		bookings := []model.BookingDTO{}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
@@ -44,13 +44,7 @@ func GetBookingByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		booking, err := s.Booking().ModelFromDTO(bookingDTO)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		bookings = append(bookings, *booking)
+		bookings = append(bookings, *bookingDTO)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allBookings.html",

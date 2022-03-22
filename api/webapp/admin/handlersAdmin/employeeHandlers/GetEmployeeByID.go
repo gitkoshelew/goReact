@@ -23,7 +23,7 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		employees := []model.Employee{}
+		employees := []model.EmployeeDTO{}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
@@ -44,13 +44,7 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		e, err := s.Employee().ModelFromDTO(employee)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		employees = append(employees, *e)
+		employees = append(employees, *employee)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allEmployee.html",

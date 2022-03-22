@@ -29,7 +29,7 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		seats := []model.Seat{}
+		seats := []model.SeatDTO{}
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
@@ -43,13 +43,7 @@ func GetSeatByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		seat, err := s.Seat().ModelFromDTO(seatDTO)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			return
-		}
-
-		seats = append(seats, *seat)
+		seats = append(seats, *seatDTO)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allSeats.html",
