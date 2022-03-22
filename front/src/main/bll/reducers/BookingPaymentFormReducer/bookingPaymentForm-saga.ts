@@ -5,14 +5,27 @@ import {
   BookingPaymentFormType,
   FetchBookingPaymentResponse,
 } from '../../../dal/api_bookingPayment/BookingService'
-import { setBookingPayment } from './bookingPaymentForm-reducer'
+import {
+  bookingPaymentError,
+  bookingPaymentMessage,
+  bookingPaymentStart,
+  setBookingPayment,
+} from './bookingPaymentForm-reducer'
 
 export function* fetchBookingPaymentSagaWorker(action: ReturnType<typeof fetchBookingPaymentRequest>) {
-  const bookingPaymentResponse: AxiosResponse<FetchBookingPaymentResponse> = yield call(
-    BookingPageAPI.createBookingPayment,
-    action.newPaymentCard
-  )
-  yield put(setBookingPayment({ bookingPayment: bookingPaymentResponse.data }))
+  try {
+    yield put(bookingPaymentStart())
+    const bookingPaymentResponse: AxiosResponse<FetchBookingPaymentResponse> = yield call(
+      BookingPageAPI.createBookingPayment,
+      action.newPaymentCard
+    )
+    yield put(setBookingPayment({ bookingPayment: bookingPaymentResponse.data }))
+    yield put(bookingPaymentMessage({ successMsg: bookingPaymentResponse.statusText }))
+  } catch (err) {
+    if (err instanceof Error) {
+      yield put(bookingPaymentError({ errorMsg: err.name }))
+    }
+  }
 }
 
 export const fetchBookingPaymentRequest = (newPaymentCard: BookingPaymentFormType) => ({

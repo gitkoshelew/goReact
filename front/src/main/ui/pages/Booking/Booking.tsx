@@ -32,6 +32,10 @@ export const Booking = () => {
 
   const dispatch = useAppDispatch()
   const checked = useSelector((state: AppRootState) => state.BookingRegForm.checkedOnlinePayment)
+
+  const successMessage = useSelector((state: AppRootState) => state.BookingPaymentForm.successMsg)
+  const errorMessage = useSelector((state: AppRootState) => state.BookingPaymentForm.errorMsg)
+
   const modalActiveHandler = () => {
     setModalActive(true)
   }
@@ -126,14 +130,12 @@ export const Booking = () => {
     },
     validate,
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2))
       dispatch(fetchBookingPaymentRequest(values))
-      // formik.resetForm() -----> если success то можно резетать форму, если есть ошибка с бэкэнда то нельзя
-      //if 201 ---> resetForm else ne reset
-      // formik.resetForm()
+      if (formik.isValid) {
+        formik.resetForm()
+      }
     },
   })
-
   //Old logic need to refactor
   const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
 
@@ -155,6 +157,12 @@ export const Booking = () => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
     return newActualDay ? newActualDay : null
   }, [actualDay, isRentArr])
+
+  const bookingPaymentLoadingStatus = useSelector((state: AppRootState) => state.BookingPaymentForm.loadingStatus)
+
+  if (bookingPaymentLoadingStatus === 'LOADING') {
+    return <Preloader />
+  }
 
   return (
     <div className="bookingContainer">
@@ -180,11 +188,7 @@ export const Booking = () => {
             {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
             <Button view={'upload'} disabled={!isActiveBtn} />
             <Modal active={modalActive} setActive={setModalActive}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci asperiores doloribus eveniet illum
-                labore non officiis totam ullam unde. Alias dolores eaque et inventore nesciunt pariatur porro sit
-                vitae.
-              </p>
+              <p>{successMessage ? 'Congratulations! You have successfully made a payment!' : errorMessage}</p>
             </Modal>
           </div>
         </div>
