@@ -35,8 +35,6 @@ func NewUser(s *store.Store) httprouter.Handle {
 		email := r.FormValue("Email")
 		password := r.FormValue("Password")
 
-		s.Logger.Info("pass: ", password)
-
 		role := r.FormValue("Role")
 		verified, err := strconv.ParseBool(r.FormValue("Verified"))
 		if err != nil {

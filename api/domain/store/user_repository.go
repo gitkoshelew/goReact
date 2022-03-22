@@ -33,7 +33,8 @@ func (r *UserRepository) Create(user *model.User) (*int, error) {
 		return nil, ErrEmailIsUsed
 	}
 
-	r.Store.EncryptPassword(&user.Password)
+	//r.Store.EncryptPassword(&user.Password)
+	model.EncryptPassword(user.Password)
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
