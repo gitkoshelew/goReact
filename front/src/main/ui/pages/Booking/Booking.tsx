@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { FormEvent, useEffect, useMemo, useState } from 'react'
 import s from './Booking.module.scss'
 import { TitlePageTextBlock } from '../../components/TitlePageTextBlock/TitlePageTextBlock'
 import { BookingRegForm } from './BookingRegForm/BookingRegForm'
@@ -11,6 +11,8 @@ import { SelectedToOrderRoom } from './SelectedToOrderRom/SelectedToOrderRoom'
 import { FormikErrors, useFormik } from 'formik'
 import Preloader from '../../components/preloader/preloader'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
+import { fetchBookingPaymentRequest } from '../../../bll/reducers/BookingPaymentFormReducer/bookingPaymentForm-saga'
+import { Modal } from '../../components/Modal/Modal'
 
 const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
 
@@ -26,7 +28,21 @@ type FormValues = {
 }
 
 export const Booking = () => {
+  const [modalActive, setModalActive] = useState(true)
+
+  const dispatch = useAppDispatch()
   const checked = useSelector((state: AppRootState) => state.BookingRegForm.checkedOnlinePayment)
+  const modalActiveHandler = () => {
+    setModalActive(true)
+  }
+  const customSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    formik.handleSubmit()
+    if (formik.isValid && formik.values.firstName && formik.values.lastName && formik.values.email) {
+      modalActiveHandler()
+    }
+  }
+  //Formik
   useEffect(() => {
     if (!checked) {
       formik.resetForm({
@@ -110,15 +126,19 @@ export const Booking = () => {
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+      // alert(JSON.stringify(values, null, 2))
+      dispatch(fetchBookingPaymentRequest(values))
+      // formik.resetForm() -----> если success то можно резетать форму, если есть ошибка с бэкэнда то нельзя
+      //if 201 ---> resetForm else ne reset
       // formik.resetForm()
     },
   })
+
+  //Old logic need to refactor
   const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
 
   const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
   const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
-  const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(BookingRoomPickSaga())
@@ -129,7 +149,7 @@ export const Booking = () => {
   const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
   const orderedRoomBasket = useSelector((state: AppRootState) => state.BookingRoomPick.orderedRoomBasket)
 
-  const isActiveBtn = progress === 'uploaded'
+  const isActiveBtn = progress === 'uploaded' && formik.isValid
 
   const roomIndicate = useMemo(() => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
@@ -138,7 +158,7 @@ export const Booking = () => {
 
   return (
     <div className="bookingContainer">
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={customSubmit}>
         <div className={bookingPage}>
           <TitlePageTextBlock mainTextMess={'Book room for pet'} isWithLink={false} />
           <div className={bookingProcess}>
@@ -159,6 +179,13 @@ export const Booking = () => {
           <div className={uploadOrderedRoomsBlock}>
             {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
             <Button view={'upload'} disabled={!isActiveBtn} />
+            <Modal active={modalActive} setActive={setModalActive}>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci asperiores doloribus eveniet illum
+                labore non officiis totam ullam unde. Alias dolores eaque et inventore nesciunt pariatur porro sit
+                vitae.
+              </p>
+            </Modal>
           </div>
         </div>
       </form>
