@@ -136,7 +136,7 @@ export const Booking = () => {
       }
     },
   })
-  //Old logic need to refactor
+
   const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
 
   const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
