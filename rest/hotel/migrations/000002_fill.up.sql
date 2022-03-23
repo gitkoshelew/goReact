@@ -70,7 +70,7 @@ INSERT INTO SEAT (room_id, is_free, description) VALUES
 (2, true, 'Seat for sick pets'),
 (3, false, 'Regular seat');
 
-INSERT INTO EMPLOYEE (user_id, hotel_id, position ) VALUES 
-(1 , 1, 'manager' ),
-(2 , 2, 'employee' ),
-(3 , 3, 'admin' );
+INSERT INTO EMPLOYEE (email, role, verified, first_name , surname, middle_name, sex, date_of_birth, address, phone, photo, hotel_id, position ) VALUES 
+('olga@mail.ru', 'employee', true, 'Olga','Oleeva','Vladimirovna', 'female', '2001-01-01', 'Minsk ul. Nesterova 1-32' ,'+375-29-675-00-00', 'PhotoURL...', 1, 'manager' ),
+('leha@mail.ru', 'employee', true, 'Vladzimir','Sakhonchik','Alekseevish', 'male', '1998-02-11', 'Minsk Partizanskiy 124-1' ,'+375-29-111-22-33', 'PhotoURL...', 2, 'employee'),
+('miha@mail.ru', 'employee', true, 'Mikhail','Valevach','Dmitrievich', 'male', '1997-01-12', 'Minsk Pr. Dzerjinskogo 01-01' ,'+375-29-777-55-44', 'PhotoURL...', 3, 'admin');

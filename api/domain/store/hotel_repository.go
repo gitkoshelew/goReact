@@ -56,6 +56,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 
 //FindByID searchs and returns hotel by ID
 func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
+
 	hotel := &model.Hotel{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM hotel WHERE id = $1",
 		id).Scan(

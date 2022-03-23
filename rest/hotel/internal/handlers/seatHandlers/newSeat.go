@@ -32,7 +32,7 @@ func CreateSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		seat, err := s.Seat().SeatFromDTO(req)
+		seat, err := s.Seat().ModelFromDTO(req)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("error occured while building model from DTO", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))

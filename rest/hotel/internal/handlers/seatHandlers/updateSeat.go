@@ -31,7 +31,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		seat, err := s.Seat().SeatFromDTO(req)
+		seat, err := s.Seat().ModelFromDTO(req)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring seatDTO.", fmt.Sprintf("%d", http.StatusInternalServerError),

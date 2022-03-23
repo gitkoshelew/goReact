@@ -12,7 +12,7 @@ type Employee struct {
 	EmployeeID  int        `json:"employeeId,omitempty"`
 	Email       string     `json:"email,omitempty"`
 	Role        Role       `json:"role,omitempty"`
-	Verified    bool       `json:"verified,omitempty"`
+	Verified    *bool      `json:"verified,omitempty"`
 	Name        string     `json:"name,omitempty"`
 	Surname     string     `json:"sName,omitempty"`
 	MiddleName  string     `json:"mName,omitempty"`
@@ -30,7 +30,7 @@ type EmployeeDTO struct {
 	EmployeeID  int        `json:"employeeId"`
 	Email       string     `json:"email,omitempty"`
 	Role        string     `json:"role,omitempty"`
-	Verified    bool       `json:"verified,omitempty"`
+	Verified    *bool      `json:"verified,omitempty"`
 	Name        string     `json:"name,omitempty"`
 	Surname     string     `json:"sName,omitempty"`
 	MiddleName  string     `json:"mName,omitempty"`

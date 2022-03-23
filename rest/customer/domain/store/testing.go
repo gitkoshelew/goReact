@@ -50,7 +50,7 @@ func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string)
 		s.Config.DataBase.DbName,
 		s.Config.DataBase.Sslmode,
 	)
-	s.Logger.Infof("Customre store opening. Source: %s", dataSourceName)
+	s.Logger.Infof("Customer store opening. Source: %s", dataSourceName)
 
 	db, err := sql.Open("postgres", dataSourceName)
 	if err != nil {

@@ -8,32 +8,33 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestHotelRepository_Create(t *testing.T) {
+func TestSeatRepository_Create(t *testing.T) {
 	teardown()
 	defer teardown()
-	store.FillDB(t, testStore)
+	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Hotel
+		model   func() *model.Seat
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Hotel {
+			model: func() *model.Seat {
 				testStore.Open()
 
-				hotel := model.TestHotel()
+				seat := model.TestSeat()
+				seat.Room.RoomID = id.Room
 
-				return hotel
+				return seat
 			},
 			isValid: true,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.Hotel {
+			model: func() *model.Seat {
 				testStore.Close()
-				return model.TestHotel()
+				return model.TestSeat()
 			},
 			isValid: false,
 		},
@@ -42,12 +43,12 @@ func TestHotelRepository_Create(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Hotel().Create(tc.model())
+				result, err := testStore.Seat().Create(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Hotel().Create(tc.model())
+				result, err := testStore.Seat().Create(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -56,7 +57,7 @@ func TestHotelRepository_Create(t *testing.T) {
 	}
 }
 
-func TestHotelRepository_GetAll(t *testing.T) {
+func TestSeatRepository_GetAll(t *testing.T) {
 	teardown()
 	defer teardown()
 	store.FillDB(t, testStore)
@@ -88,12 +89,12 @@ func TestHotelRepository_GetAll(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := tc.s().Hotel().GetAll()
+				result, err := tc.s().Seat().GetAll()
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := tc.s().Hotel().GetAll()
+				result, err := tc.s().Seat().GetAll()
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -102,7 +103,7 @@ func TestHotelRepository_GetAll(t *testing.T) {
 	}
 }
 
-func TestHotelRepository_FindByID(t *testing.T) {
+func TestSeatRepository_FindByID(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -116,7 +117,7 @@ func TestHotelRepository_FindByID(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-				return id.Hotel
+				return id.Seat
 			},
 			isValid: true,
 		},
@@ -132,7 +133,7 @@ func TestHotelRepository_FindByID(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Hotel
+				return id.Seat
 			},
 			isValid: false,
 		},
@@ -141,12 +142,12 @@ func TestHotelRepository_FindByID(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Hotel().FindByID(tc.id())
+				result, err := testStore.Seat().FindByID(tc.id())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Hotel().FindByID(tc.id())
+				result, err := testStore.Seat().FindByID(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -155,7 +156,7 @@ func TestHotelRepository_FindByID(t *testing.T) {
 	}
 }
 
-func TestHotelRepository_Delete(t *testing.T) {
+func TestSeatRepository_Delete(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -169,8 +170,9 @@ func TestHotelRepository_Delete(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-				hotel := model.TestHotel()
-				id, _ := testStore.Hotel().Create(hotel)
+				seat := model.TestSeat()
+				seat.Room.RoomID = id.Room
+				id, _ := testStore.Seat().Create(seat)
 				return *id
 			},
 			isValid: true,
@@ -187,7 +189,7 @@ func TestHotelRepository_Delete(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Hotel
+				return id.Seat
 			},
 			isValid: false,
 		},
@@ -195,11 +197,11 @@ func TestHotelRepository_Delete(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Hotel().Delete(tc.id())
+				err := testStore.Seat().Delete(tc.id())
 				assert.NoError(t, err)
 				testStore.Close()
 			} else {
-				err := testStore.Hotel().Delete(tc.id())
+				err := testStore.Seat().Delete(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 			}
@@ -207,60 +209,52 @@ func TestHotelRepository_Delete(t *testing.T) {
 	}
 }
 
-func TestHotelRepository_Update(t *testing.T) {
+func TestSeatRepository_Update(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Hotel
+		model   func() *model.Seat
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Hotel {
+			model: func() *model.Seat {
 				testStore.Open()
 
-				hotel := model.TestHotel()
-				hotel.HotelID = id.Hotel
+				seat := model.TestSeat()
+				seat.SeatID = id.Seat
+				seat.Room.RoomID = id.Room
 
-				return hotel
+				return seat
 			},
 			isValid: true,
 		},
 		{
 			name: "invalid ID",
-			model: func() *model.Hotel {
+			model: func() *model.Seat {
 				testStore.Open()
 
-				hotel := model.TestHotel()
+				seat := model.TestSeat()
+				seat.SeatID = 0
+				seat.Room.RoomID = id.Room
 
-				return hotel
+				return seat
 			},
 			isValid: false,
 		},
 		{
-			name: "nil Coordinates",
-			model: func() *model.Hotel {
-				testStore.Open()
-
-				hotel := model.TestHotel()
-				hotel.HotelID = id.Hotel
-				hotel.Coordinates = nil
-
-				return hotel
-			},
-			isValid: true,
-		},
-		{
 			name: "DB closed",
-			model: func() *model.Hotel {
+			model: func() *model.Seat {
 				testStore.Close()
 
-				hotel := model.TestHotel()
+				seat := model.TestSeat()
+				seat.SeatID = id.Seat
+				seat.Room.RoomID = id.Room
 
-				return hotel
+				return seat
 			},
 			isValid: false,
 		},
@@ -268,13 +262,74 @@ func TestHotelRepository_Update(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Hotel().Update(tc.model())
+				err := testStore.Seat().Update(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 			} else {
-				err := testStore.Hotel().Update(tc.model())
+				err := testStore.Seat().Update(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
+			}
+		})
+	}
+}
+
+func TestSeatRepository_ModelFromDTO(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		model   func() *model.SeatDTO
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.SeatDTO {
+				testStore.Open()
+
+				seat := model.TestSeatDTO()
+				seat.RoomID = id.Room
+
+				return seat
+			},
+			isValid: true,
+		},
+		{
+			name: "Invalid RoomID",
+			model: func() *model.SeatDTO {
+				testStore.Open()
+
+				seat := model.TestSeatDTO()
+				seat.RoomID = 0
+
+				return seat
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.SeatDTO {
+				testStore.Close()
+				seat := model.TestSeatDTO()
+				return seat
+			},
+			isValid: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Seat().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Seat().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
 			}
 		})
 	}

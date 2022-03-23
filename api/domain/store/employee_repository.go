@@ -44,7 +44,7 @@ func (r *EmployeeRepository) GetAll() (*[]model.EmployeeDTO, error) {
 			&employee.Position,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while getting all employees. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while getting all employees. Err msg: %v", err)
 			continue
 		}
 		employees = append(employees, employee)

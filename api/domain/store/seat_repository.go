@@ -48,7 +48,7 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 			&seat.RentTo,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
 			continue
 		}
 		seats = append(seats, seat)
