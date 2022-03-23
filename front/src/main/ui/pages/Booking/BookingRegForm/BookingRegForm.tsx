@@ -78,6 +78,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
             value={formik.values.firstName}
             onChange={formik.handleChange}
             type="text"
+            placeholder={'Ivan'}
           />
         </div>
         {formik.errors.firstName && formik.touched.firstName ? (
@@ -93,6 +94,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
             value={formik.values.lastName}
             onChange={formik.handleChange}
             type="text"
+            placeholder={'Ivanov'}
           />
         </div>
         {formik.errors.lastName && formik.touched.lastName ? (
@@ -108,6 +110,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
             value={formik.values.email}
             onChange={formik.handleChange}
             type="text"
+            placeholder={'example@gmail.com'}
           />
         </div>
         {formik.errors.email && formik.touched.email ? <div className={errorMsg}>{formik.errors.email}</div> : null}
@@ -164,6 +167,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
                 value={formik.values.cardNumber}
                 onChange={formik.handleChange}
                 type="text"
+                placeholder={'0000000000000000'}
               />
             </div>
             {formik.errors.cardNumber && formik.touched.cardNumber ? (
@@ -179,6 +183,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
                 value={formik.values.mm}
                 onChange={formik.handleChange}
                 type="text"
+                placeholder={'03'}
               />
             </div>
             {formik.errors.mm && formik.touched.mm ? <div className={errorMsg}>{formik.errors.mm}</div> : null}
@@ -192,6 +197,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
                 value={formik.values.yy}
                 onChange={formik.handleChange}
                 type="text"
+                placeholder={'2022'}
               />
             </div>
             {formik.errors.yy && formik.touched.yy ? <div className={errorMsg}>{formik.errors.yy}</div> : null}
@@ -205,6 +211,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
                 value={formik.values.cvv}
                 onChange={formik.handleChange}
                 type="password"
+                placeholder={'сard verification value'}
               />
             </div>
             {formik.errors.cvv && formik.touched.cvv ? <div className={errorMsg}>{formik.errors.cvv}</div> : null}
