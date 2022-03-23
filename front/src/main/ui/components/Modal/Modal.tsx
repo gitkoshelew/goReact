@@ -15,9 +15,12 @@ export const Modal: React.FC<ModalPropsType> = ({ active, setActive, children })
   const contentHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
   }
+  const finalClassNameModal = ` ${modal} ${active ? modalActive : null}`
+  const finalClassNameContent = ` ${content} ${active ? contentActive : null}`
+
   return (
-    <div className={active ? modalActive : modal} onClick={setActiveHandler}>
-      <div className={active ? contentActive : content} onClick={contentHandler}>
+    <div className={finalClassNameModal} onClick={setActiveHandler}>
+      <div className={finalClassNameContent} onClick={contentHandler}>
         {children}
       </div>
     </div>
