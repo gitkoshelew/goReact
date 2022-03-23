@@ -18,7 +18,7 @@ services:
             - new
 
     authservice:
-        container_name: authservice
+        container_name: service_auth
         build:
             dockerfile: dockerfile
             context: ./authentication
@@ -37,7 +37,7 @@ services:
             - new
 
     authdb:
-        container_name: authdb
+        container_name: db_auth
         image: postgres:latest
         env_file:
             - .env
@@ -58,7 +58,7 @@ services:
                     - database
 
     auth_migrate:
-        container_name: auth_migrate
+        container_name: migrate_auth
         image: migrate/migrate
         restart: on-failure
         networks:
@@ -78,8 +78,50 @@ services:
         depends_on:
             - authdb
 
+    authdbtest:
+        container_name: test_db_auth
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${AUTH_POSTGRES_USER_TEST}
+            - POSTGRES_PASSWORD=${AUTH_POSTGRES_PASSWORD_TEST}
+            - POSTGRES_DB=${AUTH_POSTGRES_DB_TEST}
+            - POSTGRES_HOST=${AUTH_POSTGRES_HOST_TEST}
+            - POSTGRES_SSLMODE=${AUTH_POSTGRES_SSLMODE_TEST}
+        ports:
+            - "8082:5432"
+        restart: unless-stopped
+        volumes:
+            - database-test:/var/lib/test-date/auth/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    test_migrate_auth:
+        container_name: test_migrate_auth
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./authentication/migrations:/authentication/migrations
+        command:
+            [
+                "-path",
+                "authentication/migrations",
+                "-database",
+                "postgres://user:userpass@authdbtest:5432/authdbtest?sslmode=disable",
+                "up"
+            ]
+        links:
+            - authdbtest
+        depends_on:
+            - authdbtest
+
     customerservice:
-        container_name: customerservice
+        container_name: service_customer
         build:
             dockerfile: dockerfile
             context: ./customer
@@ -100,7 +142,7 @@ services:
             - customerdb
 
     customerdb:
-        container_name: customerdb
+        container_name: db_customer
         image: postgres:latest
         env_file:
             - .env
@@ -111,7 +153,7 @@ services:
             - POSTGRES_HOST=${CUSTOMER_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${CUSTOMER_POSTGRES_SSLMODE}
         ports:
-            - "8082:5432"
+            - "8083:5432"
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/user/data/
@@ -121,7 +163,7 @@ services:
                     - database
 
     customer_migrate:
-        container_name: customer_migrate
+        container_name: migrate_customer
         image: migrate/migrate
         restart: on-failure
         networks:
@@ -142,7 +184,7 @@ services:
             - customerdb
 
     customerdbtest:
-        container_name: customerdbtest
+        container_name: test_db_customer
         image: postgres:latest
         env_file:
             - .env
@@ -153,7 +195,7 @@ services:
             - POSTGRES_HOST=${TEST_CUSTOMER_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${TEST_CUSTOMER_POSTGRES_SSLMODE}
         ports:
-            - "8083:5432"
+            - "8084:5432"
         restart: unless-stopped
         volumes:
             - database-test:/var/lib/test-date/user/data/
@@ -163,7 +205,7 @@ services:
                     - database
 
     test_customer_migrate:
-        container_name: test_customer_migrate
+        container_name: test_migrate_customer
         image: migrate/migrate
         restart: on-failure
         networks:
@@ -184,7 +226,7 @@ services:
             - customerdbtest
 
     bookingservice:
-        container_name: bookingservice
+        container_name: service_booking
         build:
             dockerfile: dockerfile
             context: ./booking
@@ -205,7 +247,7 @@ services:
             - bookingdb
 
     bookingdb:
-        container_name: bookingdb
+        container_name: db_booking
         image: postgres:latest
         env_file:
             - .env
@@ -216,7 +258,7 @@ services:
             - POSTGRES_HOST=${BOOKING_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${BOOKING_POSTGRES_SSLMODE}
         ports:
-            - "8084:5432"
+            - "8085:5432"
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/booking/data/
@@ -226,7 +268,7 @@ services:
                     - database
 
     booking_migrate:
-        container_name: booking_migrate
+        container_name: migrate_booking
         image: migrate/migrate
         restart: on-failure
         networks:
@@ -246,92 +288,8 @@ services:
         depends_on:
             - bookingdb
 
-    hoteldb:
-        container_name: hoteldb
-        image: postgres:latest
-        env_file:
-            - .env
-        environment:
-            - POSTGRES_USER=${HOTEL_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${HOTEL_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${HOTEL_POSTGRES_DB}
-            - POSTGRES_HOST=${HOTEL_POSTGRES_HOST}
-            - POSTGRES_SSLMODE=${HOTEL_POSTGRES_SSLMODE}
-        ports:
-            - "8085:5432"
-        restart: always
-        volumes:
-            - database-data:/var/lib/postgresql/hotel/data/
-        networks:
-            new:
-                aliases:
-                    - database
-
-    hoteldbtest:
-        container_name: hoteldbtest
-        image: postgres:latest
-        env_file:
-            - .env
-        environment:
-            - POSTGRES_USER=${TEST_HOTEL_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${TEST_HOTEL_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${TEST_HOTEL_POSTGRES_DB}
-            - POSTGRES_HOST=${TEST_HOTEL_POSTGRES_HOST}
-            - POSTGRES_SSLMODE=${TEST_HOTEL_POSTGRES_SSLMODE}
-        ports:
-            - "8086:5432"
-        restart: unless-stopped
-        volumes:
-            - database-test:/var/lib/test-date/hotel/data/
-        networks:
-            new:
-                aliases:
-                    - database
-
-    hotel_migrate:
-        container_name: hotel_migrate
-        image: migrate/migrate
-        restart: on-failure
-        networks:
-            - new
-        volumes:
-            - ./hotel/migrations:/hotel/migrations
-        command:
-            [
-                "-path",
-                "hotel/migrations",
-                "-database",
-                "postgres://user:userpass@hoteldb:5432/hoteldb?sslmode=disable",
-                "up"
-            ]
-        links:
-            - hoteldb
-        depends_on:
-            - hoteldb
-
-    test_hotel_migrate:
-        container_name: test_hotel_migrate
-        image: migrate/migrate
-        restart: on-failure
-        networks:
-            - new
-        volumes:
-            - ./hotel/migrations:/hotel/migrations
-        command:
-            [
-                "-path",
-                "hotel/migrations",
-                "-database",
-                "postgres://user:userpass@hoteldbtest:5432/hoteldbtest?sslmode=disable",
-                "up"
-            ]
-        links:
-            - hoteldbtest
-        depends_on:
-            - hoteldbtest
-
     hotelservice:
-        container_name: hotelservice
+        container_name: service_hotel
         build:
             dockerfile: dockerfile
             context: ./hotel
@@ -351,8 +309,92 @@ services:
         depends_on:
             - hoteldb
 
+    hoteldb:
+        container_name: db_hotel
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${HOTEL_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${HOTEL_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${HOTEL_POSTGRES_DB}
+            - POSTGRES_HOST=${HOTEL_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${HOTEL_POSTGRES_SSLMODE}
+        ports:
+            - "8086:5432"
+        restart: always
+        volumes:
+            - database-data:/var/lib/postgresql/hotel/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    hotel_migrate:
+        container_name: migrate_hotel
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./hotel/migrations:/hotel/migrations
+        command:
+            [
+                "-path",
+                "hotel/migrations",
+                "-database",
+                "postgres://user:userpass@hoteldb:5432/hoteldb?sslmode=disable",
+                "up"
+            ]
+        links:
+            - hoteldb
+        depends_on:
+            - hoteldb
+
+    hoteldbtest:
+        container_name: test_db_hotel
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_HOTEL_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_HOTEL_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_HOTEL_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_HOTEL_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_HOTEL_POSTGRES_SSLMODE}
+        ports:
+            - "8087:5432"
+        restart: unless-stopped
+        volumes:
+            - database-test:/var/lib/test-date/hotel/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    test_hotel_migrate:
+        container_name: test_migrate_hotel
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./hotel/migrations:/hotel/migrations
+        command:
+            [
+                "-path",
+                "hotel/migrations",
+                "-database",
+                "postgres://user:userpass@hoteldbtest:5432/hoteldbtest?sslmode=disable",
+                "up"
+            ]
+        links:
+            - hoteldbtest
+        depends_on:
+            - hoteldbtest
+
     gateway_service:
-        container_name: gateway_service
+        container_name: service_gateway
         build:
             dockerfile: dockerfile
             context: ./gateway
@@ -370,93 +412,8 @@ services:
         networks:
             - new
 
-    admindb:
-        container_name: admindb
-        image: postgres:latest
-        env_file:
-            - .env
-        environment:
-            - POSTGRES_USER=${ADMIN_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${ADMIN_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${ADMIN_POSTGRES_DB}
-            - POSTGRES_HOST=${ADMIN_POSTGRES_HOST}
-            - POSTGRES_SSLMODE=${ADMIN_POSTGRES_SSLMODE}
-        ports:
-            - "8087:5432"
-        restart: always
-        volumes:
-            - database-data:/var/lib/postgresql/admin/data/
-        networks:
-            new:
-                aliases:
-                    - database
-
-    admindbtest:
-        container_name: admindbtest
-        image: postgres:latest
-        env_file:
-            - .env
-        environment:
-            - POSTGRES_USER=${TEST_ADMIN_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${TEST_ADMIN_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${TEST_ADMIN_POSTGRES_DB}
-            - POSTGRES_HOST=${TEST_ADMIN_POSTGRES_HOST}
-            - POSTGRES_SSLMODE=${TEST_ADMIN_POSTGRES_SSLMODE}
-        ports:
-            - '8088:5432'
-        restart: unless-stopped
-        volumes:
-            - database-test:/var/lib/test-date/admin/data/
-        networks:
-            new:
-                aliases:
-                    - database
-
-    admin_migrate:
-        container_name: admin_migrate
-        image: migrate/migrate
-        restart: on-failure
-        networks:
-            - new
-        volumes:
-            - ./admin/migrations:/admin/migrations
-
-        command:
-            [
-                "-path",
-                "admin/migrations",
-                "-database",
-                "postgres://user:userpass@admindb:5432/admindb?sslmode=disable",
-                "up"
-            ]
-        links:
-            - admindb
-        depends_on:
-            - admindb
-
-    test_admin_migrate:
-        container_name: test_admin_migrate
-        image: migrate/migrate
-        restart: on-failure
-        networks:
-            - new
-        volumes:
-            - ./admin/migrations:/admin/migrations
-        command:
-            [
-                "-path",
-                "admin/migrations",
-                "-database",
-                "postgres://user:userpass@admindbtest:5432/admindbtest?sslmode=disable",
-                "up"
-            ]
-        links:
-            - admindbtest
-        depends_on:
-            - admindbtest
-
     adminservice:
-        container_name: adminservice
+        container_name: service_admin
         build:
             dockerfile: dockerfile
             context: ./admin
@@ -478,6 +435,91 @@ services:
             - api:/admin
         networks:
             - new
+
+    admindb:
+        container_name: db_admin
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${ADMIN_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${ADMIN_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${ADMIN_POSTGRES_DB}
+            - POSTGRES_HOST=${ADMIN_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${ADMIN_POSTGRES_SSLMODE}
+        ports:
+            - "8088:5432"
+        restart: always
+        volumes:
+            - database-data:/var/lib/postgresql/admin/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    admin_migrate:
+        container_name: migrate_admin
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./admin/migrations:/admin/migrations
+
+        command:
+            [
+                "-path",
+                "admin/migrations",
+                "-database",
+                "postgres://user:userpass@admindb:5432/admindb?sslmode=disable",
+                "up"
+            ]
+        links:
+            - admindb
+        depends_on:
+            - admindb
+
+    admindbtest:
+        container_name: test_db_admin
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_ADMIN_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_ADMIN_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_ADMIN_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_ADMIN_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_ADMIN_POSTGRES_SSLMODE}
+        ports:
+            - '8089:5432'
+        restart: unless-stopped
+        volumes:
+            - database-test:/var/lib/test-date/admin/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    test_admin_migrate:
+        container_name: test_migrate_admin
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./admin/migrations:/admin/migrations
+        command:
+            [
+                "-path",
+                "admin/migrations",
+                "-database",
+                "postgres://user:userpass@admindbtest:5432/admindbtest?sslmode=disable",
+                "up"
+            ]
+        links:
+            - admindbtest
+        depends_on:
+            - admindbtest
 
 networks:
     new:

@@ -4,9 +4,15 @@ import (
 	"auth/internal/config"
 	"auth/pkg/logging"
 	"database/sql"
+	"errors"
 	"fmt"
 
 	_ "github.com/lib/pq" // ...
+)
+
+var (
+	// ErrNoRowsAffected ...
+	ErrNoRowsAffected = errors.New("No rows affected")
 )
 
 // Store ...
@@ -40,12 +46,12 @@ func (s *Store) Open() error {
 
 	db, err := sql.Open("postgres", dataSourceName)
 	if err != nil {
-		s.Logger.Errorf("Can't open DB. Err msg: %w", err)
+		s.Logger.Errorf("Can't open DB. Err msg: %v", err)
 		return err
 	}
 
 	if err := db.Ping(); err != nil {
-		s.Logger.Errorf("Can't ping DB. Err msg: %w", err)
+		s.Logger.Errorf("Can't ping DB. Err msg: %v", err)
 		return err
 	}
 
