@@ -34,7 +34,7 @@ func (r *UserRepository) Create(u *model.User) (*int, error) {
 		u.Email,
 		u.Password,
 		string(u.Role),
-		u.Verified,
+		false,
 	).Scan(&u.UserID); err != nil {
 		r.Store.Logger.Errorf("Eror occured while creating user. Err msg: %v", err)
 		return nil, err

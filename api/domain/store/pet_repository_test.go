@@ -226,7 +226,7 @@ func TestPetRepository_Update(t *testing.T) {
 
 				pet := model.TestPet()
 				pet.PetID = id.Pet
-				pet.Owner.UserID = id.Employee
+				pet.Owner.UserID = id.User
 
 				return pet
 			},
@@ -239,7 +239,7 @@ func TestPetRepository_Update(t *testing.T) {
 
 				pet := model.TestPet()
 				pet.PetID = 0
-				pet.Owner.UserID = id.Employee
+				pet.Owner.UserID = id.User
 
 				return pet
 			},
@@ -252,7 +252,7 @@ func TestPetRepository_Update(t *testing.T) {
 
 				pet := model.TestPet()
 				pet.PetID = id.Pet
-				pet.Owner.UserID = id.Employee
+				pet.Owner.UserID = id.User
 				return pet
 			},
 			isValid: false,

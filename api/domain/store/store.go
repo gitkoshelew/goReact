@@ -12,6 +12,9 @@ import (
 var (
 	// ErrNoRowsAffected ...
 	ErrNoRowsAffected = errors.New("No rows affected")
+
+	// ErrEmailIsUsed ...
+	ErrEmailIsUsed = errors.New("Email already in use")
 )
 
 // Store ...

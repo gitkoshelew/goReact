@@ -198,7 +198,7 @@ services:
             - "8084:5432"
         restart: unless-stopped
         volumes:
-            - database-test:/var/lib/test-date/user/data/
+            - database-test:/var/lib/test-date/customer/data/
         networks:
             new:
                 aliases:

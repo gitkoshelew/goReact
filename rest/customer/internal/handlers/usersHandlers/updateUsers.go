@@ -16,7 +16,7 @@ import (
 func UpdateUser(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		req := &model.User{}
+		req := &model.UserDTO{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %w", r.Body, err)
@@ -31,54 +31,13 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		u, err := s.User().FindByID(req.UserID)
+		user, err := s.User().ModelFromDTO(req)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting user by id", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
+			json.NewEncoder(w).Encode(apperror.NewAppError("error occured while building model from DTO", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
-
-		if req.Email != "" {
-			u.Email = req.Email
-		}
-
-		if req.Role != "" {
-			u.Role = req.Role
-		}
-
-		if req.Name != "" {
-			u.Name = req.Name
-		}
-
-		if req.Surname != "" {
-			u.Surname = req.Surname
-		}
-
-		if req.MiddleName != "" {
-			u.MiddleName = req.MiddleName
-		}
-
-		if req.Sex != "" {
-			u.Sex = req.Sex
-		}
-
-		if !req.DateOfBirth.IsZero() {
-			u.DateOfBirth = req.DateOfBirth
-		}
-
-		if req.Address != "" {
-			u.Address = req.Address
-		}
-
-		if req.Phone != "" {
-			u.Phone = req.Phone
-		}
-
-		if req.Photo != "" {
-			u.Photo = req.Photo
-		}
-
-		err = s.User().Update(u)
+		err = s.User().Update(user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating user.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while updating user. Err msg:%v.", err)))
@@ -86,7 +45,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated user with id = %d", u.UserID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated user with id = %d", user.UserID)})
 
 	}
 }

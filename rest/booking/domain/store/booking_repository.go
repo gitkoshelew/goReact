@@ -58,7 +58,7 @@ func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 			&booking.Notes,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %v", err)
+			r.Store.Logger.Debugf("Eror occured while getting all bookings. Err msg: %v", err)
 			continue
 		}
 		bookings = append(bookings, booking)
