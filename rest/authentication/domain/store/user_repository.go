@@ -3,7 +3,6 @@ package store
 import (
 	"auth/domain/model"
 	"auth/domain/utils"
-	"errors"
 	"fmt"
 )
 
@@ -23,8 +22,8 @@ func (r *UserRepository) Create(u *model.User) (*int, error) {
 	}
 
 	if emailIsUsed {
-		r.Store.Logger.Errorf("email is used. Err msg: %v", emailIsUsed)
-		return nil, errors.New("Email already in use")
+		r.Store.Logger.Errorf("email is used. Err msg: %v", ErrEmailIsUsed)
+		return nil, ErrEmailIsUsed
 	}
 
 	if err := r.Store.Db.QueryRow(
@@ -129,6 +128,23 @@ func (r *UserRepository) Delete(id int) error {
 // Update user from DB
 func (r *UserRepository) Update(u *model.User) error {
 
+	email := "email"
+	if u.Email != "" {
+		var emailIsUsed bool
+		err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
+		if err != nil {
+			r.Store.Logger.Errorf("Eror during checking users email or password. Err msg: %v", err)
+			return err
+		}
+
+		if emailIsUsed {
+			r.Store.Logger.Errorf("email is used. Err msg: %v", ErrEmailIsUsed)
+			return ErrEmailIsUsed
+		}
+
+		email = fmt.Sprintf("'%s'", u.Email)
+	}
+
 	password := "password"
 	if u.Password != "" {
 		encryptedPassword, err := utils.EncryptPassword(u.Password)
@@ -138,10 +154,7 @@ func (r *UserRepository) Update(u *model.User) error {
 		}
 		password = fmt.Sprintf("'%s'", encryptedPassword)
 	}
-	email := "email"
-	if u.Email != "" {
-		email = fmt.Sprintf("'%s'", u.Email)
-	}
+
 	role := "role"
 	if u.Role != "" {
 		role = fmt.Sprintf("'%s'", string(u.Role))

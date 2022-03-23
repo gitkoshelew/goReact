@@ -288,6 +288,48 @@ services:
         depends_on:
             - bookingdb
 
+    bookingdbtest:
+        container_name: test_db_booking
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_BOOKING_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_BOOKING_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_BOOKING_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_BOOKING_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_BOOKING_POSTGRES_SSLMODE}
+        ports:
+            - "8086:5432"
+        restart: always
+        volumes:
+            - database-test:/var/lib/test-date/booking/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    booking_migrate_test:
+        container_name: test_migrate_booking
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./booking/migrations:/booking/migrations
+        command:
+            [
+                "-path",
+                "booking/migrations",
+                "-database",
+                "postgres://user:userpass@bookingdbtest:5432/bookingdbtest?sslmode=disable",
+                "up"
+            ]
+        links:
+            - bookingdbtest
+        depends_on:
+            - bookingdbtest
+
     hotelservice:
         container_name: service_hotel
         build:
@@ -321,7 +363,7 @@ services:
             - POSTGRES_HOST=${HOTEL_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${HOTEL_POSTGRES_SSLMODE}
         ports:
-            - "8086:5432"
+            - "8087:5432"
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/hotel/data/
@@ -363,7 +405,7 @@ services:
             - POSTGRES_HOST=${TEST_HOTEL_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${TEST_HOTEL_POSTGRES_SSLMODE}
         ports:
-            - "8087:5432"
+            - "8088:5432"
         restart: unless-stopped
         volumes:
             - database-test:/var/lib/test-date/hotel/data/
@@ -448,7 +490,7 @@ services:
             - POSTGRES_HOST=${ADMIN_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${ADMIN_POSTGRES_SSLMODE}
         ports:
-            - "8088:5432"
+            - "8089:5432"
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/admin/data/
@@ -491,7 +533,7 @@ services:
             - POSTGRES_HOST=${TEST_ADMIN_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${TEST_ADMIN_POSTGRES_SSLMODE}
         ports:
-            - '8089:5432'
+            - '8090:5432'
         restart: unless-stopped
         volumes:
             - database-test:/var/lib/test-date/admin/data/

@@ -32,7 +32,7 @@ func CreateHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		booking, err := s.Booking().Create(req)
+		id, err := s.Booking().Create(req)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating booking", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
@@ -40,6 +40,6 @@ func CreateHandle(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created booking with id = %d", booking.BookingID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created booking with id = %d", id)})
 	}
 }

@@ -34,6 +34,7 @@ func TestUserRepository_Create(t *testing.T) {
 				testStore.Open()
 
 				user := model.TestUser()
+				user.Email = "new@mail.org"
 				testStore.User().Create(user)
 
 				return user

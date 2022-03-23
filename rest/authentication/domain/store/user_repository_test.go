@@ -34,6 +34,7 @@ func TestUserRepository_Create(t *testing.T) {
 				testStore.Open()
 
 				user := model.TestUser()
+				user.Email = "alreadyUsed@mail.org"
 				testStore.User().Create(user)
 
 				return user
@@ -314,7 +315,21 @@ func TestUserRepository_Update(t *testing.T) {
 				testStore.Open()
 
 				user := model.TestUser()
+				user.Email = "new@mail.org"
 				user.UserID = 0
+
+				return user
+			},
+			isValid: false,
+		},
+		{
+			name: "email in use",
+			model: func() *model.User {
+				testStore.Open()
+
+				user := model.TestUser()
+				user.Email = "alreadyUsed@mail.org"
+				testStore.User().Create(user)
 
 				return user
 			},

@@ -12,11 +12,12 @@ type BookingRepository struct {
 }
 
 // Create booking and save it to DB
-func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
+func (r *BookingRepository) Create(b *model.Booking) (*int, error) {
+
 	if err := r.Store.Db.QueryRow(
-		`INSERT INTO booking
-		(seat_id, pet_id, employee_id, transactionId, status, start_date, end_date, paid, notes)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, &9) RETURNING id`,
+		`INSERT INTO booking 
+		(seat_id, pet_id, employee_id, transactionId, status, start_date, end_date, paid, notes) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
 		b.SeatID,
 		b.PetID,
 		b.EmployeeID,
@@ -27,17 +28,17 @@ func (r *BookingRepository) Create(b *model.Booking) (*model.Booking, error) {
 		b.Paid,
 		b.Notes,
 	).Scan(&b.BookingID); err != nil {
-		r.Store.Logger.Errorf("Eror occured while creating booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while creating booking. Err msg: %v", err)
 		return nil, err
 	}
-	return b, nil
+	return &b.BookingID, nil
 }
 
 // GetAll returns all bookings
 func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM booking")
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %v", err)
 		return nil, err
 	}
 	bookings := []model.Booking{}
@@ -57,7 +58,7 @@ func (r *BookingRepository) GetAll() (*[]model.Booking, error) {
 			&booking.Notes,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %w", err)
+			r.Store.Logger.Errorf("Eror occured while getting all bookings. Err msg: %v", err)
 			continue
 		}
 		bookings = append(bookings, booking)
@@ -81,7 +82,7 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 		&booking.Paid,
 		&booking.Notes,
 	); err != nil {
-		r.Store.Logger.Errorf("Eror occured while searching booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while searching booking. Err msg: %v", err)
 		return nil, err
 	}
 	return booking, nil
@@ -91,10 +92,22 @@ func (r *BookingRepository) FindByID(id int) (*model.Booking, error) {
 func (r *BookingRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM booking WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg: %v", err)
 		return err
 	}
-	r.Store.Logger.Errorf("Booking deleted, rows affectet: %d", result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg: %v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while deleting booking. Err msg: %v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Booking with id %d was deleted", id)
 	return nil
 }
 
@@ -152,9 +165,37 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 			notes,
 		), b.BookingID)
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while updating booking. Err msg: %w", err)
+		r.Store.Logger.Errorf("Eror occured while updating booking. Err msg: %v", err)
 		return err
 	}
-	r.Store.Logger.Errorf("Booking updated, rows affectet: %d", result)
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating booking. Err msg: %v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating booking. Err msg: %v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Booking with id %d was updated", b.BookingID)
 	return nil
+}
+
+// ModelFromDTO ...
+func (r *BookingRepository) ModelFromDTO(dto *model.BookingDTO) (*model.Booking, error) {
+
+	return &model.Booking{
+		BookingID:     dto.BookingID,
+		SeatID:        dto.SeatID,
+		PetID:         dto.PetID,
+		EmployeeID:    dto.EmployeeID,
+		Status:        model.BookingStatus(dto.Status),
+		StartDate:     dto.StartDate,
+		EndDate:       dto.EndDate,
+		Notes:         dto.Notes,
+		TransactionID: dto.TransactionID,
+		Paid:          dto.Paid,
+	}, nil
 }
