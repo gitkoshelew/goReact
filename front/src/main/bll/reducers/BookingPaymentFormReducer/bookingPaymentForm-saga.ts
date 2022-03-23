@@ -24,6 +24,8 @@ export function* fetchBookingPaymentSagaWorker(action: ReturnType<typeof fetchBo
   } catch (err) {
     if (err instanceof Error) {
       yield put(bookingPaymentError({ errorMsg: err.name }))
+    } else {
+      throw err
     }
   }
 }
