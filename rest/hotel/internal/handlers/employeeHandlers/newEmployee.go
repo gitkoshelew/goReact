@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"hotel/domain/model"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"hotel/pkg/response"
 	"net/http"
 
@@ -32,29 +32,15 @@ func CreateEmployee(s *store.Store) httprouter.Handle {
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
-		hotel, err := s.Hotel().FindByID(req.HotelID)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting hotel by id.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v.", err)))
-			return
-		}
 
-		e := model.Employee{
-			EmployeeID: 0,
-			UserID:     req.UserID,
-			Hotel:      *hotel,
-			Position:   model.Position(req.Position),
-		}
-
-		err = e.Validate()
+		employeeDTO, err := s.Employee().ModelFromDTO(req)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
+			json.NewEncoder(w).Encode(apperror.NewAppError("error occured while building model from DTO", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
-		_, err = s.Employee().Create(&e)
+		id, err = s.Employee().Create(employeeDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating employee.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while updating employee. Err msg:%v.", err)))
@@ -62,6 +48,6 @@ func CreateEmployee(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created employee with id = %d", e.EmployeeID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created employee with id = %d", id)})
 	}
 }

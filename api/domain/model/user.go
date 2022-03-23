@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// User extends Account and has all Account fields
+// User ...
 type User struct {
 	UserID      int        `json:"userId"`
 	Email       string     `json:"email"`
@@ -68,7 +68,6 @@ func (u *UserDTO) Validate() error {
 		validation.Field(&u.Email, validation.Required, is.Email, validation.By(IsSQL)),
 		validation.Field(&u.Password, validation.Required, validation.Length(5, 100), validation.By(IsSQL)),
 		validation.Field(&u.Role, validation.By(IsRole)),
-		validation.Field(&u.Verified),
 		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
 		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
 		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(0, 30), validation.By(IsSQL)),

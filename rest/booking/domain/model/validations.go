@@ -78,39 +78,17 @@ func IsPhone(value interface{}) error {
 	return ErrInvalidPhoneNumber
 }
 
-// IsRole checks if string matchs to a Role types of User
-// ClientRole     = "client"
-// EmployeeRole   = "employee"
-// AnonymousRole  = "anonymous"
-// if Role with be nil - wont return error
-func IsRole(value interface{}) error {
-	s := Role(value.(string))
-	if s == ClientRole || s == EmployeeRole || s == AnonymousRole || s == "" {
+// IsBookingStatus checks if string matchs to a BookingStatus
+// BookingStatusPending    BookingStatus = "pending"
+// BookingStatusInProgress BookingStatus = "in-progress"
+// BookingStatusCompleted  BookingStatus = "completed"
+// BookingStatusCancelled  BookingStatus = "cancelled"
+func IsBookingStatus(value interface{}) error {
+	s := BookingStatus(value.(string))
+	if s == BookingStatusPending || s == BookingStatusInProgress || s == BookingStatusCompleted || s == BookingStatusCancelled {
 		return nil
 	}
-	return ErrInvalidUserRole
-}
-
-// IsSex checks if string matchs to a sex types of User
-// Male    = "male"
-// Female  = "female"
-func IsSex(value interface{}) error {
-	s := Sex(value.(string))
-	if s == SexMale || s == SexFemale {
-		return nil
-	}
-	return ErrInvalidSexType
-}
-
-// IsPetType checks if string matchs to a Pet types of Pets
-// PetTypeCat = "cat"
-// PetTypeDog = "dog"
-func IsPetType(value interface{}) error {
-	s := PetType(value.(string))
-	if s == PetTypeCat || s == PetTypeDog {
-		return nil
-	}
-	return ErrInvalidPetType
+	return ErrInvalidBookingStatus
 }
 
 // IsValidBirthDate ...
