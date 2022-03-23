@@ -211,7 +211,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
                 value={formik.values.cvv}
                 onChange={formik.handleChange}
                 type="password"
-                placeholder={'сard verification value'}
+                placeholder={'xxx'}
               />
             </div>
             {formik.errors.cvv && formik.touched.cvv ? <div className={errorMsg}>{formik.errors.cvv}</div> : null}
