@@ -48,7 +48,7 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 			&room.PhotoURL,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while getting all rooms. Err msg: %v", err)
 			continue
 		}
 		rooms = append(rooms, room)
@@ -99,6 +99,7 @@ func (r *RoomRepository) Delete(id int) error {
 
 // Update room from DB
 func (r *RoomRepository) Update(rm *model.Room) error {
+
 	number := "number"
 	if rm.RoomNumber != 0 {
 		number = fmt.Sprintf("%d", rm.RoomNumber)
@@ -165,7 +166,7 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.RoomDTO,
 			&room.PhotoURL,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while scaning rooms. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while scaning rooms. Err msg: %v", err)
 			continue
 		}
 		rooms = append(rooms, room)

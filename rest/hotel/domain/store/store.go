@@ -2,11 +2,20 @@ package store
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"hotel/internal/config"
 	"hotel/pkg/logging"
 
 	_ "github.com/lib/pq" // ...
+)
+
+var (
+	// ErrNoRowsAffected ...
+	ErrNoRowsAffected = errors.New("No rows affected")
+
+	// ErrEmailIsUsed ...
+	ErrEmailIsUsed = errors.New("Email already in use")
 )
 
 // Store ...

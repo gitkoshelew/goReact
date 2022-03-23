@@ -1,2 +1,2 @@
 ALTER TABLE ROOM  
-DROP COLUMN      photo     CASCADE;
+DROP COLUMN      photoURL     CASCADE;

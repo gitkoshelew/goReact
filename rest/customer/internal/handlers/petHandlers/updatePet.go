@@ -32,53 +32,14 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		user, err := s.User().FindByID(req.OwnerID)
+		pet, err := s.Pet().ModelFromDTO(req)
 		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting user by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(apperror.NewAppError("error occured while building model from DTO", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
-		petDTO, err := s.Pet().FindByID(req.PetID)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting pet by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
-			return
-		}
-		p, err := s.Pet().PetFromDTO(petDTO)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring petDTO", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
-			return
-		}
-
-		if req.Name != "" {
-			p.Name = req.Name
-		}
-
-		if req.Type != "" {
-			p.Type = model.PetType(req.Type)
-		}
-
-		if req.Weight != 0 {
-			p.Weight = req.Weight
-		}
-
-		if req.Diseases != "" {
-			p.Diseases = req.Diseases
-		}
-
-		if user != nil {
-			if user.UserID != req.OwnerID {
-				p.Owner = *user
-			}
-		}
-
-		if req.PhotoURL != "" {
-			p.PhotoURL = req.PhotoURL
-		}
-
-		err = s.Pet().Update(p)
+		err = s.Pet().Update(pet)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while updating pet.", fmt.Sprintf("%d", http.StatusBadRequest),
@@ -87,6 +48,6 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated pet with id = %d", p.PetID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Updated pet with id = %d", pet.PetID)})
 	}
 }

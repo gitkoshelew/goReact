@@ -4,6 +4,9 @@ import (
 	"customer/domain/model"
 	"customer/domain/utils"
 	"errors"
+	"fmt"
+	"strings"
+	"time"
 )
 
 // UserRepository ...
@@ -12,7 +15,8 @@ type UserRepository struct {
 }
 
 // Create user and save it to DB
-func (r *UserRepository) Create(u *model.User) (*model.User, error) {
+func (r *UserRepository) Create(u *model.User) (*int, error) {
+
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
 	if err != nil {
@@ -21,9 +25,8 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 	}
 
 	if emailIsUsed {
-		err := errors.New("email already in use")
-		r.Store.Logger.Errorf("Error occured while creating user. Err msg:%v.", err)
-		return nil, err
+		r.Store.Logger.Errorf("Error occured while creating user. Err msg:%v.", ErrEmailIsUsed)
+		return nil, ErrEmailIsUsed
 	}
 
 	if err := r.Store.Db.QueryRow(
@@ -48,8 +51,8 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		return nil, err
 	}
 
-	r.Store.Logger.Info("Created user with id = %d", u.UserID)
-	return u, nil
+	r.Store.Logger.Infof("Created user with id = %d", u.UserID)
+	return &u.UserID, nil
 }
 
 // GetAll returns all users
@@ -79,7 +82,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Photo,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while getting all users. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while getting all users. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -113,8 +116,8 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 }
 
 // FindByID searchs and returns user by ID
-func (r *UserRepository) FindByID(id int) (*model.User, error) {
-	user := &model.User{}
+func (r *UserRepository) FindByID(id int) (*model.UserDTO, error) {
+	user := &model.UserDTO{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE id = $1",
 		id).Scan(
 		&user.UserID,
@@ -156,39 +159,118 @@ func (r *UserRepository) Delete(id int) error {
 		return err
 	}
 
-	r.Store.Logger.Info("User deleted, rows affectet: %d", result)
+	r.Store.Logger.Infof("User deleted, rows affectet: %d", result)
 	return nil
 }
 
 // Update user from DB
 func (r *UserRepository) Update(u *model.User) error {
+	email := "email"
+	if u.Email != "" {
+		var emailIsUsed bool
+		err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
+		if err != nil {
+			r.Store.Logger.Errorf("Eror during checking users email or password. Err msg: %v", err)
+			return err
+		}
 
-	result, err := r.Store.Db.Exec(
+		if emailIsUsed {
+			r.Store.Logger.Errorf("email is used. Err msg: %v", ErrEmailIsUsed)
+			return ErrEmailIsUsed
+		}
+
+		email = fmt.Sprintf("'%s'", u.Email)
+	}
+
+	password := "password"
+	if u.Password != "" {
+		encryptedPassword, err := utils.EncryptPassword(u.Password)
+		if err != nil {
+			r.Store.Logger.Errorf("Cant't encrypt password. Err msg: %v", err)
+			return err
+		}
+		password = fmt.Sprintf("'%s'", encryptedPassword)
+	}
+	role := "role"
+	if u.Role != "" {
+		role = fmt.Sprintf("'%s'", string(u.Role))
+	}
+	verified := "verified"
+	if u.Verified != nil {
+		verified = fmt.Sprintf("%v", *u.Verified)
+	}
+	name := "first_name"
+	if u.Name != "" {
+		name = fmt.Sprintf("'%s'", u.Name)
+	}
+	surname := "surname"
+	if u.Surname != "" {
+		surname = fmt.Sprintf("'%s'", u.Surname)
+	}
+	middlename := "middle_name"
+	if u.MiddleName != "" {
+		middlename = fmt.Sprintf("'%s'", u.MiddleName)
+	}
+	sex := "sex"
+	if u.Sex != "" {
+		sex = fmt.Sprintf("'%s'", string(u.Sex))
+	}
+	dateOfBirth := "date_of_birth"
+	if u.DateOfBirth != nil {
+		dateOfBirth = fmt.Sprintf("'%s'", u.DateOfBirth.Format(time.RFC3339))
+	}
+	address := "address"
+	if u.Address != "" {
+		address = fmt.Sprintf("'%s'", u.Address)
+	}
+	phone := "phone"
+	if u.Phone != "" {
+		phone = fmt.Sprintf("'%s'", u.Phone)
+	}
+	photo := "photo"
+	if u.Photo != "" {
+		photo = fmt.Sprintf("'%s'", u.Photo)
+	}
+
+	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE users SET 
-			email = $1, password = $2, role = $3, verified = $4, 
-			first_name = $5, surname = $6, middle_name = $7, sex = $8, date_of_birth = $9, 
-			address = $10, phone = $11, photo = $12 
-			WHERE id = $13`,
-		u.Email,
-		utils.EncryptPassword,
-		string(u.Role),
-		u.Verified,
-		u.Name,
-		u.Surname,
-		u.MiddleName,
-		string(u.Sex),
-		u.DateOfBirth,
-		u.Address,
-		u.Phone,
-		u.Photo,
-		u.UserID,
-	)
+			email = %s, password = %s, role = %s, verified = %s, 
+			first_name = %s, surname = %s, middle_name = %s, sex = %s, date_of_birth = %s, 
+			address = %s, phone = %s, photo = %s 
+			WHERE id = $1`,
+		email,
+		password,
+		role,
+		verified,
+		strings.Title(strings.ToLower(name)),
+		strings.Title(strings.ToLower(surname)),
+		strings.Title(strings.ToLower(middlename)),
+		sex,
+		dateOfBirth,
+		address,
+		phone,
+		photo,
+	), u.UserID)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating user. Err msg: %v", err)
+		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %v", err)
 		return err
 	}
-	r.Store.Logger.Infof("User updated, rows affectet: %d", result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating user. Err msg:%v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("User with id %d was updated", u.UserID)
+
 	return nil
+
 }
 
 // VerifyEmail user from DB

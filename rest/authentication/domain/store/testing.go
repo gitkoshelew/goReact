@@ -1,8 +1,8 @@
 package store
 
 import (
-	"customer/domain/model"
-	"customer/internal/config"
+	"auth/domain/model"
+	"auth/internal/config"
 	"database/sql"
 	"fmt"
 	"os"
@@ -12,7 +12,6 @@ import (
 // ID ...
 type ID struct {
 	User int
-	Pet  int
 }
 
 // TestStore ...
@@ -50,7 +49,7 @@ func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string)
 		s.Config.DataBase.DbName,
 		s.Config.DataBase.Sslmode,
 	)
-	s.Logger.Infof("Customer store opening. Source: %s", dataSourceName)
+	s.Logger.Infof("Auth store opening. Source: %s", dataSourceName)
 
 	db, err := sql.Open("postgres", dataSourceName)
 	if err != nil {
@@ -65,7 +64,7 @@ func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string)
 
 	return s, func() {
 		s.Open()
-		_, err := s.Db.Exec("TRUNCATE users, pet CASCADE")
+		_, err := s.Db.Exec("TRUNCATE users CASCADE")
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -82,15 +81,9 @@ func FillDB(t *testing.T, s *Store) *ID {
 	userID, _ := s.User().Create(user)
 	user.UserID = *userID
 
-	pet := model.TestPet()
-	pet.Owner = *user
-	petID, _ := s.Pet().Create(pet)
-	pet.PetID = *petID
-
 	s.Close()
 
 	return &ID{
 		User: *userID,
-		Pet:  *petID,
 	}
 }

@@ -12,9 +12,9 @@ type PetRepository struct {
 }
 
 // Create pet and save it to DB
-func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
+func (r *PetRepository) Create(p *model.Pet) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO pet (name, type, weight, diseases, user_id , photo) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
+		"INSERT INTO pet (name, type, weight, diseases, user_id , photoURL) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
 		p.Name,
 		string(p.Type),
 		p.Weight,
@@ -22,12 +22,12 @@ func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 		p.Owner.UserID,
 		p.PhotoURL,
 	).Scan(&p.PetID); err != nil {
-		r.Store.Logger.Errorf("Error occured while creating pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while creating pet. Err msg: %v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Created pet with id = %d", p.PetID)
+	r.Store.Logger.Infof("Created pet with id = %d", p.PetID)
 
-	return p, nil
+	return &p.PetID, nil
 }
 
 // GetAll returns all pets
@@ -35,6 +35,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM pet")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all pets. Err msg: %v", err)
+		return nil, err
 	}
 	pets := []model.PetDTO{}
 
@@ -50,31 +51,12 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 			&pet.PhotoURL,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while getting all pets. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while getting all pets. Err msg: %v", err)
 			continue
 		}
 		pets = append(pets, pet)
 	}
 	return &pets, nil
-}
-
-// FindDTOByID searchs and returns petDTO by ID
-func (r *PetRepository) FindDTOByID(id int) (*model.PetDTO, error) {
-	pet := &model.PetDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
-		id).Scan(
-		&pet.PetID,
-		&pet.Name,
-		&pet.Type,
-		&pet.Weight,
-		&pet.Diseases,
-		&pet.OwnerID,
-		&pet.PhotoURL,
-	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg:%v.", err)
-		return nil, err
-	}
-	return pet, nil
 }
 
 // FindByID searchs and returns pet by ID
@@ -90,7 +72,7 @@ func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 		&pet.OwnerID,
 		&pet.PhotoURL,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg: %v.", err)
 		return nil, err
 	}
 	return pet, nil
@@ -100,66 +82,107 @@ func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 func (r *PetRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM pet WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg: %v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg: %v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
 		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg: %v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Pet deleted, rows affectet: %d", result)
+	r.Store.Logger.Infof("Pet deleted, rows affectet: %d", result)
 	return nil
 }
 
 // Update pet from DB
 func (r *PetRepository) Update(p *model.Pet) error {
+	name := "name"
+	if p.Name != "" {
+		name = fmt.Sprintf("'%s'", p.Name)
+	}
+	petType := "type"
+	if p.Type != "" {
+		petType = fmt.Sprintf("'%s'", string(p.Type))
+	}
+	weight := "weight"
+	if p.Weight != 0 {
+		weight = fmt.Sprintf("%v", p.Weight)
+	}
+	diseases := "diseases"
+	if p.Diseases != "" {
+		diseases = fmt.Sprintf("'%s'", p.Diseases)
+	}
+	ownerID := "user_id"
+	if p.Owner.UserID != 0 {
+		ownerID = fmt.Sprintf("%d", p.Owner.UserID)
+	}
+	photoURL := "photoURL"
+	if p.PhotoURL != "" {
+		photoURL = fmt.Sprintf("'%s'", p.PhotoURL)
+	}
 
-	result, err := r.Store.Db.Exec(
-		"UPDATE pet SET name = $1, type = $2, weight = $3, diseases = $4, user_id = $5 , user_id = $6 WHERE id = $7",
-		p.Name,
-		string(p.Type),
-		p.Weight,
-		p.Diseases,
-		p.Owner.UserID,
-		p.PhotoURL,
-		p.PetID,
-	)
+	result, err := r.Store.Db.Exec(fmt.Sprintf(
+		`UPDATE pet SET 
+		name = %s, type = %s, weight = %s, diseases = %s, user_id = %s , photoURL = %s 
+		WHERE id = $1`,
+		name,
+		petType,
+		weight,
+		diseases,
+		ownerID,
+		photoURL,
+	), p.PetID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating pet. Err msg:%v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Updated pet with id = %d,rows affectet: %d ", p.PetID, result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating pet. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating pet. Err msg:%v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Pet with id %d was updated", p.PetID)
 	return nil
 }
 
 // IsPetValid ...
-func (r *PetRepository) IsPetValid(id int) (bool, error) {
+func (r *PetRepository) IsPetValid(id int) (*bool, error) {
 	var exist bool
-	err := r.Store.Db.QueryRow(`SELECT EXISTS (SELECT id FROM pet WHERE id = $1))`,
+	err := r.Store.Db.QueryRow(`SELECT EXISTS (SELECT id FROM pet WHERE id = $1)`,
 		id).Scan(&exist)
 	if err != nil {
-		return false, err
+		return &exist, err
 	}
 
 	if exist {
-		return true, nil
+		return &exist, nil
 	}
 
-	return false, fmt.Errorf("Pet with id = %d does not exist", id)
+	return &exist, nil
 }
 
-// PetFromDTO ...
-func (r *PetRepository) PetFromDTO(dto *model.PetDTO) (*model.Pet, error) {
-	user, err := r.Store.User().FindByID(dto.OwnerID)
+// ModelFromDTO ...
+func (r *PetRepository) ModelFromDTO(dto *model.PetDTO) (*model.Pet, error) {
+	userDTO, err := r.Store.User().FindByID(dto.OwnerID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while convetring petDTO. Err msg: %v", err)
+		return nil, err
+	}
+	user, err := r.Store.User().ModelFromDTO(userDTO)
+	if err != nil {
 		return nil, err
 	}
 

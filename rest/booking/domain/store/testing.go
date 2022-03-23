@@ -1,8 +1,8 @@
 package store
 
 import (
-	"customer/domain/model"
-	"customer/internal/config"
+	"booking/domain/model"
+	"booking/internal/config"
 	"database/sql"
 	"fmt"
 	"os"
@@ -11,8 +11,7 @@ import (
 
 // ID ...
 type ID struct {
-	User int
-	Pet  int
+	Booking int
 }
 
 // TestStore ...
@@ -50,7 +49,7 @@ func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string)
 		s.Config.DataBase.DbName,
 		s.Config.DataBase.Sslmode,
 	)
-	s.Logger.Infof("Customer store opening. Source: %s", dataSourceName)
+	s.Logger.Infof("Booking store opening. Source: %s", dataSourceName)
 
 	db, err := sql.Open("postgres", dataSourceName)
 	if err != nil {
@@ -65,7 +64,7 @@ func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string)
 
 	return s, func() {
 		s.Open()
-		_, err := s.Db.Exec("TRUNCATE users, pet CASCADE")
+		_, err := s.Db.Exec("TRUNCATE booking CASCADE")
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -77,20 +76,13 @@ func TestStore(t *testing.T, host, dbName, user, password, port, sslMode string)
 func FillDB(t *testing.T, s *Store) *ID {
 	s.Open()
 
-	user := model.TestUser()
-	user.Email = "test@mail.org"
-	userID, _ := s.User().Create(user)
-	user.UserID = *userID
-
-	pet := model.TestPet()
-	pet.Owner = *user
-	petID, _ := s.Pet().Create(pet)
-	pet.PetID = *petID
+	booking := model.TestBooking()
+	bookingID, _ := s.Booking().Create(booking)
+	booking.BookingID = *bookingID
 
 	s.Close()
 
 	return &ID{
-		User: *userID,
-		Pet:  *petID,
+		Booking: *bookingID,
 	}
 }

@@ -9468,3 +9468,7 @@
 [31mERRO[0m[2022-03-21T21:20:11+03:00]user_repository.go:329 goReact/domain/store.(*UserRepository).PasswordChange No rows was affected, possible reason: no user with such ID, err msg: No rows affected 
 [31mERRO[0m[2022-03-21T21:20:11+03:00]user_repository.go:318 goReact/domain/store.(*UserRepository).PasswordChange Cant't set into users table. Err msg: sql: database is closed 
 [31mERRO[0m[2022-03-21T21:20:11+03:00]user_repository.go:318 goReact/domain/store.(*UserRepository).PasswordChange Cant't set into users table. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-23T14:05:44+03:00]store.go:49 goReact/domain/store.(*Store).Open Error occured while ping to DB. Err msg: dial tcp [::1]:6543: connectex: No connection could be made because the target machine actively refused it. 
+[31mERRO[0m[2022-03-23T14:05:44+03:00]store.go:49 goReact/domain/store.(*Store).Open Error occured while ping to DB. Err msg: dial tcp [::1]:6543: connectex: No connection could be made because the target machine actively refused it. 
+[31mERRO[0m[2022-03-23T14:17:26+03:00]store.go:49 goReact/domain/store.(*Store).Open Error occured while ping to DB. Err msg: dial tcp [::1]:6543: connectex: No connection could be made because the target machine actively refused it. 
+[31mERRO[0m[2022-03-23T14:17:26+03:00]store.go:49 goReact/domain/store.(*Store).Open Error occured while ping to DB. Err msg: dial tcp [::1]:6543: connectex: No connection could be made because the target machine actively refused it. 

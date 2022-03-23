@@ -29,6 +29,19 @@ func TestUserRepository_Create(t *testing.T) {
 			isValid: true,
 		},
 		{
+			name: "email in use",
+			model: func() *model.User {
+				testStore.Open()
+
+				user := model.TestUser()
+				user.Email = "new@mail.org"
+				testStore.User().Create(user)
+
+				return user
+			},
+			isValid: false,
+		},
+		{
 			name: "DB closed",
 			model: func() *model.User {
 				testStore.Close()
@@ -347,7 +360,7 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 				testStore.Open()
 
 				user := model.TestUser()
-				user.Email = "searching@email.org"
+				user.Email = "searching1@email.org"
 				testStore.User().Create(user)
 
 				return "notThis@email.org"
@@ -360,7 +373,7 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 				testStore.Close()
 
 				user := model.TestUser()
-				user.Email = "searching@email.org"
+				user.Email = "searching2@email.org"
 				testStore.User().Create(user)
 
 				return user.Email
@@ -480,7 +493,7 @@ func TestUserRepository_EmailCheck(t *testing.T) {
 			email: func() string {
 				testStore.Close()
 
-				return "unusing@email.org"
+				return "unusing2@email.org"
 			},
 			isValid: false,
 		},

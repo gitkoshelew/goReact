@@ -51,7 +51,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 			&pet.PhotoURL,
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occured while getting all pets. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while getting all pets. Err msg: %v", err)
 			continue
 		}
 		pets = append(pets, pet)

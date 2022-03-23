@@ -1,7 +1,7 @@
 package store_test
 
 import (
-	"customer/domain/store"
+	"auth/domain/store"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -9,10 +9,10 @@ import (
 
 var (
 	host                = "localhost"
-	dbName              = "customerdbtest"
+	dbName              = "authdbtest"
 	user                = "user"
 	password            = "userpass"
-	port                = "8084"
+	port                = "8082"
 	sslMode             = "disable"
 	testStore, teardown = store.TestStore(&testing.T{}, host, dbName, user, password, port, sslMode)
 )

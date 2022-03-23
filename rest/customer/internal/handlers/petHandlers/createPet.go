@@ -34,24 +34,14 @@ func CreatePet(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		user, err := s.User().FindByID(req.OwnerID)
+		pet, err := s.Pet().ModelFromDTO(req)
 		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting pet by id", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(apperror.NewAppError("error occured while building model from DTO", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
-		p := model.Pet{
-			PetID:    0,
-			Name:     req.Name,
-			Type:     model.PetType(req.Type),
-			Weight:   req.Weight,
-			Diseases: req.Diseases,
-			Owner:    *user,
-			PhotoURL: req.PhotoURL,
-		}
-
-		_, err = s.Pet().Create(&p)
+		id, err := s.Pet().Create(pet)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating pet", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
@@ -59,6 +49,6 @@ func CreatePet(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created pet with id = %d", p.PetID)})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("Created pet with id = %d", id)})
 	}
 }

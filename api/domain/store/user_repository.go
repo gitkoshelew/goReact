@@ -1,7 +1,6 @@
 package store
 
 import (
-	"errors"
 	"fmt"
 	"goReact/domain/model"
 	"strings"
@@ -14,11 +13,6 @@ import (
 type UserRepository struct {
 	Store *Store
 }
-
-var (
-	// ErrEmailIsUsed ...
-	ErrEmailIsUsed = errors.New("Email already in use")
-)
 
 // Create user and save it to DB
 func (r *UserRepository) Create(user *model.User) (*int, error) {
@@ -173,6 +167,22 @@ func (r *UserRepository) Delete(id int) error {
 
 // Update user from DB
 func (r *UserRepository) Update(u *model.User) error {
+	email := "email"
+	if u.Email != "" {
+		var emailIsUsed bool
+		err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
+		if err != nil {
+			r.Store.Logger.Errorf("Eror during checking users email or password. Err msg: %v", err)
+			return err
+		}
+
+		if emailIsUsed {
+			r.Store.Logger.Errorf("email is used. Err msg: %v", ErrEmailIsUsed)
+			return ErrEmailIsUsed
+		}
+
+		email = fmt.Sprintf("'%s'", u.Email)
+	}
 
 	password := "password"
 	if u.Password != "" {
@@ -182,10 +192,6 @@ func (r *UserRepository) Update(u *model.User) error {
 			return err
 		}
 		password = fmt.Sprintf("'%s'", encryptedPassword)
-	}
-	email := "email"
-	if u.Email != "" {
-		email = fmt.Sprintf("'%s'", u.Email)
 	}
 	role := "role"
 	if u.Role != "" {

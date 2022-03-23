@@ -38,7 +38,7 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		room, err := s.RoomRepository.RoomFromDTO(roomDTO)
+		room, err := s.RoomRepository.ModelFromDTO(roomDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert room. Err msg:%v.", err)))

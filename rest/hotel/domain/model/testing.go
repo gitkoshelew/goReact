@@ -1,11 +1,22 @@
 package model
 
 import (
+	"hotel/pkg/pagination"
 	"time"
 )
 
 // TestHotel instance of hotel
 func TestHotel() *Hotel {
+	return &Hotel{
+		HotelID:     1,
+		Name:        "Name",
+		Address:     "Minsk ul sovetskaya 18",
+		Coordinates: []float64{53.89909164468815, 27.498996594142426},
+	}
+}
+
+// TestHotelDTO ...
+func TestHotelDTO() *Hotel {
 	return &Hotel{
 		HotelID:     1,
 		Name:        "Name",
@@ -25,11 +36,23 @@ func TestRoom() *Room {
 	}
 }
 
+// TestRoomDTO ...
+func TestRoomDTO() *RoomDTO {
+	return &RoomDTO{
+		RoomID:     1,
+		RoomNumber: 1,
+		PetType:    "cat",
+		HotelID:    TestHotel().HotelID,
+		PhotoURL:   "/photo/1",
+	}
+}
+
 // TestSeat ...
 func TestSeat() *Seat {
-	rentFrom := time.Time{}.AddDate(20220, 2, 2)
-	rentTo := time.Time{}.AddDate(2022, 3, 2)
+	rentFrom := time.Now().AddDate(0, 0, 1)
+	rentTo := time.Now().AddDate(0, 0, 10)
 	return &Seat{
+		SeatID:      1,
 		Description: "Description of seat",
 		RentFrom:    &rentFrom,
 		RentTo:      &rentTo,
@@ -37,14 +60,28 @@ func TestSeat() *Seat {
 	}
 }
 
+// TestSeatDTO ...
+func TestSeatDTO() *SeatDTO {
+	rentFrom := time.Now().AddDate(0, 0, 1)
+	rentTo := time.Now().AddDate(0, 0, 10)
+	return &SeatDTO{
+		SeatID:      1,
+		Description: "Description of seat",
+		RentFrom:    &rentFrom,
+		RentTo:      &rentTo,
+		RoomID:      1,
+	}
+}
+
 // TestEmployee ...
 func TestEmployee() *Employee {
 	dateOfBirth := time.Time{}.AddDate(2000, 2, 2)
+	verified := true
 	return &Employee{
 		EmployeeID:  1,
 		Email:       "email@example.org",
 		Role:        EmployeeRole,
-		Verified:    true,
+		Verified:    &verified,
 		Name:        "Name",
 		Surname:     "Surname",
 		MiddleName:  "MiddleName",
@@ -61,11 +98,12 @@ func TestEmployee() *Employee {
 // TestEmployeeDTO ...
 func TestEmployeeDTO() *EmployeeDTO {
 	dateOfBirth := time.Time{}.AddDate(2000, 2, 2)
+	verified := true
 	return &EmployeeDTO{
 		EmployeeID:  1,
 		Email:       "email@example.org",
 		Role:        string(EmployeeRole),
-		Verified:    true,
+		Verified:    &verified,
 		Name:        "Name",
 		Surname:     "Surname",
 		MiddleName:  "MiddleName",
@@ -76,5 +114,13 @@ func TestEmployeeDTO() *EmployeeDTO {
 		Photo:       "Photo",
 		HotelID:     1,
 		Position:    string(OwnerPosition),
+	}
+}
+
+// TestPage ...
+func TestPage() *pagination.Page {
+	return &pagination.Page{
+		PageNumber: 1,
+		PageSize:   10,
 	}
 }
