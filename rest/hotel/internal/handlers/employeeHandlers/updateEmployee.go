@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"hotel/domain/model"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"hotel/pkg/response"
 	"net/http"
 

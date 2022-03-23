@@ -29,9 +29,6 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 
 // Create ...
 func (r *UserRepository) Create(u *model.User) (*model.User, error) {
-	if err := u.Validate(); err != nil {
-		return nil, err
-	}
 
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)

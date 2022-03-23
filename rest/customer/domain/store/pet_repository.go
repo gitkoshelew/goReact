@@ -20,7 +20,7 @@ func (r *PetRepository) Create(p *model.Pet) (*model.Pet, error) {
 		p.Weight,
 		p.Diseases,
 		p.Owner.UserID,
-		p.PetPhotoURL,
+		p.PhotoURL,
 	).Scan(&p.PetID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating pet. Err msg:%v.", err)
 		return nil, err
@@ -47,7 +47,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 			&pet.Weight,
 			&pet.Diseases,
 			&pet.OwnerID,
-			&pet.PetPhotoURL,
+			&pet.PhotoURL,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all pets. Err msg: %v", err)
@@ -69,7 +69,7 @@ func (r *PetRepository) FindDTOByID(id int) (*model.PetDTO, error) {
 		&pet.Weight,
 		&pet.Diseases,
 		&pet.OwnerID,
-		&pet.PetPhotoURL,
+		&pet.PhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg:%v.", err)
 		return nil, err
@@ -88,7 +88,7 @@ func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 		&pet.Weight,
 		&pet.Diseases,
 		&pet.OwnerID,
-		&pet.PetPhotoURL,
+		&pet.PhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting pet by id. Err msg:%v.", err)
 		return nil, err
@@ -128,7 +128,7 @@ func (r *PetRepository) Update(p *model.Pet) error {
 		p.Weight,
 		p.Diseases,
 		p.Owner.UserID,
-		p.PetPhotoURL,
+		p.PhotoURL,
 		p.PetID,
 	)
 	if err != nil {
@@ -164,12 +164,12 @@ func (r *PetRepository) PetFromDTO(dto *model.PetDTO) (*model.Pet, error) {
 	}
 
 	return &model.Pet{
-		PetID:       dto.PetID,
-		Name:        dto.Name,
-		Type:        dto.Type,
-		Weight:      dto.Weight,
-		Diseases:    dto.Diseases,
-		Owner:       *user,
-		PetPhotoURL: dto.PetPhotoURL,
+		PetID:    dto.PetID,
+		Name:     dto.Name,
+		Type:     model.PetType(dto.Type),
+		Weight:   dto.Weight,
+		Diseases: dto.Diseases,
+		Owner:    *user,
+		PhotoURL: dto.PhotoURL,
 	}, nil
 }
