@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"authentication/internal/apperror"
-	"authentication/internal/store"
-	jwthelper "authentication/pkg/jwt"
-	"authentication/pkg/response"
+	"auth/domain/store"
+	"auth/internal/apperror"
+	jwthelper "auth/pkg/jwt"
+	"auth/pkg/response"
 	"encoding/json"
 	"fmt"
 	"net/http"

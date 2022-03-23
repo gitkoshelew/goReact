@@ -244,3 +244,22 @@ func (r *UserRepository) PasswordChange(u *model.User) error {
 	r.Store.Logger.Infof("Password updated, rows affectet: %d", result)
 	return nil
 }
+
+// ModelFromDTO ...
+func (r *UserRepository) ModelFromDTO(u *model.UserDTO) (*model.User, error) {
+	return &model.User{
+		UserID:      u.UserID,
+		Email:       u.Email,
+		Password:    u.Password,
+		Role:        model.Role(u.Role),
+		Verified:    u.Verified,
+		Name:        u.Name,
+		Surname:     u.Surname,
+		MiddleName:  u.MiddleName,
+		Sex:         model.Sex(u.Sex),
+		DateOfBirth: u.DateOfBirth,
+		Address:     u.Address,
+		Phone:       u.Phone,
+		Photo:       u.Photo,
+	}, nil
+}

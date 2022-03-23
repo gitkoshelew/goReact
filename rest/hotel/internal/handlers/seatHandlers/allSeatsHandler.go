@@ -3,8 +3,8 @@ package seathandlers
 import (
 	"encoding/json"
 	"fmt"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"

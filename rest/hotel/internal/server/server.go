@@ -1,8 +1,8 @@
 package server
 
 import (
+	"hotel/domain/store"
 	"hotel/internal/config"
-	"hotel/internal/store"
 	"hotel/pkg/logging"
 	"net/http"
 

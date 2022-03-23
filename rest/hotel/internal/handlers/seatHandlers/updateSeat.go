@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"hotel/domain/model"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"hotel/pkg/response"
 	"net/http"
 
@@ -31,61 +31,11 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		roomDTO, err := s.Room().FindByID(req.RoomID)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting room by id.",
-				fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting room by id. Err msg:%v.", err)))
-			return
-		}
-
-		room, err := s.RoomRepository.RoomFromDTO(roomDTO)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring roomDTO.", fmt.Sprintf("%d", http.StatusInternalServerError),
-				fmt.Sprintf("Error occured while convetring roomDTO. Err msg:%v.", err)))
-			return
-		}
-
-		SeatDTO, err := s.Seat().FindByID(req.SeatID)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting seat by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting seat by id. Err msg:%v.", err)))
-
-			return
-		}
-
-		seat, err := s.Seat().SeatFromDTO(SeatDTO)
+		seat, err := s.Seat().SeatFromDTO(req)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while convetring seatDTO.", fmt.Sprintf("%d", http.StatusInternalServerError),
 				fmt.Sprintf("Error occured while convetring seatDTO. Err msg:%v.", err)))
-			return
-		}
-
-		if room != nil {
-			if seat.Room.RoomID != req.RoomID {
-				seat.Room = *room
-			}
-		}
-
-		if req.Description != "" {
-			seat.Description = req.Description
-		}
-
-		if !req.RentFrom.IsZero() {
-			seat.RentFrom = req.RentFrom
-		}
-
-		if !req.RentTo.IsZero() {
-			seat.RentTo = req.RentTo
-		}
-
-		err = seat.Validate()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
 		}
 

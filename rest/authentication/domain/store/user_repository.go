@@ -1,7 +1,7 @@
 package store
 
 import (
-	"authentication/domain/model"
+	"auth/domain/model"
 	"errors"
 )
 
@@ -56,4 +56,15 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		return nil, err
 	}
 	return u, nil
+}
+
+// ModelFromDTO ...
+func (r *UserRepository) ModelFromDTO(u *model.UserDTO) (*model.User, error) {
+	return &model.User{
+		UserID:   u.UserID,
+		Email:    u.Email,
+		Password: u.Password,
+		Role:     model.Role(u.Role),
+		Verified: u.Verified,
+	}, nil
 }

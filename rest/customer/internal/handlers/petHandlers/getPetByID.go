@@ -1,8 +1,8 @@
 package pethandlers
 
 import (
+	"customer/domain/store"
 	"customer/internal/apperror"
-	"customer/internal/store"
 	"encoding/json"
 	"fmt"
 	"net/http"

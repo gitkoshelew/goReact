@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"hotel/domain/model"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"hotel/pkg/response"
 	"net/http"
 
@@ -31,13 +31,6 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		hotel, err := s.Hotel().FindByID(req.HotelID)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting hotel by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v.", err)))
-			return
-		}
-
 		roomDTO, err := s.Room().FindByID(req.RoomID)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
@@ -49,32 +42,6 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't convert room.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Can't convert room. Err msg:%v.", err)))
-			return
-		}
-
-		if req.RoomNumber != 0 {
-			room.RoomNumber = req.RoomNumber
-		}
-
-		if req.PetType != "" {
-			room.PetType = req.PetType
-		}
-
-		if hotel != nil {
-			if hotel.HotelID != req.HotelID {
-				room.Hotel = *hotel
-			}
-		}
-
-		if req.RoomPhotoURL != "" {
-			room.RoomPhotoURL = req.RoomPhotoURL
-		}
-
-		err = room.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
 		}
 

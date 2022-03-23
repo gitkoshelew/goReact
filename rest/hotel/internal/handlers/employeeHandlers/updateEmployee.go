@@ -31,46 +31,10 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		hotel, err := s.Hotel().FindByID(req.HotelID)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting hotel by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v.", err)))
-			return
-		}
-
-		employeeDTO, err := s.Employee().FindByID(req.EmployeeID)
-		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while getting employee by id.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while getting employee by id. Err msg:%v.", err)))
-
-			return
-		}
-
-		employee, err := s.Employee().EmployeeFromDTO(employeeDTO)
+		employee, err := s.Employee().ModelFromDTO(req)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while converting employeeDTO.", fmt.Sprintf("%d", http.StatusInternalServerError), fmt.Sprintf("Error occured while converting employeeDTO. Err msg:%v.", err)))
-			return
-		}
-
-		if hotel != nil {
-			if employee.Hotel.HotelID != req.HotelID {
-				employee.Hotel = *hotel
-			}
-		}
-
-		if req.UserID != 0 {
-			employee.UserID = req.UserID
-		}
-		if req.Position != "" {
-			employee.Position = req.Position
-		}
-
-		err = employee.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
 			return
 		}
 

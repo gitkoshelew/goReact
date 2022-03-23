@@ -1,8 +1,8 @@
 package server
 
 import (
+	"booking/domain/store"
 	"booking/internal/config"
-	"booking/internal/store"
 	"booking/pkg/logging"
 	"net/http"
 

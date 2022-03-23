@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"hotel/domain/model"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"hotel/pkg/response"
 	"net/http"
 
@@ -41,19 +41,11 @@ func CreateRoom(s *store.Store) httprouter.Handle {
 		}
 
 		room := model.Room{
-			RoomID:       0,
-			RoomNumber:   req.RoomNumber,
-			PetType:      model.PetType(req.PetType),
-			Hotel:        *hotel,
-			RoomPhotoURL: req.RoomPhotoURL,
-		}
-
-		err = room.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
-			return
+			RoomID:     0,
+			RoomNumber: req.RoomNumber,
+			PetType:    model.PetType(req.PetType),
+			Hotel:      *hotel,
+			PhotoURL:   req.PhotoURL,
 		}
 
 		_, err = s.Room().Create(&room)

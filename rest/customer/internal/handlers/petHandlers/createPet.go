@@ -2,8 +2,8 @@ package pethandlers
 
 import (
 	"customer/domain/model"
+	"customer/domain/store"
 	"customer/internal/apperror"
-	"customer/internal/store"
 	"customer/pkg/response"
 
 	"encoding/json"
@@ -42,21 +42,13 @@ func CreatePet(s *store.Store) httprouter.Handle {
 		}
 
 		p := model.Pet{
-			PetID:       0,
-			Name:        req.Name,
-			Type:        model.PetType(req.Type),
-			Weight:      req.Weight,
-			Diseases:    req.Diseases,
-			Owner:       *user,
-			PetPhotoURL: req.PetPhotoURL,
-		}
-
-		err = p.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
-			return
+			PetID:    0,
+			Name:     req.Name,
+			Type:     model.PetType(req.Type),
+			Weight:   req.Weight,
+			Diseases: req.Diseases,
+			Owner:    *user,
+			PhotoURL: req.PhotoURL,
 		}
 
 		_, err = s.Pet().Create(&p)

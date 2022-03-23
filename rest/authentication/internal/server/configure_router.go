@@ -1,8 +1,8 @@
 package server
 
 import (
-	"authentication/internal/handlers"
-	"authentication/internal/store"
+	"auth/domain/store"
+	"auth/internal/handlers"
 )
 
 // ConfigureRouter ...

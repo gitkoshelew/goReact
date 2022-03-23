@@ -18,7 +18,7 @@ func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 		string(rm.PetType),
 		rm.RoomNumber,
 		rm.Hotel.HotelID,
-		rm.RoomPhotoURL).Scan(&rm.RoomID); err != nil {
+		rm.PhotoURL).Scan(&rm.RoomID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating room. Err msg:%v.", err)
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 			&room.RoomNumber,
 			&room.PetType,
 			&room.HotelID,
-			&room.RoomPhotoURL,
+			&room.PhotoURL,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
@@ -61,7 +61,7 @@ func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 		&room.RoomNumber,
 		&room.PetType,
 		&room.HotelID,
-		&room.RoomPhotoURL,
+		&room.PhotoURL,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg:%v.", err)
 		return nil, err
@@ -99,7 +99,7 @@ func (r *RoomRepository) Update(rm *model.Room) error {
 		rm.RoomNumber,
 		string(rm.PetType),
 		rm.Hotel.HotelID,
-		rm.RoomPhotoURL,
+		rm.PhotoURL,
 		rm.RoomID,
 	)
 	if err != nil {
@@ -128,7 +128,7 @@ func (r *RoomRepository) GetAllPagination(p *pagination.Page) (*[]model.RoomDTO,
 			&room.RoomNumber,
 			&room.PetType,
 			&room.HotelID,
-			&room.RoomPhotoURL,
+			&room.PhotoURL,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
@@ -153,11 +153,11 @@ func (r *RoomRepository) RoomFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 		return nil, err
 	}
 	return &model.Room{
-		RoomID:       dto.RoomID,
-		RoomNumber:   dto.RoomNumber,
-		PetType:      dto.PetType,
-		Hotel:        *hotel,
-		RoomPhotoURL: dto.RoomPhotoURL,
+		RoomID:     dto.RoomID,
+		RoomNumber: dto.RoomNumber,
+		PetType:    model.PetType(dto.PetType),
+		Hotel:      *hotel,
+		PhotoURL:   dto.PhotoURL,
 	}, nil
 }
 

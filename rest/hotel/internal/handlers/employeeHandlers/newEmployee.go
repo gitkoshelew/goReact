@@ -40,7 +40,7 @@ func CreateEmployee(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		id, err = s.Employee().Create(employeeDTO)
+		id, err := s.Employee().Create(employeeDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Error occured while creating employee.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Error occured while updating employee. Err msg:%v.", err)))
