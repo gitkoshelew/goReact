@@ -16,6 +16,7 @@ import { CardsModel } from './cards/cards.model';
       database: process.env.POSTGRES_NEST_DB,
       models: [CardsModel],
       autoLoadModels: true,
+      sync: { alter: true },
     }),
     CardsModule,
   ],
