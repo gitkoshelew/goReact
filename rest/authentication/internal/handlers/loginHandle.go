@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"auth/domain/model"
 	"auth/domain/store"
 	"auth/domain/utils"
 	"auth/internal/apperror"
@@ -8,8 +9,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 // Login ...
@@ -19,32 +18,25 @@ type Login struct {
 }
 
 // LoginHandle checkes login and password and returns user if validation was passed
-func LoginHandle(s *store.Store) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func LoginHandle(s *store.Store) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		req := &Login{}
-		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %w", r.Body, err)
-			json.NewEncoder(w).Encode(apperror.NewAppError(fmt.Sprintf("Eror during JSON request decoding. Request body: %v", r.Body), fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
-			return
-		}
-
+		login := r.Context().Value(store.LoginValidateCtXKey).(*model.Login)
 		err := s.Open()
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Can't open DB", fmt.Sprintf("%d", http.StatusInternalServerError), err.Error()))
 			return
 		}
-		user, err := s.User().FindByEmail(req.Email)
+		user, err := s.User().FindByEmail(login.Email)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Invalid email or password", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
 			return
 		}
 
-		err = utils.CheckPasswordHash(user.Password, req.Password)
+		err = utils.CheckPasswordHash(user.Password, login.Password)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Invalid email or password", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
@@ -69,5 +61,5 @@ func LoginHandle(s *store.Store) httprouter.Handle {
 		w.Header().Set("Access-Token", tk.AccessToken)
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(user)
-	}
+	})
 }

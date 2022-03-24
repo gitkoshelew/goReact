@@ -2,8 +2,9 @@ package authentication
 
 import (
 	"encoding/json"
+	"goReact/domain/model"
 	"goReact/domain/store"
-	"goReact/webapp/server/handler/request"
+	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/response"
 	"net/http"
 )
@@ -13,13 +14,7 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		req := &request.Login{}
-		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Eror during JSON request decoding. Request body: %v, Err msg: %v", r.Body, err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
+		login := r.Context().Value(handler.CtxKeyLoginValidation).(*model.Login)
 
 		err := s.Open()
 		if err != nil {
@@ -27,14 +22,15 @@ func LoginHandle(s *store.Store) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-		user, err := s.User().FindByEmail(req.Email)
+
+		user, err := s.User().FindByEmail(login.Email)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
 
-		err = s.CheckPasswordHash(user.Password, req.Password)
+		err = s.CheckPasswordHash(user.Password, login.Password)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})

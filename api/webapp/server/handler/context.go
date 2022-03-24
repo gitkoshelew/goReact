@@ -13,7 +13,8 @@ const (
 	CtxKeyUser              CtxKey = 1
 	CtxKeyUserValidation    CtxKey = 2
 	CtxKeyEmail             CtxKey = 3
-	CtxKeyBookingValidation CtxKey = 4
+	CtxKeyLoginValidation   CtxKey = 4
+	CtxKeyBookingValidation CtxKey = 5
 )
 
 var (
