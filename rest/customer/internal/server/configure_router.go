@@ -1,7 +1,7 @@
 package server
 
 import (
-	"customer/internal/store"
+	"customer/domain/store"
 	pethandlers "customer/internal/handlers/petHandlers"
 	usershandlers "customer/internal/handlers/usersHandlers"
 )

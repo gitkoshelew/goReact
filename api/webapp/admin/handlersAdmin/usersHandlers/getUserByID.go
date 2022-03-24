@@ -43,7 +43,7 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
-		}
+		}		
 
 		users = append(users, *user)
 

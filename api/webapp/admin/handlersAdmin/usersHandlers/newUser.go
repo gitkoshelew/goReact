@@ -70,18 +70,18 @@ func NewUser(s *store.Store) httprouter.Handle {
 			Address:     address,
 			Phone:       phone,
 			Photo:       photo,
-			Verified:    verified,
-			DateOfBirth: dateOfBirth,
+			Verified:    &verified,
+			DateOfBirth: &dateOfBirth,
 		}
 
-		/*err = userDTO.Validate()
+		err = userDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
-		}*/
+		}
 
-		user := s.User().ModelFromDTO(&userDTO)
+		user , err := s.User().ModelFromDTO(&userDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v.", err)

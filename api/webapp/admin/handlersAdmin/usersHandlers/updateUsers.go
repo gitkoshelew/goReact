@@ -57,7 +57,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
 				return
 			}
-			userDTO.Verified = verified
+			userDTO.Verified = &verified
 		}
 
 		role := r.FormValue("Role")
@@ -94,7 +94,7 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
 				return
 			}
-			userDTO.DateOfBirth = dateOfBirth
+			userDTO.DateOfBirth = &dateOfBirth
 		}
 
 		address := r.FormValue("Address")
@@ -112,14 +112,14 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 			userDTO.Photo = photo
 		}
 
-		/*err = u.Validate()
+		err = userDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
-		}*/
+		}
 
-		user := s.User().ModelFromDTO(userDTO)
+		user, err := s.User().ModelFromDTO(userDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v.", err)

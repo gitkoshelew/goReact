@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"hotel/domain/model"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"hotel/pkg/response"
 	"net/http"
 
@@ -34,9 +34,9 @@ func CreateHotel(s *store.Store) httprouter.Handle {
 		}
 
 		h := model.Hotel{
-			HotelID: 0,
-			Name:    req.Name,
-			Address: req.Address,
+			HotelID:     0,
+			Name:        req.Name,
+			Address:     req.Address,
 			Coordinates: req.Coordinates,
 		}
 

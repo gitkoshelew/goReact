@@ -1,8 +1,8 @@
 package store
 
 import (
-	"authentication/internal/config"
-	"authentication/pkg/logging"
+	"auth/internal/config"
+	"auth/pkg/logging"
 	"database/sql"
 	"fmt"
 

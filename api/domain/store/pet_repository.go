@@ -164,7 +164,10 @@ func (r *PetRepository) ModelFromDTO(dto *model.PetDTO) (*model.Pet, error) {
 	if err != nil {
 		return nil, err
 	}
-	u := r.Store.User().ModelFromDTO(userDTO)
+	u, err := r.Store.User().ModelFromDTO(userDTO)
+	if err != nil {
+		return nil, err
+	}
 
 	return &model.Pet{
 		PetID:    dto.PetID,

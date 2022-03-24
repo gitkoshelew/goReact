@@ -3,8 +3,8 @@ package hotelhandlers
 import (
 	"encoding/json"
 	"fmt"
+	"hotel/domain/store"
 	"hotel/internal/apperror"
-	"hotel/internal/store"
 	"hotel/pkg/response"
 	"net/http"
 	"strconv"

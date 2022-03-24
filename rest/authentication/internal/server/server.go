@@ -1,9 +1,9 @@
 package server
 
 import (
-	"authentication/internal/config"
-	"authentication/internal/store"
-	"authentication/pkg/logging"
+	"auth/domain/store"
+	"auth/internal/config"
+	"auth/pkg/logging"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"

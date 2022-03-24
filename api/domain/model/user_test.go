@@ -11,20 +11,20 @@ import (
 func TestUser_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		u       func() *model.User
+		u       func() *model.UserDTO
 		isValid bool
 	}{
 		{
 			name: "valid",
-			u: func() *model.User {
-				return model.TestUser()
+			u: func() *model.UserDTO {
+				return model.TestUserDTO()
 			},
 			isValid: true,
 		},
 		{
 			name: "empty email",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Email = ""
 				return u
 			},
@@ -32,8 +32,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "invalid email",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Email = "invalid"
 				return u
 			},
@@ -41,8 +41,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "SQL email",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Email = "Sel--%^3 /** ecT"
 				return u
 			},
@@ -50,8 +50,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "empty password",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Password = ""
 				return u
 			},
@@ -59,8 +59,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "short password",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Password = "1234"
 				return u
 			},
@@ -68,8 +68,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "long password",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Password = "1234567891012345678910123456789101234567891012345678910123456789101234567891012345678910123456789101234567891012345678910"
 				return u
 			},
@@ -77,8 +77,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "sql password",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Password = "ALt  9*/123#@! eR"
 				return u
 			},
@@ -86,8 +86,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Role",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Role = "Invalid"
 				return u
 			},
@@ -95,8 +95,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Role",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Role = ""
 				return u
 			},
@@ -104,8 +104,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "SQL Role",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Role = "ALt  --__- eR"
 				return u
 			},
@@ -113,8 +113,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Name",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Name = "Name@123"
 				return u
 			},
@@ -122,8 +122,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Name",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Name = ""
 				return u
 			},
@@ -131,8 +131,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "SQL Name",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Name = "AlT*&^er"
 				return u
 			},
@@ -140,8 +140,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Short Name",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Name = "a"
 				return u
 			},
@@ -149,8 +149,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Long Name",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Name = "adsadasdasdasdasdsadasdaSDadADSdasasdasdsadaddadas"
 				return u
 			},
@@ -158,8 +158,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Surname",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Surname = "Surname-Фамилия"
 				return u
 			},
@@ -167,8 +167,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Surname",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Surname = ""
 				return u
 			},
@@ -176,8 +176,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "SQL Surname",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Surname = "AlT*&^er"
 				return u
 			},
@@ -185,8 +185,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Short Surname",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Surname = "a"
 				return u
 			},
@@ -194,8 +194,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Long Surname",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Surname = "adsadasdasdasdasdsadasdaSDadADSdasasdasdsadaddadas"
 				return u
 			},
@@ -203,8 +203,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid MiddleName",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.MiddleName = "MiddleName %?№"
 				return u
 			},
@@ -212,8 +212,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty MiddleName",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.MiddleName = ""
 				return u
 			},
@@ -221,8 +221,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "SQL MiddleName",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.MiddleName = "AlT*&^er"
 				return u
 			},
@@ -230,8 +230,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Long MiddleName",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.MiddleName = "adsadasdasdasdasdsadasdaSDadADSdasasdasdsadaddadas"
 				return u
 			},
@@ -239,8 +239,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Sex",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Sex = "Invalid"
 				return u
 			},
@@ -248,8 +248,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Sex",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Sex = "Invalid"
 				return u
 			},
@@ -257,26 +257,28 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Under age 18 DateOfBirth",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.DateOfBirth = time.Now()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
+				dateOfBirth := time.Now()
+				u.DateOfBirth = &dateOfBirth
 				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Above age 100 DateOfBirth",
-			u: func() *model.User {
-				u := model.TestUser()
-				u.DateOfBirth = time.Now().AddDate(-100, 0, -1)
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
+				dateOfBirth := time.Now().AddDate(-100, 0, -1)
+				u.DateOfBirth = &dateOfBirth
 				return u
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Address",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Address = ""
 				return u
 			},
@@ -284,8 +286,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Short Address",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Address = "asd"
 				return u
 			},
@@ -293,8 +295,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Long Address",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Address = "asdasdasdsadasdas sdad asdasdas dasdasd asdasd asdas dsa dasd"
 				return u
 			},
@@ -302,8 +304,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "SQL Address",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Address = "AL*6789 _-=--t=@#!#er"
 				return u
 			},
@@ -311,8 +313,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Invalid Phone",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Phone = "Invalid"
 				return u
 			},
@@ -320,8 +322,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Phone",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Phone = ""
 				return u
 			},
@@ -329,8 +331,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty Photo",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Photo = ""
 				return u
 			},
@@ -338,8 +340,8 @@ func TestUser_Validate(t *testing.T) {
 		},
 		{
 			name: "SQL Photo",
-			u: func() *model.User {
-				u := model.TestUser()
+			u: func() *model.UserDTO {
+				u := model.TestUserDTO()
 				u.Photo = "AlTE@##4r"
 				return u
 			},

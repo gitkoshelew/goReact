@@ -28,7 +28,6 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 		hashPassword := user.Password
 
 		err = model.CheckPasswordHash(hashPassword, Password)
-
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while checking users email or password. Err msg:%v. ", err), http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while checking users email or password. Err msg: %s", err.Error())

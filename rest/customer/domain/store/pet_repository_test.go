@@ -2,7 +2,7 @@ package store_test
 
 import (
 	"customer/domain/model"
-	"customer/internal/store"
+	"customer/domain/store"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -55,7 +55,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 		p.Owner = *u
 		p, err = s.Pet().Create(p)
 		petDto, err := s.Pet().FindByID(p.PetID)
-		p , err = s.Pet().PetFromDTO(petDto)
+		p, err = s.Pet().PetFromDTO(petDto)
 		assert.NoError(t, err)
 		assert.NotNil(t, p)
 	})
@@ -84,7 +84,7 @@ func TestPetRepository_Update(t *testing.T) {
 		p.Type = "dog"
 		p.Weight = 2
 		p.Diseases = "Izjoga"
-		p.PetPhotoURL = "/1/2/jpg"
+		p.PhotoURL = "/1/2/jpg"
 
 		err = s.Pet().Update(p)
 		assert.NoError(t, err)

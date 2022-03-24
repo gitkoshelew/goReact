@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"booking/domain/model"
+	"booking/domain/store"
 	"booking/internal/apperror"
-	"booking/internal/store"
 	"booking/pkg/response"
 	"encoding/json"
 	"fmt"

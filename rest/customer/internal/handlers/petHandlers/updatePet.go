@@ -2,8 +2,8 @@ package pethandlers
 
 import (
 	"customer/domain/model"
+	"customer/domain/store"
 	"customer/internal/apperror"
-	"customer/internal/store"
 	"customer/pkg/response"
 	"encoding/json"
 	"fmt"
@@ -57,7 +57,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		}
 
 		if req.Type != "" {
-			p.Type = req.Type
+			p.Type = model.PetType(req.Type)
 		}
 
 		if req.Weight != 0 {
@@ -74,16 +74,8 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 			}
 		}
 
-		if req.PetPhotoURL != "" {
-			p.PetPhotoURL = req.PetPhotoURL
-		}
-
-		err = p.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
-			return
+		if req.PhotoURL != "" {
+			p.PhotoURL = req.PhotoURL
 		}
 
 		err = s.Pet().Update(p)

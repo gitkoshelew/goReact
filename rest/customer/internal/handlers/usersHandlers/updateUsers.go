@@ -2,8 +2,8 @@ package usershandlers
 
 import (
 	"customer/domain/model"
+	"customer/domain/store"
 	"customer/internal/apperror"
-	"customer/internal/store"
 	"customer/pkg/response"
 	"encoding/json"
 	"fmt"
@@ -76,14 +76,6 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 
 		if req.Photo != "" {
 			u.Photo = req.Photo
-		}
-
-		err = u.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Data is not valid.", fmt.Sprintf("%d", http.StatusBadRequest), fmt.Sprintf("Data is not valid. Err msg:%v.", err)))
-			return
 		}
 
 		err = s.User().Update(u)

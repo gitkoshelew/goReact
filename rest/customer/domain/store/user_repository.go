@@ -2,6 +2,7 @@ package store
 
 import (
 	"customer/domain/model"
+	"customer/domain/utils"
 	"errors"
 )
 
@@ -161,11 +162,6 @@ func (r *UserRepository) Delete(id int) error {
 
 // Update user from DB
 func (r *UserRepository) Update(u *model.User) error {
-	encryptedPassword, err := model.EncryptPassword(u.Password)
-	if err != nil {
-		r.Store.Logger.Errorf("Error occured while encrypted password. Err msg: %v", err)
-		return err
-	}
 
 	result, err := r.Store.Db.Exec(
 		`UPDATE users SET 
@@ -174,7 +170,7 @@ func (r *UserRepository) Update(u *model.User) error {
 			address = $10, phone = $11, photo = $12 
 			WHERE id = $13`,
 		u.Email,
-		encryptedPassword,
+		utils.EncryptPassword,
 		string(u.Role),
 		u.Verified,
 		u.Name,
@@ -234,7 +230,7 @@ func (r *UserRepository) EmailCheck(email string) *bool {
 
 // PasswordChange ...
 func (r *UserRepository) PasswordChange(u *model.User) error {
-	encryptedPassword, err := model.EncryptPassword(u.Password)
+	encryptedPassword, err := utils.EncryptPassword(u.Password)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while encrypting password. Err msg: %v", err)
 		return err
@@ -247,4 +243,23 @@ func (r *UserRepository) PasswordChange(u *model.User) error {
 	}
 	r.Store.Logger.Infof("Password updated, rows affectet: %d", result)
 	return nil
+}
+
+// ModelFromDTO ...
+func (r *UserRepository) ModelFromDTO(u *model.UserDTO) (*model.User, error) {
+	return &model.User{
+		UserID:      u.UserID,
+		Email:       u.Email,
+		Password:    u.Password,
+		Role:        model.Role(u.Role),
+		Verified:    u.Verified,
+		Name:        u.Name,
+		Surname:     u.Surname,
+		MiddleName:  u.MiddleName,
+		Sex:         model.Sex(u.Sex),
+		DateOfBirth: u.DateOfBirth,
+		Address:     u.Address,
+		Phone:       u.Phone,
+		Photo:       u.Photo,
+	}, nil
 }

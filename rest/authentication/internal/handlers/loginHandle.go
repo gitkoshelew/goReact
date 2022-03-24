@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"authentication/domain/model"
-	"authentication/internal/apperror"
-	"authentication/internal/store"
-	jwthelper "authentication/pkg/jwt"
+	"auth/domain/store"
+	"auth/domain/utils"
+	"auth/internal/apperror"
+	jwthelper "auth/pkg/jwt"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -44,7 +44,7 @@ func LoginHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err = model.CheckPasswordHash(user.Password, req.Password)
+		err = utils.CheckPasswordHash(user.Password, req.Password)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(apperror.NewAppError("Invalid email or password", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))

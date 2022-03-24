@@ -299,12 +299,12 @@ func TestBookingRepository_ModelFromDTO(t *testing.T) {
 			model: func() *model.BookingDTO {
 				testStore.Open()
 
-				b := model.TestBookingDTO()
-				b.PetID = id.Pet
-				b.EmployeeID = id.Employee
-				b.SeatID = id.Seat
+				booking := model.TestBookingDTO()
+				booking.PetID = id.Pet
+				booking.EmployeeID = id.Employee
+				booking.SeatID = id.Seat
 
-				return b
+				return booking
 			},
 			isValid: true,
 		},
@@ -313,12 +313,12 @@ func TestBookingRepository_ModelFromDTO(t *testing.T) {
 			model: func() *model.BookingDTO {
 				testStore.Open()
 
-				b := model.TestBookingDTO()
-				b.PetID = 0
-				b.EmployeeID = id.Employee
-				b.SeatID = id.Seat
+				booking := model.TestBookingDTO()
+				booking.PetID = 0
+				booking.EmployeeID = id.Employee
+				booking.SeatID = id.Seat
 
-				return b
+				return booking
 			},
 			isValid: false,
 		},
@@ -327,12 +327,12 @@ func TestBookingRepository_ModelFromDTO(t *testing.T) {
 			model: func() *model.BookingDTO {
 				testStore.Open()
 
-				b := model.TestBookingDTO()
-				b.PetID = id.Pet
-				b.EmployeeID = id.Employee
-				b.SeatID = 0
+				booking := model.TestBookingDTO()
+				booking.PetID = id.Pet
+				booking.EmployeeID = id.Employee
+				booking.SeatID = 0
 
-				return b
+				return booking
 			},
 			isValid: false,
 		},
@@ -341,12 +341,12 @@ func TestBookingRepository_ModelFromDTO(t *testing.T) {
 			model: func() *model.BookingDTO {
 				testStore.Open()
 
-				b := model.TestBookingDTO()
-				b.PetID = id.Pet
-				b.EmployeeID = 0
-				b.SeatID = id.Seat
+				booking := model.TestBookingDTO()
+				booking.PetID = id.Pet
+				booking.EmployeeID = 0
+				booking.SeatID = id.Seat
 
-				return b
+				return booking
 			},
 			isValid: false,
 		},

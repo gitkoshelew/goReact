@@ -1,11 +1,11 @@
 package server
 
 import (
+	"hotel/domain/store"
 	employeehandlers "hotel/internal/handlers/employeeHandlers"
 	hotelhandlers "hotel/internal/handlers/hotelHandlers"
 	roomhandlers "hotel/internal/handlers/roomHandlers"
 	seathandlers "hotel/internal/handlers/seatHandlers"
-	"hotel/internal/store"
 )
 
 // ConfigureRouter ...

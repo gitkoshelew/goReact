@@ -1,7 +1,7 @@
 package store_test
 
 import (
-	"customer/internal/store"
+	"hotel/domain/store"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -84,7 +84,7 @@ func IsPhone(value interface{}) error {
 // AnonymousRole  = "anonymous"
 // if Role with be nil - wont return error
 func IsRole(value interface{}) error {
-	s := value.(Role)
+	s := Role(value.(string))
 	if s == ClientRole || s == EmployeeRole || s == AnonymousRole || s == "" {
 		return nil
 	}
@@ -95,7 +95,7 @@ func IsRole(value interface{}) error {
 // Male    = "male"
 // Female  = "female"
 func IsSex(value interface{}) error {
-	s := value.(Sex)
+	s := Sex(value.(string))
 	if s == SexMale || s == SexFemale {
 		return nil
 	}
@@ -138,7 +138,7 @@ func IsBookingStatus(value interface{}) error {
 // IsValidBirthDate ...
 func IsValidBirthDate(value interface{}) error {
 	t := time.Now()
-	d := value.(time.Time)
+	d := value.(*time.Time)
 	err := validation.Validate(d.Format(time.RFC3339), validation.Date(time.RFC3339).Max(t.AddDate(-18, 0, 0)).Min(t.AddDate(-100, 0, 0)))
 	if err != nil {
 		return ErrInvalidBithDate

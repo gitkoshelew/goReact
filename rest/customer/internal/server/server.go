@@ -1,10 +1,10 @@
 package server
 
 import (
-	"customer/internal/store"
-	"net/http"
+	"customer/domain/store"
 	"customer/internal/config"
 	"customer/pkg/logging"
+	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"

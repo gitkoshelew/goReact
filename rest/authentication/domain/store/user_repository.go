@@ -1,7 +1,7 @@
 package store
 
 import (
-	"authentication/domain/model"
+	"auth/domain/model"
 	"errors"
 )
 
@@ -29,9 +29,6 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 
 // Create ...
 func (r *UserRepository) Create(u *model.User) (*model.User, error) {
-	if err := u.Validate(); err != nil {
-		return nil, err
-	}
 
 	var emailIsUsed bool
 	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT email FROM users WHERE email = $1)", u.Email).Scan(&emailIsUsed)
@@ -59,4 +56,15 @@ func (r *UserRepository) Create(u *model.User) (*model.User, error) {
 		return nil, err
 	}
 	return u, nil
+}
+
+// ModelFromDTO ...
+func (r *UserRepository) ModelFromDTO(u *model.UserDTO) (*model.User, error) {
+	return &model.User{
+		UserID:   u.UserID,
+		Email:    u.Email,
+		Password: u.Password,
+		Role:     model.Role(u.Role),
+		Verified: u.Verified,
+	}, nil
 }

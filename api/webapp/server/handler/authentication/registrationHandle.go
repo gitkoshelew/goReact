@@ -25,7 +25,12 @@ func RegistrationHandle(s *store.Store, m *service.Mail) http.HandlerFunc {
 			return
 		}
 
-		u := s.User().ModelFromDTO(user)
+		u, err := s.User().ModelFromDTO(user)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while making user model from DTO. Err msg:%v.", err)
+			return
+		}
 
 		_, err = s.User().Create(u)
 		if err != nil {
