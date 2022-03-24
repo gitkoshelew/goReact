@@ -22,11 +22,12 @@
 }
 
 .content {
+  font-size: 24px;
   padding: 20px;
   border-radius: 12px;
   background-color: $modal-background-color;
-  min-width: 250px;
-  min-height: 200px;
+  width: 280px;
+  min-height: 120px;
   transform: scale(0.5);
   transition: 0.4s all;
   @media (min-width: bp.$lg) {

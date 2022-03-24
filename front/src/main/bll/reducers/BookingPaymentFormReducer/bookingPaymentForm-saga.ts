@@ -23,9 +23,9 @@ export function* fetchBookingPaymentSagaWorker(action: ReturnType<typeof fetchBo
     yield put(bookingPaymentMessage({ successMsg: bookingPaymentResponse.statusText }))
   } catch (err) {
     if (err instanceof Error) {
-      yield put(bookingPaymentError({ errorMsg: err.name }))
+      yield put(bookingPaymentError({ errorMsg: err.message }))
     } else {
-      throw err
+      yield put(bookingPaymentError({ errorMsg: 'Looks like something went wrong, please try again later' }))
     }
   }
 }
