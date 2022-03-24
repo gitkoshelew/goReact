@@ -23,3 +23,11 @@ func TestUserDTO() *UserDTO {
 		Verified: &verified,
 	}
 }
+
+// TestLogin ...
+func TestLogin() *Login {
+	return &Login{
+		Email:    "login@example.org",
+		Password: "password",
+	}
+}

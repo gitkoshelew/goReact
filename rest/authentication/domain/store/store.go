@@ -17,6 +17,16 @@ var (
 	ErrEmailIsUsed = errors.New("Email already in use")
 )
 
+// CtxKey ...
+type CtxKey int8
+
+const (
+	// LoginValidateCtXKey ...
+	LoginValidateCtXKey CtxKey = 1
+	// UserValidateCtXKey ...
+	UserValidateCtXKey CtxKey = 2
+)
+
 // Store ...
 type Store struct {
 	Config         *config.Config

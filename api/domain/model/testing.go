@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// TestLogin ...
+func TestLogin() *Login {
+	return &Login{
+		Email:    "login@example.org",
+		Password: "password",
+	}
+}
+
 // TestUser ...
 func TestUser() *User {
 	verified := true

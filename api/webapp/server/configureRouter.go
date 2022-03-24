@@ -15,7 +15,7 @@ import (
 
 func (s *Server) configureRouter() {
 
-	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(authentication.LoginHandle(store.New(s.config))))
+	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(middleware.ValidateLogin(authentication.LoginHandle(store.New(s.config)), store.New(s.config))))
 
 	s.router.Handle("POST", "/api/registration", middleware.ValidateUser(authentication.RegistrationHandle(store.New(s.config), s.Mail), store.New(s.config)))
 	s.router.Handle("POST", "/api/logout", authentication.LogoutHandle(store.New(s.config)))

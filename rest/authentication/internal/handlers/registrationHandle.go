@@ -8,13 +8,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 // RegistrationHandle ...
-func RegistrationHandle(s *store.Store) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func RegistrationHandle(s *store.Store) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		req := &model.UserDTO{}
@@ -48,5 +46,5 @@ func RegistrationHandle(s *store.Store) httprouter.Handle {
 
 		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", user.UserID)})
-	}
+	})
 }
