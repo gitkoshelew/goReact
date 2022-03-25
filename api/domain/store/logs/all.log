@@ -9472,3 +9472,861 @@
 [31mERRO[0m[2022-03-23T14:05:44+03:00]store.go:49 goReact/domain/store.(*Store).Open Error occured while ping to DB. Err msg: dial tcp [::1]:6543: connectex: No connection could be made because the target machine actively refused it. 
 [31mERRO[0m[2022-03-23T14:17:26+03:00]store.go:49 goReact/domain/store.(*Store).Open Error occured while ping to DB. Err msg: dial tcp [::1]:6543: connectex: No connection could be made because the target machine actively refused it. 
 [31mERRO[0m[2022-03-23T14:17:26+03:00]store.go:49 goReact/domain/store.(*Store).Open Error occured while ping to DB. Err msg: dial tcp [::1]:6543: connectex: No connection could be made because the target machine actively refused it. 
+[36mINFO[0m[2022-03-25T13:37:08+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-03-25T13:37:08+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-03-25T13:37:08+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-25T13:37:08+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-25T13:37:08+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[36mINFO[0m[2022-03-25T13:37:08+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[36mINFO[0m[2022-03-25T13:37:08+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
+[36mINFO[0m[2022-03-25T13:37:08+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
+[36mINFO[0m[2022-03-25T13:37:08+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
+[36mINFO[0m[2022-03-25T13:37:08+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
+[36mINFO[0m[2022-03-25T13:37:08+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 4 was created.                   
+[36mINFO[0m[2022-03-25T13:37:08+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 4 was created.                   
+[36mINFO[0m[2022-03-25T13:37:08+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 4 was created.               
+[36mINFO[0m[2022-03-25T13:37:08+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 4 was created.               
+[36mINFO[0m[2022-03-25T13:37:48+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-25T13:37:48+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-25T13:37:48+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-25T13:37:48+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-25T13:37:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-25T13:37:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-25T13:37:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-25T13:37:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-25T13:37:48+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-25T13:37:48+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-25T13:37:48+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-25T13:37:48+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-25T13:37:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 5 was created.               
+[36mINFO[0m[2022-03-25T13:37:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 5 was created.               
+[36mINFO[0m[2022-03-25T13:37:48+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = []                                     
+[36mINFO[0m[2022-03-25T13:37:48+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = []                                     
+[36mINFO[0m[2022-03-25T13:41:15+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-25T13:41:15+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-25T13:41:15+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-25T13:41:15+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-25T13:41:15+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[36mINFO[0m[2022-03-25T13:41:15+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[36mINFO[0m[2022-03-25T13:41:15+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 63 was created.                 
+[36mINFO[0m[2022-03-25T13:41:15+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 63 was created.                 
+[36mINFO[0m[2022-03-25T13:41:15+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 6 was created.                  
+[36mINFO[0m[2022-03-25T13:41:15+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 6 was created.                  
+[36mINFO[0m[2022-03-25T13:41:15+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 6 was created.                   
+[36mINFO[0m[2022-03-25T13:41:15+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 6 was created.                   
+[36mINFO[0m[2022-03-25T13:41:15+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 6 was created.               
+[36mINFO[0m[2022-03-25T13:41:15+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 6 was created.               
+[36mINFO[0m[2022-03-25T13:41:15+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [63]                                   
+[36mINFO[0m[2022-03-25T13:41:15+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [63]                                   
+[36mINFO[0m[2022-03-25T13:43:02+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-25T13:43:02+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-25T13:43:02+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-25T13:43:02+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 64 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 64 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 7 was created.                  
+[36mINFO[0m[2022-03-25T13:43:02+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 7 was created.                  
+[36mINFO[0m[2022-03-25T13:43:02+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 7 was created.                   
+[36mINFO[0m[2022-03-25T13:43:02+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 7 was created.                   
+[36mINFO[0m[2022-03-25T13:43:02+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 7 was created.               
+[36mINFO[0m[2022-03-25T13:43:02+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 7 was created.               
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 65 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 65 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 66 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 66 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 67 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 67 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 68 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 68 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 69 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 69 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 70 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 70 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 71 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 71 was created.                 
+[36mINFO[0m[2022-03-25T13:43:02+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [64 65 66 67 68 69 70 71]              
+[36mINFO[0m[2022-03-25T13:43:02+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [64 65 66 67 68 69 70 71]              
+[36mINFO[0m[2022-03-25T13:48:27+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-25T13:48:27+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-25T13:48:27+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-25T13:48:27+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-25T13:48:28+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 8 was created.              
+[36mINFO[0m[2022-03-25T13:48:28+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 8 was created.              
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 72 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 72 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 8 was created.                  
+[36mINFO[0m[2022-03-25T13:48:28+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 8 was created.                  
+[36mINFO[0m[2022-03-25T13:48:28+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 8 was created.                   
+[36mINFO[0m[2022-03-25T13:48:28+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 8 was created.                   
+[36mINFO[0m[2022-03-25T13:48:28+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 8 was created.               
+[36mINFO[0m[2022-03-25T13:48:28+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 8 was created.               
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 73 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 73 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 74 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 74 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 75 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 75 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 76 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 76 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 77 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 77 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 78 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 78 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 79 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 79 was created.                 
+[36mINFO[0m[2022-03-25T13:48:28+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [72 73 74 75 76 77 78 79]              
+[36mINFO[0m[2022-03-25T13:48:28+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [72 73 74 75 76 77 78 79]              
+[31mERRO[0m[2022-03-25T13:48:28+03:00]seat_repository.go:193 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: converting argument $1 type: unsupported type []int, a slice of int 
+[31mERRO[0m[2022-03-25T13:48:28+03:00]seat_repository.go:193 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: converting argument $1 type: unsupported type []int, a slice of int 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-25T13:50:00+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-25T13:50:00+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 9 was created.              
+[36mINFO[0m[2022-03-25T13:50:00+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 9 was created.              
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 80 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 80 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 9 was created.                  
+[36mINFO[0m[2022-03-25T13:50:00+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 9 was created.                  
+[36mINFO[0m[2022-03-25T13:50:00+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 9 was created.                   
+[36mINFO[0m[2022-03-25T13:50:00+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 9 was created.                   
+[36mINFO[0m[2022-03-25T13:50:00+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 9 was created.               
+[36mINFO[0m[2022-03-25T13:50:00+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 9 was created.               
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 81 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 81 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 82 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 82 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 83 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 83 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 84 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 84 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 85 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 85 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 86 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 86 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 87 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 87 was created.                 
+[36mINFO[0m[2022-03-25T13:50:00+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [80 81 82 83 84 85 86 87]              
+[36mINFO[0m[2022-03-25T13:50:00+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [80 81 82 83 84 85 86 87]              
+[31mERRO[0m[2022-03-25T13:50:00+03:00]seat_repository.go:195 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: pq: invalid input syntax for type integer: "{80,81,82,83,84,85,86,87}" 
+[31mERRO[0m[2022-03-25T13:50:00+03:00]seat_repository.go:195 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: pq: invalid input syntax for type integer: "{80,81,82,83,84,85,86,87}" 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-25T13:50:48+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-25T13:50:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 10 was created.             
+[36mINFO[0m[2022-03-25T13:50:48+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 10 was created.             
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 88 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 88 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 10 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 10 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 10 was created.                  
+[36mINFO[0m[2022-03-25T13:50:48+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 10 was created.                  
+[36mINFO[0m[2022-03-25T13:50:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 10 was created.              
+[36mINFO[0m[2022-03-25T13:50:48+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 10 was created.              
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 89 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 89 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 90 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 90 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 91 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 91 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 92 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 92 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 93 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 93 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 94 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 94 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 95 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 95 was created.                 
+[36mINFO[0m[2022-03-25T13:50:48+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [88 89 90 91 92 93 94 95]              
+[36mINFO[0m[2022-03-25T13:50:48+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching IDs = [88 89 90 91 92 93 94 95]              
+[36mINFO[0m[2022-03-25T13:51:54+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-25T13:51:54+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-25T13:51:54+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 11 was created.             
+[36mINFO[0m[2022-03-25T13:51:54+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 11 was created.             
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 96 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 96 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 11 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 11 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 11 was created.                  
+[36mINFO[0m[2022-03-25T13:51:54+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 11 was created.                  
+[36mINFO[0m[2022-03-25T13:51:54+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 11 was created.              
+[36mINFO[0m[2022-03-25T13:51:54+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 11 was created.              
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 97 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 97 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 98 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 98 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 99 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 99 was created.                 
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 100 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 100 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 101 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 101 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 102 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 102 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 103 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 103 was created.                
+[36mINFO[0m[2022-03-25T13:51:54+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [96 97 98 99 100 101 102 103]     
+[36mINFO[0m[2022-03-25T13:51:54+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [96 97 98 99 100 101 102 103]     
+[36mINFO[0m[2022-03-25T13:51:54+03:00]seat_repository.go:212 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [11]                              
+[36mINFO[0m[2022-03-25T13:51:54+03:00]seat_repository.go:212 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [11]                              
+[36mINFO[0m[2022-03-25T13:53:11+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[36mINFO[0m[2022-03-25T13:53:11+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[36mINFO[0m[2022-03-25T13:53:11+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 12                   
+[36mINFO[0m[2022-03-25T13:53:11+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 12                   
+[36mINFO[0m[2022-03-25T13:53:11+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 12 was created.             
+[36mINFO[0m[2022-03-25T13:53:11+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 12 was created.             
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 104 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 104 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 12 was created.                 
+[36mINFO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 12 was created.                 
+[36mINFO[0m[2022-03-25T13:53:11+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 12 was created.                  
+[36mINFO[0m[2022-03-25T13:53:11+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 12 was created.                  
+[36mINFO[0m[2022-03-25T13:53:11+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 12 was created.              
+[36mINFO[0m[2022-03-25T13:53:11+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 12 was created.              
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 105 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 105 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 106 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 106 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 107 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 107 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 108 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 108 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 109 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 109 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 110 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 110 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 111 was created.                
+[36mINFO[0m[2022-03-25T13:53:11+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 111 was created.                
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[31mERRO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:26 goReact/domain/store.(*SeatRepository).Create Error occured while creating seat. Err msg: pq: insert or update on table "seat" violates foreign key constraint "seat_room_id_fkey". 
+[36mINFO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [104 105 106 107 108 109 110 111] 
+[36mINFO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [104 105 106 107 108 109 110 111] 
+[36mINFO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:212 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [12]                              
+[36mINFO[0m[2022-03-25T13:53:11+03:00]seat_repository.go:212 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [12]                              
+[36mINFO[0m[2022-03-25T13:53:28+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 13                   
+[36mINFO[0m[2022-03-25T13:53:28+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 13                   
+[36mINFO[0m[2022-03-25T13:53:28+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 13 was created.             
+[36mINFO[0m[2022-03-25T13:53:28+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 13 was created.             
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 112 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 112 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 19 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 19 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 13 was created.                  
+[36mINFO[0m[2022-03-25T13:53:28+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 13 was created.                  
+[36mINFO[0m[2022-03-25T13:53:28+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 13 was created.              
+[36mINFO[0m[2022-03-25T13:53:28+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 13 was created.              
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 113 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 113 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 114 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 114 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 115 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 115 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 116 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 116 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 117 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 117 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 118 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 118 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 119 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 119 was created.                
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 20 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 20 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 21 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 21 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 22 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 22 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 23 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 23 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 24 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 24 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 25 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 25 was created.                 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [112 113 114 115 116 117 118 119] 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [112 113 114 115 116 117 118 119] 
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:212 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [19 20 21 22 23 24 25]            
+[36mINFO[0m[2022-03-25T13:53:28+03:00]seat_repository.go:212 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [19 20 21 22 23 24 25]            
+[36mINFO[0m[2022-03-25T21:17:53+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-03-25T21:17:53+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-03-25T21:17:53+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-25T21:17:53+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-25T21:17:53+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[36mINFO[0m[2022-03-25T21:17:53+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[36mINFO[0m[2022-03-25T21:17:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
+[36mINFO[0m[2022-03-25T21:17:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
+[36mINFO[0m[2022-03-25T21:17:53+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
+[36mINFO[0m[2022-03-25T21:17:53+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
+[36mINFO[0m[2022-03-25T21:17:53+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 4 was created.                   
+[36mINFO[0m[2022-03-25T21:17:53+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 4 was created.                   
+[36mINFO[0m[2022-03-25T21:17:53+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 4 was created.               
+[36mINFO[0m[2022-03-25T21:17:53+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 4 was created.               
+[36mINFO[0m[2022-03-25T21:17:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-25T21:17:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-25T21:17:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 63 was created.                 
+[36mINFO[0m[2022-03-25T21:17:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 63 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 64 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 64 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 65 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 65 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 66 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 66 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 67 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 67 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 68 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 68 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 6 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 6 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 7 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 7 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 8 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 8 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 9 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 9 was created.                  
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 10 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 10 was created.                 
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [61 62 63 64 65 66 67 68]         
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [61 62 63 64 65 66 67 68]         
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = []                                
+[36mINFO[0m[2022-03-25T21:17:54+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = []                                
+[36mINFO[0m[2022-03-25T21:19:28+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-25T21:19:28+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-25T21:19:28+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-25T21:19:28+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-25T21:19:28+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-25T21:19:28+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 69 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 69 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 11 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 11 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-25T21:19:28+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-25T21:19:28+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 5 was created.               
+[36mINFO[0m[2022-03-25T21:19:28+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 5 was created.               
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 70 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 70 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 71 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 71 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 72 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 72 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 73 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 73 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 74 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 74 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 75 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 75 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 76 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 76 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 12 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 12 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 13 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 13 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 14 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 14 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 15 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 15 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 16 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 16 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 17 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 17 was created.                 
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [69 70 71 72 73 74 75 76]         
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [69 70 71 72 73 74 75 76]         
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [11 12 13 14 15 16 17]            
+[36mINFO[0m[2022-03-25T21:19:28+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [11 12 13 14 15 16 17]            
+[36mINFO[0m[2022-03-25T21:40:06+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-25T21:40:06+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 9 was created.                  
+[36mINFO[0m[2022-03-25T21:40:06+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-25T21:40:06+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 6                    
+[36mINFO[0m[2022-03-25T21:40:06+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[36mINFO[0m[2022-03-25T21:40:06+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 6 was created.              
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 77 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 77 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 18 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 18 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 6 was created.                   
+[36mINFO[0m[2022-03-25T21:40:06+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 6 was created.                   
+[36mINFO[0m[2022-03-25T21:40:06+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 6 was created.               
+[36mINFO[0m[2022-03-25T21:40:06+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 6 was created.               
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 78 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 78 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 79 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 79 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 80 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 80 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 81 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 81 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 82 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 82 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 83 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 83 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 84 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 84 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 19 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 19 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 20 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 20 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 21 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 21 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 22 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 22 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 23 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 23 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 24 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 24 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 25 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 25 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 26 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 26 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 27 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 27 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 28 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 28 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 29 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 29 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 30 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 30 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 31 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 31 was created.                 
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [77 78 79 80 81 82 83 84]         
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [77 78 79 80 81 82 83 84]         
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [18 19 20 21 22 23 24]            
+[36mINFO[0m[2022-03-25T21:40:06+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [18 19 20 21 22 23 24]            
+[36mINFO[0m[2022-03-25T21:41:21+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 10 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-25T21:41:21+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 7                    
+[36mINFO[0m[2022-03-25T21:41:21+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-25T21:41:21+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 7 was created.              
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 85 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 85 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 32 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 32 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 7 was created.                   
+[36mINFO[0m[2022-03-25T21:41:21+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 7 was created.                   
+[36mINFO[0m[2022-03-25T21:41:21+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 7 was created.               
+[36mINFO[0m[2022-03-25T21:41:21+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 7 was created.               
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 86 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 86 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 87 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 87 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 88 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 88 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 89 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 89 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 90 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 90 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 91 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 91 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 92 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 92 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 33 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 33 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 34 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 34 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 35 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 35 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 36 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 36 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 37 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 37 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 38 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 38 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 39 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 39 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 40 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 40 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 41 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 41 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 42 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 42 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 43 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 43 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 44 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 44 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 45 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:30 goReact/domain/store.(*SeatRepository).Create Seat with id 45 was created.                 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [85 86 87 88 89 90 91 92]         
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:191 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [85 86 87 88 89 90 91 92]         
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [32 33 34 35 36 37 38 39 40 41 42 43 44 45] 
+[36mINFO[0m[2022-03-25T21:41:21+03:00]seat_repository.go:216 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [32 33 34 35 36 37 38 39 40 41 42 43 44 45] 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 11 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-25T21:53:04+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 8                    
+[36mINFO[0m[2022-03-25T21:53:04+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 8 was created.              
+[36mINFO[0m[2022-03-25T21:53:04+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 8 was created.              
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 93 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 93 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 46 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 46 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 8 was created.                   
+[36mINFO[0m[2022-03-25T21:53:04+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 8 was created.                   
+[36mINFO[0m[2022-03-25T21:53:04+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 8 was created.               
+[36mINFO[0m[2022-03-25T21:53:04+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 8 was created.               
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 94 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 94 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 95 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 95 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 96 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 96 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 97 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 97 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 98 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 98 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 99 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 99 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 100 was created.                
+[36mINFO[0m[2022-03-25T21:53:04+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 100 was created.                
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 47 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 47 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 48 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 48 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 49 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 49 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 50 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 50 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 51 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 51 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 52 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 52 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 53 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 53 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 54 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 54 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 55 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 55 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 56 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 56 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 57 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 57 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 58 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 58 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 59 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 59 was created.                 
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [93 94 95 96 97 98 99 100]        
+[36mINFO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [93 94 95 96 97 98 99 100]        
+[31mERRO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:197 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: pq: syntax error at end of input 
+[31mERRO[0m[2022-03-25T21:53:04+03:00]seat_repository.go:197 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: pq: syntax error at end of input 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 12 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-25T21:53:53+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 9                    
+[36mINFO[0m[2022-03-25T21:53:53+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 9 was created.              
+[36mINFO[0m[2022-03-25T21:53:53+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 9 was created.              
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 101 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 101 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 60 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 60 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 9 was created.                   
+[36mINFO[0m[2022-03-25T21:53:53+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 9 was created.                   
+[36mINFO[0m[2022-03-25T21:53:53+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 9 was created.               
+[36mINFO[0m[2022-03-25T21:53:53+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 9 was created.               
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 102 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 102 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 103 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 103 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 104 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 104 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 105 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 105 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 106 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 106 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 107 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 107 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 108 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 108 was created.                
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 61 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 61 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 62 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 62 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 63 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 63 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 64 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 64 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 65 was created.                 
+[36mINFO[0m[2022-03-25T21:53:53+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 65 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 66 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 66 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 67 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 67 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 68 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 68 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 69 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 69 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 70 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 70 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 71 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 71 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 72 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 72 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 73 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 73 was created.                 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [101 102 103 104 105 106 107 108] 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [101 102 103 104 105 106 107 108] 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:214 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [60 61 62 63 64 65 66 67 68 69 70 71 72 73] 
+[36mINFO[0m[2022-03-25T21:53:54+03:00]seat_repository.go:214 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [60 61 62 63 64 65 66 67 68 69 70 71 72 73] 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 13 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-25T21:54:07+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 10                   
+[36mINFO[0m[2022-03-25T21:54:07+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 10 was created.             
+[36mINFO[0m[2022-03-25T21:54:07+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 10 was created.             
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 109 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 109 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 74 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 74 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 10 was created.                  
+[36mINFO[0m[2022-03-25T21:54:07+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 10 was created.                  
+[36mINFO[0m[2022-03-25T21:54:07+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 10 was created.              
+[36mINFO[0m[2022-03-25T21:54:07+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 10 was created.              
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 110 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 110 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 111 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 111 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 112 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 112 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 113 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 113 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 114 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 114 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 115 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 115 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 116 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 116 was created.                
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 75 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 75 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 76 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 76 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 77 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 77 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 78 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 78 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 79 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 79 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 80 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 80 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 81 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 81 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 82 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 82 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 83 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 83 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 84 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 84 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 85 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 85 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 86 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 86 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 87 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 87 was created.                 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [109 110 111 112 113 114 115 116] 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:189 goReact/domain/store.(*SeatRepository).FreeSeatsSearching room IDs = [109 110 111 112 113 114 115 116] 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:214 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [74 75 76 77 78 79 80 81 82 83 84 85 86 87] 
+[36mINFO[0m[2022-03-25T21:54:07+03:00]seat_repository.go:214 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [74 75 76 77 78 79 80 81 82 83 84 85 86 87] 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 14 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-25T21:56:44+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 11                   
+[36mINFO[0m[2022-03-25T21:56:44+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 11 was created.             
+[36mINFO[0m[2022-03-25T21:56:44+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 11 was created.             
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 117 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 117 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 88 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 88 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 11 was created.                  
+[36mINFO[0m[2022-03-25T21:56:44+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 11 was created.                  
+[36mINFO[0m[2022-03-25T21:56:44+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 11 was created.              
+[36mINFO[0m[2022-03-25T21:56:44+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 11 was created.              
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 118 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 118 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 119 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 119 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 120 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 120 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 121 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 121 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 122 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 122 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 123 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 123 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 124 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 124 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 89 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 89 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 90 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 90 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 91 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 91 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 92 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 92 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 93 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 93 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 94 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 94 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 95 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 95 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 96 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 96 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 97 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 97 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 98 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 98 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 99 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 99 was created.                 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 100 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 100 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 101 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 101 was created.                
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:198 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [88 89 90 91 92 93 94 95 96 97 98 99 100 101] 
+[36mINFO[0m[2022-03-25T21:56:44+03:00]seat_repository.go:198 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [88 89 90 91 92 93 94 95 96 97 98 99 100 101] 
+[36mINFO[0m[2022-03-25T21:57:40+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[36mINFO[0m[2022-03-25T21:57:40+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 15 was created.                 
+[36mINFO[0m[2022-03-25T21:57:40+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 12                   
+[36mINFO[0m[2022-03-25T21:57:40+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 12                   
+[36mINFO[0m[2022-03-25T21:57:40+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 12 was created.             
+[36mINFO[0m[2022-03-25T21:57:40+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 12 was created.             
+[36mINFO[0m[2022-03-25T21:57:40+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 125 was created.                
+[36mINFO[0m[2022-03-25T21:57:40+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 125 was created.                
+[36mINFO[0m[2022-03-25T21:57:40+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 102 was created.                
+[36mINFO[0m[2022-03-25T21:57:40+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 102 was created.                
+[36mINFO[0m[2022-03-25T21:57:40+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 12 was created.                  
+[36mINFO[0m[2022-03-25T21:57:40+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 12 was created.                  
+[36mINFO[0m[2022-03-25T21:57:40+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 12 was created.              
+[36mINFO[0m[2022-03-25T21:57:40+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 12 was created.              
+[36mINFO[0m[2022-03-25T21:57:40+03:00]seat_repository.go:198 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = []                                
+[36mINFO[0m[2022-03-25T21:57:40+03:00]seat_repository.go:198 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = []                                
+[36mINFO[0m[2022-03-25T21:59:19+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[36mINFO[0m[2022-03-25T21:59:19+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 16 was created.                 
+[36mINFO[0m[2022-03-25T21:59:19+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 13                   
+[36mINFO[0m[2022-03-25T21:59:19+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 13                   
+[36mINFO[0m[2022-03-25T21:59:19+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 13 was created.             
+[36mINFO[0m[2022-03-25T21:59:19+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 13 was created.             
+[36mINFO[0m[2022-03-25T21:59:19+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 126 was created.                
+[36mINFO[0m[2022-03-25T21:59:19+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 126 was created.                
+[36mINFO[0m[2022-03-25T21:59:19+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 103 was created.                
+[36mINFO[0m[2022-03-25T21:59:19+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 103 was created.                
+[36mINFO[0m[2022-03-25T21:59:19+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 13 was created.                  
+[36mINFO[0m[2022-03-25T21:59:19+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 13 was created.                  
+[36mINFO[0m[2022-03-25T21:59:19+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 13 was created.              
+[36mINFO[0m[2022-03-25T21:59:19+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 13 was created.              
+[36mINFO[0m[2022-03-25T21:59:59+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 17 was created.                 
+[36mINFO[0m[2022-03-25T21:59:59+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 17 was created.                 
+[36mINFO[0m[2022-03-25T21:59:59+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 14                   
+[36mINFO[0m[2022-03-25T21:59:59+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 14                   
+[36mINFO[0m[2022-03-25T21:59:59+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 14 was created.             
+[36mINFO[0m[2022-03-25T21:59:59+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 14 was created.             
+[36mINFO[0m[2022-03-25T21:59:59+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 127 was created.                
+[36mINFO[0m[2022-03-25T21:59:59+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 127 was created.                
+[36mINFO[0m[2022-03-25T21:59:59+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 104 was created.                
+[36mINFO[0m[2022-03-25T21:59:59+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 104 was created.                
+[36mINFO[0m[2022-03-25T21:59:59+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 14 was created.                  
+[36mINFO[0m[2022-03-25T21:59:59+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 14 was created.                  
+[36mINFO[0m[2022-03-25T21:59:59+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 14 was created.              
+[36mINFO[0m[2022-03-25T21:59:59+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 14 was created.              
+[36mINFO[0m[2022-03-25T21:59:59+03:00]seat_repository.go:203 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [104]                             
+[36mINFO[0m[2022-03-25T21:59:59+03:00]seat_repository.go:203 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [104]                             
+[36mINFO[0m[2022-03-25T22:00:21+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 18 was created.                 
+[36mINFO[0m[2022-03-25T22:00:21+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 18 was created.                 
+[36mINFO[0m[2022-03-25T22:00:21+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 15                   
+[36mINFO[0m[2022-03-25T22:00:21+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 15                   
+[36mINFO[0m[2022-03-25T22:00:21+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 15 was created.             
+[36mINFO[0m[2022-03-25T22:00:21+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 15 was created.             
+[36mINFO[0m[2022-03-25T22:00:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 128 was created.                
+[36mINFO[0m[2022-03-25T22:00:21+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 128 was created.                
+[36mINFO[0m[2022-03-25T22:00:21+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 105 was created.                
+[36mINFO[0m[2022-03-25T22:00:21+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 105 was created.                
+[36mINFO[0m[2022-03-25T22:00:21+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 15 was created.                  
+[36mINFO[0m[2022-03-25T22:00:21+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 15 was created.                  
+[36mINFO[0m[2022-03-25T22:00:21+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 15 was created.              
+[36mINFO[0m[2022-03-25T22:00:21+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 15 was created.              
+[36mINFO[0m[2022-03-25T22:00:40+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 19 was created.                 
+[36mINFO[0m[2022-03-25T22:00:40+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 19 was created.                 
+[36mINFO[0m[2022-03-25T22:00:40+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 16                   
+[36mINFO[0m[2022-03-25T22:00:40+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 16                   
+[36mINFO[0m[2022-03-25T22:00:40+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 16 was created.             
+[36mINFO[0m[2022-03-25T22:00:40+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 16 was created.             
+[36mINFO[0m[2022-03-25T22:00:40+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 129 was created.                
+[36mINFO[0m[2022-03-25T22:00:40+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 129 was created.                
+[36mINFO[0m[2022-03-25T22:00:40+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 106 was created.                
+[36mINFO[0m[2022-03-25T22:00:40+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 106 was created.                
+[36mINFO[0m[2022-03-25T22:00:40+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 16 was created.                  
+[36mINFO[0m[2022-03-25T22:00:40+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 16 was created.                  
+[36mINFO[0m[2022-03-25T22:00:40+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 16 was created.              
+[36mINFO[0m[2022-03-25T22:00:40+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 16 was created.              
+[36mINFO[0m[2022-03-25T22:00:40+03:00]seat_repository.go:203 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [106]                             
+[36mINFO[0m[2022-03-25T22:00:40+03:00]seat_repository.go:203 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [106]                             
+[36mINFO[0m[2022-03-25T22:04:24+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 20 was created.                 
+[36mINFO[0m[2022-03-25T22:04:24+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 20 was created.                 
+[36mINFO[0m[2022-03-25T22:04:24+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 17                   
+[36mINFO[0m[2022-03-25T22:04:24+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 17                   
+[36mINFO[0m[2022-03-25T22:04:24+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 17 was created.             
+[36mINFO[0m[2022-03-25T22:04:24+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 17 was created.             
+[36mINFO[0m[2022-03-25T22:04:24+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 130 was created.                
+[36mINFO[0m[2022-03-25T22:04:24+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 130 was created.                
+[36mINFO[0m[2022-03-25T22:04:24+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 107 was created.                
+[36mINFO[0m[2022-03-25T22:04:24+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 107 was created.                
+[36mINFO[0m[2022-03-25T22:04:24+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 17 was created.                  
+[36mINFO[0m[2022-03-25T22:04:24+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 17 was created.                  
+[36mINFO[0m[2022-03-25T22:04:24+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 17 was created.              
+[36mINFO[0m[2022-03-25T22:04:24+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 17 was created.              
+[36mINFO[0m[2022-03-25T22:04:24+03:00]seat_repository.go:204 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [107]                             
+[36mINFO[0m[2022-03-25T22:04:24+03:00]seat_repository.go:204 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [107]                             
+[37mDEBU[0m[2022-03-25T22:04:24+03:00]seat_repository.go:200 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{0 cat 2022-03-26 22:04:24.8999119 +0300 MSK 2022-04-04 22:04:24.8999119 +0300 MSK} 
+[37mDEBU[0m[2022-03-25T22:04:24+03:00]seat_repository.go:200 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{0 cat 2022-03-26 22:04:24.8999119 +0300 MSK 2022-04-04 22:04:24.8999119 +0300 MSK} 
+[36mINFO[0m[2022-03-25T22:33:49+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-03-25T22:33:49+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-03-25T22:33:49+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-25T22:33:49+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 4                    
+[36mINFO[0m[2022-03-25T22:33:49+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[36mINFO[0m[2022-03-25T22:33:49+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 4 was created.              
+[36mINFO[0m[2022-03-25T22:33:49+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
+[36mINFO[0m[2022-03-25T22:33:49+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
+[36mINFO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
+[36mINFO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
+[36mINFO[0m[2022-03-25T22:33:49+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 4 was created.                   
+[36mINFO[0m[2022-03-25T22:33:49+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 4 was created.                   
+[36mINFO[0m[2022-03-25T22:33:49+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 4 was created.               
+[36mINFO[0m[2022-03-25T22:33:49+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 4 was created.               
+[36mINFO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [{4 61 Description of seat 2022-03-26 00:00:00 +0000 +0000 2022-04-04 00:00:00 +0000 +0000}] 
+[36mINFO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [{4 61 Description of seat 2022-03-26 00:00:00 +0000 +0000 2022-04-04 00:00:00 +0000 +0000}] 
+[36mINFO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = []                                
+[36mINFO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = []                                
+[31mERRO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:181 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-25T22:33:49+03:00]seat_repository.go:181 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: database is closed 
+[36mINFO[0m[2022-03-25T22:36:42+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-25T22:36:42+03:00]user_repository.go:56 goReact/domain/store.(*UserRepository).Create User with id 8 was created.                  
+[36mINFO[0m[2022-03-25T22:36:42+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-25T22:36:42+03:00]hotel_repository.go:27 goReact/domain/store.(*HotelRepository).Create Created hotel with id = 5                    
+[36mINFO[0m[2022-03-25T22:36:42+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-25T22:36:42+03:00]employee_repository.go:24 goReact/domain/store.(*EmployeeRepository).Create Employee with id 5 was created.              
+[36mINFO[0m[2022-03-25T22:36:42+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-25T22:36:42+03:00]room_repository.go:27 goReact/domain/store.(*RoomRepository).Create Room with id 62 was created.                 
+[36mINFO[0m[2022-03-25T22:36:42+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-25T22:36:42+03:00]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 5 was created.                  
+[36mINFO[0m[2022-03-25T22:36:42+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-25T22:36:42+03:00]pet_repository.go:28 goReact/domain/store.(*PetRepository).Create Pet with id 5 was created.                   
+[36mINFO[0m[2022-03-25T22:36:42+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 5 was created.               
+[36mINFO[0m[2022-03-25T22:36:42+03:00]booking_repository.go:35 goReact/domain/store.(*BookingRepository).Create Booking with id 5 was created.               
+[36mINFO[0m[2022-03-25T22:36:42+03:00]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [{5 62 Description of seat 2022-03-26 00:00:00 +0000 +0000 2022-04-04 00:00:00 +0000 +0000}] 
+[36mINFO[0m[2022-03-25T22:36:42+03:00]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [{5 62 Description of seat 2022-03-26 00:00:00 +0000 +0000 2022-04-04 00:00:00 +0000 +0000}] 
+[37mDEBU[0m[2022-03-25T22:36:42+03:00]seat_repository.go:204 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{0 cat 2022-03-26 22:36:42.5544667 +0300 MSK 2022-04-04 22:36:42.5544667 +0300 MSK} 
+[37mDEBU[0m[2022-03-25T22:36:42+03:00]seat_repository.go:204 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{0 cat 2022-03-26 22:36:42.5544667 +0300 MSK 2022-04-04 22:36:42.5544667 +0300 MSK} 
+[31mERRO[0m[2022-03-25T22:36:42+03:00]seat_repository.go:181 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: database is closed 
+[31mERRO[0m[2022-03-25T22:36:42+03:00]seat_repository.go:181 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: database is closed 
