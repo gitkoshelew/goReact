@@ -16,6 +16,6 @@ func (l *Login) Validate() error {
 	return validation.ValidateStruct(
 		l,
 		validation.Field(&l.Email, validation.Required, is.Email, validation.By(IsSQL)),
-		validation.Field(&l.Password, validation.Required, validation.Length(5, 100), validation.By(IsSQL)),
+		validation.Field(&l.Password, validation.Required, validation.Length(5, 25), validation.By(IsSQL)),
 	)
 }

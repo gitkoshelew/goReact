@@ -2,8 +2,10 @@ package store_test
 
 import (
 	"goReact/domain/model"
+	"goReact/domain/request"
 	"goReact/domain/store"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -327,6 +329,79 @@ func TestSeatRepository_ModelFromDTO(t *testing.T) {
 				assert.NotNil(t, result)
 			} else {
 				result, err := testStore.Seat().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
+}
+
+func TestSeatRepository_FreeSeatsSearching(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		req     func() *request.FreeSeatsSearching
+		isValid bool
+	}{
+		{
+			name: "valid",
+			req: func() *request.FreeSeatsSearching {
+				testStore.Open()
+
+				req := request.TestFreeSeatsSearching()
+				rentFrom := time.Now().AddDate(0, 0, 11)
+				rentTo := time.Now().AddDate(0, 0, 22)
+				req.RentFrom = &rentFrom
+				req.RentTo = &rentTo
+				req.HotelID = id.Hotel
+
+				return req
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid data",
+			req: func() *request.FreeSeatsSearching {
+				testStore.Open()
+
+				req := request.TestFreeSeatsSearching()
+				req.HotelID = 0
+
+				return req
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			req: func() *request.FreeSeatsSearching {
+				testStore.Close()
+
+				req := request.TestFreeSeatsSearching()
+				rentFrom := time.Now().AddDate(0, 0, 11)
+				rentTo := time.Now().AddDate(0, 0, 22)
+				req.RentFrom = &rentFrom
+				req.RentTo = &rentTo
+				req.HotelID = id.Hotel
+
+				return req
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Seat().FreeSeatsSearching(tc.req())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Seat().FreeSeatsSearching(tc.req())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)

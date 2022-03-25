@@ -3,6 +3,7 @@ package store
 import (
 	"fmt"
 	"goReact/domain/model"
+	"goReact/domain/request"
 	"time"
 )
 
@@ -163,4 +164,48 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 		RentFrom:    dto.RentFrom,
 		RentTo:      dto.RentTo,
 	}, nil
+}
+
+// FreeSeatsSearching searching free seats by hotel ID, pet type, rentTo and rentFrom data
+func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[]model.SeatDTO, error) {
+	rows, err := r.Store.Db.Query(`SELECT * FROM seat 
+	WHERE 
+	(room_id = any(SELECT id FROM room WHERE pet_type = $1 AND hotel_id = $2)) 
+	and 
+	($3 >= rent_to or $4 <= rent_from)`,
+		req.PetType,
+		req.HotelID,
+		req.RentFrom,
+		req.RentTo)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
+		return nil, err
+	}
+
+	seats := []model.SeatDTO{}
+
+	for rows.Next() {
+		seat := model.SeatDTO{}
+		err := rows.Scan(
+			&seat.SeatID,
+			&seat.RoomID,
+			&seat.Description,
+			&seat.RentFrom,
+			&seat.RentTo,
+		)
+		if err != nil {
+			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
+			continue
+		}
+		seats = append(seats, seat)
+	}
+
+	if len(seats) < 1 {
+		r.Store.Logger.Debugf("no free seats for data: %v", req)
+		return nil, ErrNoFreeSeatsForCurrentRequest
+	}
+
+	r.Store.Logger.Infof("seat IDs = %v", seats)
+
+	return &seats, nil
 }

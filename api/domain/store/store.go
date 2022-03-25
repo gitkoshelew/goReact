@@ -13,6 +13,9 @@ var (
 	// ErrNoRowsAffected ...
 	ErrNoRowsAffected = errors.New("No rows affected")
 
+	// ErrNoFreeSeatsForCurrentRequest ...
+	ErrNoFreeSeatsForCurrentRequest = errors.New("No seats available for chosen data")
+
 	// ErrEmailIsUsed ...
 	ErrEmailIsUsed = errors.New("Email already in use")
 )

@@ -30,6 +30,7 @@ func (s *Server) configureRouter() {
 
 	s.router.Handle("GET", "/api/seat/:id", seat.GetSeatHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/seats", seat.GetAllSeatsHandle(store.New(s.config)))
+	s.router.Handle("POST", "/api/seats/search/free", middleware.ValidateFreeSeatsSearchingRequest(seat.GetFreeSeatsHandle(store.New(s.config)), store.New(s.config)))
 
 	s.router.Handle("GET", "/api/hotel/:id", hotel.GetHotelByID(store.New(s.config)))
 	s.router.Handle("GET", "/api/hotels", hotel.AllHotelsHandler(store.New(s.config)))
