@@ -1,6 +1,7 @@
 package roomhandlers
 
 import (
+	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
@@ -15,36 +16,35 @@ import (
 func GetRoomByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-
-		rooms := []model.Room{}
-		id, err := strconv.Atoi(ps.ByName("id"))
+		err := session.CheckRigths(w, r, permissionRead.Name)
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			http.Error(w, err.Error(), http.StatusForbidden)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
+		rooms := []model.RoomDTO{}
+
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		id, err := strconv.Atoi(r.FormValue("id"))
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 
 		roomDTO, err := s.Room().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find pet. Err msg:%v.", err)
+			http.Error(w, fmt.Sprintf("Error occured while getting room by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
-		room, err := s.Room().ModelFromDTO(roomDTO)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		rooms = append(rooms, *room)
+		rooms = append(rooms, *roomDTO)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allRooms.html",
@@ -53,15 +53,15 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, rooms)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
 			return
 		}
 	}

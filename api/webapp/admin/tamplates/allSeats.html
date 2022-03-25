@@ -11,14 +11,16 @@
     <table class="table">
         <th>SeatID</th>
         <th>RoomID</th>
-        <th>IsFree</th>
+        <th>RentFrom</th>
+        <th>RentTo</th>
         <th>Description</th>
 
         {{range . }}
         <tr>
             <td>{{.SeatID}}</td>
-            <td>{{.Room.RoomID}}</td>
-            <td>{{.IsFree}}</td>
+            <td>{{.RoomID}}</td>
+            <td>{{.RentFrom}}</td>
+            <td>{{.RentTo}}</td>
             <td>{{.Description}}</td>
 
         </tr>

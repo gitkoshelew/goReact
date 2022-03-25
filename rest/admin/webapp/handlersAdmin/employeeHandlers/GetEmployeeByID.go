@@ -47,8 +47,8 @@ func GetEmployeeByID(s *store.Store) httprouter.Handle {
 		employees = append(employees, *employee)
 
 		files := []string{
-			"/rest-api/webapp/tamplates/allEmployee.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/allEmployee.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 
 		tmpl, err := template.ParseFiles(files...)

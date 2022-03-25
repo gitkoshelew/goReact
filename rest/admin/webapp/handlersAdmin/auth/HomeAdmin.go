@@ -22,8 +22,8 @@ func HomeAdmin(s *store.Store) httprouter.Handle {
 		}
 
 		files := []string{
-			"/rest-api/webapp/tamplates/homeAdmin.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/homeAdmin.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {

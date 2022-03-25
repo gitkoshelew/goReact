@@ -16,13 +16,13 @@ func LoginAdmin(s *store.Store) httprouter.Handle {
 
 		exist := session.IsExist(w, r)
 		if exist {
-			http.Redirect(w, r, "/", http.StatusFound)
+			http.Redirect(w, r, "/admin/home", http.StatusFound)
 			return
 		}
 
 		files := []string{
-			"/rest-api/webapp/tamplates/loginAdmin.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/loginAdmin.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 
 		tmpl, err := template.ParseFiles(files...)

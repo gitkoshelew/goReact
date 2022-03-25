@@ -13,13 +13,16 @@
         <th>RoomNumber</th>
         <th>PetType</th>
         <th>Hotel</th>
+        <th>RoomPhotoURL</th>
+        
 
         {{range . }}
         <tr>
             <td>{{.RoomID}}</td>
             <td>{{.RoomNumber}}</td>
             <td>{{.PetType}}</td>
-            <td>{{.Hotel.HotelID}}</td>
+            <td>{{.HotelID}}</td>
+            <td>{{.PhotoURL}}</td>
 
         </tr>
         {{end}}

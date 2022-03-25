@@ -10,36 +10,36 @@ import (
 
 // User ...
 type User struct {
-	UserID      int        `json:"userId"`
-	Email       string     `json:"email"`
-	Password    string     `json:"-"`
-	Role        Role       `json:"role"`
-	Verified    *bool      `json:"verified"`
-	Name        string     `json:"name"`
-	Surname     string     `json:"sName"`
-	MiddleName  string     `json:"mName"`
-	Sex         Sex        `json:"sex"`
-	DateOfBirth *time.Time `json:"birthDate"`
-	Address     string     `json:"address"`
-	Phone       string     `json:"phone"`
-	Photo       string     `json:"photo"`
+	UserID      int        `json:"userId" csv:"userId"`
+	Email       string     `json:"email" csv:"email"`
+	Password    string     `json:"-" csv:"-"`
+	Role        Role      `json:"role" csv:"role"`
+	Verified    *bool       `json:"verified" csv:"verified"`
+	Name        string     `json:"name" csv:"name"`
+	Surname     string     `json:"sName" csv:"sName"`
+	MiddleName  string     `json:"mName" csv:"mName"`
+	Sex         Sex        `json:"sex" csv:"sex"`
+	DateOfBirth *time.Time `json:"birthDate" csv:"birthDate"`
+	Address     string     `json:"address" csv:"address"`
+	Phone       string     `json:"phone" csv:"phone"`
+	Photo       string     `json:"photo" csv:"photo"`
 }
 
 // UserDTO ...
 type UserDTO struct {
-	UserID      int        `json:"userId"`
-	Email       string     `json:"email"`
-	Password    string     `json:"password"`
-	Role        string     `json:"role,omitempty"`
-	Verified    *bool      `json:"verified,omitempty"`
-	Name        string     `json:"name"`
-	Surname     string     `json:"sName"`
-	MiddleName  string     `json:"mName"`
-	Sex         string     `json:"sex"`
-	DateOfBirth *time.Time `json:"birthDate"`
-	Address     string     `json:"address"`
-	Phone       string     `json:"phone"`
-	Photo       string     `json:"photo"`
+	UserID      int        `json:"userId" csv:"userId"`
+	Email       string     `json:"email" csv:"email"`
+	Password    string     `json:"password" csv:"-"`
+	Role        string     `json:"role,omitempty" csv:"role"`
+	Verified    *bool      `json:"verified,omitempty" csv:"verified"`
+	Name        string     `json:"name" csv:"name"`
+	Surname     string     `json:"sName" csv:"sName"`
+	MiddleName  string     `json:"mName" csv:"mName"`
+	Sex         string     `json:"sex" csv:"sex"`
+	DateOfBirth *time.Time `json:"birthDate" csv:"birthDate"`
+	Address     string     `json:"address" csv:"address"`
+	Phone       string     `json:"phone" csv:"phone"`
+	Photo       string     `json:"photo" csv:"photo"`
 }
 
 // Role ...

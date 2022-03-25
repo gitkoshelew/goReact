@@ -27,8 +27,8 @@ func HomeSeatsHandler(s *store.Store) httprouter.Handle {
 		}
 
 		files := []string{
-			"/rest-api/webapp/tamplates/seatsHome.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/seatsHome.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 
 		tmpl, err := template.ParseFiles(files...)

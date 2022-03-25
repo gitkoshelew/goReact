@@ -1,6 +1,7 @@
 package bookinghandlers
 
 import (
+	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
@@ -15,37 +16,35 @@ import (
 func GetBookingByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-
-		bookings := []model.Booking{}
-
-		id, err := strconv.Atoi(ps.ByName("id"))
+		err := session.CheckRigths(w, r, permissionRead.Name)
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, ps.ByName("id"))
+			http.Error(w, err.Error(), http.StatusForbidden)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
+			return
+		}
+
+		bookings := []model.BookingDTO{}
+
+		id, err := strconv.Atoi(r.FormValue("id"))
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("Can't open DB. Err msg:%v.", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		bookingDTO, err := s.Booking().FindByID(id)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusNotFound)
-			s.Logger.Errorf("Cant find booking. Err msg:%v.", err)
+			http.Error(w, fmt.Sprintf("Error occured while getting booking by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
 		}
 
-		booking, err := s.Booking().ModelFromDTO(bookingDTO)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		bookings = append(bookings, *booking)
+		bookings = append(bookings, *bookingDTO)
 
 		files := []string{
 			"/api/webapp/admin/tamplates/allBookings.html",
@@ -54,15 +53,15 @@ func GetBookingByID(s *store.Store) httprouter.Handle {
 
 		tmpl, err := template.ParseFiles(files...)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
 			return
 		}
 
 		err = tmpl.Execute(w, bookings)
 		if err != nil {
-			http.Error(w, err.Error(), 400)
-			s.Logger.Errorf("Can not parse template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
 			return
 		}
 	}

@@ -1,0 +1,130 @@
+{{template "base" .}}
+
+{{define "title"}}bookings{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+
+<body>
+
+
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+
+
+    {{if .HasPermission "read_booking"}}
+    <div>
+        <h2>Bookings</h2>
+        <form action="/admin/bookings">
+            <button>all bookings</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "read_booking"}}
+    <form action="/admin/bookings/id" method="GET">
+        <th>Get booking by id</th>
+        <input type="number" name="id" min="1" required><br><br>
+        <button>Get</button>
+    </form>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "delete_booking"}}
+    <div>
+        <form action="/admin/bookings/delete/" method="POST">
+            <th>Delete booking by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Delete</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "creat_booking"}}
+    <div>
+        <h2>New booking</h2>
+        <form action="/admin/bookings/new" method="POST">
+            <th>SeatID</th>
+            <input type="number" name="SeatID" min=1 required>
+            <th>PetID</th>
+            <input type="number" name="PetID" min=1 required>
+            <th>EmployeeID</th>
+            <input type="number" name="EmployeeID" min=1 required>
+            <br><br>
+            <th>Status</th>
+            <input type="radio" name="Status" value="pending" id="Status1" required>
+            <label for="Status1">pending</label>
+            <input type="radio" name="Status" value="in-progress" id="Status2" required>
+            <label for="Status2" required>in-progress</label>
+            <input type="radio" name="Status" value="completed" id="Status3" required>
+            <label for="Status3" required>completed</label>
+            <input type="radio" name="Status" value="cancelled" id="Status4" required>
+            <label for="Status4" required>cancelled</label><br><br>
+            <th>StartDate</th>
+            <input type="Date" name="StartDate" required><br><br>
+            <th>EndDate</th>
+            <input type="Date" name="EndDate" required><br><br>
+            <th>Notes</th>
+            <input type="text" name="Notes">
+            <br><br>
+            <th>Paid</th>
+            <input type="radio" name="Paid" value="true" id="Paid1" required>
+            <label for="Paid1">true</label>
+            <input type="radio" name="Paid" value="false" id="Paid2" required>
+            <label for="Paid2">false</label><br><br>
+            <th>TransactionID</th>
+            <input type="number" name="TransactionID" min=0 required>
+            <button>new</button>
+        </form>
+    </div>
+    {{end}}
+    <br><br>
+    {{if .HasPermission "update_booking"}}
+    <div>
+        <h2>Update booking</h2>
+        <form action="/admin/bookings/update" method="POST">
+            <th>BookingID</th>
+            <input type="number" name="BookingID" min=1 required>
+            <th>SeatID</th>
+            <input type="number" name="SeatID" min=1>
+            <th>PetID</th>
+            <input type="number" name="PetID" min=1>
+            <th>EmployeeID</th>
+            <input type="number" name="EmployeeID" min=1>
+            <br><br>
+            <th>Status</th>
+            <input type="radio" name="Status" value="pending" id="Status1">
+            <label for="Status1">pending</label>
+            <input type="radio" name="Status" value="in-progress" id="Status2">
+            <label for="Status2" required>in-progress</label>
+            <input type="radio" name="Status" value="completed" id="Status3">
+            <label for="Status3" required>completed</label>
+            <input type="radio" name="Status" value="cancelled" id="Status4">
+            <label for="Status4" required>cancelled</label><br><br>
+            <th>StartDate</th>
+            <input type="Date" name="StartDate"><br><br>
+            <th>EndDate</th>
+            <input type="Date" name="EndDate"><br><br>
+            <th>Notes</th>
+            <input type="text" name="Notes">
+            <br><br>
+            <th>Paid</th>
+            <input type="radio" name="Paid" value="true" id="Paid1">
+            <label for="Paid1">true</label>
+            <input type="radio" name="Paid" value="false" id="Paid2">
+            <label for="Paid2">false</label><br><br>
+            <th>TransactionID</th>
+            <input type="number" name="TransactionID" min=0>
+            <button>update</button>
+        </form>
+    </div>
+    {{end}}
+</body>
+
+{{end}}

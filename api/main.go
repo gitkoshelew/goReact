@@ -46,7 +46,6 @@ func initAccountDb(c *webapp.Config) {
 		panic(err)
 	}
 	defer db.Close()
-
 	for i := 0; i < 6; i++ {
 
 		encryptedPassword, err := model.EncryptPassword(fmt.Sprintf("password"))

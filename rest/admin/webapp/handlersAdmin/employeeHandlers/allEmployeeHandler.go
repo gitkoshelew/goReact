@@ -36,8 +36,8 @@ func AllEmployeeHandler(s *store.Store) httprouter.Handle {
 		}
 
 		files := []string{
-			"/rest-api/webapp/tamplates/allEmployee.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/allEmployee.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 
 		tmpl, err := template.ParseFiles(files...)

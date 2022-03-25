@@ -1,4 +1,4 @@
-package handlersadmin
+package auth
 
 import (
 	"goReact/domain/store"
@@ -12,6 +12,5 @@ import (
 func LogoutAdmin(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.Logout(w, r)
-		w.WriteHeader(http.StatusOK)
 	}
 }

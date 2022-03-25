@@ -27,8 +27,8 @@ func HomePetsHandler(s *store.Store) httprouter.Handle {
 		}
 
 		files := []string{
-			"/rest-api/webapp/tamplates/petHome.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/petHome.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 
 		tmpl, err := template.ParseFiles(files...)

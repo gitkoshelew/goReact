@@ -33,8 +33,8 @@ func AllPermissons(s *store.Store) httprouter.Handle {
 		}
 
 		files := []string{
-			"/rest-api/webapp/tamplates/allPermissions.html",
-			"/rest-api/webapp/tamplates/base.html",
+			"/api/webapp/admin/tamplates/allPermissions.html",
+			"/api/webapp/admin/tamplates/base.html",
 		}
 
 		tmpl, err := template.ParseFiles(files...)
