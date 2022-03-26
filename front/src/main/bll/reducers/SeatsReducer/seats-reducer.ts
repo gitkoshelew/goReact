@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Room, Seat } from '../../../dal/api_client/SeatsService'
+import { Room, Seat, SeatSearch } from '../../../dal/api_client/SeatsService'
 
 const initialState: InitialStateSeats = {
   rooms: [],
   seats: [],
+  seatsSearch: [],
 }
 
 const seatsSlice = createSlice({
@@ -16,15 +17,19 @@ const seatsSlice = createSlice({
     setSeats(state, action: PayloadAction<{ seats: Seat[] }>) {
       state.seats = action.payload.seats
     },
+    setSeatsSearch(state, action: PayloadAction<{ seatsSearch: SeatSearch[] }>) {
+      state.seatsSearch = action.payload.seatsSearch
+    },
   },
 })
 
 export const SeatsReducer = seatsSlice.reducer
-export const { setRooms, setSeats } = seatsSlice.actions
+export const { setRooms, setSeats, setSeatsSearch } = seatsSlice.actions
 
 //types
 
 type InitialStateSeats = {
   rooms: Room[]
   seats: Seat[]
+  seatsSearch: SeatSearch[]
 }
