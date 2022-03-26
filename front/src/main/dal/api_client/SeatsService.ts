@@ -32,7 +32,7 @@ export type SeatSearch = {
 }
 
 export type FetchSeatsResponse = Seat[]
-export type FetchSeatsSearchResponse = SeatSearch[]
+export type SeatsSearchResponse = SeatSearch[]
 
 export const SeatsAPI = {
   async fetchRooms(): Promise<AxiosResponse<FetchRoomsResponse>> {
@@ -41,7 +41,7 @@ export const SeatsAPI = {
   async fetchSeats(): Promise<AxiosResponse<FetchSeatsResponse>> {
     return $api.get(`api/seats`)
   },
-  async fetchSeatsFree(newSeatsSearch: SeatSearch): Promise<AxiosResponse<FetchSeatsSearchResponse>> {
+  async fetchSeatsFree(newSeatsSearch: SeatSearch): Promise<AxiosResponse<SeatsSearchResponse>> {
     const res = await $api.post(`api/seats/search/free`, newSeatsSearch)
     return res
   },
