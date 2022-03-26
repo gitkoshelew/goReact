@@ -6,7 +6,7 @@ import {
   SeatSearch,
   SeatsSearchResponse,
 } from '../../../dal/api_client/SeatsService'
-import { setRooms, setSeats } from './seats-reducer'
+import { setRooms, setSeats, setSeatsSearch } from './seats-reducer'
 import { AxiosResponse } from 'axios'
 
 export function* fetchSeatsSagaWorker() {
@@ -25,6 +25,8 @@ export function* seatsSearchSagaWorker(action: ReturnType<typeof searchSeatsRequ
     SeatsAPI.fetchSeatsFree,
     action.newSeatsSearch
   )
+  yield put(setSeatsSearch({ seatsSearch: searchSeatsResponse.data }))
+  console.log({ seatsSearch: searchSeatsResponse.data })
 }
 
 export const searchSeatsRequest = (newSeatsSearch: SeatSearch) => ({
