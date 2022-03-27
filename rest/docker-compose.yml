@@ -32,7 +32,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/authentication/
+            - ./authentication/logs:/logs
         networks:
             - new
 
@@ -135,7 +135,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/user/
+            - ./customer/logs:/logs
         networks:
             - new
         depends_on:
@@ -240,7 +240,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/booking/
+            - ./booking/logs:/logs
         networks:
             - new
         depends_on:
@@ -345,7 +345,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/hotel/
+            - ./hotel/logs:/logs
         networks:
             - new
         depends_on:
@@ -450,7 +450,7 @@ services:
         tty: true
         restart: on-failure
         volumes:
-            - api:/gateway/
+            - ./gateway/logs:/logs
         networks:
             - new
 

@@ -600,3 +600,31 @@
 [36mINFO[0m[2022-03-23T23:27:20+03:00]store.go:47 auth/domain/store.(*Store).Open Auth store opening. Source: host=localhost port=8082 user=user password=userpass dbname=authdbtest sslmode=disable 
 [36mINFO[0m[2022-03-23T23:27:20+03:00]store.go:47 auth/domain/store.(*Store).Open Auth store opening. Source: host=localhost port=8082 user=user password=userpass dbname=authdbtest sslmode=disable 
 [36mINFO[0m[2022-03-23T23:27:20+03:00]store.go:47 auth/domain/store.(*Store).Open Auth store opening. Source: host=localhost port=8082 user=user password=userpass dbname=authdbtest sslmode=disable 
+[36mINFO[0m[2022-03-27T12:37:46Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-27T12:37:46Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-27T12:37:46Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:37:46Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-03-27T12:37:46Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.26.0.2:5432: connect: connection refused 
+[31mERRO[0m[2022-03-27T12:37:46Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.26.0.2:5432: connect: connection refused 
+[31mERRO[0m[2022-03-27T12:37:46Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00038a120 0xc0003a6000}) 
+[31mERRO[0m[2022-03-27T12:37:46Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00038a120 0xc0003a6000}) 
+[31mERRO[0m[2022-03-27T12:37:46Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00038a120 0xc0003a6000}) 
+[31mERRO[0m[2022-03-27T12:37:46Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00038a120 0xc0003a6000}) 
+[36mINFO[0m[2022-03-27T12:38:00Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-27T12:38:00Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-27T12:38:00Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:38:00Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:38:00Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-27T12:38:00Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-27T12:39:10Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-27T12:39:10Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-27T12:39:10Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:39:10Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:39:10Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-27T12:39:10Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[31mERRO[0m[2022-03-27T12:39:23Z]helper.go:138 auth/pkg/jwt.ExtractTokenMetadata you are unauthorized. err: %!w(*jwt.ValidationError=&{<nil> 1 token contains an invalid number of segments}) 
+[31mERRO[0m[2022-03-27T12:39:23Z]helper.go:138 auth/pkg/jwt.ExtractTokenMetadata you are unauthorized. err: %!w(*jwt.ValidationError=&{<nil> 1 token contains an invalid number of segments}) 
+[36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 

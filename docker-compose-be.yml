@@ -117,7 +117,7 @@ services:
     tty: true
     restart: on-failure
     volumes:
-      - api:/api
+      - ./api/logs:/api/logs
     networks:
       - new
 
@@ -126,6 +126,5 @@ networks:
     driver: bridge
 volumes:
   test-database: null
-  api: null
   database-data: null
   pgadmin: null

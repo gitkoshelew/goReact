@@ -7,18 +7,11 @@ ENV GOPATH=/
 # Set destination for COPY
 WORKDIR /api
 
-#instal psql
-RUN apt-get update
-RUN apt-get -y install postgresql-client
-
 # build go app
 COPY ["go.mod", "go.sum", "./"] 
 RUN go mod download
 
 COPY ./ ./
-
-#make wait-for-postgres.sh executable
-RUN chmod +x wait-for-postgres.sh
 
 RUN go build -o goreact ./main.go
 
