@@ -2,7 +2,15 @@ import React from 'react'
 import s from './BookingSearchForm.module.scss'
 import { FormikValues } from 'formik/dist/types'
 
-const { bookingForm, clientDescription, inputInfo, inputInfoInput, errorMsg, errorInputInfo, errorInputInfoInput } = s
+const {
+  bookingSearchForm,
+  clientDescription,
+  inputInfo,
+  inputInfoInput,
+  errorMsg,
+  errorInputInfo,
+  errorInputInfoInput,
+} = s
 
 type BookingSearchFormType = {
   formik: FormikValues
@@ -10,7 +18,7 @@ type BookingSearchFormType = {
 
 export const BookingSearchForm = ({ formik }: BookingSearchFormType) => {
   return (
-    <div className={bookingForm}>
+    <div className={bookingSearchForm}>
       <div className={clientDescription}>
         <div className={formik.errors.hotelId && formik.touched.hotelId ? errorInputInfo : inputInfo}>
           Hotel Id:
@@ -37,7 +45,7 @@ export const BookingSearchForm = ({ formik }: BookingSearchFormType) => {
             value={formik.values.petType}
             onChange={formik.handleChange}
             type="text"
-            placeholder={'cat or dog'}
+            placeholder={'cat / dog'}
           />
         </div>
         {formik.errors.petType && formik.touched.petType ? (
