@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { $api } from './API'
 
-type Pet = 'cat' | 'dog'
+export type Pet = 'cat' | 'dog'
 
 export type Room = {
   roomId: number
@@ -25,8 +25,8 @@ export type Seat = {
 }
 
 export type SeatSearch = {
-  hotelId: number
-  petType: Pet
+  hotelId: number | null
+  petType: Pet | string
   rentFrom: Date
   rentTo: Date
 }
