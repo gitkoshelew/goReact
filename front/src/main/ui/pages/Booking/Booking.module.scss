@@ -1,6 +1,31 @@
 @use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
+.searchPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: $main-background-color;
+
+  .searchProcess {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: bp.$lg) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .searchForm {
+      margin: 0 10%;
+    }
+  }
+}
+
+
 .bookingPage {
   display: flex;
   align-items: center;
