@@ -13,10 +13,20 @@ import Preloader from '../../components/preloader/preloader'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
 import { fetchBookingPaymentRequest } from '../../../bll/reducers/BookingPaymentFormReducer/bookingPaymentForm-saga'
 import { Modal } from '../../components/Modal/Modal'
+import { BookingSearchForm } from './BookingSearchForm/BookingSearchForm'
 
-const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
+const {
+  bookingPage,
+  bookingForm,
+  bookingProcess,
+  bookingCalendar,
+  uploadOrderedRoomsBlock,
+  searchPage,
+  searchForm,
+  searchProcess,
+} = s
 
-type FormValues = {
+type BookingFormValues = {
   firstName: string
   lastName: string
   email: string
@@ -41,19 +51,24 @@ export const Booking = () => {
   }
   const customSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    formik.handleSubmit()
-    if (formik.isValid && formik.values.firstName && formik.values.lastName && formik.values.email) {
+    formikBooking.handleSubmit()
+    if (
+      formikBooking.isValid &&
+      formikBooking.values.firstName &&
+      formikBooking.values.lastName &&
+      formikBooking.values.email
+    ) {
       modalActiveHandler()
     }
   }
   //Formik
   useEffect(() => {
     if (!checked) {
-      formik.resetForm({
+      formikBooking.resetForm({
         values: {
-          firstName: formik.values.firstName,
-          lastName: formik.values.lastName,
-          email: formik.values.email,
+          firstName: formikBooking.values.firstName,
+          lastName: formikBooking.values.lastName,
+          email: formikBooking.values.email,
           cardNumber: '',
           company: '',
           mm: '',
@@ -64,8 +79,8 @@ export const Booking = () => {
     }
   }, [checked])
 
-  const validate = (values: FormValues) => {
-    const errors: FormikErrors<FormValues> = {}
+  const validateBooking = (values: BookingFormValues) => {
+    const errors: FormikErrors<BookingFormValues> = {}
     if (!values.firstName) {
       errors.firstName = 'Required field'
     } else if (values.firstName.length > 15) {
@@ -117,7 +132,7 @@ export const Booking = () => {
     return errors
   }
 
-  const formik = useFormik({
+  const formikBooking = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -128,11 +143,11 @@ export const Booking = () => {
       yy: '',
       cvv: '',
     },
-    validate,
+    validate: validateBooking,
     onSubmit: (values) => {
       dispatch(fetchBookingPaymentRequest(values))
-      if (formik.isValid) {
-        formik.resetForm()
+      if (formikBooking.isValid) {
+        formikBooking.resetForm()
       }
     },
   })
@@ -151,7 +166,7 @@ export const Booking = () => {
   const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
   const orderedRoomBasket = useSelector((state: AppRootState) => state.BookingRoomPick.orderedRoomBasket)
 
-  const isActiveBtn = progress === 'uploaded' && formik.isValid
+  const isActiveBtn = progress === 'uploaded' && formikBooking.isValid
 
   const roomIndicate = useMemo(() => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
@@ -166,12 +181,26 @@ export const Booking = () => {
 
   return (
     <div className="bookingContainer">
+      <form>
+        <div className={searchPage}>
+          <TitlePageTextBlock mainTextMess={'Write hotel, pet and hotel'} isWithLink={false} />
+          <div className={searchProcess}>
+            <div className={searchForm}>
+              <BookingSearchForm formik={formikBooking} />
+            </div>
+          </div>
+          <div>
+            <Button view={'upload'} />
+          </div>
+        </div>
+      </form>
+
       <form onSubmit={customSubmit}>
         <div className={bookingPage}>
           <TitlePageTextBlock mainTextMess={'Book room for pet'} isWithLink={false} />
           <div className={bookingProcess}>
             <div className={bookingForm}>
-              <BookingRegForm formik={formik} />
+              <BookingRegForm formik={formikBooking} />
             </div>
             <div className={bookingCalendar}>
               {correctView}
