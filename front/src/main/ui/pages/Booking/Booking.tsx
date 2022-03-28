@@ -14,6 +14,8 @@ import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReduc
 import { fetchBookingPaymentRequest } from '../../../bll/reducers/BookingPaymentFormReducer/bookingPaymentForm-saga'
 import { Modal } from '../../components/Modal/Modal'
 import { BookingSearchForm } from './BookingSearchForm/BookingSearchForm'
+import { searchSeatsRequest } from '../../../bll/reducers/SeatsReducer/seats-saga'
+import moment from 'moment'
 
 const {
   bookingPage,
@@ -25,6 +27,13 @@ const {
   searchForm,
   searchProcess,
 } = s
+
+type SearchFormValues = {
+  hotelId: string
+  petType: string
+  rentFrom: Date | string
+  rentTo: Date | string
+}
 
 type BookingFormValues = {
   firstName: string
@@ -61,7 +70,52 @@ export const Booking = () => {
       modalActiveHandler()
     }
   }
-  //Formik
+  //Formik Search
+  const validateSearch = (values: SearchFormValues) => {
+    const errors: FormikErrors<SearchFormValues> = {}
+    if (!values.hotelId) {
+      errors.hotelId = 'Required field'
+    } else if (values.hotelId.toString().length > 1) {
+      errors.hotelId = 'Must be 1 character'
+    }
+    if (!values.petType) {
+      errors.petType = 'Required field'
+    } else if (values.petType !== 'cat' && values.petType !== 'dog') {
+      errors.petType = 'Please write cat or dog'
+    }
+    if (!values.rentTo) {
+      errors.rentTo = 'Required field'
+    }
+    if (!values.rentFrom) {
+      errors.rentFrom = 'Required field'
+    }
+    return errors
+  }
+
+  const formikSearch = useFormik({
+    initialValues: {
+      hotelId: '',
+      petType: '',
+      rentTo: '',
+      rentFrom: '',
+    },
+    validate: validateSearch,
+    onSubmit: (values) => {
+      dispatch(
+        searchSeatsRequest({
+          hotelId: Number(values.hotelId),
+          petType: values.petType,
+          rentTo: new Date(moment(values.rentTo).format()),
+          rentFrom: new Date(moment(values.rentFrom).format()),
+        })
+      )
+      if (formikSearch.isValid) {
+        formikSearch.resetForm()
+      }
+    },
+  })
+
+  //Formik Booking
   useEffect(() => {
     if (!checked) {
       formikBooking.resetForm({
@@ -181,12 +235,12 @@ export const Booking = () => {
 
   return (
     <div className="bookingContainer">
-      <form>
+      <form onSubmit={formikSearch.handleSubmit}>
         <div className={searchPage}>
           <TitlePageTextBlock mainTextMess={'Write hotel, pet and hotel'} isWithLink={false} />
           <div className={searchProcess}>
             <div className={searchForm}>
-              <BookingSearchForm formik={formikBooking} />
+              <BookingSearchForm formik={formikSearch} />
             </div>
           </div>
           <div>
