@@ -12,10 +12,11 @@ import { fetchSeatsRequest } from '../../../../bll/reducers/SeatsReducer/seats-s
 
 export const BookingCalendar = () => {
   const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
-
+  const startDate = useSelector((state: AppRootState) => state.Seats.seatsSearch[0])
   const dispatch = useAppDispatch()
 
-  const [dateState, setDateState] = useState<Date>(new Date())
+  const [dateState, setDateState] = useState<Date>(new Date(startDate?.rentFrom ? startDate.rentFrom : new Date()))
+
   const [tooltipVisible, setTooltipVisible] = useState<boolean>(false)
   const [tooltipDate, setTooltipDate] = useState<Date | null>(null)
 
@@ -54,7 +55,7 @@ export const BookingCalendar = () => {
         )}
         tileClassName={s.calendarCell}
         tileDisabled={searchInRentArr}
-        minDate={new Date()}
+        minDate={new Date(2022, 2, 30)}
         defaultActiveStartDate={dateState}
         onChange={changeDate}
       />
