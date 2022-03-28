@@ -38,15 +38,17 @@ export const BookingSearchForm = ({ formik }: BookingSearchFormType) => {
 
         <div className={formik.errors.petType && formik.touched.petType ? errorInputInfo : inputInfo}>
           Pet Type:
-          <input
+          <select
             className={formik.errors.petType && formik.touched.petType ? errorInputInfoInput : inputInfoInput}
             id={'petType'}
             onBlur={formik.handleBlur}
             value={formik.values.petType}
             onChange={formik.handleChange}
-            type="text"
-            placeholder={'cat / dog'}
-          />
+          >
+            <option value="" label="Select a pet" />
+            <option value="cat" label="cat" />
+            <option value="dog" label="dog" />
+          </select>
         </div>
         {formik.errors.petType && formik.touched.petType ? (
           <div className={errorMsg}>{formik.errors.petType}</div>
