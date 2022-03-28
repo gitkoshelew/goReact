@@ -32,14 +32,14 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		seatid, err := strconv.Atoi(r.FormValue("SeatID"))
+		seatID, err := strconv.Atoi(r.FormValue("SeatID"))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("SeatID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("SeatID"))
 			return
 		}
 
-		seat, err := s.Seat().FindByID(seatid)
+		seatDTO, err := s.Seat().FindByID(seatID)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting seat by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
@@ -48,18 +48,13 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 		roomID, err := strconv.Atoi(r.FormValue("RoomID"))
 		if err == nil {
 			if roomID != 0 {
-				room, err := s.Room().FindByID(roomID)
-				if err != nil {
-					http.Error(w, fmt.Sprintf("Error occured while getting room by id. Err msg:%v. ", err), http.StatusBadRequest)
-					return
-				}
-				seat.Room = *room
+				seatDTO.RoomID = roomID
 			}
 		}
 
 		description := r.FormValue("Description")
 		if description != "" {
-			seat.Description = description
+			seatDTO.Description = description
 		}
 
 		layout := "2006-01-02"
@@ -71,7 +66,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
 				return
 			}
-			seat.RentFrom = rentFrom
+			seatDTO.RentFrom = &rentFrom
 		}
 
 		rentTo := r.FormValue("RentTo")
@@ -82,16 +77,21 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 				return
 			}
-			seat.RentTo = rentTo
+			seatDTO.RentTo = &rentTo
 		}
 
-		err = seat.Validate()
+		err = seatDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
+		seat, err := s.Seat().ModelFromDTO(seatDTO)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
+			return
+		}
 		err = s.Seat().Update(seat)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while updating seat. Err msg:%v. ", err), http.StatusBadRequest)

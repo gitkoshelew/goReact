@@ -14,7 +14,6 @@ import (
 
 var permissionUpdate model.Permission = model.Permission{Name: model.UpdateUser}
 
-// UpdateUser ...
 func UpdateUser(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
@@ -38,94 +37,79 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		u, err := s.User().FindByID(id)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
 
 		email := r.FormValue("Email")
-		if email != "" {
-			u.Email = email
-		}
 
-		verified := r.FormValue("Verified")
-		if verified != "" {
-			verified, err := strconv.ParseBool(verified)
+		var verified bool
+		verifiedString := r.FormValue("Verified")
+		if verifiedString != "" {
+			verified, err = strconv.ParseBool(verifiedString)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Verified"))
 				return
 			}
-			u.Verified = verified
 		}
 
 		role := r.FormValue("Role")
-		if role != "" {
-			u.Role = model.Role(role)
-		}
 
 		name := r.FormValue("Name")
-		if name != "" {
-			u.Name = name
-		}
 
 		surname := r.FormValue("Surname")
-		if surname != "" {
-			u.Surname = surname
-		}
 
 		middleName := r.FormValue("MiddleName")
-		if surname != "" {
-			u.MiddleName = middleName
-		}
 
 		sex := r.FormValue("Sex")
-		if sex != "" {
-			u.Sex = model.Sex(sex)
-		}
 
 		layout := "2006-01-02"
-		dateOfBirth := r.FormValue("DateOfBirth")
-		if dateOfBirth != "" {
-			dateOfBirth, err := time.Parse(layout, r.FormValue("DateOfBirth"))
+
+		var dateOfBirth time.Time
+		dateString := r.FormValue("DateOfBirth")
+		if dateString != "" {
+			dateOfBirth, err = time.Parse(layout, dateString)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("DateOfBirth"))
 				return
 			}
-			u.DateOfBirth = dateOfBirth
 		}
 
 		address := r.FormValue("Address")
-		if address != "" {
-			u.Address = address
-		}
 
 		phone := r.FormValue("Phone")
-		if phone != "" {
-			u.Phone = phone
-		}
 
 		photo := r.FormValue("Photo")
-		if photo != "" {
-			u.Photo = photo
+
+		userDTO := model.UserDTO{
+			UserID:      id,
+			Email:       email,
+			Role:        role,
+			Name:        name,
+			Surname:     surname,
+			MiddleName:  middleName,
+			Sex:         sex,
+			Address:     address,
+			Phone:       phone,
+			Photo:       photo,
+			Verified:    &verified,
+			DateOfBirth: &dateOfBirth,
 		}
 
-		err = u.Validate()
+		/*err = userDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
-		}
+		}*/
 
+		user, err := s.User().ModelFromDTO(&userDTO)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v.", err)
 			return
 		}
 
-		err = s.User().Update(u)
+		err = s.User().Update(user)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while updating user. Err msg:%v. ", err), http.StatusInternalServerError)
 			return

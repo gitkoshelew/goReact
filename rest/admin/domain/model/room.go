@@ -6,30 +6,29 @@ import (
 
 // Room struct
 type Room struct {
-	RoomID       int     `json:"roomId"`
-	RoomNumber   int     `json:"roomNum"`
-	PetType      PetType `json:"petType"`
-	Hotel        Hotel
-	RoomPhotoURL string `json:"roomPhotoUrl"`
+	RoomID     int     `json:"roomId"`
+	RoomNumber int     `json:"roomNum"`
+	PetType    PetType `json:"petType"`
+	Hotel      Hotel
+	PhotoURL   string `json:"photoUrl,omitempty"`
 }
 
 // RoomDTO struct
 type RoomDTO struct {
-	RoomID       int     `json:"roomId"`
-	RoomNumber   int     `json:"roomNum"`
-	PetType      PetType `json:"petType"`
-	HotelID      int     `json:"hotelID"`
-	RoomPhotoURL string  `json:"roomPhotoUrl"`
+	RoomID     int    `json:"roomId"`
+	RoomNumber int    `json:"roomNum"`
+	PetType    string `json:"petType"`
+	HotelID    int    `json:"hotelId"`
+	PhotoURL   string `json:"photoUrl,omitempty"`
 }
 
 // Validate ...
-func (r *Room) Validate() error {
-
+func (r *RoomDTO) Validate() error {
 	return validation.ValidateStruct(
 		r,
-		validation.Field(&r.RoomNumber, validation.Required, validation.Min(1), validation.Max(999999999999)),
+		validation.Field(&r.RoomNumber, validation.Required, validation.Min(1), validation.Max(999)),
 		validation.Field(&r.PetType, validation.Required, validation.By(IsPetType)),
-		validation.Field(&r.Hotel, validation.Required),
-		validation.Field(&r.RoomPhotoURL, validation.Length(2, 40)),
+		validation.Field(&r.HotelID, validation.Required, validation.By(IsValidID)),
+		validation.Field(&r.PhotoURL, validation.By(IsSQL)),
 	)
 }

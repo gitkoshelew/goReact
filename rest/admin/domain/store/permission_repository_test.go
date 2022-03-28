@@ -8,33 +8,32 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPetRepository_Create(t *testing.T) {
+func TestPermissionsRepository_Create(t *testing.T) {
 	teardown()
 	defer teardown()
-	id := store.FillDB(t, testStore)
+	store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Pet
+		model   func() *model.Permission
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Pet {
+			model: func() *model.Permission {
 				testStore.Open()
 
-				pet := model.TestPet()
-				pet.Owner.UserID = id.User
+				permission := model.TestPermission()
 
-				return pet
+				return permission
 			},
 			isValid: true,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.Pet {
+			model: func() *model.Permission {
 				testStore.Close()
-				return model.TestPet()
+				return model.TestPermission()
 			},
 			isValid: false,
 		},
@@ -43,12 +42,12 @@ func TestPetRepository_Create(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Pet().Create(tc.model())
+				result, err := testStore.Permissions().Create(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Pet().Create(tc.model())
+				result, err := testStore.Permissions().Create(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -57,7 +56,7 @@ func TestPetRepository_Create(t *testing.T) {
 	}
 }
 
-func TestPetRepository_GetAll(t *testing.T) {
+func TestPermissionsRepository_GetAll(t *testing.T) {
 	teardown()
 	defer teardown()
 	store.FillDB(t, testStore)
@@ -89,12 +88,12 @@ func TestPetRepository_GetAll(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := tc.s().Pet().GetAll()
+				result, err := tc.s().Permissions().GetAll()
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := tc.s().Pet().GetAll()
+				result, err := tc.s().Permissions().GetAll()
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -103,7 +102,7 @@ func TestPetRepository_GetAll(t *testing.T) {
 	}
 }
 
-func TestPetRepository_FindByID(t *testing.T) {
+func TestPermissionsRepository_FindByID(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -117,7 +116,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-				return id.Pet
+				return id.Permission
 			},
 			isValid: true,
 		},
@@ -133,7 +132,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Pet
+				return id.Permission
 			},
 			isValid: false,
 		},
@@ -142,12 +141,12 @@ func TestPetRepository_FindByID(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Pet().FindByID(tc.id())
+				result, err := testStore.Permissions().FindByID(tc.id())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Pet().FindByID(tc.id())
+				result, err := testStore.Permissions().FindByID(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -156,7 +155,7 @@ func TestPetRepository_FindByID(t *testing.T) {
 	}
 }
 
-func TestPetRepository_Delete(t *testing.T) {
+func TestPermissionsRepository_Delete(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -170,9 +169,10 @@ func TestPetRepository_Delete(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-				pet := model.TestPet()
-				pet.Owner.UserID = id.User
-				id, _ := testStore.Pet().Create(pet)
+
+				permission := model.TestPermission()
+				id, _ := testStore.Permissions().Create(permission)
+
 				return *id
 			},
 			isValid: true,
@@ -189,7 +189,7 @@ func TestPetRepository_Delete(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Pet
+				return id.Permission
 			},
 			isValid: false,
 		},
@@ -197,11 +197,11 @@ func TestPetRepository_Delete(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Pet().Delete(tc.id())
+				err := testStore.Permissions().Delete(tc.id())
 				assert.NoError(t, err)
 				testStore.Close()
 			} else {
-				err := testStore.Pet().Delete(tc.id())
+				err := testStore.Permissions().Delete(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 			}
@@ -209,123 +209,50 @@ func TestPetRepository_Delete(t *testing.T) {
 	}
 }
 
-func TestPetRepository_Update(t *testing.T) {
+func TestPermissionsRepository_GetPermissoinsByEmployeeID(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Pet
+		id      func() int
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Pet {
+			id: func() int {
 				testStore.Open()
-
-				pet := model.TestPet()
-				pet.PetID = id.Pet
-				pet.Owner.UserID = id.User
-
-				return pet
+				return id.Employee
 			},
 			isValid: true,
-		},
-		{
-			name: "invalid ID",
-			model: func() *model.Pet {
+		}, {
+			name: "Invalid ID",
+			id: func() int {
 				testStore.Open()
-
-				pet := model.TestPet()
-				pet.PetID = 0
-				pet.Owner.UserID = id.User
-
-				return pet
+				return 0
 			},
 			isValid: false,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.Pet {
+			id: func() int {
 				testStore.Close()
-
-				pet := model.TestPet()
-				pet.PetID = id.Pet
-				pet.Owner.UserID = id.User
-				return pet
+				return id.Employee
 			},
 			isValid: false,
 		},
 	}
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Pet().Update(tc.model())
-				testStore.Close()
-				assert.NoError(t, err)
-			} else {
-				err := testStore.Pet().Update(tc.model())
-				testStore.Close()
-				assert.Error(t, err)
-			}
-		})
-	}
-}
-
-func TestPetRepository_ModelFromDTO(t *testing.T) {
-	teardown()
-	defer teardown()
-	id := store.FillDB(t, testStore)
-
-	testCases := []struct {
-		name    string
-		model   func() *model.PetDTO
-		isValid bool
-	}{
-		{
-			name: "valid",
-			model: func() *model.PetDTO {
-				testStore.Open()
-
-				pet := model.TestPetDTO()
-				pet.OwnerID = id.User
-
-				return pet
-			},
-			isValid: true,
-		},
-		{
-			name: "invalid OwnerId",
-			model: func() *model.PetDTO {
-				testStore.Open()
-
-				pet := model.TestPetDTO()
-				pet.OwnerID = 0
-
-				return pet
-			},
-			isValid: false,
-		},
-		{
-			name: "DB closed",
-			model: func() *model.PetDTO {
-				testStore.Close()
-				p := model.TestPetDTO()
-				return p
-			},
-			isValid: false,
-		},
-	}
-	for _, tc := range testCases {
-		t.Run(tc.name, func(t *testing.T) {
-			if tc.isValid {
-				result, err := testStore.Pet().ModelFromDTO(tc.model())
+				result, err := testStore.Permissions().GetPermissoinsByEmployeeID(tc.id())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Pet().ModelFromDTO(tc.model())
+				result, err := testStore.Permissions().GetPermissoinsByEmployeeID(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)

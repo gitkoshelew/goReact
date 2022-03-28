@@ -2,40 +2,41 @@ package store_test
 
 import (
 	"admin/domain/model"
+	"admin/domain/request"
 	"admin/domain/store"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestEmployeeRepository_Create(t *testing.T) {
+func TestSeatRepository_Create(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Employee
+		model   func() *model.Seat
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Employee {
+			model: func() *model.Seat {
 				testStore.Open()
 
-				employee := model.TestEmployee()
-				employee.User.UserID = id.User
-				employee.Hotel.HotelID = id.Hotel
+				seat := model.TestSeat()
+				seat.Room.RoomID = id.Room
 
-				return employee
+				return seat
 			},
 			isValid: true,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.Employee {
+			model: func() *model.Seat {
 				testStore.Close()
-				return model.TestEmployee()
+				return model.TestSeat()
 			},
 			isValid: false,
 		},
@@ -44,12 +45,12 @@ func TestEmployeeRepository_Create(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Employee().Create(tc.model())
+				result, err := testStore.Seat().Create(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Employee().Create(tc.model())
+				result, err := testStore.Seat().Create(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -58,7 +59,7 @@ func TestEmployeeRepository_Create(t *testing.T) {
 	}
 }
 
-func TestEmployeeRepository_GetAll(t *testing.T) {
+func TestSeatRepository_GetAll(t *testing.T) {
 	teardown()
 	defer teardown()
 	store.FillDB(t, testStore)
@@ -90,12 +91,12 @@ func TestEmployeeRepository_GetAll(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := tc.s().Employee().GetAll()
+				result, err := tc.s().Seat().GetAll()
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := tc.s().Employee().GetAll()
+				result, err := tc.s().Seat().GetAll()
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -104,7 +105,7 @@ func TestEmployeeRepository_GetAll(t *testing.T) {
 	}
 }
 
-func TestEmployeeRepository_FindByID(t *testing.T) {
+func TestSeatRepository_FindByID(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -118,7 +119,7 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-				return id.Employee
+				return id.Seat
 			},
 			isValid: true,
 		},
@@ -134,7 +135,7 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Employee
+				return id.Seat
 			},
 			isValid: false,
 		},
@@ -143,12 +144,12 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Employee().FindByID(tc.id())
+				result, err := testStore.Seat().FindByID(tc.id())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Employee().FindByID(tc.id())
+				result, err := testStore.Seat().FindByID(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -157,7 +158,7 @@ func TestEmployeeRepository_FindByID(t *testing.T) {
 	}
 }
 
-func TestEmployeeRepository_Delete(t *testing.T) {
+func TestSeatRepository_Delete(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
@@ -171,12 +172,9 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 			name: "valid",
 			id: func() int {
 				testStore.Open()
-
-				employee := model.TestEmployee()
-				employee.User.UserID = id.User
-				employee.Hotel.HotelID = id.Hotel
-				id, _ := testStore.Employee().Create(employee)
-
+				seat := model.TestSeat()
+				seat.Room.RoomID = id.Room
+				id, _ := testStore.Seat().Create(seat)
 				return *id
 			},
 			isValid: true,
@@ -193,7 +191,7 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 			name: "DB closed",
 			id: func() int {
 				testStore.Close()
-				return id.Employee
+				return id.Seat
 			},
 			isValid: false,
 		},
@@ -201,11 +199,11 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Employee().Delete(tc.id())
+				err := testStore.Seat().Delete(tc.id())
 				assert.NoError(t, err)
 				testStore.Close()
 			} else {
-				err := testStore.Employee().Delete(tc.id())
+				err := testStore.Seat().Delete(tc.id())
 				testStore.Close()
 				assert.Error(t, err)
 			}
@@ -213,55 +211,52 @@ func TestEmployeeRepository_Delete(t *testing.T) {
 	}
 }
 
-func TestEmployeeRepository_Update(t *testing.T) {
+func TestSeatRepository_Update(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.Employee
+		model   func() *model.Seat
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.Employee {
+			model: func() *model.Seat {
 				testStore.Open()
 
-				employee := model.TestEmployee()
-				employee.EmployeeID = id.Employee
-				employee.User.UserID = id.User
-				employee.Hotel.HotelID = id.Hotel
+				seat := model.TestSeat()
+				seat.SeatID = id.Seat
+				seat.Room.RoomID = id.Room
 
-				return employee
+				return seat
 			},
 			isValid: true,
 		},
 		{
 			name: "invalid ID",
-			model: func() *model.Employee {
+			model: func() *model.Seat {
 				testStore.Open()
 
-				employee := model.TestEmployee()
-				employee.EmployeeID = 0
-				employee.User.UserID = id.User
-				employee.Hotel.HotelID = id.Hotel
+				seat := model.TestSeat()
+				seat.SeatID = 0
+				seat.Room.RoomID = id.Room
 
-				return employee
+				return seat
 			},
 			isValid: false,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.Employee {
+			model: func() *model.Seat {
 				testStore.Close()
 
-				employee := model.TestEmployee()
-				employee.EmployeeID = id.Employee
-				employee.User.UserID = id.User
-				employee.Hotel.HotelID = id.Hotel
+				seat := model.TestSeat()
+				seat.SeatID = id.Seat
+				seat.Room.RoomID = id.Room
 
-				return employee
+				return seat
 			},
 			isValid: false,
 		},
@@ -269,11 +264,11 @@ func TestEmployeeRepository_Update(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.Employee().Update(tc.model())
+				err := testStore.Seat().Update(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 			} else {
-				err := testStore.Employee().Update(tc.model())
+				err := testStore.Seat().Update(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 			}
@@ -281,56 +276,59 @@ func TestEmployeeRepository_Update(t *testing.T) {
 	}
 }
 
-func TestEmployeeRepository_FindByUserID(t *testing.T) {
+func TestSeatRepository_ModelFromDTO(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		id      func() int
+		model   func() *model.SeatDTO
 		isValid bool
 	}{
 		{
 			name: "valid",
-			id: func() int {
+			model: func() *model.SeatDTO {
 				testStore.Open()
 
-				employee := model.TestEmployee()
-				employee.User.UserID = id.User
-				employee.Hotel.HotelID = id.Hotel
+				seat := model.TestSeatDTO()
+				seat.RoomID = id.Room
 
-				return employee.User.UserID
+				return seat
 			},
 			isValid: true,
 		},
 		{
-			name: "invalid ID",
-			id: func() int {
+			name: "Invalid RoomID",
+			model: func() *model.SeatDTO {
 				testStore.Open()
-				return 0
+
+				seat := model.TestSeatDTO()
+				seat.RoomID = 0
+
+				return seat
 			},
 			isValid: false,
 		},
 		{
 			name: "DB closed",
-			id: func() int {
+			model: func() *model.SeatDTO {
 				testStore.Close()
-				return id.Employee
+				seat := model.TestSeatDTO()
+				return seat
 			},
 			isValid: false,
 		},
 	}
-
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Employee().FindByUserID(tc.id())
+				result, err := testStore.Seat().ModelFromDTO(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Employee().FindByUserID(tc.id())
+				result, err := testStore.Seat().ModelFromDTO(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
@@ -339,78 +337,71 @@ func TestEmployeeRepository_FindByUserID(t *testing.T) {
 	}
 }
 
-func TestEmployeeRepository_ModelFromDTO(t *testing.T) {
+func TestSeatRepository_FreeSeatsSearching(t *testing.T) {
 	teardown()
 	defer teardown()
 	id := store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		model   func() *model.EmployeeDTO
+		req     func() *request.FreeSeatsSearching
 		isValid bool
 	}{
 		{
 			name: "valid",
-			model: func() *model.EmployeeDTO {
+			req: func() *request.FreeSeatsSearching {
 				testStore.Open()
 
-				employee := model.TestEmployeeDTO()
-				employee.UserID = id.User
-				employee.HotelID = id.Hotel
+				req := request.TestFreeSeatsSearching()
+				rentFrom := time.Now().AddDate(0, 0, 11)
+				rentTo := time.Now().AddDate(0, 0, 22)
+				req.RentFrom = &rentFrom
+				req.RentTo = &rentTo
+				req.HotelID = id.Hotel
 
-				return employee
+				return req
 			},
 			isValid: true,
 		},
 		{
-			name: "Invalid UserID",
-			model: func() *model.EmployeeDTO {
+			name: "invalid data",
+			req: func() *request.FreeSeatsSearching {
 				testStore.Open()
 
-				employee := model.TestEmployeeDTO()
-				employee.UserID = 0
-				employee.HotelID = id.Hotel
+				req := request.TestFreeSeatsSearching()
+				req.HotelID = 0
 
-				return employee
-			},
-			isValid: false,
-		},
-		{
-			name: "Invalid HotelID",
-			model: func() *model.EmployeeDTO {
-				testStore.Open()
-
-				employee := model.TestEmployeeDTO()
-				employee.UserID = id.User
-				employee.HotelID = 0
-
-				return employee
+				return req
 			},
 			isValid: false,
 		},
 		{
 			name: "DB closed",
-			model: func() *model.EmployeeDTO {
+			req: func() *request.FreeSeatsSearching {
 				testStore.Close()
 
-				employee := model.TestEmployeeDTO()
-				employee.UserID = id.User
-				employee.HotelID = id.Hotel
+				req := request.TestFreeSeatsSearching()
+				rentFrom := time.Now().AddDate(0, 0, 11)
+				rentTo := time.Now().AddDate(0, 0, 22)
+				req.RentFrom = &rentFrom
+				req.RentTo = &rentTo
+				req.HotelID = id.Hotel
 
-				return employee
+				return req
 			},
 			isValid: false,
 		},
 	}
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Employee().ModelFromDTO(tc.model())
+				result, err := testStore.Seat().FreeSeatsSearching(tc.req())
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Employee().ModelFromDTO(tc.model())
+				result, err := testStore.Seat().FreeSeatsSearching(tc.req())
 				testStore.Close()
 				assert.Error(t, err)
 				assert.Nil(t, result)
