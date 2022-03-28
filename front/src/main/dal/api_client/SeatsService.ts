@@ -27,8 +27,8 @@ export type Seat = {
 export type SeatSearch = {
   hotelId: number
   petType: Pet | string
-  rentFrom: Date | null
-  rentTo: Date | null
+  rentFrom: Date | undefined
+  rentTo: Date | undefined
 }
 
 export type FetchSeatsResponse = Seat[]
