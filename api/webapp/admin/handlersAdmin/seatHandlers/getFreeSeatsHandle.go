@@ -2,44 +2,36 @@ package seathandlers
 
 import (
 	"fmt"
-	"goReact/domain/model"
+	"goReact/domain/request"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
+	"text/template"
 	"time"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-var permissionCreate model.Permission = model.Permission{Name: model.CreatSeat}
-
-// NewSeat ...
-func NewSeat(s *store.Store) httprouter.Handle {
+// GetFreeSeatsHandle ...
+func GetFreeSeatsHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permissionCreate.Name)
+		err := session.CheckRigths(w, r, permissionRead.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
 			return
 		}
 
-		err = s.Open()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		roomID, err := strconv.Atoi(r.FormValue("RoomID"))
+		hotelID, err := strconv.Atoi(r.FormValue("HoomID"))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID"))
 			return
 		}
 
-		description := r.FormValue("Description")
+		petType := r.FormValue("PetType")
 
 		layout := "2006-01-02"
 		rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
@@ -55,32 +47,47 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 			return
 		}
-		seatDTO := model.SeatDTO{
-			SeatID:      0,
-			RoomID:      roomID,
-			Description: description,
-			RentFrom:    &rentFrom,
-			RentTo:      &rentTo,
+		req := &request.FreeSeatsSearching{
+			HotelID:  hotelID,
+			PetType:  petType,
+			RentFrom: &rentFrom,
+			RentTo:   &rentTo,
 		}
 
-		err = seatDTO.Validate()
+		err = req.Validate()
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
 			return
 		}
-		seat, err := s.Seat().ModelFromDTO(&seatDTO)
+		err = s.Open()
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		_, err = s.Seat().Create(seat)
+		seats, err := s.Seat().FreeSeatsSearching(req)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while creating seat. Err msg:%v. ", err), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting all seats. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
-		http.Redirect(w, r, "/admin/homeseats/", http.StatusFound)
 
+		files := []string{
+			"/api/webapp/admin/tamplates/allSeats.html",
+			"/api/webapp/admin/tamplates/base.html",
+		}
+
+		tmpl, err := template.ParseFiles(files...)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while parsing template: %v", err)
+			return
+		}
+
+		err = tmpl.Execute(w, seats)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while executing template: %v", err)
+			return
+		}
 	}
-
 }

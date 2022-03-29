@@ -37,6 +37,27 @@
 
     <br><br>
 
+    {{if .HasPermission "read_seat"}}
+    <div>
+        <form action="/admin/seats/free/" method="GET">
+            <h3>Find free seats</h3>
+            <th>Room id</th>
+            <input type="number" name="HotelID" min=1 required>
+            <th>Pet type</th>
+            <input type="radio" name="PetType" value="cat" id="PetType" required>
+            <label for="PetType1">cat</label>
+            <input type="radio" name="PetType" value="dog" id="PetType" required>
+            <label for="PetType2">dog</label><br><br>
+            <th>RentFrom</th>
+            <input type="Date" name="RentFrom"><br><br>
+            <th>RentTo</th>
+            <input type="Date" name="RentTo"><br><br>
+            <button>Find</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
     {{if .HasPermission "delete_seat"}}
     <div>
         <form action="/admin/seats/delete/" method="POST">
