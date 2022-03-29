@@ -207,3 +207,10 @@ func TestPermissionsEmployees() *PermissionsEmployees {
 		Employee:    *TestEmployee(),
 	}
 }
+
+func TestPermissionsEmployeesDTO() *PermissionsEmployeesDTO {
+	return &PermissionsEmployeesDTO{
+		PermissionsID: 1,
+		EmployeeID:    1,
+	}
+}

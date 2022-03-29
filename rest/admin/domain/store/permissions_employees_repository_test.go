@@ -1,6 +1,7 @@
 package store_test
 
 import (
+	"admin/domain/model"
 	"admin/domain/store"
 	"testing"
 
@@ -56,29 +57,26 @@ func TestPermissionsEmployeeRepository_GetAll(t *testing.T) {
 func TestPermissionsEmployeeRepository_SetForEmployee(t *testing.T) {
 	teardown()
 	defer teardown()
-	id := store.FillDB(t, testStore)
+	store.FillDB(t, testStore)
 
 	testCases := []struct {
 		name    string
-		id      func() []int
+		model   func() *model.PermissionsEmployees
 		isValid bool
 	}{
 		{
 			name: "valid",
-			id: func() []int {
+			model: func() *model.PermissionsEmployees {
 				testStore.Open()
-				permissionID := id.Permission
-				employeeID := id.Employee
-				id := []int{permissionID, employeeID}
-				return id
+				pe := model.TestPermissionsEmployees()
+				return pe
 			},
 			isValid: true,
 		},
 		{
 			name: "DB closed",
-			id: func() []int {
-				st := testStore
-				st.Close()
+			model: func() *model.PermissionsEmployees {
+				testStore.Close()
 				return nil
 			},
 			isValid: false,
@@ -88,13 +86,63 @@ func TestPermissionsEmployeeRepository_SetForEmployee(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				err := testStore.PermissionsEmployee().SetForEmployee(tc.id()[0], tc.id()[1])
+				err := testStore.PermissionsEmployee().SetForEmployee(tc.model())
 				testStore.Close()
 				assert.NoError(t, err)
 			} else {
-				err := testStore.PermissionsEmployee().SetForEmployee(tc.id()[0], tc.id()[1])
+				err := testStore.PermissionsEmployee().SetForEmployee(tc.model())
 				testStore.Close()
 				assert.Error(t, err)
+			}
+		})
+	}
+}
+
+func TestPermissionsEmployeeRepository__ModelFromDTO(t *testing.T) {
+	teardown()
+	defer teardown()
+	store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		model   func() *model.PermissionsEmployeesDTO
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.PermissionsEmployeesDTO {
+				testStore.Open()
+
+				pe := model.TestPermissionsEmployeesDTO()
+
+				return pe
+			},
+			isValid: true,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.PermissionsEmployeesDTO {
+				testStore.Close()
+
+				pe := model.TestPermissionsEmployeesDTO()
+
+				return pe
+			},
+			isValid: true,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.PermissionsEmployee().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.PermissionsEmployee().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
 			}
 		})
 	}
