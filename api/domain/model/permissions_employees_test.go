@@ -1,7 +1,7 @@
 package model_test
 
 import (
-	"admin/domain/model"
+	"goReact/domain/model"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
