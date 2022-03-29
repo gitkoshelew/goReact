@@ -56,37 +56,30 @@ func TestPermissionsEmployeeRepository_GetAll(t *testing.T) {
 func TestPermissionsEmployeeRepository_SetForEmployee(t *testing.T) {
 	teardown()
 	defer teardown()
-	store.FillDB(t, testStore)
+	id := store.FillDB(t, testStore)
 
-	type id struct {
-		permissionID int
-		employeeId   int
-	}
 	testCases := []struct {
-		name string
-		id id
+		name    string
+		id      func() []int
 		isValid bool
 	}{
 		{
 			name: "valid",
-			id: func() id {
+			id: func() []int {
 				testStore.Open()
 				permissionID := id.Permission
 				employeeID := id.Employee
-				var id struct{} = id{
-					pepermissionID: pepermissionID,
-					eemployeeId:    employeeID,
-				}
+				id := []int{permissionID, employeeID}
 				return id
 			},
 			isValid: true,
 		},
 		{
 			name: "DB closed",
-			s: func() *store.Store {
+			id: func() []int {
 				st := testStore
 				st.Close()
-				return st
+				return nil
 			},
 			isValid: false,
 		},
@@ -95,15 +88,13 @@ func TestPermissionsEmployeeRepository_SetForEmployee(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Permissions().SetForEmployee()
+				err := testStore.PermissionsEmployee().SetForEmployee(tc.id()[0], tc.id()[1])
 				testStore.Close()
 				assert.NoError(t, err)
-				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Permissions().SetForEmployee()
+				err := testStore.PermissionsEmployee().SetForEmployee(tc.id()[0], tc.id()[1])
 				testStore.Close()
 				assert.Error(t, err)
-				assert.Nil(t, result)
 			}
 		})
 	}
