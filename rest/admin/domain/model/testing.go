@@ -59,22 +59,26 @@ func TestHotel() *Hotel {
 // TestRoom ...
 func TestRoom() *Room {
 	return &Room{
-		RoomID:     1,
-		RoomNumber: 1,
-		PetType:    PetTypeCat,
-		Hotel:      *TestHotel(),
-		PhotoURL:   "/photo/1",
+		RoomID:      1,
+		RoomNumber:  1,
+		PetType:     PetTypeCat,
+		Hotel:       *TestHotel(),
+		PhotoURL:    "/photo/1",
+		Description: "Description of room",
+		Square:      25.52,
 	}
 }
 
 // TestRoomDTO ...
 func TestRoomDTO() *RoomDTO {
 	return &RoomDTO{
-		RoomID:     1,
-		RoomNumber: 1,
-		PetType:    "cat",
-		HotelID:    TestHotel().HotelID,
-		PhotoURL:   "/photo/1",
+		RoomID:      1,
+		RoomNumber:  1,
+		PetType:     "cat",
+		HotelID:     TestHotel().HotelID,
+		PhotoURL:    "/photo/1",
+		Description: "Description of room",
+		Square:      25.52,
 	}
 }
 
@@ -129,11 +133,11 @@ func TestSeat() *Seat {
 	rentFrom := time.Now().AddDate(0, 0, 1)
 	rentTo := time.Now().AddDate(0, 0, 10)
 	return &Seat{
-		SeatID:      1,
-		Description: "Description of seat",
-		RentFrom:    &rentFrom,
-		RentTo:      &rentTo,
-		Room:        *TestRoom(),
+		SeatID:   1,
+		RentFrom: &rentFrom,
+		RentTo:   &rentTo,
+		Room:     *TestRoom(),
+		Price:    32.99,
 	}
 }
 
@@ -142,11 +146,11 @@ func TestSeatDTO() *SeatDTO {
 	rentFrom := time.Now().AddDate(0, 0, 1)
 	rentTo := time.Now().AddDate(0, 0, 10)
 	return &SeatDTO{
-		SeatID:      1,
-		Description: "Description of seat",
-		RentFrom:    &rentFrom,
-		RentTo:      &rentTo,
-		RoomID:      1,
+		SeatID:   1,
+		RentFrom: &rentFrom,
+		RentTo:   &rentTo,
+		RoomID:   1,
+		Price:    32.99,
 	}
 }
 
