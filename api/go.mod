@@ -28,6 +28,7 @@ require (
 	github.com/antonlindstrom/pgstore v0.0.0-20200229204646-b08ebf1105e0
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/gocarina/gocsv v0.0.0-20220310154401-d4df709ca055
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/rs/cors v1.8.2
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.7.0

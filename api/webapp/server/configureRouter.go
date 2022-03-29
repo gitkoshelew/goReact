@@ -5,6 +5,7 @@ import (
 	"goReact/webapp/server/handler/authentication"
 	"goReact/webapp/server/handler/booking"
 	"goReact/webapp/server/handler/hotel"
+	"goReact/webapp/server/handler/image"
 	"goReact/webapp/server/handler/middleware"
 	"goReact/webapp/server/handler/pet"
 	restorepassword "goReact/webapp/server/handler/restorePassword"
@@ -14,6 +15,9 @@ import (
 )
 
 func (s *Server) configureRouter() {
+
+	s.router.Handle("POST", "/save", image.SaveJPEGHandle(store.New(s.config)))
+	s.router.Handle("GET", "/getImage", image.GetImageHandle(store.New(s.config)))
 
 	s.router.Handler("POST", "/api/login", middleware.IsLoggedIn(middleware.ValidateLogin(authentication.LoginHandle(store.New(s.config)), store.New(s.config))))
 

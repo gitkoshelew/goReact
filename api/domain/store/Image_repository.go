@@ -1,8 +1,15 @@
 package store
 
 import (
+	"fmt"
 	"goReact/domain/model"
+	"image"
+	"image/jpeg"
 	"log"
+	"os"
+	"time"
+
+	"github.com/nfnt/resize"
 )
 
 // ImageRepository ...
@@ -96,4 +103,54 @@ func (r *ImageRepository) Update(i *model.Image) error {
 	}
 	log.Printf("Image updated, rows affectet: %d", result)
 	return nil
+}
+
+// SaveImage image and save it to DB
+func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image) (*int, error) {
+	path := fmt.Sprintf("images/%s/id-%d", imageDTO.Type, imageDTO.OwnerID)
+
+	if err := os.MkdirAll(path, os.ModePerm); err != nil {
+		r.Store.Logger.Errorf("Error occured while creating directory for file. Err msg: %v.", err)
+		return nil, err
+	}
+
+	imageDTO.URL = fmt.Sprintf("%s/%s", path, time.Now().Format("2006-01-02-03-04-05"))
+	imagesMap := r.ResizeImage(image)
+	for format, img := range imagesMap {
+		file, err := os.Create(fmt.Sprintf("%s-%s.jpg", imageDTO.URL, string(format)))
+		if err != nil {
+			r.Store.Logger.Errorf("Error occured while creating file. Err msg: %v.", err)
+			return nil, err
+		}
+
+		if err = jpeg.Encode(file, img, nil); err != nil {
+			r.Store.Logger.Errorf("Error occured while encoding jpeg. Err msg: %v.", err)
+			return nil, err
+		}
+	}
+
+	if err := r.Store.Db.QueryRow(
+		`INSERT INTO images 
+		(type, URL, ownerId) 
+		VALUES ($1, $2, $3) RETURNING id`,
+		imageDTO.Type,
+		imageDTO.URL,
+		imageDTO.OwnerID,
+	).Scan(&imageDTO.ImageID); err != nil {
+		r.Store.Logger.Errorf("Error occured while saving image data in db. Err msg: %v.", err)
+		return nil, err
+	}
+
+	return &imageDTO.ImageID, nil
+}
+
+// ResizeImage ...
+func (r *ImageRepository) ResizeImage(original *image.Image) map[model.ImageFormat]image.Image {
+	images := make(map[model.ImageFormat]image.Image)
+	images[model.FormatOriginal] = *original
+	images[model.FormatQVGA] = resize.Resize(320, 240, *original, resize.Lanczos3)
+	images[model.FormatVGA] = resize.Resize(640, 480, *original, resize.Lanczos3)
+	images[model.FormatHD720p] = resize.Resize(1280, 720, *original, resize.Lanczos3)
+
+	return images
 }
