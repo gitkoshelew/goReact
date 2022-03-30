@@ -13,7 +13,7 @@ type RoomRepository struct {
 // Create room and save it to DB
 func (r *RoomRepository) Create(room *model.Room) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room (pet_type, number, hotel_id , photoUrl, description , square) VALUES ($1, $2, $3, $4, $4, $5 , 6) RETURNING id",
+		"INSERT INTO room (pet_type, number, hotel_id , photoUrl, description , square) VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING id",
 		room.PetType,
 		room.RoomNumber,
 		room.Hotel.HotelID,
