@@ -243,6 +243,16 @@ export const Booking = () => {
               <BookingSearchForm formik={formikSearch} />
             </div>
           </div>
+          <div className={bookingCalendar}>
+            {correctView}
+            {roomIndicate && (
+              <BookingRoom
+                dayId={roomIndicate.id}
+                firstRoom={roomIndicate.firstRoom}
+                secondRoom={roomIndicate.secondRoom}
+              />
+            )}
+          </div>
           <div>
             <Button view={'upload'} />
           </div>
@@ -255,16 +265,6 @@ export const Booking = () => {
           <div className={bookingProcess}>
             <div className={bookingForm}>
               <BookingRegForm formik={formikBooking} />
-            </div>
-            <div className={bookingCalendar}>
-              {correctView}
-              {roomIndicate && (
-                <BookingRoom
-                  dayId={roomIndicate.id}
-                  firstRoom={roomIndicate.firstRoom}
-                  secondRoom={roomIndicate.secondRoom}
-                />
-              )}
             </div>
           </div>
           <div className={uploadOrderedRoomsBlock}>
