@@ -35,7 +35,7 @@ func GetPerByEmplID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		per, err := s.Permissions().GetEmployeeByID(id)
+		per, err := s.Permissions().GetPermissoinsByEmployeeID(id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting permission by employee id. Err msg:%v. ", err), http.StatusInternalServerError)
 			s.Logger.Errorf("Error occured while getting permission by employee id. Err msg: %v", err)

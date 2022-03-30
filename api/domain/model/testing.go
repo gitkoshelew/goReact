@@ -202,3 +202,24 @@ func TestBooking() *Booking {
 		Paid:          &paid,
 	}
 }
+
+func TestPermission() *Permission {
+	return &Permission{
+		Name:        ReadUser,
+		Descriptoin: "Abiliti to get users",
+	}
+}
+
+func TestPermissionsEmployees() *PermissionsEmployees {
+	return &PermissionsEmployees{
+		Permissions: *TestPermission(),
+		Employee:    *TestEmployee(),
+	}
+}
+
+func TestPermissionsEmployeesDTO() *PermissionsEmployeesDTO {
+	return &PermissionsEmployeesDTO{
+		PermissionsID: 1,
+		EmployeeID:    1,
+	}
+}

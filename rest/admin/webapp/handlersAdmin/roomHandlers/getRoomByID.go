@@ -23,7 +23,7 @@ func GetRoomByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		rooms := []model.Room{}
+		rooms := []model.RoomDTO{}
 
 		err = s.Open()
 		if err != nil {

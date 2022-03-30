@@ -39,12 +39,6 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		/*room, err := s.Room().FindByID(roomID)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}*/
-
 		description := r.FormValue("Description")
 
 		layout := "2006-01-02"

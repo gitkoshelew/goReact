@@ -2,7 +2,7 @@ package store
 
 import (
 	"admin/domain/model"
-	"errors"
+	"fmt"
 
 	"github.com/lib/pq"
 )
@@ -13,22 +13,27 @@ type HotelRepository struct {
 }
 
 // Create hotel and save it to DB
-func (r *HotelRepository) Create(h *model.Hotel) (*model.Hotel, error) {
+func (r *HotelRepository) Create(h *model.Hotel) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id",
-		h.Name, h.Address, pq.Array(h.Coordinates)).Scan(&h.HotelID); err != nil {
-		r.Store.Logger.Errorf("Error occurred while creating hotel. Err msg:%v.", err)
+		h.Name,
+		h.Address,
+		pq.Array(h.Coordinates),
+	).Scan(&h.HotelID); err != nil {
+		r.Store.Logger.Errorf("Error occured while creating hotel. Err msg:%v.", err)
 		return nil, err
 	}
-	r.Store.Logger.Info("Created hotel with id = %d", h.HotelID)
-	return h, nil
+
+	r.Store.Logger.Infof("Created hotel with id = %d", h.HotelID)
+	return &h.HotelID, nil
 }
 
 // GetAll returns all hotels
 func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM hotel")
 	if err != nil {
-		r.Store.Logger.Errorf("Error occurred while getting all hotels. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while getting all hotels. Err msg: %v", err)
+		return nil, err
 	}
 	hotels := []model.Hotel{}
 
@@ -41,7 +46,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 			pq.Array(&hotel.Coordinates),
 		)
 		if err != nil {
-			r.Store.Logger.Errorf("Error occurred while getting all hotels. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occured while getting all hotels. Err msg: %v", err)
 			continue
 		}
 		hotels = append(hotels, hotel)
@@ -51,6 +56,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 
 //FindByID searchs and returns hotel by ID
 func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
+
 	hotel := &model.Hotel{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM hotel WHERE id = $1",
 		id).Scan(
@@ -59,7 +65,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 		&hotel.Address,
 		pq.Array(&hotel.Coordinates),
 	); err != nil {
-		r.Store.Logger.Errorf("Error occurred while getting hotel by id. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while searching hotel by id. Err msg:%v.", err)
 		return nil, err
 	}
 	return hotel, nil
@@ -69,38 +75,63 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 func (r *HotelRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM hotel WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occurred while deleting hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occurred while deleting hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		err := errors.New("no rows affected")
-		r.Store.Logger.Errorf("Error occurred while deleting hotel. Err msg:%v.", err)
-		return err
+		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
 	}
-	r.Store.Logger.Info("Hotel deleted, rows affectet: %d", result)
+	r.Store.Logger.Infof("Hotel with id %d was deleted.", id)
 	return nil
 }
 
 // Update hotel from DB
 func (r *HotelRepository) Update(h *model.Hotel) error {
+	name := "name"
+	if h.Name != "" {
+		name = fmt.Sprintf("'%s'", h.Name)
+	}
+	address := "address"
+	if h.Address != "" {
+		address = fmt.Sprintf("'%s'", h.Address)
+	}
+	coordinates := "coordinates"
+	if h.Coordinates != nil {
+		coordinates = fmt.Sprintf("'%v'", h.Coordinates)
+	}
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE hotel SET name = $1, address = $2 , coordinates = $3 WHERE id = $4",
-		h.Name,
-		h.Address,
-		pq.Array(h.Coordinates),
-		h.HotelID,
+		fmt.Sprintf(`UPDATE hotel SET 
+		name = %s, address = %s , coordinates = %s 
+		WHERE id = $1`,
+			name,
+			address,
+			coordinates,
+		), h.HotelID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occurred while updating hotel. Err msg:%v.", err)
+		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
 		return err
 	}
-	r.Store.Logger.Info("Updated hotel with id = %d,rows affectet: %d ", h.HotelID, result)
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating hotel. Err msg:%v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Hotel with id = %d was updated", h.HotelID)
 	return nil
 }
