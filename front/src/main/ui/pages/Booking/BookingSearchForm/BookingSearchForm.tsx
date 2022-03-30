@@ -21,16 +21,19 @@ export const BookingSearchForm = ({ formik }: BookingSearchFormType) => {
     <div className={bookingSearchForm}>
       <div className={clientDescription}>
         <div className={formik.errors.hotelId && formik.touched.hotelId ? errorInputInfo : inputInfo}>
-          Hotel Id:
-          <input
+          Hotel Name:
+          <select
             className={formik.errors.hotelId && formik.touched.hotelId ? errorInputInfoInput : inputInfoInput}
             id={'hotelId'}
             onBlur={formik.handleBlur}
             value={formik.values.hotelId}
             onChange={formik.handleChange}
-            type="number"
-            placeholder={'Id'}
-          />
+          >
+            <option value="" label="Select a Hotel" />
+            <option value="1" label="First World Hotel & Plaza" />
+            <option value="2" label="CityCenter" />
+            <option value="3" label="MGM Grand" />
+          </select>
         </div>
         {formik.errors.hotelId && formik.touched.hotelId ? (
           <div className={errorMsg}>{formik.errors.hotelId}</div>
