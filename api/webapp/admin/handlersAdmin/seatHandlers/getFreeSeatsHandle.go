@@ -24,10 +24,10 @@ func GetFreeSeatsHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		hotelID, err := strconv.Atoi(r.FormValue("HoomID"))
+		hotelID, err := strconv.Atoi(r.FormValue("HotelID"))
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RoomID"))
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("HotelID"))
 			return
 		}
 
