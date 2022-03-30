@@ -12,3 +12,41 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
 [31mERRO[0m[2022-03-27T12:34:13Z]seat_repository.go:71 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg: sql: no rows in result set. 
 [31mERRO[0m[2022-03-27T12:34:13Z]seat_repository.go:71 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg: sql: no rows in result set. 
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-03-30T16:46:25Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-03-30T16:47:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-03-30T16:53:02Z]allHotelsHandler.go:23 goReact/webapp/admin/handlersAdmin/hotelHandlers.AllHotelsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
+[31mERRO[0m[2022-03-30T16:53:02Z]allHotelsHandler.go:23 goReact/webapp/admin/handlersAdmin/hotelHandlers.AllHotelsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
+[31mERRO[0m[2022-03-30T16:54:03Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:54:03Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:55:37Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:55:37Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:56:40Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:56:40Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:56:56Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:56:56Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:58:04Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[31mERRO[0m[2022-03-30T16:58:04Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
+[36mINFO[0m[2022-03-30T16:58:31Z]room_repository.go:144 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
+[36mINFO[0m[2022-03-30T16:58:31Z]room_repository.go:144 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
