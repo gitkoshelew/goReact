@@ -68,6 +68,16 @@ func UpdateRoom(s *store.Store) httprouter.Handle {
 			roomDTO.PhotoURL = photo
 		}
 
+		description := r.FormValue("Description")
+		if description != "" {
+			roomDTO.Description = description
+		}
+
+		square, err := strconv.ParseFloat(r.FormValue("Square"), 32)
+		if square != 0 {
+			roomDTO.Square = square
+		}
+
 		err = roomDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)

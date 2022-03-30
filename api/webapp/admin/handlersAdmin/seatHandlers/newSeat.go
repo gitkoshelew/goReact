@@ -39,8 +39,6 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		description := r.FormValue("Description")
-
 		layout := "2006-01-02"
 		rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
 		if err != nil {
@@ -55,12 +53,19 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 			return
 		}
+		price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Price")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Price"))
+			return
+		}
+
 		seatDTO := model.SeatDTO{
-			SeatID:      0,
-			RoomID:      roomID,
-			Description: description,
-			RentFrom:    &rentFrom,
-			RentTo:      &rentTo,
+			SeatID:   0,
+			RoomID:   roomID,
+			RentFrom: &rentFrom,
+			RentTo:   &rentTo,
+			Price:    price,
 		}
 
 		err = seatDTO.Validate()
