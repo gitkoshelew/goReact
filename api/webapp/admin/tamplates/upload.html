@@ -1,12 +1,15 @@
 <html>
+
 <head>
-   	<title>upload</title>
+	<title>upload</title>
 </head>
+
 <body>
-<form enctype="multipart/form-data" action="http://localhost:8080/admin/upload" method="post">
-	<input type="file" name="uploadfile" />
-	<input type="hidden" name="token" value="{{.}}"/>
-	<input type="submit" value="upload" />
-</form>
+	<form enctype="multipart/form-data" action="http://localhost:8080/admin/upload" method="post">
+		<input type="file" name="Photo" accept="image/*,image/jpeg" />
+
+		<input type="submit" value="upload" />
+	</form>
 </body>
+
 </html>
