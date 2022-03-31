@@ -628,3 +628,51 @@
 [36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
 [36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
 [36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T09:24:13Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T09:24:13Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T09:24:13Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T09:24:13Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-03-30T09:24:16Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.25.0.13:5432: connect: no route to host 
+[31mERRO[0m[2022-03-30T09:24:16Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.25.0.13:5432: connect: no route to host 
+[31mERRO[0m[2022-03-30T09:24:16Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002c4240 0xc000020040}) 
+[31mERRO[0m[2022-03-30T09:24:16Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002c4240 0xc000020040}) 
+[31mERRO[0m[2022-03-30T09:24:16Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002c4240 0xc000020040}) 
+[31mERRO[0m[2022-03-30T09:24:16Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002c4240 0xc000020040}) 
+[36mINFO[0m[2022-03-30T09:24:24Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T09:24:24Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T09:24:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T09:24:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-03-30T09:24:24Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.25.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-03-30T09:24:24Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.25.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-03-30T09:24:24Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00033c150 0xc00029d6a0}) 
+[31mERRO[0m[2022-03-30T09:24:24Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00033c150 0xc00029d6a0}) 
+[31mERRO[0m[2022-03-30T09:24:24Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00033c150 0xc00029d6a0}) 
+[31mERRO[0m[2022-03-30T09:24:24Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00033c150 0xc00029d6a0}) 
+[36mINFO[0m[2022-03-30T09:24:34Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T09:24:34Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T09:24:34Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T09:24:34Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T09:24:34Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-30T09:24:34Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-30T17:27:16Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:16Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:16Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:27:16Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-03-30T17:27:18Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.8:5432: connect: connection refused 
+[31mERRO[0m[2022-03-30T17:27:18Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.8:5432: connect: connection refused 
+[31mERRO[0m[2022-03-30T17:27:18Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066120 0xc000020040}) 
+[31mERRO[0m[2022-03-30T17:27:18Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066120 0xc000020040}) 
+[31mERRO[0m[2022-03-30T17:27:18Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066120 0xc000020040}) 
+[31mERRO[0m[2022-03-30T17:27:18Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066120 0xc000020040}) 
+[36mINFO[0m[2022-03-30T17:27:25Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:25Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:25Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:27:25Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:27:26Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-30T17:27:26Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-30T17:28:55Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:28:55Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:28:55Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:28:55Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:28:55Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-03-30T17:28:55Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       

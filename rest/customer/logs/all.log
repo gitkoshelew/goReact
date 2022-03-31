@@ -926,3 +926,23 @@
 [31mERRO[0m[2022-03-23T23:27:06+03:00]user_repository.go:284 customer/domain/store.(*UserRepository).VerifyEmail Error occured while verifying email. Err msg: sql: database is closed 
 [36mINFO[0m[2022-03-23T23:27:06+03:00]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=localhost port=8084 user=user password=userpass dbname=customerdbtest sslmode=disable 
 [36mINFO[0m[2022-03-23T23:27:06+03:00]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=localhost port=8084 user=user password=userpass dbname=customerdbtest sslmode=disable 
+[36mINFO[0m[2022-03-30T17:27:30Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:30Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:30Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:27:30Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-03-30T17:27:30Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000094030 0xc00009e000}) 
+[31mERRO[0m[2022-03-30T17:27:30Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000094030 0xc00009e000}) 
+[31mERRO[0m[2022-03-30T17:27:30Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000094030 0xc00009e000}) 
+[31mERRO[0m[2022-03-30T17:27:30Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000094030 0xc00009e000}) 
+[36mINFO[0m[2022-03-30T17:27:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:27:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:27:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:27:36Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-03-30T17:27:36Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-03-30T17:28:56Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:28:56Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-03-30T17:28:56Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:28:56Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-03-30T17:28:56Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-03-30T17:28:56Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       

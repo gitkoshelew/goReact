@@ -59,16 +59,16 @@ func (r *ImageRepository) GetAll() (*[]model.Image, error) {
 }
 
 //FindByID searchs and returns image by ID
-func (r *ImageRepository) FindByID(id int) (*model.Image, error) {
-	image := &model.Image{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM image WHERE id = $1",
+func (r *ImageRepository) FindByID(id int) (*model.ImageDTO, error) {
+	image := &model.ImageDTO{}
+	if err := r.Store.Db.QueryRow("SELECT * FROM images WHERE id = $1",
 		id).Scan(
 		&image.ImageID,
 		&image.Type,
 		&image.URL,
 		&image.OwnerID,
 	); err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Error occured while seacrhing image by id. Err msg: %v.", err)
 		return nil, err
 	}
 	return image, nil
@@ -105,7 +105,7 @@ func (r *ImageRepository) Update(i *model.Image) error {
 	return nil
 }
 
-// SaveImage image and save it to DB
+// SaveImage image to local store and to DB
 func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image) (*int, error) {
 	path := fmt.Sprintf("images/%s/id-%d", imageDTO.Type, imageDTO.OwnerID)
 
@@ -153,4 +153,23 @@ func (r *ImageRepository) ResizeImage(original *image.Image) map[model.ImageForm
 	images[model.FormatHD720p] = resize.Resize(1280, 720, *original, resize.Lanczos3)
 
 	return images
+}
+
+// GetImageFromLocalStore ...
+func (r *ImageRepository) GetImageFromLocalStore(imageDTO *model.ImageDTO) (*image.Image, error) {
+	path := fmt.Sprintf("images/%s/id-%d/%s-%s.jpg", imageDTO.Type, imageDTO.OwnerID, imageDTO.URL, imageDTO.Format)
+
+	file, err := os.Open(path)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while opening image file. Err msg: %v.", err)
+		return nil, err
+	}
+
+	image, err := jpeg.Decode(file)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while decoding file to jpeg. Err msg: %v.", err)
+		return nil, err
+	}
+
+	return &image, nil
 }

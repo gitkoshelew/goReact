@@ -2,20 +2,20 @@ package model
 
 // Image struct
 type Image struct {
-	ImageID int           `json:"imageId"`
-	Type    ImageType     `json:"type"`
-	URL     string        `json:"url"`
-	OwnerID int           `json:"ownerId"`
-	Format  []ImageFormat `json:"format"`
+	ImageID int         `json:"imageId"`
+	Type    ImageType   `json:"type"`
+	URL     string      `json:"url"`
+	OwnerID int         `json:"ownerId"`
+	Format  ImageFormat `json:"format"`
 }
 
 // ImageDTO struct
 type ImageDTO struct {
-	ImageID int      `json:"imageId"`
-	Type    string   `json:"type"`
-	URL     string   `json:"url"`
-	OwnerID int      `json:"ownerId"`
-	Format  []string `json:"format"`
+	ImageID int    `json:"imageId"`
+	Type    string `json:"type"`
+	URL     string `json:"url"`
+	OwnerID int    `json:"ownerId"`
+	Format  string `json:"format"`
 }
 
 // ImageType ...
