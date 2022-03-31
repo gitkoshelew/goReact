@@ -56,6 +56,7 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 
 			if part.FormName() == "image" {
 				image, err = jpeg.Decode(part)
+				image, err = jpeg.Decode(file)
 				if err != nil {
 					w.WriteHeader(http.StatusBadRequest)
 					s.Logger.Errorf("error occured while decoding image. Err msg: %v.", err)
@@ -89,4 +90,5 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(response.Info{Messsage: imageDTO.URL})
 	}
+
 }
