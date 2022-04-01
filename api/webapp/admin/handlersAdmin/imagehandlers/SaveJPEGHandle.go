@@ -17,7 +17,7 @@ import (
 func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		r.ParseMultipartForm(32 << 20)
+		r.ParseMultipartForm(32000000)
 		//https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/04.5.html
 
 		file, header, err := r.FormFile("Photo")
