@@ -8,14 +8,43 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Image home</title>
 </head>
 
 <body>
 
-	<div>
-		<h2>Upload image</h2>
 
+	<h2>Images</h2>
+	<div>
+		<form action="/admin/images" method="GET">
+			<th>Get all images</th><br><br>
+			<button>Get</button>
+		</form>
+	</div>
+
+	<br><br>
+	<div>
+		<form action="/admin/image/id" method="GET">
+			<th>Get image by id</th>
+			<input type="number" name="id" min="1" required><br><br>
+			<button>Get</button>
+		</form>
+	</div>
+
+	<br><br>
+
+	<div>
+		<form action="/admin/image/delete" method="GET">
+			<th>Delete image </th>
+			<input type="number" name="id" min="1" required><br><br>
+			<button>Delete</button>
+		</form>
+	</div>
+
+	<br><br>
+
+
+	<div>
 		<th>Owner id</th>
 		<input type="number" name="OwnerID" min=1 required>
 		<br><br>

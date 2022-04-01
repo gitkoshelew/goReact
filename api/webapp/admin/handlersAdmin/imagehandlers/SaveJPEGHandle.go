@@ -1,4 +1,4 @@
-package imagehandler
+package imagehandlers
 
 import (
 	"fmt"

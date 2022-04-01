@@ -1,0 +1,32 @@
+{{template "base" .}}
+
+{{define "title"}}All images{{end}}
+
+{{define "main"}}
+
+<head>
+    <title>All images</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>ImageID</th>
+        <th>Type</th>
+        <th>URL</th>
+        <td>OwnerID</td>
+        <td>Format</td>
+
+        {{range . }}
+        <tr>
+            <td>{{.ImageID}}</td>
+            <td>{{.Type}}</td>
+            <td>{{.URL}}</td>
+            <td>{{.OwnerID}}</td>
+            <td>{{.Format}}</td>
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}
