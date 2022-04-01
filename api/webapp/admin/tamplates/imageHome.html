@@ -1,0 +1,38 @@
+{{template "base" .}}
+
+{{define "title"}}image{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+</head>
+
+<body>
+
+	<div>
+		<h2>Upload image</h2>
+
+		<th>Owner id</th>
+		<input type="number" name="OwnerID" min=1 required>
+		<br><br>
+		<th>Image type</th>
+		<input type="radio" name="Type" value="pet" id="Type1">
+		<label for="Type1">pet</label>
+		<input type="radio" name="Type" value="room" id="Type2">
+		<label for="Type2">room</label>
+		<input type="radio" name="Type" value="user" id="Type3">
+		<label for="Type3">user</label>
+		<br><br>
+
+		<form enctype="multipart/form-data" action="/admin/image/upload" method="post">
+			<input type="file" name="Photo" accept="image/*,image/jpeg" />
+			<input type="submit" value="upload" />
+		</form>
+	</div>
+
+</body>
+{{end}}

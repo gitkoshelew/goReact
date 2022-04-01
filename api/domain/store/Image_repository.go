@@ -8,6 +8,8 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/nfnt/resize"
 )
 
 // ImageRepository ...

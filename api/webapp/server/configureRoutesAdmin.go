@@ -6,6 +6,7 @@ import (
 	bookinghandlers "goReact/webapp/admin/handlersAdmin/bookingHandlers"
 	employeehandlers "goReact/webapp/admin/handlersAdmin/employeeHandlers"
 	hotelhandlers "goReact/webapp/admin/handlersAdmin/hotelHandlers"
+	"goReact/webapp/admin/handlersAdmin/imagehandler"
 	"goReact/webapp/admin/handlersAdmin/permission"
 	pethandlers "goReact/webapp/admin/handlersAdmin/petHandlers"
 	roomhandlers "goReact/webapp/admin/handlersAdmin/roomHandlers"
@@ -88,6 +89,11 @@ func (s *Server) configureRoutesAdmin() {
 	s.router.Handle("GET", "/admin/addpermissions", permission.ShowAllPermissions(store.New(s.config)))
 	s.router.Handle("GET", "/admin/permissionsemployyes", permission.AllPermissionsEmployees(store.New(s.config)))
 	s.router.Handle("POST", "/admin/set", permission.AddPermissionsEmployee(store.New(s.config)))
+
+	//Image
+	s.router.Handle("GET", "/admin/homeimages", imagehandler.GetImageHandle(store.New(s.config)))
+	s.router.Handle("GET", "/admin/getImage", imagehandler.GetImageHandle(store.New(s.config)))
+	s.router.Handle("POST", "/admin/upload", imagehandler.SaveJPEGHandle(store.New(s.config)))
 
 	s.router.ServeFiles("/templates/*filepath", http.Dir("templates"))
 }
