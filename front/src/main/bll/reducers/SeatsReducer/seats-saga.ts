@@ -6,7 +6,7 @@ import {
   SeatSearch,
   SeatsSearchResponse,
 } from '../../../dal/api_client/SeatsService'
-import { setRooms, setSeats, setSeatsSearch } from './seats-reducer'
+import { seatsError, seatsMessage, seatsStart, setRooms, setSeats, setSeatsSearch } from './seats-reducer'
 import { AxiosResponse } from 'axios'
 
 export function* fetchSeatsSagaWorker() {
@@ -21,12 +21,21 @@ export const fetchSeatsRequest = () => ({
 })
 
 export function* seatsSearchSagaWorker(action: ReturnType<typeof searchSeatsRequest>) {
-  const searchSeatsResponse: AxiosResponse<SeatsSearchResponse> = yield call(
-    SeatsAPI.fetchSeatsFree,
-    action.newSeatsSearch
-  )
-  yield put(setSeatsSearch({ seatsSearch: searchSeatsResponse.data }))
-  console.log({ seatsSearch: searchSeatsResponse.data })
+  try {
+    yield put(seatsStart())
+    const searchSeatsResponse: AxiosResponse<SeatsSearchResponse> = yield call(
+      SeatsAPI.fetchSeatsFree,
+      action.newSeatsSearch
+    )
+    yield put(setSeatsSearch({ seatsSearch: searchSeatsResponse.data }))
+    yield put(seatsMessage({ successMsg: searchSeatsResponse.statusText }))
+  } catch (err) {
+    if (err) {
+      yield put(seatsError({ errorMsg: 'Looks like something went wrong, please try again later' }))
+    } else {
+      yield put(seatsError({ errorMsg: 'Looks like something went wrong, please try again later' }))
+    }
+  }
 }
 
 export const searchSeatsRequest = (newSeatsSearch: SeatSearch) => ({
