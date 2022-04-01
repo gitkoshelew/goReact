@@ -71,6 +71,10 @@ export const Booking = () => {
     }
   }
   //Formik Search
+  const initialDate: Date = new Date()
+  const rentFromInitialDate = new Date(moment().format())
+  const rentToInitialDate = new Date(moment(initialDate.setMonth(initialDate.getMonth() + 1)).format())
+
   const validateSearch = (values: SearchFormValues) => {
     const errors: FormikErrors<SearchFormValues> = {}
     if (!values.hotelId) {
@@ -83,12 +87,6 @@ export const Booking = () => {
     } else if (values.petType !== 'cat' && values.petType !== 'dog') {
       errors.petType = 'Please write cat or dog'
     }
-    if (!values.rentTo) {
-      errors.rentTo = 'Required field'
-    }
-    if (!values.rentFrom) {
-      errors.rentFrom = 'Required field'
-    }
     return errors
   }
 
@@ -96,8 +94,8 @@ export const Booking = () => {
     initialValues: {
       hotelId: '',
       petType: '',
-      rentTo: '',
-      rentFrom: '',
+      rentTo: rentToInitialDate,
+      rentFrom: rentFromInitialDate,
     },
     validate: validateSearch,
     onSubmit: (values) => {
