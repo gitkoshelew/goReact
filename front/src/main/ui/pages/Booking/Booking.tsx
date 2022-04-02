@@ -243,7 +243,7 @@ export const Booking = () => {
   const orderedRoomBasket = useSelector((state: AppRootState) => state.BookingRoomPick.orderedRoomBasket)
 
   const isActiveBtnBooking = progress === 'uploaded' && formikBooking.isValid
-  const isActiveBtnSearch = formikSearch.isValid
+  const isActiveBtnSearch = formikSearch.isValid && formikSearch.values.petType && formikSearch.values.hotelId
 
   const roomIndicate = useMemo(() => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
