@@ -272,17 +272,18 @@ export const Booking = () => {
                 <Button view={'upload'} disabled={!isActiveBtnSearch} />
               </div>
             </div>
-
-            <div className={bookingCalendar}>
-              {correctView}
-              {roomIndicate && (
-                <BookingRoom
-                  dayId={roomIndicate.id}
-                  firstRoom={roomIndicate.firstRoom}
-                  secondRoom={roomIndicate.secondRoom}
-                />
-              )}
-            </div>
+            {successMessageSeats ? (
+              <div className={bookingCalendar}>
+                {correctView}
+                {roomIndicate && (
+                  <BookingRoom
+                    dayId={roomIndicate.id}
+                    firstRoom={roomIndicate.firstRoom}
+                    secondRoom={roomIndicate.secondRoom}
+                  />
+                )}
+              </div>
+            ) : null}
           </div>
 
           <Modal active={modalActiveSeats} setActive={setModalActiveSeats}>
