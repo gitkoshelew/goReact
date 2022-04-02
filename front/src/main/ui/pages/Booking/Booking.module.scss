@@ -14,9 +14,11 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
     @media (min-width: bp.$lg) {
       flex-direction: row;
       align-items: flex-start;
+      margin-bottom: 0
     }
 
     .searchForm {
