@@ -10,9 +10,10 @@ type PropsType = {
 
 export const CalendarTooltipAnchor = React.memo(({ date, showTooltip, handleTooltipDate }: PropsType) => {
   const handleShowTooltip = () => {
+    const nextMaxDate = moment().add(+1, 'month')
     const prevDay = moment().add(-1, 'days')
     const selectedDay = moment(date)
-    if (selectedDay >= prevDay) {
+    if (selectedDay >= prevDay && selectedDay <= nextMaxDate) {
       showTooltip(true)
       handleTooltipDate(date)
     }
