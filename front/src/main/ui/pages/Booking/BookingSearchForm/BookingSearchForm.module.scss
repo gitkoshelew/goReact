@@ -5,7 +5,6 @@
   min-width: 300px;
   max-width: 700px;
   background-color: white;
-  margin: -20px 0 40px 0;
   border: 1px solid #0f97aa;
   border-radius: 12px;
 
@@ -92,11 +91,5 @@
   outline: none !important;
   @media (min-width: bp.$lg) {
     width: 350px;
-  }
-
-  &:nth-child(n) {
-    @media (min-width: bp.$lg) {
-      margin: 20px 20px;
-    }
   }
 }

@@ -21,7 +21,15 @@
 
     .searchForm {
       margin: 0 10%;
+      .updateCalendarInfo{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        margin-bottom: 20px;
+      }
     }
+
+
   }
 }
 
