@@ -68,14 +68,28 @@ export const Booking = () => {
     const errors: FormikErrors<FormValues> = {}
     if (!values.firstName) {
       errors.firstName = 'Required field'
-    } else if (values.firstName.length > 15) {
-      errors.firstName = 'Must be 15 characters or less'
+    } else if (values.firstName.length > 30) {
+      errors.firstName = 'Must be 30 characters or less'
+    } else if (values.firstName.length < 2) {
+      errors.firstName = 'Too short'
+    } else if (values.firstName === 'postmaster') {
+      errors.firstName = 'incorrect firstname'
+    } else if (values.firstName === 'abuse') {
+      errors.firstName = 'incorrect firstname'
     }
+
     if (!values.lastName) {
       errors.lastName = 'Required field'
-    } else if (values.lastName.length > 15) {
-      errors.lastName = 'Must be 15 characters or less'
+    } else if (values.lastName.length > 30) {
+      errors.lastName = 'Must be 30 characters or less'
+    } else if (values.lastName.length < 2) {
+      errors.lastName = 'Too short'
+    } else if (values.lastName === 'postmaster') {
+      errors.lastName = 'incorrect lastName'
+    } else if (values.lastName === 'abuse') {
+      errors.lastName = 'incorrect lastName'
     }
+
     if (!values.email) {
       errors.email = 'Required field'
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
