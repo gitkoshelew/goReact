@@ -76,6 +76,8 @@ export const Booking = () => {
       errors.firstName = 'incorrect firstname'
     } else if (values.firstName === 'abuse') {
       errors.firstName = 'incorrect firstname'
+    } else if (!/^[a-z]{2,30}$/i.test(values.firstName)) {
+      errors.firstName = 'incorrect symbols'
     }
 
     if (!values.lastName) {
@@ -88,6 +90,8 @@ export const Booking = () => {
       errors.lastName = 'incorrect lastName'
     } else if (values.lastName === 'abuse') {
       errors.lastName = 'incorrect lastName'
+    } else if (!/^[a-z]{2,30}$/i.test(values.lastName)) {
+      errors.lastName = 'incorrect symbols'
     }
 
     if (!values.email) {
