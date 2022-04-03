@@ -66,7 +66,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
 				return
 			}
-			seatDTO.RentFrom = &rentFrom
+			seatDTO.RentFrom = []*time.Time{&rentFrom}
 		}
 
 		rentTo := r.FormValue("RentTo")
@@ -77,7 +77,7 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 				return
 			}
-			seatDTO.RentTo = &rentTo
+			seatDTO.RentTo = []*time.Time{&rentTo}
 		}
 
 		err = seatDTO.Validate()

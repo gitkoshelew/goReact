@@ -44,7 +44,7 @@ func TestSeat_Validate(t *testing.T) {
 			b: func() *model.SeatDTO {
 				seat := model.TestSeatDTO()
 				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = &rentFrom
+				seat.RentFrom = []*time.Time{&rentFrom}
 				return seat
 			},
 			isValid: false,
@@ -63,7 +63,7 @@ func TestSeat_Validate(t *testing.T) {
 			b: func() *model.SeatDTO {
 				seat := model.TestSeatDTO()
 				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = &rentFrom
+				seat.RentFrom = []*time.Time{&rentFrom}
 				return seat
 			},
 			isValid: false,

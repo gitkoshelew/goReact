@@ -65,8 +65,8 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			SeatID:      0,
 			RoomID:      roomID,
 			Description: description,
-			RentFrom:    &rentFrom,
-			RentTo:      &rentTo,
+			RentFrom:    []*time.Time{&rentFrom},
+			RentTo:      []*time.Time{&rentTo},
 		}
 
 		err = seatDTO.Validate()

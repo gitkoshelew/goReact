@@ -148,8 +148,8 @@ func TestSeat() *Seat {
 	return &Seat{
 		SeatID:      1,
 		Description: "Description of seat",
-		RentFrom:    &rentFrom,
-		RentTo:      &rentTo,
+		RentFrom:    []*time.Time{&rentFrom},
+		RentTo:      []*time.Time{&rentTo},
 		Room:        *TestRoom(),
 	}
 }
@@ -161,8 +161,8 @@ func TestSeatDTO() *SeatDTO {
 	return &SeatDTO{
 		SeatID:      1,
 		Description: "Description of seat",
-		RentFrom:    &rentFrom,
-		RentTo:      &rentTo,
+		RentFrom:    []*time.Time{&rentFrom},
+		RentTo:      []*time.Time{&rentTo},
 		RoomID:      1,
 	}
 }

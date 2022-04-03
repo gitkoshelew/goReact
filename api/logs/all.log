@@ -46,3 +46,159 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 [37mDEBU[0m[2022-04-03T13:39:37Z]tokens.go:194 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1649000377 user_id:7] 
 [36mINFO[0m[2022-04-03T13:39:39Z]mail_service.go:96 goReact/service.(*Mail).Send Mail send successfull                        
 [36mINFO[0m[2022-04-03T13:39:39Z]mail_service.go:96 goReact/service.(*Mail).Send Mail send successfull                        
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:25:00Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[37mDEBU[0m[2022-04-03T15:26:11Z]seat_repository.go:51 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type time.Time into type *[]*time.Time 
+[37mDEBU[0m[2022-04-03T15:26:11Z]seat_repository.go:51 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type time.Time into type *[]*time.Time 
+[37mDEBU[0m[2022-04-03T15:26:11Z]seat_repository.go:51 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type time.Time into type *[]*time.Time 
+[37mDEBU[0m[2022-04-03T15:26:11Z]seat_repository.go:51 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type time.Time into type *[]*time.Time 
+[37mDEBU[0m[2022-04-03T15:26:11Z]seat_repository.go:51 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type time.Time into type *[]*time.Time 
+[37mDEBU[0m[2022-04-03T15:26:11Z]seat_repository.go:51 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type time.Time into type *[]*time.Time 
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:34:08Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[37mDEBU[0m[2022-04-03T15:34:16Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: cannot convert time.Time to []*time.Time 
+[37mDEBU[0m[2022-04-03T15:34:16Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: cannot convert time.Time to []*time.Time 
+[37mDEBU[0m[2022-04-03T15:34:16Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: cannot convert time.Time to []*time.Time 
+[37mDEBU[0m[2022-04-03T15:34:16Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: cannot convert time.Time to []*time.Time 
+[37mDEBU[0m[2022-04-03T15:34:16Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: cannot convert time.Time to []*time.Time 
+[37mDEBU[0m[2022-04-03T15:34:16Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: cannot convert time.Time to []*time.Time 
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:36:03Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[37mDEBU[0m[2022-04-03T15:36:15Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: parsing array element index 0: pq: scanning to *time.Time is not implemented; only sql.Scanner 
+[37mDEBU[0m[2022-04-03T15:36:15Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: parsing array element index 0: pq: scanning to *time.Time is not implemented; only sql.Scanner 
+[37mDEBU[0m[2022-04-03T15:36:15Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: parsing array element index 0: pq: scanning to *time.Time is not implemented; only sql.Scanner 
+[37mDEBU[0m[2022-04-03T15:36:15Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: parsing array element index 0: pq: scanning to *time.Time is not implemented; only sql.Scanner 
+[37mDEBU[0m[2022-04-03T15:36:15Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: parsing array element index 0: pq: scanning to *time.Time is not implemented; only sql.Scanner 
+[37mDEBU[0m[2022-04-03T15:36:15Z]seat_repository.go:53 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": pq: parsing array element index 0: pq: scanning to *time.Time is not implemented; only sql.Scanner 
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:42:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:43:36Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:45:10Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T15:45:57Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T16:22:29Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[37mDEBU[0m[2022-04-03T16:22:33Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [{0001-01-01 00:00:00 +0000 UTC false}] [{0001-01-01 00:00:00 +0000 UTC false}] 
+[37mDEBU[0m[2022-04-03T16:22:33Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [{0001-01-01 00:00:00 +0000 UTC false}] [{0001-01-01 00:00:00 +0000 UTC false}] 
+[37mDEBU[0m[2022-04-03T16:22:33Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [{0001-01-01 00:00:00 +0000 UTC false}] [{0001-01-01 00:00:00 +0000 UTC false}] 
+[37mDEBU[0m[2022-04-03T16:22:33Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [{0001-01-01 00:00:00 +0000 UTC false}] [{0001-01-01 00:00:00 +0000 UTC false}] 
+[37mDEBU[0m[2022-04-03T16:22:33Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [{0001-01-01 00:00:00 +0000 UTC false}] [{0001-01-01 00:00:00 +0000 UTC false}] 
+[37mDEBU[0m[2022-04-03T16:22:33Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [{0001-01-01 00:00:00 +0000 UTC false}] [{0001-01-01 00:00:00 +0000 UTC false}] 
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T16:49:38Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[37mDEBU[0m[2022-04-03T16:49:43Z]seat_repository.go:54 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type []uint8 into type *[]pq.NullTime 
+[37mDEBU[0m[2022-04-03T16:49:43Z]seat_repository.go:54 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type []uint8 into type *[]pq.NullTime 
+[37mDEBU[0m[2022-04-03T16:49:43Z]seat_repository.go:54 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type []uint8 into type *[]pq.NullTime 
+[37mDEBU[0m[2022-04-03T16:49:43Z]seat_repository.go:54 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type []uint8 into type *[]pq.NullTime 
+[37mDEBU[0m[2022-04-03T16:49:43Z]seat_repository.go:54 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type []uint8 into type *[]pq.NullTime 
+[37mDEBU[0m[2022-04-03T16:49:43Z]seat_repository.go:54 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: Scan error on column index 3, name "rent_from": unsupported Scan, storing driver.Value type []uint8 into type *[]pq.NullTime 
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-03T16:51:04Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[37mDEBU[0m[2022-04-03T16:51:14Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [123 50 48 50 50 45 48 49 45 50 53 125] [123 50 48 50 50 45 48 49 45 51 48 125] 
+[37mDEBU[0m[2022-04-03T16:51:14Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [123 50 48 50 50 45 48 49 45 50 53 125] [123 50 48 50 50 45 48 49 45 51 48 125] 
+[37mDEBU[0m[2022-04-03T16:51:14Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [123 50 48 50 50 45 48 50 45 49 48 125] [123 50 48 50 50 45 48 50 45 50 48 125] 
+[37mDEBU[0m[2022-04-03T16:51:14Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [123 50 48 50 50 45 48 50 45 49 48 125] [123 50 48 50 50 45 48 50 45 50 48 125] 
+[37mDEBU[0m[2022-04-03T16:51:14Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [123 50 48 50 50 45 48 50 45 49 52 125] [123 50 48 50 50 45 48 51 45 48 56 125] 
+[37mDEBU[0m[2022-04-03T16:51:14Z]seat_repository.go:57 goReact/domain/store.(*SeatRepository).GetAll [123 50 48 50 50 45 48 50 45 49 52 125] [123 50 48 50 50 45 48 51 45 48 56 125] 

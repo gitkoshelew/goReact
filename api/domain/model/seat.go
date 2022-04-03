@@ -10,18 +10,18 @@ import (
 type Seat struct {
 	SeatID      int `json:"seatId"`
 	Room        Room
-	Description string     `json:"description,omitempty"`
-	RentFrom    *time.Time `json:"rentFrom,omitempty"`
-	RentTo      *time.Time `json:"rentTo,omitempty"`
+	Description string       `json:"description,omitempty"`
+	RentFrom    []*time.Time `json:"rentFrom,omitempty"`
+	RentTo      []*time.Time `json:"rentTo,omitempty"`
 }
 
 // SeatDTO struct
 type SeatDTO struct {
-	SeatID      int        `json:"seatId"`
-	RoomID      int        `json:"roomId"`
-	Description string     `json:"description,omitempty"`
-	RentFrom    *time.Time `json:"rentFrom,omitempty"`
-	RentTo      *time.Time `json:"rentTo,omitempty"`
+	SeatID      int          `json:"seatId"`
+	RoomID      int          `json:"roomId"`
+	Description string       `json:"description,omitempty"`
+	RentFrom    []*time.Time `json:"rentFrom,omitempty"`
+	RentTo      []*time.Time `json:"rentTo,omitempty"`
 }
 
 // Validate ...

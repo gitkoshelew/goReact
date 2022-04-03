@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"goReact/domain/model"
 	"goReact/domain/request"
-	"time"
+
+	"github.com/lib/pq"
 )
 
 // SeatRepository ...
@@ -17,8 +18,8 @@ func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO seat (room_id, rent_from, rent_to, description) VALUES ($1, $2, $3, $4) RETURNING id",
 		s.Room.RoomID,
-		s.RentFrom,
-		s.RentTo,
+		pq.Array(s.RentFrom),
+		pq.Array(s.RentTo),
 		s.Description,
 	).Scan(&s.SeatID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating seat. Err msg: %v.", err)
@@ -38,19 +39,27 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 		return nil, err
 	}
 	seats := []model.SeatDTO{}
-
 	for rows.Next() {
 		seat := model.SeatDTO{}
+		var timeFrom []pq.NullTime
+		var timeTo []pq.NullTime
 		err := rows.Scan(
 			&seat.SeatID,
 			&seat.RoomID,
 			&seat.Description,
-			&seat.RentFrom,
-			&seat.RentTo,
+			&timeFrom,
+			&timeTo,
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
 			continue
+		}
+		r.Store.Logger.Debugf("%v %v", timeFrom, timeTo)
+		for _, t := range timeFrom {
+			seat.RentFrom = append(seat.RentFrom, &t.Time)
+		}
+		for _, t := range timeTo {
+			seat.RentTo = append(seat.RentTo, &t.Time)
 		}
 		seats = append(seats, seat)
 	}
@@ -65,8 +74,8 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 		&seatDTO.SeatID,
 		&seatDTO.RoomID,
 		&seatDTO.Description,
-		&seatDTO.RentFrom,
-		&seatDTO.RentTo,
+		pq.Array(&seatDTO.RentFrom),
+		pq.Array(&seatDTO.RentTo),
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg: %v.", err)
 		return nil, err
@@ -105,11 +114,13 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 	}
 	rentFrom := "rent_from"
 	if s.RentFrom != nil {
-		rentFrom = fmt.Sprintf("'%s'", s.RentFrom.Format(time.RFC3339))
+		rentFrom = fmt.Sprintf("'%v'", s.RentFrom)
+		StringOfArrayFromJSONToPSQL(&rentFrom)
 	}
 	rentTo := "rent_to"
 	if s.RentTo != nil {
-		rentTo = fmt.Sprintf("'%s'", s.RentTo.Format(time.RFC3339))
+		rentTo = fmt.Sprintf("'%s'", s.RentTo)
+		StringOfArrayFromJSONToPSQL(&rentTo)
 	}
 	description := "description"
 	if s.Description != "" {
@@ -175,8 +186,8 @@ func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[
 	($3 >= rent_to or $4 <= rent_from)`,
 		req.PetType,
 		req.HotelID,
-		req.RentFrom,
-		req.RentTo)
+		pq.Array(req.RentFrom),
+		pq.Array(req.RentTo))
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
 		return nil, err
@@ -190,8 +201,8 @@ func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[
 			&seat.SeatID,
 			&seat.RoomID,
 			&seat.Description,
-			&seat.RentFrom,
-			&seat.RentTo,
+			pq.Array(&seat.RentFrom),
+			pq.Array(&seat.RentTo),
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)

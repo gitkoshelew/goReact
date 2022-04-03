@@ -53,7 +53,7 @@ func (c *Config) NewConfig() {
 // PgDataSource ...
 func (c *Config) PgDataSource() string {
 	return fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s ",
 		c.DbConnection.Host,
 		c.DbConnection.Port,
 		c.DbConnection.Username,
