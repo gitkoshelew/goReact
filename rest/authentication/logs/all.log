@@ -40,3 +40,43 @@
 [36mINFO[0m[2022-04-02T15:01:12Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
 [36mINFO[0m[2022-04-02T15:01:12Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
 [36mINFO[0m[2022-04-02T15:01:12Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-04-03T14:19:39Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T14:19:39Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T14:19:39Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:19:39Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:19:39Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-04-03T14:19:39Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[31mERRO[0m[2022-04-03T14:20:24Z]helper.go:138 auth/pkg/jwt.ExtractTokenMetadata you are unauthorized. err: %!w(*jwt.ValidationError=&{<nil> 1 token contains an invalid number of segments}) 
+[31mERRO[0m[2022-04-03T14:20:24Z]helper.go:138 auth/pkg/jwt.ExtractTokenMetadata you are unauthorized. err: %!w(*jwt.ValidationError=&{<nil> 1 token contains an invalid number of segments}) 
+[36mINFO[0m[2022-04-03T14:20:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:20:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:20:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:20:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:20:28Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:20:28Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-03T14:20:28Z]validateUser.go:39 auth/internal/middleware.ValidateUser.func1 Error occured while validating user. Err msg: -: cannot be blank. 
+[31mERRO[0m[2022-04-03T14:20:28Z]validateUser.go:39 auth/internal/middleware.ValidateUser.func1 Error occured while validating user. Err msg: -: cannot be blank. 
+[36mINFO[0m[2022-04-03T14:24:02Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:24:02Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-03T14:24:02Z]validateUser.go:39 auth/internal/middleware.ValidateUser.func1 Error occured while validating user. Err msg: -: cannot be blank. 
+[31mERRO[0m[2022-04-03T14:24:02Z]validateUser.go:39 auth/internal/middleware.ValidateUser.func1 Error occured while validating user. Err msg: -: cannot be blank. 
+[36mINFO[0m[2022-04-03T14:27:35Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T14:27:35Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T14:27:35Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:27:35Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:27:35Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-04-03T14:27:35Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-04-03T14:27:51Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:27:51Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-03T14:27:51Z]registrationHandle.go:21 auth/internal/handlers.RegistrationHandle.func1 Bad request. Err msg:EOF. Requests body: &{0xc000302150 <nil> 0xc000090480 false true {0 0} true false false 0x672220} 
+[31mERRO[0m[2022-04-03T14:27:51Z]registrationHandle.go:21 auth/internal/handlers.RegistrationHandle.func1 Bad request. Err msg:EOF. Requests body: &{0xc000302150 <nil> 0xc000090480 false true {0 0} true false false 0x672220} 
+[36mINFO[0m[2022-04-03T14:31:15Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T14:31:15Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T14:31:15Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:31:15Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:31:15Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-04-03T14:31:15Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-04-03T14:31:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:31:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:31:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-03T14:31:24Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 

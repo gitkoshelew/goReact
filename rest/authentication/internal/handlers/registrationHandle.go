@@ -15,13 +15,7 @@ func RegistrationHandle(s *store.Store) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		req := &model.UserDTO{}
-		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(apperror.NewAppError("Bad request", fmt.Sprintf("%d", http.StatusBadRequest), err.Error()))
-			return
-		}
+		userDTO := r.Context().Value(store.UserValidateCtXKey).(*model.UserDTO)
 
 		err := s.Open()
 		if err != nil {
@@ -30,7 +24,7 @@ func RegistrationHandle(s *store.Store) http.Handler {
 			return
 		}
 
-		user, err := s.User().ModelFromDTO(req)
+		user, err := s.User().ModelFromDTO(userDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while building user model from DTO. Err msg:%v.", err)
