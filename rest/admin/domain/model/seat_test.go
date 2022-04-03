@@ -3,7 +3,6 @@ package model_test
 import (
 	"admin/domain/model"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -11,80 +10,43 @@ import (
 func TestSeat_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		b       func() *model.SeatDTO
+		s       func() *model.Seat
 		isValid bool
 	}{
 		{
 			name: "valid",
-			b: func() *model.SeatDTO {
-				return model.TestSeatDTO()
+			s: func() *model.Seat {
+				return model.TestSeat()
 			},
 			isValid: true,
 		},
 		{
-			name: "invalid RoomID",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				seat.RoomID = -1
-				return seat
+			name: "without descriptions",
+			s: func() *model.Seat {
+				s := model.TestSeat()
+				s.Description = ""
+				return s
 			},
 			isValid: false,
 		},
 		{
-			name: "invalid RentFrom",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = &rentFrom
-				return seat
+			name: "valid Room",
+			s: func() *model.Seat {
+				r := model.TestRoom()
+				s := model.TestSeat()
+				s.Room = *r
+				return s
 			},
-			isValid: false,
-		},
-		{
-			name: "invalid RentFrom",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				seat.RentFrom = nil
-				return seat
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid RentTo",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = &rentFrom
-				return seat
-			},
-			isValid: false,
-		},
-		{
-			name: "nil RentTo",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				seat.RentTo = nil
-				return seat
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid Price",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				seat.Price = -10
-				return seat
-			},
-			isValid: false,
+			isValid: true,
 		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				assert.NoError(t, tc.b().Validate())
+				assert.NoError(t, tc.s().Validate())
 			} else {
-				assert.Error(t, tc.b().Validate())
+				assert.Error(t, tc.s().Validate())
 			}
 		})
 	}

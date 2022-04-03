@@ -65,33 +65,6 @@ func TestRoom_Validate(t *testing.T) {
 			},
 			isValid: false,
 		},
-		{
-			name: "SQL Description",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.Description = "ALt **%#--eR"
-				return r
-			},
-			isValid: false,
-		},
-		{
-			name: "Empty Description",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.Description = ""
-				return r
-			},
-			isValid: false,
-		},
-		{
-			name: "Ivalid Square",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.Square = -10
-				return r
-			},
-			isValid: false,
-		},
 	}
 
 	for _, tc := range testCases {

@@ -23,7 +23,7 @@ func GetPetByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		pets := []model.PetDTO{}
+		pets := []model.Pet{}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {

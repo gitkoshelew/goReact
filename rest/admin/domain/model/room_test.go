@@ -10,84 +10,76 @@ import (
 func TestRoom_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		r       func() *model.RoomDTO
+		r       func() *model.Room
 		isValid bool
 	}{
 		{
 			name: "valid",
-			r: func() *model.RoomDTO {
-				return model.TestRoomDTO()
+			r: func() *model.Room {
+				return model.TestRoom()
 			},
 			isValid: true,
 		},
 		{
-			name: "invalid pet type",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.PetType = "invalid"
-				return r
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid Room Number",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
+			name: "0 or less room number",
+			r: func() *model.Room {
+				r := model.TestRoom()
 				r.RoomNumber = -5
 				return r
 			},
 			isValid: false,
 		},
 		{
-			name: "Large Room Number",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.RoomNumber = 99999999999
+			name: "invalid pet type",
+			r: func() *model.Room {
+				r := model.TestRoom()
+				r.PetType = "invalid"
 				return r
 			},
 			isValid: false,
 		},
 		{
-			name: "Invalid HotelID",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.HotelID = -1
+			name: "valid pet type",
+			r: func() *model.Room {
+				r := model.TestRoom()
+				r.PetType = model.PetTypeCat
+				return r
+			},
+			isValid: true,
+		},
+		{
+			name: "valid pet type",
+			r: func() *model.Room {
+				r := model.TestRoom()
+				r.PetType = model.PetTypeDog
+				return r
+			},
+			isValid: true,
+		},
+		{
+			name: "valid hotel",
+			r: func() *model.Room {
+				h := model.TestHotel()
+				r := model.TestRoom()
+				r.Hotel = *h
+				return r
+			},
+			isValid: true,
+		},
+		{
+			name: "Empty RoomPhotoURL",
+			r: func() *model.Room {
+				r := model.TestRoom()
+				r.RoomPhotoURL = ""
 				return r
 			},
 			isValid: false,
 		},
 		{
-			name: "SQL PhotoURL",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.PhotoURL = "Al t^&*745Er"
-				return r
-			},
-			isValid: false,
-		},
-		{
-			name: "SQL Description",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.Description = "ALt **%#--eR"
-				return r
-			},
-			isValid: false,
-		},
-		{
-			name: "Empty Description",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.Description = ""
-				return r
-			},
-			isValid: false,
-		},
-		{
-			name: "Ivalid Square",
-			r: func() *model.RoomDTO {
-				r := model.TestRoomDTO()
-				r.Square = -10
+			name: "Invalid RoomPhotoURL",
+			r: func() *model.Room {
+				r := model.TestRoom()
+				r.RoomPhotoURL = "/"
 				return r
 			},
 			isValid: false,

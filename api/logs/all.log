@@ -1,188 +1,48 @@
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-27T12:33:57Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+[36mINFO[0m[2022-04-02T14:28:27Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[31mERRO[0m[2022-03-27T12:34:13Z]seat_repository.go:71 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg: sql: no rows in result set. 
-[31mERRO[0m[2022-03-27T12:34:13Z]seat_repository.go:71 goReact/domain/store.(*SeatRepository).FindByID Error occured while getting seat by id. Err msg: sql: no rows in result set. 
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+[31mERRO[0m[2022-04-02T14:28:30Z]validateUser.go:24 goReact/webapp/server/handler/middleware.ValidateUser.func1 Bad request. Err msg:parsing time "\"2003-03-03\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "T". Requests body: &{0xc0000ab440 <nil> <nil> false true {0 0} true false false 0x72a7a0} 
+[31mERRO[0m[2022-04-02T14:28:30Z]validateUser.go:24 goReact/webapp/server/handler/middleware.ValidateUser.func1 Bad request. Err msg:parsing time "\"2003-03-03\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "T". Requests body: &{0xc0000ab440 <nil> <nil> false true {0 0} true false false 0x72a7a0} 
+[31mERRO[0m[2022-04-02T14:28:36Z]validateUser.go:24 goReact/webapp/server/handler/middleware.ValidateUser.func1 Bad request. Err msg:parsing time "\"2003-03-03\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "T". Requests body: &{0xc0000ab5d8 <nil> <nil> false true {0 0} true false false 0x72a7a0} 
+[31mERRO[0m[2022-04-02T14:28:36Z]validateUser.go:24 goReact/webapp/server/handler/middleware.ValidateUser.func1 Bad request. Err msg:parsing time "\"2003-03-03\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "T". Requests body: &{0xc0000ab5d8 <nil> <nil> false true {0 0} true false false 0x72a7a0} 
+[37mDEBU[0m[2022-04-02T14:28:41Z]tokens.go:138 goReact/webapp/server/handler/authentication.ExtractTokenMetadata Token is expired. Msg: Token is expired      
+[37mDEBU[0m[2022-04-02T14:28:41Z]tokens.go:138 goReact/webapp/server/handler/authentication.ExtractTokenMetadata Token is expired. Msg: Token is expired      
+[31mERRO[0m[2022-04-02T14:28:41Z]validateLogin.go:37 goReact/webapp/server/handler/middleware.ValidateLogin.func1 Error occured while validating login. Err msg: email: no SQL commands allowed to input. 
+[31mERRO[0m[2022-04-02T14:28:41Z]validateLogin.go:37 goReact/webapp/server/handler/middleware.ValidateLogin.func1 Error occured while validating login. Err msg: email: no SQL commands allowed to input. 
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T16:46:25Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+[36mINFO[0m[2022-04-03T13:37:33Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T16:47:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[31mERRO[0m[2022-03-30T16:53:02Z]allHotelsHandler.go:23 goReact/webapp/admin/handlersAdmin/hotelHandlers.AllHotelsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
-[31mERRO[0m[2022-03-30T16:53:02Z]allHotelsHandler.go:23 goReact/webapp/admin/handlersAdmin/hotelHandlers.AllHotelsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
-[31mERRO[0m[2022-03-30T16:54:03Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:54:03Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:55:37Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:55:37Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:56:40Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:56:40Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:56:56Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:56:56Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:58:04Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[31mERRO[0m[2022-03-30T16:58:04Z]getFreeSeatsHandle.go:30 goReact/webapp/admin/handlersAdmin/seatHandlers.GetFreeSeatsHandle.func1 Bad request. Err msg:strconv.Atoi: parsing "": invalid syntax. Requests body:  
-[36mINFO[0m[2022-03-30T16:58:31Z]room_repository.go:144 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
-[36mINFO[0m[2022-03-30T16:58:31Z]room_repository.go:144 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:19:43Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:21:23Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[37mDEBU[0m[2022-03-30T17:22:46Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:22:46Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:22:46Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:22:46Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:22:46Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:22:46Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:25:58Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:25:58Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:25:58Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:25:58Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:25:58Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:25:58Z]seat_repository.go:50 goReact/domain/store.(*SeatRepository).GetAll Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:26:15Z]seat_repository.go:187 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:26:15Z]seat_repository.go:187 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:26:15Z]seat_repository.go:194 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{1 cat 2022-03-31 00:00:00 +0000 UTC 2022-03-31 00:00:00 +0000 UTC} 
-[37mDEBU[0m[2022-03-30T17:26:15Z]seat_repository.go:194 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{1 cat 2022-03-31 00:00:00 +0000 UTC 2022-03-31 00:00:00 +0000 UTC} 
-[37mDEBU[0m[2022-03-30T17:26:23Z]seat_repository.go:187 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:26:23Z]seat_repository.go:187 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:26:23Z]seat_repository.go:194 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{1 cat 2022-03-31 00:00:00 +0000 UTC 2022-04-03 00:00:00 +0000 UTC} 
-[37mDEBU[0m[2022-03-30T17:26:23Z]seat_repository.go:194 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{1 cat 2022-03-31 00:00:00 +0000 UTC 2022-04-03 00:00:00 +0000 UTC} 
-[37mDEBU[0m[2022-03-30T17:26:28Z]seat_repository.go:187 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:26:28Z]seat_repository.go:187 goReact/domain/store.(*SeatRepository).FreeSeatsSearching Error occured while getting all seats. Err msg: sql: expected 5 destination arguments in Scan, not 4 
-[37mDEBU[0m[2022-03-30T17:26:28Z]seat_repository.go:194 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{1 cat 2022-04-01 00:00:00 +0000 UTC 2022-04-03 00:00:00 +0000 UTC} 
-[37mDEBU[0m[2022-03-30T17:26:28Z]seat_repository.go:194 goReact/domain/store.(*SeatRepository).FreeSeatsSearching no free seats for data: &{1 cat 2022-04-01 00:00:00 +0000 UTC 2022-04-03 00:00:00 +0000 UTC} 
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:30:41Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:32:05Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[31mERRO[0m[2022-03-30T17:34:15Z]homeSeatsHandler.go:20 goReact/webapp/admin/handlersAdmin/seatHandlers.HomeSeatsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
-[31mERRO[0m[2022-03-30T17:34:15Z]homeSeatsHandler.go:20 goReact/webapp/admin/handlersAdmin/seatHandlers.HomeSeatsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
-[31mERRO[0m[2022-03-30T17:34:19Z]AuthHandler.go:49 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedPassword is not the hash of the given password 
-[31mERRO[0m[2022-03-30T17:34:19Z]AuthHandler.go:49 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedPassword is not the hash of the given password 
-[31mERRO[0m[2022-03-30T17:34:38Z]updateSeat.go:88 goReact/webapp/admin/handlersAdmin/seatHandlers.UpdateSeat.func1 Data is not valid. Err msg:rentFrom: invalid start date. Start date cannot be before today; rentTo: invalid end date. End date cannot be before today.. 
-[31mERRO[0m[2022-03-30T17:34:38Z]updateSeat.go:88 goReact/webapp/admin/handlersAdmin/seatHandlers.UpdateSeat.func1 Data is not valid. Err msg:rentFrom: invalid start date. Start date cannot be before today; rentTo: invalid end date. End date cannot be before today.. 
-[36mINFO[0m[2022-03-30T17:34:52Z]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
-[36mINFO[0m[2022-03-30T17:34:52Z]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
-[36mINFO[0m[2022-03-30T17:35:03Z]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [{1 1 2022-01-25 00:00:00 +0000 +0000 2022-01-30 00:00:00 +0000 +0000 1} {4 1 2022-03-30 00:00:00 +0000 +0000 2022-03-31 00:00:00 +0000 +0000 1.5}] 
-[36mINFO[0m[2022-03-30T17:35:03Z]seat_repository.go:208 goReact/domain/store.(*SeatRepository).FreeSeatsSearching seat IDs = [{1 1 2022-01-25 00:00:00 +0000 +0000 2022-01-30 00:00:00 +0000 +0000 1} {4 1 2022-03-30 00:00:00 +0000 +0000 2022-03-31 00:00:00 +0000 +0000 1.5}] 
-[31mERRO[0m[2022-03-30T17:35:19Z]room_repository.go:25 goReact/domain/store.(*RoomRepository).Create Error occured while creating room. Err msg: pq: INSERT has more expressions than target columns. 
-[31mERRO[0m[2022-03-30T17:35:19Z]room_repository.go:25 goReact/domain/store.(*RoomRepository).Create Error occured while creating room. Err msg: pq: INSERT has more expressions than target columns. 
-[36mINFO[0m[2022-03-30T17:36:23Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:36:23Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:36:42Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:36:42Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:37:07Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:37:07Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[31mERRO[0m[2022-03-30T17:37:59Z]updateSeat.go:88 goReact/webapp/admin/handlersAdmin/seatHandlers.UpdateSeat.func1 Data is not valid. Err msg:rentFrom: invalid start date. Start date cannot be before today; rentTo: invalid end date. End date cannot be before today.. 
-[31mERRO[0m[2022-03-30T17:37:59Z]updateSeat.go:88 goReact/webapp/admin/handlersAdmin/seatHandlers.UpdateSeat.func1 Data is not valid. Err msg:rentFrom: invalid start date. Start date cannot be before today; rentTo: invalid end date. End date cannot be before today.. 
-[36mINFO[0m[2022-03-30T17:38:04Z]seat_repository.go:144 goReact/domain/store.(*SeatRepository).Update Seat with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:38:04Z]seat_repository.go:144 goReact/domain/store.(*SeatRepository).Update Seat with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:38:24Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:38:24Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 1 was updated                   
-[36mINFO[0m[2022-03-30T17:43:22Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:43:22Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:43:22Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:43:22Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:43:22Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:43:22Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:43:23Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:43:23Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:43:23Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:43:23Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[36mINFO[0m[2022-03-30T17:46:20Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
-PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
-[31mERRO[0m[2022-03-30T17:46:48Z]allRoomsHandler.go:23 goReact/webapp/admin/handlersAdmin/roomHandlers.AllRoomsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
-[31mERRO[0m[2022-03-30T17:46:48Z]allRoomsHandler.go:23 goReact/webapp/admin/handlersAdmin/roomHandlers.AllRoomsHandler.func1 Access is denied. Err msg:error occurred while getting permissions.  
-[31mERRO[0m[2022-03-30T17:46:51Z]AuthHandler.go:49 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedPassword is not the hash of the given password 
-[31mERRO[0m[2022-03-30T17:46:51Z]AuthHandler.go:49 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedPassword is not the hash of the given password 
-[36mINFO[0m[2022-03-30T17:47:16Z]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
-[36mINFO[0m[2022-03-30T17:47:16Z]seat_repository.go:28 goReact/domain/store.(*SeatRepository).Create Seat with id 4 was created.                  
-[36mINFO[0m[2022-03-30T17:47:27Z]room_repository.go:102 goReact/domain/store.(*RoomRepository).Delete Room with id 1 was deleted                   
-[36mINFO[0m[2022-03-30T17:47:27Z]room_repository.go:102 goReact/domain/store.(*RoomRepository).Delete Room with id 1 was deleted                   
-[36mINFO[0m[2022-03-30T17:47:39Z]room_repository.go:29 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
-[36mINFO[0m[2022-03-30T17:47:39Z]room_repository.go:29 goReact/domain/store.(*RoomRepository).Create Room with id 61 was created.                 
-[36mINFO[0m[2022-03-30T17:47:49Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
-[36mINFO[0m[2022-03-30T17:47:49Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
-[36mINFO[0m[2022-03-30T17:47:53Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
-[36mINFO[0m[2022-03-30T17:47:53Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
-[36mINFO[0m[2022-03-30T17:48:09Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
-[36mINFO[0m[2022-03-30T17:48:09Z]room_repository.go:160 goReact/domain/store.(*RoomRepository).Update Room with id 2 was updated                   
+[37mDEBU[0m[2022-04-03T13:38:41Z]tokens.go:138 goReact/webapp/server/handler/authentication.ExtractTokenMetadata Token is expired. Msg: Token is expired      
+[37mDEBU[0m[2022-04-03T13:38:41Z]tokens.go:138 goReact/webapp/server/handler/authentication.ExtractTokenMetadata Token is expired. Msg: Token is expired      
+[31mERRO[0m[2022-04-03T13:38:41Z]validateLogin.go:37 goReact/webapp/server/handler/middleware.ValidateLogin.func1 Error occured while validating login. Err msg: email: no SQL commands allowed to input. 
+[31mERRO[0m[2022-04-03T13:38:41Z]validateLogin.go:37 goReact/webapp/server/handler/middleware.ValidateLogin.func1 Error occured while validating login. Err msg: email: no SQL commands allowed to input. 
+[37mDEBU[0m[2022-04-03T13:38:54Z]tokens.go:138 goReact/webapp/server/handler/authentication.ExtractTokenMetadata Token is expired. Msg: Token is expired      
+[37mDEBU[0m[2022-04-03T13:38:54Z]tokens.go:138 goReact/webapp/server/handler/authentication.ExtractTokenMetadata Token is expired. Msg: Token is expired      
+[31mERRO[0m[2022-04-03T13:38:54Z]utils.go:13 goReact/domain/store.(*Store).CheckPasswordHash Eror occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-03T13:38:54Z]utils.go:13 goReact/domain/store.(*Store).CheckPasswordHash Eror occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-03T13:39:07Z]validateUser.go:24 goReact/webapp/server/handler/middleware.ValidateUser.func1 Bad request. Err msg:parsing time "\"2003-03-03\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "T". Requests body: &{0xc0003b4528 <nil> <nil> false true {0 0} true false false 0x72a7a0} 
+[31mERRO[0m[2022-04-03T13:39:07Z]validateUser.go:24 goReact/webapp/server/handler/middleware.ValidateUser.func1 Bad request. Err msg:parsing time "\"2003-03-03\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "T". Requests body: &{0xc0003b4528 <nil> <nil> false true {0 0} true false false 0x72a7a0} 
+[36mINFO[0m[2022-04-03T13:39:37Z]user_repository.go:61 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[36mINFO[0m[2022-04-03T13:39:37Z]user_repository.go:61 goReact/domain/store.(*UserRepository).Create User with id 7 was created.                  
+[37mDEBU[0m[2022-04-03T13:39:37Z]tokens.go:194 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1649000377 user_id:7] 
+[37mDEBU[0m[2022-04-03T13:39:37Z]tokens.go:194 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1649000377 user_id:7] 
+[36mINFO[0m[2022-04-03T13:39:39Z]mail_service.go:96 goReact/service.(*Mail).Send Mail send successfull                        
+[36mINFO[0m[2022-04-03T13:39:39Z]mail_service.go:96 goReact/service.(*Mail).Send Mail send successfull                        

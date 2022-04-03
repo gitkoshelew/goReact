@@ -8,38 +8,21 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// User ...
+// User struct
 type User struct {
-	UserID      int        `json:"userId" csv:"userId"`
-	Email       string     `json:"email" csv:"email"`
-	Password    string     `json:"-" csv:"-"`
-	Role        Role       `json:"role" csv:"role"`
-	Verified    *bool      `json:"verified" csv:"verified"`
-	Name        string     `json:"name" csv:"name"`
-	Surname     string     `json:"sName" csv:"sName"`
-	MiddleName  string     `json:"mName" csv:"mName"`
-	Sex         Sex        `json:"sex" csv:"sex"`
-	DateOfBirth *time.Time `json:"birthDate" csv:"birthDate"`
-	Address     string     `json:"address" csv:"address"`
-	Phone       string     `json:"phone" csv:"phone"`
-	Photo       string     `json:"photo" csv:"photo"`
-}
-
-// UserDTO ...
-type UserDTO struct {
-	UserID      int        `json:"userId" csv:"userId"`
-	Email       string     `json:"email" csv:"email"`
-	Password    string     `json:"password" csv:"-"`
-	Role        string     `json:"role,omitempty" csv:"role"`
-	Verified    *bool      `json:"verified,omitempty" csv:"verified"`
-	Name        string     `json:"name" csv:"name"`
-	Surname     string     `json:"sName" csv:"sName"`
-	MiddleName  string     `json:"mName" csv:"mName"`
-	Sex         string     `json:"sex" csv:"sex"`
-	DateOfBirth *time.Time `json:"birthDate" csv:"birthDate"`
-	Address     string     `json:"address" csv:"address"`
-	Phone       string     `json:"phone" csv:"phone"`
-	Photo       string     `json:"photo" csv:"photo"`
+	UserID      int       `json:"userId" csv:"userId"`
+	Email       string    `json:"email" csv:"email"`
+	Password    string    `json:"-" csv:"-"`
+	Role        Role      `json:"role" csv:"role"`
+	Verified    bool      `json:"verified" csv:"verified"`
+	Name        string    `json:"name" csv:"name"`
+	Surname     string    `json:"sName" csv:"sName"`
+	MiddleName  string    `json:"mName" csv:"mName"`
+	Sex         Sex       `json:"sex" csv:"sex"`
+	DateOfBirth time.Time `json:"birthDate" csv:"birthDate"`
+	Address     string    `json:"address" csv:"address"`
+	Phone       string    `json:"phone" csv:"phone"`
+	Photo       string    `json:"photo" csv:"photo"`
 }
 
 // Role ...
@@ -62,21 +45,31 @@ const (
 )
 
 // Validate ...
-func (u *UserDTO) Validate() error {
+func (u *User) Validate() error {
 	return validation.ValidateStruct(
 		u,
-		validation.Field(&u.Email, validation.Required, is.Email, validation.By(IsSQL)),
-		validation.Field(&u.Password, validation.Required, validation.Length(5, 100), validation.By(IsSQL)),
-		validation.Field(&u.Role, validation.By(IsRole)),
-		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
-		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(2, 30), validation.By(IsSQL)),
-		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(0, 30), validation.By(IsSQL)),
+		validation.Field(&u.Email, validation.Required, is.Email),
+		validation.Field(&u.Password, validation.Required, validation.Length(5, 100)),
+		validation.Field(&u.Role, validation.Required, validation.By(IsRole)),
+		validation.Field(&u.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
+		validation.Field(&u.Surname, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
+		validation.Field(&u.MiddleName, validation.By(IsLetterHyphenSpaces), validation.Length(3, 20)),
 		validation.Field(&u.Sex, validation.Required, validation.By(IsSex)),
-		validation.Field(&u.DateOfBirth, validation.Required, validation.By(IsValidBirthDate)),
-		validation.Field(&u.Address, validation.Required, validation.By(IsSQL), validation.Length(10, 40)),
+		validation.Field(&u.DateOfBirth, validation.Required),
+		validation.Field(&u.Address, validation.Required, validation.Length(10, 40)),
 		validation.Field(&u.Phone, validation.Required, validation.By(IsPhone)),
-		validation.Field(&u.Photo, validation.By(IsSQL)),
 	)
+}
+
+// WithEncryptedPassword creates User with encrypted password
+func (u *User) WithEncryptedPassword() error {
+	EncryptedPassword, err := EncryptPassword(u.Password)
+	if err != nil {
+		return err
+	}
+
+	u.Password = EncryptedPassword
+	return nil
 }
 
 // EncryptPassword ...

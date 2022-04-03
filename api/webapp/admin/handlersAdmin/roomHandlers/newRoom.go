@@ -46,25 +46,14 @@ func NewRoom(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		description := r.FormValue("Description")
-
 		photo := r.FormValue("Photo")
 
-		square, err := strconv.ParseFloat(r.FormValue("Square"), 32)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lat")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lat"))
-			return
-		}
-
 		roomDTO := model.RoomDTO{
-			RoomID:      0,
-			RoomNumber:  roomNumber,
-			PetType:     petType,
-			HotelID:     hotelID,
-			PhotoURL:    photo,
-			Description: description,
-			Square: square,
+			RoomID:     0,
+			RoomNumber: roomNumber,
+			PetType:    petType,
+			HotelID:    hotelID,
+			PhotoURL:   photo,
 		}
 
 		err = roomDTO.Validate()
