@@ -38,6 +38,12 @@ func NewPet(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		user, err := s.User().FindByID(userID)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusBadRequest)
+			return
+		}
+
 		name := r.FormValue("Name")
 
 		petType := r.FormValue("PetType")
@@ -48,29 +54,24 @@ func NewPet(s *store.Store) httprouter.Handle {
 
 		photo := r.FormValue("Photo")
 
-		petDTO := model.PetDTO{
-			PetID:    0,
-			Name:     name,
-			Type:     petType,
-			Weight:   float32(weight),
-			Diseases: diseases,
-			OwnerID:  userID,
-			PhotoURL: photo,
+		pet := model.Pet{
+			PetID:       0,
+			Name:        name,
+			Type:        model.PetType(petType),
+			Weight:      weight,
+			Diseases:    diseases,
+			Owner:       *user,
+			PetPhotoURL: photo,
 		}
 
-		err = petDTO.Validate()
+		err = pet.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		pet, err := s.Pet().ModelFromDTO(&petDTO)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
-			return
-		}
-		_, err = s.Pet().Create(pet)
+		_, err = s.Pet().Create(&pet)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating pet. Err msg:%v. ", err), http.StatusBadRequest)
 			return

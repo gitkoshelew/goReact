@@ -15,11 +15,11 @@ type SeatRepository struct {
 // Create seat and save it to DB
 func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO seat (room_id, rent_from, rent_to , price) VALUES ($1, $2, $3, $4) RETURNING id",
+		"INSERT INTO seat (room_id, rent_from, rent_to, description) VALUES ($1, $2, $3, $4) RETURNING id",
 		s.Room.RoomID,
 		s.RentFrom,
 		s.RentTo,
-		s.Price,
+		s.Description,
 	).Scan(&s.SeatID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating seat. Err msg: %v.", err)
 		return nil, err
@@ -44,9 +44,9 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 		err := rows.Scan(
 			&seat.SeatID,
 			&seat.RoomID,
+			&seat.Description,
 			&seat.RentFrom,
 			&seat.RentTo,
-			&seat.Price,
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
@@ -64,9 +64,9 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 		id).Scan(
 		&seatDTO.SeatID,
 		&seatDTO.RoomID,
+		&seatDTO.Description,
 		&seatDTO.RentFrom,
 		&seatDTO.RentTo,
-		&seatDTO.Price,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg: %v.", err)
 		return nil, err
@@ -111,19 +111,19 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 	if s.RentTo != nil {
 		rentTo = fmt.Sprintf("'%s'", s.RentTo.Format(time.RFC3339))
 	}
-
-	price := "price"
-	if s.Price != 0 {
-		price = fmt.Sprintf("%f", s.Price)
+	description := "description"
+	if s.Description != "" {
+		description = fmt.Sprintf("'%s'", s.Description)
 	}
+
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE seat SET 
-		room_id = %s, rent_from = %s, rent_to = %s, price = %s
+		room_id = %s, rent_from = %s, rent_to = %s, description = %s 
 		WHERE id = $1`,
 		roomID,
 		rentFrom,
 		rentTo,
-		price,
+		description,
 	), s.SeatID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating seat. Err msg: %v.", err)
@@ -158,11 +158,11 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 	}
 
 	return &model.Seat{
-		SeatID:   dto.RoomID,
-		Room:     *room,
-		RentFrom: dto.RentFrom,
-		RentTo:   dto.RentTo,
-		Price:    dto.Price,
+		SeatID:      dto.RoomID,
+		Description: dto.Description,
+		Room:        *room,
+		RentFrom:    dto.RentFrom,
+		RentTo:      dto.RentTo,
 	}, nil
 }
 
@@ -189,9 +189,9 @@ func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[
 		err := rows.Scan(
 			&seat.SeatID,
 			&seat.RoomID,
+			&seat.Description,
 			&seat.RentFrom,
 			&seat.RentTo,
-			&seat.Price,
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)

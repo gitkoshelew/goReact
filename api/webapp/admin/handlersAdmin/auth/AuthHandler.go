@@ -14,26 +14,10 @@ import (
 func AuthAdmin(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		emailForm := r.FormValue("email")
-		password := r.FormValue("password")
-
-		login := model.Login{
-			Email:    emailForm,
-			Password: password,
-		}
-		err := login.Validate()
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while validating login. Err msg: %v", err)
-			return
-		}
-		err = s.Open()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		user, err := s.User().FindByEmail(login.Email)
+		EmailForm := r.FormValue("email")
+		Password := r.FormValue("password")
+		s.Open()
+		user, err := s.User().FindByEmail(EmailForm)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while checking users email or password. Err msg:%v. ", err), http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while checking users email or password. Err msg: %s", err.Error())
@@ -43,7 +27,7 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 		userID := user.UserID
 		hashPassword := user.Password
 
-		err = model.CheckPasswordHash(hashPassword, login.Password)
+		err = model.CheckPasswordHash(hashPassword, Password)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while checking users email or password. Err msg:%v. ", err), http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while checking users email or password. Err msg: %s", err.Error())

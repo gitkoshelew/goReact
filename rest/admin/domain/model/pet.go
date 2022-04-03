@@ -6,24 +6,13 @@ import (
 
 // Pet struct
 type Pet struct {
-	PetID    int     `json:"petId"`
-	Name     string  `json:"name"`
-	Type     PetType `json:"petType"`
-	Weight   float32 `json:"weight"`
-	Diseases string  `json:"diseases,omitempty"`
-	Owner    User
-	PhotoURL string `json:"photoUrl,omitempty"`
-}
-
-// PetDTO struct
-type PetDTO struct {
-	PetID    int     `json:"petId"`
-	Name     string  `json:"name"`
-	Type     string  `json:"petType"`
-	Weight   float32 `json:"weight"`
-	Diseases string  `json:"diseases,omitempty"`
-	OwnerID  int     `json:"userId"`
-	PhotoURL string  `json:"photoUrl,omitempty"`
+	PetID       int     `json:"petId"`
+	Name        string  `json:"name"`
+	Type        PetType `json:"petType"`
+	Weight      float64 `json:"weight"`
+	Diseases    string  `json:"diseases"`
+	Owner       User
+	PetPhotoURL string `json:"petPhotoUrl"`
 }
 
 // PetType ...
@@ -36,14 +25,12 @@ const (
 )
 
 // Validate ...
-func (p *PetDTO) Validate() error {
+func (p *Pet) Validate() error {
 	return validation.ValidateStruct(
 		p,
-		validation.Field(&p.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.By(IsSQL), validation.Length(2, 20)),
 		validation.Field(&p.Type, validation.Required, validation.By(IsPetType)),
-		validation.Field(&p.Weight, validation.Required, validation.Min(0.01), validation.Max(49.9)),
-		validation.Field(&p.Diseases, validation.By(IsSQL)),
-		validation.Field(&p.OwnerID, validation.Required, validation.By(IsValidID)),
-		validation.Field(&p.PhotoURL, validation.By(IsSQL)),
+		validation.Field(&p.Name, validation.Required, validation.By(IsLetterHyphenSpaces), validation.Length(1, 20)),
+		validation.Field(&p.Weight, validation.Required, validation.Min(0.1), validation.Max(49.9)),
+		validation.Field(&p.Owner, validation.Required),
 	)
 }
