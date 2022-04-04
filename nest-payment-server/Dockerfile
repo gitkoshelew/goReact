@@ -1,11 +1,14 @@
 FROM node:12.13-alpine
+
 WORKDIR /app
 
 COPY package*.json ./
 
-COPY ./ ./
-
 RUN npm ci
+
+COPY . .
+
+RUN npm run build
 
 RUN chmod +x wait-for-postgres.sh
 
