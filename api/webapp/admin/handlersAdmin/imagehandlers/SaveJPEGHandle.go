@@ -28,7 +28,7 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 
 		}
 
-		s.Logger.Info("Header: %v ", header)
+		s.Logger.Info("1", header.Size)
 
 		/*mr, err := r.MultipartReader()
 		if err != nil {
@@ -72,6 +72,7 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("OwnerID"))
 			return
 		}
+		s.Logger.Info("2")
 
 		imgtype := r.FormValue("Type")
 
@@ -88,16 +89,17 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+		s.Logger.Info("3  " , imageDTO)
 
-		_, err = s.Image().SaveImage(imageDTO, &image)
+		i, err := s.Image().SaveImage(imageDTO, &image)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("eror occured while saving JPEG.  Err msg: %v", err), http.StatusInternalServerError)
 			s.Logger.Errorf("eror occured while saving JPEG.  Err msg: %v", err)
 			return
 		}
+		s.Logger.Info("4 i " , *i)
 
-		w.WriteHeader(http.StatusOK)
-		http.Redirect(w, r, "/admin/imagehome/", http.StatusFound)
+		http.Redirect(w, r, "/admin/homeimages/", http.StatusFound)
 
 	}
 

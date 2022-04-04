@@ -12,10 +12,9 @@
 </head>
 
 <body>
-
-
-	<h2>Images</h2>
+	
 	<div>
+		<h2>Images</h2>
 		<form action="/admin/images" method="GET">
 			<th>Get all images</th><br><br>
 			<button>Get</button>
@@ -45,6 +44,7 @@
 
 
 	<div>
+		<form enctype="multipart/form-data" action="/admin/image/upload" method="post">
 		<th>Owner id</th>
 		<input type="number" name="OwnerID" min=1 required>
 		<br><br>
@@ -56,8 +56,6 @@
 		<input type="radio" name="Type" value="user" id="Type3">
 		<label for="Type3">user</label>
 		<br><br>
-
-		<form enctype="multipart/form-data" action="/admin/image/upload" method="post">
 			<input type="file" name="Photo" accept="image/*,image/jpeg" />
 			<input type="submit" value="upload" />
 		</form>

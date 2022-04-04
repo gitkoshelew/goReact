@@ -20,7 +20,7 @@ func GetImageHandle(s *store.Store) httprouter.Handle {
 		session.CheckSession(w, r)
 		imgs := []model.Image{}
 
-		id, err := strconv.Atoi(ps.ByName("id"))
+		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while parsing id. Err msg: %v", err)})
@@ -29,15 +29,14 @@ func GetImageHandle(s *store.Store) httprouter.Handle {
 
 		err = s.Open()
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while openong DB. Err msg: %v", err)})
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
 
 		img, err := s.Image().FindByID(id)
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while searching image. Err msg: %v", err)})
+			http.Error(w, fmt.Sprintf("Error occured while getting image by id. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 
