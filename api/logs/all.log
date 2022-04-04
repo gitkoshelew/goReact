@@ -482,3 +482,21 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
 [31mERRO[0m[2022-04-04T13:13:36Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
 [31mERRO[0m[2022-04-04T13:13:36Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T13:13:45Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T13:13:57Z]updateImage.go:67 goReact/webapp/admin/handlersAdmin/imagehandlers.UpdateImage.func1 imagedto     &{1 pet 1 }                     
+[36mINFO[0m[2022-04-04T13:13:57Z]updateImage.go:67 goReact/webapp/admin/handlersAdmin/imagehandlers.UpdateImage.func1 imagedto     &{1 pet 1 }                     
+[36mINFO[0m[2022-04-04T13:13:57Z]updateImage.go:75 goReact/webapp/admin/handlersAdmin/imagehandlers.UpdateImage.func1 image   &{1 pet 1 }                          
+[36mINFO[0m[2022-04-04T13:13:57Z]updateImage.go:75 goReact/webapp/admin/handlersAdmin/imagehandlers.UpdateImage.func1 image   &{1 pet 1 }                          
+[36mINFO[0m[2022-04-04T13:13:57Z]Image_repository.go:121 goReact/domain/store.(*ImageRepository).Update Image with id 1 was updated                  
+[36mINFO[0m[2022-04-04T13:13:57Z]Image_repository.go:121 goReact/domain/store.(*ImageRepository).Update Image with id 1 was updated                  
