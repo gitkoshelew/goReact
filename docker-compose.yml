@@ -233,6 +233,7 @@ services:
         container_name: payment-card-server
         build:
             context: ./nest-payment-server
+        command: npm run start:prod
         ports:
             - "5003:5002"
         environment:
