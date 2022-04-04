@@ -33,7 +33,7 @@ func (r *ImageRepository) Create(i *model.Image) (*int, error) {
 
 // GetAll returns all images
 func (r *ImageRepository) GetAll() (*[]model.Image, error) {
-	rows, err := r.Store.Db.Query("SELECT * FROM image")
+	rows, err := r.Store.Db.Query("SELECT * FROM images")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all images. Err msg: %v.", err)
 		return nil, err

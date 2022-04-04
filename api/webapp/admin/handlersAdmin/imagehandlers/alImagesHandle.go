@@ -2,6 +2,7 @@ package imagehandlers
 
 import (
 	"fmt"
+	"goReact/domain/model"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
 	"net/http"
@@ -10,18 +11,20 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+var permissionRead model.Permission = model.Permission{Name: model.ReadImage}
+
 // GetAllImagesHandle ...
 func GetAllImagesHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		/*	err := session.CheckRigths(w, r, permissionRead.Name)
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusForbidden)
-				s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
-				return
-			}*/
+		err := session.CheckRigths(w, r, permissionRead.Name)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusForbidden)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
+			return
+		}
 
-		err := s.Open()
+		err = s.Open()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -29,10 +32,10 @@ func GetAllImagesHandle(s *store.Store) httprouter.Handle {
 
 		imgs, err := s.Image().GetAll()
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while getting all employees. Err msg:%v. ", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Error occured while getting all images. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
-		
+
 		files := []string{
 			"/api/webapp/admin/tamplates/allImages.html",
 			"/api/webapp/admin/tamplates/base.html",

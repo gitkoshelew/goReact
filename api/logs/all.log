@@ -46,3 +46,123 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 [37mDEBU[0m[2022-04-03T13:39:37Z]tokens.go:194 goReact/webapp/server/handler/authentication.CreateCustomToken JWT.MapClaims created: map[exp:1649000377 user_id:7] 
 [36mINFO[0m[2022-04-03T13:39:39Z]mail_service.go:96 goReact/service.(*Mail).Send Mail send successfull                        
 [36mINFO[0m[2022-04-03T13:39:39Z]mail_service.go:96 goReact/service.(*Mail).Send Mail send successfull                        
+[36mINFO[0m[2022-04-04T09:04:07Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:04:07Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:04:07Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:04:07Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:04:07Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:04:07Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:04:08Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:04:08Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:04:08Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T09:04:08Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-04-04T09:04:31Z]Image_repository.go:38 goReact/domain/store.(*ImageRepository).GetAll Error occured while getting all images. Err msg: pq: relation "image" does not exist. 
+[31mERRO[0m[2022-04-04T09:04:31Z]Image_repository.go:38 goReact/domain/store.(*ImageRepository).GetAll Error occured while getting all images. Err msg: pq: relation "image" does not exist. 
+[31mERRO[0m[2022-04-04T09:06:14Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-1/image-original.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T09:06:14Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-1/image-original.jpg: no such file or directory. 
+[36mINFO[0m[2022-04-04T09:06:32Z]SaveJPEGHandle.go:31 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 1999100                                      
+[36mINFO[0m[2022-04-04T09:06:32Z]SaveJPEGHandle.go:31 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 1999100                                      
+[36mINFO[0m[2022-04-04T09:06:32Z]SaveJPEGHandle.go:75 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 2                                            
+[36mINFO[0m[2022-04-04T09:06:32Z]SaveJPEGHandle.go:75 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 2                                            
+[36mINFO[0m[2022-04-04T09:06:32Z]SaveJPEGHandle.go:92 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 3  &{0 pet 1 }                               
+[36mINFO[0m[2022-04-04T09:06:32Z]SaveJPEGHandle.go:92 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 3  &{0 pet 1 }                               
+[36mINFO[0m[2022-04-04T09:06:34Z]SaveJPEGHandle.go:100 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 i 5                                        
+[36mINFO[0m[2022-04-04T09:06:34Z]SaveJPEGHandle.go:100 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 i 5                                        
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T09:18:41Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-04-04T09:18:59Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-04T09:18:59Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-04T09:19:03Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-04T09:19:03Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T09:20:01Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-04-04T09:20:44Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-1/image-original.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T09:20:44Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-1/image-original.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T09:20:59Z]SaveJPEGHandle.go:26 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 error occured while reading multi form data request. Err msg: http: no such file. Requests body: &{0xc0003ae858 <nil> <nil> false true {0 0} true false false 0x72c280} 
+[31mERRO[0m[2022-04-04T09:20:59Z]SaveJPEGHandle.go:26 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 error occured while reading multi form data request. Err msg: http: no such file. Requests body: &{0xc0003ae858 <nil> <nil> false true {0 0} true false false 0x72c280} 
+[31mERRO[0m[2022-04-04T09:20:59Z]SaveJPEGHandle.go:26 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 error occured while reading multi form data request. Err msg: http: no such file. Requests body: &{0xc00000f5a8 <nil> <nil> false true {0 0} true false false 0x72c280} 
+[31mERRO[0m[2022-04-04T09:20:59Z]SaveJPEGHandle.go:26 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 error occured while reading multi form data request. Err msg: http: no such file. Requests body: &{0xc00000f5a8 <nil> <nil> false true {0 0} true false false 0x72c280} 
+[31mERRO[0m[2022-04-04T09:20:59Z]SaveJPEGHandle.go:26 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 error occured while reading multi form data request. Err msg: http: no such file. Requests body: &{0xc0003aee70 <nil> <nil> false true {0 0} true false false 0x72c280} 
+[31mERRO[0m[2022-04-04T09:20:59Z]SaveJPEGHandle.go:26 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 error occured while reading multi form data request. Err msg: http: no such file. Requests body: &{0xc0003aee70 <nil> <nil> false true {0 0} true false false 0x72c280} 
+[36mINFO[0m[2022-04-04T09:21:07Z]SaveJPEGHandle.go:59 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 id 5                                       
+[36mINFO[0m[2022-04-04T09:21:07Z]SaveJPEGHandle.go:59 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 id 5                                       
+[36mINFO[0m[2022-04-04T09:23:17Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:23:17Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:23:17Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:23:17Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:23:18Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:23:18Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:23:18Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:23:18Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:23:18Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T09:23:18Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T09:23:54Z]SaveJPEGHandle.go:59 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 id 5                                       
+[36mINFO[0m[2022-04-04T09:23:54Z]SaveJPEGHandle.go:59 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 id 5                                       
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T09:25:30Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-04-04T10:16:51Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-04T10:16:51Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-04T10:17:04Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[31mERRO[0m[2022-04-04T10:17:04Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedSecret too short to be a bcrypted password 
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-04T10:17:50Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-04-04T10:20:36Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedPassword is not the hash of the given password 
+[31mERRO[0m[2022-04-04T10:20:36Z]AuthHandler.go:33 goReact/webapp/admin/handlersAdmin/auth.AuthAdmin.func1 Error occured while checking users email or password. Err msg: crypto/bcrypt: hashedPassword is not the hash of the given password 
+[36mINFO[0m[2022-04-04T10:21:10Z]SaveJPEGHandle.go:59 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 id 5                                       
+[36mINFO[0m[2022-04-04T10:21:10Z]SaveJPEGHandle.go:59 goReact/webapp/admin/handlersAdmin/imagehandlers.SaveJPEGHandle.func1 4 id 5                                       
+[31mERRO[0m[2022-04-04T10:21:34Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:34Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:34Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:34Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:34Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:34Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:35Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:35Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:35Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:35Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:35Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 
+[31mERRO[0m[2022-04-04T10:21:35Z]Image_repository.go:177 goReact/domain/store.(*ImageRepository).GetImageFromLocalStore Error occured while opening image file. Err msg: open images/user/id-3/image-QVGA.jpg: no such file or directory. 

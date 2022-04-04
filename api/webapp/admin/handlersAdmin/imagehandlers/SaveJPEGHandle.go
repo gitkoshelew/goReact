@@ -13,14 +13,22 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+var permissionCreate model.Permission = model.Permission{Name: model.CreatImage}
+
 // SaveJPEGHandle ...
 func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		r.ParseMultipartForm(32000000)
-		//https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/04.5.html
+		err := session.CheckRigths(w, r, permissionCreate.Name)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusForbidden)
+			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
+			return
+		}
 
-		file, header, err := r.FormFile("Photo")
+		r.ParseMultipartForm(32000000)
+
+		file, _, err := r.FormFile("Photo")
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.Body), http.StatusInternalServerError)
@@ -28,51 +36,12 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 
 		}
 
-		s.Logger.Info("1", header.Size)
-
-		/*mr, err := r.MultipartReader()
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			s.Logger.Errorf("error occured while reading multi form data request. Err msg: %v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("error occured while reading multi form data request. Err msg: %v", err)})
-		}*/
-		/*
-			for {
-				part, err := mr.NextPart()
-				if err == io.EOF {
-					break
-				} else if err != nil {
-					w.WriteHeader(http.StatusInternalServerError)
-					s.Logger.Errorf("error occured while reading parts of multipart reader. Err msg: %v", err)
-					json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("error occured while reading parts of multipart reader. Err msg: %v", err)})
-				}
-
-				if part.FormName() == "image" {
-					image, err = jpeg.Decode(part)
-
-					if err != nil {
-						w.WriteHeader(http.StatusBadRequest)
-						s.Logger.Errorf("error occured while decoding image. Err msg: %v.", err)
-						return
-					}
-				} else if part.FormName() == "json" {
-					if err := json.NewDecoder(part).Decode(imageDTO); err != nil {
-						w.WriteHeader(http.StatusInternalServerError)
-						s.Logger.Errorf("eror occured while JSON request decoding. Request body: %v, Err msg: %v", part, err)
-						json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-						return
-					}
-				}
-			}
-		*/
-
 		id, err := strconv.Atoi(r.FormValue("OwnerID"))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("OwnerID")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("OwnerID"))
 			return
 		}
-		s.Logger.Info("2")
 
 		imgtype := r.FormValue("Type")
 
@@ -89,7 +58,6 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		s.Logger.Info("3  " , imageDTO)
 
 		i, err := s.Image().SaveImage(imageDTO, &image)
 		if err != nil {
@@ -97,7 +65,7 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("eror occured while saving JPEG.  Err msg: %v", err)
 			return
 		}
-		s.Logger.Info("4 i " , *i)
+		s.Logger.Info("4 id ", *i)
 
 		http.Redirect(w, r, "/admin/homeimages/", http.StatusFound)
 

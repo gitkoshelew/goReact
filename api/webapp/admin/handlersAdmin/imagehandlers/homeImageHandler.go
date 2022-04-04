@@ -2,6 +2,7 @@ package imagehandlers
 
 import (
 	"goReact/domain/store"
+	viewdata "goReact/webapp/admin/pkg/viewData"
 	"goReact/webapp/admin/session"
 	"net/http"
 	"text/template"
@@ -13,7 +14,7 @@ import (
 func HomeImageHandler(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		/*err := session.CheckRigths(w, r, permissionRead.Name)
+		err := session.CheckRigths(w, r, permissionRead.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
@@ -23,7 +24,7 @@ func HomeImageHandler(s *store.Store) httprouter.Handle {
 		vd := viewdata.ViewData{
 			ResponseWriter: w,
 			Request:        r,
-		}*/
+		}
 
 		files := []string{
 			"/api/webapp/admin/tamplates/imageHome.html",
@@ -37,7 +38,7 @@ func HomeImageHandler(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err = tmpl.Execute(w, 0)
+		err = tmpl.Execute(w, vd)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			s.Logger.Errorf("Error occured while executing template: %v", err)
