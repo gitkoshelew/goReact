@@ -18,6 +18,9 @@ var (
 
 	// ErrEmailIsUsed ...
 	ErrEmailIsUsed = errors.New("Email already in use")
+
+	// ErrNilPointer ...
+	ErrNilPointer = errors.New("Nil pointer reference")
 )
 
 // Store ...

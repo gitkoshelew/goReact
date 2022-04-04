@@ -10,49 +10,62 @@ import (
 func TestEmployee_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		e       func() *model.EmployeeDTO
+		e       func() *model.Employee
 		isValid bool
 	}{
 		{
 			name: "valid",
-			e: func() *model.EmployeeDTO {
-				return model.TestEmployeeDTO()
+			e: func() *model.Employee {
+				return model.TestEmployee()
 			},
 			isValid: true,
 		},
 		{
-			name: "nil employee",
-			e: func() *model.EmployeeDTO {
-				return &model.EmployeeDTO{}
+			name: "valid user",
+			e: func() *model.Employee {
+				u := model.TestUser()
+				e := model.TestEmployee()
+				e.User = *u
+				return e
+			},
+			isValid: true,
+		},
+		{
+			name: "valid position",
+			e: func() *model.Employee {
+				e := model.TestEmployee()
+				e.Position = model.OwnerPosition
+				return e
+			},
+			isValid: true,
+		},
+		{
+			name: "valid position",
+			e: func() *model.Employee {
+				e := model.TestEmployee()
+				e.Position = model.EmployeePosition
+				return e
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid position",
+			e: func() *model.Employee {
+				e := model.TestEmployee()
+				e.Position = "wwww"
+				return e
 			},
 			isValid: false,
 		},
 		{
-			name: "invalid UserID",
-			e: func() *model.EmployeeDTO {
-				employee := model.TestEmployeeDTO()
-				employee.UserID = 0
-				return employee
+			name: "valid hotel",
+			e: func() *model.Employee {
+				h := model.TestHotel()
+				e := model.TestEmployee()
+				e.Hotel = *h
+				return e
 			},
-			isValid: false,
-		},
-		{
-			name: "invalid HotelID",
-			e: func() *model.EmployeeDTO {
-				employee := model.TestEmployeeDTO()
-				employee.HotelID = 0
-				return employee
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid Position",
-			e: func() *model.EmployeeDTO {
-				employee := model.TestEmployeeDTO()
-				employee.Position = "invalid position"
-				return employee
-			},
-			isValid: false,
+			isValid: true,
 		},
 	}
 

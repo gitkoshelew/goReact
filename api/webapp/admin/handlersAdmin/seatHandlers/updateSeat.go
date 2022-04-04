@@ -52,6 +52,11 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 			}
 		}
 
+		description := r.FormValue("Description")
+		if description != "" {
+			seatDTO.Description = description
+		}
+
 		layout := "2006-01-02"
 		rentFrom := r.FormValue("RentFrom")
 		if rentFrom != "" {
@@ -73,13 +78,6 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 				return
 			}
 			seatDTO.RentTo = &rentTo
-		}
-
-		price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
-		if err == nil {
-			if price != 0 {
-				seatDTO.Price = price
-			}
 		}
 
 		err = seatDTO.Validate()

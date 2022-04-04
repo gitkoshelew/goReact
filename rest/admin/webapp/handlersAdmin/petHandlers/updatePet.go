@@ -38,7 +38,7 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		petDTO, err := s.Pet().FindByID(petID)
+		pet, err := s.Pet().FindByID(petID)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting pet by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
@@ -47,49 +47,49 @@ func UpdatePet(s *store.Store) httprouter.Handle {
 		userID, err := strconv.Atoi(r.FormValue("UserID"))
 		if err == nil {
 			if userID != 0 {
-
-				petDTO.OwnerID = userID
+				user, err := s.User().FindByID(userID)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusBadRequest)
+					return
+				}
+				pet.Owner = *user
 			}
 		}
 
 		name := r.FormValue("Name")
 		if name != "" {
-			petDTO.Name = name
+			pet.Name = name
 		}
 
 		petType := r.FormValue("PetType")
 		if petType != "" {
-			petDTO.Type = petType
+			pet.Type = model.PetType(petType)
 		}
 
 		weight, err := strconv.ParseFloat(r.FormValue("Weight"), 32)
 		if err == nil {
 			if weight != 0 {
-				petDTO.Weight = float32(weight)
+				pet.Weight = weight
 			}
 		}
 
 		diseases := r.FormValue("Diseases")
 		if diseases != "" {
-			petDTO.Diseases = diseases
+			pet.Diseases = diseases
 		}
 
 		photo := r.FormValue("Photo")
 		if photo != "" {
-			petDTO.PhotoURL = photo
+			pet.PetPhotoURL = photo
 		}
 
-		err = petDTO.Validate()
+		err = pet.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
-		pet, err := s.Pet().ModelFromDTO(petDTO)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
-			return
-		}
+
 		err = s.Pet().Update(pet)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while updating pet. Err msg:%v. ", err), http.StatusBadRequest)

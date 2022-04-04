@@ -1,7 +1,6 @@
 package permission
 
 import (
-	"admin/domain/model"
 	"admin/domain/store"
 	"admin/webapp/session"
 	"fmt"
@@ -22,7 +21,7 @@ func AddPermissionsEmployee(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		employeeID, err := strconv.Atoi(r.FormValue("id"))
+		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
@@ -35,37 +34,18 @@ func AddPermissionsEmployee(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("permissions"))
 			return
 		}
-		peDTO := model.PermissionsEmployeesDTO{
-			PermissionsID: perID,
-			EmployeeID:    employeeID,
-		}
-
 		err = s.Open()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
-		err = peDTO.Validate()
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
-			return
-		}
-
-		pe, err := s.PermissionsEmployee().ModelFromDTO(&peDTO)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		err = s.PermissionsEmployee().SetForEmployee(pe)
+		err = s.PermissionsEmployee().SetForEmployee(perID, id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while setting permissions. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 
-		http.Redirect(w, r, "/admin/addpermissions", http.StatusFound)
+		http.Redirect(w, r, "/admin/homepermissions", http.StatusFound)
 
 	}
 }

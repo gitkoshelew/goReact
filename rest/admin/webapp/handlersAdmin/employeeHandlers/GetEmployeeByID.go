@@ -12,8 +12,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// GetPermissoinsByEmployeeID ...
-func GetPermissoinsByEmployeeID(s *store.Store) httprouter.Handle {
+// GetEmployeeByID ...
+func GetEmployeeByID(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
 		err := session.CheckRigths(w, r, permissionRead.Name)
@@ -23,7 +23,7 @@ func GetPermissoinsByEmployeeID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		employees := []model.EmployeeDTO{}
+		employees := []model.Employee{}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {

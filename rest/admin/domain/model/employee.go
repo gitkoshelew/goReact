@@ -1,8 +1,6 @@
 package model
 
-import (
-	validation "github.com/go-ozzo/ozzo-validation"
-)
+import validation "github.com/go-ozzo/ozzo-validation"
 
 // Employee extends User and has all User fields
 type Employee struct {
@@ -10,14 +8,6 @@ type Employee struct {
 	User
 	Hotel    Hotel
 	Position Position `json:"position"`
-}
-
-// EmployeeDTO ...
-type EmployeeDTO struct {
-	EmployeeID int    `json:"employeeId"`
-	UserID     int    `json:"userId"`
-	HotelID    int    `json:"hotelId"`
-	Position   string `json:"position"`
 }
 
 // Position ...
@@ -31,12 +21,13 @@ const (
 	AdminPosition    Position = "admin"
 )
 
+
 // Validate ...
-func (e *EmployeeDTO) Validate() error {
+func (e *Employee) Validate() error {
 	return validation.ValidateStruct(
 		e,
-		validation.Field(&e.UserID, validation.Required, validation.By(IsValidID)),
-		validation.Field(&e.HotelID, validation.Required, validation.By(IsValidID)),
+		validation.Field(&e.User, validation.Required),
+		validation.Field(&e.Hotel, validation.Required),
 		validation.Field(&e.Position, validation.Required, validation.By(IsEmployeePosition)),
 	)
 }

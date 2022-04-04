@@ -77,6 +77,6 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response.Info{Messsage: imageDTO.URL})
+		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("image with id %d created", imageDTO.ImageID)})
 	}
 }

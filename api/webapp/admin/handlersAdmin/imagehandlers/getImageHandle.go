@@ -18,7 +18,7 @@ import (
 func GetImageHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		session.CheckSession(w, r)
-		imgs := []model.Image{}
+		imgs := []model.ImageDTO{}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
@@ -27,6 +27,8 @@ func GetImageHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		format := r.FormValue("Format")
+
 		err = s.Open()
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
@@ -34,16 +36,25 @@ func GetImageHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		img, err := s.Image().FindByID(id)
+		imageDTO, err := s.Image().FindByID(id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting image by id. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 
-		imgs = append(imgs, *img)
+		imageDTO.Format = format
+
+		image, err := s.ImageRepository.GetImageFromLocalStore(imageDTO)
+
+		imgs = append(imgs, *imageDTO)
+
+		/*files := []string{
+			"/api/webapp/admin/tamplates/allImages.html",
+			"/api/webapp/admin/tamplates/base.html",
+		}*/
 
 		files := []string{
-			"/api/webapp/admin/tamplates/allImages.html",
+			"/api/webapp/admin/tamplates/image.html",
 			"/api/webapp/admin/tamplates/base.html",
 		}
 
@@ -54,7 +65,7 @@ func GetImageHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		err = tmpl.Execute(w, imgs)
+		err = tmpl.Execute(w, image)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			s.Logger.Errorf("Error occured while executing template: %v", err)

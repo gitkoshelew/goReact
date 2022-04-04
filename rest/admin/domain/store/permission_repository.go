@@ -11,7 +11,7 @@ type PermissionsRepository struct {
 }
 
 // Create permossion and save it to DB
-func (r *PermissionsRepository) Create(p *model.Permission) (*int, error) {
+func (r *PermissionsRepository) Create(p *model.Permission) (*model.Permission, error) {
 	if err := r.Store.Db.QueryRow(
 		"INSERT INTO PERMISSIONS (name, description) VALUES ($1, $2) RETURNING id",
 		p.Name,
@@ -20,7 +20,7 @@ func (r *PermissionsRepository) Create(p *model.Permission) (*int, error) {
 		r.Store.Logger.Errorf("Error occurred while creating permission. Err msg:%v.", err)
 		return nil, err
 	}
-	return &p.PermissionID, nil
+	return p, nil
 }
 
 // GetAll ...
@@ -86,8 +86,8 @@ func (r *PermissionsRepository) Delete(id int) error {
 	return nil
 }
 
-// GetPermissoinsByEmployeeID return []permissions that the employee has
-func (r *PermissionsRepository) GetPermissoinsByEmployeeID(id int) (*[]model.Permission, error) {
+// GetEmployeeByID return []permissions that the employee has
+func (r *PermissionsRepository) GetEmployeeByID(id int) (*[]model.Permission, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM PERMISSiONS WHERE id IN ( SELECT permissions_id FROM permissions_employees where employee_id = $1 )", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occurred while getting permissions. Err msg: %v", err)

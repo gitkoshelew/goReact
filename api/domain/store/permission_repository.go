@@ -1,8 +1,8 @@
 package store
 
 import (
-	"goReact/domain/model"
 	"errors"
+	"goReact/domain/model"
 )
 
 // PermissionsRepository ...
@@ -82,7 +82,7 @@ func (r *PermissionsRepository) Delete(id int) error {
 		return err
 	}
 
-	r.Store.Logger.Info("Permission deleted, rows affectet: %d", result)
+	r.Store.Logger.Infof("Permission deleted, rows affectet: %d", result)
 	return nil
 }
 

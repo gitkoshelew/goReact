@@ -26,6 +26,12 @@
 		<form action="/admin/image/id" method="GET">
 			<th>Get image by id</th>
 			<input type="number" name="id" min="1" required><br><br>
+			<select name="Format">
+				<option value="original">original</option>
+				<option value="QVGA">QVGA</option>
+				<option value="VGA">VGA</option>
+				<option value="HD720p">HD720p</option>
+			</select>
 			<button>Get</button>
 		</form>
 	</div>
@@ -56,7 +62,7 @@
 			<input type="radio" name="Type" value="user" id="Type3">
 			<label for="Type3">user</label>
 			<br><br>
-			<input type="file" name="Photo" accept="image/*,image/jpeg" />
+			<input type="file" name="Photo" accept="image/jpeg" />
 			<input type="submit" value="upload" />
 		</form>
 	</div>

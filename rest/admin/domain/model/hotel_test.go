@@ -10,94 +10,48 @@ import (
 func TestHotel_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
-		model   func() *model.Hotel
+		h       func() *model.Hotel
 		isValid bool
-	}{
+	}{{
+		name: "valid",
+		h: func() *model.Hotel {
+			return model.TestHotel()
+		},
+		isValid: true,
+	},
 		{
-			name: "valid",
-			model: func() *model.Hotel {
-				return model.TestHotel()
+			name: "Invalid Name",
+			h: func() *model.Hotel {
+				h := model.TestHotel()
+				h.Name = ""
+				return h
 			},
-			isValid: true,
+			isValid: false,
 		},
 		{
 			name: "Empty Name",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Name = ""
-				return hotel
-			},
-			isValid: false,
-		},
-		{
-			name: "SQL Name",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Name = "ALtE  *)/8 R"
-				return hotel
-			},
-			isValid: false,
-		},
-		{
-			name: "Long Name",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Name = "1234567891011121314151617181920"
-				return hotel
+			h: func() *model.Hotel {
+				h := model.TestHotel()
+				h.Name = ""
+				return h
 			},
 			isValid: false,
 		},
 		{
 			name: "Empty Address",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Address = ""
-				return hotel
+			h: func() *model.Hotel {
+				h := model.TestHotel()
+				h.Address = ""
+				return h
 			},
 			isValid: false,
 		},
 		{
-			name: "SQL Address",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Address = "ALt E  *)/8 R"
-				return hotel
-			},
-			isValid: false,
-		},
-		{
-			name: "short Address",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Address = "12345"
-				return hotel
-			},
-			isValid: false,
-		},
-		{
-			name: "Long Address",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Address = "123456789101112131415161718192021222324252627282930313234353637383940"
-				return hotel
-			},
-			isValid: false,
-		},
-		{
-			name: "empty Coordinates",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Coordinates = []float64{}
-				return hotel
-			},
-			isValid: false,
-		},
-		{
-			name: "nil Coordinates",
-			model: func() *model.Hotel {
-				hotel := model.TestHotel()
-				hotel.Coordinates = nil
-				return hotel
+			name: "Empty coordinates",
+			h: func() *model.Hotel {
+				h := model.TestHotel()
+				h.Coordinates = []string{"", ""}
+				return h
 			},
 			isValid: false,
 		},
@@ -106,9 +60,9 @@ func TestHotel_Validate(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				assert.NoError(t, tc.model().Validate())
+				assert.NoError(t, tc.h().Validate())
 			} else {
-				assert.Error(t, tc.model().Validate())
+				assert.Error(t, tc.h().Validate())
 			}
 		})
 	}

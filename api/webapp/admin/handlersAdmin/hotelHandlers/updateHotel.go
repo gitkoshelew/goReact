@@ -75,6 +75,12 @@ func UpdateHotel(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		/*employee, err := s.Employee().ModelFromDTO(employeeDTO)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
+			return
+		}*/
+
 		err = s.Hotel().Update(hotel)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while updating hotel. Err msg:%v. ", err), http.StatusInternalServerError)
