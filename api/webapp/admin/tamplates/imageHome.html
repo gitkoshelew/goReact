@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	
+
 	<div>
 		<h2>Images</h2>
 		<form action="/admin/images" method="GET">
@@ -45,17 +45,17 @@
 
 	<div>
 		<form enctype="multipart/form-data" action="/admin/image/upload" method="post">
-		<th>Owner id</th>
-		<input type="number" name="OwnerID" min=1 required>
-		<br><br>
-		<th>Image type</th>
-		<input type="radio" name="Type" value="pet" id="Type1">
-		<label for="Type1">pet</label>
-		<input type="radio" name="Type" value="room" id="Type2">
-		<label for="Type2">room</label>
-		<input type="radio" name="Type" value="user" id="Type3">
-		<label for="Type3">user</label>
-		<br><br>
+			<th>Owner id</th>
+			<input type="number" name="OwnerID" min=1 required>
+			<br><br>
+			<th>Image type</th>
+			<input type="radio" name="Type" value="pet" id="Type1">
+			<label for="Type1">pet</label>
+			<input type="radio" name="Type" value="room" id="Type2">
+			<label for="Type2">room</label>
+			<input type="radio" name="Type" value="user" id="Type3">
+			<label for="Type3">user</label>
+			<br><br>
 			<input type="file" name="Photo" accept="image/*,image/jpeg" />
 			<input type="submit" value="upload" />
 		</form>
