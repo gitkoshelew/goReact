@@ -30,7 +30,6 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 
 		file, _, err := r.FormFile("Photo")
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.Body), http.StatusInternalServerError)
 			s.Logger.Errorf("error occured while reading multi form data request. Err msg: %v. Requests body: %v", err, r.Body)
 
@@ -52,6 +51,11 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 		var image image.Image
 
 		image, err = jpeg.Decode(file)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while decoding file to jpeg. Err msg: %v.", err), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while decoding file to jpeg. Err msg: %v.", err)
+			return
+		}
 
 		err = s.Open()
 		if err != nil {
@@ -59,14 +63,19 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		i, err := s.Image().SaveImage(imageDTO, &image)
+		err = imageDTO.Validate()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
+			return
+		}
+
+		_, err = s.Image().SaveImage(imageDTO, &image)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("eror occured while saving JPEG.  Err msg: %v", err), http.StatusInternalServerError)
 			s.Logger.Errorf("eror occured while saving JPEG.  Err msg: %v", err)
 			return
 		}
-		s.Logger.Info("4 id ", *i)
-
 		http.Redirect(w, r, "/admin/homeimages/", http.StatusFound)
 
 	}
