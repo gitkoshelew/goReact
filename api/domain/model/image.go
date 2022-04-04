@@ -46,6 +46,6 @@ func (i *ImageDTO) Validate() error {
 		i,
 		validation.Field(&i.Type, validation.Required, validation.By(IsImageType)),
 		validation.Field(&i.OwnerID, validation.Required, validation.By(IsValidID)),
-		validation.Field(&i.Format, validation.Required, validation.By(IsImageFormat)),
+		//validation.Field(&i.Format, validation.Required, validation.By(IsImageFormat)),
 	)
 }

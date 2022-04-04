@@ -1,0 +1,104 @@
+{{template "base" .}}
+
+{{define "title"}}image{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Image home</title>
+</head>
+
+<body>
+
+	{{if .HasPermission "delete_image"}}
+	<div>
+		<h2>Images</h2>
+		<form action="/admin/images" method="GET">
+			<th>Get all images</th><br><br>
+			<button>Get all images</button>
+		</form>
+	</div>
+	{{end}}
+
+
+	<br><br>
+
+	{{if .HasPermission "read_image"}}
+	<div>
+		<form action="/admin/image/id" method="GET">
+			<th>Get image by id</th>
+			<input type="number" name="id" min="1" required><br><br>
+			<select name="Format">
+				<option value="original">original</option>
+				<option value="QVGA">QVGA</option>
+				<option value="VGA">VGA</option>
+				<option value="HD720p">HD720p</option>
+			</select>
+			<button>Get</button>
+		</form>
+	</div>
+	{{end}}
+
+
+	<br><br>
+
+	{{if .HasPermission "delete_image"}}
+	<div>
+		<form action="/admin/image/delete" method="GET">
+			<th>Delete image </th>
+			<input type="number" name="id" min="1" required><br><br>
+			<button>Delete</button>
+		</form>
+	</div>
+	{{end}}
+
+	<br><br>
+
+	{{if .HasPermission "creat_image"}}
+	<div>
+		<h2>Create image</h2>
+		<form enctype="multipart/form-data" action="/admin/image/upload" method="post">
+			<th>Owner id</th>
+			<input type="number" name="OwnerID" min=1 required>
+			<br><br>
+			<th>Image type</th>
+			<input type="radio" name="Type" value="pet" id="Type1" required>
+			<label for="Type1">pet</label>
+			<input type="radio" name="Type" value="room" id="Type2" required>
+			<label for="Type2">room</label>
+			<input type="radio" name="Type" value="user" id="Type3" required>
+			<label for="Type3">user</label>
+			<br><br>
+			<input type="file" name="Photo" accept="image/jpeg" required>
+			<input type="submit" value="Upload" />
+		</form>
+	</div>
+	{{end}}
+
+	{{if .HasPermission "update_image"}}
+	<div>
+		<h2>Update image</h2>
+		<form action="/admin/image/update" method="post">
+			<th>Image id</th>
+			<input type="number" name="ImageID" min=1>
+			<th>Owner id</th>
+			<input type="number" name="OwnerID" min=1>
+			<br><br>
+			<th>Image type</th>
+			<input type="radio" name="Type" value="pet" id="Type1">
+			<label for="Type1">pet</label>
+			<input type="radio" name="Type" value="room" id="Type2">
+			<label for="Type2">room</label>
+			<input type="radio" name="Type" value="user" id="Type3">
+			<label for="Type3">user</label>
+			<button>Update</button>
+		</form>
+
+	</div>
+	{{end}}
+
+</body>
+{{end}}

@@ -33,7 +33,7 @@ func (r *ImageRepository) Create(i *model.Image) (*int, error) {
 
 // GetAll returns all images
 func (r *ImageRepository) GetAll() (*[]model.Image, error) {
-	rows, err := r.Store.Db.Query("SELECT * FROM image")
+	rows, err := r.Store.Db.Query("SELECT * FROM images")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all images. Err msg: %v.", err)
 		return nil, err
@@ -95,18 +95,30 @@ func (r *ImageRepository) Delete(id int) error {
 func (r *ImageRepository) Update(i *model.Image) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE image SET",
-		"type = $1 ownerId = $2",
-		"WHERE id = $4",
+		`UPDATE images SET 
+		type = $1 ,
+		ownerId = $2 
+		WHERE id = $3`,
 		string(i.Type),
 		i.OwnerID,
 		i.ImageID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg: %v.", err)
 		return err
 	}
-	log.Printf("Image updated, rows affectet: %d", result)
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg:%v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Image with id %d was updated", i.ImageID)
 	return nil
 }
 
@@ -185,4 +197,14 @@ func (r *ImageRepository) GetImageFromLocalStore(imageDTO *model.ImageDTO) (*ima
 	}
 
 	return &image, nil
+}
+
+// ModelFromDTO ...
+func (r *ImageRepository) ModelFromDTO(dto *model.ImageDTO) (*model.Image, error) {
+
+	return &model.Image{
+		ImageID: dto.ImageID,
+		Type:    model.ImageType(dto.Type),
+		OwnerID: dto.OwnerID,
+	}, nil
 }

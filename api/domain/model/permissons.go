@@ -41,4 +41,8 @@ const (
 	CreatSeat      PermissionName = "creat_seat"
 	DeleteSeat     PermissionName = "delete_seat"
 	UpdateSeat     PermissionName = "update_seat"
+	ReadImage      PermissionName = "read_image"
+	CreatImage     PermissionName = "creat_image"
+	DeleteImage    PermissionName = "delete_image"
+	UpdateImage    PermissionName = "update_image"
 )

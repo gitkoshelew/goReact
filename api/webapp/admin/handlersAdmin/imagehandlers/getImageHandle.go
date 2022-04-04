@@ -1,8 +1,9 @@
-package employeehandlers
+package imagehandlers
 
 import (
 	"fmt"
-	"goReact/domain/model"
+	"image/jpeg"
+
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
 	"net/http"
@@ -11,14 +12,11 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permissionDelete model.Permission = model.Permission{Name: model.DeleteEmployee}
-
-// DeleteEmployee ...
-func DeleteEmployee(s *store.Store) httprouter.Handle {
+// GetImageHandle ...
+func GetImageHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permissionDelete.Name)
+		err := session.CheckRigths(w, r, permissionRead.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
@@ -31,17 +29,30 @@ func DeleteEmployee(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
 			return
 		}
+
+		format := r.FormValue("Format")
+
 		err = s.Open()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		err = s.Employee().Delete(id)
+
+		imageDTO, err := s.Image().FindByID(id)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while deleting  employee. Err msg:%v. ", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Error occured while getting image by id. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
-		http.Redirect(w, r, "/admin/homeemployees", http.StatusFound)
 
+		imageDTO.Format = format
+
+		image, err := s.ImageRepository.GetImageFromLocalStore(imageDTO)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while getting image file. Err msg: %v.", err), http.StatusInternalServerError)
+			s.Logger.Errorf("Error occured while getting image file. Err msg: %v:", err)
+			return
+		}
+
+		jpeg.Encode(w, *image, nil)
 	}
 }
