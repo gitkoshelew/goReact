@@ -6,6 +6,7 @@ import (
 	bookinghandlers "goReact/webapp/admin/handlersAdmin/bookingHandlers"
 	employeehandlers "goReact/webapp/admin/handlersAdmin/employeeHandlers"
 	hotelhandlers "goReact/webapp/admin/handlersAdmin/hotelHandlers"
+	"goReact/webapp/admin/handlersAdmin/imagehandlers"
 	"goReact/webapp/admin/handlersAdmin/permission"
 	pethandlers "goReact/webapp/admin/handlersAdmin/petHandlers"
 	roomhandlers "goReact/webapp/admin/handlersAdmin/roomHandlers"
@@ -89,5 +90,17 @@ func (s *Server) configureRoutesAdmin() {
 	s.router.Handle("GET", "/admin/permissionsemployyes", permission.AllPermissionsEmployees(store.New(s.config)))
 	s.router.Handle("POST", "/admin/set", permission.AddPermissionsEmployee(store.New(s.config)))
 
+	//Image
+	s.router.Handle("GET", "/admin/homeimages", imagehandlers.HomeImageHandler(store.New(s.config)))
+	s.router.Handle("GET", "/admin/images", imagehandlers.GetAllImagesHandle(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/id", imagehandlers.GetImageHandle(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/delete", imagehandlers.DeleteImageHandle(store.New(s.config)))
+	s.router.Handle("POST", "/admin/image/upload", imagehandlers.SaveJPEGHandle(store.New(s.config)))
+	s.router.Handle("POST", "/admin/image/update", imagehandlers.UpdateImage(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/downloand/", imagehandlers.DownloandImage(store.New(s.config), download.DownloadFileHandler(store.New(s.config))))
+
+
 	s.router.ServeFiles("/templates/*filepath", http.Dir("templates"))
 }
+
+

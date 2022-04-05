@@ -1,9 +1,10 @@
-package bookinghandlers
+package imagehandlers
 
 import (
+	"context"
 	"fmt"
-	"goReact/domain/model"
 	"goReact/domain/store"
+	"goReact/webapp/admin/middlewear"
 	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
@@ -11,14 +12,11 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var permissionDelete model.Permission = model.Permission{Name: model.DeleteBooking}
-
-// DeleteBooking ....
-func DeleteBooking(s *store.Store) httprouter.Handle {
+// DownloandImage
+func DownloandImage(s *store.Store, next http.Handler) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
 		session.CheckSession(w, r)
-		err := session.CheckRigths(w, r, permissionDelete.Name)
+		err := session.CheckRigths(w, r, permissionRead.Name)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusForbidden)
 			s.Logger.Errorf("Access is denied. Err msg:%v. ", err)
@@ -29,20 +27,26 @@ func DeleteBooking(s *store.Store) httprouter.Handle {
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("id"))
-			http.Redirect(w, r, "/admin/homebookings", http.StatusFound)
 			return
 		}
+
+		format := r.FormValue("Format")
+
 		err = s.Open()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		err = s.Booking().Delete(id)
+
+		imageDTO, err := s.Image().FindByID(id)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while deleting booking. Err msg:%v. ", err), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error occured while getting image by id. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
-		http.Redirect(w, r, "/admin/homebookings", http.StatusFound)
 
+		imageDTO.Format = format
+		path := fmt.Sprintf("images/%s/id-%d/image-%s.jpg", imageDTO.Type, imageDTO.OwnerID, imageDTO.Format)
+
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), middlewear.CtxKeyFile, path)))
 	}
 }
