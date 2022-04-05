@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+//TestBooking_Validate..
 func TestBooking_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
