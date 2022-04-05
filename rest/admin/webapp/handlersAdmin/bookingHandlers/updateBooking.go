@@ -39,7 +39,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		bookingDTO, err := s.Booking().FindByID(id)
+		b, err := s.Booking().FindByID(id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while finding booking by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
@@ -48,7 +48,12 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		seatID, err := strconv.Atoi(r.FormValue("SeatID"))
 		if err == nil {
 			if seatID != 0 {
-				bookingDTO.SeatID = seatID
+				seat, err := s.Seat().FindByID(seatID)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Error occured while finding seat by id. Err msg:%v. ", err), http.StatusBadRequest)
+					return
+				}
+				b.Seat = *seat
 			}
 
 		}
@@ -56,7 +61,12 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		petID, err := strconv.Atoi(r.FormValue("PetID"))
 		if err == nil {
 			if petID != 0 {
-				bookingDTO.PetID = petID
+				pet, err := s.Pet().FindByID(petID)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Error occured while finding pet by id. Err msg:%v. ", err), http.StatusBadRequest)
+					return
+				}
+				b.Pet = *pet
 			}
 
 		}
@@ -64,14 +74,19 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 		employeeID, err := strconv.Atoi(r.FormValue("EmployeeID"))
 		if err == nil {
 			if employeeID != 0 {
-				bookingDTO.EmployeeID = employeeID
+				employee, err := s.Employee().FindByID(employeeID)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Error occured while finding employee by id. Err msg:%v. ", err), http.StatusBadRequest)
+					return
+				}
+				b.Employee = *employee
 			}
 
 		}
 
 		status := r.FormValue("Status")
 		if status != "" {
-			bookingDTO.Status = status
+			b.Status = model.BookingStatus(status)
 		}
 
 		layout := "2006-01-02"
@@ -83,7 +98,7 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("StartDate"))
 				return
 			}
-			bookingDTO.StartDate = &startDate
+			b.StartDate = startDate
 		}
 
 		endDate := r.FormValue("EndDate")
@@ -94,45 +109,33 @@ func UpdateBooking(s *store.Store) httprouter.Handle {
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("EndDate"))
 				return
 			}
-			bookingDTO.EndDate = &endDate
+			b.EndDate = endDate
 		}
 
 		notes := r.FormValue("Notes")
 		if notes != "" {
-			bookingDTO.Notes = notes
+			b.Notes = notes
 		}
 
 		paid := r.FormValue("Paid")
 		if paid != "" {
 			paid, err := strconv.ParseBool(paid)
 			if err != nil {
-				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Paid")), http.StatusBadRequest)
+				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("paid")), http.StatusBadRequest)
 				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Paid"))
 				return
 			}
-			bookingDTO.Paid = &paid
+			b.Paid = paid
 		}
 
-		transactionID, err := strconv.Atoi(r.FormValue("TransactionID"))
-		if err == nil {
-			if employeeID != 0 {
-				bookingDTO.TransactionID = transactionID
-			}
-		}
-
-		err = bookingDTO.Validate()
+		err = b.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
-		booking, err := s.Booking().ModelFromDTO(bookingDTO)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
-			return
-		}
 
-		err = s.Booking().Update(booking)
+		err = s.Booking().Update(b)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while updating booking. Err msg:%v. ", err), http.StatusBadRequest)
 			return

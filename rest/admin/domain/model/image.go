@@ -1,6 +1,6 @@
 package model
 
-// Image struct
+// Image struct 
 type Image struct {
 	ImageID int       `json:"imageId"`
 	Type    ImageType `json:"type"`

@@ -14,9 +14,7 @@
         <th>PetType</th>
         <th>Hotel</th>
         <th>RoomPhotoURL</th>
-        <td>Description</td>
-        <td>Square</td>
-
+        
 
         {{range . }}
         <tr>
@@ -25,8 +23,6 @@
             <td>{{.PetType}}</td>
             <td>{{.HotelID}}</td>
             <td>{{.PhotoURL}}</td>
-            <td>{{.Description}}</td>
-            <td>{{.Square}}</td>
 
         </tr>
         {{end}}

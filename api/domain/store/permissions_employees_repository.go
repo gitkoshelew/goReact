@@ -11,19 +11,19 @@ type PermissionsEmployeeRepository struct {
 }
 
 // GetAll ...
-func (r *PermissionsEmployeeRepository) GetAll() (*[]model.PermissionsEmployeesDTO, error) {
+func (r *PermissionsEmployeeRepository) GetAll() (*[]model.PermissionsEmployees, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM permissions_employees")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occurred while getting all permissions for employees. Err msg: %v", err)
 	}
 
-	permissionsEmployees := []model.PermissionsEmployeesDTO{}
+	permissionsEmployees := []model.PermissionsEmployees{}
 
 	for rows.Next() {
-		permissionEmployees := model.PermissionsEmployeesDTO{}
+		permissionEmployees := model.PermissionsEmployees{}
 		err := rows.Scan(
-			&permissionEmployees.PermissionsID,
-			&permissionEmployees.EmployeeID,
+			&permissionEmployees.Permissions.PermissionID,
+			&permissionEmployees.Employee.EmployeeID,
 		)
 		if err != nil {
 			r.Store.Logger.Errorf("Error occurred while getting all permissions for employees. Err msg: %v", err)
@@ -35,11 +35,11 @@ func (r *PermissionsEmployeeRepository) GetAll() (*[]model.PermissionsEmployeesD
 }
 
 //SetForEmployee set permissions for employee
-func (r *PermissionsEmployeeRepository) SetForEmployee(pe *model.PermissionsEmployees) error {
+func (r *PermissionsEmployeeRepository) SetForEmployee(PermissionID int, employeeID int) error {
 
-	result, err := r.Store.Db.Exec("INSERT INTO permissions_employees (permissions_id, employee_id) VALUES ($1, $2)", pe.Permissions.PermissionID, pe.Employee.EmployeeID)
+	result, err := r.Store.Db.Exec("INSERT INTO permissions_employees (permissions_id, employee_id) VALUES ($1, $2)", PermissionID, employeeID)
 	if err != nil {
-		r.Store.Logger.Info("Permissions for employees seted: %d", result)
+		r.Store.Logger.Infof("Permissions for employees seted: %d", result)
 		return err
 	}
 	rowsAffected, err := result.RowsAffected()
@@ -54,28 +54,7 @@ func (r *PermissionsEmployeeRepository) SetForEmployee(pe *model.PermissionsEmpl
 		return err
 	}
 
-	r.Store.Logger.Info("Permissions for employees seted: %d", result)
+	r.Store.Logger.Infof("Permissions for employees seted: %d", result)
 	return nil
 
-}
-
-// ModelFromDTO ...
-func (r *PermissionsEmployeeRepository) ModelFromDTO(dto *model.PermissionsEmployeesDTO) (*model.PermissionsEmployees, error) {
-	per, err := r.Store.Permissions().FindByID(dto.PermissionsID)
-	if err != nil {
-		return nil, err
-	}
-	employeeDTO, err := r.Store.Employee().FindByID(dto.EmployeeID)
-	if err != nil {
-		return nil, err
-	}
-	employee, err := r.Store.Employee().ModelFromDTO(employeeDTO)
-	if err != nil {
-		return nil, err
-	}
-
-	return &model.PermissionsEmployees{
-		Permissions: *per,
-		Employee:    *employee,
-	}, nil
 }

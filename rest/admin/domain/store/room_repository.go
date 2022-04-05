@@ -2,7 +2,7 @@ package store
 
 import (
 	"admin/domain/model"
-	"fmt"
+	"errors"
 )
 
 // RoomRepository ...
@@ -11,47 +11,39 @@ type RoomRepository struct {
 }
 
 // Create room and save it to DB
-func (r *RoomRepository) Create(room *model.Room) (*int, error) {
+func (r *RoomRepository) Create(rm *model.Room) (*model.Room, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room (pet_type, number, hotel_id , photoUrl, description , square) VALUES ($1, $2, $3, $4, $4, $5 , 6) RETURNING id",
-		room.PetType,
-		room.RoomNumber,
-		room.Hotel.HotelID,
-		room.PhotoURL,
-		room.Description,
-		room.Square,
-	).Scan(&room.RoomID); err != nil {
-		r.Store.Logger.Errorf("Error occured while creating room. Err msg: %v.", err)
+		"INSERT INTO room (pet_type, number, hotel_id , photo) VALUES ($1, $2, $3, $4) RETURNING id",
+		string(rm.PetType),
+		rm.RoomNumber,
+		rm.Hotel.HotelID,
+		rm.RoomPhotoURL).Scan(&rm.RoomID); err != nil {
+		r.Store.Logger.Errorf("Error occured while creating room. Err msg:%v.", err)
 		return nil, err
 	}
-
-	r.Store.Logger.Infof("Room with id %d was created.", room.RoomID)
-
-	return &room.RoomID, nil
+	r.Store.Logger.Info("Created room with id = %d", rm.RoomID)
+	return rm, nil
 }
 
 // GetAll returns all rooms
-func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
+func (r *RoomRepository) GetAll() (*[]model.Room, error) {
 	rows, err := r.Store.Db.Query("SELECT * FROM room")
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while getting all rooms. Err msg: %v", err)
-		return nil, err
+		r.Store.Logger.Errorf("Error occurred while getting all rooms. Err msg: %v", err)
 	}
-	rooms := []model.RoomDTO{}
+	rooms := []model.Room{}
 
 	for rows.Next() {
-		room := model.RoomDTO{}
+		room := model.Room{}
 		err := rows.Scan(
 			&room.RoomID,
 			&room.RoomNumber,
 			&room.PetType,
-			&room.HotelID,
-			&room.PhotoURL,
-			&room.Description,
-			&room.Square,
+			&room.Hotel.HotelID,
+			&room.RoomPhotoURL,
 		)
 		if err != nil {
-			r.Store.Logger.Debugf("Error occured while getting all rooms. Err msg: %v", err)
+			r.Store.Logger.Errorf("Error occurred while getting all rooms. Err msg: %v", err)
 			continue
 		}
 		rooms = append(rooms, room)
@@ -60,132 +52,59 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 }
 
 //FindByID searchs and returns room by ID
-func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
-	roomDTO := &model.RoomDTO{}
+func (r *RoomRepository) FindByID(id int) (*model.Room, error) {
+	room := &model.Room{}
 	if err := r.Store.Db.QueryRow("SELECT * FROM room WHERE id = $1",
 		id).Scan(
-		&roomDTO.RoomID,
-		&roomDTO.RoomNumber,
-		&roomDTO.PetType,
-		&roomDTO.HotelID,
-		&roomDTO.PhotoURL,
-		&roomDTO.Description,
-		&roomDTO.Square,
+		&room.RoomID,
+		&room.RoomNumber,
+		&room.PetType,
+		&room.Hotel.HotelID,
+		&room.RoomPhotoURL,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while getting room by id. Err msg: %v.", err)
+		r.Store.Logger.Errorf("Error occurred while getting room by id. Err msg:%v.", err)
 		return nil, err
 	}
-
-	return roomDTO, nil
+	return room, nil
 }
 
 // Delete room from DB by ID
 func (r *RoomRepository) Delete(id int) error {
 	result, err := r.Store.Db.Exec("DELETE FROM room WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting room. Err msg:%v.", err)
 		return err
 	}
-
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %v.", err)
+		r.Store.Logger.Errorf("Error occurred while deleting room. Err msg:%v.", err)
 		return err
 	}
 
 	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %v.", ErrNoRowsAffected)
-		return ErrNoRowsAffected
+		err := errors.New("no rows affected")
+		r.Store.Logger.Errorf("Error occurred while deleting room. Err msg:%v.", err)
+		return err
 	}
-
-	r.Store.Logger.Infof("Room with id %d was deleted", id)
+	r.Store.Logger.Info("Room deleted, rows affectet: %d", result)
 	return nil
 }
 
 // Update room from DB
 func (r *RoomRepository) Update(rm *model.Room) error {
 
-	number := "number"
-	if rm.RoomNumber != 0 {
-		number = fmt.Sprintf("%d", rm.RoomNumber)
-	}
-	petType := "pet_type"
-	if rm.PetType != "" {
-		petType = fmt.Sprintf("'%s'", string(rm.PetType))
-	}
-	hotelID := "hotel_id"
-	if rm.Hotel.HotelID != 0 {
-		hotelID = fmt.Sprintf("%d", rm.Hotel.HotelID)
-	}
-	photoURL := "photoUrl"
-	if rm.PhotoURL != "" {
-		photoURL = fmt.Sprintf("'%s'", rm.PhotoURL)
-	}
-	description := "description"
-	if rm.Description != "" {
-		description = fmt.Sprintf("'%s'", rm.Description)
-	}
-	square := "square"
-	if rm.Square != 0 {
-		square = fmt.Sprintf("%f", rm.Square)
-	}
-	result, err := r.Store.Db.Exec(fmt.Sprintf(
-		`UPDATE room SET 
-		number = %s, pet_type = %s, hotel_id = %s, photoUrl = %s , description = %s , square = %s
-		WHERE id = $1`,
-		number,
-		petType,
-		hotelID,
-		photoURL,
-		description,
-		square,
-	), rm.RoomID)
-	if err != nil {
-		r.Store.Logger.Errorf("Error occured while updating room. Err msg: %v.", err)
-		return err
-	}
-
-	rowsAffected, err := result.RowsAffected()
+	result, err := r.Store.Db.Exec(
+		"UPDATE room SET number = $1, pet_type = $2, hotel_id = $3, photo = $4 WHERE id = $5",
+		rm.RoomNumber,
+		string(rm.PetType),
+		rm.Hotel.HotelID,
+		rm.RoomPhotoURL,
+		rm.RoomID,
+	)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating room. Err msg:%v.", err)
 		return err
 	}
-
-	if rowsAffected < 1 {
-		r.Store.Logger.Errorf("Error occured while updating room. Err msg:%v.", ErrNoRowsAffected)
-		return ErrNoRowsAffected
-	}
-
-	r.Store.Logger.Infof("Room with id %d was updated", rm.RoomID)
+	r.Store.Logger.Info("Updated room with id = %d,rows affectet: %d ", rm.RoomID, result)
 	return nil
-}
-
-// GetTotalRows ...
-func (r *RoomRepository) GetTotalRows() (int, error) {
-	var c int
-	err := r.Store.Db.QueryRow("SELECT COUNT(*) FROM ROOM").Scan(&c)
-	if err != nil {
-		r.Store.Logger.Errorf("Error occured counting  rooms. Err msg: %v", err)
-		return 0, err
-	}
-
-	return c, nil
-}
-
-// ModelFromDTO ...
-func (r *RoomRepository) ModelFromDTO(dto *model.RoomDTO) (*model.Room, error) {
-	hotel, err := r.Store.Hotel().FindByID(dto.HotelID)
-	if err != nil {
-		return nil, err
-	}
-
-	return &model.Room{
-		RoomID:      dto.RoomID,
-		RoomNumber:  dto.RoomNumber,
-		PetType:     model.PetType(dto.PetType),
-		Hotel:       *hotel,
-		PhotoURL:    dto.PhotoURL,
-		Description: dto.Description,
-		Square:      dto.Square,
-	}, nil
 }

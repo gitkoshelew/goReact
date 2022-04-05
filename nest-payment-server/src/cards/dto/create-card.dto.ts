@@ -1,12 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, Length } from 'class-validator';
+import { IsAlpha, IsEmail, IsString, Length } from 'class-validator';
 
 export class CreateCardDto {
   @ApiProperty({ example: 'Ivan', description: 'FirstName' })
   @IsString({ message: 'Should be a string' })
+  @Length(2, 30, { message: 'Must contain exactly 4 characters' })
+  @IsAlpha()
   readonly firstName: string;
   @ApiProperty({ example: 'Ivanov', description: 'LastName' })
   @IsString({ message: 'Should be a string' })
+  @Length(2, 30, { message: 'Must contain exactly 4 characters' })
+  @IsAlpha()
   readonly lastName: string;
   @ApiProperty({ example: 'ivanov@mail.ru', description: 'Email' })
   @IsString({ message: 'Should be a string' })

@@ -8,6 +8,8 @@ RUN npm ci
 
 COPY . .
 
+RUN npm run build
+
 RUN chmod +x wait-for-postgres.sh
 
 CMD ["npm", "run", "start"]

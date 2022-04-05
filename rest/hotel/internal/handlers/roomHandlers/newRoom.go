@@ -46,7 +46,6 @@ func CreateRoom(s *store.Store) httprouter.Handle {
 			PetType:    model.PetType(req.PetType),
 			Hotel:      *hotel,
 			PhotoURL:   req.PhotoURL,
-			Description: req.Description,
 		}
 
 		_, err = s.Room().Create(&room)

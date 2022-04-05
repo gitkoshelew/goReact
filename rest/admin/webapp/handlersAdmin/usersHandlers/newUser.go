@@ -34,7 +34,6 @@ func NewUser(s *store.Store) httprouter.Handle {
 
 		email := r.FormValue("Email")
 		password := r.FormValue("Password")
-
 		role := r.FormValue("Role")
 		verified, err := strconv.ParseBool(r.FormValue("Verified"))
 		if err != nil {
@@ -58,37 +57,37 @@ func NewUser(s *store.Store) httprouter.Handle {
 		phone := r.FormValue("Phone")
 		photo := r.FormValue("Photo")
 
-		userDTO := model.UserDTO{
+		u := model.User{
 			UserID:      0,
 			Email:       email,
 			Password:    password,
-			Role:        role,
+			Role:        model.Role(role),
 			Name:        name,
 			Surname:     surname,
 			MiddleName:  middleName,
-			Sex:         sex,
+			Sex:         model.Sex(sex),
 			Address:     address,
 			Phone:       phone,
 			Photo:       photo,
-			Verified:    &verified,
-			DateOfBirth: &dateOfBirth,
+			Verified:    verified,
+			DateOfBirth: dateOfBirth,
 		}
 
-		err = userDTO.Validate()
+		err = u.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		user , err := s.User().ModelFromDTO(&userDTO)
+		err = u.WithEncryptedPassword()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v.", err)
 			return
 		}
 
-		_, err = s.User().Create(user)
+		_, err = s.User().Create(&u)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating user. Err msg:%v. ", err), http.StatusInternalServerError)
 			return

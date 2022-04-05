@@ -38,7 +38,7 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		employeeDTO, err := s.Employee().FindByID(employeeID)
+		employee, err := s.Employee().FindByID(employeeID)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while getting employee by id. Err msg:%v. ", err), http.StatusBadRequest)
 			return
@@ -47,34 +47,39 @@ func UpdateEmployee(s *store.Store) httprouter.Handle {
 		userID, err := strconv.Atoi(r.FormValue("UserID"))
 		if err == nil {
 			if userID != 0 {
-				employeeDTO.UserID = userID
+				user, err := s.User().FindByID(userID)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Error occured while getting user by id. Err msg:%v. ", err), http.StatusBadRequest)
+					return
+				}
+				employee.User = *user
 			}
 		}
 
 		hotelID, err := strconv.Atoi(r.FormValue("HotelID"))
 		if err == nil {
 			if hotelID != 0 {
-				employeeDTO.HotelID = hotelID
+				hotel, err := s.Hotel().FindByID(hotelID)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v. ", err), http.StatusBadRequest)
+					return
+				}
+				employee.Hotel = *hotel
 			}
 		}
 
 		position := r.FormValue("Position")
 		if position != "" {
-			employeeDTO.Position = position
+			employee.Position = model.Position(position)
 		}
 
-		err = employeeDTO.Validate()
+		err = employee.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		employee, err := s.Employee().ModelFromDTO(employeeDTO)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
-			return
-		}
 		err = s.Employee().Update(employee)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while updating employee. Err msg:%v. ", err), http.StatusBadRequest)
