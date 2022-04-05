@@ -13,7 +13,7 @@ import (
 
 var permissionDelete model.Permission = model.Permission{Name: model.DeleteBooking}
 
-// DeleteBooking ...
+// DeleteBooking ....
 func DeleteBooking(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
