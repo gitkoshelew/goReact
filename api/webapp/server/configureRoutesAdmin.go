@@ -96,6 +96,8 @@ func (s *Server) configureRoutesAdmin() {
 	s.router.Handle("GET", "/admin/image/delete", imagehandlers.DeleteImageHandle(store.New(s.config)))
 	s.router.Handle("POST", "/admin/image/upload", imagehandlers.SaveJPEGHandle(store.New(s.config)))
 	s.router.Handle("POST", "/admin/image/update", imagehandlers.UpdateImage(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/downloand/", imagehandlers.DownloandImage(store.New(s.config), download.DownloadFileHandler(store.New(s.config))))
+
 
 	s.router.ServeFiles("/templates/*filepath", http.Dir("templates"))
 }

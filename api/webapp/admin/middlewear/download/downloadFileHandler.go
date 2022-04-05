@@ -1,6 +1,7 @@
 package download
 
 import (
+	"fmt"
 	"goReact/domain/store"
 	"goReact/webapp/admin/middlewear"
 	"goReact/webapp/admin/session"
@@ -18,14 +19,14 @@ func DownloadFileHandler(s *store.Store) http.HandlerFunc {
 
 		path, err := middlewear.CtxFile(r.Context())
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Error occured while parsing file: %v", err), http.StatusInternalServerError)
 			s.Logger.Errorf("Error occured while parsing file: %v", err)
 			return
 		}
 
 		file, err := os.Open(path)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Error occured while parsing file: %v", err), http.StatusInternalServerError)
 			s.Logger.Errorf("Error occured while parsing file: %v", err)
 			return
 		}
@@ -40,7 +41,7 @@ func DownloadFileHandler(s *store.Store) http.HandlerFunc {
 
 		_, err = io.Copy(w, file)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Error occured while sending file: %v", err), http.StatusInternalServerError)
 			s.Logger.Errorf("Error occured while sending file: %v", err)
 			return
 		}
