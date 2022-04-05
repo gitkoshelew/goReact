@@ -41,26 +41,18 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 	seats := []model.SeatDTO{}
 	for rows.Next() {
 		seat := model.SeatDTO{}
-		var timeFrom []pq.NullTime
-		var timeTo []pq.NullTime
 		err := rows.Scan(
 			&seat.SeatID,
 			&seat.RoomID,
 			&seat.Description,
-			&timeFrom,
-			&timeTo,
+			pq.Array(&seat.RentFrom),
+			pq.Array(&seat.RentTo),
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
 			continue
 		}
-		r.Store.Logger.Debugf("%v %v", timeFrom, timeTo)
-		for _, t := range timeFrom {
-			seat.RentFrom = append(seat.RentFrom, &t.Time)
-		}
-		for _, t := range timeTo {
-			seat.RentTo = append(seat.RentTo, &t.Time)
-		}
+
 		seats = append(seats, seat)
 	}
 	return &seats, nil
