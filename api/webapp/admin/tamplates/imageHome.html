@@ -13,7 +13,7 @@
 
 <body>
 
-	{{if .HasPermission "delete_image"}}
+	{{if .HasPermission "read_image"}}
 	<div>
 		<h2>Images</h2>
 		<form action="/admin/images" method="GET">
@@ -41,7 +41,22 @@
 		</form>
 	</div>
 	{{end}}
-
+	<br><br>
+	{{if .HasPermission "read_image"}}
+	<div>
+		<form action="/admin/image/downloand" download method="GET">
+			<th>Download image by id</th>
+			<input type="number" name="id" min="1" required><br><br>
+			<select name="Format">
+				<option value="original">original</option>
+				<option value="QVGA">QVGA</option>
+				<option value="VGA">VGA</option>
+				<option value="HD720p">HD720p</option>
+			</select>
+			<button>Get</button>
+		</form>
+	</div>
+	{{end}}
 
 	<br><br>
 
