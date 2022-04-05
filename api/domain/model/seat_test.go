@@ -31,20 +31,11 @@ func TestSeat_Validate(t *testing.T) {
 			isValid: false,
 		},
 		{
-			name: "SQL Description",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				seat.Description = "ALt **%#--eR"
-				return seat
-			},
-			isValid: false,
-		},
-		{
 			name: "invalid RentFrom",
 			b: func() *model.SeatDTO {
 				seat := model.TestSeatDTO()
 				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = []*time.Time{&rentFrom}
+				seat.RentFrom = &rentFrom
 				return seat
 			},
 			isValid: false,
@@ -63,7 +54,7 @@ func TestSeat_Validate(t *testing.T) {
 			b: func() *model.SeatDTO {
 				seat := model.TestSeatDTO()
 				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = []*time.Time{&rentFrom}
+				seat.RentFrom = &rentFrom
 				return seat
 			},
 			isValid: false,
@@ -73,6 +64,15 @@ func TestSeat_Validate(t *testing.T) {
 			b: func() *model.SeatDTO {
 				seat := model.TestSeatDTO()
 				seat.RentTo = nil
+				return seat
+			},
+			isValid: false,
+		},
+		{
+			name: "invalid Price",
+			b: func() *model.SeatDTO {
+				seat := model.TestSeatDTO()
+				seat.Price = -10
 				return seat
 			},
 			isValid: false,
