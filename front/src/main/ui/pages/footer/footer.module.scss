@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.footerBlock {
+  display: flex;
+  flex-direction: column;
+  background-color: $secondary-contrast-color;
+  .footerTitle {
+    display: flex;
+    padding: 20px 0;
+  }
+}

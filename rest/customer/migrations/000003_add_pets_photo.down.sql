@@ -1,0 +1,2 @@
+ALTER TABLE PET  
+DROP COLUMN      photoURL     CASCADE;

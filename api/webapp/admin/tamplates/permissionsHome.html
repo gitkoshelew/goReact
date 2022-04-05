@@ -1,0 +1,61 @@
+{{template "base" .}}
+
+{{define "title"}}Permissions{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Permissions</title>
+</head>
+
+<body>
+    <div>
+        <h2>Permissions</h2>
+        <form action="/admin/permissions">
+            <button>all permissions</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Employees</h2>
+        <form action="/admin/employees">
+            <button>all employees</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Permissions_employyes</h2>
+        <form action="/admin/permissionsemployyes">
+            <button>Permissions_employyes</button>
+        </form>
+    </div>
+
+    <br><br>
+
+    <div>
+        <form action="/admin/permissionsemployee" method="GET">
+            <th>Get permissions by employey id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Get</button>
+        </form>
+    </div>
+
+    <br><br>
+
+
+
+    <div>
+        <form action="/admin/addpermissions" method="GET">
+            <button>Set permissions</button>
+
+        </form>
+    </div>
+
+
+
+
+</body>
+{{end}}

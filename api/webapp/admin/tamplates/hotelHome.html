@@ -1,0 +1,87 @@
+{{template "base" .}}
+
+{{define "title"}}Hotels{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+
+    {{if .HasPermission "read_hotel"}}
+    <div>
+        <h2>Hotels</h2>
+        <form action="/admin/hotels">
+            <button>all hotels</button>
+        </form>
+    </div>
+    {{end}}
+    <br><br>
+
+    {{if .HasPermission "read_hotel"}}
+    <form action="/admin/hotels/id/" method="GET">
+        <th>Get hotel by id</th>
+        <input type="number" name="id" min="1" required><br><br>
+        <button>Get</button>
+    </form>
+    {{end}}
+    <br><br>
+
+    {{if .HasPermission "delete_hotel"}}
+    <div>
+        <form action="/admin/hotels/delete/" method="POST">
+            <th>Delete hotel by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Delete</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "creat_hotel"}}
+    <div>
+        <h2>Create hotel</h2>
+        <form action="/admin/hotels/new" method="POST">
+
+            <th>Name</th>
+            <input type="text" name="Name" required>
+            <th>Address</th>
+            <input type="text" name="Address" required><br><br>
+            <th>Coordinates(lat )</th>
+            <input type="number" name="Lat" min=0 step="any" required>
+            <th>Coordinates(lon)</th>
+            <input type="number" name="Lon" min=0 step="any" required>
+            <button>New</button>
+
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+    {{if .HasPermission "update_hotel"}}
+    <div>
+        <h2>Update hotel</h2>
+        <form action="/admin/hotels/update" method="POST">
+            <th>Hotel id</th>
+            <input type="number" name="HotelID" min="1" required><br><br>
+            <th>Name</th>
+            <input type="text" name="Name">
+            <th>Address</th>
+            <input type="text" name="Address"><br><br>
+            <th>Coordinates(lat )</th>
+            <input type="string" name="Lat" required>
+            <th>Coordinates(lon)</th>
+            <input type="string" name="Lon" required>
+            <button>Update</button>
+
+        </form>
+    </div>
+    {{end}}
+
+</body>
+
+{{end}}

@@ -1,0 +1,53 @@
+@use '../../../styles/breakpoints' as bp;
+@import '../../../styles/variables';
+
+.usefulLinksBlock {
+  flex-direction: column;
+  position: relative;
+  display: none;
+
+  :after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    top: 76px;
+  }
+
+  @media (min-width: bp.$md) {
+    display: flex;
+    margin-left: 50px;
+  }
+
+  @media (min-width: 900px) {
+    margin-left: 120px;
+  }
+  @media (min-width: 1024px) {
+    margin-left: 185px;
+  }
+
+  @media (min-width: bp.$xl) {
+    margin-left: 85px;
+  }
+
+  .linksTitle {
+    font-family: $main-fonts;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: $main-background-color;
+    margin: 35px 0 58px 0;
+  }
+
+  .linksList {
+    display: flex;
+
+    .groupOfLinks {
+      margin-right: 120px;
+    }
+  }
+}

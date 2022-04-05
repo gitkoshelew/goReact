@@ -1,0 +1,94 @@
+{{template "base" .}}
+
+{{define "title"}}rooms{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+<body>
+
+    {{if .HasPermission "read_room"}}
+    <div>
+        <h2>Rooms</h2>
+        <form action="/admin/rooms">
+            <button>all rooms</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "read_room"}}
+    <div>
+        <form action="/admin/rooms/id" method="GET">
+            <th>Get room by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Get</button>
+        </form>
+    </div>
+    {{end}}
+
+    <br><br>
+
+    {{if .HasPermission "delete_room"}}
+    <div>
+        <form action="/admin/rooms/delete/" method="POST">
+            <th>Delete room by id</th>
+            <input type="number" name="id" min="1" required><br><br>
+            <button>Delete</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "creat_room"}}
+    <div>
+        <h2>Create room</h2>
+        <form action="/admin/rooms/new" method="POST">
+            <th>Room number</th>
+            <input type="number" name="RoomNumber" min=1 required>
+            <th>Pet type</th>
+            <input type="radio" name="PetType" value="cat" id="PetType" required>
+            <label for="PetType1">cat</label>
+            <input type="radio" name="PetType" value="dog" id="PetType" required>
+            <label for="PetType2">dog</label>
+            <br><br>
+            <th>Hotel id</th>
+            <input type="number" name="HotelID" min=1 required>
+            <th>Photo URL</th>
+            <input type="text" name="Photo"><br><br>
+            <button>New</button>
+        </form>
+    </div>
+    {{end}}
+    <br><br>
+    {{if .HasPermission "update_room"}}
+    <div>
+        <h2>Update room</h2>
+        <form action="/admin/rooms/update" method="POST">
+            <th>Room id</th>
+            <input type="number" name="RoomID" min="1" required><br><br>
+            <th>Room number</th>
+            <input type="number" name="RoomNumber" min=1>
+            <th>Pet type</th>
+            <input type="radio" name="PetType" value="cat" id="PetType">
+            <label for="PetType1">cat</label>
+            <input type="radio" name="PetType" value="dog" id="PetType">
+            <label for="PetType2">dog</label>
+            <br><br>
+            <th>Hotel id</th>
+            <input type="number" name="HotelID" min=1>
+            <th>Photo URL</th>
+            <input type="text" name="Photo"><br><br>
+            <button>Update</button>
+        </form>
+    </div>
+    {{end}}
+
+</body>
+{{end}}

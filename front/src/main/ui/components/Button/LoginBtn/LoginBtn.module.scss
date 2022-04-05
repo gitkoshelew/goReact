@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+.loginBtnTitle {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  background: $secondary-background-color;
+  border-radius: 8px;
+  font-family: $main-fonts;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  color: $main-text-color;
+}

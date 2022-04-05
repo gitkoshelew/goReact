@@ -1,0 +1,10 @@
+.app {
+  width: 100%;
+  overflow: hidden;
+}
+.notificationContainer {
+  position: fixed;
+  top: 2%;
+  left: 83%;
+  z-index: 10000;
+}

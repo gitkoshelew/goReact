@@ -1,0 +1,528 @@
+{
+	"info": {
+		"_postman_id": "3c9e4401-6c35-4c7f-96d1-e97fce24925e",
+		"name": "goreact",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Monolith",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"email\": \"iv5hs9anass33s@mail.ru\",\r\n        \"password\": \"altesr\",\r\n        \"name\": \"Ivan\",\r\n        \"sName\": \"Ivanov\",\r\n        \"mName\": \"Ivanovich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user"
+									]
+								},
+								"description": "Create user and save into USERS table in DB\n\nPassword will be encrypred in server and then will be saved in DB\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n201 - http.StatusCreated"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjQzNzVlNDI1LTRiYzMtNGY5ZS04MDhmLWVkODhiNTFlYjlhOCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0NDk1NjI4MCwicm9sZSI6ImNsaWVudCIsInVzZXJfaWQiOjF9.JQBw4X6BHOl9aeUO20mHuEwd6eTiws_gUN8znNQq37s",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "Send a request to server to get all Users from DB.\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON massieve:\n\n\\[\n\n{   \n\n\"userId\": int,   \n\n\"email\": string,   \n\n\"role\": string,    \n\n\"verified\": bool,          \n\n\"name\": string,          \n\n\"sName\": string,             \n\n\"mName\": string,               \n\n\"sex\": string,   \n\n\"birthDate\": time.Time,     # format: \"2111-01-01\" #   \n\n\"address\": string,             \n\n\"phone\": string,             \n\n\"photo\": string            \n\n},\n\n{user JSON...},\n\n{user JSON...},\n\n...\n\n\\]"
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/user/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"7"
+									]
+								},
+								"description": "Return user from DB by userID. ID need to be set in URL params api/user/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"userId\": int,\n\n\"email\": string,\n\n\"role\": string,\n\n\"verified\": bool,\n\n\"name\": string,\n\n\"sName\": string,\n\n\"mName\": string,\n\n\"sex\": string,\n\n\"birthDate\": time.Time, # format: \"2111-01-01\" #\n\n\"address\": string,\n\n\"phone\": string,\n\n\"photo\": string\n\n}"
+							},
+							"response": []
+						}
+					],
+					"description": "## User's struct:\n\n| Field | type | JSON |\n| --- | --- | --- |\n| UserID | int | userId |\n| Email | string | \"email\" |\n| Password | string | \"password\" |\n| Role | string | \"role\" |\n| Verified | bool | \"verified\" |\n| Name | string | \"name |\n| Surname | string | \"sName\" |\n| MiddleName | string | \"mName\" |\n| Sex | string | \"sex\" |\n| DateOfBirth | time.Time | \"birthDate\" |\n| Address | string | \"address\" |\n| Phone | string | \"phone |\n| Photo | string | \"photo\" |"
+				},
+				{
+					"name": "Authentiction",
+					"item": [
+						{
+							"name": "Registration",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"email\": \"example@gmail.com\",\r\n        \"password\": \"password\",\r\n        \"role\": \"client\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"registration"
+									]
+								},
+								"description": "Create user. Giving back ID for user. If registration was successufull send email verification to user. If verification will be done changes verifiend field to true\n\n## Request data:\n\nJSON\n\n{\n\n\"email\": string,\n\n\"password\": string,\n\n\"role\": string, NOT NULL # \"client\", \"employee\", \"anonymous\" #\n\n\"verified\": bool, NOT NULL\n\n\"name\": string, NOT NULL\n\n\"sName\": string, NOT NULL\n\n\"mName\": string,\n\n\"sex\": string, NOT NULL\n\n\"birthDate\": time.Time, NOT NULL # format: RFC3339 #\n\n\"address\": string,\n\n\"phone\": string, NOT NULL\n\n\"photo\": string\n\n}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n201- http.StatusCreated\n\nSends mail to user for verification. After verification change field verified to true, role to \"client\""
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6Ijg5Nzk5MDhkLWYzMGItNDJiMi1iYmE4LWM5N2E0OTk4ZjZjMiIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTQyMzExMCwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.uFMa30dqQvqWv0Hl1xsvBLacaA2YAXiyZJt_mepo70Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"ivan@mail.ru\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								},
+								"description": "SImple login endpoint. Checks first if usser already logged in. If true return msg by response writer.\n\n### Request data:\n\n{\n\nEmail string NOT NULL\n\nPassword string NOT NULL\n\n}\n\nResponse data:\n\n400 - StatusBadRequest\n\n422- StatusUnprocessableEntity\n\n500 - StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nCookie: Refresh-Token\n\nHeader: access_token\n\n#### JSON:\n\n{\n\n\"userId\": int,\n\n\"email\": string,\n\n\"role\": string,\n\n\"verified\": bool,\n\n\"name\": string,\n\n\"sName\": string,\n\n\"mName\": string,\n\n\"sex\": string,\n\n\"birthDate\": time.Time, # format: \"2111-01-01\" #\n\n\"address\": string,\n\n\"phone\": string,\n\n\"photo\": string\n\n}"
+							},
+							"response": []
+						},
+						{
+							"name": "Me",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjUzNDRiZWU5LWVkYWMtNDk0MS05NDU0LWVhNzA4ZjJjYmI2NCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MjExNjM4OCwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.rwlB0F6moo7l6wB29WqE5RG0x3sqW8AhPJ8M4ED1_vI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"me"
+									]
+								},
+								"description": "Who Am I endpoin. Checks if user is authorized by using access token. If true giving back userId and user role. if false send msg that user is unauthorized\n\n### Request data:\n\nAuthorization Bearer Token\n\n### Response data:\n\n401-StatusUnauthorized\n\n200- http.StatusOK  \n{\n\n\"userId\": int,\n\n\"role\": string\n\n}"
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh Token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImIyMmZiMWYzLTlkZDktNGFkYi05ZmE3LWYxMWUwMTAxNzg2YyIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MTM3MTIwMSwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.Pu-K89BWmApnsxD3wEh0SFthY_arD7RUeuu3JLCFc2I",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"refresh"
+									]
+								},
+								"description": "Creates new access and refresh tokens and sends them back by header(access) and cookie(refresh). Needed valid refresh token\n\n### Request data:\n\nCookie: Refresh-Token\n\n### Response data:\n\n401 - StatusUnauthorized  \n422 - StatusUnprocessableEntity\n\n402 - StatusOK\n\nCookie: Refresh-Token\n\nHeader: access_token"
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjUzNDRiZWU5LWVkYWMtNDk0MS05NDU0LWVhNzA4ZjJjYmI2NCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0MjExNjM4OCwicm9sZSI6ImVtcGxveWVlIiwidXNlcl9pZCI6NH0.rwlB0F6moo7l6wB29WqE5RG0x3sqW8AhPJ8M4ED1_vI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"logout"
+									]
+								},
+								"description": "### Request data:\n\nAuthorization Bearer Token\n\n### Response data:\n\n401 - StatusUnauthorized  \n  \n200 - StatusOK\n\nCookie: Refresh-Token - null\n\nHeader: access_token - null"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Room",
+					"item": [
+						{
+							"name": "Get all rooms",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/rooms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"rooms"
+									]
+								},
+								"description": "Send a request to server to get all Rooms from DB.\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON massieve:\n\n\\[\n\n{\n\n\"roomId\": 1,\n\n\"roomNum\": 101,\n\n\"petType\": \"Cat\",\n\n\"hotelId\": 1,\n\n\"roomPhotoUrl\": \"roomPhotoUrl\"\n\n},\n\n....\n\n\\]"
+							},
+							"response": []
+						},
+						{
+							"name": "Get room by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:1110/api/ping",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "1110",
+									"path": [
+										"api",
+										"ping"
+									]
+								},
+								"description": "Return room from DB by roomID. ID need to be set in URL params api/room/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"roomId\": 1,\n\n\"roomNum\": 101,\n\n\"petType\": \"Cat\",\n\n\"hotelId\": 1,\n\n\"roomPhotoUrl\": \"roomPhotoUrl\"\n\n}"
+							},
+							"response": []
+						}
+					],
+					"description": "| **Field** | **type** | **JSON** |\n| --- | --- | --- |\n| RoomID | int | roomId |\n| RoomNumber | int | roomNum |\n| PetType | string | petType |\n| HotelID | int | hotelId |\n| RoomPhotoURL | string | roomPhotoUrl |"
+				},
+				{
+					"name": "Seat",
+					"item": [
+						{
+							"name": "Get all seats",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/seats",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"seats"
+									]
+								},
+								"description": "Send a request to server to get all Seats from DB.\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON massieve:\n\n\\[\n\n{\n\n\"seatId\": 1,\n\n\"roomId\": 1,\n\n\"description\": \"some description\",\n\n\"rentFrom\": \"2022-02-10T00:00:00Z\",\n\n\"rentTo\": \"2022-02-15T00:00:00Z\"\n\n},\n\n....\n\n\\]"
+							},
+							"response": []
+						},
+						{
+							"name": "Get by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/seat/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"seat",
+										"1"
+									]
+								},
+								"description": "Return seat from DB by seatD. ID need to be set in URL params api/seat/{id}\n\n### Response data:\n\n400 - http.StatusBadRequest\n\n500 - http.StatusInternalServerError\n\nif OK:\n\n200 - http.StatusOK\n\nJSON:\n\n{\n\n\"seatId\": 1,\n\n\"roomId\": 1,\n\n\"description\": \"some description\",\n\n\"rentFrom\": \"2022-02-10T00:00:00Z\",\n\n\"rentTo\": \"2022-02-15T00:00:00Z\"\n\n}"
+							},
+							"response": []
+						}
+					],
+					"description": "| Field | type | JSON |\n| --- | --- | --- |\n| SeatID | int | seatId |\n| RoomID | int | roomId |\n| Description | string | description |\n| RentFrom | time.Time | rentFrom |\n| RentTo | time.Time | rentTo |"
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rest",
+			"item": [
+				{
+					"name": "Gateway",
+					"item": [
+						{
+							"name": "Auth service",
+							"item": [
+								{
+									"name": "Login",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"ivan@mail.ru\",\r\n    \"password\": \"password\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:1110/login",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "1110",
+											"path": [
+												"login"
+											]
+										},
+										"description": "Send email and password to login.\n\nIf data is valid receive refresh-token by Cookie, and access-token by header \"Access-Token\""
+									},
+									"response": []
+								},
+								{
+									"name": "Logout",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6Ijg0NTNiOGNlLTUyNDAtNGIyZC04YTE3LTUwMzgwNGM2OTAzNCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0NjIyNjU1Nywicm9sZSI6ImNsaWVudCIsInVzZXJfaWQiOjF9.g1HY62OjpJIbs9Z5vVtSfUSOeaZcPGZxURgTZibcmjs",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:1110/logout",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "1110",
+											"path": [
+												"logout"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Registration",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n        \"email\": \"exsdsple@gmail.com\",\r\n        \"password\": \"password\",\r\n        \"role\": \"employee\",\r\n        \"name\": \"Ivasdaan\",\r\n        \"sName\": \"Ivasadasdnov\",\r\n        \"mName\": \"Ivanoasdavich\",\r\n        \"sex\": \"male\",\r\n        \"birthDate\": \"2000-01-01T00:00:00Z\",\r\n        \"address\": \"Minsk Pr. Nezavisimosti 22-222\",\r\n        \"phone\": \"+375-29-154-89-33\",\r\n        \"photo\": \"PhotoURL...\",\r\n        \"hotelId\": 1,\r\n        \"position\": \"employee\"\r\n    }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:1110/registration",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "1110",
+											"path": [
+												"registration"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Refresh",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6Ijg0NTNiOGNlLTUyNDAtNGIyZC04YTE3LTUwMzgwNGM2OTAzNCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTY0NjIyNjU1Nywicm9sZSI6ImNsaWVudCIsInVzZXJfaWQiOjF9.g1HY62OjpJIbs9Z5vVtSfUSOeaZcPGZxURgTZibcmjs",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:1110/refresh",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "1110",
+											"path": [
+												"refresh"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "New Request",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								}
+							],
+							"description": "Endpoints to gateway wich redirects to auth service"
+						}
+					],
+					"description": "All endpoints sends requests to gateway"
+				}
+			],
+			"description": "REST-API microservices"
+		}
+	]
+}

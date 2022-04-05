@@ -1,0 +1,98 @@
+@use '../../styles/breakpoints' as bp;
+@import '../../styles/variables';
+
+.headerContainer {
+  border-bottom: 1px solid rgba(202, 202, 202, 0.5);
+  width: 100%;
+
+  .headerNavBar {
+    width: 100%;
+    margin: 0 auto;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    @media (min-width: bp.$lg) {
+      width: 90%;
+    }
+
+    .offlineMode {
+      color: $offline-text-color;
+      white-space: nowrap;
+      @media (min-width: bp.$lg) {
+        position: absolute;
+        top: 0;
+        margin-top: 5px;
+      }
+    }
+
+    .disableMode {
+      display: none;
+    }
+
+    .contentContainer {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 95%;
+      @media (min-width: bp.$lg) {
+        justify-content: center;
+      }
+
+      .logoSelectContainer {
+        display: flex;
+        align-items: center;
+
+        .logoContainer {
+          position: relative;
+          left: 20px;
+
+          &:after {
+            content: '';
+            width: 80px;
+            border-bottom: 2px solid $secondary-background-color;
+            transform: rotate(90deg);
+            display: block;
+            clear: both;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+          }
+
+          @media (min-width: bp.$lg) {
+            &:after {
+              width: 50px;
+              top: 16px;
+              left: 38px;
+            }
+          }
+        }
+
+        .selectContainer {
+          margin: 0 0 0 -20px;
+        }
+      }
+
+      .commonNavBar {
+        display: none;
+        @media (min-width: bp.$lg) {
+          display: flex;
+          align-items: center;
+        }
+
+        .navLinksBlock {
+          margin: 0 auto;
+        }
+
+        .btnBlock {
+          display: flex;
+          align-items: center;
+          margin-left: 205px;
+          @media (min-width: bp.$lg) {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}

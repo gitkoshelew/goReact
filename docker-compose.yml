@@ -1,0 +1,287 @@
+version: '3.9'
+
+services:
+    postgresqldatabase:
+        container_name: postgresqldatabase
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_HOST=${POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${POSTGRES_SSLMODE}
+        ports:
+            - "8081:5432"
+        restart: on-failure
+        volumes:
+            - database-data:/var/lib/postgresql/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    testdatabase:
+        container_name: testdatabase
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_POSTGRES_SSLMODE}
+        ports:
+            - '6543:5432'
+        restart: unless-stopped
+        volumes:
+            - test-database:/var/lib/test-data/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    migrate:
+        image: migrate/migrate
+        restart: on-failure
+        volumes:
+            - ./migrations:/migrations
+
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@postgresqldatabase:5432/goreact?sslmode=disable",
+                "up"
+            ]
+        links:
+            - postgresqldatabase
+        depends_on:
+            - postgresqldatabase
+        networks:
+            - new
+
+    test-migrate:
+        image: migrate/migrate
+        restart: on-failure
+        volumes:
+            - ./migrations:/migrations
+        command:
+            [
+                "-path",
+                "/migrations",
+                "-database",
+                "postgres://user:userpass@testdatabase:5432/test_goreact?sslmode=disable",
+                "up"
+            ]
+        links:
+            - testdatabase
+        depends_on:
+            - testdatabase
+        networks:
+            - new
+
+    pgadmin:
+        image: dpage/pgadmin4
+        env_file:
+            - .env
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+            - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+        ports:
+            - "5050:80"
+        restart: unless-stopped
+        volumes:
+            - pgadmin:/root/.pgadmin
+        networks:
+            - new
+
+    rabbitmq:
+        build:
+            context: ./rabbit
+        container_name: rabbitmq
+        ports:
+            - ${RABBIT_HTTP_EXTERNAL_PORT_V3}:15672
+        environment:
+            - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+            - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBITMQ_CONFIG_FILE=/etc/rabbitmq.conf
+        volumes:
+            - ./rabbit/rabbitmq.conf:/etc/rabbitmq.conf
+            - ./rabbit/definitions.json:/etc/rabbitmq/definitions.json
+        networks:
+            - new
+
+    goreact:
+        build:
+            context: ./api
+        ports:
+            - 8080:8080
+        depends_on:
+            - postgresqldatabase
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
+            - SERVER_HOST=0.0.0.0
+            - ENV=prod
+        tty: true
+        restart: on-failure
+        volumes:
+            - ./api/logs:/api/logs
+        networks:
+            - new
+
+    chat_db:
+        image: postgres
+        container_name: socket-chat-postrgres
+        ports:
+            - "5444:5432"
+        environment:
+            POSTGRES_PASSWORD: 123
+            POSTGRES_DB: socket_chat
+            PGDATA: /var/lib/postgresql/data/pgdata
+        restart: on-failure
+        networks:
+            - new
+
+    chat_server:
+        build:
+            context: ./socket-chat-server
+        image: socket-chat-express
+        container_name: socket-chat-express
+        ports:
+            - "5001:5000"
+        environment:
+            - DB_HOST=chat_db
+            - DB_PASSWORD=123
+            - PORT=5000
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - NODE_ENV=development
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
+        depends_on:
+            - chat_db
+            - rabbitmq
+        networks:
+            - new
+
+    notification_producer:
+        build:
+            context: ./notifications-producer
+        image: notification-producer
+        container_name: notification-producer
+        ports:
+            - "5006:5005"
+        environment:
+            - PORT=5005
+            - RABBIT_HOST=rabbitmq
+            - RABBIT_PORT=${RABBIT_TCP_PORT}
+            - RABBIT_USER=${RABBITMQ_DEFAULT_USER}
+            - RABBIT_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+            - DB_HOST=${POSTGRES_HOST}
+            - DB_PORT=${POSTGRES_PORT}
+            - DB_NAME=${POSTGRES_DB}
+            - DB_USER=${POSTGRES_USER}
+            - DB_PASS=${POSTGRES_PASSWORD}
+        restart: on-failure
+        links:
+            - chat_db
+            - rabbitmq
+        depends_on:
+            - chat_db
+            - rabbitmq
+        networks:
+            - new
+
+    chat_pgadmin:
+        image: dpage/pgadmin4
+        container_name: socket-chat-pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5051:80"
+        networks:
+            - new
+
+    payment_db:
+        image: postgres:latest
+        container_name: payment-card-postgres
+        environment:
+            POSTGRES_PASSWORD: 123456
+            POSTGRES_DB: nest-card-payment
+            PGDATA: /var/lib/postgresql/data/pgdata
+        ports:
+            - "5445:5432"
+        restart: on-failure
+        networks:
+            - new
+
+    payment_server:
+        image: payment-card-server
+        container_name: payment-card-server
+        build:
+            context: ./nest-payment-server
+        command: npm run start:prod
+        ports:
+            - "5003:5002"
+        environment:
+            - PORT=5002
+            - POSTGRESS_NEST_HOST=${POSTGRESS_NEST_HOST}
+            - POSTGRES_NEST_PORT=${POSTGRES_NEST_PORT}
+            - POSTGRESS_NEST_USER=${POSTGRESS_NEST_USER}
+            - POSTGRES_NEST_DB=${POSTGRES_NEST_DB}
+            - POSTGRES_NEST_PASSWORD=${POSTGRES_NEST_PASSWORD}
+        links:
+            - payment_db
+        depends_on:
+            - payment_db
+        restart: on-failure
+        networks:
+            - new
+
+    payment_pgadmin:
+        image: dpage/pgadmin4
+        container_name: payment-card-pgadmin
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        ports:
+            - "5052:80"
+        networks:
+            - new
+
+    react-nginx-app:
+        stdin_open: true
+        build:
+            context: ./front
+            dockerfile: Dockerfile
+        ports:
+            - "3001:80"
+        environment:
+            - REACT_APP_ENABLE_MOCKS=${REACT_APP_ENABLE_MOCKS}
+            - REACT_APP_API_LINK=${REACT_APP_API_LINK}
+            - REACT_APP_API_CHAT_LINK=${REACT_APP_API_CHAT_LINK}
+        restart: on-failure
+        networks:
+            - new
+
+networks:
+    new:
+        driver: bridge
+volumes:
+    test-database: null
+    api: null
+    database-data: null
+    pgadmin: null

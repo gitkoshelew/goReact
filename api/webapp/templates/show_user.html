@@ -1,0 +1,16 @@
+{{ define "show_user"}}
+
+{{ template "header"}}
+
+<main class="px-3">
+    <h1> User </h1>
+    <p class="lead">{{ . }}</p>
+    <p class="lead">
+        <a href="/" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Back to main page</a>
+        <a href="/api/users" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Back to users menu</a>
+    </p>
+</main>
+
+{{ template "footer"}}
+
+{{ end }}

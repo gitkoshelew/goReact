@@ -1,0 +1,5 @@
+@import '../../styles/variables';
+.logo {
+  position: relative;
+  z-index: $low-z-index-priority;
+}

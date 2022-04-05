@@ -1,0 +1,103 @@
+@use '../../styles/breakpoints' as bp;
+@import '../../styles/variables';
+
+.feedBack {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  height: 220px;
+  background: $main-background-color;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  padding: 15px;
+  @media (min-width: bp.$sm) {
+    height: 165px;
+  }
+  @media (min-width: bp.$md) {
+    height: 210px;
+    width: 88%;
+  }
+
+  .feedBackText {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: $secondary-text-color;
+    white-space: normal;
+  }
+
+  .feedBackUser {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+
+    .userPhotoNameNationalityBlock {
+      display: flex;
+      align-items: center;
+
+      .userPhoto img {
+        width: 52px;
+        height: 52px;
+        border-radius: 100%;
+        margin-left: -10px;
+        @media (min-width: bp.$xs) {
+          margin-left: 10px;
+        }
+        @media (min-width: bp.$sm) {
+          width: 62px;
+          height: 62px;
+        }
+        @media (min-width: bp.$md) {
+          width: 62px;
+          height: 62px;
+        }
+      }
+
+      .infoUserBlock {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+
+        .userFeedbackName {
+          font-family: $main-fonts;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 20px;
+          color: $main-text-color;
+          @media (min-width: bp.$sm) {
+            font-size: 22px;
+          }
+
+          @media (min-width: bp.$md) {
+            font-size: 22px;
+          }
+        }
+
+        .userFeedBackNationality {
+          font-family: $main-fonts;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 18px;
+          color: $secondary-text-color;
+          @media (min-width: bp.$sm) {
+            font-size: 19px;
+          }
+          @media (min-width: bp.$md) {
+            font-size: 19px;
+          }
+        }
+      }
+    }
+
+    .staplesBlock {
+      position: relative;
+      top: -30px;
+    }
+  }
+}

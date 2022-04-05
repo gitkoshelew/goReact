@@ -1,0 +1,44 @@
+{{template "base" .}}
+
+{{define "title"}}All bookings{{end}}
+
+{{define "main"}}
+<header>
+    <h1><a>All bookings </a></h1>
+</header>
+
+<body class="d-flex flex-column h-100">
+    <table class="table">
+        <th>BookingID</th>
+        <th>SeatID</th>
+        <th>PetID</th>
+        <th>EmployeeID</th>
+        <th>Status</th>
+        <th>StartDate</th>
+        <th>EndDate</th>
+        <th>Notes</th>
+        <th>Paid</th>
+        <th>TransactionID</th>
+        
+        
+
+        {{range . }}
+        <tr>
+            <td>{{.BookingID}}</td>
+            <td>{{.SeatID}}</td>
+            <td>{{.PetID}}</td>
+            <td>{{.EmployeeID}}</td>
+            <td>{{.Status}}</td>
+            <td>{{.StartDate}}</td>
+            <td>{{.EndDate}}</td>
+            <td>{{.Notes}}</td>
+            <td>{{.Paid}}</td>
+            <td>{{.TransactionID}}</td>
+
+        </tr>
+        {{end}}
+
+    </table>
+
+</body>
+{{end}}

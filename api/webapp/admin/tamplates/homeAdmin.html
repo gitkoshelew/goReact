@@ -1,0 +1,103 @@
+{{template "base" .}}
+
+{{define "title"}}Home{{end}}
+
+{{define "main"}}
+<!DOCTYPE html>
+<html>
+
+<body>
+
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+
+
+    {{if .HasPermission "read_user"}}
+    <div>
+        <h2>Users</h2>
+        <form action="/admin/homeusers">
+            <button>users</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_hotel"}}
+    <div>
+        <h2>Hotels</h2>
+        <form action="/admin/homehotels">
+            <button>hotels</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_booking"}}
+    <div>
+        <h2>Bookings</h2>
+        <form action="/admin/homebookings">
+            <button>bookings</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_employee"}}
+    <div>
+        <h2>Employees</h2>
+        <form action="/admin/homeemployees">
+            <button>employees</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_pet"}}
+    <div>
+        <h2>Pets</h2>
+        <form action="/admin/homepets">
+            <button>pets</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_seat"}}
+    <div>
+        <h2>Seats</h2>
+        <form action="/admin/homeseats">
+            <button>seats</button>
+        </form>
+    </div>
+    {{end}}
+
+    {{if .HasPermission "read_room"}}
+    <div>
+        <h2>Rooms</h2>
+        <form action="/admin/homerooms">
+            <button>rooms</button>
+        </form>
+    </div>
+    {{end}}
+
+
+    {{if .HasPermission "admin"}}
+    <div>
+        <h2>Permissions</h2>
+        <form action="/admin/homepermissions">
+            <button>permissions</button>
+        </form>
+    </div>
+    {{end}}
+
+    <div>
+        <h2>Logout</h2>
+        <form action="/admin/logout">
+            <button>Logout</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+
+{{end}}

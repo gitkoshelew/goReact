@@ -1,0 +1,5 @@
+ALTER TABLE PET  
+DROP COLUMN      photo     CASCADE;
+
+ALTER TABLE ROOM  
+DROP COLUMN      photo     CASCADE;
