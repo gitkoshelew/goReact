@@ -78,6 +78,14 @@
     </div>
     {{end}}
 
+    {{if .HasPermission "read_image"}}
+    <div>
+        <h2>Images</h2>
+        <form action="/admin/homeimages">
+            <button>Images</button>
+        </form>
+    </div>
+    {{end}}
 
     {{if .HasPermission "admin"}}
     <div>
@@ -87,6 +95,8 @@
         </form>
     </div>
     {{end}}
+
+
 
     <div>
         <h2>Logout</h2>

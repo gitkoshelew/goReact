@@ -38,13 +38,13 @@ INSERT INTO BOOKING (seat_id , pet_id, employee_id, status, start_date, end_date
 (2 ,2 ,2,'cancelled', '2021-12-01', '2021-12-15','feed my pet pls once a week'),
 (3, 3 ,3,'pending', '2021-11-26', '2021-12-06','no comm' );
 
-INSERT INTO IMAGES (type, URL, ownerId) VALUES 
-('pet', 'volume\images\pets\cat1.jpg', 1),
-('pet', 'volume\images\pets\cat2.jpg', 2),
-('pet', 'volume\images\pets\cat3.jpg', 3),
-('pet', 'volume\images\pets\dog1.jpg', 3),
-('pet', 'volume\images\pets\dog2.jpg', 3),
-('pet', 'volume\images\pets\dog3.jpg', 3),
-('room', 'volume\images\rooms\room1.jpg', 1),
-('room', 'volume\images\rooms\room2.jpg', 2),
-('room', 'volume\images\rooms\room3.jpg', 3);
+INSERT INTO IMAGES (type, ownerId) VALUES 
+('pet',  1),
+('pet',  2),
+('pet',  3),
+('pet',  3),
+('pet',  3),
+('pet',  3),
+('room', 1),
+('room', 2),
+('room', 3);

@@ -30,6 +30,10 @@ var (
 	ErrInvalidEmployeePosition = errors.New("invalid employee position. Allowed pet types: 'manager', 'employee' ,'owner','admin'")
 	// ErrInvalidPetType ...
 	ErrInvalidPetType = errors.New("invalid pet type. Allowed pet types: 'cat', 'dog'")
+	// ErrInvalidImageType ...
+	ErrInvalidImageType = errors.New("invalid image type. Allowed image types: 'user', 'pet', 'room'")
+	// ErrInvalidImageFormat ...
+	ErrInvalidImageFormat = errors.New("invalid image format. Allowed image types: 'original', '', 'QVGA', 'VGA', 'HD720p'")
 	// ErrInvalidSexType ...
 	ErrInvalidSexType = errors.New("invalid gender. Allowed genders: 'male', 'female'")
 	// ErrInvalidUserRole ...
@@ -111,6 +115,32 @@ func IsPetType(value interface{}) error {
 		return nil
 	}
 	return ErrInvalidPetType
+}
+
+// IsImageType checks if string matchs to a Image types of images
+//  PetImage   = "pet"
+// 	RoomImage  = "room"
+// 	UserImage  = "user"
+func IsImageType(value interface{}) error {
+	s := ImageType(value.(string))
+	if s == PetImage || s == RoomImage || s == UserImage || s == TestingImage {
+		return nil
+	}
+	return ErrInvalidImageType
+}
+
+// IsImageFormat checks if string matchs to a formats of images
+// FormatOriginal  = "original"
+// FormatQVGA      = "QVGA"
+// FormatVGA       = "VGA"
+// FormatHD720p    = "HD720p"
+// empty string allowed - convert to original
+func IsImageFormat(value interface{}) error {
+	s := ImageFormat(value.(string))
+	if s == FormatOriginal || s == FormatHD720p || s == FormatQVGA || s == FormatVGA || s == "" {
+		return nil
+	}
+	return ErrInvalidImageFormat
 }
 
 // IsEmployeePosition ...

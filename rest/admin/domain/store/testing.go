@@ -9,13 +9,13 @@ import (
 
 // ID ...
 type ID struct {
-	User     int
-	Employee int
-	Pet      int
-	Hotel    int
-	Room     int
-	Seat     int
-	Booking  int
+	User       int
+	Employee   int
+	Pet        int
+	Hotel      int
+	Room       int
+	Seat       int
+	Booking    int
 	Permission int
 }
 
@@ -89,22 +89,25 @@ func FillDB(t *testing.T, s *Store) *ID {
 	booking.BookingID = *bookingID
 
 	permission := model.TestPermission()
-	permissionID , _ := s.Permissions().Create(permission)
+	permissionID, _ := s.Permissions().Create(permission)
 	permission.PermissionID = *permissionID
 
+	image := model.TestImage()
+	image.OwnerID = user.UserID
+	imageID, _ := s.Image().Create(image)
+	image.ImageID = *imageID
 	//PermissionsEmployees := model.TestPermissionsEmployees()
-
 
 	s.Close()
 
 	return &ID{
-		User:     *userID,
-		Employee: *employeeID,
-		Pet:      *petID,
-		Hotel:    *hotelID,
-		Room:     *roomID,
-		Seat:     *seatID,
-		Booking:  *bookingID,
+		User:       *userID,
+		Employee:   *employeeID,
+		Pet:        *petID,
+		Hotel:      *hotelID,
+		Room:       *roomID,
+		Seat:       *seatID,
+		Booking:    *bookingID,
 		Permission: *permissionID,
 	}
 }
