@@ -6,6 +6,7 @@ import (
 	bookinghandlers "admin/webapp/handlersAdmin/bookingHandlers"
 	employeehandlers "admin/webapp/handlersAdmin/employeeHandlers"
 	hotelhandlers "admin/webapp/handlersAdmin/hotelHandlers"
+	"admin/webapp/handlersAdmin/imagehandlers"
 	"admin/webapp/handlersAdmin/permission"
 	pethandlers "admin/webapp/handlersAdmin/petHandlers"
 	roomhandlers "admin/webapp/handlersAdmin/roomHandlers"
@@ -88,6 +89,15 @@ func (s *Server) configureRoutes() {
 	s.router.Handle("GET", "/admin/addpermissions", permission.ShowAllPermissions(store.New(s.config)))
 	s.router.Handle("GET", "/admin/permissionsemployyes", permission.AllPermissionsEmployees(store.New(s.config)))
 	s.router.Handle("POST", "/admin/set", permission.AddPermissionsEmployee(store.New(s.config)))
+
+	//Image
+	s.router.Handle("GET", "/admin/homeimages", imagehandlers.HomeImageHandler(store.New(s.config)))
+	s.router.Handle("GET", "/admin/images", imagehandlers.GetAllImagesHandle(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/id", imagehandlers.GetImageHandle(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/delete", imagehandlers.DeleteImageHandle(store.New(s.config)))
+	s.router.Handle("POST", "/admin/image/upload", imagehandlers.SaveJPEGHandle(store.New(s.config)))
+	s.router.Handle("POST", "/admin/image/update", imagehandlers.UpdateImage(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/downloand/", imagehandlers.DownloandImage(store.New(s.config), download.DownloadFileHandler(store.New(s.config))))
 
 	s.router.ServeFiles("/templates/*filepath", http.Dir("templates"))
 }
