@@ -13,7 +13,7 @@ services:
       - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_SSLMODE=${POSTGRES_SSLMODE}
     ports:
-      - "18081:5432"
+      - "8081:5432"
     restart: on-failure
     volumes:
       - database-data:/var/lib/postgresql/data/
@@ -92,7 +92,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     ports:
-      - "15050:80"
+      - "5050:80"
     restart: unless-stopped
     volumes:
       - pgadmin:/root/.pgadmin
@@ -118,14 +118,12 @@ services:
     restart: on-failure
     volumes:
       - ./api/logs:/api/logs
-      - ./api/images:/api/images
     networks:
       - new
 
 networks:
   new:
     driver: bridge
-
 volumes:
   test-database: null
   database-data: null

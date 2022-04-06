@@ -9,83 +9,328 @@ import (
 )
 
 func TestRoomRepository_Create(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("valid", func(t *testing.T) {
-		r := model.TestRoom()
-		h, _ := s.Hotel().Create(model.TestHotel())
-		r.Hotel = *h
-		r, err := s.Room().Create(r)
-		assert.NoError(t, err)
-		assert.NotNil(t, r)
-	})
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
 
-}
+	testCases := []struct {
+		name    string
+		model   func() *model.Room
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.Room {
+				testStore.Open()
 
-func TestRoomRepository_Delete(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
+				room := model.TestRoom()
+				room.Hotel.HotelID = id.Hotel
 
-	t.Run("invalid delete id", func(t *testing.T) {
-		id := -1
-		err := s.Room().Delete(id)
-		assert.Error(t, err)
-	})
-	t.Run("valid delete id", func(t *testing.T) {
-		r := model.TestRoom()
-		h, _ := s.Hotel().Create(model.TestHotel())
-		r.Hotel = *h
-		_, err := s.Room().Create(r)
-		err = s.Room().Delete(r.RoomID)
-		assert.NoError(t, err)
-	})
-}
+				return room
+			},
+			isValid: true,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.Room {
+				testStore.Close()
+				return model.TestRoom()
+			},
+			isValid: false,
+		},
+	}
 
-func TestRoomRepository_FindByID(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-
-	t.Run("invalid find id", func(t *testing.T) {
-		id := -1
-
-		_, err := s.Room().FindByID(id)
-		assert.Error(t, err)
-	})
-	t.Run("valid find id", func(t *testing.T) {
-		r := model.TestRoom()
-		h, _ := s.Hotel().Create(model.TestHotel())
-		r.Hotel = *h
-		_, err := s.Room().Create(r)
-		r, err = s.Room().FindByID(r.RoomID)
-		assert.NoError(t, err)
-		assert.NotNil(t, r)
-	})
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Room().Create(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Room().Create(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
 }
 
 func TestRoomRepository_GetAll(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("valid get all", func(t *testing.T) {
-		r, err := s.Room().GetAll()
-		assert.NoError(t, err)
-		assert.NotNil(t, r)
-	})
+	teardown()
+	defer teardown()
+	store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		s       func() *store.Store
+		isValid bool
+	}{
+		{
+			name: "valid",
+			s: func() *store.Store {
+				testStore.Open()
+				return testStore
+			},
+			isValid: true,
+		},
+		{
+			name: "DB closed",
+			s: func() *store.Store {
+				st := testStore
+				st.Close()
+				return st
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := tc.s().Room().GetAll()
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := tc.s().Room().GetAll()
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
+}
+
+func TestRoomRepository_FindByID(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		id      func() int
+		isValid bool
+	}{
+		{
+			name: "valid",
+			id: func() int {
+				testStore.Open()
+				return id.Room
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid ID",
+			id: func() int {
+				testStore.Open()
+				return 0
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			id: func() int {
+				testStore.Close()
+				return id.Room
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Room().FindByID(tc.id())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Room().FindByID(tc.id())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
+}
+
+func TestRoomRepository_Delete(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		id      func() int
+		isValid bool
+	}{
+		{
+			name: "valid",
+			id: func() int {
+				testStore.Open()
+				room := model.TestRoom()
+				room.Hotel.HotelID = id.Hotel
+				id, _ := testStore.Room().Create(room)
+				return *id
+			},
+			isValid: true,
+		},
+		{
+			name: "Invalid ID",
+			id: func() int {
+				testStore.Open()
+				return 0
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			id: func() int {
+				testStore.Close()
+				return id.Room
+			},
+			isValid: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				err := testStore.Room().Delete(tc.id())
+				assert.NoError(t, err)
+				testStore.Close()
+			} else {
+				err := testStore.Room().Delete(tc.id())
+				testStore.Close()
+				assert.Error(t, err)
+			}
+		})
+	}
 }
 
 func TestRoomRepository_Update(t *testing.T) {
-	s, teardown := store.TestStore(t, host, dbName, user, password, port, sslMode)
-	t.Cleanup(teardown)
-	t.Run("valid update", func(t *testing.T) {
-		r := model.TestRoom()
-		h, _ := s.Hotel().Create(model.TestHotel())
-		r.Hotel = *h
-		r, _ = s.Room().Create(r)
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
 
-		r.RoomNumber = 2222
-		r.PetType = "dog"
-		r.RoomPhotoURL = "//photo//2"
+	testCases := []struct {
+		name    string
+		model   func() *model.Room
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.Room {
+				testStore.Open()
 
-		err := s.Room().Update(r)
-		assert.NoError(t, err)
-	})
+				room := model.TestRoom()
+				room.RoomID = id.Room
+				room.Hotel.HotelID = id.Hotel
+
+				return room
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid ID",
+			model: func() *model.Room {
+				testStore.Open()
+
+				room := model.TestRoom()
+				room.RoomID = 0
+				room.Hotel.HotelID = id.Hotel
+
+				return room
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.Room {
+				testStore.Close()
+
+				room := model.TestRoom()
+				room.RoomID = id.Room
+				room.Hotel.HotelID = id.Hotel
+
+				return room
+			},
+			isValid: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				err := testStore.Room().Update(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+			} else {
+				err := testStore.Room().Update(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+			}
+		})
+	}
+}
+
+func TestRoomRepository_ModelFromDTO(t *testing.T) {
+	teardown()
+	defer teardown()
+	id := store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		model   func() *model.RoomDTO
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.RoomDTO {
+				testStore.Open()
+
+				room := model.TestRoomDTO()
+				room.HotelID = id.Hotel
+
+				return room
+			},
+			isValid: true,
+		},
+		{
+			name: "Invalid HotelID",
+			model: func() *model.RoomDTO {
+				testStore.Open()
+
+				room := model.TestRoomDTO()
+				room.HotelID = 0
+
+				return room
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.RoomDTO {
+				testStore.Close()
+				b := model.TestRoomDTO()
+				return b
+			},
+			isValid: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.Room().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.Room().ModelFromDTO(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
 }

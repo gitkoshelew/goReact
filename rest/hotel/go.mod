@@ -10,12 +10,12 @@ require (
 	github.com/lib/pq v1.10.4
 	github.com/sirupsen/logrus v1.8.1
 	github.com/twinj/uuid v1.0.0
-	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064
 )
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
 )
 

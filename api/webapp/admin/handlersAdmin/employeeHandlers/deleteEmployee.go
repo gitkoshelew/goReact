@@ -38,7 +38,7 @@ func DeleteEmployee(s *store.Store) httprouter.Handle {
 		}
 		err = s.Employee().Delete(id)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while deleting all employees. Err msg:%v. ", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Error occured while deleting  employee. Err msg:%v. ", err), http.StatusInternalServerError)
 			return
 		}
 		http.Redirect(w, r, "/admin/homeemployees", http.StatusFound)

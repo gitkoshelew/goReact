@@ -1,14 +1,8 @@
 package store
 
 import (
-	"fmt"
 	"goReact/domain/model"
-	"image"
-	"image/jpeg"
 	"log"
-	"os"
-
-	"github.com/nfnt/resize"
 )
 
 // ImageRepository ...
@@ -17,26 +11,26 @@ type ImageRepository struct {
 }
 
 // Create image and save it to DB
-func (r *ImageRepository) Create(i *model.Image) (*int, error) {
+func (r *ImageRepository) Create(i *model.Image) (*model.Image, error) {
 	if err := r.Store.Db.QueryRow(
-		`INSERT INTO images 
-		(type, ownerId) 
-		VALUES ($1, $2) RETURNING id`,
+		"INSERT INTO image",
+		"(type, URL, ownerId)",
+		"VALUES ($1, $2, $3) RETURNING id",
 		string(i.Type),
+		i.URL,
 		i.OwnerID,
 	).Scan(&i.ImageID); err != nil {
-		r.Store.Logger.Errorf("Error occured while creating image. Err msg: %v.", err)
+		log.Print(err)
 		return nil, err
 	}
-	return &i.ImageID, nil
+	return i, nil
 }
 
 // GetAll returns all images
 func (r *ImageRepository) GetAll() (*[]model.Image, error) {
-	rows, err := r.Store.Db.Query("SELECT * FROM image")
+	rows, err := r.Store.Db.Query("SELECT * FROM images")
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while getting all images. Err msg: %v.", err)
-		return nil, err
+		log.Print(err)
 	}
 	images := []model.Image{}
 
@@ -45,6 +39,7 @@ func (r *ImageRepository) GetAll() (*[]model.Image, error) {
 		err := rows.Scan(
 			&image.ImageID,
 			&image.Type,
+			&image.URL,
 			&image.OwnerID,
 		)
 		if err != nil {
@@ -57,37 +52,29 @@ func (r *ImageRepository) GetAll() (*[]model.Image, error) {
 }
 
 //FindByID searchs and returns image by ID
-func (r *ImageRepository) FindByID(id int) (*model.ImageDTO, error) {
-	image := &model.ImageDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM images WHERE id = $1",
+func (r *ImageRepository) FindByID(id int) (*model.Image, error) {
+	image := &model.Image{}
+	if err := r.Store.Db.QueryRow("SELECT * FROM image WHERE id = $1",
 		id).Scan(
 		&image.ImageID,
 		&image.Type,
+		&image.URL,
 		&image.OwnerID,
 	); err != nil {
-		r.Store.Logger.Errorf("Error occured while seacrhing image by id. Err msg: %v.", err)
+		log.Printf(err.Error())
 		return nil, err
 	}
 	return image, nil
 }
 
-// Delete image from DB and local store by ID
+// Delete image from DB by ID
 func (r *ImageRepository) Delete(id int) error {
-	var imageType string
-	var ownerID int
-	if err := r.Store.Db.QueryRow("DELETE FROM images WHERE id = $1 RETURNING type, ownerId", id).Scan(
-		&imageType,
-		&ownerID,
-	); err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting image by id. Err msg: %v.", err)
-		return err
-	}
-
-	err := os.RemoveAll(fmt.Sprintf("images/%s/id-%d", imageType, ownerID))
+	result, err := r.Store.Db.Exec("DELETE FROM image WHERE id = $1", id)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while deleting image in local store. Err msg: %v.", err)
+		log.Printf(err.Error())
 		return err
 	}
+	log.Printf("Image deleted, rows affectet: %d", result)
 	return nil
 }
 
@@ -95,18 +82,31 @@ func (r *ImageRepository) Delete(id int) error {
 func (r *ImageRepository) Update(i *model.Image) error {
 
 	result, err := r.Store.Db.Exec(
-		"UPDATE image SET",
-		"type = $1 ownerId = $2",
-		"WHERE id = $4",
+		`UPDATE images SET 
+		type = $1 ,
+		ownerId = $2 
+		WHERE id = $3`,
 		string(i.Type),
+		i.URL,
 		i.OwnerID,
 		i.ImageID,
 	)
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg: %v.", err)
 		return err
 	}
-	log.Printf("Image updated, rows affectet: %d", result)
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg:%v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Image with id %d was updated", i.ImageID)
 	return nil
 }
 
@@ -185,4 +185,14 @@ func (r *ImageRepository) GetImageFromLocalStore(imageDTO *model.ImageDTO) (*ima
 	}
 
 	return &image, nil
+}
+
+// ModelFromDTO ...
+func (r *ImageRepository) ModelFromDTO(dto *model.ImageDTO) (*model.Image, error) {
+
+	return &model.Image{
+		ImageID: dto.ImageID,
+		Type:    model.ImageType(dto.Type),
+		OwnerID: dto.OwnerID,
+	}, nil
 }

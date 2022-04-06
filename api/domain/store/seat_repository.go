@@ -14,9 +14,10 @@ type SeatRepository struct {
 // Create seat and save it to DB
 func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO seat room_id, description VALUES ($1, $2) RETURNING id",
+		"INSERT INTO seat room_id, description, price VALUES ($1, $2, $3) RETURNING id",
 		s.Room.RoomID,
 		s.Description,
+		s.Price,
 	).Scan(&s.SeatID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating seat. Err msg: %v.", err)
 		return nil, err
@@ -35,18 +36,19 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 		return nil, err
 	}
 	seats := []model.SeatDTO{}
+
 	for rows.Next() {
 		seat := model.SeatDTO{}
 		err := rows.Scan(
 			&seat.SeatID,
 			&seat.RoomID,
 			&seat.Description,
+			&seat.Price,
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
 			continue
 		}
-
 		seats = append(seats, seat)
 	}
 	return &seats, nil
@@ -60,6 +62,7 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 		&seatDTO.SeatID,
 		&seatDTO.RoomID,
 		&seatDTO.Description,
+		&seatDTO.Price,
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg: %v.", err)
 		return nil, err
@@ -101,12 +104,17 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 		description = fmt.Sprintf("'%s'", s.Description)
 	}
 
+	price := "price"
+	if s.Price != 0 {
+		price = fmt.Sprintf("%f", s.Price)
+	}
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE seat SET 
-		room_id = %s, description = %s 
+		room_id = %s, description = %s, price = %s 
 		WHERE id = $1`,
 		roomID,
 		description,
+    price,
 	), s.SeatID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating seat. Err msg: %v.", err)
@@ -144,6 +152,7 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 		SeatID:      dto.RoomID,
 		Description: dto.Description,
 		Room:        *room,
+		Price:    dto.Price,
 	}, nil
 }
 
@@ -170,6 +179,7 @@ func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) 
 			&seat.SeatID,
 			&seat.RoomID,
 			&seat.Description,
+			&seat.Price,
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)

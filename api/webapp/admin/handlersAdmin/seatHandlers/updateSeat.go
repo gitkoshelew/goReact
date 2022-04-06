@@ -50,6 +50,11 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 				seatDTO.RoomID = roomID
 			}
 		}
+    
+    price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
+		if err == nil {
+			if price != 0 {
+				seatDTO.Price = price
 
 		description := r.FormValue("Description")
 		if description != "" {

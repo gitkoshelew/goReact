@@ -45,11 +45,19 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		}*/
 
 		description := r.FormValue("Description")
+    
+    price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Price")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Price"))
+			return
+		}
 
 		seatDTO := model.SeatDTO{
 			SeatID:      0,
 			RoomID:      roomID,
 			Description: description,
+      Price:    price,
 		}
 
 		err = seatDTO.Validate()
