@@ -1,4 +1,4 @@
-package request
+package reqandresp
 
 import (
 	"goReact/domain/model"

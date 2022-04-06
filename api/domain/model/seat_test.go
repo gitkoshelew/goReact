@@ -3,7 +3,6 @@ package model_test
 import (
 	"goReact/domain/model"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -31,43 +30,10 @@ func TestSeat_Validate(t *testing.T) {
 			isValid: false,
 		},
 		{
-			name: "invalid RentFrom",
+			name: "SQL Description",
 			b: func() *model.SeatDTO {
 				seat := model.TestSeatDTO()
-				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = &rentFrom
-				return seat
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid RentFrom",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				seat.RentFrom = nil
-				return seat
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid RentTo",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				rentFrom := time.Now().AddDate(0, 0, -10)
-				seat.RentFrom = &rentFrom
-				return seat
-			},
-			isValid: false,
-		},
-		{
-			name: "nil RentTo",
-			b: func() *model.SeatDTO {
-				seat := model.TestSeatDTO()
-				seat.RentTo = nil
-				return seat
-			},
-			isValid: false,
-		},
+				seat.Description = "ALt **%#--eR"
 		{
 			name: "invalid Price",
 			b: func() *model.SeatDTO {

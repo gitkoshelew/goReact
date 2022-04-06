@@ -7,7 +7,6 @@ import (
 	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -51,35 +50,15 @@ func UpdateSeat(s *store.Store) httprouter.Handle {
 				seatDTO.RoomID = roomID
 			}
 		}
-
-		layout := "2006-01-02"
-		rentFrom := r.FormValue("RentFrom")
-		if rentFrom != "" {
-			rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom")), http.StatusBadRequest)
-				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
-				return
-			}
-			seatDTO.RentFrom = &rentFrom
-		}
-
-		rentTo := r.FormValue("RentTo")
-		if rentTo != "" {
-			rentTo, err := time.Parse(layout, r.FormValue("RentTo"))
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo")), http.StatusBadRequest)
-				s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
-				return
-			}
-			seatDTO.RentTo = &rentTo
-		}
-
-		price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
+    
+    price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
 		if err == nil {
 			if price != 0 {
 				seatDTO.Price = price
-			}
+
+		description := r.FormValue("Description")
+		if description != "" {
+			seatDTO.Description = description
 		}
 
 		err = seatDTO.Validate()

@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"goReact/domain/request"
+	reqandresp "goReact/domain/reqAndResp"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/response"
@@ -18,7 +18,7 @@ func ValidateFreeSeatsSearchingRequest(next http.Handler, s *store.Store) httpro
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
-		request := &request.FreeSeatsSearching{}
+		request := &reqandresp.FreeSeatsSearching{}
 		if err := json.NewDecoder(r.Body).Decode(request); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)

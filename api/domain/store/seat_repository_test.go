@@ -2,7 +2,7 @@ package store_test
 
 import (
 	"goReact/domain/model"
-	"goReact/domain/request"
+	reqandresp "goReact/domain/reqAndResp"
 	"goReact/domain/store"
 	"testing"
 	"time"
@@ -344,15 +344,15 @@ func TestSeatRepository_FreeSeatsSearching(t *testing.T) {
 
 	testCases := []struct {
 		name    string
-		req     func() *request.FreeSeatsSearching
+		req     func() *reqandresp.FreeSeatsSearching
 		isValid bool
 	}{
 		{
 			name: "valid",
-			req: func() *request.FreeSeatsSearching {
+			req: func() *reqandresp.FreeSeatsSearching {
 				testStore.Open()
 
-				req := request.TestFreeSeatsSearching()
+				req := reqandresp.TestFreeSeatsSearching()
 				rentFrom := time.Now().AddDate(0, 0, 11)
 				rentTo := time.Now().AddDate(0, 0, 22)
 				req.RentFrom = &rentFrom
@@ -365,10 +365,10 @@ func TestSeatRepository_FreeSeatsSearching(t *testing.T) {
 		},
 		{
 			name: "invalid data",
-			req: func() *request.FreeSeatsSearching {
+			req: func() *reqandresp.FreeSeatsSearching {
 				testStore.Open()
 
-				req := request.TestFreeSeatsSearching()
+				req := reqandresp.TestFreeSeatsSearching()
 				req.HotelID = 0
 
 				return req
@@ -377,10 +377,10 @@ func TestSeatRepository_FreeSeatsSearching(t *testing.T) {
 		},
 		{
 			name: "DB closed",
-			req: func() *request.FreeSeatsSearching {
+			req: func() *reqandresp.FreeSeatsSearching {
 				testStore.Close()
 
-				req := request.TestFreeSeatsSearching()
+				req := reqandresp.TestFreeSeatsSearching()
 				rentFrom := time.Now().AddDate(0, 0, 11)
 				rentTo := time.Now().AddDate(0, 0, 22)
 				req.RentFrom = &rentFrom

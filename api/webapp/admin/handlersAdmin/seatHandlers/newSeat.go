@@ -7,7 +7,6 @@ import (
 	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -39,21 +38,15 @@ func NewSeat(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		layout := "2006-01-02"
-		rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
+		/*room, err := s.Room().FindByID(roomID)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
-		}
+		}*/
 
-		rentTo, err := time.Parse(layout, r.FormValue("RentTo"))
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
-			return
-		}
-		price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
+		description := r.FormValue("Description")
+    
+    price, err := strconv.ParseFloat(r.FormValue("Price"), 32)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Price")), http.StatusBadRequest)
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Price"))
@@ -61,11 +54,10 @@ func NewSeat(s *store.Store) httprouter.Handle {
 		}
 
 		seatDTO := model.SeatDTO{
-			SeatID:   0,
-			RoomID:   roomID,
-			RentFrom: &rentFrom,
-			RentTo:   &rentTo,
-			Price:    price,
+			SeatID:      0,
+			RoomID:      roomID,
+			Description: description,
+      Price:    price,
 		}
 
 		err = seatDTO.Validate()
