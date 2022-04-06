@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { BookingInfoPhoto, BookingPhotoType } from '../../../dal/api_bookingPhoto/BookingService'
 
 const initialState: InitialStateType = {
   progress: 'getUpload',
   photoUrl: null,
   errorMSG: '',
   checkedOnlinePayment: false,
+  bookingPhoto: [],
+  bookingInfo: [],
 }
 
 const BookingRegFormSlice = createSlice({
@@ -23,11 +26,15 @@ const BookingRegFormSlice = createSlice({
     changeCheckedOnlinePayment(state, action: PayloadAction<{ checkedOnlinePayment: boolean }>) {
       state.checkedOnlinePayment = action.payload.checkedOnlinePayment
     },
+    setBookingPhoto(state, action: PayloadAction<{ bookingInfo: BookingInfoPhoto; bookingPhoto: BookingPhotoType }>) {
+      state.bookingInfo = action.payload.bookingInfo
+      state.bookingPhoto = action.payload.bookingPhoto
+    },
   },
 })
 
 export const BookingRegFormReducer = BookingRegFormSlice.reducer
-export const { changePhotoUrl, changeProgressStatus, changeErrorMSG, changeCheckedOnlinePayment } =
+export const { changePhotoUrl, changeProgressStatus, changeErrorMSG, changeCheckedOnlinePayment, setBookingPhoto } =
   BookingRegFormSlice.actions
 
 //types
@@ -39,4 +46,6 @@ export type InitialStateType = {
   photoUrl: null | string
   errorMSG: string
   checkedOnlinePayment: boolean
+  bookingPhoto: any
+  bookingInfo: any
 }
