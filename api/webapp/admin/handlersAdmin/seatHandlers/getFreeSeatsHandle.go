@@ -2,7 +2,7 @@ package seathandlers
 
 import (
 	"fmt"
-	"goReact/domain/request"
+	reqandresp "goReact/domain/reqAndResp"
 	"goReact/domain/store"
 	"goReact/webapp/admin/session"
 	"net/http"
@@ -47,7 +47,7 @@ func GetFreeSeatsHandle(s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
 			return
 		}
-		req := &request.FreeSeatsSearching{
+		req := &reqandresp.FreeSeatsSearching{
 			HotelID:  hotelID,
 			PetType:  petType,
 			RentFrom: &rentFrom,

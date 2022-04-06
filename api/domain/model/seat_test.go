@@ -34,6 +34,10 @@ func TestSeat_Validate(t *testing.T) {
 			b: func() *model.SeatDTO {
 				seat := model.TestSeatDTO()
 				seat.Description = "ALt **%#--eR"
+				return seat
+			},
+			isValid: false,
+		},
 		{
 			name: "invalid Price",
 			b: func() *model.SeatDTO {
