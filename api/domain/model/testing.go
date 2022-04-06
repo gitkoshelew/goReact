@@ -151,7 +151,7 @@ func TestSeat() *Seat {
 		SeatID:      1,
 		Description: "Description of seat",
 		Room:        *TestRoom(),
-		Price:    32.99,
+		Price:       32.99,
 	}
 }
 
@@ -161,7 +161,7 @@ func TestSeatDTO() *SeatDTO {
 		SeatID:      1,
 		Description: "Description of seat",
 		RoomID:      1,
-		Price:    32.99,
+		Price:       32.99,
 	}
 }
 
@@ -201,6 +201,25 @@ func TestBooking() *Booking {
 	}
 }
 
+// TestImage ...
+func TestImage() *Image {
+	return &Image{
+		Type:    UserImage,
+		OwnerID: 1,
+		Format:  "original",
+	}
+}
+
+// TestImageDTO ...
+func TestImageDTO() *ImageDTO {
+	return &ImageDTO{
+		Type:    string(TestingImage),
+		OwnerID: 1,
+		Format:  "original",
+	}
+}
+
+// TestPermission ...
 func TestPermission() *Permission {
 	return &Permission{
 		Name:        ReadUser,
@@ -208,6 +227,7 @@ func TestPermission() *Permission {
 	}
 }
 
+// TestPermissionsEmployees ...
 func TestPermissionsEmployees() *PermissionsEmployees {
 	return &PermissionsEmployees{
 		Permissions: *TestPermission(),
@@ -215,6 +235,7 @@ func TestPermissionsEmployees() *PermissionsEmployees {
 	}
 }
 
+// TestPermissionsEmployeesDTO ...
 func TestPermissionsEmployeesDTO() *PermissionsEmployeesDTO {
 	return &PermissionsEmployeesDTO{
 		PermissionsID: 1,

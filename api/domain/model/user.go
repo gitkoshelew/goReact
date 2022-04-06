@@ -13,8 +13,8 @@ type User struct {
 	UserID      int        `json:"userId" csv:"userId"`
 	Email       string     `json:"email" csv:"email"`
 	Password    string     `json:"-" csv:"-"`
-	Role        Role      `json:"role" csv:"role"`
-	Verified    *bool       `json:"verified" csv:"verified"`
+	Role        Role       `json:"role" csv:"role"`
+	Verified    *bool      `json:"verified" csv:"verified"`
 	Name        string     `json:"name" csv:"name"`
 	Surname     string     `json:"sName" csv:"sName"`
 	MiddleName  string     `json:"mName" csv:"mName"`
