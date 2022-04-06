@@ -40,7 +40,7 @@ func (r *UserRepository) Create(user *model.User) (*int, error) {
 		`INSERT INTO users 
 		(email, password, role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo) 
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
-		RETURNING id`,
+		RETURNING user_id`,
 		user.Email,
 		user.Password,
 		string(model.AnonymousRole),
@@ -126,7 +126,7 @@ func (r *UserRepository) FindByEmail(email string) (*model.UserDTO, error) {
 // FindByID searchs and returns user by ID
 func (r *UserRepository) FindByID(id int) (*model.UserDTO, error) {
 	user := &model.UserDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM users WHERE user_id = $1",
 		id).Scan(
 		&user.UserID,
 		&user.Name,
@@ -150,7 +150,7 @@ func (r *UserRepository) FindByID(id int) (*model.UserDTO, error) {
 
 // Delete user from DB by ID
 func (r *UserRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM users WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM users WHERE user_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting user. Err msg:%v.", err)
 		return err
@@ -244,7 +244,7 @@ func (r *UserRepository) Update(u *model.User) error {
 			email = %s, password = %s, role = %s, verified = %s, 
 			first_name = %s, surname = %s, middle_name = %s, sex = %s, date_of_birth = %s, 
 			address = %s, phone = %s, photo = %s 
-			WHERE id = $1`,
+			WHERE user_id = $1`,
 		email,
 		password,
 		role,
@@ -282,7 +282,7 @@ func (r *UserRepository) Update(u *model.User) error {
 // VerifyEmail user from DB
 func (r *UserRepository) VerifyEmail(userID int) error {
 	result, err := r.Store.Db.Exec(
-		"UPDATE users SET verified = $1, role = $2  WHERE id = $3",
+		"UPDATE users SET verified = $1, role = $2  WHERE user_id = $3",
 		true,
 		string(model.ClientRole),
 		userID,

@@ -15,7 +15,7 @@ type SeatRepository struct {
 // Create seat and save it to DB
 func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO seat (room_id, rent_from, rent_to , price) VALUES ($1, $2, $3, $4) RETURNING id",
+		"INSERT INTO seat (room_id, rent_from, rent_to , price) VALUES ($1, $2, $3, $4) RETURNING seat_id",
 		s.Room.RoomID,
 		s.RentFrom,
 		s.RentTo,
@@ -60,7 +60,7 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 //FindByID searchs and returns seat by ID
 func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 	seatDTO := &model.SeatDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM seat WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM seat WHERE seat_id = $1",
 		id).Scan(
 		&seatDTO.SeatID,
 		&seatDTO.RoomID,
@@ -77,7 +77,7 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 
 // Delete seat from DB by ID
 func (r *SeatRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM seat WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM seat WHERE seat_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg: %v.", err)
 		return err
@@ -119,7 +119,7 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE seat SET 
 		room_id = %s, rent_from = %s, rent_to = %s, price = %s
-		WHERE id = $1`,
+		WHERE seat_id = $1`,
 		roomID,
 		rentFrom,
 		rentTo,
