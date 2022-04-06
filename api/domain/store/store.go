@@ -18,9 +18,6 @@ var (
 
 	// ErrEmailIsUsed ...
 	ErrEmailIsUsed = errors.New("Email already in use")
-
-	// ErrNilPointer ...
-	ErrNilPointer = errors.New("Nil pointer reference")
 )
 
 // Store ...
@@ -34,7 +31,6 @@ type Store struct {
 	SeatRepository                *SeatRepository
 	PetRepository                 *PetRepository
 	BookingRepository             *BookingRepository
-	ImageRepository               *ImageRepository
 	PermissionsRepository         *PermissionsRepository
 	PermissionsEmployeeRepository *PermissionsEmployeeRepository
 	SessionRepository             *SessionRepository
@@ -152,17 +148,6 @@ func (s *Store) Booking() *BookingRepository {
 		Store: s,
 	}
 	return s.BookingRepository
-}
-
-// Image ...
-func (s *Store) Image() *ImageRepository {
-	if s.ImageRepository != nil {
-		return s.ImageRepository
-	}
-	s.ImageRepository = &ImageRepository{
-		Store: s,
-	}
-	return s.ImageRepository
 }
 
 // Session for admin part

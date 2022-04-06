@@ -6,21 +6,44 @@ import (
 
 // TestUser ...
 func TestUser() *User {
+	verified := true
+	dateOfBirth := time.Time{}.AddDate(2000, 2, 2)
 	return &User{
+		UserID:      1,
 		Email:       "email@example.org",
 		Password:    "password",
-		Role:        EmployeeRole,
-		Verified:    true,
+		Role:        ClientRole,
+		Verified:    &verified,
 		Name:        "Name",
 		Surname:     "Surname",
 		MiddleName:  "MiddleName",
 		Sex:         SexMale,
-		DateOfBirth: time.Time{}.AddDate(2000, 2, 2),
+		DateOfBirth: &dateOfBirth,
 		Address:     "Minsk Pr. Nezavisimosti 22-222",
 		Phone:       "+375-29-154-89-33",
 		Photo:       "Photo",
 	}
+}
 
+// TestUserDTO ...
+func TestUserDTO() *UserDTO {
+	verified := true
+	dateOfBirth := time.Time{}.AddDate(2000, 2, 2)
+	return &UserDTO{
+		UserID:      1,
+		Email:       "email@example.org",
+		Password:    "password",
+		Role:        "client",
+		Verified:    &verified,
+		Name:        "Name",
+		Surname:     "Surname",
+		MiddleName:  "MiddleName",
+		Sex:         string(SexMale),
+		DateOfBirth: &dateOfBirth,
+		Address:     "Minsk Pr. Nezavisimosti 22-222",
+		Phone:       "+375-29-154-89-33",
+		Photo:       "Photo",
+	}
 }
 
 // TestHotel instance of hotel
@@ -29,62 +52,169 @@ func TestHotel() *Hotel {
 		HotelID:     1,
 		Name:        "Name",
 		Address:     "Minsk ul sovetskaya 18",
-		Coordinates: []string{"53.89909164468815", "27.498996594142426"},
+		Coordinates: []float64{53.89909164468815, 27.498996594142426},
 	}
 }
 
-// TestRoom instance of room
+// TestRoom ...
 func TestRoom() *Room {
 	return &Room{
-		RoomID:       1,
-		RoomNumber:   1,
-		PetType:      PetTypeCat,
-		Hotel:        *TestHotel(),
-		RoomPhotoURL: "/photo/1",
+		RoomID:      1,
+		RoomNumber:  1,
+		PetType:     PetTypeCat,
+		Hotel:       *TestHotel(),
+		PhotoURL:    "/photo/1",
+		Description: "Description of room",
+		Square:      25.52,
 	}
 }
 
-// TestEmployee instance of employee
+// TestRoomDTO ...
+func TestRoomDTO() *RoomDTO {
+	return &RoomDTO{
+		RoomID:      1,
+		RoomNumber:  1,
+		PetType:     "cat",
+		HotelID:     TestHotel().HotelID,
+		PhotoURL:    "/photo/1",
+		Description: "Description of room",
+		Square:      25.52,
+	}
+}
+
+// TestEmployee ...
 func TestEmployee() *Employee {
 	return &Employee{
-		User:     *TestUser(),
-		Hotel:    *TestHotel(),
-		Position: OwnerPosition,
+		EmployeeID: 1,
+		User:       *TestUser(),
+		Hotel:      *TestHotel(),
+		Position:   OwnerPosition,
 	}
 }
 
-// TestPet instance of pet
+// TestEmployeeDTO ...
+func TestEmployeeDTO() *EmployeeDTO {
+	return &EmployeeDTO{
+		EmployeeID: 1,
+		UserID:     1,
+		HotelID:    1,
+		Position:   string(OwnerPosition),
+	}
+}
+
+// TestPet ...
 func TestPet() *Pet {
 	return &Pet{
-		Name:        "Name",
-		Type:        PetTypeCat,
-		Weight:      1,
-		Diseases:    "Disease",
-		Owner:       *TestUser(),
-		PetPhotoURL: "/",
+		PetID:    1,
+		Name:     "Name",
+		Type:     PetTypeCat,
+		Weight:   1,
+		Diseases: "Diseases",
+		Owner:    *TestUser(),
+		PhotoURL: "/",
 	}
 }
 
-// TestSeat instance of seat
+// TestPetDTO ...
+func TestPetDTO() *PetDTO {
+	return &PetDTO{
+		PetID:    1,
+		Name:     "Name",
+		Type:     string(PetTypeCat),
+		Weight:   1,
+		Diseases: "Diseases",
+		OwnerID:  1,
+		PhotoURL: "/",
+	}
+}
+
+// TestSeat ...
 func TestSeat() *Seat {
+	rentFrom := time.Now().AddDate(0, 0, 1)
+	rentTo := time.Now().AddDate(0, 0, 10)
 	return &Seat{
-		Description: "Description of seat",
-		RentFrom:    time.Time{}.AddDate(20220, 2, 2),
-		RentTo:      time.Time{}.AddDate(2022, 3, 2),
-		Room:        *TestRoom(),
+		SeatID:   1,
+		RentFrom: &rentFrom,
+		RentTo:   &rentTo,
+		Room:     *TestRoom(),
+		Price:    32.99,
 	}
 }
 
-// TestBooking instance of booking
+// TestSeatDTO ...
+func TestSeatDTO() *SeatDTO {
+	rentFrom := time.Now().AddDate(0, 0, 1)
+	rentTo := time.Now().AddDate(0, 0, 10)
+	return &SeatDTO{
+		SeatID:   1,
+		RentFrom: &rentFrom,
+		RentTo:   &rentTo,
+		RoomID:   1,
+		Price:    32.99,
+	}
+}
+
+// TestBookingDTO ...
+func TestBookingDTO() *BookingDTO {
+	a := time.Now().AddDate(0, 0, 1)
+	b := time.Now().AddDate(0, 0, 10)
+	paid := true
+	return &BookingDTO{
+		SeatID:        TestSeat().SeatID,
+		PetID:         TestPet().PetID,
+		EmployeeID:    TestEmployee().EmployeeID,
+		Status:        string(BookingStatusInProgress),
+		StartDate:     &a,
+		EndDate:       &b,
+		Notes:         "Notes",
+		TransactionID: 1,
+		Paid:          &paid,
+	}
+}
+
+// TestBooking ...
 func TestBooking() *Booking {
+	a := time.Now().AddDate(0, 0, 1)
+	b := time.Now().AddDate(0, 0, 10)
+	paid := true
 	return &Booking{
-		Seat:      *TestSeat(),
-		Pet:       *TestPet(),
-		Employee:  *TestEmployee(),
-		Status:    BookingStatusInProgress,
-		StartDate: time.Time{}.AddDate(2000, 2, 2),
-		EndDate:   time.Time{}.AddDate(2000, 22, 2),
-		Paid:      true,
-		Notes:     "Notes",
+		Seat:          *TestSeat(),
+		Pet:           *TestPet(),
+		Employee:      *TestEmployee(),
+		Status:        BookingStatusInProgress,
+		StartDate:     &a,
+		EndDate:       &b,
+		Notes:         "Notes",
+		TransactionID: 1,
+		Paid:          &paid,
+	}
+}
+
+// TestLogin ...
+func TestLogin() *Login {
+	return &Login{
+		Email:    "login@example.org",
+		Password: "password",
+	}
+}
+
+func TestPermission() *Permission {
+	return &Permission{
+		Name:        ReadUser,
+		Descriptoin: "Abiliti to get users",
+	}
+}
+
+func TestPermissionsEmployees() *PermissionsEmployees {
+	return &PermissionsEmployees{
+		Permissions: *TestPermission(),
+		Employee:    *TestEmployee(),
+	}
+}
+
+func TestPermissionsEmployeesDTO() *PermissionsEmployeesDTO {
+	return &PermissionsEmployeesDTO{
+		PermissionsID: 1,
+		EmployeeID:    1,
 	}
 }

@@ -1,21 +1,11 @@
 package model
 
-import validation "github.com/go-ozzo/ozzo-validation"
-
 // Image struct
 type Image struct {
-	ImageID int         `json:"imageId"`
-	Type    ImageType   `json:"type"`
-	OwnerID int         `json:"ownerId"`
-	Format  ImageFormat `json:"format"`
-}
-
-// ImageDTO struct
-type ImageDTO struct {
-	ImageID int    `json:"imageId"`
-	Type    string `json:"type"`
-	OwnerID int    `json:"ownerId"`
-	Format  string `json:"format"`
+	ImageID int       `json:"imageId"`
+	Type    ImageType `json:"type"`
+	URL     string    `json:"url"`
+	OwnerID int       `json:"ownerId"`
 }
 
 // ImageType ...
@@ -23,11 +13,9 @@ type ImageType string
 
 // Image Types
 var (
-	PetImage     ImageType = "pet"
-	RoomImage    ImageType = "room"
-	UserImage    ImageType = "user"
-	TestingImage ImageType = "test"
-)
+	PetImage  ImageType = "pet"
+	RoomImage ImageType = "room"
+
 
 // ImageFormat ...
 type ImageFormat string

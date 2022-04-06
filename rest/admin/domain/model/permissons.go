@@ -1,5 +1,7 @@
 package model
 
+import validation "github.com/go-ozzo/ozzo-validation"
+
 //Permission refers to what an authorized worker can do ,  like creat_user , delete_hotel
 type Permission struct {
 	PermissionID int
@@ -42,3 +44,13 @@ const (
 	DeleteSeat     PermissionName = "delete_seat"
 	UpdateSeat     PermissionName = "update_seat"
 )
+
+// Validate ...
+func (p *Permission) Validate() error {
+	return validation.ValidateStruct(
+		p,
+		validation.Field(&p.PermissionID, validation.Required, validation.By(IsValidID)),
+		validation.Field(&p.Name, validation.Required, validation.By(IsSQL), validation.Length(5, 30)),
+		validation.Field(&p.Descriptoin, validation.Required, validation.By(IsSQL), validation.Length(5, 50)),
+	)
+}

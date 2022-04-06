@@ -30,7 +30,7 @@ func (r *UserRepository) Create(user *model.User) (*int, error) {
 	}
 	encryptedPassword, err := model.EncryptPassword(user.Password)
 	if err != nil {
-		r.Store.Logger.Errorf("Eror occured while password encrypting. Err msg: %v", err)
+		r.Store.Logger.Error("Eror occured while password encrypting. Err msg: %v", err)
 		return nil, err
 	}
 

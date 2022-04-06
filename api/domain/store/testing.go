@@ -16,7 +16,6 @@ type ID struct {
 	Room     int
 	Seat     int
 	Booking  int
-	Image    int
 }
 
 // TestStore ...
@@ -88,11 +87,6 @@ func FillDB(t *testing.T, s *Store) *ID {
 	bookingID, _ := s.Booking().Create(booking)
 	booking.BookingID = *bookingID
 
-	image := model.TestImage()
-	image.OwnerID = user.UserID
-	imageID, _ := s.Image().Create(image)
-	image.ImageID = *imageID
-
 	s.Close()
 
 	return &ID{
@@ -103,6 +97,5 @@ func FillDB(t *testing.T, s *Store) *ID {
 		Room:     *roomID,
 		Seat:     *seatID,
 		Booking:  *bookingID,
-		Image:    *imageID,
 	}
 }
