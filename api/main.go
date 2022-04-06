@@ -53,7 +53,7 @@ func initAccountDb(c *webapp.Config) {
 			log.Print(err)
 		}
 
-		_, err = db.Exec("UPDATE USERS set password = $1 WHERE id = $2",
+		_, err = db.Exec("UPDATE USERS set password = $1 WHERE user_id = $2",
 			encryptedPassword, i+1)
 		if err != nil {
 			log.Print(err)
