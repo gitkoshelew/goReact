@@ -7,7 +7,6 @@ import (
 	"goReact/webapp/admin/session"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -47,26 +46,10 @@ func NewSeat(s *store.Store) httprouter.Handle {
 
 		description := r.FormValue("Description")
 
-		layout := "2006-01-02"
-		rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
-			return
-		}
-
-		rentTo, err := time.Parse(layout, r.FormValue("RentTo"))
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
-			return
-		}
 		seatDTO := model.SeatDTO{
 			SeatID:      0,
 			RoomID:      roomID,
 			Description: description,
-			RentFrom:    []*time.Time{&rentFrom},
-			RentTo:      []*time.Time{&rentTo},
 		}
 
 		err = seatDTO.Validate()

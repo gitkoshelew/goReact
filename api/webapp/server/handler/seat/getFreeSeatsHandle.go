@@ -3,7 +3,7 @@ package seat
 import (
 	"encoding/json"
 	"fmt"
-	"goReact/domain/request"
+	reqandresp "goReact/domain/reqAndResp"
 	"goReact/domain/store"
 	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/response"
@@ -15,7 +15,7 @@ func GetFreeSeatsHandle(s *store.Store) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		request := r.Context().Value(handler.CtxKeyFreeSeatsSearchReqValidation).(*request.FreeSeatsSearching)
+		request := r.Context().Value(handler.CtxKeyFreeSeatsSearchReqValidation).(*reqandresp.FreeSeatsSearching)
 
 		err := s.Open()
 		if err != nil {

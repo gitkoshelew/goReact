@@ -1,12 +1,12 @@
 CREATE TABLE IF NOT EXISTS PERMISSIONS 
-(   id              serial PRIMARY key, 
+(   permissions_id              serial PRIMARY key, 
     name      CHARACTER VARYING(30) NOT NULL ,
     description         TEXT NOT NULL 
 );
 
 CREATE TABLE IF NOT EXISTS permissions_employees
-(   permissions_id            INTEGER REFERENCES PERMISSIONS(id) ON DELETE CASCADE NOT NULL  ,
-    employee_id            INTEGER REFERENCES EMPLOYEE(id) ON DELETE CASCADE NOT NULL     
+(   permissions_id            INTEGER REFERENCES PERMISSIONS(permissions_id) ON DELETE CASCADE NOT NULL  ,
+    employee_id            INTEGER REFERENCES EMPLOYEE(employee_id) ON DELETE CASCADE NOT NULL     
 );
 
 INSERT INTO PERMISSIONS (name, description) VALUES

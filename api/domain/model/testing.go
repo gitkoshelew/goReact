@@ -143,26 +143,18 @@ func TestPage() *pagination.Page {
 
 // TestSeat ...
 func TestSeat() *Seat {
-	rentFrom := time.Now().AddDate(0, 0, 1)
-	rentTo := time.Now().AddDate(0, 0, 10)
 	return &Seat{
 		SeatID:      1,
 		Description: "Description of seat",
-		RentFrom:    []*time.Time{&rentFrom},
-		RentTo:      []*time.Time{&rentTo},
 		Room:        *TestRoom(),
 	}
 }
 
 // TestSeatDTO ...
 func TestSeatDTO() *SeatDTO {
-	rentFrom := time.Now().AddDate(0, 0, 1)
-	rentTo := time.Now().AddDate(0, 0, 10)
 	return &SeatDTO{
 		SeatID:      1,
 		Description: "Description of seat",
-		RentFrom:    []*time.Time{&rentFrom},
-		RentTo:      []*time.Time{&rentTo},
 		RoomID:      1,
 	}
 }

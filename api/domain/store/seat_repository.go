@@ -3,9 +3,7 @@ package store
 import (
 	"fmt"
 	"goReact/domain/model"
-	"goReact/domain/request"
-
-	"github.com/lib/pq"
+	reqandresp "goReact/domain/reqAndResp"
 )
 
 // SeatRepository ...
@@ -16,10 +14,8 @@ type SeatRepository struct {
 // Create seat and save it to DB
 func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO seat (room_id, rent_from, rent_to, description) VALUES ($1, $2, $3, $4) RETURNING id",
+		"INSERT INTO seat room_id, description VALUES ($1, $2) RETURNING id",
 		s.Room.RoomID,
-		pq.Array(s.RentFrom),
-		pq.Array(s.RentTo),
 		s.Description,
 	).Scan(&s.SeatID); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating seat. Err msg: %v.", err)
@@ -45,8 +41,6 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 			&seat.SeatID,
 			&seat.RoomID,
 			&seat.Description,
-			pq.Array(&seat.RentFrom),
-			pq.Array(&seat.RentTo),
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
@@ -66,8 +60,6 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 		&seatDTO.SeatID,
 		&seatDTO.RoomID,
 		&seatDTO.Description,
-		pq.Array(&seatDTO.RentFrom),
-		pq.Array(&seatDTO.RentTo),
 	); err != nil {
 		r.Store.Logger.Errorf("Error occured while getting seat by id. Err msg: %v.", err)
 		return nil, err
@@ -104,16 +96,6 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 	if s.Room.RoomID != 0 {
 		roomID = fmt.Sprintf("%d", s.Room.RoomID)
 	}
-	rentFrom := "rent_from"
-	if s.RentFrom != nil {
-		rentFrom = fmt.Sprintf("'%v'", s.RentFrom)
-		StringOfArrayFromJSONToPSQL(&rentFrom)
-	}
-	rentTo := "rent_to"
-	if s.RentTo != nil {
-		rentTo = fmt.Sprintf("'%s'", s.RentTo)
-		StringOfArrayFromJSONToPSQL(&rentTo)
-	}
 	description := "description"
 	if s.Description != "" {
 		description = fmt.Sprintf("'%s'", s.Description)
@@ -121,11 +103,9 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE seat SET 
-		room_id = %s, rent_from = %s, rent_to = %s, description = %s 
+		room_id = %s, description = %s 
 		WHERE id = $1`,
 		roomID,
-		rentFrom,
-		rentTo,
 		description,
 	), s.SeatID)
 	if err != nil {
@@ -164,22 +144,19 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 		SeatID:      dto.RoomID,
 		Description: dto.Description,
 		Room:        *room,
-		RentFrom:    dto.RentFrom,
-		RentTo:      dto.RentTo,
 	}, nil
 }
 
 // FreeSeatsSearching searching free seats by hotel ID, pet type, rentTo and rentFrom data
-func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[]model.SeatDTO, error) {
-	rows, err := r.Store.Db.Query(`SELECT * FROM seat 
-	WHERE 
-	(room_id = any(SELECT id FROM room WHERE pet_type = $1 AND hotel_id = $2)) 
-	and 
-	($3 >= rent_to or $4 <= rent_from)`,
+func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) (*[]model.SeatDTO, error) {
+	rows, err := r.Store.Db.Query(`SELECT S.seat_id, start_date, end_date   FROM seat AS S
+		JOIN booking AS B ON(S.seat_id = B.seat_id)
+		JOIN room AS R ON (pet_type = $1 AND hotel_id = $2 and S.room_id = R.room_id)
+		GROUP BY S.seat_id, start_date, end_date
+		ORDER BY start_date`,
 		req.PetType,
 		req.HotelID,
-		pq.Array(req.RentFrom),
-		pq.Array(req.RentTo))
+	)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
 		return nil, err
@@ -193,8 +170,6 @@ func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[
 			&seat.SeatID,
 			&seat.RoomID,
 			&seat.Description,
-			pq.Array(&seat.RentFrom),
-			pq.Array(&seat.RentTo),
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
