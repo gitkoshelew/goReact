@@ -61,3 +61,51 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
 [36mINFO[0m[2022-04-06T14:54:55Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T15:55:39Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T16:07:29Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T16:08:35Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-06T16:09:49Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
