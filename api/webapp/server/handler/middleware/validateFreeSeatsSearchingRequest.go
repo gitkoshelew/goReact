@@ -29,7 +29,7 @@ func ValidateFreeSeatsSearchingRequest(next http.Handler, s *store.Store) httpro
 		err := request.Validate()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
+			s.Logger.Errorf("Error occured while validating seats searching data. Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while validating user. Err msg: %v", err)})
 			return
 		}

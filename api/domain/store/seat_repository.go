@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"goReact/domain/model"
 	reqandresp "goReact/domain/reqAndResp"
+	"time"
 )
 
 // SeatRepository ...
@@ -114,7 +115,7 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 		WHERE id = $1`,
 		roomID,
 		description,
-    price,
+		price,
 	), s.SeatID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating seat. Err msg: %v.", err)
@@ -152,48 +153,64 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 		SeatID:      dto.RoomID,
 		Description: dto.Description,
 		Room:        *room,
-		Price:    dto.Price,
+		Price:       dto.Price,
 	}, nil
 }
 
 // FreeSeatsSearching searching free seats by hotel ID, pet type, rentTo and rentFrom data
-func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) (*[]model.SeatDTO, error) {
-	rows, err := r.Store.Db.Query(`SELECT S.seat_id, start_date, end_date   FROM seat AS S
-		JOIN booking AS B ON(S.seat_id = B.seat_id)
-		JOIN room AS R ON (pet_type = $1 AND hotel_id = $2 and S.room_id = R.room_id)
-		GROUP BY S.seat_id, start_date, end_date
-		ORDER BY start_date`,
+func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) (*map[int][]int, error) {
+	rows, err := r.Store.Db.Query(`SELECT  S.seat_id, start_date, end_date   FROM seat AS S
+	LEFT JOIN booking AS B ON(S.seat_id = B.seat_id)
+	JOIN room AS R ON (pet_type = $1 AND hotel_id = $2 and S.room_id = R.room_id)
+	GROUP BY S.seat_id, start_date, end_date
+	ORDER BY start_date`,
 		req.PetType,
 		req.HotelID,
 	)
 	if err != nil {
-		r.Store.Logger.Errorf("Error occured while getting all seats. Err msg: %v", err)
+		r.Store.Logger.Errorf("Error occured while getting room info. Err msg: %v", err)
 		return nil, err
 	}
 
-	seats := []model.SeatDTO{}
+	roomInfos := []reqandresp.RoomInfo{}
 
 	for rows.Next() {
-		seat := model.SeatDTO{}
+		roomInfo := reqandresp.RoomInfo{}
 		err := rows.Scan(
-			&seat.SeatID,
-			&seat.RoomID,
-			&seat.Description,
-			&seat.Price,
+			&roomInfo.SeatID,
+			&roomInfo.StartDate,
+			&roomInfo.EndDate,
 		)
 		if err != nil {
-			r.Store.Logger.Debugf("Error occured while getting all seats. Err msg: %v", err)
+			r.Store.Logger.Debugf("Error occured while getting room info. Err msg: %v", err)
 			continue
 		}
-		seats = append(seats, seat)
+		roomInfos = append(roomInfos, roomInfo)
 	}
 
-	if len(seats) < 1 {
+	if len(roomInfos) < 1 {
 		r.Store.Logger.Debugf("no free seats for data: %v", req)
 		return nil, ErrNoFreeSeatsForCurrentRequest
 	}
 
-	r.Store.Logger.Infof("seat IDs = %v", seats)
+	BookingCalendar := make(map[int][]int)
 
-	return &seats, nil
+	for i := 1; i < 31; i++ {
+		var seatsIDs []int
+		date := time.Now().AddDate(0, 0, i)
+
+		for _, d := range roomInfos {
+			if d.StartDate == nil && d.EndDate == nil {
+				seatsIDs = append(seatsIDs, d.SeatID)
+			} else {
+				if date.Before(*d.StartDate) || date.After(*d.EndDate) {
+					seatsIDs = append(seatsIDs, d.SeatID)
+				}
+			}
+		}
+
+		BookingCalendar[i] = seatsIDs
+	}
+
+	return &BookingCalendar, nil
 }

@@ -2,7 +2,6 @@ package reqandresp
 
 import (
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -34,26 +33,6 @@ func TestPet_Validate(t *testing.T) {
 			req: func() *FreeSeatsSearching {
 				request := TestFreeSeatsSearching()
 				request.PetType = "invalid"
-				return request
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid SratDate",
-			req: func() *FreeSeatsSearching {
-				request := TestFreeSeatsSearching()
-				rentFrom := time.Now().AddDate(0, 0, -1)
-				request.RentFrom = &rentFrom
-				return request
-			},
-			isValid: false,
-		},
-		{
-			name: "invalid EndDate",
-			req: func() *FreeSeatsSearching {
-				request := TestFreeSeatsSearching()
-				RentTo := time.Now().AddDate(0, 0, -1)
-				request.RentFrom = &RentTo
 				return request
 			},
 			isValid: false,
