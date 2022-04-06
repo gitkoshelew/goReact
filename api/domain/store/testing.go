@@ -93,6 +93,10 @@ func FillDB(t *testing.T, s *Store) *ID {
 	imageID, _ := s.Image().Create(image)
 	image.ImageID = *imageID
 
+	permission := model.TestPermission()
+	permissionID, _ := s.Permissions().Create(permission)
+	permission.PermissionID = *permissionID
+
 	s.Close()
 
 	return &ID{
