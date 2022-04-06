@@ -21,7 +21,7 @@ func (r *ImageRepository) Create(i *model.Image) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO images 
 		(type, ownerId) 
-		VALUES ($1, $2) RETURNING id`,
+		VALUES ($1, $2) RETURNING image_id`,
 		string(i.Type),
 		i.OwnerID,
 	).Scan(&i.ImageID); err != nil {
@@ -33,7 +33,7 @@ func (r *ImageRepository) Create(i *model.Image) (*int, error) {
 
 // GetAll returns all images
 func (r *ImageRepository) GetAll() (*[]model.Image, error) {
-	rows, err := r.Store.Db.Query("SELECT * FROM image")
+	rows, err := r.Store.Db.Query("SELECT * FROM images")
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while getting all images. Err msg: %v.", err)
 		return nil, err
@@ -59,7 +59,7 @@ func (r *ImageRepository) GetAll() (*[]model.Image, error) {
 //FindByID searchs and returns image by ID
 func (r *ImageRepository) FindByID(id int) (*model.ImageDTO, error) {
 	image := &model.ImageDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM images WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM images WHERE image_id = $1",
 		id).Scan(
 		&image.ImageID,
 		&image.Type,
@@ -75,7 +75,7 @@ func (r *ImageRepository) FindByID(id int) (*model.ImageDTO, error) {
 func (r *ImageRepository) Delete(id int) error {
 	var imageType string
 	var ownerID int
-	if err := r.Store.Db.QueryRow("DELETE FROM images WHERE id = $1 RETURNING type, ownerId", id).Scan(
+	if err := r.Store.Db.QueryRow("DELETE FROM images WHERE image_id = $1 RETURNING type, ownerId", id).Scan(
 		&imageType,
 		&ownerID,
 	); err != nil {
@@ -97,16 +97,28 @@ func (r *ImageRepository) Update(i *model.Image) error {
 	result, err := r.Store.Db.Exec(
 		"UPDATE image SET",
 		"type = $1 ownerId = $2",
-		"WHERE id = $4",
+		"WHERE image_id = $3",
 		string(i.Type),
 		i.OwnerID,
 		i.ImageID,
 	)
+
 	if err != nil {
-		log.Printf(err.Error())
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg: %v.", err)
 		return err
 	}
-	log.Printf("Image updated, rows affectet: %d", result)
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg:%v.", err)
+		return err
+	}
+
+	if rowsAffected < 1 {
+		r.Store.Logger.Errorf("Error occured while updating image. Err msg:%v.", ErrNoRowsAffected)
+		return ErrNoRowsAffected
+	}
+
+	r.Store.Logger.Infof("Image with id %d was updated", i.ImageID)
 	return nil
 }
 
@@ -116,7 +128,7 @@ func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO images 
 		(type, ownerId) 
-		VALUES ($1, $2) RETURNING id`,
+		VALUES ($1, $2) RETURNING image_id`,
 		imageDTO.Type,
 		imageDTO.OwnerID,
 	).Scan(&imageDTO.ImageID); err != nil {
