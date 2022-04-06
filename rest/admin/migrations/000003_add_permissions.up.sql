@@ -37,7 +37,12 @@ INSERT INTO PERMISSIONS (name, description) VALUES
 ('read_seat','ability to read a seat'), 
 ('creat_seat','ability to create a seat'),
 ('delete_seat','ability to delete a seat'),
-('update_seat','ability to update a seat');
+('update_seat','ability to update a seat'),
+('update_seat','ability to update a seat'),
+('read_image','ability to read a image'), 
+('creat_image','ability to create a image'),
+('delete_image','ability to delete a image'),
+('update_image','ability to update a image');
 
 INSERT INTO permissions_employees (permissions_id, employee_id) VALUES 
 (1,3),
