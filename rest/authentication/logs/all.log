@@ -628,3 +628,167 @@
 [36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
 [36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
 [36mINFO[0m[2022-03-27T12:39:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:32:59Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:32:59Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:32:59Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:32:59Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:33:09Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:33868->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:33:09Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:33868->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:33:09Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000580c0}) 
+[31mERRO[0m[2022-04-06T18:33:09Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000580c0}) 
+[31mERRO[0m[2022-04-06T18:33:09Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000580c0}) 
+[31mERRO[0m[2022-04-06T18:33:09Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000580c0}) 
+[36mINFO[0m[2022-04-06T18:33:23Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:33:23Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:33:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:33:23Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:33:33Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:38637->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:33:33Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:38637->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:33:33Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a7c0}) 
+[31mERRO[0m[2022-04-06T18:33:33Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a7c0}) 
+[31mERRO[0m[2022-04-06T18:33:33Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a7c0}) 
+[31mERRO[0m[2022-04-06T18:33:33Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a7c0}) 
+[36mINFO[0m[2022-04-06T18:33:37Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:33:37Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:33:37Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:33:37Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:33:47Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:42016->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:33:47Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:42016->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:33:47Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b67c0}) 
+[31mERRO[0m[2022-04-06T18:33:47Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b67c0}) 
+[31mERRO[0m[2022-04-06T18:33:47Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b67c0}) 
+[31mERRO[0m[2022-04-06T18:33:47Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b67c0}) 
+[36mINFO[0m[2022-04-06T18:33:50Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:33:50Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:33:50Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:33:50Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:34:00Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:40306->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:00Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:40306->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:00Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000290000}) 
+[31mERRO[0m[2022-04-06T18:34:00Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000290000}) 
+[31mERRO[0m[2022-04-06T18:34:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000290000}) 
+[31mERRO[0m[2022-04-06T18:34:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000290000}) 
+[36mINFO[0m[2022-04-06T18:34:02Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:02Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:02Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:34:02Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:34:12Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:38360->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:12Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:38360->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:12Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002f0780}) 
+[31mERRO[0m[2022-04-06T18:34:12Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002f0780}) 
+[31mERRO[0m[2022-04-06T18:34:12Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002f0780}) 
+[31mERRO[0m[2022-04-06T18:34:12Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002f0780}) 
+[36mINFO[0m[2022-04-06T18:34:14Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:14Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:14Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:34:14Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:34:24Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:49841->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:24Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:49841->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:24Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[31mERRO[0m[2022-04-06T18:34:24Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[31mERRO[0m[2022-04-06T18:34:24Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[31mERRO[0m[2022-04-06T18:34:24Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[36mINFO[0m[2022-04-06T18:34:26Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:26Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:26Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:34:26Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:34:36Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:56645->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:36Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:56645->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:36Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a780}) 
+[31mERRO[0m[2022-04-06T18:34:36Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a780}) 
+[31mERRO[0m[2022-04-06T18:34:36Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a780}) 
+[31mERRO[0m[2022-04-06T18:34:36Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00027a780}) 
+[36mINFO[0m[2022-04-06T18:34:38Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:38Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:38Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:34:38Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:34:46Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:46Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:46Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:34:46Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:34:56Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:54214->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:56Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:54214->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:34:56Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00040c000}) 
+[31mERRO[0m[2022-04-06T18:34:56Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00040c000}) 
+[31mERRO[0m[2022-04-06T18:34:56Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00040c000}) 
+[31mERRO[0m[2022-04-06T18:34:56Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00040c000}) 
+[36mINFO[0m[2022-04-06T18:34:58Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:58Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:34:58Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:34:58Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:35:08Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:42729->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:08Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:42729->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:08Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b4800}) 
+[31mERRO[0m[2022-04-06T18:35:08Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b4800}) 
+[31mERRO[0m[2022-04-06T18:35:08Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b4800}) 
+[31mERRO[0m[2022-04-06T18:35:08Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002b4800}) 
+[36mINFO[0m[2022-04-06T18:35:10Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:10Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:10Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:35:10Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:35:20Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:39921->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:20Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:39921->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:20Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002347c0}) 
+[31mERRO[0m[2022-04-06T18:35:20Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002347c0}) 
+[31mERRO[0m[2022-04-06T18:35:20Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002347c0}) 
+[31mERRO[0m[2022-04-06T18:35:20Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002347c0}) 
+[36mINFO[0m[2022-04-06T18:35:22Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:22Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:22Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:35:22Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:35:32Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:39509->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:32Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:39509->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:32Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002367c0}) 
+[31mERRO[0m[2022-04-06T18:35:32Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002367c0}) 
+[31mERRO[0m[2022-04-06T18:35:32Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002367c0}) 
+[31mERRO[0m[2022-04-06T18:35:32Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0002367c0}) 
+[36mINFO[0m[2022-04-06T18:35:34Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:34Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:34Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:35:34Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:35:44Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:38418->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:44Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:38418->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:44Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000368580}) 
+[31mERRO[0m[2022-04-06T18:35:44Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000368580}) 
+[31mERRO[0m[2022-04-06T18:35:44Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000368580}) 
+[31mERRO[0m[2022-04-06T18:35:44Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc000368580}) 
+[36mINFO[0m[2022-04-06T18:35:46Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:46Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:46Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:35:46Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:35:56Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:60167->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:56Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:60167->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:35:56Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000b4040}) 
+[31mERRO[0m[2022-04-06T18:35:56Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000b4040}) 
+[31mERRO[0m[2022-04-06T18:35:56Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000b4040}) 
+[31mERRO[0m[2022-04-06T18:35:56Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc0000b4040}) 
+[36mINFO[0m[2022-04-06T18:35:59Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:59Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:35:59Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:35:59Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:36:09Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:51198->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:36:09Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:51198->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:36:09Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00038e040}) 
+[31mERRO[0m[2022-04-06T18:36:09Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00038e040}) 
+[31mERRO[0m[2022-04-06T18:36:09Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00038e040}) 
+[31mERRO[0m[2022-04-06T18:36:09Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00038e040}) 
+[36mINFO[0m[2022-04-06T18:36:11Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:36:11Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:36:11Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:36:11Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[31mERRO[0m[2022-04-06T18:36:21Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:52451->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:36:21Z]store.go:66 auth/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp: lookup authdb on 127.0.0.11:53: read udp 127.0.0.1:52451->127.0.0.11:53: i/o timeout 
+[31mERRO[0m[2022-04-06T18:36:21Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[31mERRO[0m[2022-04-06T18:36:21Z]server.go:37 auth/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[31mERRO[0m[2022-04-06T18:36:21Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[31mERRO[0m[2022-04-06T18:36:21Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> <nil> 0xc00032a040}) 
+[36mINFO[0m[2022-04-06T18:36:22Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:36:22Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:36:22Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:36:22Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:38:02Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:38:02Z]server.go:34 auth/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-06T18:38:02Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:38:02Z]store.go:57 auth/domain/store.(*Store).Open Auth store opening. Source: host=authdb port=5432 user=user password=userpass dbname=authdb sslmode=disable 
+[36mINFO[0m[2022-04-06T18:38:02Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       
+[36mINFO[0m[2022-04-06T18:38:02Z]server.go:56 auth/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1111 ...       

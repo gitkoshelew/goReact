@@ -199,19 +199,28 @@ func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) 
 		var seatsIDs []int
 		date := time.Now().AddDate(0, 0, i)
 		existingSeats := make(map[int]bool)
+
 		for _, d := range roomInfos {
-			if d.StartDate == nil && d.EndDate == nil {
+			exist, ok := existingSeats[d.SeatID]
+			if ok && !exist {
+				continue
+			} else if d.StartDate == nil && d.EndDate == nil {
 				if _, ok := existingSeats[d.SeatID]; !ok {
 					existingSeats[d.SeatID] = true
-					seatsIDs = append(seatsIDs, d.SeatID)
 				}
-			} else {
-				if date.Before(*d.StartDate) || date.After(*d.EndDate) {
-					if _, ok := existingSeats[d.SeatID]; !ok {
-						existingSeats[d.SeatID] = true
-						seatsIDs = append(seatsIDs, d.SeatID)
-					}
+			} else if _, ok := existingSeats[d.SeatID]; !ok {
+				r.Store.Logger.Errorf("%v", d.SeatID)
+				r.Store.Logger.Errorf("%v ---- %v  ----- %v", date, d.StartDate, d.EndDate)
+				existingSeats[d.SeatID] = true
+				if date.After(*d.StartDate) && date.Before(*d.EndDate) {
+					existingSeats[d.SeatID] = false
 				}
+			}
+		}
+
+		for i := range existingSeats {
+			if existingSeats[i] == true {
+				seatsIDs = append(seatsIDs, i)
 			}
 		}
 
