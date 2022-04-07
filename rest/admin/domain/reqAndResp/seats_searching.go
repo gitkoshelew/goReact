@@ -1,4 +1,4 @@
-package request
+package reqandresp
 
 import (
 	"admin/domain/model"
