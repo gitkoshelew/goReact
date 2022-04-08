@@ -157,8 +157,8 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 	}, nil
 }
 
-// FreeSeatsSearching searching free seats by hotel ID, pet type, rentTo and rentFrom data
-func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) (*map[int][]int, error) {
+// FreeSeatsSearching searching free seats by hotel ID, pet type
+func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) (*[]reqandresp.FreeSeatsResponse, error) {
 	rows, err := r.Store.Db.Query(`SELECT  S.seat_id, start_date, end_date   FROM seat AS S
 	LEFT JOIN booking AS B ON(S.seat_id = B.seat_id)
 	JOIN room AS R ON (pet_type = $1 AND hotel_id = $2 and S.room_id = R.room_id)
@@ -193,7 +193,7 @@ func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) 
 		return nil, ErrNoFreeSeatsForCurrentRequest
 	}
 
-	BookingCalendar := make(map[int][]int)
+	var resp []reqandresp.FreeSeatsResponse
 
 	for i := 1; i < 31; i++ {
 		var seatsIDs []int
@@ -224,8 +224,12 @@ func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) 
 			}
 		}
 
-		BookingCalendar[i] = seatsIDs
+		resp = append(resp, reqandresp.FreeSeatsResponse{
+			Day:        i,
+			SeatIDs:    seatsIDs,
+			TotalCount: len(seatsIDs),
+		})
 	}
 
-	return &BookingCalendar, nil
+	return &resp, nil
 }
