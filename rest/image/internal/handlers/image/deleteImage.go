@@ -16,7 +16,7 @@ func DeleteImageHandle(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Content-Type", "application/json")
 
-		id, err := strconv.Atoi(r.URL.Query().Get("id"))
+		id, err := strconv.Atoi(ps.ByName("id"))
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while parsing id. Err msg: %v", err)})
