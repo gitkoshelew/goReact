@@ -1,7 +1,7 @@
 package request
 
 import (
-	"goReact/domain/model"
+	"hotel/domain/model"
 	"time"
 )
 

@@ -13,6 +13,7 @@ import (
 
 var permissionCreate model.Permission = model.Permission{Name: model.CreatRoom}
 
+
 // NewRoom ...
 func NewRoom(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -46,29 +47,41 @@ func NewRoom(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		hotel, err := s.Hotel().FindByID(hotelID)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured while getting hotel by id. Err msg:%v. ", err), http.StatusBadRequest)
-			return
-		}
+		description := r.FormValue("Description")
+
 		photo := r.FormValue("Photo")
 
-		room := model.Room{
-			RoomID:       0,
-			RoomNumber:   roomNumber,
-			PetType:      model.PetType(petType),
-			Hotel:        *hotel,
-			RoomPhotoURL: photo,
+		square, err := strconv.ParseFloat(r.FormValue("Square"), 32)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lat")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lat"))
+			return
 		}
 
-		err = room.Validate()
+		roomDTO := model.RoomDTO{
+			RoomID:      0,
+			RoomNumber:  roomNumber,
+			PetType:     petType,
+			HotelID:     hotelID,
+			PhotoURL:    photo,
+			Description: description,
+			Square: square,
+		}
+
+		err = roomDTO.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		_, err = s.Room().Create(&room)
+		room, err := s.Room().ModelFromDTO(&roomDTO)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while converting DTO. Err msg:%v. ", err), http.StatusBadRequest)
+			return
+		}
+
+		_, err = s.Room().Create(room)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating room. Err msg:%v. ", err), http.StatusBadRequest)
 			return

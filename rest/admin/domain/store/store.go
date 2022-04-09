@@ -4,8 +4,23 @@ import (
 	"admin/webapp"
 	"admin/webapp/logger"
 	"database/sql"
+	"errors"
 
 	_ "github.com/lib/pq" // ...
+)
+
+var (
+	// ErrNoRowsAffected ...
+	ErrNoRowsAffected = errors.New("No rows affected")
+
+	// ErrNoFreeSeatsForCurrentRequest ...
+	ErrNoFreeSeatsForCurrentRequest = errors.New("No seats available for chosen data")
+
+	// ErrEmailIsUsed ...
+	ErrEmailIsUsed = errors.New("Email already in use")
+
+	// ErrNilPointer ...
+	ErrNilPointer = errors.New("Nil pointer reference")
 )
 
 // Store ...

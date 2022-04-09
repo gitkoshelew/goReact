@@ -18,7 +18,7 @@ type User struct {
 type UserDTO struct {
 	UserID   int    `json:"userId"`
 	Email    string `json:"email"`
-	Password string `json:"password"`
+	Password string `json:"-"`
 	Role     string `json:"role"`
 	Verified *bool  `json:"verified"`
 }

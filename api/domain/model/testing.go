@@ -68,22 +68,26 @@ func TestHotel() *Hotel {
 // TestRoom ...
 func TestRoom() *Room {
 	return &Room{
-		RoomID:     1,
-		RoomNumber: 1,
-		PetType:    PetTypeCat,
-		Hotel:      *TestHotel(),
-		PhotoURL:   "/photo/1",
+		RoomID:      1,
+		RoomNumber:  1,
+		PetType:     PetTypeCat,
+		Hotel:       *TestHotel(),
+		PhotoURL:    "/photo/1",
+		Description: "Description of room",
+		Square:      25.52,
 	}
 }
 
 // TestRoomDTO ...
 func TestRoomDTO() *RoomDTO {
 	return &RoomDTO{
-		RoomID:     1,
-		RoomNumber: 1,
-		PetType:    "cat",
-		HotelID:    TestHotel().HotelID,
-		PhotoURL:   "/photo/1",
+		RoomID:      1,
+		RoomNumber:  1,
+		PetType:     "cat",
+		HotelID:     TestHotel().HotelID,
+		PhotoURL:    "/photo/1",
+		Description: "Description of room",
+		Square:      25.52,
 	}
 }
 
@@ -143,27 +147,21 @@ func TestPage() *pagination.Page {
 
 // TestSeat ...
 func TestSeat() *Seat {
-	rentFrom := time.Now().AddDate(0, 0, 1)
-	rentTo := time.Now().AddDate(0, 0, 10)
 	return &Seat{
 		SeatID:      1,
 		Description: "Description of seat",
-		RentFrom:    &rentFrom,
-		RentTo:      &rentTo,
 		Room:        *TestRoom(),
+		Price:       32.99,
 	}
 }
 
 // TestSeatDTO ...
 func TestSeatDTO() *SeatDTO {
-	rentFrom := time.Now().AddDate(0, 0, 1)
-	rentTo := time.Now().AddDate(0, 0, 10)
 	return &SeatDTO{
 		SeatID:      1,
 		Description: "Description of seat",
-		RentFrom:    &rentFrom,
-		RentTo:      &rentTo,
 		RoomID:      1,
+		Price:       32.99,
 	}
 }
 
@@ -218,5 +216,29 @@ func TestImageDTO() *ImageDTO {
 		Type:    string(TestingImage),
 		OwnerID: 1,
 		Format:  "original",
+	}
+}
+
+// TestPermission ...
+func TestPermission() *Permission {
+	return &Permission{
+		Name:        ReadUser,
+		Descriptoin: "Abiliti to get users",
+	}
+}
+
+// TestPermissionsEmployees ...
+func TestPermissionsEmployees() *PermissionsEmployees {
+	return &PermissionsEmployees{
+		Permissions: *TestPermission(),
+		Employee:    *TestEmployee(),
+	}
+}
+
+// TestPermissionsEmployeesDTO ...
+func TestPermissionsEmployeesDTO() *PermissionsEmployeesDTO {
+	return &PermissionsEmployeesDTO{
+		PermissionsID: 1,
+		EmployeeID:    1,
 	}
 }

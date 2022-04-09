@@ -21,7 +21,7 @@ func (r *ImageRepository) Create(i *model.Image) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO images 
 		(type, ownerId) 
-		VALUES ($1, $2) RETURNING id`,
+		VALUES ($1, $2) RETURNING image_id`,
 		string(i.Type),
 		i.OwnerID,
 	).Scan(&i.ImageID); err != nil {
@@ -59,7 +59,7 @@ func (r *ImageRepository) GetAll() (*[]model.Image, error) {
 //FindByID searchs and returns image by ID
 func (r *ImageRepository) FindByID(id int) (*model.ImageDTO, error) {
 	image := &model.ImageDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM images WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM images WHERE image_id = $1",
 		id).Scan(
 		&image.ImageID,
 		&image.Type,
@@ -75,7 +75,7 @@ func (r *ImageRepository) FindByID(id int) (*model.ImageDTO, error) {
 func (r *ImageRepository) Delete(id int) error {
 	var imageType string
 	var ownerID int
-	if err := r.Store.Db.QueryRow("DELETE FROM images WHERE id = $1 RETURNING type, ownerId", id).Scan(
+	if err := r.Store.Db.QueryRow("DELETE FROM images WHERE image_id = $1 RETURNING type, ownerId", id).Scan(
 		&imageType,
 		&ownerID,
 	); err != nil {
@@ -95,14 +95,14 @@ func (r *ImageRepository) Delete(id int) error {
 func (r *ImageRepository) Update(i *model.Image) error {
 
 	result, err := r.Store.Db.Exec(
-		`UPDATE images SET 
-		type = $1 ,
-		ownerId = $2 
-		WHERE id = $3`,
+		"UPDATE image SET",
+		"type = $1 ownerId = $2",
+		"WHERE image_id = $3",
 		string(i.Type),
 		i.OwnerID,
 		i.ImageID,
 	)
+
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while updating image. Err msg: %v.", err)
 		return err
@@ -123,46 +123,46 @@ func (r *ImageRepository) Update(i *model.Image) error {
 }
 
 // SaveImage image to local store and to DB
-func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image) (*int, error) {
+func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image) (*int, *string, error) {
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO images 
 		(type, ownerId) 
-		VALUES ($1, $2) RETURNING id`,
+		VALUES ($1, $2) RETURNING image_id`,
 		imageDTO.Type,
 		imageDTO.OwnerID,
 	).Scan(&imageDTO.ImageID); err != nil {
 		r.Store.Logger.Errorf("Error occured while saving image data in db. Err msg: %v.", err)
-		return nil, err
+		return nil, nil, err
 	}
 
 	path := fmt.Sprintf("%s/id-%d", imageDTO.Type, imageDTO.OwnerID)
 
 	if err := os.MkdirAll(fmt.Sprintf("images/%s", path), os.ModePerm); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating directory for file. Err msg: %v.", err)
-		return nil, err
+		return nil, nil, err
 	}
 
 	imagesMap, err := r.ResizeImage(image)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-
+	imageURL := fmt.Sprintf("images/%s/image", path)
 	for format, img := range imagesMap {
-		file, err := os.Create(fmt.Sprintf("images/%s/image-%s.jpg", path, string(format)))
+		file, err := os.Create(fmt.Sprintf("%s-%s.jpg", imageURL, string(format)))
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while creating file. Err msg: %v.", err)
-			return nil, err
+			return nil, nil, err
 		}
 
 		if err = jpeg.Encode(file, img, nil); err != nil {
 			r.Store.Logger.Errorf("Error occured while encoding jpeg. Err msg: %v.", err)
-			return nil, err
+			return nil, nil, err
 		}
 		defer file.Close()
 	}
 
-	return &imageDTO.ImageID, nil
+	return &imageDTO.ImageID, &imageURL, nil
 }
 
 // ResizeImage ...
@@ -206,5 +206,6 @@ func (r *ImageRepository) ModelFromDTO(dto *model.ImageDTO) (*model.Image, error
 		ImageID: dto.ImageID,
 		Type:    model.ImageType(dto.Type),
 		OwnerID: dto.OwnerID,
+		Format:  model.ImageFormat(dto.Format),
 	}, nil
 }

@@ -32,9 +32,9 @@ type Store struct {
 	HotelRepository               *HotelRepository
 	RoomRepository                *RoomRepository
 	SeatRepository                *SeatRepository
+	ImageRepository               *ImageRepository
 	PetRepository                 *PetRepository
 	BookingRepository             *BookingRepository
-	ImageRepository               *ImageRepository
 	PermissionsRepository         *PermissionsRepository
 	PermissionsEmployeeRepository *PermissionsEmployeeRepository
 	SessionRepository             *SessionRepository
@@ -154,17 +154,6 @@ func (s *Store) Booking() *BookingRepository {
 	return s.BookingRepository
 }
 
-// Image ...
-func (s *Store) Image() *ImageRepository {
-	if s.ImageRepository != nil {
-		return s.ImageRepository
-	}
-	s.ImageRepository = &ImageRepository{
-		Store: s,
-	}
-	return s.ImageRepository
-}
-
 // Session for admin part
 func (s *Store) Session() *SessionRepository {
 	if s.SessionRepository != nil {
@@ -198,4 +187,15 @@ func (s *Store) PermissionsEmployee() *PermissionsEmployeeRepository {
 		Store: s,
 	}
 	return s.PermissionsEmployeeRepository
+}
+
+// Image ...
+func (s *Store) Image() *ImageRepository {
+	if s.ImageRepository != nil {
+		return s.ImageRepository
+	}
+	s.ImageRepository = &ImageRepository{
+		Store: s,
+	}
+	return s.ImageRepository
 }

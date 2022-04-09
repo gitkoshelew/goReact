@@ -6,6 +6,7 @@ import (
 	bookinghandlers "admin/webapp/handlersAdmin/bookingHandlers"
 	employeehandlers "admin/webapp/handlersAdmin/employeeHandlers"
 	hotelhandlers "admin/webapp/handlersAdmin/hotelHandlers"
+	"admin/webapp/handlersAdmin/imagehandlers"
 	"admin/webapp/handlersAdmin/permission"
 	pethandlers "admin/webapp/handlersAdmin/petHandlers"
 	roomhandlers "admin/webapp/handlersAdmin/roomHandlers"
@@ -59,6 +60,7 @@ func (s *Server) configureRoutes() {
 	//Seat
 	s.router.Handle("GET", "/admin/homeseats", seathandlers.HomeSeatsHandler(store.New(s.config)))
 	s.router.Handle("GET", "/admin/seats", seathandlers.AllSeatsHandler(store.New(s.config)))
+	s.router.Handle("GET", "/admin/seats/free", seathandlers.GetFreeSeatsHandle(store.New(s.config)))
 	s.router.Handle("GET", "/admin/seats/id", seathandlers.GetSeatByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/seats/delete", seathandlers.DeleteSeats(store.New(s.config)))
 	s.router.Handle("POST", "/admin/seats/new", seathandlers.NewSeat(store.New(s.config)))
@@ -75,7 +77,7 @@ func (s *Server) configureRoutes() {
 	//Employee
 	s.router.Handle("GET", "/admin/homeemployees", employeehandlers.HomeEmployeesHandler(store.New(s.config)))
 	s.router.Handle("GET", "/admin/employees", employeehandlers.AllEmployeeHandler(store.New(s.config)))
-	s.router.Handle("GET", "/admin/employees/id", employeehandlers.GetEmployeeByID(store.New(s.config)))
+	s.router.Handle("GET", "/admin/employees/id", employeehandlers.GetPermissoinsByEmployeeID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/employees/delete", employeehandlers.DeleteEmployee(store.New(s.config)))
 	s.router.Handle("POST", "/admin/employees/new", employeehandlers.NewEmployee(store.New(s.config)))
 	s.router.Handle("POST", "/admin/employees/update", employeehandlers.UpdateEmployee(store.New(s.config)))
@@ -87,6 +89,15 @@ func (s *Server) configureRoutes() {
 	s.router.Handle("GET", "/admin/addpermissions", permission.ShowAllPermissions(store.New(s.config)))
 	s.router.Handle("GET", "/admin/permissionsemployyes", permission.AllPermissionsEmployees(store.New(s.config)))
 	s.router.Handle("POST", "/admin/set", permission.AddPermissionsEmployee(store.New(s.config)))
+
+	//Image
+	s.router.Handle("GET", "/admin/homeimages", imagehandlers.HomeImageHandler(store.New(s.config)))
+	s.router.Handle("GET", "/admin/images", imagehandlers.GetAllImagesHandle(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/id", imagehandlers.GetImageHandle(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/delete", imagehandlers.DeleteImageHandle(store.New(s.config)))
+	s.router.Handle("POST", "/admin/image/upload", imagehandlers.SaveJPEGHandle(store.New(s.config)))
+	s.router.Handle("POST", "/admin/image/update", imagehandlers.UpdateImage(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/downloand/", imagehandlers.DownloandImage(store.New(s.config), download.DownloadFileHandler(store.New(s.config))))
 
 	s.router.ServeFiles("/templates/*filepath", http.Dir("templates"))
 }

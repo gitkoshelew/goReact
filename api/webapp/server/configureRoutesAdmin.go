@@ -60,6 +60,7 @@ func (s *Server) configureRoutesAdmin() {
 	//Seat
 	s.router.Handle("GET", "/admin/homeseats", seathandlers.HomeSeatsHandler(store.New(s.config)))
 	s.router.Handle("GET", "/admin/seats", seathandlers.AllSeatsHandler(store.New(s.config)))
+	s.router.Handle("GET", "/admin/seats/free", seathandlers.GetFreeSeatsHandle(store.New(s.config)))
 	s.router.Handle("GET", "/admin/seats/id", seathandlers.GetSeatByID(store.New(s.config)))
 	s.router.Handle("POST", "/admin/seats/delete", seathandlers.DeleteSeats(store.New(s.config)))
 	s.router.Handle("POST", "/admin/seats/new", seathandlers.NewSeat(store.New(s.config)))
@@ -96,6 +97,8 @@ func (s *Server) configureRoutesAdmin() {
 	s.router.Handle("GET", "/admin/image/delete", imagehandlers.DeleteImageHandle(store.New(s.config)))
 	s.router.Handle("POST", "/admin/image/upload", imagehandlers.SaveJPEGHandle(store.New(s.config)))
 	s.router.Handle("POST", "/admin/image/update", imagehandlers.UpdateImage(store.New(s.config)))
+	s.router.Handle("GET", "/admin/image/downloand/", imagehandlers.DownloandImage(store.New(s.config), download.DownloadFileHandler(store.New(s.config))))
+
 
 	s.router.ServeFiles("/templates/*filepath", http.Dir("templates"))
 }
