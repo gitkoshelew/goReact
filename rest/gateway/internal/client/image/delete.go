@@ -1,4 +1,4 @@
-package booking
+package image
 
 import (
 	"context"
@@ -9,14 +9,14 @@ import (
 	"io"
 )
 
-// Delete booking by ID
+// Delete image by ID
 func Delete(ctx context.Context, c *client.Client, body io.Reader) (*response.Service, error) {
 	url, err := c.Base.BuildURL(c.Resource, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	req, err := c.Base.CreateRequest("DELETE", fmt.Sprintf("%s/%v", url, ctx.Value(client.BookingDeleteQuerryParamsCtxKey)), body)
+	req, err := c.Base.CreateRequest("DELETE", fmt.Sprintf("%s/%v", url, ctx.Value(client.ImageDeleteQuerryParamsCtxKey)), body)
 	if err != nil {
 		return nil, err
 	}

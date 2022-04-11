@@ -1,22 +1,21 @@
-package booking
+package image
 
 import (
 	"context"
-	"fmt"
 	"gateway/internal/apperror"
 	"gateway/internal/client"
 	"gateway/pkg/response"
 	"io"
 )
 
-// Delete booking by ID
-func Delete(ctx context.Context, c *client.Client, body io.Reader) (*response.Service, error) {
+// Update image
+func Update(ctx context.Context, c *client.Client, body io.Reader) (*response.Service, error) {
 	url, err := c.Base.BuildURL(c.Resource, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	req, err := c.Base.CreateRequest("DELETE", fmt.Sprintf("%s/%v", url, ctx.Value(client.BookingDeleteQuerryParamsCtxKey)), body)
+	req, err := c.Base.CreateRequest("PUT", url, body)
 	if err != nil {
 		return nil, err
 	}

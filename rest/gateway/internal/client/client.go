@@ -68,8 +68,8 @@ var (
 	// HotelSeatService using methods:
 	// "POST" to create
 	// "PUT" to update
-	// "GET" to get one by id. Using querry params (/room/:id)
-	// "DELETE" to delete by id. Using querry params (/room/:id)
+	// "GET" to get one by id. Using querry params (/seat/:id)
+	// "DELETE" to delete by id. Using querry params (/seat/:id)
 	HotelSeatService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/seat")
 
 	// HotelGetAllEmployeesService ...
@@ -77,9 +77,18 @@ var (
 	// HotelEmployeeService using methods:
 	// "POST" to create
 	// "PUT" to update
-	// "GET" to get one by id. Using querry params (/room/:id)
-	// "DELETE" to delete by id. Using querry params (/room/:id)
+	// "GET" to get one by id. Using querry params (/employee/:id)
+	// "DELETE" to delete by id. Using querry params (/employee/:id)
 	HotelEmployeeService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/employee")
+
+	// HotelGetAllEmployeesService ...
+	GetAllImagesService = New(fmt.Sprintf("http://%s:%s", os.Getenv("IMAGE_SERVER_DOCKER_HOST"), os.Getenv("IMAGE_SERVER_PORT")), "/images")
+	// HotelEmployeeService using methods:
+	// "POST" to create
+	// "PUT" to update
+	// "GET" to get one by id. Using querry params (/image/?id=1)
+	// "DELETE" to delete by id. Using querry params (/image/:id)
+	ImageService = New(fmt.Sprintf("http://%s:%s", os.Getenv("IMAGE_SERVER_DOCKER_HOST"), os.Getenv("IMAGE_SERVER_PORT")), "/image")
 )
 
 // CtxKey ...
@@ -90,20 +99,26 @@ const (
 	AccessTokenCtxKey CtxKey = 1
 	// RefreshTokenCtxKey ...
 	RefreshTokenCtxKey CtxKey = 2
+
 	// CustomerGetQuerryParamsCtxKey ...
 	CustomerGetQuerryParamsCtxKey CtxKey = 3
 	// CustomerDeleteQuerryParamsCtxKey ...
 	CustomerDeleteQuerryParamsCtxKey CtxKey = 4
+
 	// BookingDeleteQuerryParamsCtxKey ...
 	BookingDeleteQuerryParamsCtxKey CtxKey = 5
 	// BookingGetQuerryParamsCtxKey ...
 	BookingGetQuerryParamsCtxKey CtxKey = 6
+
 	// HotelDeleteQuerryParamsCtxKey ...
 	HotelDeleteQuerryParamsCtxKey CtxKey = 7
 	// HotelGetQuerryParamsCtxKey ...
 	HotelGetQuerryParamsCtxKey CtxKey = 8
+
+	// ImageDeleteQuerryParamsCtxKey ...
+	ImageDeleteQuerryParamsCtxKey CtxKey = 7
 	// EmployeeGetQuerryParamsCtxKey ...
-	EmployeeGetQuerryParamsCtxKey CtxKey = 9
+	ImageGetQuerryParamsCtxKey CtxKey = 10
 )
 
 // Client ...
