@@ -156,6 +156,9 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 	}, nil
 }
 
+
+
+
 // FreeSeatsSearching searching free seats by hotel ID, pet type, rentTo and rentFrom data
 func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) (*[]model.SeatDTO, error) {
 	rows, err := r.Store.Db.Query(`SELECT S.seat_id, start_date, end_date   FROM seat AS S
