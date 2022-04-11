@@ -3,6 +3,7 @@ package store
 import (
 	"fmt"
 	"goReact/domain/model"
+	reqandresp "goReact/domain/reqAndResp"
 	"goReact/webapp/server/handler/pagination"
 )
 
@@ -221,4 +222,34 @@ func (r *RoomRepository) ModelFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 		Description: dto.Description,
 		Square:      dto.Square,
 	}, nil
+}
+
+func (r *RoomRepository) GetTopRooms() (*[]reqandresp.TopRooms, error) {
+	rows, err := r.Store.Db.Query(
+		`select r.room_id,   count(*) AS Total_bookings 
+		from booking AS b
+		JOIN seat AS s ON(b.seat_id = s.seat_id)
+		JOIN room AS r ON (s.room_id = r.room_id)
+		GROUP BY r.room_id 
+		order by Total_bookings DESC`)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while getting top rooms. Err msg: %v", err)
+		return nil, err
+	}
+	topRooms := []reqandresp.TopRooms{}
+
+	for rows.Next() {
+		topRoom := reqandresp.TopRooms{}
+		err := rows.Scan(
+			&topRoom.RoomID,
+			&topRoom.TotalBookings,
+		)
+		if err != nil {
+			r.Store.Logger.Debugf("Error occured while getting top rooms. Err msg: %v", err)
+			continue
+		}
+		topRooms = append(topRooms, topRoom)
+	}
+	return &topRooms, nil
+
 }

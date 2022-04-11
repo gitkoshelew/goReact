@@ -1,5 +1,5 @@
 version: '3.9'
-
+# docker-compose -f docker-compose-be.yml up --build
 services:
   postgresqldatabase:
     container_name: postgresqldatabase
