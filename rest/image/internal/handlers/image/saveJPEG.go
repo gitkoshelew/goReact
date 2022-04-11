@@ -68,7 +68,7 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		_, err = s.Image().SaveImage(imageDTO, &image)
+		_, imageURL, err := s.Image().SaveImage(imageDTO, &image)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			s.Logger.Errorf("eror occured while saving JPEG.  Err msg: %v", err)
@@ -76,7 +76,9 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
+		URLs := model.BuildImagesURLsResponse(imageURL)
+
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("image with id %d created", imageDTO.ImageID)})
+		json.NewEncoder(w).Encode(URLs)
 	}
 }
