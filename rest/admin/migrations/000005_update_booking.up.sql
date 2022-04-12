@@ -1,6 +1,6 @@
 ALTER TABLE BOOKING
 ADD COLUMN paid BOOLEAN NOT NULL DEFAULT FALSE;
 
-UPDATE BOOKING SET paid = 'true' WHERE id = 1;
-UPDATE BOOKING SET paid = 'true' WHERE id = 2;
-UPDATE BOOKING SET paid = 'false' WHERE id = 3;
+UPDATE BOOKING SET paid = 'true' WHERE booking_id = 1;
+UPDATE BOOKING SET paid = 'true' WHERE booking_id = 2;
+UPDATE BOOKING SET paid = 'false' WHERE booking_id = 3;

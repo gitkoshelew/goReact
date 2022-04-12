@@ -123,7 +123,7 @@ func (r *ImageRepository) Update(i *model.Image) error {
 }
 
 // SaveImage image to local store and to DB
-func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image) (*int, error) {
+func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image) (*int, *string, error) {
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO images 
@@ -133,36 +133,36 @@ func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image
 		imageDTO.OwnerID,
 	).Scan(&imageDTO.ImageID); err != nil {
 		r.Store.Logger.Errorf("Error occured while saving image data in db. Err msg: %v.", err)
-		return nil, err
+		return nil, nil, err
 	}
 
 	path := fmt.Sprintf("%s/id-%d", imageDTO.Type, imageDTO.OwnerID)
 
 	if err := os.MkdirAll(fmt.Sprintf("images/%s", path), os.ModePerm); err != nil {
 		r.Store.Logger.Errorf("Error occured while creating directory for file. Err msg: %v.", err)
-		return nil, err
+		return nil, nil, err
 	}
 
 	imagesMap, err := r.ResizeImage(image)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-
+	imageURL := fmt.Sprintf("images/%s/image", path)
 	for format, img := range imagesMap {
-		file, err := os.Create(fmt.Sprintf("images/%s/image-%s.jpg", path, string(format)))
+		file, err := os.Create(fmt.Sprintf("%s-%s.jpg", imageURL, string(format)))
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while creating file. Err msg: %v.", err)
-			return nil, err
+			return nil, nil, err
 		}
 
 		if err = jpeg.Encode(file, img, nil); err != nil {
 			r.Store.Logger.Errorf("Error occured while encoding jpeg. Err msg: %v.", err)
-			return nil, err
+			return nil, nil, err
 		}
 		defer file.Close()
 	}
 
-	return &imageDTO.ImageID, nil
+	return &imageDTO.ImageID, &imageURL, nil
 }
 
 // ResizeImage ...

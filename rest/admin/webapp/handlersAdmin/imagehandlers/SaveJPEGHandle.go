@@ -1,10 +1,10 @@
 package imagehandlers
 
 import (
+	"admin/domain/model"
+	"admin/domain/store"
+	"admin/webapp/session"
 	"fmt"
-	"goReact/domain/model"
-	"goReact/domain/store"
-	"goReact/webapp/admin/session"
 	"image"
 	"image/jpeg"
 	"net/http"
@@ -70,7 +70,7 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		_, _, err = s.Image().SaveImage(imageDTO, &image)
+		_, err = s.Image().SaveImage(imageDTO, &image)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("eror occured while saving JPEG.  Err msg: %v", err), http.StatusInternalServerError)
 			s.Logger.Errorf("eror occured while saving JPEG.  Err msg: %v", err)

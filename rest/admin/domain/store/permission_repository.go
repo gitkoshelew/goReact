@@ -13,7 +13,7 @@ type PermissionsRepository struct {
 // Create permossion and save it to DB
 func (r *PermissionsRepository) Create(p *model.Permission) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO PERMISSIONS (name, description) VALUES ($1, $2) RETURNING id",
+		"INSERT INTO PERMISSIONS (name, description) VALUES ($1, $2) RETURNING permissions_id",
 		p.Name,
 		p.Descriptoin,
 	).Scan(&p.PermissionID); err != nil {
@@ -52,7 +52,7 @@ func (r *PermissionsRepository) GetAll() (*[]model.Permission, error) {
 func (r *PermissionsRepository) FindByID(id int) (*model.Permission, error) {
 
 	permissoin := model.Permission{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM PERMISSIONS WHERE id = $1", id).Scan(
+	if err := r.Store.Db.QueryRow("SELECT * FROM PERMISSIONS WHERE permissions_id = $1", id).Scan(
 		&permissoin.PermissionID,
 		&permissoin.Name,
 		&permissoin.Descriptoin,
@@ -65,7 +65,7 @@ func (r *PermissionsRepository) FindByID(id int) (*model.Permission, error) {
 
 // Delete ...
 func (r *PermissionsRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM PERMISSIONS WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM PERMISSIONS WHERE permissions_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occurred while deleting permission. Err msg:%v.", err)
 		return err
@@ -88,7 +88,7 @@ func (r *PermissionsRepository) Delete(id int) error {
 
 // GetPermissoinsByEmployeeID return []permissions that the employee has
 func (r *PermissionsRepository) GetPermissoinsByEmployeeID(id int) (*[]model.Permission, error) {
-	rows, err := r.Store.Db.Query("SELECT * FROM PERMISSiONS WHERE id IN ( SELECT permissions_id FROM permissions_employees where employee_id = $1 )", id)
+	rows, err := r.Store.Db.Query("SELECT * FROM PERMISSiONS WHERE permissions_id IN ( SELECT permissions_id FROM permissions_employees where employee_id = $1 )", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occurred while getting permissions. Err msg: %v", err)
 	}

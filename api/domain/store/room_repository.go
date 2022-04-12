@@ -3,6 +3,7 @@ package store
 import (
 	"fmt"
 	"goReact/domain/model"
+	reqandresp "goReact/domain/reqAndResp"
 	"goReact/webapp/server/handler/pagination"
 )
 
@@ -14,7 +15,7 @@ type RoomRepository struct {
 // Create room and save it to DB
 func (r *RoomRepository) Create(room *model.Room) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO room (pet_type, number, hotel_id , photoUrl, description , square) VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING id",
+		"INSERT INTO room (pet_type, number, hotel_id , photoUrl, description , square) VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING room_id",
 		room.PetType,
 		room.RoomNumber,
 		room.Hotel.HotelID,
@@ -63,7 +64,7 @@ func (r *RoomRepository) GetAll() (*[]model.RoomDTO, error) {
 //FindByID searchs and returns room by ID
 func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 	roomDTO := &model.RoomDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM room WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM room WHERE room_id = $1",
 		id).Scan(
 		&roomDTO.RoomID,
 		&roomDTO.RoomNumber,
@@ -82,7 +83,7 @@ func (r *RoomRepository) FindByID(id int) (*model.RoomDTO, error) {
 
 // Delete room from DB by ID
 func (r *RoomRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM room WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM room WHERE room_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting room. Err msg: %v.", err)
 		return err
@@ -133,7 +134,7 @@ func (r *RoomRepository) Update(rm *model.Room) error {
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE room SET 
 		number = %s, pet_type = %s, hotel_id = %s, photoUrl = %s , description = %s , square = %s
-		WHERE id = $1`,
+		WHERE room_id = $1`,
 		number,
 		petType,
 		hotelID,
@@ -221,4 +222,34 @@ func (r *RoomRepository) ModelFromDTO(dto *model.RoomDTO) (*model.Room, error) {
 		Description: dto.Description,
 		Square:      dto.Square,
 	}, nil
+}
+
+func (r *RoomRepository) GetTopRooms() (*[]reqandresp.TopRooms, error) {
+	rows, err := r.Store.Db.Query(
+		`select r.room_id,   count(*) AS Total_bookings 
+		from booking AS b
+		JOIN seat AS s ON(b.seat_id = s.seat_id)
+		JOIN room AS r ON (s.room_id = r.room_id)
+		GROUP BY r.room_id 
+		order by Total_bookings DESC`)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while getting top rooms. Err msg: %v", err)
+		return nil, err
+	}
+	topRooms := []reqandresp.TopRooms{}
+
+	for rows.Next() {
+		topRoom := reqandresp.TopRooms{}
+		err := rows.Scan(
+			&topRoom.RoomID,
+			&topRoom.TotalBookings,
+		)
+		if err != nil {
+			r.Store.Logger.Debugf("Error occured while getting top rooms. Err msg: %v", err)
+			continue
+		}
+		topRooms = append(topRooms, topRoom)
+	}
+	return &topRooms, nil
+
 }

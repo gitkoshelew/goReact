@@ -1,6 +1,10 @@
 package model
 
-import validation "github.com/go-ozzo/ozzo-validation"
+import (
+	"fmt"
+
+	validation "github.com/go-ozzo/ozzo-validation"
+)
 
 // Image struct
 type Image struct {
@@ -28,6 +32,25 @@ var (
 	UserImage    ImageType = "user"
 	TestingImage ImageType = "test"
 )
+
+// ImagesURLsResponse ...
+type ImagesURLsResponse struct {
+	Original string `json:"original"`
+	QVGA     string `json:"qvga"`
+	VGA      string `json:"vga"`
+	HD720p   string `json:"hd720p"`
+}
+
+// BuildImagesURLsResponse ...
+func BuildImagesURLsResponse(imageURL *string) ImagesURLsResponse {
+	return ImagesURLsResponse{
+		Original: fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatOriginal)),
+		QVGA:     fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatQVGA)),
+		VGA:      fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatVGA)),
+		HD720p:   fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatHD720p)),
+	}
+
+}
 
 // ImageFormat ...
 type ImageFormat string

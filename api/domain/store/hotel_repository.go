@@ -15,7 +15,7 @@ type HotelRepository struct {
 // Create hotel and save it to DB
 func (r *HotelRepository) Create(h *model.Hotel) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING id",
+		"INSERT INTO hotel (name, address, coordinates ) VALUES ($1, $2 , $3) RETURNING hotel_id",
 		h.Name,
 		h.Address,
 		pq.Array(h.Coordinates),
@@ -58,7 +58,7 @@ func (r *HotelRepository) GetAll() (*[]model.Hotel, error) {
 func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 
 	hotel := &model.Hotel{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM hotel WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM hotel WHERE hotel_id = $1",
 		id).Scan(
 		&hotel.HotelID,
 		&hotel.Name,
@@ -73,7 +73,7 @@ func (r *HotelRepository) FindByID(id int) (*model.Hotel, error) {
 
 // Delete hotel from DB by ID
 func (r *HotelRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM hotel WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM hotel WHERE hotel_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting hotel. Err msg:%v.", err)
 		return err
@@ -111,7 +111,7 @@ func (r *HotelRepository) Update(h *model.Hotel) error {
 	result, err := r.Store.Db.Exec(
 		fmt.Sprintf(`UPDATE hotel SET 
 		name = %s, address = %s , coordinates = %s 
-		WHERE id = $1`,
+		WHERE hotel_id = $1`,
 			name,
 			address,
 			coordinates,

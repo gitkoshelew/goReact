@@ -11,13 +11,16 @@ import (
 
 var (
 	// ErrNoRowsAffected ...
-	ErrNoRowsAffected = errors.New("no rows affected")
+	ErrNoRowsAffected = errors.New("No rows affected")
 
 	// ErrNoFreeSeatsForCurrentRequest ...
-	ErrNoFreeSeatsForCurrentRequest = errors.New("no seats available for chosen data")
+	ErrNoFreeSeatsForCurrentRequest = errors.New("No seats available for chosen data")
 
 	// ErrEmailIsUsed ...
-	ErrEmailIsUsed = errors.New("email already in use")
+	ErrEmailIsUsed = errors.New("Email already in use")
+
+	// ErrNilPointer ...
+	ErrNilPointer = errors.New("Nil pointer reference")
 )
 
 // Store ...

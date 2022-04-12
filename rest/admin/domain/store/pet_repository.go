@@ -13,7 +13,7 @@ type PetRepository struct {
 // Create pet and save it to DB
 func (r *PetRepository) Create(p *model.Pet) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO pet (name, type, weight, diseases, user_id , photoURL) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING id",
+		"INSERT INTO pet (name, type, weight, diseases, user_id , photoURL) VALUES ($1, $2, $3, $4, $5 ,$6) RETURNING pet_id",
 		p.Name,
 		p.Type,
 		p.Weight,
@@ -62,7 +62,7 @@ func (r *PetRepository) GetAll() (*[]model.PetDTO, error) {
 // FindByID searchs and returns petDTO by ID
 func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 	petDTO := &model.PetDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM pet WHERE pet_id = $1",
 		id).Scan(
 		&petDTO.PetID,
 		&petDTO.Name,
@@ -81,7 +81,7 @@ func (r *PetRepository) FindByID(id int) (*model.PetDTO, error) {
 
 // Delete pet from DB by ID
 func (r *PetRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM pet WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM pet WHERE pet_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting pet. Err msg:%v.", err)
 		return err
@@ -130,7 +130,7 @@ func (r *PetRepository) Update(p *model.Pet) error {
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE pet SET 
 		name = %s, type = %s, weight = %s, diseases = %s, user_id = %s , photoURL = %s 
-		WHERE id = $1`,
+		WHERE pet_id = $1`,
 		name,
 		petType,
 		weight,

@@ -15,3 +15,9 @@ type FreeSeatsResponse struct {
 	SeatIDs    []int `json:"seatIds"`
 	TotalCount int   `json:"totalCount"`
 }
+
+//Top rooms response
+type TopRooms struct {
+	RoomID        int `json:"roomId"`
+	TotalBookings int `json:"total bookings"`
+}
