@@ -5,7 +5,6 @@ import (
 	reqandresp "goReact/domain/reqAndResp"
 	"goReact/domain/store"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -353,10 +352,6 @@ func TestSeatRepository_FreeSeatsSearching(t *testing.T) {
 				testStore.Open()
 
 				req := reqandresp.TestFreeSeatsSearching()
-				rentFrom := time.Now().AddDate(0, 0, 11)
-				rentTo := time.Now().AddDate(0, 0, 22)
-				req.RentFrom = &rentFrom
-				req.RentTo = &rentTo
 				req.HotelID = id.Hotel
 
 				return req
@@ -381,10 +376,6 @@ func TestSeatRepository_FreeSeatsSearching(t *testing.T) {
 				testStore.Close()
 
 				req := reqandresp.TestFreeSeatsSearching()
-				rentFrom := time.Now().AddDate(0, 0, 11)
-				rentTo := time.Now().AddDate(0, 0, 22)
-				req.RentFrom = &rentFrom
-				req.RentTo = &rentTo
 				req.HotelID = id.Hotel
 
 				return req
