@@ -17,7 +17,7 @@ func (r *EmployeeRepository) Create(e *model.Employee) (*int, error) {
 	if err := r.Store.Db.QueryRow(`INSERT INTO employee 
 	(email, verified, role, first_name, surname, middle_name, sex, 
 	date_of_birth, address, phone, photo, hotel_id, position) 
-	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id`,
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING employee_id`,
 		e.Email,
 		e.Verified,
 		e.Role,
@@ -36,7 +36,7 @@ func (r *EmployeeRepository) Create(e *model.Employee) (*int, error) {
 		return nil, err
 	}
 
-	r.Store.Logger.Infof("Creat employee with id = %d", e.EmployeeID)
+	r.Store.Logger.Infof("Creat employee with employee_id = %d", e.EmployeeID)
 
 	return &e.EmployeeID, nil
 }
@@ -80,7 +80,7 @@ func (r *EmployeeRepository) GetAll() (*[]model.EmployeeDTO, error) {
 // FindByID searchs and returns employee by ID
 func (r *EmployeeRepository) FindByID(id int) (*model.EmployeeDTO, error) {
 	employee := &model.EmployeeDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE id = $1", id).Scan(
+	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE employee_id = $1", id).Scan(
 		&employee.EmployeeID,
 		&employee.Email,
 		&employee.Verified,
@@ -104,7 +104,7 @@ func (r *EmployeeRepository) FindByID(id int) (*model.EmployeeDTO, error) {
 
 // Delete employee from DB by ID
 func (r *EmployeeRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM employee WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM employee WHERE employee_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Can't delete employee. Err msg:%v.", err)
 		return err
@@ -224,7 +224,7 @@ func (r *EmployeeRepository) Update(e *model.Employee) error {
 			email = %s, role = %s, verified = %s, 
 			first_name = %s, surname = %s, middle_name = %s, sex = %s, date_of_birth = %s, 
 			address = %s, phone = %s, photo = %s, hotel_id = %s, position = %s 
-			WHERE id = $1`,
+			WHERE employee_id = $1`,
 		email,
 		role,
 		verified,

@@ -79,6 +79,7 @@ func (c *BaseClient) SendRequest(ctx context.Context, req *http.Request) (*APIRe
 	req.Header.Set("Content-Type", "image/jpeg")
 
 	ctxTimeOut, cancel := context.WithTimeout(ctx, 5*time.Second)
+
 	defer cancel()
 	req = req.WithContext(ctxTimeOut)
 	c.Logger.Debug("sending request...")

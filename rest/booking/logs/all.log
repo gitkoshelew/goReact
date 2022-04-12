@@ -440,3 +440,405 @@
 [36mINFO[0m[2022-03-23T23:27:14+03:00]testing.go:52 booking/domain/store.TestStore Booking store opening. Source: host=localhost port=8086 user=user password=userpass dbname=bookingdbtest sslmode=disable 
 [36mINFO[0m[2022-03-23T23:27:14+03:00]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=localhost port=8086 user=user password=userpass dbname=bookingdbtest sslmode=disable 
 [36mINFO[0m[2022-03-23T23:27:14+03:00]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=localhost port=8086 user=user password=userpass dbname=bookingdbtest sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:41Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:41Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:42Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:42Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:23:42Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.19.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:23:42Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.19.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:23:42Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066000 0xc000056020}) 
+[31mERRO[0m[2022-04-12T08:23:42Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066000 0xc000056020}) 
+[31mERRO[0m[2022-04-12T08:23:42Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066000 0xc000056020}) 
+[31mERRO[0m[2022-04-12T08:23:42Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066000 0xc000056020}) 
+[36mINFO[0m[2022-04-12T08:23:51Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:51Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:51Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:51Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:51Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:23:51Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:26:40Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:26:40Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:26:40Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:26:40Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:26:40Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:26:40Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:38:44Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:38:44Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:38:44Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:38:44Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:38:45Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:38:45Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:44:39Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:39Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:39Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:44:39Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:44:39Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.16:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:44:39Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.16:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:44:39Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00024be30 0xc00024f680}) 
+[31mERRO[0m[2022-04-12T08:44:39Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00024be30 0xc00024f680}) 
+[31mERRO[0m[2022-04-12T08:44:39Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00024be30 0xc00024f680}) 
+[31mERRO[0m[2022-04-12T08:44:39Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00024be30 0xc00024f680}) 
+[36mINFO[0m[2022-04-12T08:44:54Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:54Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:54Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:44:54Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:44:54Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.16:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:44:54Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.16:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:44:54Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000282150 0xc00029e000}) 
+[31mERRO[0m[2022-04-12T08:44:54Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000282150 0xc00029e000}) 
+[31mERRO[0m[2022-04-12T08:44:54Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000282150 0xc00029e000}) 
+[31mERRO[0m[2022-04-12T08:44:54Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000282150 0xc00029e000}) 
+[36mINFO[0m[2022-04-12T08:45:09Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:45:09Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:45:09Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:45:09Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:45:09Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.16:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:45:09Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.16:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:45:09Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3e60 0xc0001d7680}) 
+[31mERRO[0m[2022-04-12T08:45:09Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3e60 0xc0001d7680}) 
+[31mERRO[0m[2022-04-12T08:45:09Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3e60 0xc0001d7680}) 
+[31mERRO[0m[2022-04-12T08:45:09Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3e60 0xc0001d7680}) 
+[36mINFO[0m[2022-04-12T08:45:15Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:45:15Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:45:15Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:45:15Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:45:15Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:45:15Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:49:05Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:49:05Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:49:05Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:49:05Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:49:05Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:49:05Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:58:59Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:58:59Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:58:59Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:58:59Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:58:59Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.4:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:58:59Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.4:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:58:59Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[31mERRO[0m[2022-04-12T08:58:59Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[31mERRO[0m[2022-04-12T08:58:59Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[31mERRO[0m[2022-04-12T08:58:59Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[36mINFO[0m[2022-04-12T08:59:14Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:14Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:14Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:14Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:59:15Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.4:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:59:15Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.4:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:59:15Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T08:59:15Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T08:59:15Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T08:59:15Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[36mINFO[0m[2022-04-12T08:59:28Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:28Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:28Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:28Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:59:28Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.4:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:59:28Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.4:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T08:59:28Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000940f0 0xc0000aa000}) 
+[31mERRO[0m[2022-04-12T08:59:28Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000940f0 0xc0000aa000}) 
+[31mERRO[0m[2022-04-12T08:59:28Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000940f0 0xc0000aa000}) 
+[31mERRO[0m[2022-04-12T08:59:28Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000940f0 0xc0000aa000}) 
+[36mINFO[0m[2022-04-12T08:59:53Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:53Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:53Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:53Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:54Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T08:59:54Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T09:11:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:11:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:11:50Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:11:50Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:11:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:11:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:11:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000068150 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T09:11:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000068150 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T09:11:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000068150 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T09:11:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000068150 0xc00004e020}) 
+[36mINFO[0m[2022-04-12T09:12:07Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:07Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:07Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:07Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:12:07Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:12:07Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:12:07Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:12:07Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:12:07Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:12:07Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T09:12:22Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:22Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:22Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:22Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:12:22Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:12:22Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:12:22Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:12:22Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:12:22Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:12:22Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T09:12:35Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:35Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:35Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:35Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:35Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T09:12:35Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T09:27:05Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:27:05Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:02Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:02Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:03Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:03Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:34:03Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:34:03Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:34:03Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:34:03Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:34:03Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:34:03Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T09:34:13Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:13Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:13Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:13Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:34:13Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:34:13Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:34:13Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T09:34:13Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T09:34:13Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T09:34:13Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[36mINFO[0m[2022-04-12T09:34:28Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:28Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:28Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:28Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:34:28Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:34:28Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.13:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T09:34:28Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:34:28Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:34:28Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T09:34:28Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T09:34:37Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:37Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:37Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:37Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:37Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T09:34:37Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T09:39:19Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:39:19Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:39:19Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:39:19Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:39:19Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T09:39:19Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T11:43:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:43:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:43:50Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:43:50Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T11:43:50Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T11:43:50Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T11:43:50Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T11:43:50Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T11:43:50Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T11:43:50Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T11:44:07Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:07Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:07Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:07Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T11:44:07Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T11:44:07Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T11:44:07Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000068030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T11:44:07Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000068030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T11:44:08Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000068030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T11:44:08Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000068030 0xc00004e020}) 
+[36mINFO[0m[2022-04-12T11:44:21Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:21Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:22Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:22Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:22Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T11:44:22Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:18:28Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:28Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:28Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:18:28Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:18:28Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:18:28Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:18:28Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:18:28Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:18:28Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:18:28Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:18:42Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:42Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:42Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:18:42Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:18:42Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:18:42Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:18:42Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002d6480 0xc00004fc40}) 
+[31mERRO[0m[2022-04-12T12:18:42Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002d6480 0xc00004fc40}) 
+[31mERRO[0m[2022-04-12T12:18:42Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002d6480 0xc00004fc40}) 
+[31mERRO[0m[2022-04-12T12:18:42Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002d6480 0xc00004fc40}) 
+[36mINFO[0m[2022-04-12T12:18:51Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:51Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:51Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:18:51Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:18:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:18:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:18:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:18:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:18:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:18:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:19:17Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:17Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:17Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:17Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:19:17Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:19:17Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.20.0.10:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:19:17Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:19:17Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:19:17Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:19:17Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:19:26Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:26Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:26Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:26Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:19:26Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: pq: the database system is starting up 
+[31mERRO[0m[2022-04-12T12:19:26Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: pq: the database system is starting up 
+[31mERRO[0m[2022-04-12T12:19:26Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[31mERRO[0m[2022-04-12T12:19:26Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[31mERRO[0m[2022-04-12T12:19:26Z]main.go:14 main.main failed to start server due to error: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[31mERRO[0m[2022-04-12T12:19:26Z]main.go:14 main.main failed to start server due to error: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[36mINFO[0m[2022-04-12T12:19:38Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:38Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:38Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:38Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:38Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:19:38Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:35:14Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:14Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:14Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:35:14Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:35:14Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:35:14Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:35:14Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:35:14Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:35:14Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:35:14Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:35:26Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:26Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:26Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:35:26Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:35:27Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:35:27Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:35:27Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000070f00 0xc00004efe0}) 
+[31mERRO[0m[2022-04-12T12:35:27Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000070f00 0xc00004efe0}) 
+[31mERRO[0m[2022-04-12T12:35:27Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000070f00 0xc00004efe0}) 
+[31mERRO[0m[2022-04-12T12:35:27Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000070f00 0xc00004efe0}) 
+[36mINFO[0m[2022-04-12T12:35:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:51Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:35:51Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:35:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:35:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:35:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:35:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:35:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:35:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e60 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:36:02Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:02Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:02Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:36:02Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:36:02Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:36:02Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.21.0.5:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:36:02Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:36:02Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:36:02Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:36:02Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e00 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:18Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:36:18Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:45:46Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:45:46Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:45:46Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:45:46Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:45:46Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:45:46Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:45:46Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T12:45:46Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T12:45:46Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T12:45:46Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe60 0xc0001cf680}) 
+[36mINFO[0m[2022-04-12T12:45:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:45:50Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:45:50Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:45:50Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:45:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:45:51Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:45:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000707e0 0xc00004e2c0}) 
+[31mERRO[0m[2022-04-12T12:45:51Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000707e0 0xc00004e2c0}) 
+[31mERRO[0m[2022-04-12T12:45:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000707e0 0xc00004e2c0}) 
+[31mERRO[0m[2022-04-12T12:45:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000707e0 0xc00004e2c0}) 
+[36mINFO[0m[2022-04-12T12:46:03Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:03Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:03Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:03Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:46:03Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:46:03Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:46:03Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[31mERRO[0m[2022-04-12T12:46:03Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[31mERRO[0m[2022-04-12T12:46:03Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[31mERRO[0m[2022-04-12T12:46:03Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002018f0 0xc00020e7a0}) 
+[36mINFO[0m[2022-04-12T12:46:15Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:15Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:16Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:16Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:46:16Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:46:16Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.22.0.3:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:46:16Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:46:16Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:46:16Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:46:16Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:46:32Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:32Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:32Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:32Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:32Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:46:32Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:50:36Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:50:36Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:55:59Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:55:59Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:55:59Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:55:59Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:56:00Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.23.0.6:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:56:00Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.23.0.6:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:56:00Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:56:00Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:56:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T12:56:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201e30 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T12:56:12Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:12Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:13Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:13Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:56:13Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.23.0.6:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:56:13Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.23.0.6:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:56:13Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000076660 0xc00004ef40}) 
+[31mERRO[0m[2022-04-12T12:56:13Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000076660 0xc00004ef40}) 
+[31mERRO[0m[2022-04-12T12:56:13Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000076660 0xc00004ef40}) 
+[31mERRO[0m[2022-04-12T12:56:13Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000076660 0xc00004ef40}) 
+[36mINFO[0m[2022-04-12T12:56:26Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:26Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:26Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:26Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:56:26Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.23.0.6:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:56:26Z]store.go:54 booking/domain/store.(*Store).Open Can't ping DB. Err msg: dial tcp 172.23.0.6:5432: connect: connection refused 
+[31mERRO[0m[2022-04-12T12:56:26Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T12:56:26Z]server.go:37 booking/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T12:56:26Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[31mERRO[0m[2022-04-12T12:56:26Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001cbe00 0xc0001cf680}) 
+[36mINFO[0m[2022-04-12T12:56:38Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:38Z]server.go:34 booking/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:38Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:38Z]store.go:45 booking/domain/store.(*Store).Open Booking store opening. Source: host=bookingdb port=5432 user=user password=userpass dbname=bookingdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:39Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    
+[36mINFO[0m[2022-04-12T12:56:39Z]server.go:56 booking/internal/server.(*Server).Start Booking server starts at 0.0.0.0:1113 ...    

@@ -16,7 +16,7 @@ type SeatRepository struct {
 // Create seat and save it to DB
 func (r *SeatRepository) Create(s *model.Seat) (*int, error) {
 	if err := r.Store.Db.QueryRow(
-		"INSERT INTO seat (room_id, rent_from, rent_to , price) VALUES ($1, $2, $3, $4) RETURNING id",
+		"INSERT INTO seat (room_id, rent_from, rent_to , price) VALUES ($1, $2, $3, $4) RETURNING seat_id",
 		s.Room.RoomID,
 		s.RentFrom,
 		s.RentTo,
@@ -61,7 +61,7 @@ func (r *SeatRepository) GetAll() (*[]model.SeatDTO, error) {
 //FindByID searchs and returns seat by ID
 func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 	seatDTO := &model.SeatDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM seat WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM seat WHERE seat_id = $1",
 		id).Scan(
 		&seatDTO.SeatID,
 		&seatDTO.RoomID,
@@ -78,7 +78,7 @@ func (r *SeatRepository) FindByID(id int) (*model.SeatDTO, error) {
 
 // Delete seat from DB by ID
 func (r *SeatRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM seat WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM seat WHERE seat_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting seat. Err msg: %v.", err)
 		return err
@@ -120,7 +120,7 @@ func (r *SeatRepository) Update(s *model.Seat) error {
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE seat SET 
 		room_id = %s, rent_from = %s, rent_to = %s, price = %s
-		WHERE id = $1`,
+		WHERE seat_id = $1`,
 		roomID,
 		rentFrom,
 		rentTo,
@@ -171,7 +171,7 @@ func (r *SeatRepository) ModelFromDTO(dto *model.SeatDTO) (*model.Seat, error) {
 func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[]model.SeatDTO, error) {
 	rows, err := r.Store.Db.Query(`SELECT * FROM seat 
 	WHERE 
-	(room_id = any(SELECT id FROM room WHERE pet_type = $1 AND hotel_id = $2)) 
+	(room_id = any(SELECT seat_id FROM room WHERE pet_type = $1 AND hotel_id = $2)) 
 	and 
 	($3 >= rent_to or $4 <= rent_from)`,
 		req.PetType,
@@ -203,7 +203,7 @@ func (r *SeatRepository) FreeSeatsSearching(req *request.FreeSeatsSearching) (*[
 
 	if len(seats) < 1 {
 		r.Store.Logger.Debugf("no free seats for data: %v", req)
-		return nil, errors.New("No seats available for chosen data")
+		return nil, errors.New("no seats available for chosen data")
 
 	}
 

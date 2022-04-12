@@ -81,9 +81,9 @@ var (
 	// "DELETE" to delete by id. Using querry params (/employee/:id)
 	HotelEmployeeService = New(fmt.Sprintf("http://%s:%s", os.Getenv("HOTEL_SERVER_DOCKER_HOST"), os.Getenv("HOTEL_SERVER_PORT")), "/employee")
 
-	// HotelGetAllEmployeesService ...
+	// GetAllImagesService ...
 	GetAllImagesService = New(fmt.Sprintf("http://%s:%s", os.Getenv("IMAGE_SERVER_DOCKER_HOST"), os.Getenv("IMAGE_SERVER_PORT")), "/images")
-	// HotelEmployeeService using methods:
+	// ImageService using methods:
 	// "POST" to create
 	// "PUT" to update
 	// "GET" to get one by id. Using querry params (/image/?id=1)
@@ -116,7 +116,7 @@ const (
 	HotelGetQuerryParamsCtxKey CtxKey = 8
 
 	// ImageDeleteQuerryParamsCtxKey ...
-	ImageDeleteQuerryParamsCtxKey CtxKey = 7
+	ImageDeleteQuerryParamsCtxKey CtxKey = 9
 	// EmployeeGetQuerryParamsCtxKey ...
 	ImageGetQuerryParamsCtxKey CtxKey = 10
 )

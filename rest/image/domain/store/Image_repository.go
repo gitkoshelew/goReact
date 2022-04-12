@@ -96,7 +96,7 @@ func (r *ImageRepository) Update(i *model.Image) error {
 
 	result, err := r.Store.Db.Exec(
 		`UPDATE image SET
-		type = $1 ownerId = $2
+		type = $1 ,ownerId = $2
 		WHERE image_id = $3`,
 		string(i.Type),
 		i.OwnerID,

@@ -926,3 +926,343 @@
 [31mERRO[0m[2022-03-23T23:27:06+03:00]user_repository.go:284 customer/domain/store.(*UserRepository).VerifyEmail Error occured while verifying email. Err msg: sql: database is closed 
 [36mINFO[0m[2022-03-23T23:27:06+03:00]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=localhost port=8084 user=user password=userpass dbname=customerdbtest sslmode=disable 
 [36mINFO[0m[2022-03-23T23:27:06+03:00]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=localhost port=8084 user=user password=userpass dbname=customerdbtest sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:16Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:16Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:17Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:17Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:23:17Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:23:17Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:23:17Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:23:17Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[36mINFO[0m[2022-04-12T08:23:23Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:23Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:23Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:23Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:23:23Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00008e120 0xc0000a2000}) 
+[31mERRO[0m[2022-04-12T08:23:23Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00008e120 0xc0000a2000}) 
+[31mERRO[0m[2022-04-12T08:23:23Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00008e120 0xc0000a2000}) 
+[31mERRO[0m[2022-04-12T08:23:23Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00008e120 0xc0000a2000}) 
+[36mINFO[0m[2022-04-12T08:23:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:23:36Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:23:36Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:23:36Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:23:36Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[36mINFO[0m[2022-04-12T08:23:45Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:45Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:23:46Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:46Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:23:46Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:23:46Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:26:39Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:26:39Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:26:39Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:26:39Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:26:40Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:26:40Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:38:43Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:38:43Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:38:43Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:38:43Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:38:43Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:38:43Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:44:30Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:30Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:31Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:44:31Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:44:31Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:31Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:31Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:31Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[36mINFO[0m[2022-04-12T08:44:41Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:41Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:41Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:44:41Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:44:41Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:41Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:41Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:41Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000066030 0xc00004e020}) 
+[36mINFO[0m[2022-04-12T08:44:54Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:54Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:44:54Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:44:54Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:44:54Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:54Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:54Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:44:54Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00004e020}) 
+[36mINFO[0m[2022-04-12T08:45:10Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:45:10Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:45:10Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:45:10Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:45:10Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:45:10Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:49:03Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:49:03Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:49:03Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:49:03Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:49:03Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:49:03Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:53:45Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:53:45Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:01Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:01Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:01Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:01Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:59:01Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000286120 0xc00029c000}) 
+[31mERRO[0m[2022-04-12T08:59:01Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000286120 0xc00029c000}) 
+[31mERRO[0m[2022-04-12T08:59:01Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000286120 0xc00029c000}) 
+[31mERRO[0m[2022-04-12T08:59:01Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000286120 0xc00029c000}) 
+[36mINFO[0m[2022-04-12T08:59:19Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:19Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:19Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:19Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:59:19Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000068000 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:59:19Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000068000 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:59:19Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000068000 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T08:59:19Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000068000 0xc00004e020}) 
+[36mINFO[0m[2022-04-12T08:59:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T08:59:36Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:59:36Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:59:36Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T08:59:36Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[36mINFO[0m[2022-04-12T08:59:58Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:58Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T08:59:58Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:58Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T08:59:58Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T08:59:58Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T09:11:51Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:11:51Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:11:51Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:11:51Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:11:51Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000286150 0xc00029e000}) 
+[31mERRO[0m[2022-04-12T09:11:51Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000286150 0xc00029e000}) 
+[31mERRO[0m[2022-04-12T09:11:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000286150 0xc00029e000}) 
+[31mERRO[0m[2022-04-12T09:11:51Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000286150 0xc00029e000}) 
+[36mINFO[0m[2022-04-12T09:12:12Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:12Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:12Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:12Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:12:12Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000241f50 0xc00023f660}) 
+[31mERRO[0m[2022-04-12T09:12:12Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000241f50 0xc00023f660}) 
+[31mERRO[0m[2022-04-12T09:12:12Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000241f50 0xc00023f660}) 
+[31mERRO[0m[2022-04-12T09:12:12Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000241f50 0xc00023f660}) 
+[36mINFO[0m[2022-04-12T09:12:27Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:27Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:27Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:27Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:12:28Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[31mERRO[0m[2022-04-12T09:12:28Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[31mERRO[0m[2022-04-12T09:12:28Z]main.go:14 main.main failed to start server due to error: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[31mERRO[0m[2022-04-12T09:12:28Z]main.go:14 main.main failed to start server due to error: %!w(*pq.Error=&{FATAL 57P03 the database system is starting up            postmaster.c 2325 ProcessStartupPacket}) 
+[36mINFO[0m[2022-04-12T09:12:34Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:34Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:12:34Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:34Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:12:35Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T09:12:35Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T09:27:12Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:27:12Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:27:17Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:27:17Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:33:54Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:33:54Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:33:54Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:33:54Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T09:33:54Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000284030 0xc00028e000}) 
+[31mERRO[0m[2022-04-12T09:33:54Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000284030 0xc00028e000}) 
+[31mERRO[0m[2022-04-12T09:33:54Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000284030 0xc00028e000}) 
+[31mERRO[0m[2022-04-12T09:33:54Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000284030 0xc00028e000}) 
+[36mINFO[0m[2022-04-12T09:34:11Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:11Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:34:11Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:11Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:34:11Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T09:34:11Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T09:38:41Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:38:41Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:39:20Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:39:20Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T09:39:20Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:39:20Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:39:20Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T09:39:20Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T09:39:37Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T09:39:37Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:07Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:07Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:07Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:07Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T11:44:08Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2150 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T11:44:08Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2150 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T11:44:08Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2150 0xc00020f660}) 
+[31mERRO[0m[2022-04-12T11:44:08Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2150 0xc00020f660}) 
+[36mINFO[0m[2022-04-12T11:44:24Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:24Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:24Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:24Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T11:44:24Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000278060 0xc0001cf660}) 
+[31mERRO[0m[2022-04-12T11:44:24Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000278060 0xc0001cf660}) 
+[31mERRO[0m[2022-04-12T11:44:24Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000278060 0xc0001cf660}) 
+[31mERRO[0m[2022-04-12T11:44:24Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000278060 0xc0001cf660}) 
+[36mINFO[0m[2022-04-12T11:44:41Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:41Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:41Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:41Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T11:44:41Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000067110 0xc00004efc0}) 
+[31mERRO[0m[2022-04-12T11:44:41Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000067110 0xc00004efc0}) 
+[31mERRO[0m[2022-04-12T11:44:41Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000067110 0xc00004efc0}) 
+[31mERRO[0m[2022-04-12T11:44:41Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000067110 0xc00004efc0}) 
+[36mINFO[0m[2022-04-12T11:44:49Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:49Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:49Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:49Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T11:44:49Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000300090 0xc0001d7660}) 
+[31mERRO[0m[2022-04-12T11:44:49Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000300090 0xc0001d7660}) 
+[31mERRO[0m[2022-04-12T11:44:49Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000300090 0xc0001d7660}) 
+[31mERRO[0m[2022-04-12T11:44:49Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000300090 0xc0001d7660}) 
+[36mINFO[0m[2022-04-12T11:44:55Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:55Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T11:44:55Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:55Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T11:44:55Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T11:44:55Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:18:32Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:32Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:32Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:18:32Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:18:32Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000074630 0xc00004ef40}) 
+[31mERRO[0m[2022-04-12T12:18:32Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000074630 0xc00004ef40}) 
+[31mERRO[0m[2022-04-12T12:18:32Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000074630 0xc00004ef40}) 
+[31mERRO[0m[2022-04-12T12:18:32Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000074630 0xc00004ef40}) 
+[36mINFO[0m[2022-04-12T12:18:43Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:43Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:43Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:18:43Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:18:43Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002ba150 0xc000217660}) 
+[31mERRO[0m[2022-04-12T12:18:43Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002ba150 0xc000217660}) 
+[31mERRO[0m[2022-04-12T12:18:43Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002ba150 0xc000217660}) 
+[31mERRO[0m[2022-04-12T12:18:43Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002ba150 0xc000217660}) 
+[36mINFO[0m[2022-04-12T12:18:56Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:56Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:18:56Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:18:56Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:18:56Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00024ba70 0xc0000a6f20}) 
+[31mERRO[0m[2022-04-12T12:18:56Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc00024ba70 0xc0000a6f20}) 
+[31mERRO[0m[2022-04-12T12:18:56Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00024ba70 0xc0000a6f20}) 
+[31mERRO[0m[2022-04-12T12:18:56Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc00024ba70 0xc0000a6f20}) 
+[36mINFO[0m[2022-04-12T12:19:20Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:20Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:20Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:20Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:19:20Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000304000 0xc00030c000}) 
+[31mERRO[0m[2022-04-12T12:19:20Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000304000 0xc00030c000}) 
+[31mERRO[0m[2022-04-12T12:19:20Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000304000 0xc00030c000}) 
+[31mERRO[0m[2022-04-12T12:19:20Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000304000 0xc00030c000}) 
+[36mINFO[0m[2022-04-12T12:19:27Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:27Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:27Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:27Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:19:27Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:19:27Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:19:27Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:19:27Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[36mINFO[0m[2022-04-12T12:19:38Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:38Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:19:38Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:38Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:19:39Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:19:39Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:35:21Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:21Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:21Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:35:21Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:35:21Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000670e0 0xc00004efc0}) 
+[31mERRO[0m[2022-04-12T12:35:21Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000670e0 0xc00004efc0}) 
+[31mERRO[0m[2022-04-12T12:35:21Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000670e0 0xc00004efc0}) 
+[31mERRO[0m[2022-04-12T12:35:21Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000670e0 0xc00004efc0}) 
+[36mINFO[0m[2022-04-12T12:35:34Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:34Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:35:34Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:35:34Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:35:34Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:35:34Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:35:34Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:35:34Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2090 0xc00020f640}) 
+[36mINFO[0m[2022-04-12T12:36:00Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:00Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:00Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:36:00Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:36:00Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201b00 0xc00020e740}) 
+[31mERRO[0m[2022-04-12T12:36:00Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000201b00 0xc00020e740}) 
+[31mERRO[0m[2022-04-12T12:36:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201b00 0xc00020e740}) 
+[31mERRO[0m[2022-04-12T12:36:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000201b00 0xc00020e740}) 
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:36:18Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:36:18Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:36:18Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:46:05Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:05Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:05Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:05Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:46:05Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000178030 0xc0000b5d40}) 
+[31mERRO[0m[2022-04-12T12:46:05Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc000178030 0xc0000b5d40}) 
+[31mERRO[0m[2022-04-12T12:46:06Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000178030 0xc0000b5d40}) 
+[31mERRO[0m[2022-04-12T12:46:06Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc000178030 0xc0000b5d40}) 
+[36mINFO[0m[2022-04-12T12:46:17Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:17Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:17Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:17Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:46:17Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:46:17Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:46:17Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:46:17Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[36mINFO[0m[2022-04-12T12:46:35Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:35Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:35Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:35Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:46:35Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:46:35Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:46:35Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[31mERRO[0m[2022-04-12T12:46:35Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0002b2060 0xc00020f640}) 
+[36mINFO[0m[2022-04-12T12:46:44Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:44Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:46:44Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:44Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:46:44Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:46:44Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:50:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:50:36Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:50:36Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:56:00Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:00Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:00Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:00Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:56:00Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000680f0 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T12:56:00Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0000680f0 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T12:56:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000680f0 0xc00004e020}) 
+[31mERRO[0m[2022-04-12T12:56:00Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0000680f0 0xc00004e020}) 
+[36mINFO[0m[2022-04-12T12:56:22Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:22Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:22Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:22Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[31mERRO[0m[2022-04-12T12:56:22Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3c20 0xc0001d7520}) 
+[31mERRO[0m[2022-04-12T12:56:22Z]server.go:37 customer/internal/server.(*Server).Start err during db opening, err: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3c20 0xc0001d7520}) 
+[31mERRO[0m[2022-04-12T12:56:22Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3c20 0xc0001d7520}) 
+[31mERRO[0m[2022-04-12T12:56:22Z]main.go:14 main.main failed to start server due to error: %!w(*net.OpError=&{dial tcp <nil> 0xc0001d3c20 0xc0001d7520}) 
+[36mINFO[0m[2022-04-12T12:56:35Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:35Z]server.go:34 customer/internal/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-12T12:56:35Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:35Z]store.go:49 customer/domain/store.(*Store).Open User store opening. Source: host=customerdb port=5432 user=user password=userpass dbname=customerdb sslmode=disable 
+[36mINFO[0m[2022-04-12T12:56:36Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       
+[36mINFO[0m[2022-04-12T12:56:36Z]server.go:56 customer/internal/server.(*Server).Start Auth server starts at 0.0.0.0:1112 ...       

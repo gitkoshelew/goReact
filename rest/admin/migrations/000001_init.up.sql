@@ -30,12 +30,12 @@ CREATE TABLE IF NOT EXISTS ROOM
 (   room_id          serial PRIMARY key, 
     number      CHARACTER VARYING(30) NOT NULL ,
     pet_type    TEXT NOT NULL ,
-    hotel_id    INTEGER REFERENCES HOTEL(id) ON DELETE CASCADE 
+    hotel_id    INTEGER REFERENCES HOTEL(hotel_id) ON DELETE CASCADE 
 );
 
 CREATE TABLE IF NOT EXISTS SEAT 
 (   seat_id           serial PRIMARY key, 
-    room_id      INTEGER REFERENCES ROOM(id) ON DELETE CASCADE NOT NULL ,
+    room_id      INTEGER REFERENCES ROOM(room_id) ON DELETE CASCADE NOT NULL ,
     is_free      BOOLEAN NOT NULL,
     description  TEXT NOT NULL
 );
@@ -46,21 +46,21 @@ CREATE TABLE IF NOT EXISTS PET
     type         CHARACTER VARYING(30) NOT NULL ,
     weight       SMALLINT NOT NULL ,
     diseases       TEXT,
-    user_id      INTEGER REFERENCES USERS(id) ON DELETE CASCADE NOT NULL     
+    user_id      INTEGER REFERENCES USERS(user_id) ON DELETE CASCADE NOT NULL     
 );
 
 CREATE TABLE IF NOT EXISTS EMPLOYEE 
 (   employee_id          serial PRIMARY key ,
-    user_id     INTEGER REFERENCES USERS(id) ON DELETE CASCADE NOT NULL ,
-    hotel_id    INTEGER REFERENCES HOTEL(id) ON DELETE CASCADE ,
+    user_id     INTEGER REFERENCES USERS(user_id) ON DELETE CASCADE NOT NULL ,
+    hotel_id    INTEGER REFERENCES HOTEL(hotel_id) ON DELETE CASCADE ,
     position    emp_position NOT NULL 
 );
 
 CREATE TABLE IF NOT EXISTS BOOKING 
 (   booking_id               serial PRIMARY key,
-    seat_id          INTEGER REFERENCES SEAT(id) ON DELETE CASCADE NOT NULL ,
-    pet_id           INTEGER REFERENCES PET(id) ON DELETE CASCADE NOT NULL ,
-    employee_id      INTEGER REFERENCES EMPLOYEE(id) ON DELETE CASCADE NOT NULL  ,
+    seat_id          INTEGER REFERENCES SEAT(seat_id) ON DELETE CASCADE NOT NULL ,
+    pet_id           INTEGER REFERENCES PET(pet_id) ON DELETE CASCADE NOT NULL ,
+    employee_id      INTEGER REFERENCES EMPLOYEE(employee_id) ON DELETE CASCADE NOT NULL  ,
     status           TEXT ,
     start_date       DATE NOT NULL ,
     end_date         DATE NOT NULL ,

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS PERMISSIONS 
-(   id              serial PRIMARY key, 
+(   permissions_id              serial PRIMARY key, 
     name      CHARACTER VARYING(30) NOT NULL ,
     description         TEXT NOT NULL 
 );

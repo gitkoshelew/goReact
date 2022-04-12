@@ -575,7 +575,7 @@ services:
             - POSTGRES_HOST=${IMAGE_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${IMAGE_POSTGRES_SSLMODE}
         ports:
-            - "8083:5432"
+            - "8091:5432"
         restart: always
         volumes:
             - database-data:/var/lib/postgresql/user/data/
@@ -617,7 +617,7 @@ services:
             - POSTGRES_HOST=${TEST_IMAGE_POSTGRES_HOST}
             - POSTGRES_SSLMODE=${TEST_IMAGE_POSTGRES_SSLMODE}
         ports:
-            - "8084:5432"
+            - "8092:5432"
         restart: unless-stopped
         volumes:
             - database-test:/var/lib/test-date/image/data/
