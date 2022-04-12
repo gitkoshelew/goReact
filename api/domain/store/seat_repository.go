@@ -230,6 +230,5 @@ func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) 
 			TotalCount: len(seatsIDs),
 		})
 	}
-
 	return &resp, nil
 }
