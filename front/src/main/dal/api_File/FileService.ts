@@ -1,21 +1,22 @@
 import { apiBookingRegForm } from './API'
+import { AxiosResponse } from 'axios'
 
-type UploadFleRespType = {
-  type: string
-  ownerId: number
+export type PhotoUrl = {
+  original: string
+  qvga: string
+  vga: string
+  hd720p: string
 }
-type PhotoUrl = {
-  photoUrl: string | null
-}
+
+export type FetchPhotoUrlResponse = PhotoUrl
 
 export const FilesAPI = {
-  async uploadFile(file: File): Promise<PhotoUrl> {
+  async uploadFile(file: File): Promise<AxiosResponse<FetchPhotoUrlResponse>> {
     let formData = new FormData()
     formData.append('image', file, file.name)
     formData.append('type', 'user')
     formData.append('ownerId', '1')
-    const res = apiBookingRegForm.post<UploadFleRespType, PhotoUrl>('save', formData)
-    console.log(res)
+    const res = apiBookingRegForm.post('save', formData)
     return res
   },
 }
