@@ -29,7 +29,6 @@ type BookingRegFormType = {
 export const BookingRegForm = ({ formik }: BookingRegFormType) => {
   const progress = useSelector((state: AppRootState) => state.BookingRegForm.progress)
   const errorMSG = useSelector((state: AppRootState) => state.BookingRegForm.errorMSG)
-  const photoUrlOriginal = useSelector((state: AppRootState) => state.BookingRegForm.photoUrl?.original)
   const photoUrlQvga = useSelector((state: AppRootState) => state.BookingRegForm.photoUrl?.qvga)
   const photoUrlVga = useSelector((state: AppRootState) => state.BookingRegForm.photoUrl?.vga)
   const photoUrlHd720p = useSelector((state: AppRootState) => state.BookingRegForm.photoUrl?.hd720p)
@@ -58,7 +57,7 @@ export const BookingRegForm = ({ formik }: BookingRegFormType) => {
             Your pet :
             <img
               className={uploadedImgContent}
-              src={photoUrlOriginal ? process.env.REACT_APP_API_BOOKING_REG_LINK + photoUrlOriginal : ''}
+              src={photoUrlQvga ? process.env.REACT_APP_API_BOOKING_REG_LINK + photoUrlQvga : ''}
               srcSet={`${photoUrlQvga ? process.env.REACT_APP_API_BOOKING_REG_LINK + photoUrlQvga : ''} 320w,
               ${photoUrlVga ? process.env.REACT_APP_API_BOOKING_REG_LINK + photoUrlVga : ''} 640w, ${
                 photoUrlHd720p ? process.env.REACT_APP_API_BOOKING_REG_LINK + photoUrlHd720p : ''
