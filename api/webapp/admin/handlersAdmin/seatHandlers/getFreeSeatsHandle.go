@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"strconv"
 	"text/template"
-	"time"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -33,25 +32,9 @@ func GetFreeSeatsHandle(s *store.Store) httprouter.Handle {
 
 		petType := r.FormValue("PetType")
 
-		layout := "2006-01-02"
-		rentFrom, err := time.Parse(layout, r.FormValue("RentFrom"))
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentFrom"))
-			return
-		}
-
-		rentTo, err := time.Parse(layout, r.FormValue("RentTo"))
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo")), http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("RentTo"))
-			return
-		}
 		req := &reqandresp.FreeSeatsSearching{
-			HotelID:  hotelID,
-			PetType:  petType,
-			RentFrom: &rentFrom,
-			RentTo:   &rentTo,
+			HotelID: hotelID,
+			PetType: petType,
 		}
 
 		err = req.Validate()

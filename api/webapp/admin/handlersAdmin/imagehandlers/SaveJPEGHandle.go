@@ -70,7 +70,7 @@ func SaveJPEGHandle(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		_, err = s.Image().SaveImage(imageDTO, &image)
+		_, _, err = s.Image().SaveImage(imageDTO, &image)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("eror occured while saving JPEG.  Err msg: %v", err), http.StatusInternalServerError)
 			s.Logger.Errorf("eror occured while saving JPEG.  Err msg: %v", err)

@@ -41,13 +41,13 @@ func (s *Server) configureRouter() {
 
 	s.router.Handle("GET", "/api/room/:id", room.GetRoomHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/rooms", room.GetAllRoomsHandle(store.New(s.config)))
+	//localhost:8080/api/rooms/?offset=2&pagesize=2
+	s.router.Handle("GET", "/api/rooms/", room.GetRoomsHandlePagination(store.New(s.config)))
+	s.router.Handle("GET", "/api/toprooms/", room.GetTopRoomsHandle(store.New(s.config)))
 
 	s.router.Handle("POST", "/api/booking", middleware.ValidateBooking(booking.PostBookingHandle(store.New(s.config)), store.New(s.config)))
 	s.router.Handle("GET", "/api/bookings", booking.GetAllBookingsHandle(store.New(s.config)))
 	s.router.Handle("GET", "/api/booking/:id", booking.GetBookingByIDHandler(store.New(s.config)))
-
-	//localhost:8080/api/rooms/?offset=2&pagesize=2
-	s.router.Handle("GET", "/api/rooms/", room.GetRoomsHandlePagination(store.New(s.config)))
 
 	s.router.Handle("GET", "/api/emailconfirm/:token", authentication.EmailConfirm(store.New(s.config)))
 	s.router.Handle("POST", "/api/forgotpassword", restorepassword.ForgotPassword(store.New(s.config), s.Mail))
