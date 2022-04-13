@@ -7,6 +7,8 @@ import (
 	"goReact/webapp/server/handler/hotel"
 	"goReact/webapp/server/handler/image"
 	"goReact/webapp/server/handler/middleware"
+	gitoauth2 "goReact/webapp/server/handler/middleware/gitoauth2"
+
 	"goReact/webapp/server/handler/pet"
 	restorepassword "goReact/webapp/server/handler/restorePassword"
 	"goReact/webapp/server/handler/room"
@@ -52,4 +54,8 @@ func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/api/emailconfirm/:token", authentication.EmailConfirm(store.New(s.config)))
 	s.router.Handle("POST", "/api/forgotpassword", restorepassword.ForgotPassword(store.New(s.config), s.Mail))
 	s.router.Handle("GET", "/api/emailrestore/:token", restorepassword.СhekingLinkForRestorePassword(store.New(s.config), restorepassword.ChangePassword(store.New(s.config))))
+
+	s.router.Handle("GET", "/api/gitlogin", gitoauth2.GitHubLogin(store.New(s.config)))
+	s.router.Handle("GET", "/api/gitlogin/re", gitoauth2.GitHubAuth(gitoauth2.GetUserGit(store.New(s.config)), store.New(s.config)))
+
 }
