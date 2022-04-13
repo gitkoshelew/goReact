@@ -37,14 +37,14 @@ func TestImagelRepository_SaveImage(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if tc.isValid {
-				result, err := testStore.Image().SaveImage(tc.model())
+				result, _, err := testStore.Image().SaveImage(tc.model())
 
 				testStore.Image().Delete(*result)
 				testStore.Close()
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
 			} else {
-				result, err := testStore.Image().SaveImage(tc.model())
+				result, _, err := testStore.Image().SaveImage(tc.model())
 				testStore.Image().Delete(*result)
 				testStore.Close()
 				assert.Error(t, err)
@@ -118,7 +118,7 @@ func TestImagelRepository_Delete(t *testing.T) {
 				imageDTO := model.TestImageDTO()
 				file, _ := os.Open("./test_image.jpg")
 				imageFile, _ := jpeg.Decode(file)
-				id, _ := testStore.Image().SaveImage(imageDTO, &imageFile)
+				id, _, _ := testStore.Image().SaveImage(imageDTO, &imageFile)
 				imageDTO.ImageID = *id
 				return &imageDTO.ImageID
 			},
@@ -167,7 +167,7 @@ func TestImagelRepository_GetImageFromLocalStore(t *testing.T) {
 				imageDTO := model.TestImageDTO()
 				file, _ := os.Open("./test_image.jpg")
 				imageFile, _ := jpeg.Decode(file)
-				id, _ := testStore.Image().SaveImage(imageDTO, &imageFile)
+				id, _, _ := testStore.Image().SaveImage(imageDTO, &imageFile)
 				imageDTO.ImageID = *id
 				return imageDTO
 			},
@@ -205,3 +205,4 @@ func TestImagelRepository_GetImageFromLocalStore(t *testing.T) {
 		})
 	}
 }
+

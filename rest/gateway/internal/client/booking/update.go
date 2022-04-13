@@ -8,7 +8,7 @@ import (
 	"io"
 )
 
-// Update User or Pet
+// Update booking
 func Update(ctx context.Context, c *client.Client, body io.Reader) (*response.Service, error) {
 	url, err := c.Base.BuildURL(c.Resource, nil)
 	if err != nil {

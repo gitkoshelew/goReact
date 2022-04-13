@@ -76,8 +76,10 @@ func (c *BaseClient) CreateRequest(method, url string, body io.Reader) (*http.Re
 func (c *BaseClient) SendRequest(ctx context.Context, req *http.Request) (*APIResponse, error) {
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Content-Type", "image/jpeg")
 
 	ctxTimeOut, cancel := context.WithTimeout(ctx, 5*time.Second)
+
 	defer cancel()
 	req = req.WithContext(ctxTimeOut)
 	c.Logger.Debug("sending request...")

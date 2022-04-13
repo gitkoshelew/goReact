@@ -1,5 +1,5 @@
 ALTER TABLE ROOM
-DROP COLUMN     description     CASCADE,
+DROP COLUMN     description     CASCADE;
 
 ALTER TABLE SEAT  
 ADD COLUMN description TEXT  NOT NULL DEFAULT '';  
