@@ -161,7 +161,7 @@ func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image
 		}
 		defer file.Close()
 	}
-	imageURL := fmt.Sprintf("getImage?id=%d", imageDTO.OwnerID)
+	imageURL := fmt.Sprintf("getImage?id=%d", imageDTO.ImageID)
 	return &imageDTO.ImageID, &imageURL, nil
 }
 
