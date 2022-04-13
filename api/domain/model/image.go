@@ -44,12 +44,11 @@ type ImagesURLsResponse struct {
 // BuildImagesURLsResponse ...
 func BuildImagesURLsResponse(imageURL *string) ImagesURLsResponse {
 	return ImagesURLsResponse{
-		Original: fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatOriginal)),
-		QVGA:     fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatQVGA)),
-		VGA:      fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatVGA)),
-		HD720p:   fmt.Sprintf("%s-%s.jpg", *imageURL, string(FormatHD720p)),
+		Original: fmt.Sprintf("%s&format=%s", *imageURL, string(FormatOriginal)),
+		QVGA:     fmt.Sprintf("%s&format=%s", *imageURL, string(FormatQVGA)),
+		VGA:      fmt.Sprintf("%s&format=%s", *imageURL, string(FormatVGA)),
+		HD720p:   fmt.Sprintf("%s&format=%s", *imageURL, string(FormatHD720p)),
 	}
-
 }
 
 // ImageFormat ...
