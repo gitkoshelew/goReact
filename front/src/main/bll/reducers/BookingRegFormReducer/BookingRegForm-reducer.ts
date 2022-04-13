@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { PhotoUrl } from '../../../dal/api_File/FileService'
 
 const initialState: InitialStateType = {
   progress: 'getUpload',
@@ -14,7 +15,7 @@ const BookingRegFormSlice = createSlice({
     changeProgressStatus(state, action: PayloadAction<{ newStatus: ProgressType }>) {
       state.progress = action.payload.newStatus
     },
-    changePhotoUrl(state, action: PayloadAction<{ newPhotoUrl: string }>) {
+    changePhotoUrl(state, action: PayloadAction<{ newPhotoUrl: PhotoUrl }>) {
       state.photoUrl = action.payload.newPhotoUrl
     },
     changeErrorMSG(state, action: PayloadAction<{ newErrorMsg: string }>) {
@@ -36,7 +37,7 @@ export type ProgressType = 'getUpload' | 'uploading' | 'uploaded' | 'uploadError
 
 export type InitialStateType = {
   progress: ProgressType
-  photoUrl: null | string
+  photoUrl: PhotoUrl | null
   errorMSG: string
   checkedOnlinePayment: boolean
 }
