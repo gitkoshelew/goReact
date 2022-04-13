@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { BookingInfoPhoto, BookingPhotoType } from '../../../dal/api_bookingPhoto/BookingService'
+import { PhotoUrl } from '../../../dal/api_File/FileService'
 
 const initialState: InitialStateType = {
   progress: 'getUpload',
   photoUrl: null,
   errorMSG: '',
   checkedOnlinePayment: false,
-  bookingPhoto: [],
-  bookingInfo: [],
 }
 
 const BookingRegFormSlice = createSlice({
@@ -17,7 +15,7 @@ const BookingRegFormSlice = createSlice({
     changeProgressStatus(state, action: PayloadAction<{ newStatus: ProgressType }>) {
       state.progress = action.payload.newStatus
     },
-    changePhotoUrl(state, action: PayloadAction<{ newPhotoUrl: string }>) {
+    changePhotoUrl(state, action: PayloadAction<{ newPhotoUrl: PhotoUrl }>) {
       state.photoUrl = action.payload.newPhotoUrl
     },
     changeErrorMSG(state, action: PayloadAction<{ newErrorMsg: string }>) {
@@ -26,15 +24,11 @@ const BookingRegFormSlice = createSlice({
     changeCheckedOnlinePayment(state, action: PayloadAction<{ checkedOnlinePayment: boolean }>) {
       state.checkedOnlinePayment = action.payload.checkedOnlinePayment
     },
-    setBookingPhoto(state, action: PayloadAction<{ bookingInfo: BookingInfoPhoto; bookingPhoto: BookingPhotoType }>) {
-      state.bookingInfo = action.payload.bookingInfo
-      state.bookingPhoto = action.payload.bookingPhoto
-    },
   },
 })
 
 export const BookingRegFormReducer = BookingRegFormSlice.reducer
-export const { changePhotoUrl, changeProgressStatus, changeErrorMSG, changeCheckedOnlinePayment, setBookingPhoto } =
+export const { changePhotoUrl, changeProgressStatus, changeErrorMSG, changeCheckedOnlinePayment } =
   BookingRegFormSlice.actions
 
 //types
@@ -43,9 +37,7 @@ export type ProgressType = 'getUpload' | 'uploading' | 'uploaded' | 'uploadError
 
 export type InitialStateType = {
   progress: ProgressType
-  photoUrl: null | string
+  photoUrl: PhotoUrl | null
   errorMSG: string
   checkedOnlinePayment: boolean
-  bookingPhoto: any
-  bookingInfo: any
 }
