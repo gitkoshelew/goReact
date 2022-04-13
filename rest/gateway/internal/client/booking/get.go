@@ -9,7 +9,7 @@ import (
 	"io"
 )
 
-// Get User or Pet by ID
+// Get booking by ID
 func Get(ctx context.Context, c *client.Client, body io.Reader) (*response.Service, error) {
 	url, err := c.Base.BuildURL(c.Resource, nil)
 	if err != nil {

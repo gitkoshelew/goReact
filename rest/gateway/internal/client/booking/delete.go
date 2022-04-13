@@ -9,7 +9,7 @@ import (
 	"io"
 )
 
-// Delete User or Pet by ID
+// Delete booking by ID
 func Delete(ctx context.Context, c *client.Client, body io.Reader) (*response.Service, error) {
 	url, err := c.Base.BuildURL(c.Resource, nil)
 	if err != nil {

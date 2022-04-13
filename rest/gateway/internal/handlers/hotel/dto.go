@@ -4,10 +4,10 @@ import "time"
 
 // HotelDTO ...
 type HotelDTO struct {
-	HotelID     int    `json:"hotelId"`
-	Name        string `json:"nameId"`
-	Address     string `json:"addressId"`
-	Coordinates string `json:"coordinates"` // coordinates : lat , lon
+	HotelID     int       `json:"hotelId"`
+	Name        string    `json:"nameId"`
+	Address     string    `json:"addressId"`
+	Coordinates []float64 `json:"coordinates"` // coordinates : lat , lon
 }
 
 // PetType ...
@@ -20,13 +20,15 @@ const (
 	PetTypeDog PetType = "dog"
 )
 
-// RoomDTO ...
+// RoomDTO struct
 type RoomDTO struct {
-	RoomID       int     `json:"roomId"`
-	RoomNumber   int     `json:"roomNum"`
-	PetType      PetType `json:"petType"`
-	HotelID      int     `json:"hotelID"`
-	RoomPhotoURL string  `json:"roomPhotoUrl"`
+	RoomID      int     `json:"roomId"`
+	RoomNumber  int     `json:"roomNum"`
+	PetType     string  `json:"petType"`
+	HotelID     int     `json:"hotelId"`
+	PhotoURL    string  `json:"photoUrl,omitempty"`
+	Description string  `json:"description,omitempty"`
+	Square      float64 `json:"square,omitempty"`
 }
 
 // SeatDTO ...

@@ -7,6 +7,7 @@ import (
 	"gateway/internal/handlers/customer"
 	"gateway/internal/handlers/hotel"
 	"gateway/internal/handlers/middleware"
+	"gateway/internal/handlers/image"
 )
 
 // ConfigureRouter ...
@@ -62,4 +63,9 @@ func (s *Server) ConfigureRouter() {
 	s.Router.Handle("PUT", "/employee", hotel.UpdateEmployeeHandle(client.HotelEmployeeService))
 	s.Router.Handle("POST", "/employee", hotel.CreateEmployeeHandle(client.HotelEmployeeService))
 
+	s.Router.Handle("GET", "/images", image.GetAllImagesHandle(client.GetAllImagesService))
+	s.Router.Handle("GET", "/image/", image.GetImageHandle(client.ImageService))
+	s.Router.Handle("DELETE", "/image/:id", image.DeleteImageHandle(client.ImageService))
+	s.Router.Handle("PUT", "/image", image.UpdateimageHandle(client.ImageService))
+	s.Router.Handle("POST", "/image", image.CreateImageHandle(client.ImageService))
 }
