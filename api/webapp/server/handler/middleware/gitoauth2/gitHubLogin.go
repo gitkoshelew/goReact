@@ -11,11 +11,11 @@ import (
 )
 
 var conf = &oauth2.Config{
-	ClientID:        os.Getenv("GIT_CLIENT_ID"),
-	ClientSecret:    os.Getenv("GIT_CLIENT_SECRET"),
-	RedirectURL: os.Getenv("GIT_REDIRECT_URI"),
+	ClientID:     os.Getenv("GIT_CLIENT_ID"),
+	ClientSecret: os.Getenv("GIT_CLIENT_SECRET"),
+	RedirectURL:  os.Getenv("GIT_REDIRECT_URI"),
 	Endpoint: oauth2.Endpoint{
-		AuthURL:  os.Getenv("AUTHOTIZE_URI"),
+		AuthURL:  os.Getenv("GIT_AUTHOTIZE_URI"),
 		TokenURL: os.Getenv("GIT_ACCESS_TOKEN_URI"),
 	},
 }
@@ -34,8 +34,10 @@ var conf = &oauth2.Config{
 func GitHubLogin(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		url := fmt.Sprintf("%s?client_id=%s&redirect_uri=%s", conf.Endpoint.AuthURL, conf.ClientID, conf.RedirectURL)
+		s.Logger.Info("link %s", url)
+
 		link := conf.AuthCodeURL("state", oauth2.AccessTypeOnline)
-		s.Logger.Info("link %v", link)
+		s.Logger.Info("link %s", link)
 
 		http.Redirect(w, r, url, http.StatusFound)
 
