@@ -2100,3 +2100,17 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 [36mINFO[0m[2022-04-14T12:02:47Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
 [36mINFO[0m[2022-04-14T12:03:27Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
 [36mINFO[0m[2022-04-14T12:03:27Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[36mINFO[0m[2022-04-14T12:14:09Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T12:14:09Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T12:14:09Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T12:14:09Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T12:14:09Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T12:14:09Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T12:14:10Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T12:14:10Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T12:14:10Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T12:14:10Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T12:14:13Z]gitHubAuth.go:69 goReact/webapp/server/handler/middleware/gitoauth2.GitHubAuth.func1 TOKEN   -   &{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 bearer  0001-01-01 00:00:00 +0000 UTC <nil>} 
+[36mINFO[0m[2022-04-14T12:14:13Z]gitHubAuth.go:69 goReact/webapp/server/handler/middleware/gitoauth2.GitHubAuth.func1 TOKEN   -   &{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 bearer  0001-01-01 00:00:00 +0000 UTC <nil>} 
