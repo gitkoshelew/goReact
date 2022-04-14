@@ -33,11 +33,12 @@ var conf = &oauth2.Config{
 
 func GitHubLogin(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		
 		url := fmt.Sprintf("%s?client_id=%s&redirect_uri=%s", conf.Endpoint.AuthURL, conf.ClientID, conf.RedirectURL)
-		s.Logger.Info("link %s", url)
+		s.Logger.Info("url ", url)
 
 		link := conf.AuthCodeURL("state", oauth2.AccessTypeOnline)
-		s.Logger.Info("link %s", link)
+		s.Logger.Info("link  AuthCodeURL ", link)
 
 		http.Redirect(w, r, url, http.StatusFound)
 

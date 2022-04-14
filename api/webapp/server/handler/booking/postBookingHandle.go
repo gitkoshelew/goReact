@@ -11,7 +11,8 @@ import (
 )
 
 // PostBookingHandle ...
-func PostBookingHandle(s *store.Store) http.HandlerFunc {
+func 
+PostBookingHandle(s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
