@@ -7,11 +7,12 @@ import (
 	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/response"
 	"net/http"
+	"os"
 
 	"golang.org/x/oauth2"
 )
 
-var getUserURI = "https://api.github.com/user"
+var getUserURI = os.Getenv("GIT_GET_USER_DATA") 
 
 func GetUserGit(s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -20,20 +21,8 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 
 		authHeader := fmt.Sprintf("token %s", token.AccessToken)
 
-		w.Header().Set("Accept", "application/json")
-		//
+		w.Header().Set("Accept", "application/json")		
 		
-
-	/*	resp, err := http.Get(getUserURI)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while getting resource . Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
-			return
-		}
-		defer resp.Body.Close()*/
-
-
 		req, err := http.NewRequest(http.MethodGet, getUserURI, nil)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)

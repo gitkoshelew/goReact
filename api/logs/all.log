@@ -2050,3 +2050,53 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
 [36mINFO[0m[2022-04-14T09:34:40Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
 PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T09:35:39Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T09:35:48Z]gitHubLogin.go:38 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 url https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http://localhost:8080/api/gitlogin/re 
+[36mINFO[0m[2022-04-14T09:35:48Z]gitHubLogin.go:38 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 url https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http://localhost:8080/api/gitlogin/re 
+[36mINFO[0m[2022-04-14T09:35:48Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?access_type=online&client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[36mINFO[0m[2022-04-14T09:35:48Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?access_type=online&client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[31mERRO[0m[2022-04-14T11:51:12Z]gitHubAuth.go:58 goReact/webapp/server/handler/middleware/gitoauth2.GitHubAuth.func1 Error occured while getting resource . Err msg: Get "https://github.com/login/oauth/access_token?client_id=12ddc6cc61f9387d552c&client_secret=37ee47acce31f8857c514420f3f86f6a55a785ff&code=735f3e4d4938d20d9d7e": dial tcp 140.82.121.4:443: connect: connection refused 
+[31mERRO[0m[2022-04-14T11:51:12Z]gitHubAuth.go:58 goReact/webapp/server/handler/middleware/gitoauth2.GitHubAuth.func1 Error occured while getting resource . Err msg: Get "https://github.com/login/oauth/access_token?client_id=12ddc6cc61f9387d552c&client_secret=37ee47acce31f8857c514420f3f86f6a55a785ff&code=735f3e4d4938d20d9d7e": dial tcp 140.82.121.4:443: connect: connection refused 
+[36mINFO[0m[2022-04-14T11:58:33Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T11:58:33Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T11:58:33Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T11:58:33Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T11:58:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T11:58:34Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T11:58:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T11:58:34Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T11:58:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T11:58:34Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T11:58:50Z]gitHubLogin.go:38 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 url https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http://localhost:8080/api/gitlogin/re 
+[36mINFO[0m[2022-04-14T11:58:50Z]gitHubLogin.go:38 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 url https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http://localhost:8080/api/gitlogin/re 
+[36mINFO[0m[2022-04-14T11:58:50Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[36mINFO[0m[2022-04-14T11:58:50Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T12:02:43Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-14T12:02:47Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[36mINFO[0m[2022-04-14T12:02:47Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[36mINFO[0m[2022-04-14T12:03:27Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
+[36mINFO[0m[2022-04-14T12:03:27Z]gitHubLogin.go:41 goReact/webapp/server/handler/middleware/gitoauth2.GitHubLogin.func1 link  AuthCodeURL https://github.com/login/oauth/authorize?client_id=12ddc6cc61f9387d552c&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fgitlogin%2Fre&response_type=code&state=state 
