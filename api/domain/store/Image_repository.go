@@ -147,9 +147,9 @@ func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image
 	if err != nil {
 		return nil, nil, err
 	}
-	imageURL := fmt.Sprintf("images/%s/image", path)
+	imageDirectory := fmt.Sprintf("images/%s/image", path)
 	for format, img := range imagesMap {
-		file, err := os.Create(fmt.Sprintf("%s-%s.jpg", imageURL, string(format)))
+		file, err := os.Create(fmt.Sprintf("%s-%s.jpg", imageDirectory, string(format)))
 		if err != nil {
 			r.Store.Logger.Errorf("Error occured while creating file. Err msg: %v.", err)
 			return nil, nil, err
@@ -161,7 +161,7 @@ func (r *ImageRepository) SaveImage(imageDTO *model.ImageDTO, image *image.Image
 		}
 		defer file.Close()
 	}
-
+	imageURL := fmt.Sprintf("getImage?id=%d", imageDTO.ImageID)
 	return &imageDTO.ImageID, &imageURL, nil
 }
 

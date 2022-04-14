@@ -134,6 +134,7 @@ services:
         restart: on-failure
         volumes:
             - ./api/logs:/api/logs
+            - ./api/images:/api/images
         networks:
             - new
 
