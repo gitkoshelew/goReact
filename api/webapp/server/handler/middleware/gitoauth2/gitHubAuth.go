@@ -35,36 +35,6 @@ func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 			return
 		}
 
-		/*req, err := http.NewRequest(http.MethodGet, url, nil)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while making requsr . Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
-			return
-		}
-		req.Header.Set("Accept", "application/json")
-		var c http.Client
-		resp, err := c.Do(req)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while getting resource . Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
-			return
-		}
-		defer resp.Body.Close()
-
-		token := &oauth2.Token{}
-
-		
-		if err := json.NewDecoder(resp.Body).Decode(token); err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err ms:%v. Response body: %v", err, &resp.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}*/
-
-
-
 		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CTXKeyAccessTokenGitOAuth, token)))
 
 	}

@@ -13,7 +13,7 @@ import (
 	"golang.org/x/oauth2"
 )
 
-var getUserURI = os.Getenv("GIT_GET_USER_DATA") 
+var getUserURI = os.Getenv("GIT_GET_USER_DATA")
 
 func GetUserGit(s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -22,39 +22,15 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 
 		authHeader := fmt.Sprintf("token %s", token.AccessToken)
 
-		w.Header().Set("Accept", "application/json")		
-		
-		/*req, err := http.NewRequest(http.MethodGet, getUserURI, nil)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while getting req . Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
-			return
-		}
-		req.Header.Set("Authorization", authHeader)		
-		var c http.Client
-		resp, err := c.Do(req)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Error occured while getting resp . Err msg: %v", err)
-			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
-			return
-		}
-		defer resp.Body.Close()*/
+		w.Header().Set("Accept", "application/json")
 
-		result , err := service.UserDataGit(getUserURI, authHeader)
+		result, err := service.UserDataGit(getUserURI, authHeader)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while getting resource . Err msg: %v", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
 			return
 		}
-
-	
-
-		//var result map[string]interface{}
-
-		//json.NewDecoder(body).Decode(&result)
 
 		json.NewEncoder(w).Encode(result)
 	}
