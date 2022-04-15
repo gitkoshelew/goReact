@@ -194,11 +194,19 @@ func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) 
 	}
 
 	var resp []reqandresp.FreeSeatsResponse
+	loc, _ := time.LoadLocation("Europe/Moscow")
+	localDate := time.Now().In(loc)
+	currentHour, _, _ := localDate.Clock()
 
-	for i := 1; i < 31; i++ {
+	for i := 0; i < 31; i++ {
 		var seatsIDs []int
-		date := time.Now().AddDate(0, 0, i)
+
 		existingSeats := make(map[int]bool)
+		date := localDate.AddDate(0, 0, i)
+
+		if i == 0 && currentHour > 11 {
+			continue
+		}
 
 		for _, d := range roomInfos {
 			exist, ok := existingSeats[d.SeatID]
@@ -209,8 +217,6 @@ func (r *SeatRepository) FreeSeatsSearching(req *reqandresp.FreeSeatsSearching) 
 					existingSeats[d.SeatID] = true
 				}
 			} else if _, ok := existingSeats[d.SeatID]; !ok {
-				r.Store.Logger.Errorf("%v", d.SeatID)
-				r.Store.Logger.Errorf("%v ---- %v  ----- %v", date, d.StartDate, d.EndDate)
 				existingSeats[d.SeatID] = true
 				if date.After(*d.StartDate) && date.Before(*d.EndDate) {
 					existingSeats[d.SeatID] = false

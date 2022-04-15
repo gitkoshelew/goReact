@@ -16,7 +16,9 @@ require (
 	github.com/stretchr/testify v1.7.1
 	github.com/twinj/uuid v1.0.0
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
+
 	golang.org/x/oauth2 v0.0.0-20220411215720-9780585627b5
+
 )
 
 require (
