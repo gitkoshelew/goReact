@@ -1,4 +1,4 @@
-package gitoauth2
+package linkedinoauth2
 
 import (
 	"context"
@@ -17,7 +17,7 @@ import (
 
 
 
-func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
+func LinkedInAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Accept", "application/json")
 		w.Header().Set("Content-Type", "application/json")

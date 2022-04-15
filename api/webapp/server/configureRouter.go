@@ -8,6 +8,8 @@ import (
 	"goReact/webapp/server/handler/image"
 	"goReact/webapp/server/handler/middleware"
 	gitoauth2 "goReact/webapp/server/handler/middleware/gitoauth2"
+	linkedinoauth2 "goReact/webapp/server/handler/middleware/linkedinoauth2"
+
 
 	"goReact/webapp/server/handler/pet"
 	restorepassword "goReact/webapp/server/handler/restorePassword"
@@ -58,4 +60,6 @@ func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/api/gitlogin", gitoauth2.GitHubLogin(store.New(s.config)))
 	s.router.Handle("GET", "/api/gitlogin/re", gitoauth2.GitHubAuth(gitoauth2.GetUserGit(store.New(s.config)), store.New(s.config)))
 
+	s.router.Handle("GET", "/api/linkedinlogin", linkedinoauth2.LinkedInLogin(store.New(s.config)))
+	s.router.Handle("GET", "/api/linkedinlogin/re", linkedinoauth2.LinkedInAuth(gitoauth2.GetUserGit(store.New(s.config)), store.New(s.config)))
 }

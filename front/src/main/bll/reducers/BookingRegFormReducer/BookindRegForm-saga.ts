@@ -1,23 +1,13 @@
 import { changePhotoUrl, changeProgressStatus } from './BookingRegForm-reducer'
 import { put, call } from 'redux-saga/effects'
-
-const dataGivers = async (data: Blob | MediaSource) => {
-  const result: Blob | MediaSource = await new Promise<Blob | MediaSource>((res) => {
-    setTimeout(() => {
-      res(data)
-    }, 1000)
-  })
-  const correctImg = Object.assign(result, {
-    preview: URL.createObjectURL(result),
-  })
-
-  return correctImg.preview
-}
+import { AxiosResponse } from 'axios'
+import { FilesAPI } from '../../../dal/api_File/FileService'
 
 export function* BookingUploadPetImgSagaWorker(action: BookingUploadPetImgType) {
   yield put(changeProgressStatus({ newStatus: 'uploading' }))
-  const file: string = yield call(dataGivers, action.file)
-  yield put(changePhotoUrl({ newPhotoUrl: file }))
+  const bookingPhotoResponse: AxiosResponse = yield call(FilesAPI.uploadFile, action.file)
+  yield put(changePhotoUrl({ newPhotoUrl: bookingPhotoResponse.data }))
+
   yield put(changeProgressStatus({ newStatus: 'uploaded' }))
 }
 
