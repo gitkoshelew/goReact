@@ -27,7 +27,7 @@ func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 
 		url := fmt.Sprintf("%s?client_id=%s&client_secret=%s&code=%s", conf.Endpoint.TokenURL, conf.ClientID, conf.ClientSecret, code)	
 
-		token , err := service.GetTokenGit (url)
+		token , err := service.GetToken(url)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while making resource . Err msg: %v", err)

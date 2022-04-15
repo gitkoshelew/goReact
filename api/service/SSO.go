@@ -7,8 +7,8 @@ import (
 	"golang.org/x/oauth2"
 )
 
-//GetUserDataGit
-func UserDataGit( getDataURI string, headerValue string) (map[string]interface{}, error) {
+//GetUserData
+func GetUserData(getDataURI string, headerValue string) (map[string]interface{}, error) {
 
 	req, err := http.NewRequest(http.MethodGet, getDataURI, nil)
 	if err != nil {
@@ -29,8 +29,8 @@ func UserDataGit( getDataURI string, headerValue string) (map[string]interface{}
 	return result, nil
 }
 
-//GetUserDataGit
-func GetTokenGit(getTokenURI string) (*oauth2.Token, error) {
+//GetToken
+func GetToken(getTokenURI string) (*oauth2.Token, error) {
 
 	req, err := http.NewRequest(http.MethodGet, getTokenURI, nil)
 	if err != nil {

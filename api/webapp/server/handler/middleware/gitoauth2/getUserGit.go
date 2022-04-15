@@ -24,7 +24,7 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 
 		w.Header().Set("Accept", "application/json")
 
-		result, err := service.UserDataGit(getUserURI, authHeader)
+		result, err := service.GetUserData(getUserURI, authHeader)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while getting resource . Err msg: %v", err)

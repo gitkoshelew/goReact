@@ -18,13 +18,13 @@ var getUserURI = os.Getenv("LINKEDIN_GET_USER_DATA")
 func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		token := r.Context().Value(handler.CTXKeyAccessTokenGitOAuth).(*oauth2.Token)
+		token := r.Context().Value(handler.CTXKeyAccessTokenLinkedINOAuth).(*oauth2.Token)
 
-		authHeader := fmt.Sprintf("token %s", token.AccessToken)
+		authHeader := fmt.Sprintf("Bearer %s", token.AccessToken)
 
 		w.Header().Set("Accept", "application/json")
 
-		result, err := service.UserDataGit(getUserURI, authHeader)
+		result, err := service.GetUserData(getUserURI, authHeader)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while getting resource . Err msg: %v", err)
