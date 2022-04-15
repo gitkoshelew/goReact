@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"goReact/domain/store"
+	"goReact/service"
 	"goReact/webapp/server/handler"
 	"goReact/webapp/server/handler/response"
 	"net/http"
@@ -23,7 +24,7 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 
 		w.Header().Set("Accept", "application/json")		
 		
-		req, err := http.NewRequest(http.MethodGet, getUserURI, nil)
+		/*req, err := http.NewRequest(http.MethodGet, getUserURI, nil)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while getting req . Err msg: %v", err)
@@ -39,12 +40,21 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
 			return
 		}
-		defer resp.Body.Close()
+		defer resp.Body.Close()*/
 
+		result , err := service.UserDataGit(getUserURI, authHeader)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while getting resource . Err msg: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
+			return
+		}
 
-		var result map[string]interface{}
+	
 
-		json.NewDecoder(resp.Body).Decode(&result)
+		//var result map[string]interface{}
+
+		//json.NewDecoder(body).Decode(&result)
 
 		json.NewEncoder(w).Encode(result)
 	}

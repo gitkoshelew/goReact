@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"goReact/service"
 
 	"goReact/domain/store"
 	"goReact/webapp/server/handler"
@@ -12,7 +13,6 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"golang.org/x/oauth2"
 )
 
 
@@ -27,7 +27,15 @@ func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 
 		url := fmt.Sprintf("%s?client_id=%s&client_secret=%s&code=%s", conf.Endpoint.TokenURL, conf.ClientID, conf.ClientSecret, code)	
 
-		req, err := http.NewRequest(http.MethodGet, url, nil)
+		token , err := service.GetTokenGit (url)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while making resource . Err msg: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while getting resource . Err msg: %v", err)})
+			return
+		}
+
+		/*req, err := http.NewRequest(http.MethodGet, url, nil)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while making requsr . Err msg: %v", err)
@@ -53,7 +61,9 @@ func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 			s.Logger.Errorf("Bad request. Err ms:%v. Response body: %v", err, &resp.Body)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
-		}
+		}*/
+
+
 
 		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CTXKeyAccessTokenGitOAuth, token)))
 
