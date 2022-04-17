@@ -17,6 +17,7 @@ const (
 	CtxKeyBookingValidation            CtxKey = 5
 	CtxKeyFreeSeatsSearchReqValidation CtxKey = 6
 	CTXKeyAccessTokenGitOAuth          CtxKey = 7
+	CTXKeyAccessTokenLinkedINOAuth     CtxKey = 8
 )
 
 var (

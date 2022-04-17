@@ -1,4 +1,4 @@
-package gitoauth2
+package linkedinoauth2
 
 import (
 	"encoding/json"
@@ -13,14 +13,14 @@ import (
 	"golang.org/x/oauth2"
 )
 
-var getUserURI = os.Getenv("GIT_GET_USER_DATA")
+var getUserURI = os.Getenv("LINKEDIN_GET_USER_DATA")
 
-func GetUserGit(s *store.Store) http.HandlerFunc {
+func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		token := r.Context().Value(handler.CTXKeyAccessTokenGitOAuth).(*oauth2.Token)
+		token := r.Context().Value(handler.CTXKeyAccessTokenLinkedINOAuth).(*oauth2.Token)
 
-		authHeader := fmt.Sprintf("token %s", token.AccessToken)
+		authHeader := fmt.Sprintf("Bearer %s", token.AccessToken)
 
 		w.Header().Set("Accept", "application/json")
 

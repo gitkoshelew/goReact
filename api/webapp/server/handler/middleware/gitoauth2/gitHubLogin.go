@@ -17,12 +17,13 @@ var conf = &oauth2.Config{
 		AuthURL:  os.Getenv("GIT_AUTHOTIZE_URI"),
 		TokenURL: os.Getenv("GIT_ACCESS_TOKEN_URI"),
 	},
+	
 }
 
 func GitHubLogin(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
-		link := conf.AuthCodeURL("state")
+		link := conf.AuthCodeURL("state" , )
 
 		http.Redirect(w, r, link, http.StatusFound)
 

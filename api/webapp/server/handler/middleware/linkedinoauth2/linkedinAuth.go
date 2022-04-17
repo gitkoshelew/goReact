@@ -1,4 +1,4 @@
-package gitoauth2
+package linkedinoauth2
 
 import (
 	"context"
@@ -15,9 +15,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-
-
-func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
+func LinkedInAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Accept", "application/json")
 		w.Header().Set("Content-Type", "application/json")
@@ -25,9 +23,15 @@ func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 
 		code := r.URL.Query().Get("code")
 
-		url := fmt.Sprintf("%s?client_id=%s&client_secret=%s&code=%s", conf.Endpoint.TokenURL, conf.ClientID, conf.ClientSecret, code)	
+		url := fmt.Sprintf("%s?grant_type=authorization_code&code=%s&redirect_uri=%s&client_id=%s&client_secret=%s",
+			conf.Endpoint.TokenURL,
+			code,
+			conf.RedirectURL,
+			conf.ClientID,
+			conf.ClientSecret,
+		)
 
-		token , err := service.GetToken(url)
+		token, err := service.GetToken(url)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occured while making resource . Err msg: %v", err)
@@ -35,7 +39,7 @@ func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 			return
 		}
 
-		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CTXKeyAccessTokenGitOAuth, token)))
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CTXKeyAccessTokenLinkedINOAuth, token)))
 
 	}
 }
