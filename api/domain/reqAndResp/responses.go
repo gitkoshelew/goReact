@@ -1,6 +1,10 @@
 package reqandresp
 
-import "time"
+import (
+	"fmt"
+	"goReact/domain/model"
+	"time"
+)
 
 // RoomInfo ...
 type RoomInfo struct {
@@ -20,4 +24,44 @@ type FreeSeatsResponse struct {
 type TopRooms struct {
 	RoomID        int `json:"roomId"`
 	TotalBookings int `json:"total bookings"`
+}
+
+//GitSSOUser response
+type GitSSOUser struct {
+	UserID int    `json:"id"`
+	Email  string `json:"email"`
+	Name   string `json:"name"`
+	Photo  string `json:"avatar_url"`
+}
+
+//LinkedInSSOUser response
+type LinkedInSSOUser struct {
+	UserID  string                 `json:"id"`
+	Email   string                 `json:"email"`
+	Name    string                 `json:"localizedFirstName"`
+	Surname string                 `json:"localizedLastName"`
+	Photo   map[string]interface{} `json:"profilePicture"`
+}
+
+func UserFromGit(gituser *GitSSOUser) (*model.User, error) {
+	return &model.User{
+		Name:    gituser.Name,
+		Surname: gituser.Name,
+		Email:   gituser.Email,
+		Role:    model.ClientRole,
+		Photo:   gituser.Photo,
+	}, nil
+
+}
+
+func UserFromLinked(linkedInUser *LinkedInSSOUser) (*model.User, error) {
+	photourl := linkedInUser.Photo["profilePicture"]
+	return &model.User{
+		Name:    linkedInUser.Name,
+		Surname: linkedInUser.Surname,
+		Email:   linkedInUser.Email,
+		Role:    model.ClientRole,
+		Photo:   fmt.Sprintf("%v", photourl),
+	}, nil
+
 }

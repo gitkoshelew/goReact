@@ -3,6 +3,7 @@ package gitoauth2
 import (
 	"encoding/json"
 	"fmt"
+	reqandresp "goReact/domain/reqAndResp"
 	"goReact/domain/store"
 	"goReact/service"
 	"goReact/webapp/server/handler"
@@ -32,6 +33,15 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 			return
 		}
 
-		json.NewEncoder(w).Encode(result)
+		gitSSOUser := &reqandresp.GitSSOUser{}
+		err = json.Unmarshal(*result, gitSSOUser)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occurred  while unmarshaling bytes. Err msg:%v.", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
+			return
+		}
+
+		json.NewEncoder(w).Encode(gitSSOUser)
 	}
 }
