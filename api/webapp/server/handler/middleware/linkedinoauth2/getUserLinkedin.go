@@ -10,7 +10,6 @@ import (
 	"goReact/webapp/server/handler/response"
 	"net/http"
 	"os"
-	"reflect"
 
 	"golang.org/x/oauth2"
 )
@@ -34,17 +33,7 @@ func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
 			return
 		}
 
-		//	re := bytes.NewReader(*result)
 		linkedInSSOUser := &reqandresp.LinkedInSSOUser{}
-
-		/*err = binary.Read(re, binary.BigEndian, *linkedInSSOUser)
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
-			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
-			return
-		}
-		*/
 		err = json.Unmarshal(*result, linkedInSSOUser)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -52,17 +41,26 @@ func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-		fmt.Println("linkedInSSOUser -   :", reflect.TypeOf((linkedInSSOUser.Photo)))
-		fmt.Println("linkedInSSOUser -   :", reflect.ValueOf((linkedInSSOUser.Photo)))
 
-
-		/*if err := json.NewDecoder(re).Decode(linkedInSSOUser); err != nil {
+		user, err := reqandresp.UserFromLinked(linkedInSSOUser)
+		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
-			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.Body)
+			s.Logger.Errorf("Error occurred  while converting user. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
-		}*/
+		}
+		err = s.Open()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while opening DB. Err msg: %v", err)})
+		}
+		_, err = s.User().CreateFromSocial(user)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while creating user: %v", err)})
+			return
+		}
 
-		json.NewEncoder(w).Encode(linkedInSSOUser)
+		json.NewEncoder(w).Encode(user)
 	}
 }

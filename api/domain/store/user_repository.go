@@ -15,6 +15,37 @@ type UserRepository struct {
 }
 
 // Create user and save it to DB
+func (r *UserRepository) CreateFromSocial(user *model.User) (*int, error) {
+	r.Store.Logger.Info("FIRST TIME USER REPO : %+v", user)
+
+	if err := r.Store.Db.QueryRow(
+		`INSERT INTO users 
+		(email,  role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo , social_network) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 , $12) 
+		RETURNING user_id`,
+		user.Email,
+		string(model.ClientRole),
+		false,
+		strings.Title(strings.ToLower(user.Name)),
+		strings.Title(strings.ToLower(user.Surname)),
+		strings.Title(strings.ToLower(user.MiddleName)),
+		string(user.Sex),
+		user.DateOfBirth,
+		user.Address,
+		user.Phone,
+		user.Photo,
+		user.SocialNetwork,
+	).Scan(&user.UserID); err != nil {
+		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %v", err)
+		return nil, err
+	}
+
+	r.Store.Logger.Infof("User with id %d was created.", user.UserID)
+
+	return &user.UserID, nil
+}
+
+// Create user and save it to DB
 func (r *UserRepository) Create(user *model.User) (*int, error) {
 
 	var emailIsUsed bool
@@ -88,9 +119,10 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Verified,
 			&user.Sex,
 			&user.Photo,
+			&user.SocialNetwork,
 		)
 		if err != nil {
-			r.Store.Logger.Debugf("Eror occured while getting all bookings. Err msg: %v", err)
+			r.Store.Logger.Debugf("Eror occured while getting all user. Err msg: %v", err)
 			continue
 		}
 		users = append(users, user)
@@ -116,6 +148,7 @@ func (r *UserRepository) FindByEmail(email string) (*model.UserDTO, error) {
 		&user.Verified,
 		&user.Sex,
 		&user.Photo,
+		&user.SocialNetwork,
 	); err != nil {
 		r.Store.Logger.Errorf("Eror occure while searching user by email. Err msg: %v", err)
 		return nil, err
@@ -141,6 +174,7 @@ func (r *UserRepository) FindByID(id int) (*model.UserDTO, error) {
 		&user.Verified,
 		&user.Sex,
 		&user.Photo,
+		&user.SocialNetwork,
 	); err != nil {
 		r.Store.Logger.Errorf("Eror occure while searching user by id. Err msg: %v", err)
 		return nil, err
@@ -238,12 +272,16 @@ func (r *UserRepository) Update(u *model.User) error {
 	if u.Photo != "" {
 		photo = fmt.Sprintf("'%s'", u.Photo)
 	}
+	socialNetwork := "social_network"
+	if u.SocialNetwork != "" {
+		photo = fmt.Sprintf("'%s'", string(u.SocialNetwork))
+	}
 
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE users SET 
 			email = %s, password = %s, role = %s, verified = %s, 
 			first_name = %s, surname = %s, middle_name = %s, sex = %s, date_of_birth = %s, 
-			address = %s, phone = %s, photo = %s 
+			address = %s, phone = %s, photo = %s  , socialNetwork = %s 
 			WHERE user_id = $1`,
 		email,
 		password,
@@ -257,6 +295,7 @@ func (r *UserRepository) Update(u *model.User) error {
 		address,
 		phone,
 		photo,
+		socialNetwork,
 	), u.UserID)
 	if err != nil {
 		r.Store.Logger.Errorf("Erorr occured while updating user. Err msg: %v", err)
@@ -368,5 +407,6 @@ func (r *UserRepository) ModelFromDTO(u *model.UserDTO) (*model.User, error) {
 		Address:     u.Address,
 		Phone:       u.Phone,
 		Photo:       u.Photo,
+		SocialNetwork: model.SocialNetwork(u.SocialNetwork),
 	}, nil
 }

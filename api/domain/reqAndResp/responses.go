@@ -44,24 +44,44 @@ type LinkedInSSOUser struct {
 }
 
 func UserFromGit(gituser *GitSSOUser) (*model.User, error) {
+	verified := new(bool)
+	*verified = false
+	dateOfBirth := time.Time{}
+
 	return &model.User{
+		Email: gituser.Email,
+		//	Password:    "1",
+		//Role:        model.ClientRole,
+		//	Verified:    verified,
 		Name:    gituser.Name,
 		Surname: gituser.Name,
-		Email:   gituser.Email,
-		Role:    model.ClientRole,
-		Photo:   gituser.Photo,
+		//	MiddleName:  "ААаа",
+		Sex:         model.SexUnknown,
+		DateOfBirth: &dateOfBirth,
+		//Address:     "1",
+		//	Phone:       "1",
+		Photo:         gituser.Photo,
+		SocialNetwork: model.GitHub,
 	}, nil
 
 }
 
 func UserFromLinked(linkedInUser *LinkedInSSOUser) (*model.User, error) {
-	photourl := linkedInUser.Photo["profilePicture"]
+	dateOfBirth := time.Time{}
+
 	return &model.User{
+		//Email:       "",
+		//Password:    "",
+		//Role:        model.ClientRole,
 		Name:    linkedInUser.Name,
 		Surname: linkedInUser.Surname,
-		Email:   linkedInUser.Email,
-		Role:    model.ClientRole,
-		Photo:   fmt.Sprintf("%v", photourl),
+		//	MiddleName:    "",
+		Sex:         model.SexUnknown,
+		DateOfBirth: &dateOfBirth,
+		//Address:       "",
+		//Phone:         "",
+		Photo:         fmt.Sprintf("%v", linkedInUser.Photo),
+		SocialNetwork: model.LinkedIN,
 	}, nil
 
 }

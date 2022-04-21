@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 
@@ -25,22 +24,10 @@ func GetUserData(getDataURI string, headerValue string) (*[]byte, error) {
 	}
 	defer resp.Body.Close()
 
-	//var result map[string]interface{}
-
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
-
-	//json.NewDecoder(resp.Body).Decode(&result)
-	bodyBytesJson, err := json.Marshal(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println("bodyBytes -   :", bodyBytes)
-
-	fmt.Println("bodyBytesJson -   :", bodyBytesJson)
-
 
 	return &bodyBytes, nil
 }
@@ -57,7 +44,6 @@ func GetToken(getTokenURI string) (*oauth2.Token, error) {
 	var c http.Client
 	resp, err := c.Do(req)
 	if err != nil {
-
 		return nil, err
 	}
 	defer resp.Body.Close()
