@@ -17,9 +17,10 @@ var conf = &oauth2.Config{
 		AuthURL:  os.Getenv("LINKEDIN_AUTHOTIZE_URI"),
 		TokenURL: os.Getenv("LINKEDIN_ACCESS_TOKEN_URI"),
 	},
-	Scopes: []string{"r_liteprofile" , "r_emailaddress"},
+	Scopes: []string{"r_emailaddress", "r_liteprofile"},
 }
 
+//Resource authorization request
 func LinkedInLogin(s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
@@ -29,4 +30,3 @@ func LinkedInLogin(s *store.Store) httprouter.Handle {
 
 	}
 }
-

@@ -10,38 +10,40 @@ import (
 
 // User ...
 type User struct {
-	UserID        int           `json:"userId" csv:"userId"`
-	Email         string        `json:"email" csv:"email"`
-	Password      string        `json:"-" csv:"-"`
-	Role          Role          `json:"role" csv:"role"`
-	Verified      *bool         `json:"verified" csv:"verified"`
-	Name          string        `json:"name" csv:"name"`
-	Surname       string        `json:"sName" csv:"sName"`
-	MiddleName    string        `json:"mName" csv:"mName"`
-	Sex           Sex           `json:"sex" csv:"sex"`
-	DateOfBirth   *time.Time    `json:"birthDate" csv:"birthDate"`
-	Address       string        `json:"address" csv:"address"`
-	Phone         string        `json:"phone" csv:"phone"`
-	Photo         string        `json:"photo" csv:"photo"`
-	SocialNetwork SocialNetwork `json:"socialNetwork" csv:"socialNetwork"`
+	UserID          int           `json:"userId" csv:"userId"`
+	Email           string        `json:"email" csv:"email"`
+	Password        string        `json:"-" csv:"-"`
+	Role            Role          `json:"role" csv:"role"`
+	Verified        *bool         `json:"verified" csv:"verified"`
+	Name            string        `json:"name" csv:"name"`
+	Surname         string        `json:"sName" csv:"sName"`
+	MiddleName      string        `json:"mName" csv:"mName"`
+	Sex             Sex           `json:"sex" csv:"sex"`
+	DateOfBirth     *time.Time    `json:"birthDate" csv:"birthDate"`
+	Address         string        `json:"address" csv:"address"`
+	Phone           string        `json:"phone" csv:"phone"`
+	Photo           string        `json:"photo" csv:"photo"`
+	SocialNetwork   SocialNetwork `json:"socialNetwork" csv:"socialNetwork"`
+	SocialNetworkID string        `json:"socialNetworkId" csv:"socialNetworkId"`
 }
 
 // UserDTO ...
 type UserDTO struct {
-	UserID        int           `json:"userId" csv:"userId"`
-	Email         string        `json:"email" csv:"email"`
-	Password      string        `json:"password" csv:"-"`
-	Role          string        `json:"role,omitempty" csv:"role"`
-	Verified      *bool         `json:"verified,omitempty" csv:"verified"`
-	Name          string        `json:"name" csv:"name"`
-	Surname       string        `json:"sName" csv:"sName"`
-	MiddleName    string        `json:"mName" csv:"mName"`
-	Sex           string        `json:"sex" csv:"sex"`
-	DateOfBirth   *time.Time    `json:"birthDate" csv:"birthDate"`
-	Address       string        `json:"address" csv:"address"`
-	Phone         string        `json:"phone" csv:"phone"`
-	Photo         string        `json:"photo" csv:"photo"`
-	SocialNetwork string `json:"socialNetwork" csv:"socialNetwork"`
+	UserID          int        `json:"userId" csv:"userId"`
+	Email           string     `json:"email" csv:"email"`
+	Password        string     `json:"password" csv:"-"`
+	Role            string     `json:"role,omitempty" csv:"role"`
+	Verified        *bool      `json:"verified,omitempty" csv:"verified"`
+	Name            string     `json:"name" csv:"name"`
+	Surname         string     `json:"sName" csv:"sName"`
+	MiddleName      string     `json:"mName" csv:"mName"`
+	Sex             string     `json:"sex" csv:"sex"`
+	DateOfBirth     *time.Time `json:"birthDate" csv:"birthDate"`
+	Address         string     `json:"address" csv:"address"`
+	Phone           string     `json:"phone" csv:"phone"`
+	Photo           string     `json:"photo" csv:"photo"`
+	SocialNetwork   string     `json:"socialNetwork" csv:"socialNetwork"`
+	SocialNetworkID string     `json:"socialNetworkId" csv:"socialNetworkId"`
 }
 
 // Role ...

@@ -14,14 +14,33 @@ type UserRepository struct {
 	Store *Store
 }
 
-// Create user and save it to DB
+// Create user from oauth and save it to DB
 func (r *UserRepository) CreateFromSocial(user *model.User) (*int, error) {
-	r.Store.Logger.Info("FIRST TIME USER REPO : %+v", user)
+	emailIsUsed, err := r.EmailCheck(user.Email)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %v", err)
+		return nil, err
+	}
+
+	if *emailIsUsed {
+		r.Store.Logger.Error(ErrEmailIsUsed)
+		return nil, ErrEmailIsUsed
+	}
+	socialNetworkId, err := r.CheckSocialNetworkID(user.SocialNetworkID)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %v", err)
+		return nil, err
+	}
+
+	if *socialNetworkId {
+		r.Store.Logger.Error(ErrSocialIDIsExist)
+		return nil, ErrSocialIDIsExist
+	}
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
-		(email,  role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo , social_network) 
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 , $12) 
+		(email,  role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo , social_network_id) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 , $12 , $13) 
 		RETURNING user_id`,
 		user.Email,
 		string(model.ClientRole),
@@ -35,6 +54,7 @@ func (r *UserRepository) CreateFromSocial(user *model.User) (*int, error) {
 		user.Phone,
 		user.Photo,
 		user.SocialNetwork,
+		user.SocialNetworkID,
 	).Scan(&user.UserID); err != nil {
 		r.Store.Logger.Errorf("Error occured while inserting data to DB. Err msg: %v", err)
 		return nil, err
@@ -394,19 +414,30 @@ func (r *UserRepository) CheckPasswordHash(hash, password string) error {
 // ModelFromDTO ...
 func (r *UserRepository) ModelFromDTO(u *model.UserDTO) (*model.User, error) {
 	return &model.User{
-		UserID:      u.UserID,
-		Email:       u.Email,
-		Password:    u.Password,
-		Role:        model.Role(u.Role),
-		Verified:    u.Verified,
-		Name:        u.Name,
-		Surname:     u.Surname,
-		MiddleName:  u.MiddleName,
-		Sex:         model.Sex(u.Sex),
-		DateOfBirth: u.DateOfBirth,
-		Address:     u.Address,
-		Phone:       u.Phone,
-		Photo:       u.Photo,
+		UserID:        u.UserID,
+		Email:         u.Email,
+		Password:      u.Password,
+		Role:          model.Role(u.Role),
+		Verified:      u.Verified,
+		Name:          u.Name,
+		Surname:       u.Surname,
+		MiddleName:    u.MiddleName,
+		Sex:           model.Sex(u.Sex),
+		DateOfBirth:   u.DateOfBirth,
+		Address:       u.Address,
+		Phone:         u.Phone,
+		Photo:         u.Photo,
 		SocialNetwork: model.SocialNetwork(u.SocialNetwork),
 	}, nil
+}
+
+// EmailCheck check if email exists in DB
+func (r *UserRepository) CheckSocialNetworkID(social_network_id string) (*bool, error) {
+	var idIsExist bool
+	err := r.Store.Db.QueryRow("SELECT EXISTS (SELECT social_network_id FROM users WHERE social_network_id = $1)", social_network_id).Scan(&idIsExist)
+	if err != nil {
+		r.Store.Logger.Errorf("Error occured while social_network_id checking. Err msg: %v", err)
+		return &idIsExist, err
+	}
+	return &idIsExist, nil
 }

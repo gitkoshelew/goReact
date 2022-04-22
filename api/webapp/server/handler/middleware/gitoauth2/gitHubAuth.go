@@ -15,8 +15,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-
-
+//Getting an access token
 func GitHubAuth(next http.HandlerFunc, s *store.Store) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Header().Set("Accept", "application/json")
