@@ -8,7 +8,7 @@ import (
 	"io"
 )
 
-// GetAll Users or Pets
+// GetAll bookings
 func GetAll(ctx context.Context, c *client.Client, body io.Reader) (*response.Service, error) {
 	url, err := c.Base.BuildURL(c.Resource, nil)
 	if err != nil {

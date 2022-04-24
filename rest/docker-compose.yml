@@ -32,7 +32,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/authentication/
+            - ./authentication/logs:/logs
         networks:
             - new
 
@@ -135,7 +135,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/user/
+            - ./customer/logs:/logs
         networks:
             - new
         depends_on:
@@ -240,7 +240,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/booking/
+            - ./booking/logs:/logs
         networks:
             - new
         depends_on:
@@ -345,7 +345,7 @@ services:
         tty: true
         restart: always
         volumes:
-            - api:/hotel/
+            - ./hotel/logs:/logs
         networks:
             - new
         depends_on:
@@ -450,7 +450,7 @@ services:
         tty: true
         restart: on-failure
         volumes:
-            - api:/gateway/
+            - ./gateway/logs:/logs
         networks:
             - new
 
@@ -562,6 +562,111 @@ services:
             - admindbtest
         depends_on:
             - admindbtest
+
+    imagedb:
+        container_name: db_image
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${IMAGE_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${IMAGE_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${IMAGE_POSTGRES_DB}
+            - POSTGRES_HOST=${IMAGE_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${IMAGE_POSTGRES_SSLMODE}
+        ports:
+            - "8091:5432"
+        restart: always
+        volumes:
+            - database-data:/var/lib/postgresql/user/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    image_migrate:
+        container_name: migrate_image
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./image/migrations:/image/migrations
+        command:
+            [
+                "-path",
+                "image/migrations",
+                "-database",
+                "postgres://user:userpass@imagedb:5432/imagedb?sslmode=disable",
+                "up"
+            ]
+        links:
+            - imagedb
+        depends_on:
+            - imagedb
+
+    imagedbtest:
+        container_name: test_db_image
+        image: postgres:latest
+        env_file:
+            - .env
+        environment:
+            - POSTGRES_USER=${TEST_IMAGE_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${TEST_IMAGE_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${TEST_IMAGE_POSTGRES_DB}
+            - POSTGRES_HOST=${TEST_IMAGE_POSTGRES_HOST}
+            - POSTGRES_SSLMODE=${TEST_IMAGE_POSTGRES_SSLMODE}
+        ports:
+            - "8092:5432"
+        restart: unless-stopped
+        volumes:
+            - database-test:/var/lib/test-date/image/data/
+        networks:
+            new:
+                aliases:
+                    - database
+
+    test_image_migrate:
+        container_name: test_migrate_image
+        image: migrate/migrate
+        restart: on-failure
+        networks:
+            - new
+        volumes:
+            - ./image/migrations:/image/migrations
+        command:
+            [
+                "-path",
+                "image/migrations",
+                "-database",
+                "postgres://user:userpass@imagedbtest:5432/imagedbtest?sslmode=disable",
+                "up"
+            ]
+        links:
+            - imagedbtest
+        depends_on:
+            - imagedbtest
+
+    imageservice:
+        container_name: service_image
+        build:
+            dockerfile: dockerfile
+            context: ./image
+        ports:
+            - "1115:1115"
+        env_file:
+            - .env
+        environment:
+            - SERVER_HOST=0.0.0.0
+            - ENV=prod
+        tty: true
+        restart: always
+        volumes:
+            - ./image/logs:/logs
+        networks:
+            - new
+        depends_on:
+            - imagedb
 
 networks:
     new:

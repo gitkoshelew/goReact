@@ -53,9 +53,18 @@ func UpdateHotel(s *store.Store) httprouter.Handle {
 			hotel.Address = address
 		}
 
-		coordinates := []string{r.FormValue("Lat"), r.FormValue("Lon")}
-		if coordinates != nil{
-			hotel.Coordinates = coordinates
+		lat, err := strconv.ParseFloat(r.FormValue("Lat"), 32)
+		if err == nil {
+			if lat != 0 {
+				hotel.Coordinates[0] = lat
+			}
+		}
+
+		lon, err := strconv.ParseFloat(r.FormValue("Lon"), 32)
+		if err == nil {
+			if lon != 0 {
+				hotel.Coordinates[1] = lon
+			}
 		}
 
 		err = hotel.Validate()

@@ -25,7 +25,7 @@ func GetUserByID(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		users := []model.User{}
+		users := []model.UserDTO{}
 
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {

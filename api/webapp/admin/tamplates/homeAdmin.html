@@ -79,6 +79,16 @@
     {{end}}
 
 
+    {{if .HasPermission "read_image"}}
+    <div>
+        <h2>Images</h2>
+        <form action="/admin/homeimages">
+            <button>Images</button>
+        </form>
+    </div>
+    {{end}}
+
+
     {{if .HasPermission "admin"}}
     <div>
         <h2>Permissions</h2>

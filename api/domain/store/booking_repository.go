@@ -17,7 +17,7 @@ func (r *BookingRepository) Create(booking *model.Booking) (*int, error) {
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO booking
 		(seat_id, pet_id, employee_id, status, start_date, end_date, paid, notes, transactionId)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING booking_id`,
 		booking.Seat.SeatID,
 		booking.Pet.PetID,
 		booking.Employee.EmployeeID,
@@ -72,7 +72,7 @@ func (r *BookingRepository) GetAll() (*[]model.BookingDTO, error) {
 //FindByID searchs and returns booking by ID
 func (r *BookingRepository) FindByID(id int) (*model.BookingDTO, error) {
 	bookingDTO := &model.BookingDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM booking WHERE id = $1",
+	if err := r.Store.Db.QueryRow("SELECT * FROM booking WHERE booking_id = $1",
 		id).Scan(
 		&bookingDTO.BookingID,
 		&bookingDTO.SeatID,
@@ -94,7 +94,7 @@ func (r *BookingRepository) FindByID(id int) (*model.BookingDTO, error) {
 
 // Delete booking from DB by ID
 func (r *BookingRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM booking WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM booking WHERE booking_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Eror occured while deleting booking. Err msg: %v", err)
 		return err
@@ -157,7 +157,7 @@ func (r *BookingRepository) Update(b *model.Booking) error {
 	result, err := r.Store.Db.Exec(
 		fmt.Sprintf(`UPDATE booking SET
 		seat_id = %s, pet_id = %s, employee_id = %s, status = %s, start_date = %s, end_date = %s, paid = %s, notes = %s, transactionId = %s
-		WHERE id = $1`,
+		WHERE booking_id = $1`,
 			seatID,
 			petID,
 			employeeID,

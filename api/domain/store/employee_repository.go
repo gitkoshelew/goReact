@@ -12,7 +12,7 @@ type EmployeeRepository struct {
 
 // Create employee and save it to DB
 func (r *EmployeeRepository) Create(e *model.Employee) (*int, error) {
-	if err := r.Store.Db.QueryRow("INSERT INTO employee (user_id, hotel_id, position) VALUES ($1, $2, $3) RETURNING id",
+	if err := r.Store.Db.QueryRow("INSERT INTO employee (user_id, hotel_id, position) VALUES ($1, $2, $3) RETURNING employee_id",
 		e.UserID,
 		e.Hotel.HotelID,
 		e.Position,
@@ -21,7 +21,7 @@ func (r *EmployeeRepository) Create(e *model.Employee) (*int, error) {
 		return nil, err
 	}
 
-	r.Store.Logger.Infof("Employee with id %d was created.", e.EmployeeID)
+	r.Store.Logger.Infof("Employee with employee_id %d was created.", e.EmployeeID)
 
 	return &e.EmployeeID, nil
 }
@@ -55,7 +55,7 @@ func (r *EmployeeRepository) GetAll() (*[]model.EmployeeDTO, error) {
 // FindByID searchs and returns employee by ID
 func (r *EmployeeRepository) FindByID(id int) (*model.EmployeeDTO, error) {
 	employeeDTO := &model.EmployeeDTO{}
-	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE id = $1", id).Scan(
+	if err := r.Store.Db.QueryRow("SELECT * FROM employee WHERE employee_id = $1", id).Scan(
 		&employeeDTO.EmployeeID,
 		&employeeDTO.UserID,
 		&employeeDTO.HotelID,
@@ -70,7 +70,7 @@ func (r *EmployeeRepository) FindByID(id int) (*model.EmployeeDTO, error) {
 
 // Delete employee from DB by ID
 func (r *EmployeeRepository) Delete(id int) error {
-	result, err := r.Store.Db.Exec("DELETE FROM employee WHERE id = $1", id)
+	result, err := r.Store.Db.Exec("DELETE FROM employee WHERE employee_id = $1", id)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while deleting employee. Err msg: %v.", err)
 		return err
@@ -109,7 +109,7 @@ func (r *EmployeeRepository) Update(e *model.Employee) error {
 	result, err := r.Store.Db.Exec(fmt.Sprintf(
 		`UPDATE employee SET
 		user_id = %s, hotel_id = %s, position = %s
-		WHERE id = $1`,
+		WHERE employee_id = $1`,
 		userID,
 		hotelID,
 		position,

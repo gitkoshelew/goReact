@@ -6,6 +6,7 @@ import (
 	"admin/webapp/session"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -33,22 +34,37 @@ func NewHotel(s *store.Store) httprouter.Handle {
 
 		address := r.FormValue("Address")
 
-		coordinates := []string{r.FormValue("Lat"), r.FormValue("Lon")}
+		lat, err := strconv.ParseFloat(r.FormValue("Lat"), 32)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lat")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lat"))
+			return
+		}
 
-		h := model.Hotel{
+		lon, err := strconv.ParseFloat(r.FormValue("Lon"), 32)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lon")), http.StatusBadRequest)
+			s.Logger.Errorf("Bad request. Err msg:%v. Requests body: %v", err, r.FormValue("Lon"))
+			return
+		}
+
+		coordinates := []float64{lat, lon}
+
+		hotel := model.Hotel{
 			HotelID:     0,
 			Name:        name,
 			Address:     address,
 			Coordinates: coordinates,
 		}
-		err = h.Validate()
+
+		err = hotel.Validate()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			s.Logger.Errorf("Data is not valid. Err msg:%v.", err)
 			return
 		}
 
-		_, err = s.Hotel().Create(&h)
+		_, err = s.Hotel().Create(&hotel)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured while creating hotel. Err msg:%v. ", err), http.StatusInternalServerError)
 			return

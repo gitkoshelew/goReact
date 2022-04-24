@@ -1,0 +1,6 @@
+ALTER TABLE SEAT
+DROP COLUMN     description     CASCADE;
+
+ALTER TABLE ROOM  
+ADD COLUMN description TEXT  NOT NULL DEFAULT '';  
+

@@ -1,5 +1,5 @@
 version: '3.9'
-
+# docker-compose -f docker-compose-be.yml up --build
 services:
   postgresqldatabase:
     container_name: postgresqldatabase
@@ -117,7 +117,8 @@ services:
     tty: true
     restart: on-failure
     volumes:
-      - api:/api
+      - ./api/logs:/api/logs
+      - ./api/images:/api/images
     networks:
       - new
 
@@ -126,6 +127,5 @@ networks:
     driver: bridge
 volumes:
   test-database: null
-  api: null
   database-data: null
   pgadmin: null

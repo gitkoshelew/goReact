@@ -133,7 +133,8 @@ services:
         tty: true
         restart: on-failure
         volumes:
-            - api:/api
+            - ./api/logs:/api/logs
+            - ./api/images:/api/images
         networks:
             - new
 
