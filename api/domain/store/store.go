@@ -19,6 +19,9 @@ var (
 	// ErrEmailIsUsed ...
 	ErrEmailIsUsed = errors.New("Email already in use")
 
+	// ErrSocialIDIsExist ...
+	ErrSocialIDIsExist = errors.New("Social id is exist")
+
 	// ErrNilPointer ...
 	ErrNilPointer = errors.New("Nil pointer reference")
 )

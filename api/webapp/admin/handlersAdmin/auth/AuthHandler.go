@@ -68,7 +68,12 @@ func AuthAdmin(s *store.Store) httprouter.Handle {
 			return
 		}
 
-		session.AuthSession(w, r, employee, permissions)
+		err = session.AuthSession(w, r, employee, permissions)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error occured while making session. Err msg:%v. ", err), http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while making session. Err msg: %s", err.Error())
+			return
+		}
 
 		http.Redirect(w, r, "/admin/home", http.StatusFound)
 

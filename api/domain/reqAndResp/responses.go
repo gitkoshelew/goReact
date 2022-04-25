@@ -1,6 +1,8 @@
 package reqandresp
 
-import "time"
+import (
+	"time"
+)
 
 // RoomInfo ...
 type RoomInfo struct {

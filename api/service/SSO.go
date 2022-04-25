@@ -2,13 +2,14 @@ package service
 
 import (
 	"encoding/json"
+	"io"
 	"net/http"
 
 	"golang.org/x/oauth2"
 )
 
 //GetUserData
-func GetUserData(getDataURI string, headerValue string) (map[string]interface{}, error) {
+func GetUserData(getDataURI string, headerValue string) (*[]byte, error) {
 
 	req, err := http.NewRequest(http.MethodGet, getDataURI, nil)
 	if err != nil {
@@ -21,12 +22,14 @@ func GetUserData(getDataURI string, headerValue string) (map[string]interface{},
 	if err != nil {
 		return nil, err
 	}
-	var result map[string]interface{}
-
-	json.NewDecoder(resp.Body).Decode(&result)
-
 	defer resp.Body.Close()
-	return result, nil
+
+	bodyBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return &bodyBytes, nil
 }
 
 //GetToken
@@ -41,7 +44,6 @@ func GetToken(getTokenURI string) (*oauth2.Token, error) {
 	var c http.Client
 	resp, err := c.Do(req)
 	if err != nil {
-
 		return nil, err
 	}
 	defer resp.Body.Close()
@@ -49,7 +51,6 @@ func GetToken(getTokenURI string) (*oauth2.Token, error) {
 	token := &oauth2.Token{}
 
 	if err := json.NewDecoder(resp.Body).Decode(token); err != nil {
-
 		return nil, err
 	}
 

@@ -1,0 +1,5 @@
+ALTER TABLE USERS  
+ADD COLUMN social_network TEXT DEFAULT '', 
+ADD COLUMN social_network_id TEXT DEFAULT ''; 
+
+ALTER TYPE sex ADD VALUE IF NOT EXISTS  'unknown';

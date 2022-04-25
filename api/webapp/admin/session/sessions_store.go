@@ -41,6 +41,8 @@ func OpenSessionStore(c *webapp.Config) error {
 	}
 	sstore.PGStore = PGStore
 
+	sstore.PGStore.MaxLength(0)
+
 	return nil
 
 }
