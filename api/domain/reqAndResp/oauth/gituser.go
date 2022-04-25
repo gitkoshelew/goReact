@@ -2,12 +2,13 @@ package oauth
 
 import (
 	"goReact/domain/model"
+	"strconv"
 	"time"
 )
 
 //GitSSOUser response
 type GitSSOUser struct {
-	UserID string `json:"id"`
+	UserID int    `json:"id"`
 	Email  string `json:"email"`
 	Name   string `json:"name"`
 	Photo  string `json:"avatar_url"`
@@ -27,7 +28,7 @@ func UserFromGit(gituser *GitSSOUser) (*model.User, error) {
 		DateOfBirth:     &dateOfBirth,
 		Photo:           gituser.Photo,
 		SocialNetwork:   model.GitHub,
-		SocialNetworkID: gituser.UserID,
+		SocialNetworkID: strconv.Itoa(gituser.UserID),
 	}, nil
 
 }

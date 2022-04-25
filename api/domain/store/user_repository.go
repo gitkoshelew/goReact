@@ -16,7 +16,7 @@ type UserRepository struct {
 
 // Create user from oauth and save it to DB
 func (r *UserRepository) CreateFromSocial(user *model.User) (*int, error) {
-	emailIsUsed, err := r.EmailCheck(user.Email)
+	/*emailIsUsed, err := r.EmailCheck(user.Email)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %v", err)
 		return nil, err
@@ -25,7 +25,7 @@ func (r *UserRepository) CreateFromSocial(user *model.User) (*int, error) {
 	if *emailIsUsed {
 		r.Store.Logger.Error(ErrEmailIsUsed)
 		return nil, ErrEmailIsUsed
-	}
+	}*/
 	socialNetworkId, err := r.CheckSocialNetworkID(user.SocialNetworkID)
 	if err != nil {
 		r.Store.Logger.Errorf("Error occured while email validating. Err msg: %v", err)
@@ -39,7 +39,7 @@ func (r *UserRepository) CreateFromSocial(user *model.User) (*int, error) {
 
 	if err := r.Store.Db.QueryRow(
 		`INSERT INTO users 
-		(email,  role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo , social_network_id) 
+		(email,  role, verified, first_name, surname, middle_name, sex, date_of_birth, address, phone, photo , social_network, social_network_id) 
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 , $12 , $13) 
 		RETURNING user_id`,
 		user.Email,
@@ -140,6 +140,7 @@ func (r *UserRepository) GetAll() (*[]model.User, error) {
 			&user.Sex,
 			&user.Photo,
 			&user.SocialNetwork,
+			&user.SocialNetworkID,
 		)
 		if err != nil {
 			r.Store.Logger.Debugf("Eror occured while getting all user. Err msg: %v", err)

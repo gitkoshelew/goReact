@@ -3,7 +3,7 @@ package linkedinoauth2
 import (
 	"encoding/json"
 	"fmt"
-	"goReact/domain/reqandresp/oauth"
+	"goReact/domain/reqAndResp/oauth"
 	"goReact/domain/store"
 	"goReact/service"
 	"goReact/webapp/server/handler"
@@ -56,6 +56,14 @@ func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while opening DB. Err msg: %v", err)})
 		}
+		
+		_, err = s.User().CreateFromSocial(user)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while creating user: %v", err)})
+			return
+		}
+
 		tk, err := authentication.CreateToken(uint64(user.UserID), string(user.Role))
 		if err != nil {
 			w.WriteHeader(http.StatusUnprocessableEntity)

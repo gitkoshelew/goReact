@@ -3,7 +3,8 @@ package gitoauth2
 import (
 	"encoding/json"
 	"fmt"
-	"goReact/domain/reqandresp/oauth"
+
+	"goReact/domain/reqAndResp/oauth"
 	"goReact/domain/store"
 	"goReact/service"
 	"goReact/webapp/server/handler"
