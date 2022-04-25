@@ -1,9 +1,9 @@
 package session
 
 import (
-	"goReact/domain/model"
 	"encoding/gob"
 	"fmt"
+	"goReact/domain/model"
 	"net/http"
 	"strings"
 )
@@ -25,13 +25,13 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// AuthSession ...
-func AuthSession(w http.ResponseWriter, r *http.Request, employee *model.Employee, permissions *[]model.Permission) {
+// AuthSession making session with values
+func AuthSession(w http.ResponseWriter, r *http.Request, employee *model.Employee, permissions *[]model.Permission) error{
 
 	session, err := sstore.PGStore.Get(r, "session-key")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		return err
 	}
 	gob.Register(model.Employee{})
 	session.Values["Employee"] = employee
@@ -44,9 +44,9 @@ func AuthSession(w http.ResponseWriter, r *http.Request, employee *model.Employe
 	err = session.Save(r, w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		return err
 	}
-
+	return nil
 }
 
 // Logout ...
