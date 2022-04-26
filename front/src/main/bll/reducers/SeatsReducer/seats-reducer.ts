@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Room, Seat, SeatSearch } from '../../../dal/api_client/SeatsService'
+import { Room, Seat, SeatResponse } from '../../../dal/api_client/SeatsService'
 
 enum SeatsLoadingStatuses {
   IDLE = 'IDLE',
@@ -34,7 +34,7 @@ const seatsSlice = createSlice({
       state.loadingStatus = SeatsLoadingStatuses.SUCCESS
       state.seats = action.payload.seats
     },
-    setSeatsSearch(state, action: PayloadAction<{ seatsSearch: SeatSearch[] }>) {
+    setSeatsSearch(state, action: PayloadAction<{ seatsSearch: SeatResponse[] }>) {
       state.loadingStatus = SeatsLoadingStatuses.SUCCESS
       state.seatsSearch = action.payload.seatsSearch
     },
@@ -58,7 +58,7 @@ type InitialStateSeats = {
   loadingStatus: SeatsLoadingStatus
   rooms: Room[]
   seats: Seat[]
-  seatsSearch: SeatSearch[]
+  seatsSearch: SeatResponse[]
   successMsg: string
   errorMsg: string
 }

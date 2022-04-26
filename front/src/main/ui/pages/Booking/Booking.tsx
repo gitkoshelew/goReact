@@ -15,7 +15,6 @@ import { fetchBookingPaymentRequest } from '../../../bll/reducers/BookingPayment
 import { Modal } from '../../components/Modal/Modal'
 import { BookingSearchForm } from './BookingSearchForm/BookingSearchForm'
 import { searchSeatsRequest } from '../../../bll/reducers/SeatsReducer/seats-saga'
-import moment from 'moment'
 
 const {
   bookingPage,
@@ -32,8 +31,6 @@ const {
 type SearchFormValues = {
   hotelId: string
   petType: string
-  rentFrom: Date | string
-  rentTo: Date | string
 }
 
 type BookingFormValues = {
@@ -84,20 +81,11 @@ export const Booking = () => {
   const customSubmitSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     formikSearch.handleSubmit()
-    if (
-      formikSearch.isValid &&
-      formikSearch.values.hotelId &&
-      formikSearch.values.petType &&
-      formikSearch.values.rentTo &&
-      formikSearch.values.rentFrom
-    ) {
+    if (formikSearch.isValid && formikSearch.values.hotelId && formikSearch.values.petType) {
       modalActiveSeatsHandler()
     }
   }
   //Formik Search
-  const initialDate: Date = new Date()
-  const rentFromInitialDate = new Date(moment().format())
-  const rentToInitialDate = new Date(moment(initialDate.setMonth(initialDate.getMonth() + 1)).format())
 
   const validateSearch = (values: SearchFormValues) => {
     const errors: FormikErrors<SearchFormValues> = {}
@@ -118,8 +106,6 @@ export const Booking = () => {
     initialValues: {
       hotelId: '',
       petType: '',
-      rentTo: rentToInitialDate,
-      rentFrom: rentFromInitialDate,
     },
     validate: validateSearch,
     onSubmit: (values) => {
@@ -127,8 +113,6 @@ export const Booking = () => {
         searchSeatsRequest({
           hotelId: Number(values.hotelId),
           petType: values.petType,
-          rentTo: new Date(moment(values.rentTo).format()),
-          rentFrom: new Date(moment(values.rentFrom).format()),
         })
       )
       if (formikSearch.isValid) {

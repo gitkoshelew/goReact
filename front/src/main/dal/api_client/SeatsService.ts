@@ -24,15 +24,19 @@ export type Seat = {
   rentTo: Date
 }
 
+export type SeatResponse = {
+  day: number
+  seatIds: number[]
+  totalCount?: number
+}
+
 export type SeatSearch = {
   hotelId: number
   petType: Pet | string
-  rentFrom: Date | undefined
-  rentTo: Date | undefined
 }
 
 export type FetchSeatsResponse = Seat[]
-export type SeatsSearchResponse = SeatSearch[]
+export type SeatsSearchResponse = SeatResponse[]
 
 export const SeatsAPI = {
   async fetchRooms(): Promise<AxiosResponse<FetchRoomsResponse>> {
