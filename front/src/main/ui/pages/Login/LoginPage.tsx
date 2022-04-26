@@ -9,10 +9,11 @@ import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
 import { UserRequestData } from '../../../dal/api_client/AuthService'
-import { closedEye, openedEye } from '../../svgWrapper/LoginSvgWrapper'
-import { useState } from 'react'
+import { closedEye, Github, Linkedin, openedEye } from '../../svgWrapper/LoginSvgWrapper'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../Routes/RoutesInfo'
+import { useState } from 'react'
+import { fetchGithubRequest, fetchLinkedinRequest } from '../../../bll/reducers/SocialNetworkAuth/socialNetwork-saga'
 
 const {
   authenticationForm,
@@ -23,6 +24,11 @@ const {
   passwordRenderEye,
   signUpLink,
   loginBtnLinkBlock,
+  socialBtnWrapper,
+  loginBtn,
+  loginBtnGithub,
+  loginBtnLinkedin,
+  icon,
 } = s
 
 export const LoginPage = () => {
@@ -40,6 +46,16 @@ export const LoginPage = () => {
   const errMsg = ErrorMsg && <LoginErrorMsg ErrorMsg={ErrorMsg} />
   const correctEyeRender = isPasswordOpen ? closedEye : openedEye
   const correctPasswordInputType = isPasswordOpen ? 'text' : 'password'
+
+  const githubHandler = () => {
+    dispatch(fetchGithubRequest())
+  }
+  const linkedinHandler = () => {
+    dispatch(fetchLinkedinRequest())
+  }
+
+  const githubClassName = ` ${loginBtn} ${loginBtnGithub}`
+  const linkedinClassName = ` ${loginBtn} ${loginBtnLinkedin}`
 
   if (LoginPageLoadingStatus === 'loading') {
     return <Preloader />
@@ -78,6 +94,16 @@ export const LoginPage = () => {
               <NavLink to={PATH.REGISTRATION} className={signUpLink}>
                 Sign Up
               </NavLink>
+            </div>
+            <div className={socialBtnWrapper}>
+              <div className={githubClassName} onClick={githubHandler}>
+                <img src={Github} alt="" className={icon} />
+                Github
+              </div>
+              <div className={linkedinClassName} onClick={linkedinHandler}>
+                <img src={Linkedin} alt="" className={icon} />
+                Linkedin
+              </div>
             </div>
           </div>
           {errMsg}
