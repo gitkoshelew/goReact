@@ -12,9 +12,12 @@ import { fetchSeatsRequest } from '../../../../bll/reducers/SeatsReducer/seats-s
 
 export const BookingCalendar = () => {
   const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
-  const seatSearchData = useSelector((state: AppRootState) => state.Seats.seatsSearch[0])
+  // const seatSearchData = useSelector((state: AppRootState) => state.Seats.seatsSearch[0].seatIds)
+  // console.log(seatSearchData)
   const dispatch = useAppDispatch()
+  // const [numberDate, setNumberDate] = useState()
 
+  // console.log(moment().add(Number(seatSearchData), 'days').calendar())
   // eslint-disable-next-line no-unused-vars
   const [dateState, setDateState] = useState<Date>(new Date())
 
@@ -50,7 +53,7 @@ export const BookingCalendar = () => {
 
   const dateSearch: Date = new Date()
   const maxDateSearch = new Date(dateSearch.setMonth(dateSearch.getMonth() + 1))
-  const minDateSearch = new Date(moment(seatSearchData?.rentFrom).format('YYYY MM DD'))
+  // const minDateSearch = new Date(moment(seatSearchData?.rentFrom).format('YYYY MM DD'))
 
   return (
     <div className={s.calendarContainer}>
@@ -60,9 +63,9 @@ export const BookingCalendar = () => {
         )}
         tileClassName={s.calendarCell}
         tileDisabled={searchInRentArr}
-        minDate={minDateSearch}
+        minDate={new Date()}
         maxDate={maxDateSearch}
-        defaultActiveStartDate={minDateSearch}
+        defaultActiveStartDate={new Date()}
         onChange={changeDate}
       />
       {tooltipVisible && <CalendarTooltip tooltipDate={tooltipDate} />}
