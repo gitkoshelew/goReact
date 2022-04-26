@@ -39,6 +39,11 @@ import { fetchSeatsSagaWorker } from '../reducers/SeatsReducer/seats-saga'
 import { openNotificationChannelSagaWorker } from '../reducers/NotificationReducer/socketChannel'
 import { BookingPaymentFormReducer } from '../reducers/BookingPaymentFormReducer/bookingPaymentForm-reducer'
 import { fetchBookingPaymentSagaWorker } from '../reducers/BookingPaymentFormReducer/bookingPaymentForm-saga'
+import { SocialNetworkAuthReducer } from '../reducers/SocialNetworkAuth/socialNetwork-reducer'
+import {
+  fetchGithubAuthSagaWorker,
+  fetchLinkedinAuthSagaWorker,
+} from '../reducers/SocialNetworkAuth/socialNetwork-saga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -52,6 +57,7 @@ const rootReducer = combineReducers({
   Notification: NotificationReducer,
   Seats: SeatsReducer,
   BookingPaymentForm: BookingPaymentFormReducer,
+  SocialNetworkAuth: SocialNetworkAuthReducer,
 })
 
 export type RootReducer = typeof rootReducer
@@ -95,4 +101,6 @@ function* rootWatcher() {
   yield takeEvery('NOTIFICATION/CLOSE_CHANNEL', closeNotificationChannelSagaWorker)
   yield takeEvery('SEATS/FETCH_SETS', fetchSeatsSagaWorker)
   yield takeEvery('BOOKING_PAYMENT/FETCH_PAYMENT_SAGA', fetchBookingPaymentSagaWorker)
+  yield takeEvery('SOCIAL_NETWORK/GITHUB_SAGA', fetchGithubAuthSagaWorker)
+  yield takeEvery('SOCIAL_NETWORK/Linkedin_SAGA', fetchLinkedinAuthSagaWorker)
 }
