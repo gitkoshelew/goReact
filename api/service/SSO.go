@@ -32,10 +32,10 @@ func GetUserData(getDataURI string, headerValue string) (*[]byte, error) {
 	return &bodyBytes, nil
 }
 
-//GetToken
+//GetToken Exchange  code for an access token
 func GetToken(getTokenURI string) (*oauth2.Token, error) {
 
-	req, err := http.NewRequest(http.MethodGet, getTokenURI, nil)
+	req, err := http.NewRequest(http.MethodPost, getTokenURI, nil)
 	if err != nil {
 
 		return nil, err

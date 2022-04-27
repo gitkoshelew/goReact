@@ -63,6 +63,7 @@ func (s *Server) ConfigureRouter() {
 	s.Router.Handle("PUT", "/employee", hotel.UpdateEmployeeHandle(client.HotelEmployeeService))
 	s.Router.Handle("POST", "/employee", hotel.CreateEmployeeHandle(client.HotelEmployeeService))
 
+	//Image service handlers
 	s.Router.Handle("GET", "/images", image.GetAllImagesHandle(client.GetAllImagesService))
 	s.Router.Handle("GET", "/image/", image.GetImageHandle(client.ImageService))
 	s.Router.Handle("DELETE", "/image/:id", image.DeleteImageHandle(client.ImageService))

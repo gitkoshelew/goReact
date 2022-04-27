@@ -54,7 +54,7 @@ func (s *Server) Start() error {
 
 	s.Logger.Infof("Server starts at %s ...", s.config.ServerInfo())
 	CORS := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3001", "http://react-ngnix-app:3001"},
+		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3001", "http://react-ngnix-app:3001","www.linkedin.com" ,"https://github.com" },
 		AllowedMethods: []string{
 			http.MethodHead,
 			http.MethodGet,
@@ -65,7 +65,7 @@ func (s *Server) Start() error {
 		},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
-		ExposedHeaders:   []string{"Access-Token"},
+		ExposedHeaders:   []string{"Access-Token","Authorization"},
 	})
 
 	handler := CORS.Handler(s.router)
