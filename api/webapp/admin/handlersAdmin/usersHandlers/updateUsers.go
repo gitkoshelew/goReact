@@ -203,19 +203,25 @@ func UpdateUser(s *store.Store) httprouter.Handle {
 
 		photo := r.FormValue("Photo")
 
+		socialNetwork := r.FormValue("SocialNetwork")
+
+		socialNetworkID := r.FormValue("SocialNetworkID")
+
 		userDTO := model.UserDTO{
-			UserID:      id,
-			Email:       email,
-			Role:        role,
-			Name:        name,
-			Surname:     surname,
-			MiddleName:  middleName,
-			Sex:         sex,
-			Address:     address,
-			Phone:       phone,
-			Photo:       photo,
-			Verified:    &verified,
-			DateOfBirth: &dateOfBirth,
+			UserID:          id,
+			Email:           email,
+			Role:            role,
+			Name:            name,
+			Surname:         surname,
+			MiddleName:      middleName,
+			Sex:             sex,
+			Address:         address,
+			Phone:           phone,
+			Photo:           photo,
+			Verified:        &verified,
+			DateOfBirth:     &dateOfBirth,
+			SocialNetwork:   socialNetwork,
+			SocialNetworkID: socialNetworkID,
 		}
 
 		/*err = userDTO.Validate()
