@@ -300,11 +300,11 @@ func (r *UserRepository) Update(u *model.User) error {
 	}
 	socialNetwork := "social_network"
 	if u.SocialNetwork != "" {
-		photo = fmt.Sprintf("'%s'", string(u.SocialNetwork))
+		socialNetwork = fmt.Sprintf("'%s'", string(u.SocialNetwork))
 	}
 	socialNetworkID := "social_network_id"
 	if u.SocialNetworkID != "" {
-		photo = fmt.Sprintf("'%s'", u.SocialNetworkID)
+		socialNetworkID = fmt.Sprintf("'%s'", u.SocialNetworkID)
 	}
 
 	result, err := r.Store.Db.Exec(fmt.Sprintf(

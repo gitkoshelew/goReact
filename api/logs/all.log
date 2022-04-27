@@ -18,3 +18,77 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 [31mERRO[0m[2022-04-25T18:27:44Z]user_repository.go:479 goReact/domain/store.(*UserRepository).FindBySocialNetworkId Eror occure while searching user by social network id. Err msg: sql: no rows in result set 
 [36mINFO[0m[2022-04-25T18:27:44Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 8 was created.                  
 [36mINFO[0m[2022-04-25T18:27:44Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 8 was created.                  
+[36mINFO[0m[2022-04-26T08:39:38Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:39:38Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:39:38Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:39:38Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:39:39Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:39:39Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:39:39Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:39:39Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:39:39Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:39:39Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:40:44Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:40:44Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:40:44Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:40:44Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:40:45Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:40:45Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:40:45Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:40:45Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:40:45Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:40:45Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:41:00Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:41:35Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 1 was updated                   
+[36mINFO[0m[2022-04-26T08:41:35Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 1 was updated                   
+[36mINFO[0m[2022-04-26T08:42:02Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 1 was updated                   
+[36mINFO[0m[2022-04-26T08:42:02Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 1 was updated                   
+[36mINFO[0m[2022-04-26T08:42:49Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 1 was updated                   
+[36mINFO[0m[2022-04-26T08:42:49Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 1 was updated                   
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:47:27Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-26T08:47:37Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-04-26T08:48:16Z]user_repository.go:479 goReact/domain/store.(*UserRepository).FindBySocialNetworkId Eror occure while searching user by social network id. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-04-26T08:48:16Z]user_repository.go:479 goReact/domain/store.(*UserRepository).FindBySocialNetworkId Eror occure while searching user by social network id. Err msg: sql: no rows in result set 
+[36mINFO[0m[2022-04-26T08:48:16Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 7 was created.                  
+[36mINFO[0m[2022-04-26T08:48:16Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 7 was created.                  
+[36mINFO[0m[2022-04-26T08:48:33Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 7 was updated                   
+[36mINFO[0m[2022-04-26T08:48:33Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 7 was updated                   
+[36mINFO[0m[2022-04-26T08:48:51Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 6 was updated                   
+[36mINFO[0m[2022-04-26T08:48:51Z]user_repository.go:347 goReact/domain/store.(*UserRepository).Update User with id 6 was updated                   
