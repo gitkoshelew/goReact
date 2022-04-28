@@ -86,12 +86,10 @@
       width: 150px;
       padding: 15px 25px;
       border-radius: 5px;
-      color: white;
       display: flex;
       align-items: center;
       font-weight: bold;
       margin-bottom: 12px;
-      cursor: pointer;
     }
 
     .loginBtnGithub {
@@ -100,6 +98,15 @@
 
     .loginBtnLinkedin {
       background-color: $linkedin-color;
+    }
+
+    .linkSocialMedia {
+      text-decoration: none;
+      color: $link-auth-color;
+    }
+
+    .linkSocialMedia:hover {
+      color: $link-auth-color-hover;
     }
 
     .icon {

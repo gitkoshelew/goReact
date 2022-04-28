@@ -13,7 +13,6 @@ import { closedEye, Github, Linkedin, openedEye } from '../../svgWrapper/LoginSv
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../Routes/RoutesInfo'
 import { useState } from 'react'
-import { fetchGithubRequest, fetchLinkedinRequest } from '../../../bll/reducers/SocialNetworkAuth/socialNetwork-saga'
 
 const {
   authenticationForm,
@@ -29,6 +28,7 @@ const {
   loginBtnGithub,
   loginBtnLinkedin,
   icon,
+  linkSocialMedia,
 } = s
 
 export const LoginPage = () => {
@@ -47,15 +47,12 @@ export const LoginPage = () => {
   const correctEyeRender = isPasswordOpen ? closedEye : openedEye
   const correctPasswordInputType = isPasswordOpen ? 'text' : 'password'
 
-  const githubHandler = () => {
-    dispatch(fetchGithubRequest())
-  }
-  const linkedinHandler = () => {
-    dispatch(fetchLinkedinRequest())
-  }
-
   const githubClassName = ` ${loginBtn} ${loginBtnGithub}`
   const linkedinClassName = ` ${loginBtn} ${loginBtnLinkedin}`
+
+  const githubUrl = process.env.REACT_APP_API_SOCIAL_AUTH_LINK + 'api/gitlogin'
+
+  const linkedinUrl = process.env.REACT_APP_API_SOCIAL_AUTH_LINK + 'api/linkedinlogin'
 
   if (LoginPageLoadingStatus === 'loading') {
     return <Preloader />
@@ -96,13 +93,17 @@ export const LoginPage = () => {
               </NavLink>
             </div>
             <div className={socialBtnWrapper}>
-              <div className={githubClassName} onClick={githubHandler}>
+              <div className={githubClassName}>
                 <img src={Github} alt="" className={icon} />
-                Github
+                <a className={linkSocialMedia} href={githubUrl}>
+                  Github
+                </a>
               </div>
-              <div className={linkedinClassName} onClick={linkedinHandler}>
+              <div className={linkedinClassName}>
                 <img src={Linkedin} alt="" className={icon} />
-                Linkedin
+                <a className={linkSocialMedia} href={linkedinUrl}>
+                  Linkedin
+                </a>
               </div>
             </div>
           </div>
