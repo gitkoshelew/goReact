@@ -58,8 +58,8 @@ func (s *Server) configureRouter() {
 	s.router.Handle("GET", "/api/emailrestore/:token", restorepassword.СhekingLinkForRestorePassword(store.New(s.config), restorepassword.ChangePassword(store.New(s.config))))
 
 	s.router.Handle("GET", "/api/gitlogin", gitoauth2.GitHubLogin(store.New(s.config)))
-	s.router.Handle("GET", "/api/gitlogin/re", gitoauth2.GitHubAuth(gitoauth2.GetUserGit(store.New(s.config)), store.New(s.config)))
+	s.router.Handle("GET", "/api/gitlogin/re", gitoauth2.GitHubAuth(gitoauth2.GetUserGit(middleware.CreateToken(store.New(s.config)),store.New(s.config)), store.New(s.config)))
 
 	s.router.Handle("GET", "/api/linkedinlogin", linkedinoauth2.LinkedInLogin(store.New(s.config)))
-	s.router.Handle("GET", "/api/linkedinlogin/re", linkedinoauth2.LinkedInAuth(linkedinoauth2.GetUserLinkedIn(store.New(s.config)), store.New(s.config)))
+	s.router.Handle("GET", "/api/linkedinlogin/re", linkedinoauth2.LinkedInAuth(linkedinoauth2.GetUserLinkedIn(middleware.CreateToken(store.New(s.config)),store.New(s.config)), store.New(s.config)))
 }

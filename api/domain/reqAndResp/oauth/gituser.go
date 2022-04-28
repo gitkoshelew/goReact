@@ -4,6 +4,9 @@ import (
 	"goReact/domain/model"
 	"strconv"
 	"time"
+
+	validation "github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/is"
 )
 
 //GitSSOUser response
@@ -31,4 +34,15 @@ func UserFromGit(gituser *GitSSOUser) (*model.User, error) {
 		SocialNetworkID: strconv.Itoa(gituser.UserID),
 	}, nil
 
+}
+
+// Validate ...
+func (u *GitSSOUser) Validate() error {
+	return validation.ValidateStruct(
+		u,
+		validation.Field(&u.Email, validation.Required, is.Email, validation.By(model.IsSQL)),
+		validation.Field(&u.Name, validation.Required, validation.By(model.IsSQL)),
+		validation.Field((&u.UserID), validation.Required),
+		validation.Field(&u.Photo, validation.By(model.IsSQL)),
+	)
 }

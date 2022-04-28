@@ -1,6 +1,7 @@
 package gitoauth2
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -8,6 +9,7 @@ import (
 	"goReact/domain/store"
 	"goReact/service"
 	"goReact/webapp/server/handler"
+
 	"goReact/webapp/server/handler/response"
 	"net/http"
 	"os"
@@ -18,7 +20,7 @@ import (
 var getUserURI = os.Getenv("GIT_GET_USER_DATA")
 
 //Getting a resource (user) and creating a user
-func GetUserGit(s *store.Store) http.HandlerFunc {
+func GetUserGit(next http.HandlerFunc, s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		token := r.Context().Value(handler.CTXKeyAccessTokenGitOAuth).(*oauth2.Token)
@@ -44,6 +46,19 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 			return
 		}
 
+		fmt.Println(gitUser.Email)
+		fmt.Println(gitUser.UserID)
+		fmt.Println(gitUser.Name)
+
+
+		err = gitUser.Validate()
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while validating user. Err msg: %v", err)})
+			return
+		}
+
 		user, err := oauth.UserFromGit(gitUser)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -52,16 +67,14 @@ func GetUserGit(s *store.Store) http.HandlerFunc {
 			return
 		}
 
-		id, err := service.OauthRegisterUser(s, user)
+		_, err = service.OauthRegisterUser(s, user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occurred while registering user. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-
-		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", *id)})
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CtxKeyUser, user)))
 
 	}
 }
