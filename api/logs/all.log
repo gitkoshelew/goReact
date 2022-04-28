@@ -384,3 +384,33 @@ PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass d
 [31mERRO[0m[2022-04-28T08:58:09Z]getUserGit.go:57 goReact/webapp/server/handler/middleware/gitoauth2.GetUserGit.func1 Error occured while validating user. Err msg: email: cannot be blank; id: cannot be blank; name: cannot be blank. 
 [31mERRO[0m[2022-04-28T08:58:22Z]getUserLinkedin.go:49 goReact/webapp/server/handler/middleware/linkedinoauth2.GetUserLinkedIn.func1 Error occured while validating user. Err msg: email: cannot be blank. 
 [31mERRO[0m[2022-04-28T08:58:22Z]getUserLinkedin.go:49 goReact/webapp/server/handler/middleware/linkedinoauth2.GetUserLinkedIn.func1 Error occured while validating user. Err msg: email: cannot be blank. 
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:38 goReact/webapp/server.(*Server).Start Router started successfully                  
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:41 goReact/webapp/server.(*Server).Start Admin router started successfully            
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:47 goReact/webapp/server.(*Server).Start Session store started successfully           
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:53 goReact/webapp/server.(*Server).Start Store started successfully                   
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[36mINFO[0m[2022-04-28T12:19:20Z]server.go:55 goReact/webapp/server.(*Server).Start Server starts at Server Address: 0.0.0.0:8080
+PG Data Source: "host=postgresqldatabase port=5432 user=user password=userpass dbname=goreact sslmode=disable" ... 
+[31mERRO[0m[2022-04-28T12:21:47Z]getUserGit.go:57 goReact/webapp/server/handler/middleware/gitoauth2.GetUserGit.func1 Error occured while validating user. Err msg: email: cannot be blank; id: cannot be blank; name: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:21:47Z]getUserGit.go:57 goReact/webapp/server/handler/middleware/gitoauth2.GetUserGit.func1 Error occured while validating user. Err msg: email: cannot be blank; id: cannot be blank; name: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:22:16Z]user_repository.go:479 goReact/domain/store.(*UserRepository).FindBySocialNetworkId Eror occure while searching user by social network id. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-04-28T12:22:16Z]user_repository.go:479 goReact/domain/store.(*UserRepository).FindBySocialNetworkId Eror occure while searching user by social network id. Err msg: sql: no rows in result set 
+[36mINFO[0m[2022-04-28T12:22:16Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 7 was created.                  
+[36mINFO[0m[2022-04-28T12:22:16Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 7 was created.                  
+[31mERRO[0m[2022-04-28T12:22:39Z]getUserGit.go:57 goReact/webapp/server/handler/middleware/gitoauth2.GetUserGit.func1 Error occured while validating user. Err msg: email: cannot be blank; id: cannot be blank; name: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:22:39Z]getUserGit.go:57 goReact/webapp/server/handler/middleware/gitoauth2.GetUserGit.func1 Error occured while validating user. Err msg: email: cannot be blank; id: cannot be blank; name: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:22:43Z]getUserGit.go:57 goReact/webapp/server/handler/middleware/gitoauth2.GetUserGit.func1 Error occured while validating user. Err msg: email: cannot be blank; id: cannot be blank; name: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:22:43Z]getUserGit.go:57 goReact/webapp/server/handler/middleware/gitoauth2.GetUserGit.func1 Error occured while validating user. Err msg: email: cannot be blank; id: cannot be blank; name: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:22:53Z]user_repository.go:479 goReact/domain/store.(*UserRepository).FindBySocialNetworkId Eror occure while searching user by social network id. Err msg: sql: no rows in result set 
+[31mERRO[0m[2022-04-28T12:22:53Z]user_repository.go:479 goReact/domain/store.(*UserRepository).FindBySocialNetworkId Eror occure while searching user by social network id. Err msg: sql: no rows in result set 
+[36mINFO[0m[2022-04-28T12:22:53Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 8 was created.                  
+[36mINFO[0m[2022-04-28T12:22:53Z]user_repository.go:66 goReact/domain/store.(*UserRepository).CreateFromSocial User with id 8 was created.                  
+[31mERRO[0m[2022-04-28T12:22:58Z]getUserLinkedin.go:49 goReact/webapp/server/handler/middleware/linkedinoauth2.GetUserLinkedIn.func1 Error occured while validating user. Err msg: id: cannot be blank; localizedFirstName: cannot be blank; localizedLastName: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:22:58Z]getUserLinkedin.go:49 goReact/webapp/server/handler/middleware/linkedinoauth2.GetUserLinkedIn.func1 Error occured while validating user. Err msg: id: cannot be blank; localizedFirstName: cannot be blank; localizedLastName: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:24:30Z]getUserLinkedin.go:49 goReact/webapp/server/handler/middleware/linkedinoauth2.GetUserLinkedIn.func1 Error occured while validating user. Err msg: id: cannot be blank; localizedFirstName: cannot be blank; localizedLastName: cannot be blank. 
+[31mERRO[0m[2022-04-28T12:24:30Z]getUserLinkedin.go:49 goReact/webapp/server/handler/middleware/linkedinoauth2.GetUserLinkedIn.func1 Error occured while validating user. Err msg: id: cannot be blank; localizedFirstName: cannot be blank; localizedLastName: cannot be blank. 
