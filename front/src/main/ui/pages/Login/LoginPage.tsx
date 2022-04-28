@@ -9,10 +9,10 @@ import Preloader from '../../components/preloader/preloader'
 import { Home } from '../Home/Home'
 import { LoginErrorMsg } from '../../components/ErrorMsgLogin/LoginErrorMsg'
 import { UserRequestData } from '../../../dal/api_client/AuthService'
-import { closedEye, openedEye } from '../../svgWrapper/LoginSvgWrapper'
-import { useState } from 'react'
+import { closedEye, Github, Linkedin, openedEye } from '../../svgWrapper/LoginSvgWrapper'
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../Routes/RoutesInfo'
+import { useState } from 'react'
 
 const {
   authenticationForm,
@@ -23,6 +23,12 @@ const {
   passwordRenderEye,
   signUpLink,
   loginBtnLinkBlock,
+  socialBtnWrapper,
+  loginBtn,
+  loginBtnGithub,
+  loginBtnLinkedin,
+  icon,
+  linkSocialMedia,
 } = s
 
 export const LoginPage = () => {
@@ -40,6 +46,13 @@ export const LoginPage = () => {
   const errMsg = ErrorMsg && <LoginErrorMsg ErrorMsg={ErrorMsg} />
   const correctEyeRender = isPasswordOpen ? closedEye : openedEye
   const correctPasswordInputType = isPasswordOpen ? 'text' : 'password'
+
+  const githubClassName = ` ${loginBtn} ${loginBtnGithub}`
+  const linkedinClassName = ` ${loginBtn} ${loginBtnLinkedin}`
+
+  const githubUrl = process.env.REACT_APP_API_SOCIAL_AUTH_LINK + 'api/gitlogin'
+
+  const linkedinUrl = process.env.REACT_APP_API_SOCIAL_AUTH_LINK + 'api/linkedinlogin'
 
   if (LoginPageLoadingStatus === 'loading') {
     return <Preloader />
@@ -78,6 +91,20 @@ export const LoginPage = () => {
               <NavLink to={PATH.REGISTRATION} className={signUpLink}>
                 Sign Up
               </NavLink>
+            </div>
+            <div className={socialBtnWrapper}>
+              <div className={githubClassName}>
+                <img src={Github} alt="" className={icon} />
+                <a className={linkSocialMedia} href={githubUrl}>
+                  Github
+                </a>
+              </div>
+              <div className={linkedinClassName}>
+                <img src={Linkedin} alt="" className={icon} />
+                <a className={linkSocialMedia} href={linkedinUrl}>
+                  Linkedin
+                </a>
+              </div>
             </div>
           </div>
           {errMsg}
