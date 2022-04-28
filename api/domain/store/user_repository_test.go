@@ -587,3 +587,200 @@ func TestUserRepository_PasswordChange(t *testing.T) {
 		})
 	}
 }
+
+func TestUserRepository_CheckSocialNetworkID(t *testing.T) {
+	teardown()
+	defer teardown()
+	store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		id      func() string
+		isValid bool
+		isExist bool
+	}{
+		{
+			name: "CheckSocialNetworkID in use",
+			id: func() string {
+				testStore.Open()
+
+				user := model.TestUser()
+				user.SocialNetworkID = "hidude"
+				testStore.User().Create(user)
+
+				return user.Email
+			},
+			isValid: true,
+			isExist: true,
+		},
+		{
+			name: "CheckSocialNetworkID is not in use",
+			id: func() string {
+				testStore.Open()
+
+				return "56563h"
+			},
+			isValid: true,
+			isExist: false,
+		},
+		{
+			name: "DB closed",
+			id: func() string {
+				testStore.Close()
+
+				return "dsdsdsa"
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.User().EmailCheck(tc.id())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+				if tc.isExist {
+					assert.True(t, *result)
+				} else {
+					assert.False(t, *result)
+				}
+
+			} else {
+				result, err := testStore.User().EmailCheck(tc.id())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.NotNil(t, result)
+			}
+		})
+	}
+}
+
+func FindBySocialNetworkId(t *testing.T) {
+	teardown()
+	defer teardown()
+	store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		id      func() string
+		isValid bool
+	}{
+		{
+			name: "valid",
+			id: func() string {
+				testStore.Open()
+
+				user := model.TestUser()
+				user.SocialNetworkID = "id"
+				testStore.User().Create(user)
+
+				return user.SocialNetworkID
+			},
+			isValid: true,
+		},
+		{
+			name: "invalid id",
+			id: func() string {
+				testStore.Open()
+
+				user := model.TestUser()
+				user.SocialNetworkID = "id1"
+				testStore.User().Create(user)
+
+				return "wrongid"
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			id: func() string {
+				testStore.Close()
+
+				user := model.TestUser()
+				user.Email = "id1"
+				testStore.User().Create(user)
+
+				return user.SocialNetworkID
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.User().FindByEmail(tc.id())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.User().FindByEmail(tc.id())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
+}
+
+func TestUserRepository_CreateFromSocial(t *testing.T) {
+	teardown()
+	defer teardown()
+	store.FillDB(t, testStore)
+
+	testCases := []struct {
+		name    string
+		model   func() *model.User
+		isValid bool
+	}{
+		{
+			name: "valid",
+			model: func() *model.User {
+				testStore.Open()
+
+				user := model.TestUser()
+				return user
+			},
+			isValid: true,
+		},
+		{
+			name: "Social id in use",
+			model: func() *model.User {
+				testStore.Open()
+
+				user := model.TestUser()
+				user.Email = "fSF323423"
+				testStore.User().Create(user)
+
+				return user
+			},
+			isValid: false,
+		},
+		{
+			name: "DB closed",
+			model: func() *model.User {
+				testStore.Close()
+				return model.TestUser()
+			},
+			isValid: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if tc.isValid {
+				result, err := testStore.User().CreateFromSocial(tc.model())
+				testStore.Close()
+				assert.NoError(t, err)
+				assert.NotNil(t, result)
+			} else {
+				result, err := testStore.User().CreateFromSocial(tc.model())
+				testStore.Close()
+				assert.Error(t, err)
+				assert.Nil(t, result)
+			}
+		})
+	}
+}
