@@ -27,6 +27,7 @@ export function* seatsSearchSagaWorker(action: ReturnType<typeof searchSeatsRequ
       SeatsAPI.fetchSeatsFree,
       action.newSeatsSearch
     )
+    console.log(searchSeatsResponse)
     yield put(setSeatsSearch({ seatsSearch: searchSeatsResponse.data }))
     yield put(seatsMessage({ successMsg: searchSeatsResponse.statusText }))
   } catch (err) {

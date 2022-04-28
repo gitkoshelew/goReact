@@ -15,6 +15,7 @@ const initialState: InitialStateSeats = {
   seatsSearch: [],
   successMsg: '',
   errorMsg: '',
+  searchDay: 0,
 }
 
 const seatsSlice = createSlice({
@@ -38,19 +39,24 @@ const seatsSlice = createSlice({
       state.loadingStatus = SeatsLoadingStatuses.SUCCESS
       state.seatsSearch = action.payload.seatsSearch
     },
+    seatsError(state, action: PayloadAction<{ errorMsg: string }>) {
+      state.loadingStatus = SeatsLoadingStatuses.ERROR
+      state.errorMsg = action.payload.errorMsg
+    },
     seatsMessage(state, action: PayloadAction<{ successMsg: string }>) {
       state.loadingStatus = SeatsLoadingStatuses.SUCCESS
       state.successMsg = action.payload.successMsg
     },
-    seatsError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = SeatsLoadingStatuses.ERROR
-      state.errorMsg = action.payload.errorMsg
+    seatsSearchDay(state, action: PayloadAction<{ searchDay: number }>) {
+      state.loadingStatus = SeatsLoadingStatuses.SUCCESS
+      state.searchDay = action.payload.searchDay
     },
   },
 })
 
 export const SeatsReducer = seatsSlice.reducer
-export const { seatsStart, setRooms, setSeats, setSeatsSearch, seatsMessage, seatsError } = seatsSlice.actions
+export const { seatsStart, setRooms, setSeats, setSeatsSearch, seatsMessage, seatsError, seatsSearchDay } =
+  seatsSlice.actions
 
 //types
 
@@ -61,6 +67,7 @@ type InitialStateSeats = {
   seatsSearch: SeatResponse[]
   successMsg: string
   errorMsg: string
+  searchDay: number
 }
 
 export type SeatsLoadingStatus =
