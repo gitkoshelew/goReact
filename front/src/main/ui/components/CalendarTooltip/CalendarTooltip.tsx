@@ -1,56 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import s from './CalendarTooltip.module.scss'
 import { useSelector } from 'react-redux'
-import { AppRootState } from '../../../bll/store/store'
+import { AppRootState, useAppDispatch } from '../../../bll/store/store'
 import moment from 'moment'
+import { seatsSearchDay } from '../../../bll/reducers/SeatsReducer/seats-reducer'
 
 type PropsType = {
   tooltipDate: Date | null
 }
 
 export const CalendarTooltip = React.memo(({ tooltipDate }: PropsType) => {
-  const seatSearchData = useSelector((state: AppRootState) => state.Seats.seatsSearch[0].seatIds.toString().split(' '))
+  const dispatch = useAppDispatch()
+
+  const strDate = tooltipDate ? tooltipDate.toString().split(' ') : ''
+
+  const day = Number(strDate[2])
+  useEffect(() => {
+    dispatch(seatsSearchDay({ searchDay: day }))
+  }, [day])
+
+  console.log(day)
+  const currentPickDay = useSelector((state: AppRootState) => state.Seats.searchDay)
+  const seatSearchData = useSelector((state: AppRootState) =>
+    state.Seats.seatsSearch[currentPickDay].seatIds.toString().split(' ')
+  )
 
   console.log(seatSearchData)
-
-  // const seatSearchData = useSelector((state: AppRootState) => state.Seats.seatsSearch.find((seatId) => seatId.seatIds))
-  // console.log(seatSearchData)
-  // const rooms = useSelector((state: AppRootState) => state.Seats.rooms)
-  // const seats = useSelector((state: AppRootState) => state.Seats.seats)
-
-  // const freeSeats = useSelector((state: AppRootState) => state.Seats.seatsSearch)
-  // console.log(freeSeats)
-
-  // const availableSeats = useMemo(() => {
-  //   return seats.filter((seat) => {
-  //     if (tooltipDate) {
-  //       if (!moment(tooltipDate).isBetween(moment(seat.rentFrom), moment(seat.rentTo), 'date', '[]')) return seat
-  //     }
-  //   })
-  // }, [seats, tooltipDate])
-
-  // const searchRoomData = (seatRoomId: number) => {
-  //   const petType = rooms.find((room) => room.roomId === seatRoomId)?.petType
-  //   const roomNum = rooms.find((room) => room.roomId === seatRoomId)?.roomNum
-  //   return { petType, roomNum }
-  // }
-
-  // const availableSeatsInRoom = useMemo(() => {
-  //   return availableSeats.map((seat) => {
-  //     return searchRoomData(seat.roomId)
-  //   })
-  // }, [availableSeats])
+  console.log(currentPickDay)
 
   return (
-    // <div className={s.tooltipData}>
-    //   <h3 className={s.tooltipTitle}>Available seats on {moment(tooltipDate).format('MM/DD/YY')}:</h3>
-    //   {availableSeatsInRoom.map((seat, index) => (
-    //     <p key={index} className={s.tooltipText}>
-    //       We have available seat in room <span className={s.tooltipTextMark}>№{seat.roomNum}</span> for your{' '}
-    //       <span className={s.tooltipTextMark}>{seat.petType}</span>
-    //     </p>
-    //   ))}
-    // </div>
     <div className={s.tooltipData}>
       <h3 className={s.tooltipTitle}>Available seats on {moment(tooltipDate).format('MM/DD/YY')}:</h3>
 

@@ -7,7 +7,6 @@ type PropsType = {
   showTooltip: (isVisible: boolean) => void
   handleTooltipDate: (date: Date | null) => void
 }
-
 export const CalendarTooltipAnchor = React.memo(({ date, showTooltip, handleTooltipDate }: PropsType) => {
   const handleShowTooltip = () => {
     const nextMaxDate = moment().add(+1, 'month')
@@ -18,14 +17,9 @@ export const CalendarTooltipAnchor = React.memo(({ date, showTooltip, handleTool
       handleTooltipDate(date)
     }
     console.log(date)
-    if (date >= new Date()) {
-      console.log(true)
-      // Дата на которую наведен курсор - сегодняшняя дата -
-    }
   }
+  //посчитать на каком я дне.
 
-  //в юзстейт записать ID
-  //посчитать на каком я дне. 26 + ID4 = 30.
   const handleHideTooltip = () => {
     showTooltip(false)
     handleTooltipDate(null)
