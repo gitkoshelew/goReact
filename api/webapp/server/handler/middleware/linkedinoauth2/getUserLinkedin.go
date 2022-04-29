@@ -1,6 +1,7 @@
 package linkedinoauth2
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"goReact/domain/reqAndResp/oauth"
@@ -17,7 +18,7 @@ import (
 var getUserURI = os.Getenv("LINKEDIN_GET_USER_DATA")
 
 //Getting a resource (user) and creating a user
-func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
+func GetUserLinkedIn(next http.HandlerFunc, s *store.Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		token := r.Context().Value(handler.CTXKeyAccessTokenLinkedINOAuth).(*oauth2.Token)
@@ -42,6 +43,13 @@ func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
+		err = linkedInUser.Validate()
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			s.Logger.Errorf("Error occured while validating user. Err msg: %v", err)
+			json.NewEncoder(w).Encode(response.Error{Messsage: fmt.Sprintf("Error occured while validating user. Err msg: %v", err)})
+			return
+		}
 
 		user, err := oauth.UserFromLinked(linkedInUser)
 		if err != nil {
@@ -50,14 +58,15 @@ func GetUserLinkedIn(s *store.Store) http.HandlerFunc {
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-		id, err := service.OauthRegisterUser(s, user)
+		_, err = service.OauthRegisterUser(s, user)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			s.Logger.Errorf("Error occurred while registering user. Err msg:%v.", err)
 			json.NewEncoder(w).Encode(response.Error{Messsage: err.Error()})
 			return
 		}
-		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(response.Info{Messsage: fmt.Sprintf("User id = %d", *id)})
+
+		next.ServeHTTP(w, r.WithContext(context.WithValue(r.Context(), handler.CtxKeyUser, user)))
+
 	}
 }

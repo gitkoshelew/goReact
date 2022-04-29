@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"goReact/domain/model"
 	"time"
+
+	validation "github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/is"
 )
 
 //LinkedInSSOUser response
@@ -29,4 +32,15 @@ func UserFromLinked(linkedInUser *LinkedInSSOUser) (*model.User, error) {
 		SocialNetworkID: linkedInUser.UserID,
 	}, nil
 
+}
+
+// Validate ...
+func (u *LinkedInSSOUser) Validate() error {
+	return validation.ValidateStruct(
+		u,
+		validation.Field(&u.Email, is.Email, validation.By(model.IsSQL)),
+		validation.Field(&u.Name, validation.Required, validation.By(model.IsSQL)),
+		validation.Field(&u.Surname, validation.Required, validation.By(model.IsSQL)),
+		validation.Field(&u.UserID, validation.Required, validation.By(model.IsSQL)),
+	)
 }

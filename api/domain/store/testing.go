@@ -55,6 +55,8 @@ func FillDB(t *testing.T, s *Store) *ID {
 	user.Email = "test@mail.org"
 	userID, _ := s.User().Create(user)
 	user.UserID = *userID
+	user.SocialNetwork = model.LinkedIN
+	user.SocialNetworkID = "fSF323423"
 
 	hotel := model.TestHotel()
 	hotelID, _ := s.Hotel().Create(hotel)
