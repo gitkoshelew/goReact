@@ -21,21 +21,10 @@ export function* fetchSeatsSagaWorker() {
 export const fetchSeatsRequest = () => ({
   type: 'SEATS/FETCH_SETS',
 })
-// eslint-disable-next-line no-unused-vars
-// export const dayMaper = (arr: any[]) => {
-//   return arr.map((el: any, index: number) => {
-//     // eslint-disable-next-line no-unused-vars
-//     return {
-//       date: moment().add(index, 'days').format(),
-//       ...el,
-//     }
-//   })
-// }
 
 export const dayMapper = (arr: SeatResponse[]) => {
   return arr.reduce((acc: SeatResponse, el, index: number) => {
     const date = moment().add(index, 'days').format('MM DD YYYY')
-    console.log(acc)
     return {
       ...acc,
       [date]: el,
