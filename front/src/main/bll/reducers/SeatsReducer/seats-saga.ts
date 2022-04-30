@@ -1,7 +1,9 @@
 import { call, put } from 'redux-saga/effects'
+import moment from 'moment'
 import {
   FetchRoomsResponse,
   FetchSeatsResponse,
+  SeatResponse,
   SeatsAPI,
   SeatSearch,
   SeatsSearchResponse,
@@ -19,6 +21,27 @@ export function* fetchSeatsSagaWorker() {
 export const fetchSeatsRequest = () => ({
   type: 'SEATS/FETCH_SETS',
 })
+// eslint-disable-next-line no-unused-vars
+// export const dayMaper = (arr: any[]) => {
+//   return arr.map((el: any, index: number) => {
+//     // eslint-disable-next-line no-unused-vars
+//     return {
+//       date: moment().add(index, 'days').format(),
+//       ...el,
+//     }
+//   })
+// }
+
+export const dayMapper = (arr: SeatResponse[]) => {
+  return arr.reduce((acc: SeatResponse, el, index: number) => {
+    const date = moment().add(index, 'days').format('MM DD YYYY')
+    console.log(acc)
+    return {
+      ...acc,
+      [date]: el,
+    }
+  }, {} as SeatResponse)
+}
 
 export function* seatsSearchSagaWorker(action: ReturnType<typeof searchSeatsRequest>) {
   try {
@@ -27,8 +50,8 @@ export function* seatsSearchSagaWorker(action: ReturnType<typeof searchSeatsRequ
       SeatsAPI.fetchSeatsFree,
       action.newSeatsSearch
     )
-    console.log(searchSeatsResponse)
-    yield put(setSeatsSearch({ seatsSearch: searchSeatsResponse.data }))
+    // @ts-ignore
+    yield put(setSeatsSearch({ seatsSearch: dayMapper(searchSeatsResponse.data) }))
     yield put(seatsMessage({ successMsg: searchSeatsResponse.statusText }))
   } catch (err) {
     if (err) {
