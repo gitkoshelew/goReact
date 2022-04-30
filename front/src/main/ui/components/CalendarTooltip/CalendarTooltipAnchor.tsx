@@ -16,9 +16,7 @@ export const CalendarTooltipAnchor = React.memo(({ date, showTooltip, handleTool
       showTooltip(true)
       handleTooltipDate(date)
     }
-    console.log(date)
   }
-  //посчитать на каком я дне.
 
   const handleHideTooltip = () => {
     showTooltip(false)
