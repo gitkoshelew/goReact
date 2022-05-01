@@ -35,6 +35,10 @@ export type SeatSearch = {
   petType: Pet | string
 }
 
+export type SeatResponseWithNewKey = {
+  [key: string]: { day: number; seatIds: number[]; totalCount: number }
+}
+
 export type FetchSeatsResponse = Seat[]
 export type SeatsSearchResponse = SeatResponse[]
 

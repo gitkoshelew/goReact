@@ -4,6 +4,7 @@ import {
   FetchRoomsResponse,
   FetchSeatsResponse,
   SeatResponse,
+  SeatResponseWithNewKey,
   SeatsAPI,
   SeatSearch,
   SeatsSearchResponse,
@@ -22,14 +23,14 @@ export const fetchSeatsRequest = () => ({
   type: 'SEATS/FETCH_SETS',
 })
 
-export const dayMapper = (arr: SeatResponse[]) => {
-  return arr.reduce((acc: SeatResponse, el, index: number) => {
+export const dayMapper = (arr: SeatResponse[]): SeatResponseWithNewKey => {
+  return arr.reduce((acc: {}, el: SeatResponse, index: number) => {
     const date = moment().add(index, 'days').format('MM DD YYYY')
     return {
       ...acc,
       [date]: el,
     }
-  }, {} as SeatResponse)
+  }, {})
 }
 
 export function* seatsSearchSagaWorker(action: ReturnType<typeof searchSeatsRequest>) {
@@ -39,7 +40,6 @@ export function* seatsSearchSagaWorker(action: ReturnType<typeof searchSeatsRequ
       SeatsAPI.fetchSeatsFree,
       action.newSeatsSearch
     )
-    // @ts-ignore
     yield put(setSeatsSearch({ seatsSearch: dayMapper(searchSeatsResponse.data) }))
     yield put(seatsMessage({ successMsg: searchSeatsResponse.statusText }))
   } catch (err) {

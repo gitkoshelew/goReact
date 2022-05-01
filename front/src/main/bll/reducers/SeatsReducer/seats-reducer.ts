@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Room, Seat, SeatResponse } from '../../../dal/api_client/SeatsService'
+import { Room, Seat, SeatResponseWithNewKey } from '../../../dal/api_client/SeatsService'
 
 enum SeatsLoadingStatuses {
   IDLE = 'IDLE',
@@ -12,7 +12,7 @@ const initialState: InitialStateSeats = {
   loadingStatus: SeatsLoadingStatuses.IDLE,
   rooms: [],
   seats: [],
-  seatsSearch: [],
+  seatsSearch: {},
   successMsg: '',
   errorMsg: '',
 }
@@ -34,10 +34,11 @@ const seatsSlice = createSlice({
       state.loadingStatus = SeatsLoadingStatuses.SUCCESS
       state.seats = action.payload.seats
     },
-    setSeatsSearch(state, action: PayloadAction<{ seatsSearch: SeatResponse[] }>) {
+    setSeatsSearch(state, action: PayloadAction<{ seatsSearch: SeatResponseWithNewKey }>) {
       state.loadingStatus = SeatsLoadingStatuses.SUCCESS
       state.seatsSearch = action.payload.seatsSearch
     },
+
     seatsError(state, action: PayloadAction<{ errorMsg: string }>) {
       state.loadingStatus = SeatsLoadingStatuses.ERROR
       state.errorMsg = action.payload.errorMsg
@@ -50,8 +51,7 @@ const seatsSlice = createSlice({
 })
 
 export const SeatsReducer = seatsSlice.reducer
-export const { seatsStart, setRooms, setSeats, setSeatsSearch, seatsMessage, seatsError } =
-  seatsSlice.actions
+export const { seatsStart, setRooms, setSeats, setSeatsSearch, seatsMessage, seatsError } = seatsSlice.actions
 
 //types
 
@@ -59,7 +59,7 @@ type InitialStateSeats = {
   loadingStatus: SeatsLoadingStatus
   rooms: Room[]
   seats: Seat[]
-  seatsSearch: SeatResponse[]
+  seatsSearch: SeatResponseWithNewKey
   successMsg: string
   errorMsg: string
 }

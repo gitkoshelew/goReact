@@ -3,7 +3,7 @@ import s from './CalendarTooltip.module.scss'
 import { useSelector } from 'react-redux'
 import { AppRootState } from '../../../bll/store/store'
 import moment from 'moment'
-import { SeatResponse } from '../../../dal/api_client/SeatsService'
+import { SeatResponseWithNewKey } from '../../../dal/api_client/SeatsService'
 
 type PropsType = {
   tooltipDate: Date | null
@@ -11,9 +11,8 @@ type PropsType = {
 
 export const CalendarTooltip = React.memo(({ tooltipDate }: PropsType) => {
   const day = moment(tooltipDate).format('MM DD YYYY')
-
-  let filterDay = useSelector<AppRootState, SeatResponse[]>((state: AppRootState) => state.Seats.seatsSearch)[
-    day as unknown as number
+  let filterDay = useSelector<AppRootState, SeatResponseWithNewKey>((state: AppRootState) => state.Seats.seatsSearch)[
+    day
   ]?.seatIds.join(',')
 
   return (
