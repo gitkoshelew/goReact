@@ -24,8 +24,8 @@ export const fetchSeatsRequest = () => ({
 })
 
 export const dayMapper = (arr: SeatResponse[]): SeatResponseWithNewKey => {
-  return arr.reduce((acc: {}, el: SeatResponse, index: number) => {
-    const date = moment().add(index, 'days').format('MM DD YYYY')
+  return arr.reduce((acc: {}, el: SeatResponse) => {
+    const date = moment().add(el.day, 'days').format('MM DD YYYY')
     return {
       ...acc,
       [date]: el,

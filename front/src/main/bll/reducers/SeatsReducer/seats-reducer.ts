@@ -1,15 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Room, Seat, SeatResponseWithNewKey } from '../../../dal/api_client/SeatsService'
-
-enum SeatsLoadingStatuses {
-  IDLE = 'IDLE',
-  LOADING = 'LOADING',
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR',
-}
+import { LoadingStatuses } from '../types/enum'
 
 const initialState: InitialStateSeats = {
-  loadingStatus: SeatsLoadingStatuses.IDLE,
+  loadingStatus: LoadingStatuses.IDLE,
   rooms: [],
   seats: [],
   seatsSearch: {},
@@ -22,29 +16,29 @@ const seatsSlice = createSlice({
   initialState,
   reducers: {
     seatsStart(state) {
-      state.loadingStatus = SeatsLoadingStatuses.LOADING
+      state.loadingStatus = LoadingStatuses.LOADING
       state.successMsg = ''
       state.errorMsg = ''
     },
     setRooms(state, action: PayloadAction<{ rooms: Room[] }>) {
-      state.loadingStatus = SeatsLoadingStatuses.SUCCESS
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.rooms = action.payload.rooms
     },
     setSeats(state, action: PayloadAction<{ seats: Seat[] }>) {
-      state.loadingStatus = SeatsLoadingStatuses.SUCCESS
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.seats = action.payload.seats
     },
     setSeatsSearch(state, action: PayloadAction<{ seatsSearch: SeatResponseWithNewKey }>) {
-      state.loadingStatus = SeatsLoadingStatuses.SUCCESS
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.seatsSearch = action.payload.seatsSearch
     },
 
     seatsError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = SeatsLoadingStatuses.ERROR
+      state.loadingStatus = LoadingStatuses.ERROR
       state.errorMsg = action.payload.errorMsg
     },
     seatsMessage(state, action: PayloadAction<{ successMsg: string }>) {
-      state.loadingStatus = SeatsLoadingStatuses.SUCCESS
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.successMsg = action.payload.successMsg
     },
   },
@@ -65,7 +59,7 @@ type InitialStateSeats = {
 }
 
 export type SeatsLoadingStatus =
-  | SeatsLoadingStatuses.IDLE
-  | SeatsLoadingStatuses.LOADING
-  | SeatsLoadingStatuses.SUCCESS
-  | SeatsLoadingStatuses.ERROR
+  | LoadingStatuses.IDLE
+  | LoadingStatuses.LOADING
+  | LoadingStatuses.SUCCESS
+  | LoadingStatuses.ERROR
