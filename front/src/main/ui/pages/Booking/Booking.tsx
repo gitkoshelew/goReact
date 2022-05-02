@@ -13,10 +13,27 @@ import Preloader from '../../components/preloader/preloader'
 import { BookingRoomPickSaga } from '../../../bll/reducers/BookingRoomsPickReducer/BookingRoomPick-saga'
 import { fetchBookingPaymentRequest } from '../../../bll/reducers/BookingPaymentFormReducer/bookingPaymentForm-saga'
 import { Modal } from '../../components/Modal/Modal'
+import { BookingSearchForm } from './BookingSearchForm/BookingSearchForm'
+import { searchSeatsRequest } from '../../../bll/reducers/SeatsReducer/seats-saga'
 
-const { bookingPage, bookingForm, bookingProcess, bookingCalendar, uploadOrderedRoomsBlock } = s
+const {
+  bookingPage,
+  bookingForm,
+  bookingProcess,
+  bookingCalendar,
+  uploadOrderedRoomsBlock,
+  searchPage,
+  searchForm,
+  searchProcess,
+  updateCalendarInfo,
+} = s
 
-type FormValues = {
+type SearchFormValues = {
+  hotelId: string
+  petType: string
+}
+
+type BookingFormValues = {
   firstName: string
   lastName: string
   email: string
@@ -28,32 +45,90 @@ type FormValues = {
 }
 
 export const Booking = () => {
-  const [modalActive, setModalActive] = useState(false)
+  const [modalActiveBookingPayment, setModalActiveBookingPayment] = useState(false)
+  const [modalActiveSeats, setModalActiveSeats] = useState(false)
 
   const dispatch = useAppDispatch()
   const checked = useSelector((state: AppRootState) => state.BookingRegForm.checkedOnlinePayment)
 
-  const successMessage = useSelector((state: AppRootState) => state.BookingPaymentForm.successMsg)
-  const errorMessage = useSelector((state: AppRootState) => state.BookingPaymentForm.errorMsg)
+  const successMessageBookingPayment = useSelector((state: AppRootState) => state.BookingPaymentForm.successMsg)
+  const errorMessageBookingPayment = useSelector((state: AppRootState) => state.BookingPaymentForm.errorMsg)
 
-  const modalActiveHandler = () => {
-    setModalActive(true)
+  const successMessageSeats = useSelector((state: AppRootState) => state.Seats.successMsg)
+  const errorMessageSeats = useSelector((state: AppRootState) => state.Seats.errorMsg)
+
+  const modalActiveBookingPaymentHandler = () => {
+    setModalActiveBookingPayment(true)
   }
-  const customSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+  const modalActiveSeatsHandler = () => {
+    setModalActiveSeats(true)
+  }
+
+  const customSubmitBooking = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    formik.handleSubmit()
-    if (formik.isValid && formik.values.firstName && formik.values.lastName && formik.values.email) {
-      modalActiveHandler()
+    formikBooking.handleSubmit()
+    if (
+      formikBooking.isValid &&
+      formikBooking.values.firstName &&
+      formikBooking.values.lastName &&
+      formikBooking.values.email
+    ) {
+      modalActiveBookingPaymentHandler()
     }
   }
-  //Formik
+
+  const customSubmitSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    formikSearch.handleSubmit()
+    if (formikSearch.isValid && formikSearch.values.hotelId && formikSearch.values.petType) {
+      modalActiveSeatsHandler()
+    }
+  }
+  //Formik Search
+
+  const validateSearch = (values: SearchFormValues) => {
+    const errors: FormikErrors<SearchFormValues> = {}
+    if (!values.hotelId) {
+      errors.hotelId = 'Required field'
+    } else if (values.hotelId.toString().length > 1) {
+      errors.hotelId = 'Must be 1 character'
+    }
+    if (!values.petType) {
+      errors.petType = 'Required field'
+    } else if (values.petType !== 'cat' && values.petType !== 'dog') {
+      errors.petType = 'Please write cat or dog'
+    }
+    return errors
+  }
+
+  const formikSearch = useFormik({
+    initialValues: {
+      hotelId: '',
+      petType: '',
+    },
+    validate: validateSearch,
+    onSubmit: (values) => {
+      dispatch(
+        searchSeatsRequest({
+          hotelId: Number(values.hotelId),
+          petType: values.petType,
+        })
+      )
+      if (formikSearch.isValid) {
+        formikSearch.resetForm()
+      }
+    },
+  })
+
+  //Formik Booking
   useEffect(() => {
     if (!checked) {
-      formik.resetForm({
+      formikBooking.resetForm({
         values: {
-          firstName: formik.values.firstName,
-          lastName: formik.values.lastName,
-          email: formik.values.email,
+          firstName: formikBooking.values.firstName,
+          lastName: formikBooking.values.lastName,
+          email: formikBooking.values.email,
           cardNumber: '',
           company: '',
           mm: '',
@@ -64,8 +139,8 @@ export const Booking = () => {
     }
   }, [checked])
 
-  const validate = (values: FormValues) => {
-    const errors: FormikErrors<FormValues> = {}
+  const validateBooking = (values: BookingFormValues) => {
+    const errors: FormikErrors<BookingFormValues> = {}
     if (!values.firstName) {
       errors.firstName = 'Required field'
     } else if (values.firstName.length > 30) {
@@ -135,7 +210,7 @@ export const Booking = () => {
     return errors
   }
 
-  const formik = useFormik({
+  const formikBooking = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -146,11 +221,11 @@ export const Booking = () => {
       yy: '',
       cvv: '',
     },
-    validate,
+    validate: validateBooking,
     onSubmit: (values) => {
       dispatch(fetchBookingPaymentRequest(values))
-      if (formik.isValid) {
-        formik.resetForm()
+      if (formikBooking.isValid) {
+        formikBooking.resetForm()
       }
     },
   })
@@ -169,7 +244,8 @@ export const Booking = () => {
   const isRentArr = useSelector((state: AppRootState) => state.BookingRoomPick.isRent)
   const orderedRoomBasket = useSelector((state: AppRootState) => state.BookingRoomPick.orderedRoomBasket)
 
-  const isActiveBtn = progress === 'uploaded' && formik.isValid
+  const isActiveBtnBooking = progress === 'uploaded' && formikBooking.isValid
+  const isActiveBtnSearch = formikSearch.isValid && formikSearch.values.petType && formikSearch.values.hotelId
 
   const roomIndicate = useMemo(() => {
     const newActualDay = isRentArr && isRentArr.find((t) => t.id === actualDay)
@@ -177,36 +253,64 @@ export const Booking = () => {
   }, [actualDay, isRentArr])
 
   const bookingPaymentLoadingStatus = useSelector((state: AppRootState) => state.BookingPaymentForm.loadingStatus)
+  const seatsLoadingStatus = useSelector((state: AppRootState) => state.Seats.loadingStatus)
 
   if (bookingPaymentLoadingStatus === 'LOADING') {
+    return <Preloader />
+  }
+  if (seatsLoadingStatus === 'LOADING') {
     return <Preloader />
   }
 
   return (
     <div className="bookingContainer">
-      <form onSubmit={customSubmit}>
+      <form onSubmit={customSubmitSearch}>
+        <div className={searchPage}>
+          <TitlePageTextBlock mainTextMess={'Write pet and hotel'} isWithLink={false} />
+          <div className={searchProcess}>
+            <div className={searchForm}>
+              <BookingSearchForm formik={formikSearch} />
+              <div className={updateCalendarInfo}>
+                <Button view={'upload'} disabled={!isActiveBtnSearch} />
+              </div>
+            </div>
+            {successMessageSeats ? (
+              <div className={bookingCalendar}>
+                {correctView}
+                {roomIndicate && (
+                  <BookingRoom
+                    dayId={roomIndicate.id}
+                    firstRoom={roomIndicate.firstRoom}
+                    secondRoom={roomIndicate.secondRoom}
+                  />
+                )}
+              </div>
+            ) : null}
+          </div>
+
+          <Modal active={modalActiveSeats} setActive={setModalActiveSeats}>
+            <p>{successMessageSeats ? 'Please, look at the calendar. Choose an available room!' : errorMessageSeats}</p>
+          </Modal>
+        </div>
+      </form>
+
+      <form onSubmit={customSubmitBooking}>
         <div className={bookingPage}>
           <TitlePageTextBlock mainTextMess={'Book room for pet'} isWithLink={false} />
           <div className={bookingProcess}>
             <div className={bookingForm}>
-              <BookingRegForm formik={formik} />
-            </div>
-            <div className={bookingCalendar}>
-              {correctView}
-              {roomIndicate && (
-                <BookingRoom
-                  dayId={roomIndicate.id}
-                  firstRoom={roomIndicate.firstRoom}
-                  secondRoom={roomIndicate.secondRoom}
-                />
-              )}
+              <BookingRegForm formik={formikBooking} />
             </div>
           </div>
           <div className={uploadOrderedRoomsBlock}>
             {orderedRoomBasket.length !== 0 && <SelectedToOrderRoom orderedRoomBasket={orderedRoomBasket} />}
-            <Button view={'upload'} disabled={!isActiveBtn} />
-            <Modal active={modalActive} setActive={setModalActive}>
-              <p>{successMessage ? 'Congratulations! You have successfully made a payment!' : errorMessage}</p>
+            <Button view={'upload'} disabled={!isActiveBtnBooking} />
+            <Modal active={modalActiveBookingPayment} setActive={setModalActiveBookingPayment}>
+              <p>
+                {successMessageBookingPayment
+                  ? 'Congratulations! You have successfully made a payment!'
+                  : errorMessageBookingPayment}
+              </p>
             </Modal>
           </div>
         </div>

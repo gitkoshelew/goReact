@@ -1,46 +1,31 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import s from './CalendarTooltip.module.scss'
 import { useSelector } from 'react-redux'
 import { AppRootState } from '../../../bll/store/store'
 import moment from 'moment'
+import { SeatResponseWithNewKey } from '../../../dal/api_client/SeatsService'
 
 type PropsType = {
   tooltipDate: Date | null
 }
 
 export const CalendarTooltip = React.memo(({ tooltipDate }: PropsType) => {
-  const rooms = useSelector((state: AppRootState) => state.Seats.rooms)
-  const seats = useSelector((state: AppRootState) => state.Seats.seats)
-
-  const availableSeats = useMemo(() => {
-    return seats.filter((seat) => {
-      if (tooltipDate) {
-        if (!moment(tooltipDate).isBetween(moment(seat.rentFrom), moment(seat.rentTo), 'date', '[]')) return seat
-      }
-    })
-  }, [seats, tooltipDate])
-
-  const searchRoomData = (seatRoomId: number) => {
-    const petType = rooms.find((room) => room.roomId === seatRoomId)?.petType
-    const roomNum = rooms.find((room) => room.roomId === seatRoomId)?.roomNum
-    return { petType, roomNum }
-  }
-
-  const availableSeatsInRoom = useMemo(() => {
-    return availableSeats.map((seat) => {
-      return searchRoomData(seat.roomId)
-    })
-  }, [availableSeats])
+  const day = moment(tooltipDate).format('MM DD YYYY')
+  let filterDay = useSelector<AppRootState, SeatResponseWithNewKey>((state: AppRootState) => state.Seats.seatsSearch)[
+    day
+  ]?.seatIds.join(',')
 
   return (
     <div className={s.tooltipData}>
       <h3 className={s.tooltipTitle}>Available seats on {moment(tooltipDate).format('MM/DD/YY')}:</h3>
-      {availableSeatsInRoom.map((seat, index) => (
-        <p key={index} className={s.tooltipText}>
-          We have available seat in room <span className={s.tooltipTextMark}>№{seat.roomNum}</span> for your{' '}
-          <span className={s.tooltipTextMark}>{seat.petType}</span>
+      {filterDay ? (
+        <p className={s.tooltipText}>
+          We have available seat in room <span className={s.tooltipTextMark}>{filterDay}</span> for your{' '}
+          <span className={s.tooltipTextMark}>pet</span>
         </p>
-      ))}
+      ) : (
+        <p className={s.tooltipText}>Sorry, but there are no available rooms for this date</p>
+      )}
     </div>
   )
 })

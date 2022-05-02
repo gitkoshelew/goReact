@@ -1,6 +1,41 @@
 @use '../../styles/breakpoints' as bp;
 @import '../../styles/variables';
 
+.searchPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: $main-background-color;
+
+  .searchProcess {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    @media (min-width: bp.$lg) {
+      flex-direction: row;
+      align-items: flex-start;
+      margin-bottom: 0
+    }
+
+    .searchForm {
+      margin: 0 10%;
+      .updateCalendarInfo{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        margin-bottom: 20px;
+      }
+    }
+
+
+  }
+}
+
+
 .bookingPage {
   display: flex;
   align-items: center;

@@ -15,7 +15,9 @@ export const BookingCalendar = () => {
 
   const dispatch = useAppDispatch()
 
+  // eslint-disable-next-line no-unused-vars
   const [dateState, setDateState] = useState<Date>(new Date())
+
   const [tooltipVisible, setTooltipVisible] = useState<boolean>(false)
   const [tooltipDate, setTooltipDate] = useState<Date | null>(null)
 
@@ -46,6 +48,8 @@ export const BookingCalendar = () => {
     return false
   }
 
+  const dateSearch: Date = new Date()
+  const maxDateSearch = new Date(dateSearch.setMonth(dateSearch.getMonth() + 1))
   return (
     <div className={s.calendarContainer}>
       <Calendar
@@ -55,7 +59,8 @@ export const BookingCalendar = () => {
         tileClassName={s.calendarCell}
         tileDisabled={searchInRentArr}
         minDate={new Date()}
-        defaultActiveStartDate={dateState}
+        maxDate={maxDateSearch}
+        defaultActiveStartDate={new Date()}
         onChange={changeDate}
       />
       {tooltipVisible && <CalendarTooltip tooltipDate={tooltipDate} />}

@@ -1,0 +1,95 @@
+@use '../../../styles/breakpoints' as bp;
+@import '../../../styles/variables';
+
+.bookingSearchForm {
+  min-width: 300px;
+  max-width: 700px;
+  background-color: white;
+  border: 1px solid #0f97aa;
+  border-radius: 12px;
+
+  .clientDescription {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+
+    .errorInputInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      white-space: nowrap;
+      font-family: $main-fonts;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #000000;
+
+      &:nth-child(n) {
+        margin: 10px 0;
+        @media (min-width: bp.$lg) {
+          margin: 10px 20px;
+        }
+
+      }
+    }
+
+    .inputInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      font-family: $main-fonts;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 19px;
+      text-transform: uppercase;
+      color: #000000;
+      @media (min-width: bp.$sm) {
+        font-size: 22px;
+      }
+
+      &:nth-child(n) {
+        margin: 20px 0;
+      }
+
+    }
+
+    .errorMsg {
+      color: red;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      padding-bottom: 10px;
+    }
+
+  }
+}
+
+.inputInfoInput {
+  width: 100%;
+  margin-top: 30px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 22px;
+  @media (min-width: bp.$lg) {
+    min-width: 350px;
+  }
+}
+
+
+.errorInputInfoInput {
+  margin-top: 30px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 22px;
+  border: 3px solid red;
+  outline: none !important;
+  @media (min-width: bp.$lg) {
+    width: 350px;
+  }
+}

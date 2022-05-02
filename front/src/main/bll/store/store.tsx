@@ -35,7 +35,7 @@ import {
   removeNotificationSagaWorker,
 } from '../reducers/NotificationReducer/notification-saga'
 import { SeatsReducer } from '../reducers/SeatsReducer/seats-reducer'
-import { fetchSeatsSagaWorker } from '../reducers/SeatsReducer/seats-saga'
+import {fetchSeatsSagaWorker, seatsSearchSagaWorker} from '../reducers/SeatsReducer/seats-saga'
 import { openNotificationChannelSagaWorker } from '../reducers/NotificationReducer/socketChannel'
 import { BookingPaymentFormReducer } from '../reducers/BookingPaymentFormReducer/bookingPaymentForm-reducer'
 import { fetchBookingPaymentSagaWorker } from '../reducers/BookingPaymentFormReducer/bookingPaymentForm-saga'
@@ -95,4 +95,5 @@ function* rootWatcher() {
   yield takeEvery('NOTIFICATION/CLOSE_CHANNEL', closeNotificationChannelSagaWorker)
   yield takeEvery('SEATS/FETCH_SETS', fetchSeatsSagaWorker)
   yield takeEvery('BOOKING_PAYMENT/FETCH_PAYMENT_SAGA', fetchBookingPaymentSagaWorker)
+  yield takeEvery('SEATS/SEARCH_SEATS_SAGA', seatsSearchSagaWorker)
 }

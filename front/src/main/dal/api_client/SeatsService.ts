@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { $api } from './API'
 
-type Pet = 'Cat' | 'Dog'
+export type Pet = 'cat' | 'dog'
 
 export type Room = {
   roomId: number
@@ -24,7 +24,23 @@ export type Seat = {
   rentTo: Date
 }
 
+export type SeatResponse = {
+  day: number
+  seatIds: number[]
+  totalCount?: number
+}
+
+export type SeatSearch = {
+  hotelId: number
+  petType: Pet | string
+}
+
+export type SeatResponseWithNewKey = {
+  [key: string]: { day: number; seatIds: number[]; totalCount: number }
+}
+
 export type FetchSeatsResponse = Seat[]
+export type SeatsSearchResponse = SeatResponse[]
 
 export const SeatsAPI = {
   async fetchRooms(): Promise<AxiosResponse<FetchRoomsResponse>> {
@@ -32,5 +48,9 @@ export const SeatsAPI = {
   },
   async fetchSeats(): Promise<AxiosResponse<FetchSeatsResponse>> {
     return $api.get(`api/seats`)
+  },
+  async fetchSeatsFree(newSeatsSearch: SeatSearch): Promise<AxiosResponse<SeatsSearchResponse>> {
+    const res = await $api.post(`api/seats/search/free`, newSeatsSearch)
+    return res
   },
 }
