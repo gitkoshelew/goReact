@@ -17,6 +17,7 @@ import { RegistrationPage } from '../pages/Registration/RegistrationPage'
 import { RegisterPageLoadingStatus } from '../../bll/reducers/RegistrationPageReducer/registrationPage-reducer'
 import { Chat } from '../pages/Chat/Chat'
 import { Conversation } from '../components/Conversation/Conversation'
+import { LoadingStatuses } from '../../bll/reducers/types/enum'
 
 type LoginWrapperType = {
   children: ReactJSXElement
@@ -51,7 +52,7 @@ export const RoutesInfo = () => {
     return user ? <Navigate to={PATH.HOME} replace /> : children
   }
   const RegisterWrapper = ({ children, loadingStatus }: RegisterWrapper) => {
-    return loadingStatus === 'success' ? <Navigate to={PATH.LOGIN} replace /> : children
+    return loadingStatus === LoadingStatuses.SUCCESS ? <Navigate to={PATH.LOGIN} replace /> : children
   }
   return (
     <div>
