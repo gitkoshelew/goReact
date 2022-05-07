@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { LoadingStatuses } from '../types/enum'
 
 const initialState: InitialRegisterState = {
-  loadingStatus: 'idle',
+  loadingStatus: LoadingStatuses.IDLE,
   errorMsg: '',
 }
 
@@ -10,15 +11,15 @@ const registerPageSlice = createSlice({
   initialState,
   reducers: {
     reqRegisterStart(state) {
-      state.loadingStatus = 'loading'
+      state.loadingStatus = LoadingStatuses.LOADING
       state.errorMsg = ''
     },
     reqRegisterSuccess(state) {
-      state.loadingStatus = 'success'
-      state.loadingStatus = 'idle'
+      state.loadingStatus = LoadingStatuses.SUCCESS
+      state.loadingStatus = LoadingStatuses.IDLE
     },
     reqRegisterError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = 'error'
+      state.loadingStatus = LoadingStatuses.ERROR
       state.errorMsg = action.payload.errorMsg
     },
   },
@@ -33,4 +34,8 @@ type InitialRegisterState = {
   errorMsg: string
 }
 
-export type RegisterPageLoadingStatus = 'idle' | 'loading' | 'success' | 'error'
+export type RegisterPageLoadingStatus =
+  | LoadingStatuses.IDLE
+  | LoadingStatuses.LOADING
+  | LoadingStatuses.SUCCESS
+  | LoadingStatuses.ERROR

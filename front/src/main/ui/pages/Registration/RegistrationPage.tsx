@@ -12,6 +12,7 @@ import { PATH } from '../../Routes/RoutesInfo'
 import { NavLink } from 'react-router-dom'
 import { RegistrationSchema } from './validations/RegisterValidation'
 import { RegisterRequest } from '../../../bll/reducers/RegistrationPageReducer/registrationPage-saga'
+import { LoadingStatuses } from '../../../bll/reducers/types/enum'
 
 type OnSubmitValues = {
   email: string
@@ -54,7 +55,7 @@ export const RegistrationPage = () => {
   const correctEyeRender = isPasswordOpen ? closedEye : openedEye
   const correctPasswordInputType = isPasswordOpen ? 'text' : 'password'
 
-  if (RegisterPageLoadingStatus === 'loading') {
+  if (RegisterPageLoadingStatus === LoadingStatuses.LOADING) {
     return <Preloader />
   }
 

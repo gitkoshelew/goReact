@@ -13,6 +13,7 @@ import { closedEye, Github, Linkedin, openedEye } from '../../svgWrapper/LoginSv
 import { NavLink } from 'react-router-dom'
 import { PATH } from '../../Routes/RoutesInfo'
 import { useState } from 'react'
+import { LoadingStatuses } from '../../../bll/reducers/types/enum'
 
 const {
   authenticationForm,
@@ -54,7 +55,7 @@ export const LoginPage = () => {
 
   const linkedinUrl = process.env.REACT_APP_API_SOCIAL_AUTH_LINK + 'api/linkedinlogin'
 
-  if (LoginPageLoadingStatus === 'loading') {
+  if (LoginPageLoadingStatus === LoadingStatuses.LOADING) {
     return <Preloader />
   }
   if (userProfile) {

@@ -1,15 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { BookingPaymentFormType } from '../../../dal/api_bookingPayment/BookingService'
-
-enum BookingPaymentLoadingStatuses {
-  IDLE = 'IDLE',
-  LOADING = 'LOADING',
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR',
-}
+import { LoadingStatuses } from '../types/enum'
 
 const initialState: InitialStateSeats = {
-  loadingStatus: BookingPaymentLoadingStatuses.IDLE,
+  loadingStatus: LoadingStatuses.IDLE,
   bookingPayment: [],
   successMsg: '',
   errorMsg: '',
@@ -19,20 +13,20 @@ const seatsSlice = createSlice({
   initialState,
   reducers: {
     bookingPaymentStart(state) {
-      state.loadingStatus = BookingPaymentLoadingStatuses.LOADING
+      state.loadingStatus = LoadingStatuses.LOADING
       state.successMsg = ''
       state.errorMsg = ''
     },
     setBookingPayment(state, action: PayloadAction<{ bookingPayment: BookingPaymentFormType[] }>) {
-      state.loadingStatus = BookingPaymentLoadingStatuses.SUCCESS
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.bookingPayment = action.payload.bookingPayment
     },
     bookingPaymentMessage(state, action: PayloadAction<{ successMsg: string }>) {
-      state.loadingStatus = BookingPaymentLoadingStatuses.SUCCESS
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.successMsg = action.payload.successMsg
     },
     bookingPaymentError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = BookingPaymentLoadingStatuses.ERROR
+      state.loadingStatus = LoadingStatuses.ERROR
       state.errorMsg = action.payload.errorMsg
     },
   },
@@ -51,7 +45,7 @@ type InitialStateSeats = {
 }
 
 export type BookingPaymentLoadingStatus =
-  | BookingPaymentLoadingStatuses.IDLE
-  | BookingPaymentLoadingStatuses.LOADING
-  | BookingPaymentLoadingStatuses.SUCCESS
-  | BookingPaymentLoadingStatuses.ERROR
+  | LoadingStatuses.IDLE
+  | LoadingStatuses.LOADING
+  | LoadingStatuses.SUCCESS
+  | LoadingStatuses.ERROR

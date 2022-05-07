@@ -15,6 +15,7 @@ import { fetchBookingPaymentRequest } from '../../../bll/reducers/BookingPayment
 import { Modal } from '../../components/Modal/Modal'
 import { BookingSearchForm } from './BookingSearchForm/BookingSearchForm'
 import { searchSeatsRequest } from '../../../bll/reducers/SeatsReducer/seats-saga'
+import { LoadingStatuses } from '../../../bll/reducers/types/enum'
 
 const {
   bookingPage,
@@ -232,8 +233,8 @@ export const Booking = () => {
 
   const loadingStatus = useSelector((state: AppRootState) => state.BookingRoomPick.loadingStatus)
 
-  const ErrorView = loadingStatus === 'error' ? <div>error</div> : <BookingCalendar />
-  const correctView = loadingStatus === 'loading' ? <Preloader /> : ErrorView
+  const ErrorView = loadingStatus === LoadingStatuses.ERROR ? <div>error</div> : <BookingCalendar />
+  const correctView = loadingStatus === LoadingStatuses.LOADING ? <Preloader /> : ErrorView
 
   useEffect(() => {
     dispatch(BookingRoomPickSaga())

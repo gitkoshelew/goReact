@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IsRent } from '../../../dal/api_client/API'
+import { LoadingStatuses } from '../types/enum'
 
 const initialState: InitialStateType = {
   isRent: [],
-  loadingStatus: 'success',
+  loadingStatus: LoadingStatuses.SUCCESS,
   actualDay: new Date(),
   orderedRoomBasket: [],
 }
@@ -32,14 +33,14 @@ const BookingRoomPickSlice = createSlice({
       state.orderedRoomBasket.push(action.payload.newOrderedRooms)
     },
     reqCalendarDataStarted(state) {
-      state.loadingStatus = 'loading'
+      state.loadingStatus = LoadingStatuses.LOADING
     },
     reqCalendarDataSucceeded(state, action: PayloadAction<{ newCalendarData: IsRent[] }>) {
-      state.loadingStatus = 'success'
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.isRent = action.payload.newCalendarData
     },
     reqCalendarDataFailed(state) {
-      state.loadingStatus = 'error'
+      state.loadingStatus = LoadingStatuses.ERROR
     },
     deleteOrderedRoom(state, action: PayloadAction<{ newOrderedRooms: OrderedRoomsType }>) {
       const roomForDeleteIndex = state.orderedRoomBasket.findIndex((t) => t.id === action.payload.newOrderedRooms.id)
@@ -76,5 +77,10 @@ type InitialStateType = {
   loadingStatus: LoadingStatusBookingPickType
 }
 
-export type LoadingStatusBookingPickType = 'loading' | 'success' | 'error'
+export type LoadingStatusBookingPickType =
+  | LoadingStatuses.IDLE
+  | LoadingStatuses.LOADING
+  | LoadingStatuses.SUCCESS
+  | LoadingStatuses.ERROR
+
 export type RentRoomType = 'firstRoom' | 'secondRoom'

@@ -5,6 +5,7 @@ import { LogOutRequest } from '../../../../bll/reducers/LoginPageReduser/loginPa
 import { useSelector } from 'react-redux'
 import Preloader from '../../../components/preloader/preloader'
 import { LogInResponse } from '../../../../dal/api_client/AuthService'
+import { LoadingStatuses } from '../../../../bll/reducers/types/enum'
 
 const { userNav, userPhoto, userName, logoutField, userNavView, preloaderNav } = s
 
@@ -27,7 +28,7 @@ export const UserNavBarView = ({ user }: UserNavBarViewPropsType) => {
     setIsLogoutVisible(false)
   }
 
-  if (loadingStatus === 'loading') {
+  if (loadingStatus === LoadingStatuses.LOADING) {
     return (
       <div className={preloaderNav}>
         <Preloader />
