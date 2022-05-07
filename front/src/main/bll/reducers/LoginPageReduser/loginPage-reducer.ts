@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { LogInResponse } from '../../../dal/api_client/AuthService'
+import { LoadingStatuses } from '../types/enum'
 
 const initialState: InitialStateLoginPage = {
-  loadingStatus: 'idle',
+  loadingStatus: LoadingStatuses.IDLE,
   errorMsg: '',
   user: null,
 }
@@ -12,31 +13,31 @@ const loginPageSlice = createSlice({
   initialState,
   reducers: {
     reqLoginLogoutStart(state) {
-      state.loadingStatus = 'loading'
+      state.loadingStatus = LoadingStatuses.LOADING
       state.errorMsg = ''
     },
     reqLoginSuccess(state, action: PayloadAction<{ user: LogInResponse }>) {
-      state.loadingStatus = 'success'
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.user = action.payload.user
     },
     reqLoginError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = 'error'
+      state.loadingStatus = LoadingStatuses.ERROR
       state.errorMsg = action.payload.errorMsg
     },
     reqLogOutSuccess(state) {
-      state.loadingStatus = 'success'
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.user = null
     },
     reqLogOutError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = 'error'
+      state.loadingStatus = LoadingStatuses.ERROR
       state.errorMsg = action.payload.errorMsg
     },
     reqMeSuccess(state, action: PayloadAction<{ user: LogInResponse }>) {
-      state.loadingStatus = 'success'
+      state.loadingStatus = LoadingStatuses.SUCCESS
       state.user = action.payload.user
     },
     reqMeError(state, action: PayloadAction<{ errorMsg: string }>) {
-      state.loadingStatus = 'idle'
+      state.loadingStatus = LoadingStatuses.IDLE
       state.errorMsg = action.payload.errorMsg
     },
   },
@@ -61,5 +62,9 @@ export type InitialStateLoginPage = {
   user: User
 }
 
-export type LoginPageLoadingStatus = 'idle' | 'loading' | 'success' | 'error'
+export type LoginPageLoadingStatus =
+  | LoadingStatuses.IDLE
+  | LoadingStatuses.LOADING
+  | LoadingStatuses.SUCCESS
+  | LoadingStatuses.ERROR
 export type User = LogInResponse | null
